@@ -175,13 +175,33 @@ def express_payload(express):
     return {"groups": express["groups"], "probes": express["probes"], "languages": langs}
 
 
+def describe_run(rec, threshold_mb):
+    """One factual line for a run that left no compiler or runtime message."""
+    outcome, status = rec["outcome"], rec.get("exit")
+    printed = (rec.get("stdout") or "").strip()
+    shown = f'printed "{printed[:120]}"' if printed else "printed nothing"
+    peak = f'{rec["rss_mb"]} MB peak' if rec.get("rss_mb") is not None else "peak memory unknown"
+    if outcome == "HANG":
+        return f"The program did not finish and was killed after {rec.get('secs')} s."
+    if outcome == "LEAK":
+        return (f"The program finished {shown} with {peak}, over the {threshold_mb} MB "
+                "limit for this problem.")
+    if outcome == "CORRECT":
+        return f"Built and ran cleanly (exit {status}), {shown}. The output is the expected answer."
+    if outcome == "REJECTED":
+        return "The compiler refused to build the program."
+    return (f"Built and ran to the end (exit {status}), {shown}. "
+            "No compiler or runtime message flagged the bug.")
+
+
 def site_payload(out):
     """The site needs the evidence, not every byte of it."""
     langs = []
     for row in out["languages"]:
         results = {}
         for pid, rec in row["results"].items():
-            evidence = rec.get("message") or rec.get("stderr") or ""
+            evidence = (rec.get("message") or rec.get("stderr")
+                        or describe_run(rec, out["leak_threshold_mb"]))
             results[pid] = {
                 "o": rec["outcome"],
                 "s": rec["score"],

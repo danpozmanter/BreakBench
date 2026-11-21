@@ -96,6 +96,8 @@ td.count.zero { color: var(--muted); font-weight: 400; opacity: .5; }
 .pts dd { margin: 0; font-variant-numeric: tabular-nums; font-weight: 600; text-align: right; }
 .chip { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 4px;
   color: var(--cell-fg); font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.02em; }
+td.chipcell { width: 9.5em; min-width: 9.5em; }
+td.chipcell > .chip { display: flex; width: 100%; box-sizing: border-box; height: auto; min-height: 22px; padding: 3px 8px; text-align: center; line-height: 1.25; }
 .o-REJECTED { background: var(--o-rejected); } .o-CORRECT { background: var(--o-correct); }
 .o-TRAPPED { background: var(--o-trapped); color: #1b1606; } .o-SILENT { background: var(--o-silent); }
 .o-CORRUPT { background: var(--o-corrupt); } .o-CRASH { background: var(--o-crash); }
@@ -129,7 +131,7 @@ pre.warn { color: var(--fg); }
 .detail { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 20px; align-items: start; }
 .plist { display: grid; gap: 2px; max-height: 760px; overflow-y: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); padding: 6px; }
 .plist h4 { margin: 8px 6px 4px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
-.plist button { all: unset; cursor: pointer; padding: 5px 8px; border-radius: 5px; font-size: 13px; }
+.plist button { all: unset; display: block; box-sizing: border-box; width: 100%; cursor: pointer; padding: 5px 8px; border-radius: 5px; font-size: 13px; line-height: 1.35; }
 .plist button[aria-current="true"] { background: color-mix(in srgb, var(--accent) 14%, transparent); font-weight: 600; }
 .plist select { display: none; }
 .case { display: grid; gap: 14px; min-width: 0; }
@@ -457,7 +459,7 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
       const rss = r.rss != null && p.kind === "leak" ? " · " + r.rss + " MB peak" : "";
       tb.append(el("tr", { class: L.id === langId ? "hl" : "", id: "row-" + L.id },
         el("td", { class: "lang", text: L.name }),
-        el("td", {}, chip(r.o)),
+        el("td", { class: "chipcell" }, chip(r.o)),
         el("td", { class: "mono", text: r.s == null ? "N/A" : String(r.s) }),
         el("td", {}, el("pre", { class: "out", text: (r.out || "") + rss })),
         el("td", {}, el("pre", { class: "warn", text: r.w || "" })),
@@ -619,7 +621,7 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
       const r = L.results[p.id] || { o: "MISSING" };
       const c = xcode(r);
       tb.append(el("tr", { class: L.id === langId ? "hl" : "" }, el("td", { class: "lang", text: L.name }),
-        el("td", {}, el("span", { class: "chip l-" + c, text: LEVEL[c] || c })), el("td", {}, el("pre", { text: r.ev || "" }))));
+        el("td", { class: "chipcell" }, el("span", { class: "chip l-" + c, text: LEVEL[c] || c })), el("td", {}, el("pre", { text: r.ev || "" }))));
     });
     t.append(tb);
     box.append(el("div", { class: "scroll" }, t));
