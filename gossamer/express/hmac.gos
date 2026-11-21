@@ -1,7 +1,0 @@
-// LEVEL: STD
-
-use std::crypto::hmac
-
-fn main() {
-    println(hmac::sha256_hex("key".as_bytes(), "The quick brown fox jumps over the lazy dog".as_bytes()))
-}

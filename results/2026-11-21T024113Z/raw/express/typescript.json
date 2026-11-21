@@ -662,8 +662,216 @@
    "outcome": "PASS",
    "refusal": "",
    "exit": 0,
-   "secs": 2.58,
+   "secs": 2.42,
    "stdout": "3999999",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "generic_constraint": {
+   "outcome": "NONE",
+   "message": "Array.sort compares elements as text, so any element type is accepted"
+  },
+  "lossy_int_to_float": {
+   "outcome": "PASS",
+   "refusal": "main.ts(9,6): error TS2345: Argument of type 'bigint' is not assignable to parameter of type 'number'.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "7",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_index_bounds": {
+   "outcome": "PASS",
+   "refusal": "main.ts(5,19): error TS2493: Tuple type 'readonly [number, number, number]' of length '3' has no element at index '5'.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "20",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_overflow": {
+   "outcome": "NONE",
+   "message": "no 64-bit integer type; bigint has no fixed size"
+  },
+  "static_assert": {
+   "outcome": "NONE",
+   "message": "no compile-time assertion"
+  },
+  "global_mutable_state": {
+   "outcome": "NONE",
+   "message": "nothing refuses an unsynchronized write to memory that workers share"
+  },
+  "unreachable_code": {
+   "outcome": "PASS",
+   "refusal": "main.ts(10,3): error TS7027: Unreachable code detected.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "ok",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "pure_function": {
+   "outcome": "NONE",
+   "message": "no way to mark a function as free of side effects"
+  },
+  "nan_key": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "found",
+   "stderr": "",
+   "level": "STD"
+  },
+  "string_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "abc",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_equality": {
+   "outcome": "PASS",
+   "refusal": "main.ts(5,5): error TS2367: This comparison appears to be unintentional because the types 'number' and 'string' have no overlap.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "match",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "checked_interpolation": {
+   "outcome": "PASS",
+   "refusal": "main.ts(5,22): error TS2304: Cannot find name 'nmae'.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "hello Ada",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "evaluation_order": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1 2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "contracts": {
+   "outcome": "NONE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "diverging_function": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "noncopyable_type": {
+   "outcome": "NONE",
+   "message": "assignment copies the reference, and nothing marks a type as single-owner"
+  },
+  "dominated_case": {
+   "outcome": "NONE",
+   "message": "a repeated case is accepted"
+  },
+  "duplicate_key": {
+   "outcome": "PASS",
+   "refusal": "main.ts(5,33): error TS1117: An object literal cannot have multiple properties with the same name.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "char_arithmetic": {
+   "outcome": "NONE",
+   "message": "no character type; a character is a one-letter string"
+  },
+  "comparison_statement": {
+   "outcome": "NONE",
+   "message": "a comparison used as a statement is accepted"
+  },
+  "structural_equality": {
+   "outcome": "FAIL",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "different",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "hash_matches_equality": {
+   "outcome": "NONE",
+   "message": "Set compares objects by identity; there is no custom equality"
+  },
+  "array_literal_length": {
+   "outcome": "PASS",
+   "refusal": "main.ts(5,7): error TS2322: Type '[number, number, number]' is not assignable to type 'readonly [number, number, number, number]'.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "40",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "required_names": {
+   "outcome": "PASS",
+   "refusal": "main.ts(8,9): error TS2554: Expected 1 arguments, but got 2.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "3 4",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "trojan_source": {
+   "outcome": "NONE",
+   "message": "a bidirectional control character in a string literal is accepted"
+  },
+  "enum_from_int": {
+   "outcome": "NONE",
+   "message": "a number converts to a numeric enum without a check"
+  },
+  "captured_write_in_thread": {
+   "outcome": "NONE",
+   "message": "workers cannot capture variables; they share memory only through SharedArrayBuffer"
+  },
+  "increment_in_expression": {
+   "outcome": "NONE",
+   "message": "i = i++ is accepted"
+  },
+  "bitwise_on_bool": {
+   "outcome": "PASS",
+   "refusal": "main.ts(5,20): error TS2447: The '&' operator is not allowed for boolean types. Consider using '&&' instead.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "yes",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "readonly_field": {
+   "outcome": "PASS",
+   "refusal": "main.ts(8,3): error TS2540: Cannot assign to 'port' because it is a read-only property.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "8080",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bool_condition": {
+   "outcome": "NONE",
+   "message": "a number is a valid condition"
+  },
+  "forced_unwrap": {
+   "outcome": "FAIL",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "before\nNaN",
    "stderr": "",
    "level": "LANGUAGE"
   }

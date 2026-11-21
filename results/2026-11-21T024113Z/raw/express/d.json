@@ -702,10 +702,243 @@
    "outcome": "PASS",
    "refusal": "",
    "exit": 0,
-   "secs": 0.96,
+   "secs": 0.97,
    "stdout": "3999999",
    "stderr": "",
    "level": "LANGUAGE"
+  },
+  "generic_constraint": {
+   "outcome": "PASS",
+   "refusal": "/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/functional.d-mixin-227(227): Error: no operator `<` for type `Point`\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/algorithm/sorting.d(1961): Error: template instance `std.functional.binaryFun!(\"a < b\", \"a\", \"b\").binaryFun!(Point, Point)` error instantiating",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "lossy_int_to_float": {
+   "outcome": "NONE",
+   "message": "integers convert to floating point implicitly"
+  },
+  "const_index_bounds": {
+   "outcome": "PASS",
+   "refusal": "main.d(9): Error: array index 5 is out of bounds `table[0 .. 3]`\nmain.d(9): Error: template `writeln` is not callable using argument types `!()(int)`",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "20",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_overflow": {
+   "outcome": "NONE",
+   "message": "constant arithmetic wraps silently"
+  },
+  "static_assert": {
+   "outcome": "PASS",
+   "refusal": "main.d(8): Error: static assert:  `300 <= 255` is false",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "global_mutable_state": {
+   "outcome": "PASS",
+   "refusal": "main.d(10): Error: read-modify-write operations are not allowed for `shared` variables",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unreachable_code": {
+   "outcome": "NONE",
+   "message": "code after a return is accepted"
+  },
+  "pure_function": {
+   "outcome": "PASS",
+   "refusal": "main.d(9): Error: `pure` function `main.squareCounted` cannot access mutable static data `hits`",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "49",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "nan_key": {
+   "outcome": "FAIL",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "missing",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "string_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "abc",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_equality": {
+   "outcome": "PASS",
+   "refusal": "main.d(9): Error: incompatible types for `(id) == (\"42\")`: `int` and `string`",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "match",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "checked_interpolation": {
+   "outcome": "PASS",
+   "refusal": "main.d-mixin-9(9): Error: undefined identifier `nmae`, did you mean variable `name`?",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hello Ada",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "evaluation_order": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "contracts": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "before",
+   "stderr": "core.exception.AssertError@main.d(6): Assertion failure\n----------------\n??:? _d_assert [0x63ebf04fa242]\nmain.d:6 int main.isqrt(int) [0x63ebf02d252a]\nmain.d:18 _Dmain [0x63ebf02d255b]",
+   "level": "LANGUAGE"
+  },
+  "diverging_function": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "noncopyable_type": {
+   "outcome": "PASS",
+   "refusal": "main.d(15): Error: struct `main.Handle` is not copyable because it has a disabled postblit",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "dominated_case": {
+   "outcome": "PASS",
+   "refusal": "main.d(14): Error: duplicate `case \"circle\"` in `switch` statement",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "other",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "duplicate_key": {
+   "outcome": "NONE",
+   "message": "a repeated key in an associative array literal is accepted"
+  },
+  "char_arithmetic": {
+   "outcome": "NONE",
+   "message": "a char promotes to int, so c + 1 is a number"
+  },
+  "comparison_statement": {
+   "outcome": "PASS",
+   "refusal": "main.d(9): Error: the result of the equality expression `count == 5` is discarded",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "structural_equality": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "hash_matches_equality": {
+   "outcome": "NONE",
+   "message": "a struct can define opEquals and keep the default hash"
+  },
+  "array_literal_length": {
+   "outcome": "PASS",
+   "refusal": "main.d(9): Error: mismatched array lengths, 4 and 3",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "40",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "required_names": {
+   "outcome": "NONE",
+   "message": "arguments may always be passed by position"
+  },
+  "trojan_source": {
+   "outcome": "PASS",
+   "refusal": "main.d(8): Error: Bidirectional control characters are disallowed for security reasons.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hi",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "enum_from_int": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "before\ninvalid",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "captured_write_in_thread": {
+   "outcome": "NONE",
+   "message": "a delegate passed to a Thread can change any local variable it captures"
+  },
+  "increment_in_expression": {
+   "outcome": "NONE",
+   "message": "i = i++ is accepted"
+  },
+  "bitwise_on_bool": {
+   "outcome": "NONE",
+   "message": "& is defined on booleans and evaluates both sides"
+  },
+  "readonly_field": {
+   "outcome": "PASS",
+   "refusal": "main.d(10): Error: cannot modify `immutable` expression `c.port`",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "8080",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bool_condition": {
+   "outcome": "NONE",
+   "message": "an integer is a valid condition"
+  },
+  "forced_unwrap": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "before",
+   "stderr": "core.exception.AssertError@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/typecons.d(4128): Called `get' on null Nullable!int.\n----------------\n??:? _d_assert_msg [0x56823cba5b33]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/typecons.d:4128 inout pure nothrow ref @property @nogc @safe inout(int) std.typecons.Nullable!(int).Nullable.get() [0x56823c97dc6a]\nmain.d:11 _Dmain [0x56823c97d7e5]",
+   "level": "STD"
   }
  }
 }

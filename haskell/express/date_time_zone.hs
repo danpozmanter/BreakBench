@@ -1,1 +1,0 @@
--- CANNOT-EXPRESS: no time zone database in the standard library (the time package knows only the local zone)

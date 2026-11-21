@@ -1,0 +1,11 @@
+// LEVEL: LANGUAGE
+
+fn show(f: f64) {
+    println!("{f}");
+}
+
+fn main() {
+    let n: i64 = 7;
+    show(n as f64);
+    show(n); // REJECT!
+}

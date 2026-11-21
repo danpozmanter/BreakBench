@@ -653,7 +653,7 @@
    "outcome": "PASS",
    "refusal": "Syntax error (IllegalArgumentException) compiling deftype* at (main.clj:8:1).",
    "exit": 0,
-   "secs": 0.24,
+   "secs": 0.21,
    "stdout": "circle",
    "stderr": "",
    "level": "LANGUAGE"
@@ -662,9 +662,192 @@
    "outcome": "PASS",
    "refusal": "",
    "exit": 0,
-   "secs": 0.5,
+   "secs": 0.47,
    "stdout": "3999999",
    "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "generic_constraint": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "lossy_int_to_float": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "const_index_bounds": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "const_overflow": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "static_assert": {
+   "outcome": "PASS",
+   "refusal": "Unexpected error (AssertionError) macroexpanding check-fits at (main.clj:10:1).",
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "100",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "global_mutable_state": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "unreachable_code": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "pure_function": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "nan_key": {
+   "outcome": "FAIL",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "missing",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "string_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "abc",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_equality": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "checked_interpolation": {
+   "outcome": "NONE",
+   "message": "no string interpolation"
+  },
+  "evaluation_order": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "1 2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "contracts": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.28,
+   "stdout": "before",
+   "stderr": "Execution error (AssertionError) at main/isqrt (main.clj:5).\nAssert failed: (>= x 0)\n\nFull report at:\n/tmp/clojure-5053369256386734310.edn",
+   "level": "LANGUAGE"
+  },
+  "diverging_function": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "noncopyable_type": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "dominated_case": {
+   "outcome": "PASS",
+   "refusal": "Syntax error macroexpanding case at (main.clj:10:15).",
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "other",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "duplicate_key": {
+   "outcome": "PASS",
+   "refusal": "Syntax error (IllegalArgumentException) compiling at (main.clj:6:32).",
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "char_arithmetic": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "comparison_statement": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "structural_equality": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "hash_matches_equality": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "array_literal_length": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "required_names": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "trojan_source": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "enum_from_int": {
+   "outcome": "NONE",
+   "message": "no enum type"
+  },
+  "captured_write_in_thread": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "increment_in_expression": {
+   "outcome": "PASS",
+   "refusal": "Syntax error compiling at (main.clj:7:14).",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bitwise_on_bool": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "readonly_field": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.23,
+   "stdout": "8080",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bool_condition": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "forced_unwrap": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.28,
+   "stdout": "before",
+   "stderr": "Execution error (NullPointerException) at main/-main (main.clj:10).\nCannot invoke \"Object.getClass()\" because \"x\" is null\n\nFull report at:\n/tmp/clojure-10158575717818770482.edn",
    "level": "LANGUAGE"
   }
  }

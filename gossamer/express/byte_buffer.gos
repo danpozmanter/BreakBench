@@ -1,7 +1,0 @@
-// LEVEL: LANGUAGE
-
-fn main() {
-    let mut buf: Vec<u8> = #[]
-    for i in 0..100000 { buf.push((i % 256) as u8) }
-    println(buf.len())
-}

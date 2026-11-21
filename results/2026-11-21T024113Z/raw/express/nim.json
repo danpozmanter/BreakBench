@@ -696,6 +696,259 @@
    "stdout": "3999999",
    "stderr": "",
    "level": "LANGUAGE"
+  },
+  "generic_constraint": {
+   "outcome": "PASS",
+   "refusal": "/root/.choosenim/toolchains/nim-2.4.2/lib/system.nim(898, 8) Error: type mismatch",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "lossy_int_to_float": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-lossy_int_to_float/reject/main.nim(7, 5) Error: type mismatch",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7.0",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_index_bounds": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-const_index_bounds/reject/main.nim(5, 12) Error: conversion from int literal(5) to range 0..2(int) is invalid",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "20",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_overflow": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-const_overflow/reject/main.nim(4, 53) Error: over- or underflow",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "86400000000000",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "static_assert": {
+   "outcome": "PASS",
+   "refusal": "/root/.choosenim/toolchains/nim-2.4.2/lib/system/fatal.nim(62, 5) Error: unhandled exception: /tmp/breakbench/express-static_assert/reject/main.nim(6, 9) `300 <= byteLimit`  [AssertionDefect]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "global_mutable_state": {
+   "outcome": "NONE",
+   "message": "a global var needs no synchronization"
+  },
+  "unreachable_code": {
+   "outcome": "NONE",
+   "message": "code after a return is only a warning (UnreachableCode)"
+  },
+  "pure_function": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-pure_function/reject/main.nim(7, 6) Error: 'squareCounted' can have side effects",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "49",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "nan_key": {
+   "outcome": "FAIL",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "missing",
+   "stderr": "",
+   "level": "STD"
+  },
+  "string_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "abc",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_equality": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-typed_equality/reject/main.nim(5, 7) Error: type mismatch",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "match",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "checked_interpolation": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-checked_interpolation/reject/main.nim(7, 9) Error: undeclared identifier: 'nmae'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hello Ada",
+   "stderr": "",
+   "level": "STD"
+  },
+  "evaluation_order": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "contracts": {
+   "outcome": "NONE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "diverging_function": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "noncopyable_type": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-noncopyable_type/reject/main.nim(10, 14) Error: '=copy' is not available for type <Handle>; requires a copy because it's not the last read of 'h'; another read is done here: /tmp/breakbench/express-noncopyable_type/reject/main.nim(12, 15); routine: main",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "dominated_case": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-dominated_case/reject/main.nim(14, 3) Error: expression expected, but found 'keyword of'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "other",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "duplicate_key": {
+   "outcome": "NONE",
+   "message": "a table is built from a list of pairs, which accepts a repeated key"
+  },
+  "char_arithmetic": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-char_arithmetic/reject/main.nim(6, 16) Error: type mismatch",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "98",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "comparison_statement": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-comparison_statement/reject/main.nim(5, 7) Error: expression 'count == 5' is of type 'bool' and has to be used (or discarded)",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "structural_equality": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "hash_matches_equality": {
+   "outcome": "NONE",
+   "message": "a type can define its own == and keep the default hash"
+  },
+  "array_literal_length": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-array_literal_length/reject/main.nim(5, 28) Error: type mismatch: got 'array[0..2, int]' for '[10, 20, 30]' but expected 'array[0..3, int]'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "40",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "required_names": {
+   "outcome": "NONE",
+   "message": "arguments may always be passed by position"
+  },
+  "trojan_source": {
+   "outcome": "NONE",
+   "message": "a bidirectional control character in a string literal is accepted"
+  },
+  "enum_from_int": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "/tmp/breakbench/express-enum_from_int/main/main.nim(9) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/system/fatal.nim(62) sysFatal\nError: unhandled exception: value out of range: 7 notin 0 .. 2 [RangeDefect]",
+   "level": "LANGUAGE"
+  },
+  "captured_write_in_thread": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-captured_write_in_thread/reject/main.nim(17, 15) Error: type mismatch",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "increment_in_expression": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-increment_in_expression/reject/main.nim(5, 6) Error: undeclared identifier: '++'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bitwise_on_bool": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-bitwise_on_bool/reject/main.nim(5, 16) Error: type mismatch",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "yes",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "readonly_field": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-readonly_field/reject/main.nim(7, 2) Error: 'c.port' cannot be assigned to",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "8080",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bool_condition": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-bool_condition/reject/main.nim(4, 7) Error: type mismatch: got 'int' for 'cmp(\"x\", \"x\")' but expected 'bool'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "same",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "forced_unwrap": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "/tmp/breakbench/express-forced_unwrap/main/main.nim(9) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/options.nim(203) get\nError: unhandled exception: Can't obtain a value from a `none` [UnpackDefect]",
+   "level": "STD"
   }
  }
 }

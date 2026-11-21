@@ -1,0 +1,11 @@
+// LEVEL: LANGUAGE
+
+struct Config {
+    port: i64
+}
+
+fn main() {
+    let c = Config { port: 8080 }
+    c.port = 1 // REJECT!
+    println(f"{c.port}")
+}

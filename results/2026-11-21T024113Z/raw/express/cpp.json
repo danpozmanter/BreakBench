@@ -662,9 +662,197 @@
    "outcome": "PASS",
    "refusal": "",
    "exit": 0,
-   "secs": 1.36,
+   "secs": 1.38,
    "stdout": "3999999",
    "stderr": "",
+   "level": "STD"
+  },
+  "generic_constraint": {
+   "outcome": "PASS",
+   "refusal": "main.cpp:12:36: error: no matching function for call to object of type 'const __sort_fn'\n1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "lossy_int_to_float": {
+   "outcome": "NONE",
+   "message": "a 64-bit integer converts to double implicitly; -Wimplicit-int-float-conversion is only a warning"
+  },
+  "const_index_bounds": {
+   "outcome": "NONE",
+   "message": "an index past the end of a std::array is accepted"
+  },
+  "const_overflow": {
+   "outcome": "PASS",
+   "refusal": "main.cpp:8:28: error: constexpr variable 'span' must be initialized by a constant expression\n1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "86400000000000",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "static_assert": {
+   "outcome": "PASS",
+   "refusal": "main.cpp:8:15: error: static assertion failed due to requirement '300 <= byte_limit': 300 fits in a byte\n1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "global_mutable_state": {
+   "outcome": "NONE",
+   "message": "a mutable global needs no synchronization"
+  },
+  "unreachable_code": {
+   "outcome": "NONE",
+   "message": "code after a return is only a warning (-Wunreachable-code)"
+  },
+  "pure_function": {
+   "outcome": "NONE",
+   "message": "since C++23 a constexpr function may change a global"
+  },
+  "nan_key": {
+   "outcome": "FAIL",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "missing",
+   "stderr": "",
+   "level": "STD"
+  },
+  "string_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "abc",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_equality": {
+   "outcome": "PASS",
+   "refusal": "main.cpp:8:12: error: result of comparison against a string literal is unspecified (use an explicit string comparison function instead) [-Werror,-Wstring-compare]\nmain.cpp:8:12: error: comparison between pointer and integer ('int' and 'const char *')",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "match",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "checked_interpolation": {
+   "outcome": "NONE",
+   "message": "no string interpolation; std::format takes its values by position"
+  },
+  "evaluation_order": {
+   "outcome": "NONE",
+   "message": "the order in which a call's arguments run is unspecified"
+  },
+  "contracts": {
+   "outcome": "NONE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "diverging_function": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "noncopyable_type": {
+   "outcome": "PASS",
+   "refusal": "main.cpp:16:12: error: call to deleted constructor of 'Handle'\n1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "dominated_case": {
+   "outcome": "PASS",
+   "refusal": "main.cpp:14:88: error: duplicate case value 'CIRCLE'\n1 warning and 1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "other",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "duplicate_key": {
+   "outcome": "NONE",
+   "message": "a repeated key in an initializer list is accepted"
+  },
+  "char_arithmetic": {
+   "outcome": "NONE",
+   "message": "a char is an integer, so c + 1 is an int"
+  },
+  "comparison_statement": {
+   "outcome": "NONE",
+   "message": "a comparison used as a statement is only a warning (-Wunused-comparison)"
+  },
+  "structural_equality": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "hash_matches_equality": {
+   "outcome": "NONE",
+   "message": "std::unordered_set takes its hash and equality as separate template arguments"
+  },
+  "array_literal_length": {
+   "outcome": "NONE",
+   "message": "missing entries are filled with zero"
+  },
+  "required_names": {
+   "outcome": "NONE",
+   "message": "no named arguments, and a struct may be initialized by position"
+  },
+  "trojan_source": {
+   "outcome": "NONE",
+   "message": "a bidirectional control character in a string literal is accepted"
+  },
+  "enum_from_int": {
+   "outcome": "NONE",
+   "message": "a static_cast accepts any value of the underlying type"
+  },
+  "captured_write_in_thread": {
+   "outcome": "NONE",
+   "message": "a lambda can capture a local by reference and change it from another thread"
+  },
+  "increment_in_expression": {
+   "outcome": "NONE",
+   "message": "i = i++ is accepted"
+  },
+  "bitwise_on_bool": {
+   "outcome": "NONE",
+   "message": "a comparison is an int, so & accepts it and evaluates both sides"
+  },
+  "readonly_field": {
+   "outcome": "PASS",
+   "refusal": "main.cpp:9:12: error: cannot assign to non-static data member 'port' with const-qualified type 'const int'\n1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "8080",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bool_condition": {
+   "outcome": "NONE",
+   "message": "an integer is a valid condition"
+  },
+  "forced_unwrap": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 134,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/optional:1193: _Tp &&std::optional<int>::operator*() && [_Tp = int]: Assertion 'this->_M_is_engaged()' failed.\nAborted",
    "level": "STD"
   }
  }

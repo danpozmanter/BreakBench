@@ -1,1 +1,0 @@
--- CANNOT-EXPRESS: no SHA-256 in the standard library or the Haskell project's libraries

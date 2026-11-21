@@ -736,6 +736,249 @@
    "stdout": "3999999",
    "stderr": "",
    "level": "LANGUAGE"
+  },
+  "generic_constraint": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:10:34: error: referencing instance method 'sort()' on 'MutableCollection' requires that 'Point' conform to 'Comparable'\n   |                                  `- error: referencing instance method 'sort()' on 'MutableCollection' requires that 'Point' conform to 'Comparable'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "lossy_int_to_float": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:7:6: error: cannot convert value of type 'Int64' to expected argument type 'Double'\n  |      `- error: cannot convert value of type 'Int64' to expected argument type 'Double'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7.0",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_index_bounds": {
+   "outcome": "NONE",
+   "message": "a constant index past the end of an InlineArray is accepted"
+  },
+  "const_overflow": {
+   "outcome": "PASS",
+   "refusal": "main.swift:4:54: error: arithmetic operation '31536000000000000 * 300' (on type 'Int64') results in an overflow\n  |                                                      `- error: arithmetic operation '31536000000000000 * 300' (on type 'Int64') results in an overflow",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "86400000000000",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "static_assert": {
+   "outcome": "NONE",
+   "message": "no compile-time assertion"
+  },
+  "global_mutable_state": {
+   "outcome": "PASS",
+   "refusal": "main.swift:12:14: error: main actor-isolated var 'plain' can not be mutated from a nonisolated context\n   |      |       `- error: main actor-isolated var 'plain' can not be mutated from a nonisolated context",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unreachable_code": {
+   "outcome": "NONE",
+   "message": "code after a return is only a warning, and a call on the next line becomes the returned value"
+  },
+  "pure_function": {
+   "outcome": "NONE",
+   "message": "no way to mark a function as free of side effects"
+  },
+  "nan_key": {
+   "outcome": "FAIL",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "missing",
+   "stderr": "",
+   "level": "STD"
+  },
+  "string_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "abc",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_equality": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:5:7: error: binary operator '==' cannot be applied to operands of type 'Int' and 'String'\n  |       |- error: binary operator '==' cannot be applied to operands of type 'Int' and 'String'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "match",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "checked_interpolation": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:5:16: error: cannot find 'nmae' in scope\n  |                `- error: cannot find 'nmae' in scope",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hello Ada",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "evaluation_order": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "contracts": {
+   "outcome": "NONE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "diverging_function": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "noncopyable_type": {
+   "outcome": "PASS",
+   "refusal": "main.swift:9:18: error: 'copy' cannot be applied to noncopyable types\n   |                  `- error: 'copy' cannot be applied to noncopyable types",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "dominated_case": {
+   "outcome": "NONE",
+   "message": "an arm that can never run is only a warning"
+  },
+  "duplicate_key": {
+   "outcome": "NONE",
+   "message": "a repeated key in a dictionary literal is only a warning"
+  },
+  "char_arithmetic": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:6:14: error: cannot convert value of type 'Character' to expected argument type 'Int'\n  |              `- error: cannot convert value of type 'Character' to expected argument type 'Int'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "98",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "comparison_statement": {
+   "outcome": "PASS",
+   "refusal": "main.swift:5:7: warning: result of operator '==' is unused [#NoUsage]\n  |       `- warning: result of operator '==' is unused [#NoUsage]\nmain.swift:5:7: warning: result of operator '==' is unused [#NoUsage]\n  |       `- warning: result of operator '==' is unused [#NoUsage]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "structural_equality": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "hash_matches_equality": {
+   "outcome": "NONE",
+   "message": "a type can write its own == and keep the synthesized hash(into:)"
+  },
+  "array_literal_length": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:5:34: error: expected '4' elements in inline array literal, but got '3'\n  |                                  `- error: expected '4' elements in inline array literal, but got '3'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "40",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "required_names": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:8:5: error: missing argument labels 'dx:dy:' in call\n  |     `- error: missing argument labels 'dx:dy:' in call",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3 4",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "trojan_source": {
+   "outcome": "NONE",
+   "message": "a bidirectional control character in a string literal is accepted"
+  },
+  "enum_from_int": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "before\ninvalid",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "captured_write_in_thread": {
+   "outcome": "PASS",
+   "refusal": "main.swift:10:33: error: sending value of non-Sendable type '() async -> ()' risks causing data races [#RegionIsolation::SendingRisksDataRace]\n   |                                 |- error: sending value of non-Sendable type '() async -> ()' risks causing data races [#RegionIsolation::SendingRisksDataRace]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "increment_in_expression": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:5:6: error: cannot find operator '++' in scope; did you mean '+= 1'?\n  |      `- error: cannot find operator '++' in scope; did you mean '+= 1'?",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bitwise_on_bool": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:5:17: error: binary operator '&' cannot be applied to two 'Bool' operands\n  |                 `- error: binary operator '&' cannot be applied to two 'Bool' operands",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "yes",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "readonly_field": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:8:3: error: cannot assign to property: 'port' is a 'let' constant\n   |   `- error: cannot assign to property: 'port' is a 'let' constant",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "8080",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bool_condition": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:6:4: error: type 'Int' cannot be used as a boolean; test for '!= 0' instead\n  |    `- error: type 'Int' cannot be used as a boolean; test for '!= 0' instead",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "same",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "forced_unwrap": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 132,
+   "secs": 0.1,
+   "stdout": "before",
+   "stderr": "main/main.swift:8: Fatal error: Unexpectedly found nil while unwrapping an Optional value\n\n*** Signal 4: Backtracing from 0x7f9c48c461ef... done ***\n\n*** Program crashed: Illegal instruction at 0x00007f9c48c461ef ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0      0x00007f9c48c461ef closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 623 in libswift\n...\n main            /tmp/breakbench/express-forced_unwrap/main/main\n0x00007f9c472f5000\u20130x00007f9c474b4819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6       /usr/lib/x86_64-linux-gnu/libc.so.6\n0x00007f9c48ad3000\u20130x00007f9c490acb70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.01s\n\nIllegal instruction (core dumped)",
+   "level": "LANGUAGE"
   }
  }
 }

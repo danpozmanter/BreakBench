@@ -1,0 +1,9 @@
+// LEVEL: LANGUAGE
+
+const BYTE_LIMIT: i64 = 255
+
+fn main() {
+    comptime { assert(100 <= BYTE_LIMIT) }
+    comptime { assert(300 <= BYTE_LIMIT) } // REJECT!
+    println(100)
+}

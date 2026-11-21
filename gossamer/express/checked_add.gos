@@ -1,8 +1,0 @@
-// LEVEL: STD
-
-use std::env
-
-fn main() {
-    let n = env::args()[0].to_i64().unwrap()
-    println(if n.checked_add(1).is_none() { "overflow" } else { "ok" })
-}

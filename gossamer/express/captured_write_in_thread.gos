@@ -1,0 +1,13 @@
+// LEVEL: LANGUAGE
+
+use std::sync::Shared
+
+fn main() {
+    let count = Shared::new(0)
+    let t = spawn(|| count.update(|n| n + 1))
+    t.join().unwrap()
+    println(f"{count.get()}")
+    let mut plain = 0 // REJECT!
+    let u = spawn(|| plain += 1) // REJECT!
+    u.join().unwrap() // REJECT!
+}

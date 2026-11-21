@@ -561,6 +561,164 @@
    "stdout": "3999999",
    "stderr": "",
    "level": "LANGUAGE"
+  },
+  "generic_constraint": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "lossy_int_to_float": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "const_index_bounds": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "const_overflow": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "static_assert": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "global_mutable_state": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "unreachable_code": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "pure_function": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "nan_key": {
+   "outcome": "NONE",
+   "message": "no set type, and array keys cannot be floats"
+  },
+  "string_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "abc",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_equality": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "checked_interpolation": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "evaluation_order": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1 2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "contracts": {
+   "outcome": "NONE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "diverging_function": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "noncopyable_type": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "dominated_case": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "duplicate_key": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "char_arithmetic": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "comparison_statement": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "structural_equality": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "hash_matches_equality": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "array_literal_length": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "required_names": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "trojan_source": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "enum_from_int": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 255,
+   "secs": 0.01,
+   "stdout": "before",
+   "stderr": "PHP Fatal error:  Uncaught ValueError: 7 is not a valid backing value for enum Color in /tmp/breakbench/express-enum_from_int/main/main.php:13\nStack trace:\n#0 /tmp/breakbench/express-enum_from_int/main/main.php(13): Color::from()\n#1 {main}\n  thrown in /tmp/breakbench/express-enum_from_int/main/main.php on line 13\nFatal error: Uncaught ValueError: 7 is not a valid backing value for enum Color in /tmp/breakbench/express-enum_from_int/main/main.php:13\nStack trace:\n#0 /tmp/breakbench/express-enum_from_int/main/main.php(13): Color::from()\n#1 {main}\n  thrown in /tmp/breakbench/express-enum_from_int/main/main.php on line 13",
+   "level": "LANGUAGE"
+  },
+  "captured_write_in_thread": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "increment_in_expression": {
+   "outcome": "NONE",
+   "message": "i = i++ is accepted"
+  },
+  "bitwise_on_bool": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "readonly_field": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "8080",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bool_condition": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "forced_unwrap": {
+   "outcome": "FAIL",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "before\n1",
+   "stderr": "",
+   "level": "LANGUAGE"
   }
  }
 }

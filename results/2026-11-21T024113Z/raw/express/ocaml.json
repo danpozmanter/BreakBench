@@ -646,6 +646,219 @@
    "stdout": "3999999",
    "stderr": "",
    "level": "LANGUAGE"
+  },
+  "generic_constraint": {
+   "outcome": "NONE",
+   "message": "the standard compare orders every type structurally, so a list of any type sorts"
+  },
+  "lossy_int_to_float": {
+   "outcome": "PASS",
+   "refusal": "Error: The value n has type int but an expression was expected of type float",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_index_bounds": {
+   "outcome": "NONE",
+   "message": "array sizes are not part of the type, so a constant index is checked only at run time"
+  },
+  "const_overflow": {
+   "outcome": "NONE",
+   "message": "integer arithmetic wraps silently, constants included"
+  },
+  "static_assert": {
+   "outcome": "NONE",
+   "message": "no compile-time assertion"
+  },
+  "global_mutable_state": {
+   "outcome": "NONE",
+   "message": "a global ref needs no synchronization"
+  },
+  "unreachable_code": {
+   "outcome": "PASS",
+   "refusal": "Error: Unbound value return",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ok",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "pure_function": {
+   "outcome": "NONE",
+   "message": "no way to mark a function as free of side effects"
+  },
+  "nan_key": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": "",
+   "level": "STD"
+  },
+  "string_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "abc",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_equality": {
+   "outcome": "PASS",
+   "refusal": "Error: This constant has type string but an expression was expected of type",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "match",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "checked_interpolation": {
+   "outcome": "NONE",
+   "message": "no string interpolation"
+  },
+  "evaluation_order": {
+   "outcome": "FAIL",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2 1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "contracts": {
+   "outcome": "NONE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "diverging_function": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "noncopyable_type": {
+   "outcome": "NONE",
+   "message": "values are shared freely, and nothing marks a type as single-owner"
+  },
+  "dominated_case": {
+   "outcome": "PASS",
+   "refusal": "Error (warning 11 [redundant-case]): this match case is unused.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "other",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "duplicate_key": {
+   "outcome": "NONE",
+   "message": "no map literal"
+  },
+  "char_arithmetic": {
+   "outcome": "PASS",
+   "refusal": "Error: The value c has type char but an expression was expected of type int",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "98",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "comparison_statement": {
+   "outcome": "PASS",
+   "refusal": "Error: This expression has type bool but an expression was expected of type",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "structural_equality": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "hash_matches_equality": {
+   "outcome": "NONE",
+   "message": "the standard hash table uses structural equality; nothing ties a custom equality to a hash"
+  },
+  "array_literal_length": {
+   "outcome": "NONE",
+   "message": "array sizes are not part of the type"
+  },
+  "required_names": {
+   "outcome": "PASS",
+   "refusal": "Error (warning 6 [labels-omitted]): labels dx, dy were omitted in the",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3 4",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "trojan_source": {
+   "outcome": "NONE",
+   "message": "a bidirectional control character in a string literal is accepted"
+  },
+  "enum_from_int": {
+   "outcome": "NONE",
+   "message": "no conversion from an integer to a variant"
+  },
+  "captured_write_in_thread": {
+   "outcome": "NONE",
+   "message": "a ref can be changed from any domain without a lock"
+  },
+  "increment_in_expression": {
+   "outcome": "PASS",
+   "refusal": "Error: Syntax error",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bitwise_on_bool": {
+   "outcome": "PASS",
+   "refusal": "Error: This expression has type bool but an expression was expected of type",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "yes",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "readonly_field": {
+   "outcome": "PASS",
+   "refusal": "Error: The record field port is not mutable",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "8080",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bool_condition": {
+   "outcome": "PASS",
+   "refusal": "Error: This expression has type int but an expression was expected of type",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "same",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "forced_unwrap": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "Fatal error: exception Invalid_argument(\"option is None\")",
+   "level": "STD"
   }
  }
 }

@@ -1,0 +1,1 @@
+// CANNOT-EXPRESS: every struct orders structurally, so a list of Points sorts

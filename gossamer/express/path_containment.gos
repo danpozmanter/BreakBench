@@ -1,8 +1,0 @@
-// LEVEL: STD
-
-use std::path
-
-fn main() {
-    let p = path::normalize(path::join("/srv/app", "../../etc/passwd"))
-    println(if p.starts_with("/srv/app/") { "inside" } else { "outside" })
-}

@@ -667,9 +667,257 @@
    "outcome": "PASS",
    "refusal": "",
    "exit": 0,
-   "secs": 0.82,
+   "secs": 0.81,
    "stdout": "3999999",
    "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "generic_constraint": {
+   "outcome": "PASS",
+   "refusal": "main.v:12:5: error: custom sorting condition must be supplied for type `Point`",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "lossy_int_to_float": {
+   "outcome": "PASS",
+   "refusal": "main.v:10:7: error: cannot use `i64` as `f64` in argument 1 to `show`",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7.0",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_index_bounds": {
+   "outcome": "PASS",
+   "refusal": "main.v:6:16: error: index out of range (index: 5, len: 3)",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "20",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_overflow": {
+   "outcome": "NONE",
+   "message": "constant arithmetic that overflows is accepted"
+  },
+  "static_assert": {
+   "outcome": "PASS",
+   "refusal": "main.v:6:25: error: 300 does not fit in a byte",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "global_mutable_state": {
+   "outcome": "PASS",
+   "refusal": "main.v:12:1: error: use `v -enable-globals ...` to enable globals",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unreachable_code": {
+   "outcome": "PASS",
+   "refusal": "main.v:10:10: error: invalid expression: unexpected token `:=`\nmain.v:10:10: error: invalid expression: unexpected token `:=`",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ok",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "pure_function": {
+   "outcome": "PASS",
+   "refusal": "main.v:7:1: error: use `v -enable-globals ...` to enable globals",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "49",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "nan_key": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "string_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "abc",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_equality": {
+   "outcome": "PASS",
+   "refusal": "main.v:8:5: error: infix expr: cannot use `string` (right expression) as `int`",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "match",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "checked_interpolation": {
+   "outcome": "PASS",
+   "refusal": "main.v:6:19: error: undefined ident: `nmae`\nmain.v:6:19: error: expression does not return a value",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hello Ada",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "evaluation_order": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "contracts": {
+   "outcome": "NONE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "diverging_function": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "noncopyable_type": {
+   "outcome": "NONE",
+   "message": "assignment copies any struct; nothing marks a type as single-owner"
+  },
+  "dominated_case": {
+   "outcome": "PASS",
+   "refusal": "main.v:17:3: error: `else` must be the last branch of `match`",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "other",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "duplicate_key": {
+   "outcome": "PASS",
+   "refusal": "main.v:9:19: error: duplicate key \"a\" in map literal",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "char_arithmetic": {
+   "outcome": "PASS",
+   "refusal": "main.v:8:10: error: cannot assign to `total`: expected `int`, not `rune`",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "98",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "comparison_statement": {
+   "outcome": "PASS",
+   "refusal": "main.v:6:2: error: expression evaluated but not used",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "structural_equality": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "hash_matches_equality": {
+   "outcome": "NONE",
+   "message": "map keys must be numbers, strings or enums"
+  },
+  "array_literal_length": {
+   "outcome": "PASS",
+   "refusal": "main.v:9:15: error: cannot use `[3]int` as `[4]int` in argument 1 to `last`",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "40",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "required_names": {
+   "outcome": "NONE",
+   "message": "a struct literal may list its fields by position"
+  },
+  "trojan_source": {
+   "outcome": "NONE",
+   "message": "a bidirectional control character in a string literal is accepted"
+  },
+  "enum_from_int": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "before\ninvalid",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "captured_write_in_thread": {
+   "outcome": "NONE",
+   "message": "a closure changes its own copy of what it captures, and the compiler accepts it"
+  },
+  "increment_in_expression": {
+   "outcome": "NONE",
+   "message": "i = i++ is accepted"
+  },
+  "bitwise_on_bool": {
+   "outcome": "PASS",
+   "refusal": "main.v:8:17: error: bool types only have the following operators defined: `==`, `!=`, `||`, and `&&`",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "yes",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "readonly_field": {
+   "outcome": "PASS",
+   "refusal": "main.v:11:4: error: field `port` of struct `Config` is immutable\nmain.v:11:2: error: `c` is immutable, declare it with `mut` to make it mutable",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "8080",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bool_condition": {
+   "outcome": "PASS",
+   "refusal": "main.v:11:5: error: non-bool type `int` used as if condition",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "same",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "forced_unwrap": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "before",
+   "stderr": "V panic: option not set ()\n v hash: 7647ce1\n    pid: 0xf0\n    tid: 0xf0\n                                                        | 0x5a3d604f1365 | ./main(+0x18365) \n                                                        | 0x5a3d604f23d7 | ./main(+0x193d7) \n                                                        | 0x5a3d604f263c | ./main(+0x1963c) \n                                                        | 0x7182f592b601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x7182f592b718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x5a3d604e8695 | ./main(+0xf695)",
    "level": "LANGUAGE"
   }
  }

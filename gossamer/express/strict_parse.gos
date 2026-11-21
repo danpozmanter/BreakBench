@@ -1,7 +1,0 @@
-// LEVEL: STD
-
-use std::env
-
-fn main() {
-    println(if env::args()[0].to_i64().is_none() { "invalid" } else { "valid" })
-}

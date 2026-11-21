@@ -1,1 +1,0 @@
--- CANNOT-EXPRESS: numeric literals convert to NominalDiffTime, so a duration plus a plain number is accepted

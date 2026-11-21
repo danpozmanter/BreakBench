@@ -1,8 +1,0 @@
-// LEVEL: STD
-
-use std::env
-
-fn main() {
-    let n = env::args()[0].to_i64().unwrap()
-    println(n.saturating_add(1))
-}

@@ -681,6 +681,229 @@
   "automatic_memory": {
    "outcome": "NONE",
    "message": "every allocation goes through an allocator and needs an explicit free or deinit"
+  },
+  "generic_constraint": {
+   "outcome": "PASS",
+   "refusal": "/opt/zig/lib/std/sort.zig:135:22: error: operator < not allowed for type 'main.Point'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "lossy_int_to_float": {
+   "outcome": "PASS",
+   "refusal": "main.zig:19:19: error: expected type 'f64', found 'i64'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_index_bounds": {
+   "outcome": "PASS",
+   "refusal": "main.zig:14:36: error: index 5 outside array of length 3",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "20",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_overflow": {
+   "outcome": "PASS",
+   "refusal": "main.zig:14:74: error: type 'i64' cannot represent integer value '9460800000000000000'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "86400000000000",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "static_assert": {
+   "outcome": "PASS",
+   "refusal": "main.zig:10:34: error: 300 does not fit in a byte\ncomptime { if (300 > byte_limit) @compileError(\"300 does not fit in a byte\"); } // REJECT!",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "global_mutable_state": {
+   "outcome": "NONE",
+   "message": "a global var needs no synchronization"
+  },
+  "unreachable_code": {
+   "outcome": "PASS",
+   "refusal": "main.zig:12:5: error: unreachable code",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ok",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "pure_function": {
+   "outcome": "NONE",
+   "message": "no way to mark a function as free of side effects"
+  },
+  "nan_key": {
+   "outcome": "PASS",
+   "refusal": "/opt/zig/lib/std/hash/auto_hash.zig:88:12: error: unable to hash type f64\n        => @compileError(\"unable to hash type \" ++ @typeName(Key)),",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": "",
+   "level": "STD"
+  },
+  "string_value": {
+   "outcome": "NONE",
+   "message": "no string type; text is a byte slice that assignment shares"
+  },
+  "typed_equality": {
+   "outcome": "PASS",
+   "refusal": "main.zig:15:12: error: cannot compare strings with ==",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "match",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "checked_interpolation": {
+   "outcome": "NONE",
+   "message": "no string interpolation"
+  },
+  "evaluation_order": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "contracts": {
+   "outcome": "NONE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "diverging_function": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "noncopyable_type": {
+   "outcome": "NONE",
+   "message": "assignment copies any struct; nothing marks a type as single-owner"
+  },
+  "dominated_case": {
+   "outcome": "PASS",
+   "refusal": "main.zig:14:73: error: duplicate switch value '.circle'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "other",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "duplicate_key": {
+   "outcome": "NONE",
+   "message": "no map literal"
+  },
+  "char_arithmetic": {
+   "outcome": "NONE",
+   "message": "no character type; 'a' is an integer"
+  },
+  "comparison_statement": {
+   "outcome": "PASS",
+   "refusal": "main.zig:14:11: error: value of type 'bool' ignored\nmain.zig:14:11: note: all non-void values must be used",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "structural_equality": {
+   "outcome": "NONE",
+   "message": "== does not compare structs; std.meta.eql is a library call"
+  },
+  "hash_matches_equality": {
+   "outcome": "NONE",
+   "message": "a hash map takes its hash and equality as separate functions"
+  },
+  "array_literal_length": {
+   "outcome": "PASS",
+   "refusal": "main.zig:14:15: error: expected 4 array elements; found 3",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "40",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "required_names": {
+   "outcome": "PASS",
+   "refusal": "main.zig:19:20: error: type 'main.Offset' does not support array initialization syntax",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3 4",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "trojan_source": {
+   "outcome": "NONE",
+   "message": "a bidirectional control character in a string literal is accepted"
+  },
+  "enum_from_int": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 134,
+   "secs": 0.17,
+   "stdout": "before",
+   "stderr": "thread 837 panic: invalid enum value\n/tmp/breakbench/express-enum_from_int/main/main.zig:17:22: 0x11e46d8 in main (main.zig)\n    const c: Color = @enumFromInt(n);\n                     ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e5408 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e4121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)",
+   "level": "LANGUAGE"
+  },
+  "captured_write_in_thread": {
+   "outcome": "NONE",
+   "message": "a thread receives a plain pointer to any variable"
+  },
+  "increment_in_expression": {
+   "outcome": "PASS",
+   "refusal": "main.zig:14:12: error: expected expression, found ';'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bitwise_on_bool": {
+   "outcome": "NONE",
+   "message": "& is defined on booleans and evaluates both sides"
+  },
+  "readonly_field": {
+   "outcome": "PASS",
+   "refusal": "main.zig:15:6: error: cannot assign to constant",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "8080",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bool_condition": {
+   "outcome": "PASS",
+   "refusal": "main.zig:21:16: error: expected type 'bool', found 'i32'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "same",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "forced_unwrap": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 134,
+   "secs": 0.13,
+   "stdout": "before",
+   "stderr": "thread 90 panic: attempt to use null value\n/tmp/breakbench/express-forced_unwrap/main/main.zig:20:38: 0x11e456b in main (main.zig)\n    try out.print(\"{d}\\n\", .{find(id).? + 1});\n                                     ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e5238 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e4121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)",
+   "level": "LANGUAGE"
   }
  }
 }

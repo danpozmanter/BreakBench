@@ -1,9 +1,0 @@
-// LEVEL: STD
-
-use std::collections::BitSet
-
-fn main() {
-    let mut bits = BitSet::new()
-    bits.insert(1000)
-    println(f"{bits.contains(1000)} {bits.contains(999)}")
-}

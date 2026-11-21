@@ -1,7 +1,0 @@
-// LEVEL: STD
-
-use std::unicode
-
-fn main() {
-    println(if unicode::nfc("e\u{301}") == "\u{e9}" { "equal" } else { "different" })
-}

@@ -1,272 +1,242 @@
 [
  {
-  "id": "gossamer",
-  "name": "Gossamer",
-  "correctness": 90.8,
-  "builtin": 89.7,
-  "ecosystem": 95.1,
-  "overall": 91.9,
+  "id": "rust",
+  "name": "Rust",
+  "correctness": 85.2,
+  "builtin": 87.9,
+  "overall": 86.6,
   "rank": 1
  },
  {
-  "id": "fsharp",
-  "name": "F#",
-  "correctness": 80.3,
-  "builtin": 75.9,
-  "ecosystem": 98.4,
-  "overall": 84.9,
+  "id": "gossamer",
+  "name": "Gossamer",
+  "correctness": 90.8,
+  "builtin": 70.7,
+  "overall": 80.8,
   "rank": 2
  },
  {
   "id": "swift",
   "name": "Swift",
   "correctness": 80.6,
-  "builtin": 93.1,
-  "ecosystem": 78.7,
-  "overall": 84.1,
+  "builtin": 81.0,
+  "overall": 80.8,
   "rank": 3
- },
- {
-  "id": "rust",
-  "name": "Rust",
-  "correctness": 85.2,
-  "builtin": 96.6,
-  "ecosystem": 65.6,
-  "overall": 82.5,
-  "rank": 4
- },
- {
-  "id": "kotlin",
-  "name": "Kotlin",
-  "correctness": 71.7,
-  "builtin": 72.4,
-  "ecosystem": 91.8,
-  "overall": 78.6,
-  "rank": 5
- },
- {
-  "id": "csharp",
-  "name": "C#",
-  "correctness": 76.6,
-  "builtin": 62.1,
-  "ecosystem": 96.7,
-  "overall": 78.5,
-  "rank": 6
- },
- {
-  "id": "scala",
-  "name": "Scala",
-  "correctness": 70.1,
-  "builtin": 62.1,
-  "ecosystem": 90.2,
-  "overall": 74.1,
-  "rank": 7
  },
  {
   "id": "nim",
   "name": "Nim",
   "correctness": 70.7,
-  "builtin": 79.3,
-  "ecosystem": 72.1,
-  "overall": 74.0,
-  "rank": 8
+  "builtin": 77.6,
+  "overall": 74.2,
+  "rank": 4
  },
  {
   "id": "zig",
   "name": "Zig",
-  "correctness": 80.0,
-  "builtin": 69.0,
-  "ecosystem": 72.1,
-  "overall": 73.7,
-  "rank": 9
+  "correctness": 78.9,
+  "builtin": 65.5,
+  "overall": 72.2,
+  "rank": 5
  },
  {
-  "id": "crystal",
-  "name": "Crystal",
-  "correctness": 73.7,
-  "builtin": 62.1,
-  "ecosystem": 83.6,
-  "overall": 73.1,
-  "rank": 10
- },
- {
-  "id": "java",
-  "name": "Java",
-  "correctness": 64.5,
-  "builtin": 62.1,
-  "ecosystem": 86.9,
-  "overall": 71.2,
-  "rank": 11
- },
- {
-  "id": "haskell",
-  "name": "Haskell",
-  "correctness": 80.7,
-  "builtin": 62.1,
-  "ecosystem": 68.9,
-  "overall": 70.6,
-  "rank": 12
- },
- {
-  "id": "d",
-  "name": "D",
-  "correctness": 59.9,
-  "builtin": 69.0,
-  "ecosystem": 80.3,
-  "overall": 69.7,
-  "rank": 13
- },
- {
-  "id": "odin",
-  "name": "Odin",
-  "correctness": 67.1,
-  "builtin": 62.1,
-  "ecosystem": 78.7,
-  "overall": 69.3,
-  "rank": 14
- },
- {
-  "id": "ocaml",
-  "name": "OCaml",
-  "correctness": 76.3,
-  "builtin": 69.0,
-  "ecosystem": 60.7,
-  "overall": 68.7,
-  "rank": 15
+  "id": "fsharp",
+  "name": "F#",
+  "correctness": 80.3,
+  "builtin": 63.8,
+  "overall": 72.0,
+  "rank": 6
  },
  {
   "id": "v",
   "name": "V",
   "correctness": 66.4,
-  "builtin": 69.0,
-  "ecosystem": 68.9,
-  "overall": 68.1,
+  "builtin": 74.1,
+  "overall": 70.2,
+  "rank": 7
+ },
+ {
+  "id": "haskell",
+  "name": "Haskell",
+  "correctness": 79.6,
+  "builtin": 60.3,
+  "overall": 69.9,
+  "rank": 8
+ },
+ {
+  "id": "mojo",
+  "name": "Mojo",
+  "correctness": 73.4,
+  "builtin": 63.8,
+  "overall": 68.6,
+  "rank": 9
+ },
+ {
+  "id": "ocaml",
+  "name": "OCaml",
+  "correctness": 76.3,
+  "builtin": 60.3,
+  "overall": 68.3,
+  "rank": 10
+ },
+ {
+  "id": "kotlin",
+  "name": "Kotlin",
+  "correctness": 71.7,
+  "builtin": 58.6,
+  "overall": 65.2,
+  "rank": 11
+ },
+ {
+  "id": "csharp",
+  "name": "C#",
+  "correctness": 76.6,
+  "builtin": 51.7,
+  "overall": 64.2,
+  "rank": 12
+ },
+ {
+  "id": "crystal",
+  "name": "Crystal",
+  "correctness": 73.7,
+  "builtin": 53.4,
+  "overall": 63.5,
+  "rank": 13
+ },
+ {
+  "id": "goose",
+  "name": "Goose",
+  "correctness": 72.4,
+  "builtin": 53.4,
+  "overall": 62.9,
+  "rank": 14
+ },
+ {
+  "id": "odin",
+  "name": "Odin",
+  "correctness": 67.1,
+  "builtin": 58.6,
+  "overall": 62.8,
+  "rank": 15
+ },
+ {
+  "id": "d",
+  "name": "D",
+  "correctness": 59.9,
+  "builtin": 63.8,
+  "overall": 61.8,
   "rank": 16
  },
  {
-  "id": "c3",
-  "name": "C3",
-  "correctness": 70.0,
-  "builtin": 58.6,
-  "ecosystem": 70.5,
-  "overall": 66.4,
+  "id": "scala",
+  "name": "Scala",
+  "correctness": 70.1,
+  "builtin": 50.0,
+  "overall": 60.0,
   "rank": 17
- },
- {
-  "id": "cpp",
-  "name": "C++",
-  "correctness": 59.5,
-  "builtin": 69.0,
-  "ecosystem": 67.2,
-  "overall": 65.2,
-  "rank": 18
- },
- {
-  "id": "dart",
-  "name": "Dart",
-  "correctness": 75.0,
-  "builtin": 51.7,
-  "ecosystem": 68.9,
-  "overall": 65.2,
-  "rank": 19
- },
- {
-  "id": "typescript",
-  "name": "TypeScript",
-  "correctness": 61.8,
-  "builtin": 62.1,
-  "ecosystem": 70.5,
-  "overall": 64.8,
-  "rank": 20
  },
  {
   "id": "golang",
   "name": "Go",
   "correctness": 68.4,
+  "builtin": 50.0,
+  "overall": 59.2,
+  "rank": 18
+ },
+ {
+  "id": "c3",
+  "name": "C3",
+  "correctness": 69.1,
+  "builtin": 48.3,
+  "overall": 58.7,
+  "rank": 19
+ },
+ {
+  "id": "java",
+  "name": "Java",
+  "correctness": 64.5,
   "builtin": 51.7,
-  "ecosystem": 73.8,
-  "overall": 64.6,
+  "overall": 58.1,
+  "rank": 20
+ },
+ {
+  "id": "dart",
+  "name": "Dart",
+  "correctness": 71.1,
+  "builtin": 41.4,
+  "overall": 56.2,
   "rank": 21
  },
  {
-  "id": "goose",
-  "name": "Goose",
-  "correctness": 78.6,
-  "builtin": 72.4,
-  "ecosystem": 32.8,
-  "overall": 61.3,
+  "id": "typescript",
+  "name": "TypeScript",
+  "correctness": 58.6,
+  "builtin": 53.4,
+  "overall": 56.0,
   "rank": 22
+ },
+ {
+  "id": "cpp",
+  "name": "C++",
+  "correctness": 59.5,
+  "builtin": 50.0,
+  "overall": 54.8,
+  "rank": 23
  },
  {
   "id": "clojure",
   "name": "Clojure",
   "correctness": 75.7,
-  "builtin": 17.2,
-  "ecosystem": 88.5,
-  "overall": 60.5,
-  "rank": 23
- },
- {
-  "id": "mojo",
-  "name": "Mojo",
-  "correctness": 75.3,
-  "builtin": 72.4,
-  "ecosystem": 27.9,
-  "overall": 58.5,
+  "builtin": 25.9,
+  "overall": 50.8,
   "rank": 24
  },
  {
   "id": "julia",
   "name": "Julia",
   "correctness": 65.1,
-  "builtin": 17.2,
-  "ecosystem": 75.4,
-  "overall": 52.6,
+  "builtin": 20.7,
+  "overall": 42.9,
   "rank": 25
  },
  {
   "id": "ruby",
   "name": "Ruby",
   "correctness": 66.1,
-  "builtin": 13.8,
-  "ecosystem": 75.4,
-  "overall": 51.8,
+  "builtin": 15.5,
+  "overall": 40.8,
   "rank": 26
  },
  {
   "id": "python",
   "name": "Python",
   "correctness": 60.5,
-  "builtin": 13.8,
-  "ecosystem": 77.0,
-  "overall": 50.4,
+  "builtin": 20.7,
+  "overall": 40.6,
   "rank": 27
  },
  {
   "id": "c",
   "name": "C",
   "correctness": 56.2,
-  "builtin": 31.0,
-  "ecosystem": 55.7,
-  "overall": 47.6,
+  "builtin": 24.1,
+  "overall": 40.2,
   "rank": 28
  },
  {
   "id": "php",
   "name": "PHP",
-  "correctness": 60.1,
-  "builtin": 31.0,
-  "ecosystem": 50.8,
-  "overall": 47.3,
+  "correctness": 54.6,
+  "builtin": 24.1,
+  "overall": 39.4,
   "rank": 29
  },
  {
   "id": "javascript",
   "name": "JavaScript",
-  "correctness": 41.7,
+  "correctness": 39.5,
   "builtin": 13.8,
-  "ecosystem": 70.5,
-  "overall": 42.0,
+  "overall": 26.6,
   "rank": 30
  }
 ]

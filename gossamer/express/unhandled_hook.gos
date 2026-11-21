@@ -1,8 +1,0 @@
-// LEVEL: STD
-
-use std::runtime
-
-fn main() {
-    runtime::at_exit(|| println("hook ran"))
-    panic("boom")
-}

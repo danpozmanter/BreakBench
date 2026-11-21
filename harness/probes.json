@@ -21,40 +21,15 @@
       "title": "Concurrency"
     },
     {
-      "id": "processes",
-      "title": "Processes and OS"
-    },
-    {
       "id": "text",
       "title": "Text"
     },
     {
       "id": "numbers",
       "title": "Numbers"
-    },
-    {
-      "id": "data",
-      "title": "Data types"
-    },
-    {
-      "id": "errors",
-      "title": "Error handling and recovery"
-    },
-    {
-      "id": "security",
-      "title": "Security"
     }
   ],
   "probes": [
-    {
-      "id": "tuple",
-      "group": "data",
-      "title": "Tuples",
-      "task": "A function returns 1 and \"a\" together as a tuple. The caller unpacks them and prints both.",
-      "for": "out-parameter mistakes",
-      "expect": "^1 a$",
-      "bench": "ecosystem"
-    },
     {
       "id": "complete_init",
       "group": "types",
@@ -116,16 +91,6 @@
       "bench": "builtin"
     },
     {
-      "id": "duration",
-      "group": "types",
-      "title": "Duration type",
-      "task": "The program adds 1.5 s and 500 ms as durations and prints the total in milliseconds. The compiler refuses adding a plain number to a duration.",
-      "for": "unit confusion",
-      "expect": "^2000$",
-      "checked": true,
-      "bench": "builtin"
-    },
-    {
       "id": "nonnull_reference",
       "group": "types",
       "title": "Refusing null in a plain reference",
@@ -133,6 +98,16 @@
       "for": "null_deref",
       "expect": "^app$",
       "checked": true,
+      "bench": "builtin"
+    },
+    {
+      "id": "forced_unwrap",
+      "group": "types",
+      "title": "Forcing a missing value stops the program",
+      "task": "find(2) returns a missing value. The program prints before, then forces the value out with the language's shortest way to do so (*o, o!, o.get(), unwrap(), assert(o), or a null used as a number) and adds 1. It passes if the program stops there with an error; printing a number, NaN or a placeholder fails.",
+      "for": "null_deref",
+      "expect": "^before",
+      "exit": "nonzero",
       "bench": "builtin"
     },
     {
@@ -147,7 +122,7 @@
     },
     {
       "id": "thread_safety_check",
-      "group": "mutation",
+      "group": "concurrency",
       "title": "Refusing an unguarded shared write",
       "task": "Two threads each add an item to one shared growable list, under a lock or by handing the item back. The compiler refuses a version where a thread adds to the list with no lock. The program prints the list's length.",
       "for": "concurrent_map_write",
@@ -157,7 +132,7 @@
     },
     {
       "id": "lock_owns_data",
-      "group": "mutation",
+      "group": "concurrency",
       "title": "Lock that owns its data",
       "task": "A standard lock holds a record with two fields, and the compiler refuses a read of a field without the lock. Two threads each add 1 to both fields 1,000 times under the lock. The program prints both fields.",
       "for": "panic_under_lock, concurrent_map_write",
@@ -289,16 +264,6 @@
       "bench": "builtin"
     },
     {
-      "id": "assertion",
-      "group": "errors",
-      "title": "Assertions",
-      "task": "The program prints \"before\", then asserts false with the language's assertion. It must stop with a nonzero status.",
-      "for": "silent invariant breaks",
-      "expect": "^before(?![\\s\\S]*after)",
-      "exit": "nonzero",
-      "bench": "ecosystem"
-    },
-    {
       "id": "unused_value_refused",
       "group": "control",
       "title": "Refusing a value that is never used",
@@ -317,24 +282,6 @@
       "expect": "^pass$",
       "checked": true,
       "bench": "builtin"
-    },
-    {
-      "id": "unsigned64",
-      "group": "numbers",
-      "title": "Unsigned 64-bit integers",
-      "task": "The program stores 2^64 - 1 in an unsigned 64-bit integer and prints it.",
-      "for": "unsigned_subtraction",
-      "expect": "^18446744073709551615$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "int128",
-      "group": "numbers",
-      "title": "128-bit integers",
-      "task": "The program stores 2^100 in a fixed-size 128-bit integer and prints it.",
-      "for": "int_overflow",
-      "expect": "^1267650600228229401496703205376$",
-      "bench": "ecosystem"
     },
     {
       "id": "literal_range",
@@ -367,543 +314,292 @@
       "bench": "builtin"
     },
     {
-      "id": "threads_shared_memory",
-      "group": "concurrency",
-      "title": "Threads that share memory",
-      "task": "Two threads fill the two halves of one shared 10-slot array with the numbers 0 to 9. After both finish, the program prints the sum.",
-      "for": "concurrent_map_write",
-      "expect": "^45$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "mutex",
-      "group": "concurrency",
-      "title": "Mutex",
-      "task": "Two threads each add 1 to a shared counter 100,000 times, holding the standard mutex for each step. The program prints the total.",
-      "for": "self_deadlock, lock_order_deadlock",
-      "expect": "^200000$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "atomic_counter",
-      "group": "concurrency",
-      "title": "Atomic counter",
-      "task": "Two threads each add 1 to a shared counter 100,000 times with an atomic add. The program prints the total.",
-      "for": "data races",
-      "expect": "^200000$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "channel",
-      "group": "concurrency",
-      "title": "Channel",
-      "task": "A worker sends 1, 2 and 3 through the standard channel or blocking queue. The main thread receives and prints them.",
-      "for": "abandoned_worker_leak",
-      "expect": "^1 2 3$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "background_task",
-      "group": "concurrency",
-      "title": "Background task",
-      "task": "The program starts a task that sleeps 50 ms and returns 7, prints \"started\" without waiting, then waits for the task and prints its result.",
-      "for": "unawaited_task",
-      "expect": "^started\\s+7$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "join_with_failure",
-      "group": "concurrency",
-      "title": "Seeing a worker's failure",
-      "task": "A worker fails with \"bad input\" the language's usual way. The main thread waits for it and prints the failure.",
-      "for": "worker_failure_lost",
-      "expect": "bad input",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "task_timeout",
-      "group": "concurrency",
-      "title": "Waiting with a timeout",
-      "task": "The program waits at most 100 ms for a task that takes 5 s, prints \"timed out\", and exits without waiting for the task.",
-      "for": "hangs",
-      "expect": "^timed out$",
-      "timeout": 4,
-      "bench": "ecosystem"
-    },
-    {
-      "id": "task_cancel",
-      "group": "concurrency",
-      "title": "Cancelling a task",
-      "task": "The program starts a task that loops until cancelled, cancels it, waits until it stops, and prints \"stopped\".",
-      "for": "abandoned work",
-      "expect": "^stopped$",
-      "timeout": 10,
-      "bench": "ecosystem"
-    },
-    {
-      "id": "concurrent_map",
-      "group": "concurrency",
-      "title": "Map that threads can share",
-      "task": "Four threads each add 1,000 different keys to one map from the standard library that needs no outside lock. The program prints the size.",
-      "for": "concurrent_map_write",
-      "expect": "^4000$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "spawn_argv",
-      "group": "processes",
-      "title": "Running a program without a shell",
-      "task": "The program runs echo with the single argument \"hi; touch /tmp/bb_x\", passed as an argument list with no shell, and prints its output.",
-      "for": "command_injection",
-      "expect": "^hi; touch /tmp/bb_x$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "exit_status",
-      "group": "processes",
-      "title": "Reading a child's exit status",
-      "task": "The program runs false and prints its exit status.",
-      "for": "ignored_error_result",
-      "expect": "^1$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "env_absent",
-      "group": "processes",
-      "title": "Missing environment variable",
-      "task": "The program looks up the unset variable BB_UNSET with a call that tells \"not set\" apart from \"empty\", and prints \"absent\".",
-      "for": "null_deref",
-      "expect": "^absent$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "signal_graceful",
-      "group": "processes",
-      "title": "Shutting down cleanly on SIGTERM",
-      "task": "The program handles SIGTERM, sends SIGTERM to itself, runs its cleanup, prints \"cleaned up\" and exits with status 0.",
-      "for": "lost cleanup",
-      "expect": "^cleaned up$",
-      "timeout": 10,
-      "bench": "ecosystem"
-    },
-    {
-      "id": "secure_temp_file",
-      "group": "processes",
-      "title": "Creating a temporary file safely",
-      "task": "The program creates a new temporary file or folder in one call that cannot collide with another process, writes \"ok\" to a file in it, reads it back and prints it.",
-      "for": "CWE-377",
-      "expect": "^ok$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "file_permissions",
-      "group": "processes",
-      "title": "Creating a private file",
-      "task": "The program creates a file that only its owner can read and write (mode 600) and prints its permission bits in octal.",
-      "for": "CWE-732",
-      "expect": "^600$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "process_timeout",
-      "group": "processes",
-      "title": "Stopping a child that runs too long",
-      "task": "The program starts sleep 10 as a child process, stops it after 100 ms, waits for it to end, and prints \"killed\".",
-      "for": "hangs",
-      "expect": "^killed$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "regex",
-      "group": "text",
-      "title": "Regular expressions",
-      "task": "The program matches ^[a-z]+[0-9]{2}$ against \"abc12\" and \"abc1\" and prints both results.",
-      "for": "regex_backtracking",
-      "expect": "^true false$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "regex_linear",
-      "group": "text",
-      "title": "Regex that cannot run away",
-      "task": "The program matches ^(a+)+$ against 34 a's followed by \"!\" and prints \"no match\" within 5 s.",
-      "for": "regex_backtracking",
-      "expect": "^no match$",
-      "timeout": 5,
-      "bench": "ecosystem"
-    },
-    {
-      "id": "graphemes",
-      "group": "text",
-      "title": "Characters as people see them",
-      "task": "The program takes the first 9 characters, as a reader counts them, of \"abcdefgh👍🏽xyz\" and prints them.",
-      "for": "text truncation",
-      "expect": "^abcdefgh👍🏽$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "unicode_normalize",
-      "group": "text",
-      "title": "Unicode normalization",
-      "task": "The program normalizes \"e\" plus U+0301 to NFC, compares it with U+00E9, and prints \"equal\".",
-      "for": "CWE-176",
-      "expect": "^equal$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "utf8_validate",
-      "group": "text",
-      "title": "Strict UTF-8 decoding",
-      "task": "The program decodes the bytes 0x61 0xFF as UTF-8 so that bad bytes report an error instead of turning into replacement characters, and prints \"invalid\".",
-      "for": "CWE-172",
-      "expect": "^invalid$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "html_escape",
-      "group": "text",
-      "title": "Escaping text for HTML",
-      "task": "The program escapes <a href=\"x\">Tom & Jerry</a> for HTML with a library call and prints the result.",
-      "for": "CWE-79",
-      "expect": "^&lt;a href=(&quot;|&#34;|&#x22;)x(&quot;|&#34;|&#x22;)&gt;Tom &amp; Jerry&lt;(/|&#x2F;|&#47;)a&gt;$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "json_parse",
-      "group": "text",
-      "title": "Parsing JSON",
-      "task": "The program parses {\"port\": 8080, \"debug\": true} with a library call and prints the port, then parses {port: 8080}, gets an error, and prints \"invalid\".",
-      "for": "CWE-20",
-      "expect": "^8080 invalid$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "checked_add",
-      "group": "numbers",
-      "title": "Addition that reports overflow",
-      "task": "The program adds 1 to the largest 64-bit integer, read at run time, with the overflow reported as a value or an error it can catch, and prints \"overflow\".",
-      "for": "int_overflow",
-      "expect": "^overflow$",
-      "args": [
-        "9223372036854775807"
-      ],
-      "bench": "ecosystem"
-    },
-    {
-      "id": "wrapping_add",
-      "group": "numbers",
-      "title": "Addition that wraps on purpose",
-      "task": "The program adds 1 to the largest 64-bit integer, read at run time, with explicit wraparound, and prints the result.",
-      "for": "int_overflow",
-      "expect": "^-9223372036854775808$",
-      "args": [
-        "9223372036854775807"
-      ],
-      "bench": "ecosystem"
-    },
-    {
-      "id": "saturating_add",
-      "group": "numbers",
-      "title": "Addition that stops at the limit",
-      "task": "The program adds 1 to the largest 64-bit integer, read at run time, with explicit saturation, and prints the result.",
-      "for": "int_overflow",
-      "expect": "^9223372036854775807$",
-      "args": [
-        "9223372036854775807"
-      ],
-      "bench": "ecosystem"
-    },
-    {
-      "id": "bigint",
-      "group": "numbers",
-      "title": "Integers of any size",
-      "task": "The program computes 2^100 exactly and prints it.",
-      "for": "int_overflow",
-      "expect": "^1267650600228229401496703205376$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "decimal",
-      "group": "numbers",
-      "title": "Decimal numbers",
-      "task": "The program adds 0.1 and 0.2 as decimals, compares the sum with 0.3, and prints \"equal\".",
-      "for": "float_equality",
-      "expect": "^equal$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "checked_narrowing",
-      "group": "numbers",
-      "title": "Narrowing that reports failure",
-      "task": "The program converts 300, read at run time, to an unsigned 8-bit integer, with the failure reported as a value or an error it can catch, and prints \"does not fit\".",
-      "for": "narrowing_cast",
-      "expect": "^does not fit$",
-      "args": [
-        "300"
-      ],
-      "bench": "ecosystem"
-    },
-    {
-      "id": "float_to_int_checked",
-      "group": "numbers",
-      "title": "Float to integer that reports failure",
-      "task": "The program converts NaN to a 64-bit integer, with the failure reported as a value or an error it can catch, and prints \"does not fit\".",
-      "for": "CERT FLP34-C",
-      "expect": "^does not fit$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "strict_parse",
-      "group": "numbers",
-      "title": "Strict number parsing",
-      "task": "The program parses \"12abc\" as an integer, gets a failure back, and prints \"invalid\".",
-      "for": "parse_invalid_number",
-      "expect": "^invalid$",
-      "args": [
-        "12abc"
-      ],
-      "bench": "ecosystem"
-    },
-    {
-      "id": "sorted_map",
-      "group": "data",
-      "title": "Sorted map",
-      "task": "The program inserts the keys c, a and b into a map that keeps keys in order, and prints the keys.",
-      "for": "iteration-order bugs",
-      "expect": "^a b c$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "sorted_set",
-      "group": "data",
-      "title": "Sorted set",
-      "task": "The program inserts 3, 1 and 2 into a set that keeps items in order, and prints them.",
-      "for": "iteration-order bugs",
-      "expect": "^1 2 3$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "insertion_ordered_map",
-      "group": "data",
-      "title": "Map that keeps insertion order",
-      "task": "The program inserts the keys c, a and b into a map that keeps them in the order added, and prints the keys.",
-      "for": "iteration-order bugs",
-      "expect": "^c a b$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "deque",
-      "group": "data",
-      "title": "Double-ended queue",
-      "task": "The program adds 1 at the back, 0 at the front and 2 at the back, then takes one item off each end and prints them.",
-      "for": "queue misuse",
-      "expect": "^0 2$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "priority_queue",
-      "group": "data",
-      "title": "Priority queue",
-      "task": "The program pushes 3, 1 and 2 into a min-heap, then pops and prints all of them.",
-      "for": "ordering bugs",
-      "expect": "^1 2 3$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "counter",
-      "group": "data",
-      "title": "Counting map",
-      "task": "The program counts the words a, b, a with a counting map or bag type and prints the counts in key order.",
-      "for": "missing_key_default",
-      "expect": "^a=2 b=1$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "bitset",
-      "group": "data",
-      "title": "Bit set",
-      "task": "The program sets bit 1000 in a compact bit set, tests bits 1000 and 999, and prints both results.",
-      "for": "manual bit arithmetic",
-      "expect": "^true false$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "composite_key",
-      "group": "data",
-      "title": "Pair as a set key",
-      "task": "The program puts the pair (1, 2) in a set as one key compared by value, checks for (1, 2), and prints the result.",
-      "for": "mutable_hash_key",
-      "expect": "^true$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "checked_index",
-      "group": "data",
-      "title": "Index lookup that can miss",
-      "task": "The program reads index 5 of [10, 20, 30] with a lookup that returns a missing value (an optional, null or nil) instead of failing, and prints \"none\".",
-      "for": "oob_write, negative_index_wraps",
-      "expect": "^none$",
-      "bench": "ecosystem"
-    },
-    {
-      "id": "total_float_sort",
-      "group": "data",
-      "title": "Sorting floats in a total order",
-      "task": "The program sorts [3, NaN, 1, 2] with the standard comparison that puts every float, NaN included, in order, and prints the values with NaN written as \"NaN\".",
+      "id": "generic_constraint",
+      "group": "types",
+      "title": "Refusing a sort of values with no ordering",
+      "task": "Point has fields x and y and no ordering. The program sorts a list of integers and prints the smallest, 1. The compiler refuses sorting a list of Points.",
       "for": "sort_with_nan",
-      "expect": "^(NaN 1(\\.0)? 2(\\.0)? 3(\\.0)?|1(\\.0)? 2(\\.0)? 3(\\.0)? NaN)$",
-      "bench": "ecosystem"
+      "expect": "^1$",
+      "checked": true,
+      "bench": "builtin"
     },
     {
-      "id": "date_time_zone",
-      "group": "data",
-      "title": "Time zones",
-      "task": "The program converts 2026-03-29 01:30 UTC to local time in Europe/Paris, just after the switch to summer time, and prints it.",
-      "for": "time-zone bugs",
-      "expect": "^2026-03-29 03:30$",
-      "bench": "ecosystem"
+      "id": "lossy_int_to_float",
+      "group": "numbers",
+      "title": "Refusing a silent integer-to-float conversion",
+      "task": "n is a 64-bit integer holding 7. The program passes it to a function that takes a 64-bit float, converting explicitly, and prints 7. The compiler refuses the same call without the conversion, which would round integers above 2^53 (CERT FLP36-C).",
+      "for": "float_to_int_overflow",
+      "expect": "^7(\\.0)?$",
+      "checked": true,
+      "bench": "builtin"
     },
     {
-      "id": "byte_buffer",
-      "group": "data",
-      "title": "Growable byte buffer",
-      "task": "The program appends 100,000 bytes one at a time to a growable byte buffer and prints its length.",
-      "for": "quadratic copying",
-      "expect": "^100000$",
-      "bench": "ecosystem"
+      "id": "const_index_bounds",
+      "group": "memory",
+      "title": "Refusing a constant index past the end",
+      "task": "table is a fixed-size array of 3 entries. The program prints table[1], 20. The compiler refuses table[5], an index known to be out of range before the program runs.",
+      "for": "oob_read, oob_write",
+      "expect": "^20$",
+      "checked": true,
+      "bench": "builtin"
     },
     {
-      "id": "weak_reference",
-      "group": "data",
-      "title": "Weak reference",
-      "task": "The program holds a weak reference to an object, drops the last strong reference (forcing a collection where needed), and prints \"gone\" once the weak reference no longer reaches the object.",
-      "for": "reference_cycle_leak",
-      "expect": "^gone$",
-      "bench": "ecosystem"
+      "id": "const_overflow",
+      "group": "numbers",
+      "title": "Refusing constant arithmetic that overflows",
+      "task": "The program prints the nanoseconds in a day, 1,000,000,000 * 60 * 60 * 24, computed as a 64-bit constant. The compiler refuses the nanoseconds in 300 years computed the same way, which overflow 64 bits.",
+      "for": "int_overflow",
+      "expect": "^86400000000000$",
+      "checked": true,
+      "bench": "builtin"
     },
     {
-      "id": "error_chain",
-      "group": "errors",
-      "title": "Error with a cause",
-      "task": "The program wraps the error \"not found\" with the context \"loading config\", prints the message, then reads the original cause back from the wrapper and prints it.",
-      "for": "lost diagnostics",
-      "expect": "loading config.*not found\\s+not found$",
-      "bench": "ecosystem"
+      "id": "static_assert",
+      "group": "control",
+      "title": "Checking a condition at compile time",
+      "task": "The program checks at compile time that 100 fits in a byte (at most 255) and prints 100. The compiler refuses the build when the same check fails for 300.",
+      "for": "silent invariant breaks",
+      "expect": "^100$",
+      "checked": true,
+      "bench": "builtin"
     },
     {
-      "id": "stack_trace",
-      "group": "errors",
-      "title": "Stack trace as a value",
-      "task": "Function inner captures the call stack as a value. The program prints \"inner\" if the trace names it.",
-      "for": "lost diagnostics",
-      "expect": "^inner$",
-      "bench": "ecosystem"
+      "id": "global_mutable_state",
+      "group": "concurrency",
+      "title": "Refusing an unsynchronized global",
+      "task": "The program counts two calls to hit() in a counter that is safe to share and prints 2. The compiler refuses a plain global variable that a function changes without a lock, an atomic or confinement to one thread.",
+      "for": "concurrent_map_write",
+      "expect": "^2$",
+      "checked": true,
+      "bench": "builtin"
     },
     {
-      "id": "recover_worker_crash",
-      "group": "errors",
-      "title": "Surviving a crashed worker",
-      "task": "A worker panics or throws. The main thread keeps running, prints \"worker crashed\" and exits with status 0.",
-      "for": "worker_failure_lost",
-      "expect": "^worker crashed$",
-      "bench": "ecosystem"
+      "id": "unreachable_code",
+      "group": "control",
+      "title": "Refusing code after a return",
+      "task": "check(n) prints big when n is over 100 and ok otherwise, returning right after it prints, and the program calls check(1). The compiler refuses a statement placed after an unconditional return, the shape of Apple's goto fail bug (CWE-561).",
+      "for": "dead_store",
+      "expect": "^ok$",
+      "checked": true,
+      "bench": "builtin"
     },
     {
-      "id": "recover_allocation_failure",
-      "group": "errors",
-      "title": "Handling a failed allocation",
-      "task": "The program asks for 10^13 bytes, read from the command line, handles the failure, and prints \"allocation failed\".",
-      "for": "huge_allocation",
-      "expect": "^allocation failed$",
-      "args": [
-        "10000000000000"
-      ],
-      "env": {
-        "ASAN_OPTIONS": "detect_leaks=0:allocator_may_return_null=1"
-      },
-      "bench": "ecosystem"
+      "id": "pure_function",
+      "group": "control",
+      "title": "Refusing a side effect in a pure function",
+      "task": "square(x) is marked pure, or runs where the language requires purity, and the program prints square(7), 49. The compiler refuses a pure function that also changes a counter outside it.",
+      "for": "snapshot_aliasing",
+      "expect": "^49$",
+      "checked": true,
+      "bench": "builtin"
     },
     {
-      "id": "recover_stack_overflow",
-      "group": "errors",
-      "title": "Handling a stack overflow",
-      "task": "Runaway recursion becomes an error the program handles. It prints \"stack overflow\" and exits with status 0.",
-      "for": "stack_overflow",
-      "expect": "^stack overflow$",
-      "bench": "ecosystem"
+      "id": "nan_key",
+      "group": "types",
+      "title": "Finding a NaN key again",
+      "task": "The program stores a NaN, computed at run time, in a hash set of floats and looks up a second NaN computed the same way. It passes if the lookup finds it and prints found, or if the compiler refuses a hash set of floats and the program keeps the value another way.",
+      "for": "float_equality, sort_with_nan",
+      "expect": "^found$",
+      "bench": "builtin"
     },
     {
-      "id": "unhandled_hook",
-      "group": "errors",
-      "title": "Last-chance error handler",
-      "task": "The program registers a handler that runs for any unhandled error before the process exits, then fails without handling the error. The handler prints \"hook ran\".",
-      "for": "lost diagnostics",
-      "expect": "^hook ran$",
-      "exit": "any",
-      "bench": "ecosystem"
+      "id": "string_value",
+      "group": "mutation",
+      "title": "Text that assignment does not share",
+      "task": "a holds the text \"abc\". The program sets b = a, appends \"d\" to b, and prints a: abc. It also passes if the compiler refuses reading a after the assignment moved it.",
+      "for": "snapshot_aliasing",
+      "expect": "^abc$",
+      "bench": "builtin"
     },
     {
-      "id": "path_containment",
-      "group": "security",
-      "title": "Checking a path stays in its folder",
-      "task": "The program joins /srv/app with ../../etc/passwd, normalizes the result, checks whether it stays under /srv/app, and prints \"outside\".",
-      "for": "path_join_escape",
-      "expect": "^outside$",
-      "bench": "ecosystem"
+      "id": "typed_equality",
+      "group": "types",
+      "title": "Refusing == between unrelated types",
+      "task": "id is the integer 42. The program compares it with another integer and prints match. The compiler refuses comparing id with the text \"42\" using ==.",
+      "for": "unrelated_type_lookup, string_equality",
+      "expect": "^match$",
+      "checked": true,
+      "bench": "builtin"
     },
     {
-      "id": "constant_time_compare",
-      "group": "security",
-      "title": "Constant-time comparison",
-      "task": "The program compares two equal 16-byte secrets with a constant-time function and prints \"equal\".",
-      "for": "CWE-208",
+      "id": "checked_interpolation",
+      "group": "text",
+      "title": "Interpolation the compiler checks",
+      "task": "name is \"Ada\". The program prints hello Ada with string interpolation. The compiler refuses an interpolation that names a variable that does not exist, nmae.",
+      "for": "format_arg_mismatch",
+      "expect": "^hello Ada$",
+      "checked": true,
+      "bench": "builtin"
+    },
+    {
+      "id": "evaluation_order",
+      "group": "control",
+      "title": "Arguments evaluated left to right",
+      "task": "next() returns 1, then 2. The program prints pair(next(), next()) and must print 1 2: the language guarantees that arguments run left to right (CERT EXP30-C).",
+      "for": "CERT EXP30-C",
+      "expect": "^1 2$",
+      "bench": "builtin"
+    },
+    {
+      "id": "contracts",
+      "group": "control",
+      "title": "Preconditions in the signature",
+      "task": "isqrt(x) declares the precondition x >= 0 as part of its declaration, not as a check in its body. The program prints before, then calls isqrt(-1), and must stop with an error.",
+      "for": "silent invariant breaks",
+      "expect": "^before$",
+      "exit": "nonzero",
+      "bench": "builtin"
+    },
+    {
+      "id": "noncopyable_type",
+      "group": "memory",
+      "title": "Refusing a copy of a single-owner value",
+      "task": "Handle wraps a file descriptor that must have one owner. The program creates a Handle with descriptor 3 and prints it. The compiler refuses a statement that copies the Handle; a move is allowed.",
+      "for": "double_free, use_after_close",
+      "expect": "^3$",
+      "checked": true,
+      "bench": "builtin"
+    },
+    {
+      "id": "dominated_case",
+      "group": "control",
+      "title": "Refusing a match arm that can never run",
+      "task": "describe(s) handles a circle, then any other shape, and the program prints describe of a square: other. The compiler refuses an arm that can never run because an earlier arm covers it: a catch-all placed before the circle arm, or, where switch arms do not match in order, a repeated case.",
+      "for": "non_exhaustive_match",
+      "expect": "^other$",
+      "checked": true,
+      "bench": "builtin"
+    },
+    {
+      "id": "duplicate_key",
+      "group": "types",
+      "title": "Refusing a repeated key in a map literal",
+      "task": "The program builds a map literal with the keys \"a\" and \"b\" and prints its size, 2. The compiler refuses a map literal that lists the key \"a\" twice, where the second value would silently replace the first.",
+      "for": "missing_key_default",
+      "expect": "^2$",
+      "checked": true,
+      "bench": "builtin"
+    },
+    {
+      "id": "char_arithmetic",
+      "group": "types",
+      "title": "Refusing a character used as a number",
+      "task": "c is the character 'a'. The program converts c to its code, adds 1, and prints 98. The compiler refuses storing c + 1 in an integer without a conversion.",
+      "for": "type_confusion",
+      "expect": "^98$",
+      "checked": true,
+      "bench": "builtin"
+    },
+    {
+      "id": "comparison_statement",
+      "group": "control",
+      "title": "Refusing a comparison that does nothing",
+      "task": "The program sets count to 5 and prints it. The compiler refuses the statement count == 5 on its own, a comparison written where an assignment was meant (CWE-482).",
+      "for": "assign_in_condition",
+      "expect": "^5$",
+      "checked": true,
+      "bench": "builtin"
+    },
+    {
+      "id": "structural_equality",
+      "group": "types",
+      "title": "Records that compare by content",
+      "task": "a and b are two records built separately, each with x = 1 and y = 2. The program compares them with the language's equality operator and prints equal (CWE-595).",
+      "for": "string_equality",
       "expect": "^equal$",
-      "bench": "ecosystem"
+      "bench": "builtin"
     },
     {
-      "id": "secure_random",
-      "group": "security",
-      "title": "Cryptographic randomness",
-      "task": "The program reads 16 bytes from a cryptographic random source and prints them in hex.",
-      "for": "CWE-338",
-      "expect": "^[0-9a-f]{32}$",
-      "bench": "ecosystem"
+      "id": "hash_matches_equality",
+      "group": "types",
+      "title": "Refusing an equality without a matching hash",
+      "task": "Point defines equality on x and y, and the program prints the size of a hash set holding two equal Points: 1. The compiler refuses a type that defines its own equality but keeps a hash that disagrees with it (CWE-581).",
+      "for": "mutable_hash_key",
+      "expect": "^1$",
+      "checked": true,
+      "bench": "builtin"
     },
     {
-      "id": "sha256",
-      "group": "security",
-      "title": "SHA-256",
-      "task": "The program hashes \"abc\" with SHA-256 and prints the hex digest.",
-      "for": "CWE-328",
-      "expect": "^ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad$",
-      "bench": "ecosystem"
+      "id": "array_literal_length",
+      "group": "memory",
+      "title": "Refusing a table with missing entries",
+      "task": "table is a fixed-size array of 4 entries written out in full, and the program prints table[3], 40. The compiler refuses the same 4-entry table written with only 3 values.",
+      "for": "uninit_heap_read",
+      "expect": "^40$",
+      "checked": true,
+      "bench": "builtin"
     },
     {
-      "id": "password_hash",
-      "group": "security",
-      "title": "Hashing a password",
-      "task": "The program hashes the password \"hunter2\" with a slow password hash (PBKDF2, bcrypt, scrypt or Argon2), checks \"hunter2\" and \"wrong\" against it, and prints both results.",
-      "for": "CWE-916",
-      "expect": "^true false$",
-      "bench": "ecosystem"
+      "id": "required_names",
+      "group": "types",
+      "title": "Refusing an argument without its name",
+      "task": "move(dx, dy) takes two integers. The program calls it with each argument named and prints 3 4. The compiler refuses a call that passes the two numbers without names, where a swap would go unnoticed (CWE-683).",
+      "for": "missing_argument",
+      "expect": "^3 4$",
+      "checked": true,
+      "bench": "builtin"
     },
     {
-      "id": "hmac",
-      "group": "security",
-      "title": "Signing a message with HMAC",
-      "task": "The program computes HMAC-SHA256 of \"The quick brown fox jumps over the lazy dog\" with the key \"key\" and prints the tag in hex.",
-      "for": "CWE-345",
-      "expect": "^f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8$",
-      "bench": "ecosystem"
+      "id": "enum_from_int",
+      "group": "types",
+      "title": "Refusing an integer that names no enum value",
+      "task": "Color is Red, Green or Blue. The program prints before, then converts 7, read at run time, to a Color with the language's standard conversion. It passes if the conversion reports failure, which the program prints as invalid, or stops the program; a Color that is none of the three fails.",
+      "for": "wrong_variant_access",
+      "expect": "^before(\\ninvalid)?$",
+      "args": [
+        "7"
+      ],
+      "exit": "any",
+      "bench": "builtin"
     },
     {
-      "id": "aead_encrypt",
-      "group": "security",
-      "title": "Authenticated encryption",
-      "task": "The program encrypts \"secret\" with AES-GCM or ChaCha20-Poly1305 under a random key and nonce, decrypts it and prints it, then flips one bit of the ciphertext and prints \"rejected\" when decryption fails.",
-      "for": "CWE-327",
-      "expect": "^secret\\s+rejected$",
-      "bench": "ecosystem"
+      "id": "captured_write_in_thread",
+      "group": "concurrency",
+      "title": "Refusing a thread that changes a captured variable",
+      "task": "The program starts a thread that adds 1 to a counter through a lock or an atomic, waits for it, and prints 1. The compiler refuses a thread that changes a local variable it captured, without a lock or an atomic, while the code that started it changes the same variable.",
+      "for": "concurrent_map_write",
+      "expect": "^1$",
+      "checked": true,
+      "bench": "builtin"
+    },
+    {
+      "id": "increment_in_expression",
+      "group": "control",
+      "title": "Refusing an increment inside an expression",
+      "task": "The program adds 1 to i as a statement of its own and prints 1. The compiler refuses i = i++, an increment inside a larger expression whose result depends on evaluation order (CERT EXP30-C).",
+      "for": "CERT EXP30-C",
+      "expect": "^1$",
+      "checked": true,
+      "bench": "builtin"
+    },
+    {
+      "id": "bitwise_on_bool",
+      "group": "control",
+      "title": "Refusing & where && was meant",
+      "task": "The program tests that s is not empty and that it starts with \"a\" using a short-circuit and, and prints yes. The compiler refuses the same test written with &, which evaluates both sides even when the first is false (CWE-768).",
+      "for": "null_deref",
+      "expect": "^yes$",
+      "checked": true,
+      "bench": "builtin"
+    },
+    {
+      "id": "readonly_field",
+      "group": "mutation",
+      "title": "A field that cannot change after construction",
+      "task": "Config has a port fixed when the Config is built. The program builds one with port 8080 and prints the port. A change to the port must be refused by the compiler, or stop at run time with an error the program catches before it prints 8080.",
+      "for": "snapshot_aliasing",
+      "expect": "^8080$",
+      "bench": "builtin"
+    },
+    {
+      "id": "bool_condition",
+      "group": "types",
+      "title": "Refusing a number used as a condition",
+      "task": "compare(a, b) returns 0 when a equals b, as C's strcmp does. The program prints same when compare(\"x\", \"x\") is 0. The compiler refuses if (compare(a, b)), an integer used as a condition.",
+      "for": "zero_is_falsy",
+      "expect": "^same$",
+      "checked": true,
+      "bench": "builtin"
     }
   ]
 }

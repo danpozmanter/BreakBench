@@ -771,6 +771,219 @@
    "stdout": "3999999",
    "stderr": "",
    "level": "LANGUAGE"
+  },
+  "generic_constraint": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-generic_constraint/reject/Program.fs(9,31): error FS0001: The type 'Point' does not support the 'comparison' constraint because it has the 'NoComparison' attribute [/tmp/breakbench/express-generic_constraint/reject/bb.fsproj]\n/tmp/breakbench/express-generic_constraint/reject/Program.fs(9,31): error FS0001: The type 'Point' does not support the 'comparison' constraint because it has the 'NoComparison' attribute [/tmp/breakbench/express-generic_constraint/reject/bb.fsproj]\n    1 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "lossy_int_to_float": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-lossy_int_to_float/reject/Program.fs(9,10): error FS0001: This expression was expected to have type\n/tmp/breakbench/express-lossy_int_to_float/reject/Program.fs(9,10): error FS0001: This expression was expected to have type\n    1 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "7",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_index_bounds": {
+   "outcome": "NONE",
+   "message": "array sizes are not part of the type, so a constant index is checked only at run time"
+  },
+  "const_overflow": {
+   "outcome": "NONE",
+   "message": "constant arithmetic that overflows is accepted"
+  },
+  "static_assert": {
+   "outcome": "NONE",
+   "message": "no compile-time assertion"
+  },
+  "global_mutable_state": {
+   "outcome": "NONE",
+   "message": "a mutable module value needs no synchronization"
+  },
+  "unreachable_code": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-unreachable_code/reject/Program.fs(8,5): error FS0748: This construct may only be used within computation expressions. To return a value from an ordinary function simply write the expression without 'return'. [/tmp/breakbench/express-unreachable_code/reject/bb.fsproj]\n/tmp/breakbench/express-unreachable_code/reject/Program.fs(8,5): error FS0748: This construct may only be used within computation expressions. To return a value from an ordinary function simply write the expression without 'return'. [/tmp/breakbench/express-unreachable_code/reject/bb.fsproj]\n    1 Error(s)",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "ok",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "pure_function": {
+   "outcome": "NONE",
+   "message": "no way to mark a function as free of side effects"
+  },
+  "nan_key": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "found",
+   "stderr": "",
+   "level": "STD"
+  },
+  "string_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "abc",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_equality": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-typed_equality/reject/Program.fs(7,13): error FS0001: This expression was expected to have type\n/tmp/breakbench/express-typed_equality/reject/Program.fs(7,13): error FS0001: This expression was expected to have type\n    1 Error(s)",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "match",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "checked_interpolation": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-checked_interpolation/reject/Program.fs(7,22): error FS0039: The value or constructor 'nmae' is not defined. Maybe you want one of the following:\n/tmp/breakbench/express-checked_interpolation/reject/Program.fs(7,22): error FS0039: The value or constructor 'nmae' is not defined. Maybe you want one of the following:\n    1 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "hello Ada",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "evaluation_order": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1 2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "contracts": {
+   "outcome": "NONE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "diverging_function": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "noncopyable_type": {
+   "outcome": "NONE",
+   "message": "assignment copies the reference, and nothing marks a type as single-owner"
+  },
+  "dominated_case": {
+   "outcome": "NONE",
+   "message": "an arm that can never run is only a warning (FS0026)"
+  },
+  "duplicate_key": {
+   "outcome": "NONE",
+   "message": "no map literal; Map accepts a repeated key"
+  },
+  "char_arithmetic": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-char_arithmetic/reject/Program.fs(8,22): error FS0001: The type 'int' does not match the type 'char' [/tmp/breakbench/express-char_arithmetic/reject/bb.fsproj]\n/tmp/breakbench/express-char_arithmetic/reject/Program.fs(8,22): error FS0001: The type 'int' does not match the type 'char' [/tmp/breakbench/express-char_arithmetic/reject/bb.fsproj]\n    1 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "98",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "comparison_statement": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-comparison_statement/reject/Program.fs(7,5): warning FS0020: The result of this equality expression has type 'bool' and is implicitly discarded. Consider using 'let' to bind the result to a name, e.g. 'let result = expression'. If you intended to mutate a value, then use the '<-' operator e.g. 'count <- expression'. [/tmp/breakbench/express-comparison_statement/reject/bb.fs\n...\ness-comparison_statement/reject/Program.fs(7,5): warning FS0020: The result of this equality expression has type 'bool' and is implicitly discarded. Consider using 'let' to bind the result to a name, e.g. 'let result = expression'. If you intended to mutate a value, then use the '<-' operator e.g. 'count <- expression'. [/tmp/breakbench/express-comparison_statement/reject/bb.fsproj]\n    0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "structural_equality": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "hash_matches_equality": {
+   "outcome": "NONE",
+   "message": "a type can override Equals and keep the default GetHashCode"
+  },
+  "array_literal_length": {
+   "outcome": "NONE",
+   "message": "array sizes are not part of the type"
+  },
+  "required_names": {
+   "outcome": "NONE",
+   "message": "arguments may always be passed by position"
+  },
+  "trojan_source": {
+   "outcome": "NONE",
+   "message": "a bidirectional control character in a string literal is accepted"
+  },
+  "enum_from_int": {
+   "outcome": "NONE",
+   "message": "no standard conversion from an integer to a union case"
+  },
+  "captured_write_in_thread": {
+   "outcome": "NONE",
+   "message": "a captured mutable local becomes a shared ref cell that a thread can change without a lock"
+  },
+  "increment_in_expression": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-increment_in_expression/reject/Program.fs(7,11): error FS0043: None of the types 'int, unit' support the operator '++' [/tmp/breakbench/express-increment_in_expression/reject/bb.fsproj]\n/tmp/breakbench/express-increment_in_expression/reject/Program.fs(7,11): error FS0043: None of the types 'int, unit' support the operator '++' [/tmp/breakbench/express-increment_in_expression/reject/bb.fsproj]\n    1 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bitwise_on_bool": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-bitwise_on_bool/reject/Program.fs(7,8): error FS0001: The type 'bool' does not support the operator '&&&' [/tmp/breakbench/express-bitwise_on_bool/reject/bb.fsproj]\n/tmp/breakbench/express-bitwise_on_bool/reject/Program.fs(7,8): error FS0001: The type 'bool' does not support the operator '&&&' [/tmp/breakbench/express-bitwise_on_bool/reject/bb.fsproj]\n    1 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "yes",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "readonly_field": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-readonly_field/reject/Program.fs(8,7): error FS0005: This field is not mutable [/tmp/breakbench/express-readonly_field/reject/bb.fsproj]\n/tmp/breakbench/express-readonly_field/reject/Program.fs(8,7): error FS0005: This field is not mutable [/tmp/breakbench/express-readonly_field/reject/bb.fsproj]\n    1 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "8080",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bool_condition": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-bool_condition/reject/Program.fs(6,8): error FS0001: This expression was expected to have type\n/tmp/breakbench/express-bool_condition/reject/Program.fs(6,8): error FS0001: This expression was expected to have type\n/tmp/breakbench/express-bool_condition/reject/Program.fs(6,8): error FS0001: This expression was expected to have type\n/tmp/breakbench/express-bool_condition/reject/Program.fs(6,8): error FS0001: This expression was expected to have type\n    2 Error(s)",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "same",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "forced_unwrap": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 134,
+   "secs": 0.17,
+   "stdout": "before",
+   "stderr": "Unhandled exception. System.ArgumentException: The option value was None (Parameter 'option')\n   at Microsoft.FSharp.Core.OptionModule.GetValue[T](FSharpOption`1 option) in /__w/1/s/src/fsharp/src/FSharp.Core/option.fs:line 13\n   at Program.main(String[] _arg1) in /tmp/breakbench/express-forced_unwrap/main/Program.fs:line 8\nAborted (core dumped)",
+   "level": "STD"
   }
  }
 }

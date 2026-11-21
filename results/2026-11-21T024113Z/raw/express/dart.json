@@ -629,7 +629,7 @@
    "outcome": "PASS",
    "refusal": "error - main.dart:13:14 - The argument type 'int' can't be assigned to the parameter type 'Color'.  - argument_type_not_assignable\nmain.dart:13:14: Error: The argument type 'int' can't be assigned to the parameter type 'Color'.",
    "exit": 0,
-   "secs": 0.06,
+   "secs": 0.04,
    "stdout": "green",
    "stderr": "",
    "level": "LANGUAGE"
@@ -642,9 +642,197 @@
    "outcome": "PASS",
    "refusal": "",
    "exit": 0,
-   "secs": 0.13,
+   "secs": 0.12,
    "stdout": "3999999",
    "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "generic_constraint": {
+   "outcome": "NONE",
+   "message": "List.sort accepts any element type"
+  },
+  "lossy_int_to_float": {
+   "outcome": "PASS",
+   "refusal": "error - main.dart:8:8 - The argument type 'int' can't be assigned to the parameter type 'double'.  - argument_type_not_assignable\nmain.dart:8:8: Error: The argument type 'int' can't be assigned to the parameter type 'double'.",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "7.0",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_index_bounds": {
+   "outcome": "NONE",
+   "message": "array sizes are not part of the type, so a constant index is checked only at run time"
+  },
+  "const_overflow": {
+   "outcome": "NONE",
+   "message": "constant arithmetic wraps silently"
+  },
+  "static_assert": {
+   "outcome": "NONE",
+   "message": "no compile-time assertion"
+  },
+  "global_mutable_state": {
+   "outcome": "NONE",
+   "message": "a top-level variable needs no synchronization"
+  },
+  "unreachable_code": {
+   "outcome": "NONE",
+   "message": "code after a return is only an analyzer warning (dead_code)"
+  },
+  "pure_function": {
+   "outcome": "NONE",
+   "message": "no way to mark a function as free of side effects"
+  },
+  "nan_key": {
+   "outcome": "FAIL",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "missing",
+   "stderr": "",
+   "level": "STD"
+  },
+  "string_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "abc",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_equality": {
+   "outcome": "NONE",
+   "message": "comparing an int with a String is only an analyzer hint"
+  },
+  "checked_interpolation": {
+   "outcome": "PASS",
+   "refusal": "error - main.dart:6:17 - Undefined name 'nmae'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier\nmain.dart:6:17: Error: Undefined name 'nmae'.",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "hello Ada",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "evaluation_order": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.05,
+   "stdout": "1 2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "contracts": {
+   "outcome": "NONE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "diverging_function": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "noncopyable_type": {
+   "outcome": "NONE",
+   "message": "assignment copies the reference, and nothing marks a type as single-owner"
+  },
+  "dominated_case": {
+   "outcome": "NONE",
+   "message": "an arm that can never run is only an analyzer warning"
+  },
+  "duplicate_key": {
+   "outcome": "NONE",
+   "message": "a repeated key in a map literal is only an analyzer warning (equal_keys_in_map)"
+  },
+  "char_arithmetic": {
+   "outcome": "NONE",
+   "message": "no character type; a character is a one-letter String"
+  },
+  "comparison_statement": {
+   "outcome": "NONE",
+   "message": "a comparison used as a statement is accepted"
+  },
+  "structural_equality": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "hash_matches_equality": {
+   "outcome": "NONE",
+   "message": "a class can override == and keep the default hashCode"
+  },
+  "array_literal_length": {
+   "outcome": "NONE",
+   "message": "array sizes are not part of the type"
+  },
+  "required_names": {
+   "outcome": "PASS",
+   "refusal": "error - main.dart:7:3 - The named parameter 'dx' is required, but there's no corresponding argument. Try adding the required argument. - missing_required_argument\n  error - main.dart:7:3 - The named parameter 'dy' is required, but there's no corresponding argument. Try adding the required argument. - missing_required_argument\n  error - main.dart:7:8 - Too many positional arguments: 0 expected, but 2 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named\nmain.dart:7:7: Error: Too many positional arguments: 0 allowed, but 2 found.",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "3 4",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "trojan_source": {
+   "outcome": "NONE",
+   "message": "a bidirectional control character in a string literal is only an analyzer warning"
+  },
+  "enum_from_int": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 255,
+   "secs": 0.03,
+   "stdout": "before",
+   "stderr": "Unhandled exception:\nRangeError (length): Invalid value: Not in inclusive range 0..2: 7\n#0      _Array.[] (dart:core-patch/array.dart)\n#1      main (file:///tmp/breakbench/express-enum_from_int/main/main.dart:7:21)\n#2      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)\n#3      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)",
+   "level": "LANGUAGE"
+  },
+  "captured_write_in_thread": {
+   "outcome": "NONE",
+   "message": "a closure passed to Isolate.run may change a captured local, and the compiler accepts it"
+  },
+  "increment_in_expression": {
+   "outcome": "NONE",
+   "message": "i = i++ is accepted"
+  },
+  "bitwise_on_bool": {
+   "outcome": "NONE",
+   "message": "& is defined on booleans and evaluates both sides"
+  },
+  "readonly_field": {
+   "outcome": "PASS",
+   "refusal": "error - main.dart:10:5 - 'port' can't be used as a setter because it's final. Try finding a different setter, or making 'port' non-final. - assignment_to_final\nmain.dart:10:5: Error: The setter 'port' isn't defined for the type 'Config'.",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "8080",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bool_condition": {
+   "outcome": "PASS",
+   "refusal": "error - main.dart:5:7 - Conditions must have a static type of 'bool'. Try changing the condition. - non_bool_condition\nmain.dart:5:11: Error: A value of type 'int' can't be assigned to a variable of type 'bool'.",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "same",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "forced_unwrap": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "before",
+   "stderr": "Unhandled exception:\nNull check operator used on a null value\n#0      main (file:///tmp/breakbench/express-forced_unwrap/main/main.dart:7:16)\n#1      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:313:19)\n#2      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)",
    "level": "LANGUAGE"
   }
  }

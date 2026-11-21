@@ -1,9 +1,0 @@
-// LEVEL: STD
-
-use std::env
-
-fn main() {
-    let v = env::args()[0].to_i64().unwrap()
-    let r: Result<u8, _> = v.try_into()
-    println(if r.is_err() { "does not fit" } else { "fits" })
-}

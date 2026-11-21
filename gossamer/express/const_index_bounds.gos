@@ -1,0 +1,1 @@
+// CANNOT-EXPRESS: a constant index past the end of a fixed array is checked only at run time

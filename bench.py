@@ -8,7 +8,7 @@ Usage:
     uv run bench.py                        # full run of both benches into a new results folder
     uv run bench.py rust gossamer          # rerun languages in the newest folder
     uv run bench.py rust --only int_overflow,oob_write
-    uv run bench.py --express [LANG ...]   # the probe benches (built-in safety, ecosystem coverage)
+    uv run bench.py --express [LANG ...]   # the built-in safety tests
     uv run bench.py --aggregate            # rebuild the newest folder's rankings and the site
 
 Each full run gets a folder named by its UTC start time, results/YYYY-MM-DDTHHMMSSZ, holding
@@ -57,9 +57,9 @@ def run_language(run, lang_id, lang, only, express=False):
 
 def score_of(problem, rec, kinds, bonus):
     """A relevant warning lifts an imperfect outcome by `bonus`, never to a full point.
-    A problem the language cannot express has no score (N/A)."""
+    A test the language cannot express (N/A) scores 0."""
     if rec["outcome"] == "INEXPRESSIBLE":
-        return None
+        return 0.0
     score = kinds[problem["kind"]].get(rec["outcome"], 0.0)
     if rec.get("warned") and score < 1:
         score = min(score + bonus, 0.99 if score + bonus >= 1 else score + bonus)
@@ -85,8 +85,7 @@ def aggregate(run):
         for problem in spec["problems"]:
             rec = raw["results"].get(problem["id"], {"outcome": "MISSING"})
             score = score_of(problem, rec, kinds, spec.get("warned_bonus", 0.25))
-            if score is not None:
-                totals[problem["category"]].append(score)
+            totals[problem["category"]].append(score)
             per_problem[problem["id"]] = {**rec, "score": score}
         every = totals["correctness"] + totals["memory"]
         rows.append(
@@ -97,7 +96,8 @@ def aggregate(run):
                 "correctness": percent(totals["correctness"]),
                 "memory": percent(totals["memory"]),
                 "score": percent(every),
-                "scored": len(every),
+                "scored": sum(per_problem[p["id"]]["outcome"] != "INEXPRESSIBLE"
+                              for p in spec["problems"]),
                 "results": per_problem,
             }
         )
@@ -135,13 +135,12 @@ def aggregate(run):
         f.write("\n</body>\n</html>\n")
     for row in overall:
         print(f"{row['rank']:>2}. {row['name']:<12} overall {row['overall']:5.1f}%  "
-              f"correctness {row['correctness']:5.1f}%  built-in {row['builtin']:5.1f}%  "
-              f"ecosystem {row['ecosystem']:5.1f}%")
+              f"correctness {row['correctness']:5.1f}%  built-in {row['builtin']:5.1f}%")
 
 
 def combine(rows, express):
-    """The overall ranking: the mean of the three bench scores, each a percentage."""
-    totals = {b: sum(p["bench"] == b for p in express["probes"]) for b in ("builtin", "ecosystem")}
+    """The overall ranking: the mean of the correctness and built-in safety scores, each a percentage."""
+    total = sum(p["bench"] == "builtin" for p in express["probes"])
     covered = {row["id"]: row for row in express["languages"]}
     ranked = []
     for row in rows:
@@ -150,8 +149,7 @@ def combine(rows, express):
             continue
         parts = {
             "correctness": row["score"],
-            "builtin": round(100 * probes["builtin"] / totals["builtin"], 1),
-            "ecosystem": round(100 * probes["ecosystem"] / totals["ecosystem"], 1),
+            "builtin": round(100 * probes["builtin"] / total, 1),
         }
         ranked.append({"id": row["id"], "name": row["name"], **parts,
                        "overall": round(sum(parts.values()) / len(parts), 1)})
@@ -178,7 +176,6 @@ def aggregate_express(run, langs):
             "version": raw.get("version", ""),
             "expressed": len(passed),
             "builtin": sum(p["id"] in passed for p in spec["probes"] if p["bench"] == "builtin"),
-            "ecosystem": sum(p["id"] in passed for p in spec["probes"] if p["bench"] == "ecosystem"),
             "results": results,
         })
     rows.sort(key=lambda r: (-r["expressed"], r["name"]))
@@ -210,7 +207,7 @@ def describe_run(rec, threshold_mb):
         return f"The program did not finish and was killed after {rec.get('secs')} s."
     if outcome == "LEAK":
         return (f"The program finished {shown} with {peak}, over the {threshold_mb} MB "
-                "limit for this problem.")
+                "limit for this test.")
     if outcome == "CORRECT":
         return f"Built and ran cleanly (exit {status}), {shown}. The output is the expected answer."
     if outcome == "REJECTED":

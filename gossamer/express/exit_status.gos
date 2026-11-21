@@ -1,7 +1,0 @@
-// LEVEL: STD
-
-use std::process
-
-fn main() {
-    println(process::run_inherit("false", #[]).unwrap())
-}

@@ -1,1 +1,0 @@
-// CANNOT-EXPRESS: allocation failure is a panic, not an error value

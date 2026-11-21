@@ -657,9 +657,217 @@
    "outcome": "PASS",
    "refusal": "",
    "exit": 0,
-   "secs": 0.29,
+   "secs": 0.32,
    "stdout": "3999999",
    "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "generic_constraint": {
+   "outcome": "PASS",
+   "refusal": "# command-line-arguments\n# [command-line-arguments]\nvet: ./main.go:15:25: Point does not satisfy cmp.Ordered (Point missing in ~int | ~int8 | ~int16 | ~int32 | ~int64 | ~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 | ~uintptr | ~float32 | ~float64 | ~string)\n\n\n\n# command-line-arguments\n./main.go:15:36: Point does not satisfy cmp.Ordered (Point missing in ~int | ~int8 | ~int16 | ~int32 | ~int64 | ~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 | ~uintptr | ~float32 | ~float64 | ~string)",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "lossy_int_to_float": {
+   "outcome": "PASS",
+   "refusal": "# command-line-arguments\n# [command-line-arguments]\nvet: ./main.go:12:7: cannot use n (variable of type int64) as float64 value in argument to show\n\n\n\n# command-line-arguments\n./main.go:12:7: cannot use n (variable of type int64) as float64 value in argument to show",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_index_bounds": {
+   "outcome": "PASS",
+   "refusal": "# command-line-arguments\n# [command-line-arguments]\nvet: ./main.go:10:20: invalid argument: index 5 out of bounds [0:3]\n\n\n\n# command-line-arguments\n./main.go:10:20: invalid argument: index 5 out of bounds [0:3]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "20",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_overflow": {
+   "outcome": "PASS",
+   "refusal": "# command-line-arguments\n# [command-line-arguments]\nvet: ./main.go:8:20: cannot use 1_000_000_000 * 60 * 60 * 24 * 365 * 300 (untyped int constant 9460800000000000000) as int64 value in constant declaration (overflows)\n\n\n\n# command-line-arguments\n./main.go:8:20: cannot use 1_000_000_000 * 60 * 60 * 24 * 365 * 300 (untyped int constant 9460800000000000000) as int64 value in constant declaration (overflows)",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "86400000000000",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "static_assert": {
+   "outcome": "NONE",
+   "message": "no compile-time assertion"
+  },
+  "global_mutable_state": {
+   "outcome": "NONE",
+   "message": "a package variable needs no synchronization"
+  },
+  "unreachable_code": {
+   "outcome": "NONE",
+   "message": "code after a return is only a go vet finding"
+  },
+  "pure_function": {
+   "outcome": "NONE",
+   "message": "no way to mark a function as free of side effects"
+  },
+  "nan_key": {
+   "outcome": "FAIL",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "missing",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "string_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "abc",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_equality": {
+   "outcome": "PASS",
+   "refusal": "# command-line-arguments\n# [command-line-arguments]\nvet: ./main.go:12:11: invalid operation: id == \"42\" (mismatched types int and untyped string)\n\n\n\n# command-line-arguments\n./main.go:12:11: invalid operation: id == \"42\" (mismatched types int and untyped string)",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "match",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "checked_interpolation": {
+   "outcome": "NONE",
+   "message": "no string interpolation"
+  },
+  "evaluation_order": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "contracts": {
+   "outcome": "NONE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "diverging_function": {
+   "outcome": "NONE",
+   "message": "no way to declare that a function never returns; only a direct panic ends a function"
+  },
+  "noncopyable_type": {
+   "outcome": "NONE",
+   "message": "assignment copies any struct; nothing marks a type as single-owner"
+  },
+  "dominated_case": {
+   "outcome": "PASS",
+   "refusal": "# command-line-arguments\n# [command-line-arguments]\nvet: ./main.go:16:77: duplicate case \"circle\" (constant of type string) in expression switch\n\n\n\n# command-line-arguments\n./main.go:16:77: duplicate case \"circle\" (constant of type string) in expression switch\n\t./main.go:16:45: previous case",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "other",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "duplicate_key": {
+   "outcome": "PASS",
+   "refusal": "# command-line-arguments\n# [command-line-arguments]\nvet: ./main.go:10:41: duplicate key \"a\" in map literal\n\n\n\n# command-line-arguments\n./main.go:10:41: duplicate key \"a\" in map literal",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "char_arithmetic": {
+   "outcome": "NONE",
+   "message": "a rune is an int32, so c + 1 is a number"
+  },
+  "comparison_statement": {
+   "outcome": "PASS",
+   "refusal": "# command-line-arguments\n# [command-line-arguments]\nvet: ./main.go:10:2: count == 5 (untyped bool value) is not used\n\n\n\n# command-line-arguments\n./main.go:10:2: count == 5 (untyped bool value) is not used",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "structural_equality": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "hash_matches_equality": {
+   "outcome": "NONE",
+   "message": "map keys use the built-in == and hash; a type cannot define its own"
+  },
+  "array_literal_length": {
+   "outcome": "NONE",
+   "message": "missing entries are filled with zero"
+  },
+  "required_names": {
+   "outcome": "NONE",
+   "message": "no named arguments, and a struct literal may list its fields by position"
+  },
+  "trojan_source": {
+   "outcome": "NONE",
+   "message": "a bidirectional control character in a string literal is accepted"
+  },
+  "enum_from_int": {
+   "outcome": "NONE",
+   "message": "a conversion accepts any integer"
+  },
+  "captured_write_in_thread": {
+   "outcome": "NONE",
+   "message": "a goroutine can change any variable it captures"
+  },
+  "increment_in_expression": {
+   "outcome": "PASS",
+   "refusal": "./main.go:10:7: syntax error: unexpected ++ at end of statement",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bitwise_on_bool": {
+   "outcome": "PASS",
+   "refusal": "# command-line-arguments\n# [command-line-arguments]\nvet: ./main.go:12:5: invalid operation: operator & not defined on (len(s) > 0) (untyped bool value)\n\n\n\n# command-line-arguments\n./main.go:12:5: invalid operation: operator & not defined on (len(s) > 0) (untyped bool value)",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "yes",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "readonly_field": {
+   "outcome": "NONE",
+   "message": "struct fields are always writable"
+  },
+  "bool_condition": {
+   "outcome": "PASS",
+   "refusal": "# command-line-arguments\n# [command-line-arguments]\nvet: ./main.go:14:5: non-boolean condition in if statement\n\n\n\n# command-line-arguments\n./main.go:14:5: non-boolean condition in if statement",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "same",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "forced_unwrap": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "panic: runtime error: invalid memory address or nil pointer dereference\n[signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x499e91]\n\ngoroutine 1 [running]:\nmain.main()\n\t/tmp/breakbench/express-forced_unwrap/main/main.go:18 +0x51",
    "level": "LANGUAGE"
   }
  }

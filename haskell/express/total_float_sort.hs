@@ -1,1 +1,0 @@
--- CANNOT-EXPRESS: no total order for floats in the standard library; compare on NaN is inconsistent

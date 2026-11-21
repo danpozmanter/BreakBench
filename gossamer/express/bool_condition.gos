@@ -1,0 +1,10 @@
+// LEVEL: LANGUAGE
+
+fn compare(a: String, b: String) -> i64 {
+    if a == b { 0 } else if a < b { -1 } else { 1 }
+}
+
+fn main() {
+    if compare("x", "x") == 0 { println("same") }
+    if compare("x", "x") { println("different") } // REJECT!
+}

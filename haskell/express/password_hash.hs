@@ -1,1 +1,0 @@
--- CANNOT-EXPRESS: no password hash in the packages GHC ships or the Haskell project's libraries

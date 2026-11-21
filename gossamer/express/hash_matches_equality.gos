@@ -1,0 +1,1 @@
+// CANNOT-EXPRESS: the automatic hash ignores a custom eq, so a set keeps two equal values

@@ -1,8 +1,0 @@
-// LEVEL: STD
-
-use std::regex
-
-fn main() {
-    let re = regex::compile("^(a+)+$")
-    println(if re.is_match("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!") { "match" } else { "no match" })
-}

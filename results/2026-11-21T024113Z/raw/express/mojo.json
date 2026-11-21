@@ -547,10 +547,228 @@
    "outcome": "PASS",
    "refusal": "",
    "exit": 0,
-   "secs": 15.56,
+   "secs": 15.02,
    "stdout": "3999999",
    "stderr": "",
    "level": "LANGUAGE"
+  },
+  "generic_constraint": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-generic_constraint/reject/main.mojo:13:5: error: no matching function in call to 'sort'\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "lossy_int_to_float": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-lossy_int_to_float/reject/main.mojo:10:10: error: invalid call to 'show': value passed to 'f' cannot be converted from 'Int64' to 'Float64'\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "7.0",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_index_bounds": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-const_index_bounds/reject/main.mojo:3:5: error: function instantiation failed\nMojo/stdlib/std/collections/array.mojo:781:9: note: constraint failed: index is out of bounds\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to run the pass manager",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "20",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_overflow": {
+   "outcome": "NONE",
+   "message": "a constant that overflows Int64 is accepted"
+  },
+  "static_assert": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-static_assert/reject/main.mojo:6:5: error: function instantiation failed\n/tmp/breakbench/express-static_assert/reject/main.mojo:8:5: note: constraint failed: 300 fits in a byte\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to run the pass manager",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "100",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "global_mutable_state": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-global_mutable_state/reject/main.mojo:3:1: error: global variables are not supported; move this into a function body or use 'comptime' to declare a constant\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unreachable_code": {
+   "outcome": "NONE",
+   "message": "code after a return is only a warning"
+  },
+  "pure_function": {
+   "outcome": "NONE",
+   "message": "no way to mark a function as free of side effects"
+  },
+  "nan_key": {
+   "outcome": "FAIL",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "missing",
+   "stderr": "",
+   "level": "STD"
+  },
+  "string_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "abc",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_equality": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-typed_equality/reject/main.mojo:7:14: error: invalid call to '__eq__': value passed to 'rhs' cannot be converted from 'StringLiteral[\"42\"]' to 'Int'\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "match",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "checked_interpolation": {
+   "outcome": "NONE",
+   "message": "no string interpolation"
+  },
+  "evaluation_order": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1 2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "contracts": {
+   "outcome": "NONE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "diverging_function": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "noncopyable_type": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-noncopyable_type/reject/main.mojo:12:19: error: 'Handle' value has no attribute 'copy'\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "dominated_case": {
+   "outcome": "NONE",
+   "message": "an arm that can never run is only a warning"
+  },
+  "duplicate_key": {
+   "outcome": "NONE",
+   "message": "a repeated key in a dict literal is accepted"
+  },
+  "char_arithmetic": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-char_arithmetic/reject/main.mojo:6:20: error: 'Codepoint' does not implement the '__add__' method\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "98",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "comparison_statement": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-comparison_statement/reject/main.mojo:6:11: warning: 'Bool' value is unused; assign to '_' to discard the result",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "structural_equality": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "hash_matches_equality": {
+   "outcome": "NONE",
+   "message": "Hashable and Equatable are separate traits, so they can disagree"
+  },
+  "array_literal_length": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-array_literal_length/reject/main.mojo:6:32: error: no matching function in initialization\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "40",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "required_names": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-required_names/reject/main.mojo:9:9: error: invalid call to 'move': missing required argument: 'dx'\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "3 4",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "trojan_source": {
+   "outcome": "NONE",
+   "message": "a bidirectional control character in a string literal is accepted"
+  },
+  "enum_from_int": {
+   "outcome": "NONE",
+   "message": "no enum type"
+  },
+  "captured_write_in_thread": {
+   "outcome": "NONE",
+   "message": "a parallel closure may capture a local with mut and change it, and the compiler accepts it"
+  },
+  "increment_in_expression": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-increment_in_expression/reject/main.mojo:6:11: error: 'None' does not implement the '__pos__' method\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bitwise_on_bool": {
+   "outcome": "NONE",
+   "message": "& is defined on booleans and evaluates both sides"
+  },
+  "readonly_field": {
+   "outcome": "NONE",
+   "message": "fields are writable through any var"
+  },
+  "bool_condition": {
+   "outcome": "NONE",
+   "message": "an Int converts to Bool in a condition"
+  },
+  "forced_unwrap": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 132,
+   "secs": 0.22,
+   "stdout": "before\nABORT: /tmp/breakbench/express-forced_unwrap/main/main.mojo:11:24: `Optional.value()` called on empty `Optional`. Consider using `if optional:` to check whether the `Optional` is empty before calling `.value()`, or use `.or_else()` to provide a default value.",
+   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x0000707fdad41d1e\n1  libKGENCompilerRTShared.so 0x0000707fdad3ee46\n2  libKGENCompilerRTShared.so 0x0000707fdad428e0\n3  libc.so.6                  0x0000707fdaa4ccb0\n4  main                       0x00005dc1a113aace\n5  main                       0x00005dc1a113d129\n6  main                       0x00005dc1a113ab86\n7  libc.so.6                  0x0000707fdaa31601\n8  libc.so.6                  0x0000707fdaa31718 __libc_start_main + 136\n9  main                       0x00005dc1a113a145\nIllegal instruction (core dumped)",
+   "level": "STD"
   }
  }
 }

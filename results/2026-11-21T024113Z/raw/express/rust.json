@@ -697,9 +697,267 @@
    "outcome": "PASS",
    "refusal": "",
    "exit": 0,
-   "secs": 0.11,
+   "secs": 0.12,
    "stdout": "3999999",
    "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "generic_constraint": {
+   "outcome": "PASS",
+   "refusal": "error[E0277]: the trait bound `Point: std::cmp::Ord` is not satisfied\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0277`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "lossy_int_to_float": {
+   "outcome": "PASS",
+   "refusal": "error[E0308]: mismatched types\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0308`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_index_bounds": {
+   "outcome": "PASS",
+   "refusal": "error: this operation will panic at runtime\nerror: index is out of bounds\nerror: aborting due to 2 previous errors",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "20",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_overflow": {
+   "outcome": "PASS",
+   "refusal": "error[E0080]: attempt to compute `31536000000000000_i64 * 300_i64`, which would overflow\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0080`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "86400000000000",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "static_assert": {
+   "outcome": "PASS",
+   "refusal": "error[E0080]: evaluation panicked: assertion failed: 300 <= BYTE_LIMIT\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0080`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "global_mutable_state": {
+   "outcome": "PASS",
+   "refusal": "error[E0133]: use of mutable static is unsafe and requires unsafe block\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0133`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unreachable_code": {
+   "outcome": "NONE",
+   "message": "code after a return is only a warning (unreachable_code)"
+  },
+  "pure_function": {
+   "outcome": "PASS",
+   "refusal": "error[E0658]: cannot call conditionally-const method `std::cell::Cell::<i64>::set` in constant functions\nerror: `std::cell::Cell::<T>::set` is not yet stable as a const fn\nerror: aborting due to 2 previous errors\nFor more information about this error, try `rustc --explain E0658`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "49",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "nan_key": {
+   "outcome": "PASS",
+   "refusal": "error[E0277]: the trait bound `f64: std::cmp::Eq` is not satisfied\nerror[E0277]: the trait bound `f64: std::hash::Hash` is not satisfied\nerror: aborting due to 2 previous errors\nFor more information about this error, try `rustc --explain E0277`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": "",
+   "level": "STD"
+  },
+  "string_value": {
+   "outcome": "PASS",
+   "refusal": "error[E0382]: borrow of moved value: `a`\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0382`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "abc",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_equality": {
+   "outcome": "PASS",
+   "refusal": "error[E0308]: mismatched types\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0308`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "match",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "checked_interpolation": {
+   "outcome": "PASS",
+   "refusal": "error[E0425]: cannot find value `nmae` in this scope\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0425`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hello Ada",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "evaluation_order": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "contracts": {
+   "outcome": "NONE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "diverging_function": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "noncopyable_type": {
+   "outcome": "PASS",
+   "refusal": "error[E0599]: no method named `clone` found for struct `Handle` in the current scope\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0599`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "dominated_case": {
+   "outcome": "NONE",
+   "message": "an arm that can never run is only a warning (unreachable_patterns)"
+  },
+  "duplicate_key": {
+   "outcome": "NONE",
+   "message": "no map literal; HashMap::from accepts a repeated key"
+  },
+  "char_arithmetic": {
+   "outcome": "PASS",
+   "refusal": "error[E0369]: cannot add `{integer}` to `char`\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0369`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "98",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "comparison_statement": {
+   "outcome": "PASS",
+   "refusal": "warning: unused comparison that must be used",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "structural_equality": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "hash_matches_equality": {
+   "outcome": "PASS",
+   "refusal": "error: you are deriving `Hash` but have implemented `PartialEq` explicitly\nerror: aborting due to 1 previous error; 2 warnings emitted",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "array_literal_length": {
+   "outcome": "PASS",
+   "refusal": "error[E0308]: mismatched types\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0308`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "40",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "required_names": {
+   "outcome": "PASS",
+   "refusal": "error: expected identifier, found `3`\nerror: expected identifier, found `4`\nerror: aborting due to 2 previous errors",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3 4",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "trojan_source": {
+   "outcome": "PASS",
+   "refusal": "error: unicode codepoint changing visible direction of text present in literal\nerror: aborting due to 1 previous error",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hi",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "enum_from_int": {
+   "outcome": "NONE",
+   "message": "no standard conversion from an integer to an enum; a match must be written by hand"
+  },
+  "captured_write_in_thread": {
+   "outcome": "PASS",
+   "refusal": "error[E0373]: closure may outlive the current function, but it borrows `plain`, which is owned by the current function\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0373`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "increment_in_expression": {
+   "outcome": "PASS",
+   "refusal": "error: Rust has no postfix increment operator\nerror: aborting due to 1 previous error",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bitwise_on_bool": {
+   "outcome": "NONE",
+   "message": "& is defined on booleans and evaluates both sides"
+  },
+  "readonly_field": {
+   "outcome": "PASS",
+   "refusal": "error[E0594]: cannot assign to `c.port`, as `c` is not declared as mutable\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0594`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "8080",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bool_condition": {
+   "outcome": "PASS",
+   "refusal": "error[E0308]: mismatched types\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0308`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "same",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "forced_unwrap": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "thread 'main' (141) panicked at main.rs:9:28:\ncalled `Option::unwrap()` on a `None` value\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
    "level": "LANGUAGE"
   }
  }

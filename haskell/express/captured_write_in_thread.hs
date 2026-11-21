@@ -1,0 +1,1 @@
+-- CANNOT-EXPRESS: an IORef can be changed from any thread without a lock

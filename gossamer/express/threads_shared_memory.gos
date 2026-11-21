@@ -1,9 +1,0 @@
-// LEVEL: STD
-
-fn main() {
-    let mut slots = #[0; 10]
-    slots.par_chunks_mut(5, |half, chunk| {
-        for j in 0..5 { chunk[j] = half * 5 + j }
-    })
-    println(slots.iter().sum())
-}

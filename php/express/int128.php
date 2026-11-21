@@ -1,2 +1,0 @@
-<?php
-// CANNOT-EXPRESS: no 128-bit integer type

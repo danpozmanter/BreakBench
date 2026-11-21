@@ -226,7 +226,7 @@ MUST_USE_RE = re.compile(
     r"must be used|nodiscard|warn_unused_result|result of call to .* is unused"
     r"|is implicitly ignored|result of \S+ call not used|discards return value"
     r"|value is unused|answers a new value, which is not used|does not use the new \S+ instance"
-    r"|discarded a result of type",
+    r"|discarded a result of type|result of operator \S+ is unused|is implicitly discarded",
     re.IGNORECASE,
 )
 
@@ -288,7 +288,7 @@ def classify(problem, kinds, status, timed_out, maxrss_mb, stdout, stderr, thres
 
 REJECT_MARKER = "REJECT!"
 CANNOT_RE = re.compile(r"CANNOT-EXPRESS:\s*(.+?)\s*(?:\*\))?$", re.M)
-DIAGNOSIS_RE = re.compile(r"\berror\b|Error|must be used|nodiscard|implicitly ignored|has to be used")
+DIAGNOSIS_RE = re.compile(r"\berror\b|Error|must be used|nodiscard|implicitly ignored|implicitly discarded|is unused|has to be used|constraint failed")
 
 
 def diagnosis_lines(output):

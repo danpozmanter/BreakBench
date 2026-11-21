@@ -1,1 +1,0 @@
--- CANNOT-EXPRESS: no checked float-to-integer conversion; truncate turns NaN into an arbitrary integer

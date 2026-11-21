@@ -1,9 +1,0 @@
-// LEVEL: STD
-
-use std::collections::IndexMap
-
-fn main() {
-    let mut m = IndexMap::new()
-    for k in ["c", "a", "b"] { m.insert(k, 0) }
-    println(m.keys().join(" "))
-}

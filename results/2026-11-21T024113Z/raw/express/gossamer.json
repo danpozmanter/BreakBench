@@ -781,6 +781,219 @@
    "stdout": "3999999",
    "stderr": "",
    "level": "LANGUAGE"
+  },
+  "generic_constraint": {
+   "outcome": "NONE",
+   "message": "every struct orders structurally, so a list of Points sorts"
+  },
+  "lossy_int_to_float": {
+   "outcome": "PASS",
+   "refusal": "lint: 0 warning(s), 0 error(s)\nerror[GT0001]: type mismatch: expected `f64`, found `i64`\nerror: 1 front-end error(s); refusing to build",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_index_bounds": {
+   "outcome": "NONE",
+   "message": "a constant index past the end of a fixed array is checked only at run time"
+  },
+  "const_overflow": {
+   "outcome": "NONE",
+   "message": "constant arithmetic that overflows is accepted"
+  },
+  "static_assert": {
+   "outcome": "PASS",
+   "refusal": "lint: 0 warning(s), 0 error(s)\nerror: main.gos:7:5: error[GX0005]: panic: assertion failed",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "global_mutable_state": {
+   "outcome": "NONE",
+   "message": "a static mut needs no synchronization"
+  },
+  "unreachable_code": {
+   "outcome": "NONE",
+   "message": "code after a return is accepted"
+  },
+  "pure_function": {
+   "outcome": "PASS",
+   "refusal": "lint: 1 warning(s), 0 error(s)\nerror[GT0090]: the callback passed to `par_map` is not pure\n     error: this callback writes `hits`, which it captured\nerror: 1 front-end error(s); refusing to build",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "49",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "nan_key": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "string_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "abc",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_equality": {
+   "outcome": "PASS",
+   "refusal": "lint: 0 warning(s), 0 error(s)\nerror[GT0001]: type mismatch: expected `i64`, found `String`\nerror: 1 front-end error(s); refusing to build",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "match",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "checked_interpolation": {
+   "outcome": "PASS",
+   "refusal": "lint: 0 warning(s), 0 error(s)\nerror[GR0001]: cannot find `nmae` in this scope\nerror: 1 front-end error(s); refusing to build",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hello Ada",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "evaluation_order": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "contracts": {
+   "outcome": "NONE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "diverging_function": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "noncopyable_type": {
+   "outcome": "NONE",
+   "message": "assignment gives a value of its own, so every value can be copied"
+  },
+  "dominated_case": {
+   "outcome": "NONE",
+   "message": "an arm that can never run is accepted"
+  },
+  "duplicate_key": {
+   "outcome": "NONE",
+   "message": "a repeated key in a map literal is accepted"
+  },
+  "char_arithmetic": {
+   "outcome": "PASS",
+   "refusal": "lint: 1 warning(s), 0 error(s)\nerror[GT0001]: type mismatch: expected `i64`, found `char`\nerror[GT0001]: type mismatch: expected `char`, found `i64`\nerror[GT0003]: cannot apply `+` to `char` and `char`\nerror: 3 front-end error(s); refusing to build",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "98",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "comparison_statement": {
+   "outcome": "NONE",
+   "message": "a comparison used as a statement is accepted"
+  },
+  "structural_equality": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "hash_matches_equality": {
+   "outcome": "NONE",
+   "message": "the automatic hash ignores a custom eq, so a set keeps two equal values"
+  },
+  "array_literal_length": {
+   "outcome": "PASS",
+   "refusal": "lint: 1 warning(s), 0 error(s)\nerror[GT0001]: type mismatch: expected `[i64; 4]`, found `[i64; 3]`\nerror: 1 front-end error(s); refusing to build",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "40",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "required_names": {
+   "outcome": "NONE",
+   "message": "arguments may always be passed by position"
+  },
+  "trojan_source": {
+   "outcome": "NONE",
+   "message": "a bidirectional control character in a string literal is accepted"
+  },
+  "enum_from_int": {
+   "outcome": "NONE",
+   "message": "no standard conversion from an integer to an enum; a TryFrom impl must be written by hand"
+  },
+  "captured_write_in_thread": {
+   "outcome": "PASS",
+   "refusal": "lint: 0 warning(s), 0 error(s)\nerror[GT0114]: this write changes the goroutine's own snapshot of `plain`\n     error: a spawned closure takes a snapshot of `plain` at the spawn\nerror: 1 front-end error(s); refusing to build",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "increment_in_expression": {
+   "outcome": "PASS",
+   "refusal": "error[GP0001]: unexpected `+`, expected an expression\nlint: 0 warning(s), 1 error(s)\nerror: 1 lint error(s)\nerror[GP0001]: unexpected `+`, expected an expression\nerror: 1 front-end error(s); refusing to build",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bitwise_on_bool": {
+   "outcome": "NONE",
+   "message": "& is defined on booleans and evaluates both sides"
+  },
+  "readonly_field": {
+   "outcome": "PASS",
+   "refusal": "lint: 0 warning(s), 0 error(s)\nerror[GT0030]: cannot assign to immutable binding `c`\nerror: 1 front-end error(s); refusing to build",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "8080",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bool_condition": {
+   "outcome": "PASS",
+   "refusal": "lint: 0 warning(s), 0 error(s)\nerror[GT0001]: type mismatch: expected `bool`, found `i64`\nerror: 1 front-end error(s); refusing to build",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "same",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "forced_unwrap": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "error[GX0005]: panic: called `Option::unwrap()` on a `None` value\n  call stack (outermost first):\n    at main (main.gos:9:16)",
+   "level": "LANGUAGE"
   }
  }
 }

@@ -566,6 +566,199 @@
    "stdout": "3999999",
    "stderr": "",
    "level": "LANGUAGE"
+  },
+  "generic_constraint": {
+   "outcome": "PASS",
+   "refusal": "main.goose:11: error: ordering comparison requires numeric operands, got Point and Point",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "lossy_int_to_float": {
+   "outcome": "NONE",
+   "message": "an i64 converts to f64 implicitly"
+  },
+  "const_index_bounds": {
+   "outcome": "NONE",
+   "message": "a constant index is checked only at run time"
+  },
+  "const_overflow": {
+   "outcome": "NONE",
+   "message": "constant arithmetic that overflows is accepted"
+  },
+  "static_assert": {
+   "outcome": "NONE",
+   "message": "no compile-time assertion"
+  },
+  "global_mutable_state": {
+   "outcome": "NONE",
+   "message": "a global variable needs no synchronization"
+  },
+  "unreachable_code": {
+   "outcome": "NONE",
+   "message": "code after a return is neither checked nor compiled"
+  },
+  "pure_function": {
+   "outcome": "NONE",
+   "message": "no way to mark a function as free of side effects"
+  },
+  "nan_key": {
+   "outcome": "FAIL",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "missing",
+   "stderr": "",
+   "level": "STD"
+  },
+  "string_value": {
+   "outcome": "FAIL",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "abcd",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_equality": {
+   "outcome": "PASS",
+   "refusal": "main.goose:6: error: == requires operands of the same type, got i64 and const u8[:]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "match",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "checked_interpolation": {
+   "outcome": "NONE",
+   "message": "no string interpolation"
+  },
+  "evaluation_order": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "contracts": {
+   "outcome": "NONE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "diverging_function": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "noncopyable_type": {
+   "outcome": "NONE",
+   "message": "copy() copies any value, and nothing marks a type as single-owner"
+  },
+  "dominated_case": {
+   "outcome": "PASS",
+   "refusal": "main.goose:9: error: _ must be the last match arm",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "other",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "duplicate_key": {
+   "outcome": "NONE",
+   "message": "no map literal"
+  },
+  "char_arithmetic": {
+   "outcome": "NONE",
+   "message": "a character is a u8"
+  },
+  "comparison_statement": {
+   "outcome": "NONE",
+   "message": "a comparison used as a statement is accepted"
+  },
+  "structural_equality": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "hash_matches_equality": {
+   "outcome": "NONE",
+   "message": "a dictionary's hash function is written separately from equality"
+  },
+  "array_literal_length": {
+   "outcome": "PASS",
+   "refusal": "main.goose:6: error: 3 element(s) do not fill i64[4]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "40",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "required_names": {
+   "outcome": "NONE",
+   "message": "a struct literal may list its fields by position"
+  },
+  "trojan_source": {
+   "outcome": "NONE",
+   "message": "a bidirectional control character in a string literal is accepted"
+  },
+  "enum_from_int": {
+   "outcome": "NONE",
+   "message": "no conversion from an integer to an enum"
+  },
+  "captured_write_in_thread": {
+   "outcome": "NONE",
+   "message": "threads never share memory"
+  },
+  "increment_in_expression": {
+   "outcome": "PASS",
+   "refusal": "main.goose:6: error: expected ';' in assignment statement, found '++'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bitwise_on_bool": {
+   "outcome": "PASS",
+   "refusal": "main.goose:6: error: bitwise operator requires integer operands, got bool and bool",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "yes",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "readonly_field": {
+   "outcome": "NONE",
+   "message": "a let binding's fields can still be assigned"
+  },
+  "bool_condition": {
+   "outcome": "PASS",
+   "refusal": "main.goose:7: error: condition must be bool or an optional, got i64",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "same",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "forced_unwrap": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "goose runtime error: assert failed (main.goose:15)",
+   "level": "LANGUAGE"
   }
  }
 }

@@ -612,9 +612,177 @@
    "outcome": "PASS",
    "refusal": "",
    "exit": 0,
-   "secs": 0.14,
+   "secs": 0.1,
    "stdout": "3999999",
    "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "generic_constraint": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "lossy_int_to_float": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "const_index_bounds": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "const_overflow": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "static_assert": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "global_mutable_state": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "unreachable_code": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "pure_function": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "nan_key": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.18,
+   "stdout": "found",
+   "stderr": "",
+   "level": "STD"
+  },
+  "string_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "abc",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_equality": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "checked_interpolation": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "evaluation_order": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "1 2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "contracts": {
+   "outcome": "NONE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "diverging_function": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "noncopyable_type": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "dominated_case": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "duplicate_key": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "char_arithmetic": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "comparison_statement": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "structural_equality": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "hash_matches_equality": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "array_literal_length": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "required_names": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "trojan_source": {
+   "outcome": "PASS",
+   "refusal": ":($(Expr(:toplevel, :(#= none:3 =#), :(println(\"hi\")), :(#= none:4 =#), :($(Expr(:error, Base.Meta.ParseError(\"ParseError:\\n# Error @ none:4:10\\nprintln(\\\"hi\\\")\\nprintln(\\\"\\u202eadmin\\\") # REJECT!\\n#        \u2514\u2500\u2500\u2500\u2518 \u2500\u2500 unbalanced bidirectional unicode formatting \\\"\\\\u202eadmin\\\"\", Base.JuliaSyntax.ParseError(Base.JuliaSyntax.SourceFile(\"# LEVEL: LANGUAGE\\n\\nprintln(\\\"hi\\\")\\nprintln(\\\"\\u202eadmin\\\") # REJECT!\\n\", 0, \"none\", 1, [1, 19, 20, 34, 64]), Base.JuliaSyntax.Diagnostic[Base.JuliaSyntax.Diagnostic(43, 50, :error, \"unbalanced bidirectional unicode formatting \\\"\\\\u202eadmin\\\"\")], :none))))))))",
+   "exit": 0,
+   "secs": 0.08,
+   "stdout": "hi",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "enum_from_int": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.95,
+   "stdout": "before",
+   "stderr": "ERROR: LoadError: ArgumentError: invalid value for Enum Color: 7\nStacktrace:\n [1] enum_argument_error(typename::Symbol, x::Int64)\n   @ Base.Enums ./Enums.jl:93\n [2] Color\n   @ /tmp/breakbench/express-enum_from_int/main/main.jl:3 [inlined]\n [3] main()\n   @ Main /tmp/breakbench/express-enum_from_int/main/main.jl:8\n [4] top-level scope\n   @ /tmp/breakbench/express-enum_from_int/main/main.jl:11\n [5] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [6] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [7] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/express-enum_from_int/main/main.jl:11",
+   "level": "LANGUAGE"
+  },
+  "captured_write_in_thread": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "increment_in_expression": {
+   "outcome": "NONE",
+   "message": "i = i++ parses"
+  },
+  "bitwise_on_bool": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "readonly_field": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.11,
+   "stdout": "8080",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bool_condition": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "forced_unwrap": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 1.03,
+   "stdout": "before",
+   "stderr": "ERROR: LoadError: MethodError: no method matching +(::Nothing, ::Int64)\nThe function `+` exists, but no method is defined for this combination of argument types.\n\nClosest candidates are:\n  +(::Any, ::Any, !Matched::Any, !Matched::Any...)\n   @ Base operators.jl:653\n  +(!Matched::Base.CoreLogging.LogLevel, ::Integer)\n   @ Base logging/logging.jl:134\n  +(!Matched::BigInt, ::Union{Int16, Int32, Int64,\n...\nmain()\n   @ Main /tmp/breakbench/express-forced_unwrap/main/main.jl:8\n [2] top-level scope\n   @ /tmp/breakbench/express-forced_unwrap/main/main.jl:11\n [3] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [4] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [5] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/express-forced_unwrap/main/main.jl:11",
    "level": "LANGUAGE"
   }
  }

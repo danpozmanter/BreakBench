@@ -661,6 +661,209 @@
   "automatic_memory": {
    "outcome": "NONE",
    "message": "every heap allocation needs an explicit free; a @pool frees at the end of its scope, not when the memory is no longer used"
+  },
+  "generic_constraint": {
+   "outcome": "PASS",
+   "refusal": "/opt/c3/lib/std/sort/quicksort.c3:147:12: error: @require \"$defined(a < b) ||| $defined(a.less(b)) ||| $defined(a.compare_to(b))\" violated.\n/opt/c3/lib/std/sort/quicksort.c3:147:12: error: @require \"$defined(a < b) ||| $defined(a.less(b)) ||| $defined(a.compare_to(b))\" violated.\n/opt/c3/lib/std/sort/insertionsort.c3:47:12: error: @require \"$defined(a < b) ||| $defined(a.less(b)) ||| $defined(a.compare_to(b))\" violated.\n/opt/c3/lib/std/sort/mergesort.c3:76:23: error: @require \"$defined(a < b) ||| $defined(a.less(b)) ||| $defined(a.compare_to(b))\" violated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "lossy_int_to_float": {
+   "outcome": "NONE",
+   "message": "integers convert to floating point implicitly"
+  },
+  "const_index_bounds": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-const_index_bounds/reject/main.c3:9:26: error: An index of '5' is out of range, a value between 0 and 2 was expected.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "20",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_overflow": {
+   "outcome": "NONE",
+   "message": "constant arithmetic that overflows is accepted"
+  },
+  "static_assert": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-static_assert/reject/main.c3:8:9: error: Compile time assert failed.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "global_mutable_state": {
+   "outcome": "NONE",
+   "message": "a global variable needs no synchronization"
+  },
+  "unreachable_code": {
+   "outcome": "NONE",
+   "message": "code after a return is accepted"
+  },
+  "pure_function": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-pure_function/reject/main.c3:11:32: error: '@pure' functions may not access globals.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "49",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "nan_key": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-nan_key/reject/main.c3:6:24: error: Parameter(s) would violate constraint: @require \"$defined((Key){}.hash())\" violated: 'No .hash function found on the key'..",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": "",
+   "level": "STD"
+  },
+  "string_value": {
+   "outcome": "FAIL",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "abcd",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_equality": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-typed_equality/reject/main.c3:9:6: error: 'int' and 'String' are different types and cannot be compared.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "match",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "checked_interpolation": {
+   "outcome": "NONE",
+   "message": "no string interpolation"
+  },
+  "evaluation_order": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "contracts": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 132,
+   "secs": 0.15,
+   "stdout": "before",
+   "stderr": "ERROR: '@require \"x >= 0\" violated.'\n  in main.main (/tmp/breakbench/express-contracts/main/main.c3:19) [./main] [inline]",
+   "level": "LANGUAGE"
+  },
+  "diverging_function": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "noncopyable_type": {
+   "outcome": "NONE",
+   "message": "assignment copies any struct; nothing marks a type as single-owner"
+  },
+  "dominated_case": {
+   "outcome": "NONE",
+   "message": "a repeated case is accepted"
+  },
+  "duplicate_key": {
+   "outcome": "NONE",
+   "message": "no map literal"
+  },
+  "char_arithmetic": {
+   "outcome": "NONE",
+   "message": "a char is an 8-bit integer"
+  },
+  "comparison_statement": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-comparison_statement/reject/main.c3:9:2: error: This equals check was discarded, which isn't allowed. You can assign it to a variable or explicitly ignore it with a void cast '(void)' if this is what you want.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "structural_equality": {
+   "outcome": "NONE",
+   "message": "== does not compare structs"
+  },
+  "hash_matches_equality": {
+   "outcome": "NONE",
+   "message": "a key's hash and equals methods are written separately and can disagree"
+  },
+  "array_literal_length": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-array_literal_length/reject/main.c3:9:25: error: Too few (3) elements in initializer, expected 4.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "40",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "required_names": {
+   "outcome": "NONE",
+   "message": "arguments may always be passed by position"
+  },
+  "trojan_source": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-trojan_source/reject/main.c3:1:1: error: Invalid encoding - Unbalanced bidirectional markers.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hi",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "enum_from_int": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 132,
+   "secs": 0.14,
+   "stdout": "before",
+   "stderr": "ERROR: 'Attempting to convert 7 to enum 'Color' failed as the value exceeds the max ordinal (2).'\n  in main.main (/tmp/breakbench/express-enum_from_int/main/main.c3:16) [./main] [inline]",
+   "level": "LANGUAGE"
+  },
+  "captured_write_in_thread": {
+   "outcome": "NONE",
+   "message": "a thread receives a plain pointer to any variable"
+  },
+  "increment_in_expression": {
+   "outcome": "NONE",
+   "message": "i = i++ is accepted"
+  },
+  "bitwise_on_bool": {
+   "outcome": "NONE",
+   "message": "& is defined on booleans and evaluates both sides"
+  },
+  "readonly_field": {
+   "outcome": "NONE",
+   "message": "struct fields are always writable"
+  },
+  "bool_condition": {
+   "outcome": "NONE",
+   "message": "an integer is a valid condition"
+  },
+  "forced_unwrap": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 132,
+   "secs": 0.16,
+   "stdout": "before",
+   "stderr": "ERROR: 'Unexpected fault 'main::MISSING' was unwrapped!'\n  in main.main (/tmp/breakbench/express-forced_unwrap/main/main.c3:16) [./main] [inline]",
+   "level": "LANGUAGE"
   }
  }
 }

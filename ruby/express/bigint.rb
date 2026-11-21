@@ -1,3 +1,0 @@
-# LEVEL: LANGUAGE
-
-puts 2**100

@@ -164,17 +164,16 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
     <a href="#" data-view="home">Overview</a>
     <a href="#correctness" data-view="correctness">Correctness</a>
     <a href="#builtin" data-view="builtin">Built-in safety</a>
-    <a href="#ecosystem" data-view="ecosystem">Ecosystem coverage</a>
   </nav>
 
   <div class="view" id="view-home">
     <header>
       <h1>BreakBench</h1>
-      <p>What 30 programming languages do about common bugs. Correctness: each program has one classic bug in it; does the compiler catch it, does the program stop with an error, or does it quietly print the wrong answer? Built-in safety: which mistakes does the language rule out on its own? Ecosystem coverage: which safety tools come with the language, and which do you have to find on a package registry?</p>
+      <p>What 30 programming languages do about common bugs. Correctness: each program has one classic bug in it; does the compiler catch it, does the program stop with an error, or does it quietly print the wrong answer? Built-in safety: which mistakes does the language rule out on its own?</p>
     </header>
     <section aria-labelledby="overall-h">
       <h2 id="overall-h">Overall ranking</h2>
-      <p class="muted">The overall score is the mean of the three bench scores, each a percentage: correctness is the mean problem score, and each probe bench is the share of its probes covered.</p>
+      <p class="muted">The overall score is the mean of the two bench scores, each a percentage: correctness is the mean test score, and built-in safety is the share of its tests the language passes. The size of a language's standard library plays no part.</p>
       <div class="scroll"><table id="overall"></table></div>
     </section>
     <div class="cards">
@@ -188,11 +187,6 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
         <p class="muted" id="home-b-meta"></p>
         <div class="scroll"><table id="home-b"></table></div>
       </div>
-      <div class="card">
-        <h2><a class="go" href="#ecosystem">Ecosystem coverage</a></h2>
-        <p class="muted" id="home-e-meta"></p>
-        <div class="scroll"><table id="home-e"></table></div>
-      </div>
     </div>
   </div>
 
@@ -200,13 +194,13 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
     <header>
       <span class="eyebrow">Correctness and memory safety</span>
       <h1>What happens when your program has a bug</h1>
-      <p>Each problem is an ordinary program with one classic bug. A language can refuse to compile it, stop it with a clear error, or let it run on to a wrong answer, a crash, a hang or a leak.</p>
+      <p>Each test is an ordinary program with one classic bug. A language can refuse to compile it, stop it with a clear error, or let it run on to a wrong answer, a crash, a hang or a leak.</p>
       <div class="meta" id="meta"></div>
     </header>
 
     <section aria-labelledby="rank-h">
       <h2 id="rank-h">Ranking</h2>
-      <p class="muted">The score is the average over the problems a language can write, as a percentage. The correctness and memory columns break it down; they are not separate rankings.</p>
+      <p class="muted">The score is the average over all tests, as a percentage; a test the language cannot write scores 0. The correctness and memory columns break it down; they are not separate rankings.</p>
       <div class="scroll"><table id="ranking"></table></div>
     </section>
 
@@ -216,7 +210,7 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
       <div class="scoring" id="scoring"></div>
       <p class="muted">A warning that names the bug adds 0.25, but never makes a full point. Ignoring a result the language marks must-use counts as a refusal.</p>
       <p class="muted">A compile error counts as a refusal only if the same program with the bug removed compiles.</p>
-      <p class="muted">N/A means the language cannot write the program at all, for example without a mutex or shared-memory threads. Those problems leave its score. A language that simply lacks the bug, like Python with no unsigned integers, scores Ran Correctly.</p>
+      <p class="muted">N/A means the language cannot write the program at all, for example without a mutex or shared-memory threads. Those tests score 0, the same as a failure. A language that simply lacks the bug, like Python with no unsigned integers, scores Ran Correctly.</p>
     </section>
 
     <section aria-labelledby="robust-h">
@@ -227,15 +221,15 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
 
     <section aria-labelledby="grid-h">
       <h2 id="grid-h">Every outcome</h2>
-      <p class="muted">Each row is a problem and each column a language, in rank order. Select a cell to see the evidence. An outlined cell is a failure the language accepts by design.</p>
+      <p class="muted">Each row is a test and each column a language, in rank order. Select a cell to see the evidence. An outlined cell is a failure the language accepts by design.</p>
       <div id="grids" class="grids"></div>
     </section>
 
     <section aria-labelledby="case-h" id="cases">
-      <h2 id="case-h">Per problem</h2>
-      <select id="problem-select" aria-label="Problem"></select>
+      <h2 id="case-h">Per test</h2>
+      <select id="problem-select" aria-label="Test"></select>
       <div class="detail">
-        <nav class="plist" id="plist" aria-label="Problems"></nav>
+        <nav class="plist" id="plist" aria-label="Tests"></nav>
         <div class="case" id="case"></div>
       </div>
     </section>
@@ -245,46 +239,23 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
     <header>
       <span class="eyebrow">Built-in safety</span>
       <h1>What safety comes built in?</h1>
-      <p>Each probe asks whether the language itself prevents a common mistake: the compiler refuses the unsafe version, or the language gives you a safe construct such as a tagged union, a value type or a cleanup block. A probe that asks the compiler to refuse something passes only if the compiler refuses the marked line.</p>
+      <p>Each test asks whether the language itself prevents a common mistake: the compiler refuses the unsafe version, or the language gives you a safe construct such as a tagged union, a value type or a cleanup block. A test that asks the compiler to refuse something passes only if the compiler refuses the marked line.</p>
       <div class="meta" id="b-meta"></div>
     </header>
     <section aria-labelledby="b-rank-h">
       <h2 id="b-rank-h">Ranking</h2>
-      <p class="muted">Languages are ranked by the share of probes they cover. Compiler-checked probes need a compiler that refuses unsafe code, so dynamic languages pass few of them; language-feature probes need a construct in the language itself.</p>
+      <p class="muted">Languages are ranked by the share of tests they cover. Compiler-checked tests need a compiler that refuses unsafe code, so dynamic languages pass few of them; language-feature tests need a construct in the language itself.</p>
       <div class="legend" id="b-legend"></div>
       <div class="scroll"><table id="b-ranking"></table></div>
     </section>
     <section aria-labelledby="b-grid-h">
-      <h2 id="b-grid-h">Every probe</h2>
+      <h2 id="b-grid-h">Every test</h2>
       <p class="muted">Select a cell to see the task and the evidence: the output, the compiler's refusal, or why the language cannot do it.</p>
       <div class="scroll grid-wrap"><table class="grid" id="b-grid"></table></div>
     </section>
     <section aria-labelledby="b-case-h" id="b-cases">
-      <h2 id="b-case-h">Probe detail</h2>
+      <h2 id="b-case-h">Test detail</h2>
       <div class="case" id="b-case"></div>
-    </section>
-  </div>
-  <div class="view" id="view-ecosystem" hidden>
-    <header>
-      <span class="eyebrow">Ecosystem coverage</span>
-      <h1>Which safe tools ship with the language?</h1>
-      <p>Each probe asks whether the language ships a tool for a common mistake, such as a mutex, a JSON parser or password hashing. It counts if the standard library or a library the language's own project publishes provides it, plus ISO C and POSIX for C and C++. Some languages keep a small standard library on purpose and leave these tools to packages, so this is a profile of what ships, not a measure of how safe a language is.</p>
-      <div class="meta" id="e-meta"></div>
-    </header>
-    <section aria-labelledby="e-rank-h">
-      <h2 id="e-rank-h">Ranking</h2>
-      <p class="muted">Languages are ranked by the share of probes their own sources cover. The columns show where each covered probe comes from.</p>
-      <div class="legend" id="e-legend"></div>
-      <div class="scroll"><table id="e-ranking"></table></div>
-    </section>
-    <section aria-labelledby="e-grid-h">
-      <h2 id="e-grid-h">Every probe</h2>
-      <p class="muted">Select a cell to see the task and the evidence: the output, the compiler's refusal, or why the language cannot do it.</p>
-      <div class="scroll grid-wrap"><table class="grid" id="e-grid"></table></div>
-    </section>
-    <section aria-labelledby="e-case-h" id="e-cases">
-      <h2 id="e-case-h">Probe detail</h2>
-      <div class="case" id="e-case"></div>
     </section>
   </div>
 </div>
@@ -305,7 +276,7 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
     HANG: "Never finished",
     LEAK: "Memory grew past " + D.leak_threshold_mb + " MB",
     ICE: "The compiler crashed on the program",
-    INEXPRESSIBLE: "The language cannot write this program, so it does not count toward the score",
+    INEXPRESSIBLE: "The language cannot write this program, so it scores 0",
     ERROR: "Benchmark error",
   };
   const KIND = {
@@ -332,7 +303,7 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
   const nCorr = probs.filter((p) => p.category === "correctness").length;
 
   const meta = document.getElementById("meta");
-  [["Languages", D.languages.length], ["Problems", probs.length], ["Correctness", nCorr], ["Memory safety", probs.length - nCorr], ["Run", D.generated]]
+  [["Languages", D.languages.length], ["Tests", probs.length], ["Correctness", nCorr], ["Memory safety", probs.length - nCorr], ["Run", D.generated]]
     .forEach(([k, v]) => meta.append(el("span", {}, k + " ", el("b", { text: String(v) }))));
 
   const pct = (v) => v.toFixed(1) + "%";
@@ -348,9 +319,9 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
       b.addEventListener("click", () => { sortKey = k; renderRanking(); });
       head.append(el("th", {}, b));
     });
-    head.append(el("th", { class: "breakdown", title: "Mean over the correctness problems: part of the score, not a ranking" }, "Correctness"));
-    head.append(el("th", { class: "breakdown", title: "Mean over the memory-safety problems: part of the score, not a ranking" }, "Memory"));
-    head.append(el("th", { class: "breakdown", title: "Problems this language can write; N/A problems do not count" }, "Scored"));
+    head.append(el("th", { class: "breakdown", title: "Mean over the correctness tests: part of the score, not a ranking" }, "Correctness"));
+    head.append(el("th", { class: "breakdown", title: "Mean over the memory-safety tests: part of the score, not a ranking" }, "Memory"));
+    head.append(el("th", { class: "breakdown", title: "Tests this language can write; N/A tests score 0" }, "Writable"));
     present.forEach((o) => head.append(el("th", { class: "outcome", title: DESC[o] }, swatch(o), el("span", { text: NAME[o] }))));
     head.append(el("th", { class: "outcome", title: "Failures the compiler or its checker warned about" }, el("span", { class: "swatch warned-swatch", "aria-hidden": "true" }), el("span", { text: "Warned" })));
     t.append(el("thead", {}, head));
@@ -479,7 +450,7 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
       Object.entries(L.results).forEach(([pid, r]) => {
         const p = byId[pid];
         if (!p || (opt.drop && opt.drop.has(pid))) return;
-        if (r.o === "INEXPRESSIBLE" && !opt.naZero) return;
+        if (r.o === "INEXPRESSIBLE" && opt.naSkip) return;
         let base = r.o === "INEXPRESSIBLE" ? 0 : (opt.kinds ? opt.kinds(p.kind, r.o) : null) ?? (kinds[p.kind][r.o] ?? 0);
         if (r.w && base < 1 && opt.bonus !== 0) base = Math.min(base + 0.25, 0.99);
         const wt = opt.weight ? opt.weight(p) : 1;
@@ -497,8 +468,8 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
       ["A runtime stop scores like a refusal", { kinds: (k, o) => (k === "static" && o === "TRAPPED" ? 1 : null) }],
       ["No warning bonus", { bonus: 0 }],
       ["Correctness and memory weighted equally", { weight: (p) => (p.category === "correctness" ? 0.5 / nC : 0.5 / nM) }],
-      ["Without the problems nearly every language passes", { drop: uniform }],
-      ["N/A scores 0", { naZero: true }],
+      ["Without the tests nearly every language passes", { drop: uniform }],
+      ["N/A left out of the average", { naSkip: true }],
     ];
     const base = [...D.languages].sort((a, b) => a.rank - b.rank);
     const t = document.getElementById("robust");
@@ -538,11 +509,6 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
       parts: [["Compiler-checked", (L, ps) => covered(L, ps.filter((p) => p.checked)) + " / " + ps.filter((p) => p.checked).length],
               ["Language features", (L, ps) => covered(L, ps.filter((p) => !p.checked)) + " / " + ps.filter((p) => !p.checked).length]],
     },
-    ecosystem: {
-      probes: X.probes.filter((p) => p.bench === "ecosystem"),
-      parts: ["LANGUAGE", "STD", "PROJECT", "PLATFORM"].map((lv) =>
-        [LEVEL[lv], (L, ps) => String(ps.filter((p) => L.results[p.id]?.o === "PASS" && L.results[p.id].l === lv).length)]),
-    },
   };
   Object.values(BENCH).forEach((B) => {
     B.ranked = [...X.languages].map((L) => ({ L, n: covered(L, B.probes) }))
@@ -555,13 +521,13 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
   function renderBench(key) {
     const B = BENCH[key], k = key[0] + "-";
     const meta = document.getElementById(k + "meta");
-    [["Languages", X.languages.length], ["Probes", B.probes.length], ["Groups", B.groups.length]]
+    [["Languages", X.languages.length], ["Tests", B.probes.length], ["Groups", B.groups.length]]
       .forEach(([name, v]) => meta.append(el("span", {}, name + " ", el("b", { text: String(v) }))));
     const leg = document.getElementById(k + "legend");
     ["LANGUAGE", "STD", "PROJECT", "PLATFORM", "NONE", "FAIL"].forEach((lv) =>
       leg.append(el("span", {}, el("span", { class: "swatch l-" + lv, "aria-hidden": "true" }), el("strong", { text: LEVEL[lv] }), LDESC[lv])));
     const t = document.getElementById(k + "ranking");
-    const head = el("tr", {}, el("th", { class: "rank", text: "#" }), el("th", { text: "Language" }), el("th", { text: "Covered" }), el("th", { class: "breakdown", text: "Probes" }));
+    const head = el("tr", {}, el("th", { class: "rank", text: "#" }), el("th", { text: "Language" }), el("th", { text: "Covered" }), el("th", { class: "breakdown", text: "Tests" }));
     B.parts.forEach(([name]) => head.append(el("th", { class: "breakdown", text: name })));
     B.groups.forEach((g) => head.append(el("th", { class: "breakdown", text: g.title })));
     t.append(el("thead", {}, head));
@@ -578,7 +544,7 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
     });
     t.append(tb);
     const g = document.getElementById(k + "grid");
-    const gh = el("tr", {}, el("th", { class: "pname", text: "Probe" }));
+    const gh = el("tr", {}, el("th", { class: "pname", text: "Test" }));
     B.ranked.forEach(({ L }) => gh.append(el("th", { class: "lname", text: L.name })));
     const gb = el("tbody");
     B.groups.forEach((grp) => {
@@ -599,7 +565,6 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
     g.append(el("thead", {}, gh), gb);
   }
   renderBench("builtin");
-  renderBench("ecosystem");
 
   function openProbe(id, langId, scroll) {
     const p = X.probes.find((x) => x.id === id) || X.probes[0];
@@ -626,10 +591,9 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
     if (scroll) document.getElementById(k + "cases").scrollIntoView({ behavior: "smooth", block: "start" });
   }
   openProbe(BENCH.builtin.probes[0].id, null, null);
-  openProbe(BENCH.ecosystem.probes[0].id, null, null);
 
   (function () {
-    document.getElementById("home-c-meta").textContent = D.problems.length + " problems, " + D.languages.length + " languages. Mean problem score.";
+    document.getElementById("home-c-meta").textContent = D.problems.length + " tests, " + D.languages.length + " languages. Mean test score.";
     const c = document.getElementById("home-c");
     c.append(el("thead", {}, el("tr", {}, el("th", { class: "rank", text: "#" }), el("th", { text: "Language" }), el("th", { text: "Score" }))));
     const cb = el("tbody");
@@ -637,14 +601,14 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
     c.append(cb);
     const o = document.getElementById("overall");
     o.append(el("thead", {}, el("tr", {}, el("th", { class: "rank", text: "#" }), el("th", { text: "Language" }), el("th", { text: "Overall" }),
-      el("th", { class: "breakdown", text: "Correctness" }), el("th", { class: "breakdown", text: "Built-in safety" }), el("th", { class: "breakdown", text: "Ecosystem" }))));
+      el("th", { class: "breakdown", text: "Correctness" }), el("th", { class: "breakdown", text: "Built-in safety" }))));
     const ob = el("tbody");
     D.overall.forEach((r) => ob.append(el("tr", {}, el("td", { class: "rank", text: String(r.rank) }), el("td", { class: "lang", text: r.name }), el("td", {}, bar(r.overall, "")),
-      el("td", { class: "breakdown", text: pct(r.correctness) }), el("td", { class: "breakdown", text: pct(r.builtin) }), el("td", { class: "breakdown", text: pct(r.ecosystem) }))));
+      el("td", { class: "breakdown", text: pct(r.correctness) }), el("td", { class: "breakdown", text: pct(r.builtin) }))));
     o.append(ob);
-    ["builtin", "ecosystem"].forEach((key) => {
+    ["builtin"].forEach((key) => {
       const B = BENCH[key], k = "home-" + key[0];
-      document.getElementById(k + "-meta").textContent = B.probes.length + " probes, " + X.languages.length + " languages. Share of probes covered.";
+      document.getElementById(k + "-meta").textContent = B.probes.length + " tests, " + X.languages.length + " languages. Share of tests covered.";
       const x = document.getElementById(k);
       x.append(el("thead", {}, el("tr", {}, el("th", { class: "rank", text: "#" }), el("th", { text: "Language" }), el("th", { text: "Covered" }))));
       const xb = el("tbody");
@@ -656,16 +620,15 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
     });
   })();
 
-  // Views: the hash names the page (#correctness, #builtin, #ecosystem) or an item on it (#p-..., #x-...).
-  // #coverage and #expressibility are older names for #builtin, and #library for #ecosystem.
+  // Views: the hash names the page (#correctness, #builtin) or an item on it (#p-..., #x-...).
+  // #coverage and #expressibility are older names for #builtin.
   function route() {
     const h = location.hash.slice(1);
     const probe = h.startsWith("x-") ? h.slice(2).replace(/-/g, "_") : null;
     const view = h === "correctness" || h.startsWith("p-") ? "correctness"
       : probe ? benchOf(probe)
-      : h === "ecosystem" || h === "library" ? "ecosystem"
       : h === "builtin" || h === "coverage" || h === "expressibility" ? "builtin" : "home";
-    ["home", "correctness", "builtin", "ecosystem"].forEach((v) => (document.getElementById("view-" + v).hidden = v !== view));
+    ["home", "correctness", "builtin"].forEach((v) => (document.getElementById("view-" + v).hidden = v !== view));
     document.querySelectorAll("nav.top a").forEach((a) => a.setAttribute("aria-current", a.dataset.view === view ? "page" : "false"));
     if (h.startsWith("p-")) {
       const id = h.slice(2).replace(/-/g, "_");

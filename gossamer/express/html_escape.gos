@@ -1,7 +1,0 @@
-// LEVEL: STD
-
-use std::html
-
-fn main() {
-    println(html::escape("<a href=\"x\">Tom & Jerry</a>"))
-}

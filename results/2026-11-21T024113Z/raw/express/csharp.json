@@ -746,6 +746,199 @@
    "stdout": "3999999",
    "stderr": "",
    "level": "LANGUAGE"
+  },
+  "generic_constraint": {
+   "outcome": "NONE",
+   "message": "List.Sort accepts any element type"
+  },
+  "lossy_int_to_float": {
+   "outcome": "NONE",
+   "message": "long converts to double implicitly, although it can lose precision"
+  },
+  "const_index_bounds": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-const_index_bounds/reject/Program.cs(8,25): error CS9166: Index is outside the bounds of the inline array [/tmp/breakbench/express-const_index_bounds/reject/bb.csproj]\n/tmp/breakbench/express-const_index_bounds/reject/Program.cs(8,25): error CS9166: Index is outside the bounds of the inline array [/tmp/breakbench/express-const_index_bounds/reject/bb.csproj]\n    1 Error(s)",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "20",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_overflow": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-const_overflow/reject/Program.cs(4,19): error CS0220: The operation overflows at compile time in checked mode [/tmp/breakbench/express-const_overflow/reject/bb.csproj]\n/tmp/breakbench/express-const_overflow/reject/Program.cs(4,19): error CS0220: The operation overflows at compile time in checked mode [/tmp/breakbench/express-const_overflow/reject/bb.csproj]\n    1 Error(s)",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "86400000000000",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "static_assert": {
+   "outcome": "NONE",
+   "message": "no compile-time assertion"
+  },
+  "global_mutable_state": {
+   "outcome": "NONE",
+   "message": "a static field needs no synchronization"
+  },
+  "unreachable_code": {
+   "outcome": "NONE",
+   "message": "code after a return is accepted"
+  },
+  "pure_function": {
+   "outcome": "NONE",
+   "message": "the [Pure] attribute is not checked"
+  },
+  "nan_key": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "found",
+   "stderr": "",
+   "level": "STD"
+  },
+  "string_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "abc",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_equality": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-typed_equality/reject/Program.cs(5,5): error CS0019: Operator '==' cannot be applied to operands of type 'int' and 'string' [/tmp/breakbench/express-typed_equality/reject/bb.csproj]\n/tmp/breakbench/express-typed_equality/reject/Program.cs(5,5): error CS0019: Operator '==' cannot be applied to operands of type 'int' and 'string' [/tmp/breakbench/express-typed_equality/reject/bb.csproj]\n    1 Error(s)",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "match",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "checked_interpolation": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-checked_interpolation/reject/Program.cs(5,28): error CS0103: The name 'nmae' does not exist in the current context [/tmp/breakbench/express-checked_interpolation/reject/bb.csproj]\n/tmp/breakbench/express-checked_interpolation/reject/Program.cs(5,28): error CS0103: The name 'nmae' does not exist in the current context [/tmp/breakbench/express-checked_interpolation/reject/bb.csproj]\n    1 Error(s)",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "hello Ada",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "evaluation_order": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1 2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "contracts": {
+   "outcome": "NONE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "diverging_function": {
+   "outcome": "NONE",
+   "message": "[DoesNotReturn] does not end a method for definite return; a return is still needed after the call"
+  },
+  "noncopyable_type": {
+   "outcome": "NONE",
+   "message": "assignment copies the reference, and nothing marks a type as single-owner"
+  },
+  "dominated_case": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-dominated_case/reject/Program.cs(6,56): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match. [/tmp/breakbench/express-dominated_case/reject/bb.csproj]\n/tmp/breakbench/express-dominated_case/reject/Program.cs(6,56): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match. [/tmp/breakbench/express-dominated_case/reject/bb.csproj]\n    1 Error(s)",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "other",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "duplicate_key": {
+   "outcome": "NONE",
+   "message": "a collection initializer accepts a repeated key"
+  },
+  "char_arithmetic": {
+   "outcome": "NONE",
+   "message": "a char converts to int, so c + 1 is an int"
+  },
+  "comparison_statement": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-comparison_statement/reject/Program.cs(5,1): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement [/tmp/breakbench/express-comparison_statement/reject/bb.csproj]\n/tmp/breakbench/express-comparison_statement/reject/Program.cs(5,1): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement [/tmp/breakbench/express-comparison_statement/reject/bb.csproj]\n    1 Error(s)",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "structural_equality": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "hash_matches_equality": {
+   "outcome": "NONE",
+   "message": "a class can override Equals and keep the default GetHashCode"
+  },
+  "array_literal_length": {
+   "outcome": "NONE",
+   "message": "an inline array has no literal form (CS9174), and other arrays carry no size in their type"
+  },
+  "required_names": {
+   "outcome": "NONE",
+   "message": "arguments may always be passed by position"
+  },
+  "trojan_source": {
+   "outcome": "NONE",
+   "message": "a bidirectional control character in a string literal is accepted"
+  },
+  "enum_from_int": {
+   "outcome": "NONE",
+   "message": "a cast accepts any integer"
+  },
+  "captured_write_in_thread": {
+   "outcome": "NONE",
+   "message": "a thread can change any local variable it captures"
+  },
+  "increment_in_expression": {
+   "outcome": "NONE",
+   "message": "i = i++ is accepted"
+  },
+  "bitwise_on_bool": {
+   "outcome": "NONE",
+   "message": "& is defined on booleans and evaluates both sides"
+  },
+  "readonly_field": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-readonly_field/reject/Program.cs(4,1): error CS8852: Init-only property or indexer 'Config.Port' can only be assigned in an object initializer, or on 'this' or 'base' in an instance constructor or an 'init' accessor. [/tmp/breakbench/express-readonly_field/reject/bb.csproj]\n/tmp/breakbench/express-readonly_field/reject/Program.cs(4,1): error CS8852: Init-only property or indexer 'Config.Port' can only be assigned in an object initializer, or on 'this' or 'base' in an instance constructor or an 'init' accessor. [/tmp/breakbench/express-readonly_field/reject/bb.csproj]\n    1 Error(s)",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "8080",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bool_condition": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-bool_condition/reject/Program.cs(4,5): error CS0029: Cannot implicitly convert type 'int' to 'bool' [/tmp/breakbench/express-bool_condition/reject/bb.csproj]\n/tmp/breakbench/express-bool_condition/reject/Program.cs(4,5): error CS0029: Cannot implicitly convert type 'int' to 'bool' [/tmp/breakbench/express-bool_condition/reject/bb.csproj]\n    1 Error(s)",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "same",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "forced_unwrap": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 134,
+   "secs": 0.15,
+   "stdout": "before",
+   "stderr": "Unhandled exception. System.InvalidOperationException: Cannot read the Value property of a Nullable object that has no value. Check HasValue before reading Value.\n   at System.Nullable`1.get_Value()\n   at Program.<Main>$(String[] args) in /tmp/breakbench/express-forced_unwrap/main/Program.cs:line 4\nAborted (core dumped)",
+   "level": "LANGUAGE"
   }
  }
 }

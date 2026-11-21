@@ -306,7 +306,7 @@
     "ext": "jl",
     "file": "main.jl",
     "build": [
-      "julia --startup-file=no -e 'src = read(\"main.jl\", String); ex = Meta.parseall(src); bad(e) = e isa Expr && (e.head in (:error, :incomplete) || any(bad, e.args)); bad(ex) && exit(1)'"
+      "julia --startup-file=no -e 'src = read(\"main.jl\", String); ex = Meta.parseall(src); bad(e) = e isa Expr && (e.head in (:error, :incomplete) || any(bad, e.args)); bad(ex) && (show(ex); exit(1))'"
     ],
     "run": "julia --startup-file=no --check-bounds=yes -t 8 main.jl",
     "version": "julia --version"

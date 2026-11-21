@@ -1,9 +1,0 @@
-// LEVEL: STD
-
-use std::crypto::subtle
-
-fn main() {
-    let a = #[7 as u8; 16]
-    let b = #[7 as u8; 16]
-    println(if subtle::constant_time_eq(a, b) { "equal" } else { "different" })
-}

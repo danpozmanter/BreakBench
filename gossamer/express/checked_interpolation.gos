@@ -1,0 +1,7 @@
+// LEVEL: LANGUAGE
+
+fn main() {
+    let name = "Ada"
+    println(f"hello {name}")
+    println(f"hello {nmae}") // REJECT!
+}

@@ -662,10 +662,238 @@
    "outcome": "PASS",
    "refusal": "",
    "exit": 0,
-   "secs": 0.15,
+   "secs": 0.16,
    "stdout": "3999999",
    "stderr": "",
    "level": "LANGUAGE"
+  },
+  "generic_constraint": {
+   "outcome": "PASS",
+   "refusal": "main.hs:10:18: error: [GHC-39999]\n    \u2022 No instance for \u2018Ord Point\u2019 arising from a use of \u2018sort\u2019\n    \u2022 In the first argument of \u2018length\u2019, namely \u2018(sort [Point 1 2])\u2019\n      In the first argument of \u2018print\u2019, namely",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "lossy_int_to_float": {
+   "outcome": "PASS",
+   "refusal": "main.hs:10:9: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Double\u2019 with actual type \u2018Int\u2019\n    \u2022 In the first argument of \u2018showF\u2019, namely \u2018n\u2019\n      In a stmt of a 'do' block: showF n",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7.0",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "const_index_bounds": {
+   "outcome": "NONE",
+   "message": "array sizes are not part of the type, so a constant index is checked only at run time"
+  },
+  "const_overflow": {
+   "outcome": "NONE",
+   "message": "constant arithmetic wraps silently"
+  },
+  "static_assert": {
+   "outcome": "PASS",
+   "refusal": "main.hs:7:2: error: [GHC-39584] 300 does not fit in a byte",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "global_mutable_state": {
+   "outcome": "PASS",
+   "refusal": "main.hs:7:9: error: [GHC-83865]\n    \u2022 Couldn't match expected type: IORef Int\n                  with actual type: IO (IORef a0)\n    \u2022 In the expression: newIORef 0",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unreachable_code": {
+   "outcome": "NONE",
+   "message": "return () does not end a do block, and code after it is accepted"
+  },
+  "pure_function": {
+   "outcome": "PASS",
+   "refusal": "main.hs:9:28: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Int\u2019 with actual type \u2018IO Int\u2019\n    \u2022 In a stmt of a 'do' block: modifyIORef ref (+ 1)\n      In the expression:",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "49",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "nan_key": {
+   "outcome": "FAIL",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "missing",
+   "stderr": "",
+   "level": "STD"
+  },
+  "string_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "abc",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_equality": {
+   "outcome": "PASS",
+   "refusal": "main.hs:9:18: error: [GHC-83865]\n    \u2022 Couldn't match type \u2018[Char]\u2019 with \u2018Int\u2019\n      Expected: Int\n        Actual: String",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "match",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "checked_interpolation": {
+   "outcome": "NONE",
+   "message": "no string interpolation"
+  },
+  "evaluation_order": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "contracts": {
+   "outcome": "NONE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "diverging_function": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "noncopyable_type": {
+   "outcome": "NONE",
+   "message": "values are shared freely, and nothing marks a type as single-owner"
+  },
+  "dominated_case": {
+   "outcome": "NONE",
+   "message": "an arm that can never run is only a warning (-Woverlapping-patterns)"
+  },
+  "duplicate_key": {
+   "outcome": "NONE",
+   "message": "no map literal; Map.fromList accepts a repeated key"
+  },
+  "char_arithmetic": {
+   "outcome": "PASS",
+   "refusal": "main.hs:9:10: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Int\u2019 with actual type \u2018Char\u2019\n    \u2022 In the first argument of \u2018(+)\u2019, namely \u2018c\u2019\n      In the first argument of \u2018print\u2019, namely \u2018(c + 1 :: Int)\u2019",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "98",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "comparison_statement": {
+   "outcome": "PASS",
+   "refusal": "main.hs:6:3: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018IO a0\u2019 with actual type \u2018Bool\u2019\n    \u2022 In a stmt of a 'do' block: count == 5\n      In the expression:",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "structural_equality": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "hash_matches_equality": {
+   "outcome": "NONE",
+   "message": "Eq and Ord are separate classes, so a set's ordering can disagree with equality"
+  },
+  "array_literal_length": {
+   "outcome": "NONE",
+   "message": "array sizes are not part of the type"
+  },
+  "required_names": {
+   "outcome": "NONE",
+   "message": "no named arguments, and a record may be built by position"
+  },
+  "trojan_source": {
+   "outcome": "PASS",
+   "refusal": "main.hs:6:12: error: [GHC-21231] lexical error at character '\\8238'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hi",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "enum_from_int": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nEnum.toEnum{Color}: tag (7) is outside of enumeration's range (0,2)",
+   "level": "LANGUAGE"
+  },
+  "captured_write_in_thread": {
+   "outcome": "NONE",
+   "message": "an IORef can be changed from any thread without a lock"
+  },
+  "increment_in_expression": {
+   "outcome": "PASS",
+   "refusal": "main.hs:7:3: error: [GHC-58481]\n    parse error (possibly incorrect indentation or mismatched brackets)\n    parse error (possibly incorrect indentation or mismatched brackets)",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bitwise_on_bool": {
+   "outcome": "PASS",
+   "refusal": "main.hs:9:22: error: [GHC-88464]\n    Variable not in scope: (&) :: Bool -> Bool -> Bool",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "yes",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "readonly_field": {
+   "outcome": "PASS",
+   "refusal": "main.hs:10:15: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018GHC.Internal.IORef.IORef a0\u2019\n                  with actual type \u2018Int\u2019\n    \u2022 In the first argument of \u2018writeIORef\u2019, namely \u2018(port c)\u2019",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "8080",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bool_condition": {
+   "outcome": "PASS",
+   "refusal": "main.hs:11:9: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Bool\u2019 with actual type \u2018Int\u2019\n    \u2022 In the first argument of \u2018when\u2019, namely \u2018(compareText \"x\" \"x\")\u2019\n      In a stmt of a 'do' block:",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "same",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "forced_unwrap": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nMaybe.fromJust: Nothing\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/Data/Maybe.hs:150:21 in ghc-internal:GHC.Internal.Data.Maybe\n  fromJust, called at main.hs:13:10 in main:Main",
+   "level": "STD"
   }
  }
 }

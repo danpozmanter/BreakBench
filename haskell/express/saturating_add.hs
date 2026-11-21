@@ -1,1 +1,0 @@
--- CANNOT-EXPRESS: no saturating addition in the standard library
