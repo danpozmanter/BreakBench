@@ -1,0 +1,5 @@
+fn main() {
+    let s = ""
+    let yes = (s.len() > 0) & (s[0] == 'a') // CONTROL! let yes = s.len() > 0 && s[0] == 'a'
+    println(if yes { "yes" } else { "no" })
+}

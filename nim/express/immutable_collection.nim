@@ -1,5 +1,0 @@
-# LEVEL: LANGUAGE
-
-let xs = @[1, 2, 3]
-xs.add(4) # REJECT!
-echo xs.len

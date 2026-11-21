@@ -8,15 +8,11 @@ programs, and covers LangArena's 27 languages plus OCaml, Haskell and Clojure.
 
 The question behind every test: can you trust the program to run without error in production, does
 the language help you find errors fast, and does it keep you from the big ones, like the
-billion-dollar null? It has two benches:
+billion-dollar null? Each test is an ordinary program with one classic bug in it. Does the compiler
+catch it, does the program stop with a clear error, or does it quietly print the wrong answer?
 
-- **Correctness**: each program has one classic bug in it. Does the compiler catch it, does the
-  program stop with an error, or does it quietly print the wrong answer?
-- **Built-in safety**: which mistakes does the language rule out on its own, before you reach for
-  a library?
-
-Each bench scores a language as a percentage, and the **overall** ranking is the mean of the two.
-The size of a language's standard library plays no part.
+A language scores the mean over all 108 tests, as a percentage. The size of a language's standard
+library plays no part.
 
 Each language runs its latest release, built from LangArena's Dockerfiles or the language's own
 images.
@@ -29,13 +25,22 @@ images.
   well, and the bench shows where it still has gaps. Results for 0.82.2 and earlier show the gaps
   it has since closed.
 
-## Correctness
+## Tests
 
-76 tests: 58 logic and resource bugs (null dereference, overflow, missing match cases, command
-injection, deadlocks, a string cut mid-character, leaked file handles, ...) and 18 memory-safety bugs
-(use after free, out-of-bounds reads and writes, leaks, ...). Each has a CWE or CERT entry or
-appears in a language's pitfall list, reads the same in every language, and covers a mistake no
-other test covers. `harness/problems.json` describes each one.
+108 tests in four categories. Each has a CWE or CERT entry or appears in a language's pitfall list,
+reads the same in every language, and covers a mistake no other test covers.
+`harness/problems.json` describes each one.
+
+| Category | Tests | The bug |
+|---|---|---|
+| Correctness | 79 | The program computes the wrong answer: overflow, a missing match case, arguments in the wrong order, a misspelled name, a comparison where an assignment was meant, command injection, ... |
+| Null safety | 4 | The program uses a value that may be missing as if it were there |
+| Memory safety | 17 | The program reads or writes memory it does not own, or never frees it: use after free, out-of-bounds reads and writes, leaks, ... |
+| Concurrency | 8 | Threads or tasks interfere: a data race, a deadlock, a failure lost between threads, ... |
+
+The site breaks each language's score down by category, and reports two more shares: tests caught
+before running (refused by the compiler or checker) and tests with no silent failure (refused, run
+correctly or stopped with a clear error).
 
 ### Outcomes
 
@@ -70,14 +75,16 @@ other test covers. `harness/problems.json` describes each one.
   compiles. That version, the control, drops each `BREAK!` line and uses each `CONTROL! <code>`
   line in its place.
 - **N/A**: a test the language cannot write (a mutex in JavaScript, regex in Zig) scores 0, the
-  same as a failure, in both benches. A language that can write it but lacks the bug scores
+  same as a failure. A language that can write it but lacks the bug scores
   CORRECT. Each N/A program says why in a `CANNOT-EXPRESS:` line.
 - **Score**: the mean over all tests, as a percentage.
 
 **Robustness.** The site also scores the results five other ways: a run-time stop counts as a
-refusal, no warning bonus, correctness and memory weighed 50/50, near-universal passes removed, and
-N/A left out of the average. Under every scheme Gossamer and Rust stay first and second and JavaScript stays
-last. Swift, Haskell, F# and Zig trade third place, and no language moves more than eight places.
+refusal, no warning bonus, each category weighed equally, near-universal passes removed, and
+N/A left out of the average. Under every scheme Rust and Gossamer take the top two places and
+JavaScript stays last; Swift is third under all but one, where Haskell is. Weighting each category
+equally moves languages most, up to 15 places (Ruby), because it gives each of the 4 null-safety
+tests the weight of about 20 correctness tests.
 
 ### Build mode
 
@@ -118,7 +125,7 @@ ThreadSanitizer, and Go's default runtime over `-race`, which turns off its dead
 
 ### What counts as standard
 
-Both benches allow:
+Tests may use:
 
 - the language and its standard library;
 - libraries the language's own project publishes, such as Rust's `regex`, Go's
@@ -130,65 +137,31 @@ Both benches allow:
 
 GNU and BSD extensions, third-party packages and FFI do not count.
 
-## Built-in safety
+## History
 
-Each test is a small task tied to a common mistake, such as `optional_type` for `null_deref` or
-`exhaustive_return` for `missing_return`. `harness/probes.json` lists all 58. Built-in safety asks
-what the language itself prevents:
-
-- 43 compiler-checked tests need the compiler to refuse the unsafe version: a match that misses a
-  case, a null in a non-null type, two mutable references to one value, a narrowing conversion
-  without a cast, an integer where an enum belongs, a sort of values with no ordering, a statement
-  after a return, a constant index past the end of an array. A dynamic language passes one only
-  when its build step refuses the line, as Python's compiler refuses `i = i++`.
-- 15 language-feature tests need a safe construct or rule in the language: value types, typed
-  errors, cleanup blocks, memory freed without a free call, arguments evaluated left to right,
-  preconditions in a function's declaration, records that compare by content. Some check behavior
-  at run time, such as a frozen record refusing a change, an enum refusing 7, or a forced unwrap
-  of a missing value stopping the program, so dynamic languages can pass them.
-
-Null safety has three tests here: `optional_type` (the compiler refuses using a maybe-missing value
-as a value), `nonnull_reference` (a plain reference cannot hold null) and `forced_unwrap` (forcing
-a missing value out stops the program). The correctness bench adds `null_deref` and
-`missing_key_default`.
-
-A compiler-checked test marks the offending lines `REJECT!`. The bench runs the program without
-them, then builds it with them, and that build must fail or report a must-use diagnostic. The site
-shows the refusal. A language whose compiler accepts the line says so in a `CANNOT-EXPRESS:` line,
-with what the compiler does instead.
-
-The bench ranks languages by the share of these tests they pass. A test notes whether its construct
-comes from the language or its standard library, but only pass or fail counts.
-
-## Overall
-
-The overall ranking is the mean of the two bench scores: the correctness score and the share of
-built-in safety tests passed. Each bench weighs half.
-
-An earlier ecosystem coverage bench asked which safety tools ship with each language. It measured
-the size of a standard library rather than safety, so it was removed.
+BreakBench once had a second bench, built-in safety, that asked whether a language could write the
+safe version of a task. It double counted: most of its tests asked about the same mistake as a
+correctness test. Its tests that covered a new mistake became correctness tests with the bug in
+them, and the rest were dropped. An ecosystem coverage bench measured the size of a standard
+library rather than safety, so it was removed too.
 
 ## Running
 
 Requires `docker`, `docker compose` and [`uv`](https://docs.astral.sh/uv/).
 
     sh build-docker.sh                          # build the images
-    uv run bench.py                             # full run of every bench
+    uv run bench.py                             # full run of every test
     uv run bench.py rust gossamer               # rerun some languages
     uv run bench.py c --only use_after_free     # rerun some tests
-    uv run bench.py --express rust              # rerun the built-in safety tests
     uv run bench.py --aggregate                 # rebuild the rankings and the site
 
 Each full run writes a folder named for its start time, `results/YYYY-MM-DDTHHMMSSZ/`, holding raw
-results in `raw/` and the rankings in `correctness.json`, `coverage.json` (built-in safety) and
-`overall.json`. Partial runs update the newest folder. The site goes to `docs/index.html`.
+results in `raw/` and the ranking in `results.json`. Partial runs update the newest folder. The site goes to `docs/index.html`.
 
 ## Layout
 
-    <language>/<test>.<ext>             correctness tests
-    <language>/express/<test>.<ext>     built-in safety tests
-    harness/problems.json               correctness tests and scoring
-    harness/probes.json                 built-in safety tests
+    <language>/<test>.<ext>             tests
+    harness/problems.json               tests, categories and scoring
     harness/langs.json                  build and run commands
     harness/driver.py                   builds, runs and classifies inside each container
     bench.py                            runs the containers and ranks the results
@@ -200,7 +173,8 @@ results in `raw/` and the rankings in `correctness.json`, `coverage.json` (built
 - Each container gets 3 GB of memory (swap included) and 4,096 processes. A run times out after
   20 s (120 s for leak tests). A leak is peak memory over 1,024 MB. `fd_leak` runs with 512 file
   descriptors.
-- Tests with a race run ten times and keep the worst outcome.
+- Tests whose outcome can change from run to run (races, and `use_after_close`, which writes
+  through a freed C `FILE` in some languages) run ten times and keep the worst outcome.
 - C-family programs keep stale pointers in data structures, so the optimizer cannot remove the
   access.
 - Zig's debug allocator never reuses a freed slot, so a stale pointer reads the old record. Odin and
@@ -217,6 +191,11 @@ results in `raw/` and the rankings in `correctness.json`, `coverage.json` (built
 - In this build mode C's null dereference and C++'s `*` on an empty `std::optional` stop the
   program: the first through UndefinedBehaviorSanitizer, the second through a libstdc++ assertion
   that fires in this unoptimized build. Both are undefined behavior, so other builds may run on.
+- C and C++ leave the order of a call's arguments unspecified. Clang and GCC both run them left to
+  right in this build, so `evaluation_order` prints `1 2` and scores as correct.
+- V reads the line after a bare `return` as the value to return, so in a function that returns
+  nothing, any statement after `return` fails to build. That refuses `unreachable_code`, though not
+  through a check for unreachable code.
 - `by_design` in `problems.json` marks a failure that the language's own documentation names,
   along with its fix. The site outlines those cells, and they still score as measured. Only
   `reference_cycle_leak` qualifies: Rust (`Weak<T>`), Swift (`weak`), C++ (`std::weak_ptr`) and

@@ -1,1 +1,0 @@
--- CANNOT-EXPRESS: records are immutable; no mutable record that copies on assignment

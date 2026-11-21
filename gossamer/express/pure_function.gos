@@ -1,8 +1,0 @@
-// LEVEL: LANGUAGE
-
-fn main() {
-    let squares = #[7].par_map(|x| x * x)
-    let mut hits = 0 // REJECT!
-    let counted = #[7].par_map(|x| { hits += 1; x * x }) // REJECT!
-    println(f"{squares[0]}")
-}

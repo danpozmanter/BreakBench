@@ -1,1 +1,0 @@
--- CANNOT-EXPRESS: array sizes are not part of the type

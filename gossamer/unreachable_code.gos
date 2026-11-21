@@ -1,0 +1,10 @@
+fn check() {
+    println("ok")
+    return
+    let step = "checked"
+    println(step)
+}
+
+fn main() {
+    check()
+}

@@ -1,1 +1,0 @@
--- CANNOT-EXPRESS: guards that miss a case are only a warning

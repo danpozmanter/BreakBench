@@ -1,8 +1,0 @@
-// LEVEL: LANGUAGE
-
-fn main() {
-    let a = "abc"
-    let mut b = a
-    b += "d"
-    println(a)
-}

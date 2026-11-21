@@ -1,0 +1,19 @@
+enum Color {
+    Red
+    Green
+    Blue
+}
+
+fn name(c: Color) -> String {
+    match c {
+        Color::Red => "red",
+        Color::Green => "green",
+        Color::Blue => "blue",
+    }
+}
+
+fn main() {
+    let c = Color::Green
+    println(name(7)) // BREAK!
+    println(name(c))
+}

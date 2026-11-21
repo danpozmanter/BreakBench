@@ -68,7 +68,7 @@ section { display: grid; gap: 14px; min-width: 0; }
 .scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
 table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
 th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
-th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; white-space: nowrap; }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; white-space: nowrap; vertical-align: bottom; }
 th button { all: unset; cursor: pointer; }
 th button:focus-visible, .cell:focus-visible, .plist button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 tr:last-child td { border-bottom: 0; }
@@ -81,7 +81,8 @@ tr:last-child td { border-bottom: 0; }
 .bar.c i { background: var(--o-correct); }
 .bar.m i { background: var(--o-rejected); }
 .breakdown { color: var(--muted); text-align: right; font-size: 13px; }
-th.breakdown { text-align: right; }
+th.breakdown { text-align: right; white-space: normal; max-width: 7.5em; vertical-align: bottom; }
+.bar { width: 80px; }
 .num { display: inline-block; min-width: 3.2em; text-align: right; font-weight: 600; }
 tr.hl td { background: color-mix(in srgb, var(--accent) 9%, transparent); }
 .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 13px; }
@@ -144,18 +145,6 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
 #problem-select { display: none; font: inherit; padding: 8px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); width: 100%; }
 nav.top { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center; font-size: 14px; }
 nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent; }
-nav.top a[aria-current="page"] { color: var(--fg); border-bottom-color: var(--accent); font-weight: 600; }
-nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
-.view { display: grid; gap: 40px; }
-.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: grid; gap: 12px; align-content: start; min-width: 0; }
-.card table td, .card table th { padding: 5px 8px; }
-.card a.go { color: var(--accent); text-decoration: none; }
-.card a.go:hover { text-decoration: underline; }
-.l-LANGUAGE { background: var(--o-rejected); } .l-STD { background: var(--o-correct); }
-.l-PROJECT { background: #2a8a8a; } .l-PLATFORM { background: #7d8a2a; }
-.l-NONE { background: var(--o-cant); } .l-FAIL { background: var(--o-silent); }
-.l-ERROR, .l-MISSING { background: var(--o-error); }
 .robust td, .robust th { font-size: 13px; }
 @media (max-width: 760px) {
   .detail { grid-template-columns: 1fr; }
@@ -163,111 +152,52 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
   #problem-select { display: block; }
   .bar { width: 60px; }
 }
-@media (prefers-reduced-motion: no-preference) { .bar i { transition: width .4s ease; } }
-</style>
+@media (prefers-reduced-motion: no-preference) { .bar i { transition: width .4s ease; } }</style>
 
 <div class="wrap">
-  <nav class="top" aria-label="Pages">
-    <span class="brand">BreakBench</span>
-    <a href="#" data-view="home">Overview</a>
-    <a href="#correctness" data-view="correctness">Correctness</a>
-    <a href="#builtin" data-view="builtin">Built-in safety</a>
-  </nav>
+  <header>
+    <h1>BreakBench</h1>
+    <p>What 30 programming languages do when a program has one classic bug. Can you trust the program to run without error in production, does the language help you find errors fast, and does it keep you from the big ones, like the billion-dollar null? A language can refuse to build the program, stop it with a clear error, or let it run on to a wrong answer, a crash, a hang or a leak.</p>
+    <div class="meta" id="meta"></div>
+    <nav class="top" aria-label="Sections"><a href="#overview">Overview</a><a href="#tests">Tests</a></nav>
+  </header>
 
-  <div class="view" id="view-home">
-    <header>
-      <h1>BreakBench</h1>
-      <p>What 30 programming languages do about common bugs. Correctness: each program has one classic bug in it; does the compiler catch it, does the program stop with an error, or does it quietly print the wrong answer? Built-in safety: which mistakes does the language rule out on its own?</p>
-    </header>
-    <section aria-labelledby="overall-h">
-      <h2 id="overall-h">Overall ranking</h2>
-      <p class="muted">The overall score is the mean of the two bench scores, each a percentage: correctness is the mean test score, and built-in safety is the share of its tests the language passes. The size of a language's standard library plays no part.</p>
-      <div class="scroll"><table id="overall"></table></div>
-    </section>
-    <div class="cards">
-      <div class="card">
-        <h2><a class="go" href="#correctness">Correctness and memory safety</a></h2>
-        <p class="muted" id="home-c-meta"></p>
-        <div class="scroll"><table id="home-c"></table></div>
-      </div>
-      <div class="card">
-        <h2><a class="go" href="#builtin">Built-in safety</a></h2>
-        <p class="muted" id="home-b-meta"></p>
-        <div class="scroll"><table id="home-b"></table></div>
-      </div>
+  <section aria-labelledby="rank-h" id="overview">
+    <h2 id="rank-h">Overview</h2>
+    <p class="muted">The score is the average over all tests, as a percentage. The four categories break it down. Caught before running is the share of tests the compiler refused; no silent failure is the share refused, run correctly or stopped with a clear error. Select a heading to sort.</p>
+    <div class="scroll"><table id="ranking"></table></div>
+  </section>
+
+  <section aria-labelledby="score-h">
+    <h2 id="score-h">How outcomes are scored</h2>
+    <div class="legend" id="legend"></div>
+    <div class="scoring" id="scoring"></div>
+    <p class="muted">A warning that names the bug adds 0.25, but never makes a full point. Ignoring a result the language marks must-use counts as a refusal.</p>
+    <p class="muted">A compile error counts as a refusal only if the same program with the bug removed compiles.</p>
+    <p class="muted">N/A means the language cannot write the program at all, for example without a mutex or shared-memory threads. Those tests score 0, the same as a failure. A language that simply lacks the bug, like Python with no unsigned integers, scores Ran Correctly.</p>
+  </section>
+
+  <section aria-labelledby="robust-h">
+    <h2 id="robust-h">Does the ranking hold up?</h2>
+    <p class="muted">The same results, scored five other ways.</p>
+    <div class="scroll"><table id="robust" class="robust"></table></div>
+  </section>
+
+  <section aria-labelledby="grid-h" id="tests">
+    <h2 id="grid-h">Tests</h2>
+    <p class="muted">Each row is a test and each column a language, in rank order. Select a cell to see the evidence. An outlined cell is a failure the language accepts by design.</p>
+    <div id="grids" class="grids"></div>
+  </section>
+
+  <section aria-labelledby="case-h" id="cases">
+    <h2 id="case-h">Test detail</h2>
+    <select id="problem-select" aria-label="Test"></select>
+    <div class="detail">
+      <nav class="plist" id="plist" aria-label="Tests"></nav>
+      <div class="case" id="case"></div>
     </div>
-  </div>
-
-  <div class="view" id="view-correctness" hidden>
-    <header>
-      <span class="eyebrow">Correctness and memory safety</span>
-      <h1>What happens when your program has a bug</h1>
-      <p>Each test is an ordinary program with one classic bug. A language can refuse to compile it, stop it with a clear error, or let it run on to a wrong answer, a crash, a hang or a leak.</p>
-      <div class="meta" id="meta"></div>
-    </header>
-
-    <section aria-labelledby="rank-h">
-      <h2 id="rank-h">Ranking</h2>
-      <p class="muted">The score is the average over all tests, as a percentage; a test the language cannot write scores 0. The correctness and memory columns break it down; they are not separate rankings.</p>
-      <div class="scroll"><table id="ranking"></table></div>
-    </section>
-
-    <section aria-labelledby="score-h">
-      <h2 id="score-h">How outcomes are scored</h2>
-      <div class="legend" id="legend"></div>
-      <div class="scoring" id="scoring"></div>
-      <p class="muted">A warning that names the bug adds 0.25, but never makes a full point. Ignoring a result the language marks must-use counts as a refusal.</p>
-      <p class="muted">A compile error counts as a refusal only if the same program with the bug removed compiles.</p>
-      <p class="muted">N/A means the language cannot write the program at all, for example without a mutex or shared-memory threads. Those tests score 0, the same as a failure. A language that simply lacks the bug, like Python with no unsigned integers, scores Ran Correctly.</p>
-    </section>
-
-    <section aria-labelledby="robust-h">
-      <h2 id="robust-h">Does the ranking hold up?</h2>
-      <p class="muted">The same results, scored five other ways.</p>
-      <div class="scroll"><table id="robust" class="robust"></table></div>
-    </section>
-
-    <section aria-labelledby="grid-h">
-      <h2 id="grid-h">Every outcome</h2>
-      <p class="muted">Each row is a test and each column a language, in rank order. Select a cell to see the evidence. An outlined cell is a failure the language accepts by design.</p>
-      <div id="grids" class="grids"></div>
-    </section>
-
-    <section aria-labelledby="case-h" id="cases">
-      <h2 id="case-h">Per test</h2>
-      <select id="problem-select" aria-label="Test"></select>
-      <div class="detail">
-        <nav class="plist" id="plist" aria-label="Tests"></nav>
-        <div class="case" id="case"></div>
-      </div>
-    </section>
-  </div>
-
-  <div class="view" id="view-builtin" hidden>
-    <header>
-      <span class="eyebrow">Built-in safety</span>
-      <h1>What safety comes built in?</h1>
-      <p>Each test asks whether the language itself prevents a common mistake: the compiler refuses the unsafe version, or the language gives you a safe construct such as a tagged union, a value type or a cleanup block. A test that asks the compiler to refuse something passes only if the compiler refuses the marked line.</p>
-      <div class="meta" id="b-meta"></div>
-    </header>
-    <section aria-labelledby="b-rank-h">
-      <h2 id="b-rank-h">Ranking</h2>
-      <p class="muted">Languages are ranked by the share of tests they cover. Compiler-checked tests need a compiler that refuses unsafe code, so dynamic languages pass few of them; language-feature tests need a construct in the language itself.</p>
-      <div class="legend" id="b-legend"></div>
-      <div class="scroll"><table id="b-ranking"></table></div>
-    </section>
-    <section aria-labelledby="b-grid-h">
-      <h2 id="b-grid-h">Every test</h2>
-      <p class="muted">Select a cell to see the task and the evidence: the output, the compiler's refusal, or why the language cannot do it.</p>
-      <div class="scroll grid-wrap"><table class="grid" id="b-grid"></table></div>
-    </section>
-    <section aria-labelledby="b-case-h" id="b-cases">
-      <h2 id="b-case-h">Test detail</h2>
-      <div class="case" id="b-case"></div>
-    </section>
-  </div>
+  </section>
 </div>
-
 <script src="data.js"></script>
 <script>
 (function () {
@@ -294,7 +224,7 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
     leak: "Memory leak",
     valid: "Correct program that must run",
   };
-  const CAT = { correctness: "Correctness", memory: "Memory safety" };
+  const CAT = D.categories;
   const el = (tag, attrs, ...kids) => {
     const e = document.createElement(tag);
     for (const [k, v] of Object.entries(attrs || {})) {
@@ -308,10 +238,9 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
   const present = OUT.filter((o) => D.languages.some((L) => Object.values(L.results).some((r) => r.o === o)));
   const slug = (id) => "p-" + id.replace(/_/g, "-");
   const probs = D.problems;
-  const nCorr = probs.filter((p) => p.category === "correctness").length;
-
   const meta = document.getElementById("meta");
-  [["Languages", D.languages.length], ["Tests", probs.length], ["Correctness", nCorr], ["Memory safety", probs.length - nCorr], ["Run", D.generated]]
+  [["Languages", D.languages.length], ["Tests", probs.length],
+    ...Object.entries(CAT).map(([c, name]) => [name, probs.filter((p) => p.category === c).length]), ["Run", D.generated]]
     .forEach(([k, v]) => meta.append(el("span", {}, k + " ", el("b", { text: String(v) }))));
 
   const pct = (v) => v.toFixed(1) + "%";
@@ -320,33 +249,27 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
   function renderRanking() {
     const t = document.getElementById("ranking");
     t.replaceChildren();
-    const cols = [["score", "Score", ""]];
+    const cols = [["score", "Score", "Mean over every test"],
+      ...Object.entries(CAT).map(([c, name]) => [c, name, "Mean over the " + name.toLowerCase() + " tests"]),
+      ["caught", "Caught before running", "Share of tests the compiler or checker refused"],
+      ["safe", "No silent failure", "Share of tests refused, run correctly or stopped with a clear error"]];
     const head = el("tr", {}, el("th", { class: "rank", text: "#" }), el("th", { text: "Language" }));
-    cols.forEach(([k, label]) => {
-      const b = el("button", { type: "button", "aria-pressed": String(sortKey === k), text: label + (sortKey === k ? " ↓" : "") });
+    cols.forEach(([k, label, title], i) => {
+      const b = el("button", { type: "button", "aria-pressed": String(sortKey === k), title, text: label + (sortKey === k ? " ↓" : "") });
       b.addEventListener("click", () => { sortKey = k; renderRanking(); });
-      head.append(el("th", {}, b));
+      head.append(el("th", { class: i ? "breakdown" : "" }, b));
     });
-    head.append(el("th", { class: "breakdown", title: "Mean over the correctness tests: part of the score, not a ranking" }, "Correctness"));
-    head.append(el("th", { class: "breakdown", title: "Mean over the memory-safety tests: part of the score, not a ranking" }, "Memory"));
     head.append(el("th", { class: "breakdown", title: "Tests this language can write; N/A tests score 0" }, "Writable"));
-    present.forEach((o) => head.append(el("th", { class: "outcome", title: DESC[o] }, swatch(o), el("span", { text: NAME[o] }))));
-    head.append(el("th", { class: "outcome", title: "Failures the compiler or its checker warned about" }, el("span", { class: "swatch warned-swatch", "aria-hidden": "true" }), el("span", { text: "Warned" })));
     t.append(el("thead", {}, head));
     const body = el("tbody");
     const rows = [...D.languages].sort((a, b) => b[sortKey] - a[sortKey] || a.rank - b.rank);
     rows.forEach((L) => {
-      const counts = {};
-      Object.values(L.results).forEach((r) => (counts[r.o] = (counts[r.o] || 0) + 1));
       const tr = el("tr", { "data-lang": L.id },
         el("td", { class: "rank", text: String(L.rank) }),
         el("td", { class: "lang" }, L.name, el("span", { class: "ver", title: L.version, text: L.version })),
         el("td", {}, bar(L.score, "")),
-        el("td", { class: "breakdown", text: pct(L.correctness) }),
-        el("td", { class: "breakdown", text: pct(L.memory) }),
-        el("td", { class: "breakdown", text: L.scored + " of " + probs.length }),
-        ...present.map((o) => el("td", { class: "count" + (counts[o] ? "" : " zero"), text: counts[o] ? String(counts[o]) : "0" })),
-        (() => { const n = Object.values(L.results).filter((r) => r.w && r.o !== "REJECTED" && r.o !== "CORRECT").length; return el("td", { class: "count" + (n ? "" : " zero"), text: String(n) }); })());
+        ...cols.slice(1).map(([k]) => el("td", { class: "breakdown", text: pct(L[k]) })),
+        el("td", { class: "breakdown", text: L.scored + " of " + probs.length }));
       body.append(tr);
     });
     t.append(body);
@@ -367,7 +290,7 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
 
   const SHORT = NAME;
   const grids = document.getElementById("grids");
-  ["correctness", "memory"].forEach((c) => {
+  Object.keys(CAT).forEach((c) => {
     const list = probs.filter((p) => p.category === c);
     const t = el("table", { class: "grid" });
     const head = el("tr", {}, el("th", { class: "pname", text: CAT[c] + " (" + list.length + ")" }));
@@ -397,7 +320,7 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
 
   const plist = document.getElementById("plist");
   const select = document.getElementById("problem-select");
-  ["correctness", "memory"].forEach((c) => {
+  Object.keys(CAT).forEach((c) => {
     plist.append(el("h4", { text: CAT[c] }));
     const group = el("optgroup", { label: CAT[c] });
     probs.filter((p) => p.category === c).forEach((p) => {
@@ -466,7 +389,7 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
       });
       return 100 * tot / w;
     };
-    const nC = probs.filter((p) => p.category === "correctness").length, nM = probs.length - nC;
+    const perCat = Object.fromEntries(Object.keys(CAT).map((c) => [c, probs.filter((p) => p.category === c).length]));
     const uniform = new Set(probs.filter((p) => {
       const ss = D.languages.map((L) => L.results[p.id]?.s).filter((v) => v != null);
       return ss.length && ss.reduce((a, b) => a + b, 0) / ss.length >= 0.95;
@@ -475,7 +398,7 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
       ["As published", {}],
       ["A runtime stop scores like a refusal", { kinds: (k, o) => (k === "static" && o === "TRAPPED" ? 1 : null) }],
       ["No warning bonus", { bonus: 0 }],
-      ["Correctness and memory weighted equally", { weight: (p) => (p.category === "correctness" ? 0.5 / nC : 0.5 / nM) }],
+      ["Each category weighted equally", { weight: (p) => 1 / perCat[p.category] }],
       ["Without the tests nearly every language passes", { drop: uniform }],
       ["N/A left out of the average", { naSkip: true }],
     ];
@@ -497,155 +420,11 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
     t.append(tb);
   })();
 
-  const X = D.express;
-  const LEVEL = { LANGUAGE: "Language", STD: "Standard library", PROJECT: "Project library", PLATFORM: "C library (ISO C, POSIX)", NONE: "Not covered", FAIL: "Broken", ERROR: "Benchmark error", MISSING: "Missing" };
-  const LDESC = {
-    LANGUAGE: "Built into the language itself",
-    STD: "In the standard library",
-    PROJECT: "In a library the language's own project publishes",
-    PLATFORM: "C and C++ only: an ISO C or POSIX call",
-    NONE: "Needs a third-party package, or cannot be done at all",
-    FAIL: "The tool exists but gave the wrong answer",
-  };
-  const xcode = (r) => (r.o === "PASS" ? r.l : r.o);
-  const xshort = { LANGUAGE: "Lang", STD: "Std", PROJECT: "Project", PLATFORM: "C lib", NONE: "None", FAIL: "Broken", ERROR: "Error", MISSING: "Missing" };
-  const groupTitle = Object.fromEntries(X.groups.map((g) => [g.id, g.title]));
-  const covered = (L, ps) => ps.filter((p) => L.results[p.id]?.o === "PASS").length;
-  const BENCH = {
-    builtin: {
-      probes: X.probes.filter((p) => p.bench === "builtin"),
-      parts: [["Compiler-checked", (L, ps) => covered(L, ps.filter((p) => p.checked)) + " / " + ps.filter((p) => p.checked).length],
-              ["Language features", (L, ps) => covered(L, ps.filter((p) => !p.checked)) + " / " + ps.filter((p) => !p.checked).length]],
-    },
-  };
-  Object.values(BENCH).forEach((B) => {
-    B.ranked = [...X.languages].map((L) => ({ L, n: covered(L, B.probes) }))
-      .sort((a, b) => b.n - a.n || a.L.name.localeCompare(b.L.name))
-      .map((row, i) => ({ ...row, rank: i + 1 }));
-    B.groups = X.groups.filter((g) => B.probes.some((p) => p.group === g.id));
-  });
-  const benchOf = (id) => (X.probes.find((p) => p.id === id) || {}).bench || "builtin";
-
-  function renderBench(key) {
-    const B = BENCH[key], k = key[0] + "-";
-    const meta = document.getElementById(k + "meta");
-    [["Languages", X.languages.length], ["Tests", B.probes.length], ["Groups", B.groups.length]]
-      .forEach(([name, v]) => meta.append(el("span", {}, name + " ", el("b", { text: String(v) }))));
-    const leg = document.getElementById(k + "legend");
-    ["LANGUAGE", "STD", "PROJECT", "PLATFORM", "NONE", "FAIL"].forEach((lv) =>
-      leg.append(el("span", {}, el("span", { class: "swatch l-" + lv, "aria-hidden": "true" }), el("strong", { text: LEVEL[lv] }), LDESC[lv])));
-    const t = document.getElementById(k + "ranking");
-    const head = el("tr", {}, el("th", { class: "rank", text: "#" }), el("th", { text: "Language" }), el("th", { text: "Covered" }), el("th", { class: "breakdown", text: "Tests" }));
-    B.parts.forEach(([name]) => head.append(el("th", { class: "breakdown", text: name })));
-    B.groups.forEach((g) => head.append(el("th", { class: "breakdown", text: g.title })));
-    t.append(el("thead", {}, head));
-    const tb = el("tbody");
-    B.ranked.forEach(({ L, n, rank }) => {
-      const tr = el("tr", {}, el("td", { class: "rank", text: String(rank) }), el("td", { class: "lang", text: L.name }),
-        el("td", {}, bar(100 * n / B.probes.length, "c")), el("td", { class: "breakdown", text: n + " / " + B.probes.length }));
-      B.parts.forEach(([, f]) => tr.append(el("td", { class: "breakdown", text: f(L, B.probes) })));
-      B.groups.forEach((g) => {
-        const ps = B.probes.filter((p) => p.group === g.id);
-        tr.append(el("td", { class: "breakdown", text: covered(L, ps) + " / " + ps.length }));
-      });
-      tb.append(tr);
-    });
-    t.append(tb);
-    const g = document.getElementById(k + "grid");
-    const gh = el("tr", {}, el("th", { class: "pname", text: "Test" }));
-    B.ranked.forEach(({ L }) => gh.append(el("th", { class: "lname", text: L.name })));
-    const gb = el("tbody");
-    B.groups.forEach((grp) => {
-      gb.append(el("tr", {}, el("th", { class: "pname", scope: "rowgroup", text: grp.title })));
-      B.probes.filter((p) => p.group === grp.id).forEach((p) => {
-        const tr = el("tr", {}, el("th", { class: "pname", scope: "row" }, el("button", { type: "button", class: "plink", text: p.title })));
-        tr.querySelector(".plink").addEventListener("click", () => openProbe(p.id, null, true));
-        B.ranked.forEach(({ L }) => {
-          const r = L.results[p.id] || { o: "MISSING" };
-          const c = xcode(r);
-          const b = el("button", { type: "button", class: "gcell l-" + c, title: L.name + " · " + p.title + ": " + (LEVEL[c] || c), text: xshort[c] || c });
-          b.addEventListener("click", () => openProbe(p.id, L.id, true));
-          tr.append(el("td", {}, b));
-        });
-        gb.append(tr);
-      });
-    });
-    g.append(el("thead", {}, gh), gb);
-  }
-  renderBench("builtin");
-
-  function openProbe(id, langId, scroll) {
-    const p = X.probes.find((x) => x.id === id) || X.probes[0];
-    const B = BENCH[p.bench], k = p.bench[0] + "-";
-    const box = document.getElementById(k + "case");
-    box.replaceChildren();
-    box.append(el("span", { class: "eyebrow", text: groupTitle[p.group] + (p.checked ? " · compiler-checked" : "") }), el("h3", { text: p.title }),
-      el("dl", { class: "facts" },
-        el("dt", { text: "Task" }), el("dd", { text: p.task }),
-        el("dt", { text: "Stands for" }), el("dd", { text: p.for }),
-        el("dt", { text: "Program" }), el("dd", {}, el("code", { text: "<language>/express/" + p.id + ".*" }))));
-    const t = el("table");
-    t.append(el("thead", {}, el("tr", {}, el("th", { text: "Language" }), el("th", { text: "Result" }), el("th", { text: "Evidence" }))));
-    const tb = el("tbody");
-    B.ranked.forEach(({ L }) => {
-      const r = L.results[p.id] || { o: "MISSING" };
-      const c = xcode(r);
-      tb.append(el("tr", { class: L.id === langId ? "hl" : "" }, el("td", { class: "lang", text: L.name }),
-        el("td", { class: "chipcell" }, el("span", { class: "chip l-" + c, text: LEVEL[c] || c })), el("td", {}, el("pre", { text: r.ev || "" }))));
-    });
-    t.append(tb);
-    box.append(el("div", { class: "scroll" }, t));
-    if (scroll !== null && location.hash !== "#x-" + p.id.replace(/_/g, "-")) history.replaceState(null, "", "#x-" + p.id.replace(/_/g, "-"));
-    if (scroll) document.getElementById(k + "cases").scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-  openProbe(BENCH.builtin.probes[0].id, null, null);
-
-  (function () {
-    document.getElementById("home-c-meta").textContent = D.problems.length + " tests, " + D.languages.length + " languages. Mean test score.";
-    const c = document.getElementById("home-c");
-    c.append(el("thead", {}, el("tr", {}, el("th", { class: "rank", text: "#" }), el("th", { text: "Language" }), el("th", { text: "Score" }))));
-    const cb = el("tbody");
-    [...D.languages].sort((a, b) => a.rank - b.rank).forEach((L) => cb.append(el("tr", {}, el("td", { class: "rank", text: String(L.rank) }), el("td", { class: "lang", text: L.name }), el("td", {}, bar(L.score, "")))));
-    c.append(cb);
-    const o = document.getElementById("overall");
-    o.append(el("thead", {}, el("tr", {}, el("th", { class: "rank", text: "#" }), el("th", { text: "Language" }), el("th", { text: "Overall" }),
-      el("th", { class: "breakdown", text: "Correctness" }), el("th", { class: "breakdown", text: "Built-in safety" }))));
-    const ob = el("tbody");
-    D.overall.forEach((r) => ob.append(el("tr", {}, el("td", { class: "rank", text: String(r.rank) }), el("td", { class: "lang", text: r.name }), el("td", {}, bar(r.overall, "")),
-      el("td", { class: "breakdown", text: pct(r.correctness) }), el("td", { class: "breakdown", text: pct(r.builtin) }))));
-    o.append(ob);
-    ["builtin"].forEach((key) => {
-      const B = BENCH[key], k = "home-" + key[0];
-      document.getElementById(k + "-meta").textContent = B.probes.length + " tests, " + X.languages.length + " languages. Share of tests covered.";
-      const x = document.getElementById(k);
-      x.append(el("thead", {}, el("tr", {}, el("th", { class: "rank", text: "#" }), el("th", { text: "Language" }), el("th", { text: "Covered" }))));
-      const xb = el("tbody");
-      B.ranked.forEach(({ L, n, rank }) => {
-        const cell = el("td", {}, bar(100 * n / B.probes.length, "c"));
-        xb.append(el("tr", {}, el("td", { class: "rank", text: String(rank) }), el("td", { class: "lang", text: L.name }), cell));
-      });
-      x.append(xb);
-    });
-  })();
-
-  // Views: the hash names the page (#correctness, #builtin) or an item on it (#p-..., #x-...).
-  // #coverage and #expressibility are older names for #builtin.
+  // The hash names a test (#p-...); #x-... is an older name for one. Anything else shows the overview.
   function route() {
     const h = location.hash.slice(1);
-    const probe = h.startsWith("x-") ? h.slice(2).replace(/-/g, "_") : null;
-    const view = h === "correctness" || h.startsWith("p-") ? "correctness"
-      : probe ? benchOf(probe)
-      : h === "builtin" || h === "coverage" || h === "expressibility" ? "builtin" : "home";
-    ["home", "correctness", "builtin"].forEach((v) => (document.getElementById("view-" + v).hidden = v !== view));
-    document.querySelectorAll("nav.top a").forEach((a) => a.setAttribute("aria-current", a.dataset.view === view ? "page" : "false"));
-    if (h.startsWith("p-")) {
-      const id = h.slice(2).replace(/-/g, "_");
-      if (probs.some((p) => p.id === id)) openProblem(id, null, true);
-    } else if (probe && X.probes.some((p) => p.id === probe)) {
-      openProbe(probe, null, true);
-    } else {
-      window.scrollTo(0, 0);
-    }
+    const id = h.startsWith("p-") || h.startsWith("x-") ? h.slice(2).replace(/-/g, "_") : null;
+    if (id && probs.some((p) => p.id === id)) openProblem(id, null, true);
   }
   window.addEventListener("hashchange", route);
   route();

@@ -1,0 +1,17 @@
+#include <cstdio>
+
+enum Shape { CIRCLE, SQUARE };
+
+static const char *describe(enum Shape s) {
+    switch (s) {
+    case CIRCLE: return "circle";
+    default: return "other";
+    }
+}
+
+static const char *bad(enum Shape s) { switch (s) { case CIRCLE: return "circle"; case CIRCLE: return "again"; default: return "other"; } } // BREAK!
+
+int main() {
+    std::puts(describe(SQUARE));
+    return 0;
+}

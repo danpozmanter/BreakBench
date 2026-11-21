@@ -1,1 +1,0 @@
--- CANNOT-EXPRESS: a missing case is a warning (-Wincomplete-patterns), not an error

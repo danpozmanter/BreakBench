@@ -1,8 +1,0 @@
-// LEVEL: LANGUAGE
-
-fn main() {
-    let i: i64 = -1
-    let n: u64 = 3
-    let wrong = i < n // REJECT!
-    println(if i < n as i64 { "less" } else { "not less" })
-}

@@ -1,1 +1,0 @@
--- CANNOT-EXPRESS: Eq and Ord are separate classes, so a set's ordering can disagree with equality

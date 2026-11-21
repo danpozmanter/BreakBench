@@ -1,0 +1,795 @@
+{
+ "lang": "v",
+ "version": "V 0.5.2 7647ce1",
+ "results": {
+  "null_deref": {
+   "outcome": "REJECTED",
+   "message": "main.v:18:12: error: cannot access fields of an Option, handle the error with `or {...}` or propagate it with `?`\n   16 | fn main() {\n   17 |     u := find_user(os.args[1].int())\n   18 |     println(u.name.len) // BREAK!\n      |               ~~~~\n   19 |     println(u or { User{} }.name)\n   20 | }"
+  },
+  "int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "V panic: division by zero\n v hash: 7647ce1\n    pid: 0x141\n    tid: 0x141\n                                                        | 0x5df80965a959 | ./main(+0x1b959) \n                                                        | 0x5df80965c087 | ./main(+0x1d087) \n                                                        | 0x5df80965c32c | ./main(+0x1d32c) \n                                                        | 0x7a04efe42601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x7a04efe42718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x5df80964f6b5 | ./main(+0x106b5)"
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "main.v:9:14: error: cannot use `string` as `i64` in argument 1 to `add`\n    7 | fn main() {\n    8 |     raw := os.args[1]\n    9 |     println(add(raw, 3)) // BREAK!\n      |                 ~~~\n   10 |     println('${raw} ${add(1, 2)}')\n   11 | }"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "main.v:3:1: error: missing return at end of function `grade`\n    1 | import os\n    2 | \n    3 | fn grade(score int) string {\n      | ~~~~~~~~~~~~~~~~~~~~~~~~~~\n    4 |     if score > 50 {\n    5 |         return 'pass'"
+  },
+  "non_exhaustive_match": {
+   "outcome": "REJECTED",
+   "message": "main.v:10:9: error: match must be exhaustive (add match branches for: `.blue` or `else {}` at the end)\n    8 | \n    9 | fn name(c Color) string {\n   10 |     return match c {\n      |            ~~~~~~~~~\n   11 |         .red { 'red' }\n   12 |         .green { 'green' }"
+  },
+  "uninitialized_variable": {
+   "outcome": "REJECTED",
+   "message": "main.v:5:8: error: expecting `:=` (e.g. `mut x :=`)\n    3 | fn main() {\n    4 |     n := os.args[1].int()\n    5 |     mut x int // BREAK!\n      |           ~~~\n    6 |     // CONTROL! mut x := 0\n    7 |     if n > 5 {\n\n\n\nmain.v:5:8: error: expecting `:=` (e.g. `mut x :=`)\n    3 | fn main() {\n    4 |     n := os.args[1].int()\n    5 |     mut x int // BREAK!\n      |           ~~~\n    6 |     // CONTROL! mut x := 0\n    7 |     if n > 5 {"
+  },
+  "missing_argument": {
+   "outcome": "REJECTED",
+   "message": "main.v:6:10: error: expected 2 arguments, but got 1\n    4 | \n    5 | fn main() {\n    6 |     println(area(3)) // BREAK!\n      |             ~~~~~~~\n    7 |     println(area(3, 4))\n    8 | }\nDetails: have (int literal)\n         want (int, int)"
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "main.v:8:6: error: type `Config` has no field named `colour`.\nDid you mean `color`?\n    6 | fn main() {\n    7 |     mut cfg := Config{}\n    8 |     cfg.colour = 'red' // BREAK!\n      |         ~~~~~~\n    9 |     cfg.color += ''\n   10 |     println(cfg.color)\nmain.v:8:6: error: unknown field `Config.colour`\n    6 | fn main() {\n    7 |     mut cfg := Config{}\n    8 |     cfg.colour = 'red' // BREAK!\n      |         ~~~~~~\n    9 |     cfg.color += ''\n   10 |     println(cfg.color)\nmain.v:8:15: error: cannot assign to `cfg.colour`: expected `void`, not `string`\n    6 | fn main() {\n    7 |     mut cfg := Config{}\n    8 |     cfg.colour = 'red' // BREAK!\n      |                  ~~~~~\n    9 |     cfg.color += ''\n   10 |     println(cfg.color)\nIf the code of your project is in a folder with multiple .v files, try `v .` instead of `v main.v`"
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "main.v:6:7: error: unexpected token `=`, expecting `{`\n    4 |     mut x := os.args[1].int()\n    5 |     mut label := 'not one'\n    6 |     if x = 1 { label = 'one' } // BREAK!\n      |          ^\n    7 |     // CONTROL! if x == 1 { label = 'one' }\n    8 |     x += 0\n\n\n\nmain.v:6:7: error: unexpected token `=`, expecting `{`\n    4 |     mut x := os.args[1].int()\n    5 |     mut label := 'not one'\n    6 |     if x = 1 { label = 'one' } // BREAK!\n      |          ^\n    7 |     // CONTROL! if x == 1 { label = 'one' }\n    8 |     x += 0"
+  },
+  "switch_fallthrough": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "REJECTED",
+   "message": "main.v:10:5: error: non-bool type `?int` used as if condition\n    8 |     qty := parse_qty(os.args[1])\n    9 |     mut present := false\n   10 |     if qty { present = true } // BREAK!\n      |        ~~~\n   11 |     // CONTROL! if qty != none { present = true }\n   12 |     println(if present { 'have ${qty or { 0 }}' } else { 'missing' })"
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "13",
+   "stderr": ""
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "main.v:19:17: error: cannot cast array `[]Dog` to `[]Animal`\n   17 | fn main() {\n   18 |     mut dogs := [Dog{}]\n   19 |     mut animals := []Animal(dogs) // BREAK!\n      |                    ^\n   20 |     animals[0] = Cat{} // BREAK!\n   21 |     _ = Cat{}.sound()"
+  },
+  "mutate_while_iterating": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "1,2,3",
+   "stderr": ""
+  },
+  "self_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "exit": -9,
+   "rss_mb": 14.8,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "REJECTED",
+   "message": "main.v:8:2: error: save() returns `!void`, so it should have either an `or {}` block, or `!` at the end\n    6 | \n    7 | fn main() {\n    8 |     save('/nonexistent/dir/out.txt') // BREAK!\n      |     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    9 |     // CONTROL! save('/nonexistent/dir/out.txt') or {}\n   10 |     println('saved')"
+  },
+  "sort_with_nan": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "unordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "3.0",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "not a",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "main.v:5:18: error: bool types only have the following operators defined: `==`, `!=`, `||`, and `&&`\n    3 | fn main() {\n    4 |     x := os.args[1].int()\n    5 |     inside := 1 < x < 3 // BREAK!\n      |                     ^\n    6 |     // CONTROL! inside := 1 < x && x < 3\n    7 |     println(if inside { 'inside' } else { 'outside' })\nmain.v:5:12: error: infix expr: cannot use `int literal` (right expression) as `bool`\n    3 | fn main() {\n    4 |     x := os.args[1].int()\n    5 |     inside := 1 < x < 3 // BREAK!\n      |               ~~~~~~~~~\n    6 |     // CONTROL! inside := 1 < x && x < 3\n    7 |     println(if inside { 'inside' } else { 'outside' })"
+  },
+  "lost_update_on_copy": {
+   "outcome": "REJECTED",
+   "message": "main.v:11:3: error: `acct` is immutable, declare it with `mut` to make it mutable\n    9 |     }]\n   10 |     for acct in accounts {\n   11 |         acct.balance += 50 // BREAK!\n      |         ~~~~\n   12 |     }\n   13 |     println(accounts[0].balance)"
+  },
+  "command_injection": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "injected",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "exit": -9,
+   "rss_mb": 14.8,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "path_join_escape": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "inside",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "no match",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "return_in_finally": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "V panic: common_parse_uint: syntax error x\n v hash: 7647ce1\n    pid: 0x1075\n    tid: 0x1075\n                                                        | 0x593a35890566 | ./main(+0x21566) \n                                                        | 0x593a358908fc | ./main(+0x218fc) \n                                                        | 0x7d609e953601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x7d609e953718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x593a35880445 | ./main(+0x11445)"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "warned": true,
+   "all_warnings": "main.v:17:2: warning: unused variable: `task`",
+   "warnings": "main.v:17:2: warning: unused variable: `task`",
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "3 of 5",
+   "stderr": ""
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "REJECTED",
+   "message": "main.v:6:3: error: redefinition of `status`\n    4 |     mut status := 'pending'\n    5 |     if os.args[1] == 'ok' {\n    6 |         status := 'done' // CONTROL! status = 'done'\n      |         ~~~~~~\n    7 |         eprintln('status: ${status}')\n    8 |     }\n\n\n\nmain.v:6:3: error: redefinition of `status`\n    4 |     mut status := 'pending'\n    5 |     if os.args[1] == 'ok' {\n    6 |         status := 'done' // CONTROL! status = 'done'\n      |         ~~~~~~\n    7 |         eprintln('status: ${status}')\n    8 |     }"
+  },
+  "discarded_pure_result": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "V panic: array.get: index out of range (i,a.len):-1, 3\n v hash: 7647ce1\n    pid: 0x1376\n    tid: 0x1376\n                                                        | 0x652f547048b6 | ./main(+0x148b6) \n                                                        | 0x652f54704e67 | ./main(+0x14e67) \n                                                        | 0x652f5470d10c | ./main(+0x1d10c) \n                                                        | 0x652f5470d3bc | ./main(+0x1d3bc) \n                                                        | 0x76c583e02601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x76c583e02718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x652f547006b5 | ./main(+0x106b5)"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "main.v:6:13: error: left operand to `in` does not match the array element type: expected `int`, not `string`\n    4 |     ids := [10, 20, 30]\n    5 |     id := os.args[1]\n    6 |     println(if id in ids { 'found' } else { 'missing' }) // CONTROL! println(if id.int() in ids { 'found' } else { 'missing' })\n      |                ~~~~~~~~~\n    7 | }"
+  },
+  "use_after_close": {
+   "outcome": "TRAPPED",
+   "runs": 10,
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 13.9,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "V panic: result not set (os: file not opened)\n v hash: 7647ce1\n    pid: 0x7a\n    tid: 0x7a\n                                                        | 0x6005f4cb6705 | ./main(+0x1a705) \n                                                        | 0x6005f4cb88b2 | ./main(+0x1c8b2) \n                                                        | 0x6005f4cb8b7c | ./main(+0x1cb7c) \n                                                        | 0x7fd0bae4f601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x7fd0bae4f718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x6005f4cac6d5 | ./main(+0x106d5)"
+  },
+  "dead_store": {
+   "outcome": "SILENT",
+   "warned": true,
+   "all_warnings": "main.v:5:2: warning: unused variable: `total`",
+   "warnings": "main.v:5:2: warning: unused variable: `total`",
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "V panic: crash mid-update\n v hash: 7647ce1\n    pid: 0x156e\n    tid: 0x157e\n                                                        | 0x5fad8cd6ecd6 | ./main(+0x17cd6) \n                                                        | 0x5fad8cd6ec70 | ./main(+0x17c70) \n                                                        | 0x5fad8cd8ab34 | ./main(+0x33b34) \n                                                        | 0x5fad8cd9ea54 | ./main(+0x47a54) \n                                                        | 0x5fad8cd96ec6 | ./main(+0x3fec6) \n                                                        | 0x79454fa2fdba | /usr/lib/x86_64-linux-gnu/libc.so.6(+0xa3dba) \n                                                        | 0x79454fac3394 | /usr/lib/x86_64-linux-gnu/libc.so.6(.clone+0x44)"
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "V panic: fixed array index out of range (index: 4, len: 4)\n v hash: 7647ce1\n    pid: 0x1637\n    tid: 0x1637\n                                                        | 0x64e58e47c710 | ./main(+0x17710) \n                                                        | 0x64e58e4820dc | ./main(+0x1d0dc) \n                                                        | 0x64e58e48238c | ./main(+0x1d38c) \n                                                        | 0x74cdd4622601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x74cdd4622718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x64e58e4756d5 | ./main(+0x106d5)"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "V panic: fixed array index out of range (index: 4, len: 4)\n v hash: 7647ce1\n    pid: 0x16a0\n    tid: 0x16a0\n                                                        | 0x593ac07fc710 | ./main(+0x17710) \n                                                        | 0x593ac08020c6 | ./main(+0x1d0c6) \n                                                        | 0x593ac080236c | ./main(+0x1d36c) \n                                                        | 0x7d78ffbeb601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x7d78ffbeb718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x593ac07f56d5 | ./main(+0x106d5)"
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "outcome": "REJECTED",
+   "message": "main.v:10:13: error: cannot take the address of mutable array elements outside unsafe blocks\n    8 |         val: 1\n    9 |     }]\n   10 |     mut r := &v[0] // BREAK!\n      |                ~~~\n   11 |     // CONTROL! mut r := &Item{}\n   12 |     for i in 0 .. 1000 {"
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "CRASH",
+   "warned": false,
+   "exit": 139,
+   "rss_mb": 14.8,
+   "secs": 0.6,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "error_path_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.88,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "concurrent_map_write": {
+   "outcome": "HANG",
+   "runs": 10,
+   "warned": false,
+   "exit": -9,
+   "rss_mb": 14.8,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "reference_cycle_leak": {
+   "outcome": "LEAK",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 2208.0,
+   "secs": 6.81,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "view_retention": {
+   "outcome": "LEAK",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 1435.3,
+   "secs": 1.17,
+   "stdout": "40000",
+   "stderr": ""
+  },
+  "huge_allocation": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 1261.0,
+   "secs": 0.23,
+   "stdout": "1316134912",
+   "stderr": ""
+  },
+  "fd_leak": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "V panic: result not set (failed to open file \"/tmp/bb_fd.txt\")\n v hash: 7647ce1\n    pid: 0x1beb\n    tid: 0x1beb\n./main(+0x1b685) [0x576b9b809685]\n./main(+0x1dd1c) [0x576b9b80bd1c]\n./main(+0x1e08c) [0x576b9b80c08c]\n/usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) [0x74b7576cc601]\n/usr/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x88) [0x74b7576cc718]\n./main(+0x108d5) [0x576b9b7fe8d5]"
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "V panic: as cast: cannot cast `int` to `string`\n v hash: 7647ce1\n    pid: 0x1c48\n    tid: 0x1c48\n                                                        | 0x57e1543e844a | ./main(+0x1744a) \n                                                        | 0x57e1543ea542 | ./main(+0x19542) \n                                                        | 0x57e1543ea84c | ./main(+0x1984c) \n                                                        | 0x7822febf8601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x7822febf8718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x57e1543e0725 | ./main(+0xf725)"
+  },
+  "format_string": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "%s%s%n{}{0}",
+   "stderr": ""
+  },
+  "deep_structure_release": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 35.9,
+   "secs": 0.03,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "abandoned_worker_leak": {
+   "outcome": "LEAK",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 345.5,
+   "secs": 0.58,
+   "stdout": "",
+   "stderr": "V panic: `go main__answer()`: Resource temporarily unavailable\n v hash: 7647ce1\n    pid: 0x1d6b\n    tid: 0x1d6b\n./main(+0x2e10d) [0x63f280abf10d]\n./main(+0x37e8c) [0x63f280ac8e8c]\n./main(+0x3893c) [0x63f280ac993c]\n/usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) [0x76073cdd7601]\n/usr/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x88) [0x76073cdd7718]\n./main(+0x185e5) [0x63f280aa95e5]"
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "main.v:3:10: error: cannot assign to s[i] since V strings are immutable\n(note, that variables may be mutable but string values are always immutable, like in Go and Java)\n    1 | fn main() {\n    2 |     mut greeting := 'hello'\n    3 |     greeting[0] = `j` // CONTROL! greeting = 'j' + greeting[1..]\n      |             ~~~\n    4 |     println(greeting)\n    5 | }"
+  },
+  "complete_init": {
+   "outcome": "REJECTED",
+   "message": "main.v:11:13: error: field `Config.retries` must be initialized\n    9 |         retries: 3\n   10 |     }\n   11 |     partial := Config{ // BREAK!\n      |                ~~~~~~~~~~~~~~~~~\n   12 |         timeout: 5 // BREAK!\n   13 |     } // BREAK!"
+  },
+  "newtype": {
+   "outcome": "REJECTED",
+   "message": "main.v:15:2: warning: unused variable: `wrong`\n   13 | fn main() {\n   14 |     total := Meters{2} + Meters{3}\n   15 |     wrong := Meters{2} + Seconds{3} // BREAK!\n      |     ~~~~~\n   16 |     println(total.v)\n   17 | }\nmain.v:15:11: error: infix expr: cannot use `Seconds` (right expression) as `Meters`\n   13 | fn main() {\n   14 |     total := Meters{2} + Meters{3}\n   15 |     wrong := Meters{2} + Seconds{3} // BREAK!\n      |              ~~~~~~~~~~~~~~~~~~~~~~\n   16 |     println(total.v)\n   17 | }"
+  },
+  "strong_enum": {
+   "outcome": "REJECTED",
+   "message": "main.v:17:15: error: cannot use `int literal` as `Color` in argument 1 to `name`\n   15 | fn main() {\n   16 |     c := Color.green\n   17 |     println(name(7)) // BREAK!\n      |                  ^\n   18 |     println(name(c))\n   19 | }"
+  },
+  "override_check": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "shape",
+   "stderr": ""
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "before",
+   "stderr": "V panic: option not set ()\n v hash: 7647ce1\n    pid: 0x3f95\n    tid: 0x3f95\n                                                        | 0x55baacb9c365 | ./main(+0x18365) \n                                                        | 0x55baacb9d3d7 | ./main(+0x193d7) \n                                                        | 0x55baacb9d63c | ./main(+0x1963c) \n                                                        | 0x7b042f144601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x7b042f144718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x55baacb93695 | ./main(+0xf695)"
+  },
+  "readonly_param": {
+   "outcome": "REJECTED",
+   "message": "main.v:2:2: error: `xs` is immutable, declare it with `mut` to make it mutable\n    1 | fn count(xs []int) int {\n    2 |     xs[0] = 9 // BREAK!\n      |     ~~\n    3 |     return xs.len\n    4 | }"
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "REJECTED",
+   "message": "main.v:3:13: error: value `300` overflows `u8`\n    1 | fn main() {\n    2 |     ok := u8(100)\n    3 |     too_big := u8(300) // BREAK!\n      |                ~~~~~~~\n    4 |     println(too_big) // BREAK!\n    5 |     println(ok)"
+  },
+  "no_implicit_conversion": {
+   "outcome": "REJECTED",
+   "message": "main.v:5:10: error: cannot assign to `wrong`: expected `i32`, not `i64`\n    3 |     small := i32(big)\n    4 |     mut wrong := i32(0) // BREAK!\n    5 |     wrong = big // BREAK!\n      |             ~~~\n    6 |     println(wrong) // BREAK!\n    7 |     println(small)"
+  },
+  "generic_constraint": {
+   "outcome": "REJECTED",
+   "message": "main.v:10:5: error: custom sorting condition must be supplied for type `Point`\n    8 |     xs.sort()\n    9 |     mut ps := [Point{ x: 1, y: 2 }] // BREAK!\n   10 |     ps.sort() // BREAK!\n      |        ~~~~~~\n   11 |     println(xs[0])\n   12 | }"
+  },
+  "lossy_int_to_float": {
+   "outcome": "REJECTED",
+   "message": "main.v:8:7: error: cannot use `i64` as `f64` in argument 1 to `show`\n    6 |     n := i64(7)\n    7 |     show(f64(n))\n    8 |     show(n) // BREAK!\n      |          ^\n    9 | }"
+  },
+  "const_index_bounds": {
+   "outcome": "REJECTED",
+   "message": "main.v:4:16: error: index out of range (index: 5, len: 3)\n    2 |     table := [10, 20, 30]!\n    3 |     println(table[1])\n    4 |     println(table[5]) // BREAK!\n      |                   ^\n    5 | }"
+  },
+  "const_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "-8985944073709551616",
+   "stderr": ""
+  },
+  "racy_counter": {
+   "outcome": "SILENT",
+   "runs": 10,
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "unreachable_code": {
+   "outcome": "REJECTED",
+   "message": "main.v:4:2: error: unexpected argument, current function does not return anything\n    2 |     println('ok')\n    3 |     return // BREAK!\n    4 |     println('checked')\n      |     ~~~~~~~~~~~~~~~~~~\n    5 | }\n    6 |"
+  },
+  "nan_key": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "checked_interpolation": {
+   "outcome": "REJECTED",
+   "message": "main.v:4:19: error: undefined ident: `nmae`\n    2 |     name := 'Ada'\n    3 |     println('hello ${name}')\n    4 |     println('hello ${nmae}') // BREAK!\n      |                      ~~~~\n    5 | }\nmain.v:4:19: error: expression does not return a value\n    2 |     name := 'Ada'\n    3 |     println('hello ${name}')\n    4 |     println('hello ${nmae}') // BREAK!\n      |                      ~~~~\n    5 | }"
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "REJECTED",
+   "message": "main.v:15:3: error: `else` must be the last branch of `match`\n   13 | fn bad(s Shape) string { // BREAK!\n   14 |     return match s { // BREAK!\n   15 |         else { 'other' } // BREAK!\n      |         ~~~~\n   16 |         .circle { 'circle' } // BREAK!\n   17 |     } // BREAK!"
+  },
+  "duplicate_key": {
+   "outcome": "REJECTED",
+   "message": "main.v:7:19: error: duplicate key \"a\" in map literal\n    5 |     }\n    6 |     println(m.len)\n    7 |     println({'a': 1, 'a': 2}.len) // BREAK!\n      |                      ~~~\n    8 | }"
+  },
+  "char_arithmetic": {
+   "outcome": "REJECTED",
+   "message": "main.v:6:10: error: cannot assign to `total`: expected `int`, not `rune`\n    4 |     println(n)\n    5 |     mut total := 0 // BREAK!\n    6 |     total = c + 1 // BREAK!\n      |             ~~~~~\n    7 |     println(total) // BREAK!\n    8 | }"
+  },
+  "comparison_statement": {
+   "outcome": "REJECTED",
+   "message": "main.v:4:2: error: expression evaluated but not used\n    2 |     mut count := 0\n    3 |     count = 5\n    4 |     count == 5 // BREAK!\n      |     ~~~~~~~~~~\n    5 |     println(count)\n    6 | }"
+  },
+  "structural_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "hash_matches_equality": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "map keys must be numbers, strings or enums"
+  },
+  "array_literal_length": {
+   "outcome": "REJECTED",
+   "message": "main.v:7:15: error: cannot use `[3]int` as `[4]int` in argument 1 to `last`\n    5 | fn main() {\n    6 |     println(last([10, 20, 30, 40]!))\n    7 |     println(last([10, 20, 30]!)) // BREAK!\n      |                  ~~~~~~~~~~~~~\n    8 | }"
+  },
+  "required_names": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "4 3",
+   "stderr": ""
+  },
+  "enum_from_int": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "before\ninvalid",
+   "stderr": ""
+  },
+  "increment_in_expression": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "bitwise_on_bool": {
+   "outcome": "REJECTED",
+   "message": "main.v:3: notice: Use `s != ''` instead of `s.len > 0`\nmain.v:6: notice: Use `s != ''` instead of `s.len > 0`\n\n\n\nmain.v:6:17: error: bool types only have the following operators defined: `==`, `!=`, `||`, and `&&`\n    4 |         println('yes')\n    5 |     }\n    6 |     if (s.len > 0) & (s[0] == `a`) { println('both') } // BREAK!\n      |                    ^\n    7 | }"
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "main.v:9:4: error: field `port` of struct `Config` is immutable\n    7 |         port: 8080\n    8 |     }\n    9 |     c.port = 1 // BREAK!\n      |       ~~~~\n   10 |     println(c.port)\n   11 | }\nmain.v:9:2: error: `c` is immutable, declare it with `mut` to make it mutable\n    7 |         port: 8080\n    8 |     }\n    9 |     c.port = 1 // BREAK!\n      |     ^\n   10 |     println(c.port)\n   11 | }"
+  },
+  "bool_condition": {
+   "outcome": "REJECTED",
+   "message": "main.v:9:5: error: non-bool type `int` used as if condition\n    7 |         println('same')\n    8 |     }\n    9 |     if compare('x', 'x') { println('different') } // BREAK!\n      |        ~~~~~~~~~~~~~~~~~\n   10 | }"
+  },
+  "contracts": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  }
+ }
+}

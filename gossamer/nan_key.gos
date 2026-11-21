@@ -1,0 +1,6 @@
+fn main() {
+    let a = f64::NAN
+    let b = f64::NAN
+    let s = #{a}
+    println(if s.contains(b) { "found" } else { "missing" })
+}

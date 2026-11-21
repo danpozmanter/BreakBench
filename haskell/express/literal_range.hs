@@ -1,1 +1,0 @@
--- CANNOT-EXPRESS: an out-of-range literal is only a warning (-Woverflowed-literals)

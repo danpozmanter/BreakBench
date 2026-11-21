@@ -1,0 +1,8 @@
+fn count(xs: Vec<i64>) -> i64 {
+    xs[0] = 9 // BREAK!
+    xs.len()
+}
+
+fn main() {
+    println(count(#[1, 2, 3]))
+}

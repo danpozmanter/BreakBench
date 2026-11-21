@@ -1,1 +1,0 @@
--- CANNOT-EXPRESS: no map literal; Map.fromList accepts a repeated key

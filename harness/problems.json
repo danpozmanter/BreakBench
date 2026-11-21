@@ -57,7 +57,7 @@
   "problems": [
     {
       "id": "null_deref",
-      "category": "correctness",
+      "category": "null",
       "kind": "static",
       "args": [
         "2"
@@ -248,7 +248,7 @@
     },
     {
       "id": "zero_is_falsy",
-      "category": "correctness",
+      "category": "null",
       "kind": "static",
       "args": [
         "0"
@@ -309,7 +309,7 @@
     },
     {
       "id": "self_deadlock",
-      "category": "correctness",
+      "category": "concurrency",
       "kind": "dynamic",
       "args": [],
       "expect": "^done$",
@@ -484,7 +484,7 @@
       "warn": "float.*(equal|compar)|(equal|compar).*float|float_cmp"
     },
     {
-      "category": "correctness",
+      "category": "concurrency",
       "id": "lock_order_deadlock",
       "kind": "dynamic",
       "args": [],
@@ -567,7 +567,7 @@
       "warn": "unreachable|not reached|never (be )?executed|dead code|treated as an argument|newline"
     },
     {
-      "category": "correctness",
+      "category": "concurrency",
       "id": "worker_failure_lost",
       "kind": "dynamic",
       "args": [
@@ -583,7 +583,7 @@
       "warn": "uncaught|unhandled|exception in thread"
     },
     {
-      "category": "correctness",
+      "category": "concurrency",
       "id": "unawaited_task",
       "kind": "static",
       "args": [],
@@ -619,7 +619,7 @@
     },
     {
       "id": "missing_key_default",
-      "category": "correctness",
+      "category": "null",
       "kind": "dynamic",
       "args": [
         "pear"
@@ -711,7 +711,8 @@
       "title": "Writing to a closed file (CWE-910)",
       "scenario": "The program opens /tmp/bb_close.txt, writes \"a\", closes it the language's usual way, then writes \"b\" with the language's usual error handling and prints \"ok\".",
       "best": "The compiler refuses the write. A run-time error earns half; printing \"ok\" fails.",
-      "warn": "closed|after close|moved|dispos"
+      "warn": "closed|after close|moved|dispos",
+      "runs": 10
     },
     {
       "id": "dead_store",
@@ -728,7 +729,7 @@
     },
     {
       "id": "panic_under_lock",
-      "category": "correctness",
+      "category": "concurrency",
       "kind": "dynamic",
       "args": [],
       "expect": "^balanced$",
@@ -865,7 +866,7 @@
     },
     {
       "id": "concurrent_map_write",
-      "category": "memory",
+      "category": "concurrency",
       "kind": "dynamic",
       "args": [],
       "expect": "^800000$",
@@ -977,7 +978,7 @@
       "best": "\"done\". This program has no bug; a runtime that frees the chain by recursion and overflows the stack fails."
     },
     {
-      "category": "memory",
+      "category": "concurrency",
       "id": "abandoned_worker_leak",
       "kind": "leak",
       "args": [
@@ -998,6 +999,355 @@
       "scenario": "greeting is the string literal \"hello\". The program sets greeting[0] = 'j' with the language's index assignment and prints greeting.",
       "best": "A refusal because strings are immutable, a run-time error, or \"jello\" where strings are mutable values. Writing into read-only memory fails.",
       "warn": "const|read-?only|immutable|discards qualifiers|write-strings|cannot assign|not mutable|frozen|chilled"
+    },
+    {
+      "id": "complete_init",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^3$",
+      "title": "Building a record without one of its fields",
+      "scenario": "Config has the fields timeout and retries, neither with a default. The program builds a Config with only the timeout and prints retries.",
+      "best": "A refusal to build a Config without retries. Printing 0 or a placeholder is a silent wrong answer.",
+      "warn": "missing field|missing.*initializ|uninitiali|not initialized|missing argument|required"
+    },
+    {
+      "id": "newtype",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": null,
+      "title": "Adding meters to seconds",
+      "scenario": "Meters and Seconds each wrap a 64-bit float. The program adds a distance of 2 m to a time of 3 s by mistake and prints the sum.",
+      "best": "A refusal to add Meters to Seconds. Printing 5 is a silent wrong answer.",
+      "warn": "incompatible|mismatch|cannot add|no matching"
+    },
+    {
+      "id": "strong_enum",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": null,
+      "title": "Passing an integer where an enum is expected",
+      "scenario": "Color is Red, Green or Blue, and name(c) returns a color's name. The program calls name with the integer 7 and prints the result.",
+      "best": "A refusal to pass 7 as a Color. Printing an empty name or a placeholder is a silent wrong answer.",
+      "warn": "enum|assign-enum|not in range|incompatible"
+    },
+    {
+      "id": "override_check",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^circle$",
+      "title": "An override that overrides nothing",
+      "scenario": "Circle means to replace Shape's describe() but misspells the method as descibe. The program prints describe() of a Circle.",
+      "best": "A refusal of a replacement method that matches nothing in Shape. Printing shape is a silent wrong answer.",
+      "warn": "override|does not override|overrides nothing|override_on_non_overriding"
+    },
+    {
+      "id": "forced_unwrap",
+      "category": "null",
+      "kind": "dynamic",
+      "args": [],
+      "expect": null,
+      "title": "Forcing a missing value",
+      "scenario": "find(2) returns a missing value. The program prints before, then forces the value out with the language's shortest way to do so (*o, o!, o.get(), unwrap(), assert(o), or a null used as a number) and adds 1.",
+      "best": "The program stops there with an error. Printing a number, NaN or a placeholder is a silent wrong answer."
+    },
+    {
+      "id": "readonly_param",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^3$",
+      "title": "A function that changes the list it was given",
+      "scenario": "count(xs) should only read its list but sorts it in place. The program counts [3, 1, 2] and then prints the list's first item.",
+      "best": "3, or a refusal to change a list the function only reads. Printing 1 means the caller's list changed under it."
+    },
+    {
+      "id": "exclusive_mutation",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^100$",
+      "title": "One account passed as both sides of a transfer",
+      "scenario": "transfer(from, to, amount) works out both new balances, then stores them. The program transfers 30 from an account to the same account, which should leave 100, and prints the balance.",
+      "best": "100, or a refusal to pass one account as both arguments. 130 is a silent wrong answer."
+    },
+    {
+      "id": "literal_range",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": null,
+      "title": "Storing 300 in a byte",
+      "scenario": "The program stores the literal 300 in an 8-bit integer and prints it.",
+      "best": "A refusal, because 300 does not fit in 8 bits, or a clear error. Printing 44 silently drops the high bits.",
+      "warn": "overflow|out of range|does not fit|truncat|implicit conversion|changes value"
+    },
+    {
+      "id": "no_implicit_conversion",
+      "category": "correctness",
+      "kind": "static",
+      "args": [
+        "3000000000"
+      ],
+      "expect": "^3000000000$",
+      "title": "Passing a 64-bit integer as a 32-bit one",
+      "scenario": "n is a 64-bit integer holding 3,000,000,000, read at run time. The program passes it, without a conversion, to a function that takes a 32-bit integer and prints what it receives.",
+      "best": "3000000000, or a refusal to narrow without a conversion. A negative number is a silent wrong answer.",
+      "warn": "implicit conversion|narrow|loses|shorten|truncat"
+    },
+    {
+      "id": "generic_constraint",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": null,
+      "title": "Sorting values that have no order",
+      "scenario": "Point has fields x and y and no defined order. The program sorts a list of Points and prints the first x.",
+      "best": "A refusal, or an error saying Points cannot be compared. Printing a point from an arbitrary order is a silent wrong answer."
+    },
+    {
+      "id": "lossy_int_to_float",
+      "category": "correctness",
+      "kind": "static",
+      "args": [
+        "9007199254740993"
+      ],
+      "expect": "^9007199254740993$",
+      "title": "Passing 2^53 + 1 as a float (CERT FLP36-C)",
+      "scenario": "The program reads 9007199254740993 (2^53 + 1) as a 64-bit integer and passes it, without a conversion, to a function that takes a 64-bit float and prints it as a whole number.",
+      "best": "9007199254740993, or a refusal to convert implicitly. 9007199254740992 is a silent wrong answer.",
+      "warn": "precision|implicit.*conversion|lose"
+    },
+    {
+      "id": "const_index_bounds",
+      "category": "memory",
+      "kind": "static",
+      "args": [],
+      "expect": null,
+      "title": "A constant index past the end of an array",
+      "scenario": "table holds 3 entries. The program prints table[5], an index known to be out of range before the program runs.",
+      "best": "A refusal to build. A bounds error at run time is next best; printing a value or a placeholder is a silent wrong answer.",
+      "warn": "out of bounds|past the end|out of range|array index|array-bounds"
+    },
+    {
+      "id": "const_overflow",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^9460800000000000000$",
+      "title": "Constant arithmetic that overflows 64 bits",
+      "scenario": "The program computes the nanoseconds in 300 years, 1,000,000,000 * 60 * 60 * 24 * 365 * 300, as a 64-bit constant and prints it.",
+      "best": "9460800000000000000 where integers have no fixed size, or a refusal. A wrapped number is a silent wrong answer.",
+      "warn": "overflow"
+    },
+    {
+      "id": "racy_counter",
+      "category": "concurrency",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^2000000$",
+      "title": "Two threads adding to one counter without a lock (CWE-362)",
+      "scenario": "count is a local variable. The program starts two threads that each add 1 to count 1,000,000 times with the language's ordinary update and no lock, waits for both, and prints count.",
+      "best": "2000000, or a refusal to let two threads change count without synchronization. A smaller number means lost updates.",
+      "warn": "race|not thread|sendable|concurren|data race|captured",
+      "runs": 10
+    },
+    {
+      "id": "unreachable_code",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^ok\\nchecked$",
+      "title": "A statement after an early return (CWE-561)",
+      "scenario": "check() is meant to print ok and then checked, but a stray return sits between them, the shape of Apple's goto fail bug. The program calls check().",
+      "best": "A refusal of the code after the return. Printing only ok is a silent wrong answer.",
+      "warn": "unreachable|never be executed|dead code|not reachable|will never"
+    },
+    {
+      "id": "nan_key",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^found$",
+      "title": "Looking up a NaN key",
+      "scenario": "The program stores a NaN, computed at run time, in a hash set of floats and looks up a second NaN computed the same way, printing found or missing.",
+      "best": "found, or a refusal to key a hash set by floats. missing is a silent wrong answer: the key is in the set but can never be found."
+    },
+    {
+      "id": "checked_interpolation",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": null,
+      "title": "A misspelled name in string interpolation",
+      "scenario": "name is Ada. The program prints a greeting with string interpolation, but the placeholder misspells the variable as nmae.",
+      "best": "A refusal to build. A clear error at run time is next best; a greeting with an empty name is a silent wrong answer.",
+      "warn": "undefined|not defined|unresolved|cannot find|undeclared"
+    },
+    {
+      "id": "evaluation_order",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^1 2$",
+      "title": "Arguments with side effects (CERT EXP30-C)",
+      "scenario": "next() returns 1, then 2. The program prints pair(next(), next()).",
+      "best": "1 2: the language runs a call's arguments left to right. 2 1 is a silent wrong answer.",
+      "warn": "unsequenced|order of evaluation"
+    },
+    {
+      "id": "dominated_case",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^circle$",
+      "title": "A match arm that can never run",
+      "scenario": "describe(s) is meant to say circle for a circle and other for anything else, but the catch-all arm (or, where switch arms do not match in order, a repeated case) comes first. The program prints describe of a circle.",
+      "best": "A refusal of the arm that can never run. Printing other is a silent wrong answer.",
+      "warn": "unreachable|never|already handled|redundant|dominated|duplicate case|overlapping"
+    },
+    {
+      "id": "duplicate_key",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^2$",
+      "title": "A repeated key in a map literal",
+      "scenario": "The program builds a map literal meant to hold the keys a and b, but types a twice, and prints the map's size.",
+      "best": "2 cannot happen here, so the best outcome is a refusal; a clear error at run time is next best. Printing 1 means the second value silently replaced the first.",
+      "warn": "duplicat|equal keys|same name"
+    },
+    {
+      "id": "char_arithmetic",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^b$",
+      "title": "A character used as a number",
+      "scenario": "c is the letter a. The program works out the next letter as c + 1 and prints it.",
+      "best": "b, or a refusal to add a number to a character without a conversion. Printing 98 or a1 is a silent wrong answer."
+    },
+    {
+      "id": "comparison_statement",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^5$",
+      "title": "A comparison written instead of an assignment (CWE-482)",
+      "scenario": "count starts at 0. The program means to set it to 5 but writes count == 5, then prints count.",
+      "best": "A refusal of a comparison whose result is unused. Printing 0 is a silent wrong answer.",
+      "warn": "unused|no effect|discarded|never used|is not used"
+    },
+    {
+      "id": "structural_equality",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^equal$",
+      "title": "Comparing records with == (CWE-595)",
+      "scenario": "a and b are two records built separately, each with x = 1 and y = 2. The program compares them with == and prints equal or different.",
+      "best": "equal, or a refusal of == on records. different means == compared identity, not content."
+    },
+    {
+      "id": "hash_matches_equality",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^1$",
+      "title": "Equality without a matching hash (CWE-581)",
+      "scenario": "Point defines equality on x and y only, without a matching hash. The program puts two Points that are equal by that definition in a hash set and prints its size.",
+      "best": "1, or a refusal of a key type whose hash can disagree with its equality. 2 means the set holds two equal values.",
+      "warn": "hash|GetHashCode|hashCode|derived_hash"
+    },
+    {
+      "id": "array_literal_length",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^40$",
+      "title": "A table with a missing entry",
+      "scenario": "table is meant to hold 4 entries but is written with 3 values. The program prints table[3].",
+      "best": "A refusal of a 4-entry table with 3 values, or a clear error. Printing 0 or a placeholder is a silent wrong answer.",
+      "warn": "too few|missing|excess|initializ"
+    },
+    {
+      "id": "required_names",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^3 4$",
+      "title": "Two arguments passed in the wrong order (CWE-683)",
+      "scenario": "move(dx, dy) takes two integers. The program means to move 3 across and 4 down but passes 4 and 3 by position.",
+      "best": "A refusal of a call without argument names, or an error. Printing 4 3 is a silent wrong answer."
+    },
+    {
+      "id": "enum_from_int",
+      "category": "correctness",
+      "kind": "dynamic",
+      "args": [
+        "7"
+      ],
+      "expect": "^before\\ninvalid$",
+      "title": "Converting 7 to an enum with three values",
+      "scenario": "Color is Red, Green or Blue. The program prints before, then converts 7, read at run time, to a Color with the language's standard conversion and prints the result, or invalid if the conversion reports failure.",
+      "best": "invalid, or the program stops with an error. A Color that is none of the three is a silent wrong answer."
+    },
+    {
+      "id": "increment_in_expression",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^1$",
+      "title": "i = i++",
+      "scenario": "i starts at 0. The program means to add 1 to i but writes i = i++, then prints i.",
+      "best": "1, or a refusal of an increment inside a larger expression. Printing 0 is a silent wrong answer.",
+      "warn": "unsequenced|undefined|multiple|modif"
+    },
+    {
+      "id": "bitwise_on_bool",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^no$",
+      "title": "& where && was meant (CWE-768)",
+      "scenario": "s is empty. The program tests that s is not empty and starts with a, using & where && was meant, and prints yes or no.",
+      "best": "no, or a refusal of & between booleans. With & both sides run, so reading the first letter of an empty string may stop the program.",
+      "warn": "bitwise|&&|boolean"
+    },
+    {
+      "id": "readonly_field",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^8080$",
+      "title": "Changing a field meant to be fixed",
+      "scenario": "Config has a port fixed when it is built. The program builds one with port 8080, then sets the port to 1 by mistake and prints it.",
+      "best": "A refusal to change the port. A clear error at run time is next best; printing 1 is a silent wrong answer.",
+      "warn": "read-only|readonly|immutable|cannot assign|final|frozen"
+    },
+    {
+      "id": "bool_condition",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^same$",
+      "title": "An integer used as a condition",
+      "scenario": "compare(a, b) returns 0 when a equals b, as C's strcmp does. The program writes if (compare(\"x\", \"x\")) meaning they are equal and prints same or different.",
+      "best": "same, or a refusal of an integer as a condition. Printing different is a silent wrong answer.",
+      "warn": "condition|bool|truth"
+    },
+    {
+      "id": "contracts",
+      "category": "correctness",
+      "kind": "dynamic",
+      "args": [],
+      "expect": null,
+      "title": "Calling a function outside its precondition",
+      "scenario": "isqrt(x) requires x >= 0, written as part of its declaration. The program calls isqrt(-1).",
+      "best": "The program stops with an error naming the broken precondition. Any printed result is a silent wrong answer."
     }
   ],
   "warned_bonus": 0.25

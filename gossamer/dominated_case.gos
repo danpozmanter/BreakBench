@@ -1,0 +1,15 @@
+enum Shape {
+    Circle
+    Square
+}
+
+fn describe(s: Shape) -> String {
+    match s {
+        _ => "other",
+        Shape::Circle => "circle",
+    }
+}
+
+fn main() {
+    println(describe(Shape::Circle))
+}

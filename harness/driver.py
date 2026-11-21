@@ -1,7 +1,6 @@
 """Runs every BreakBench problem for one language inside its container.
 
 Usage: python3 harness/driver.py LANG [PROBLEM ...]
-       python3 harness/driver.py LANG --express [PROBE ...]
 
 Each problem is compiled (or syntax-checked) and run; the outcome is
 classified and written to RUN/raw/LANG.json, where the BB_RUN environment
@@ -286,112 +285,10 @@ def classify(problem, kinds, status, timed_out, maxrss_mb, stdout, stderr, thres
     return "TRAPPED"
 
 
-REJECT_MARKER = "REJECT!"
 CANNOT_RE = re.compile(r"CANNOT-EXPRESS:\s*(.+?)\s*(?:\*\))?$", re.M)
-DIAGNOSIS_RE = re.compile(r"\berror\b|Error|must be used|nodiscard|implicitly ignored|implicitly discarded|is unused|has to be used|constraint failed")
-
-
-def diagnosis_lines(output):
-    """Diagnostic lines, each with the indented message that follows it (GHC puts it there)."""
-    lines = output.splitlines()
-    picked = []
-    for i, line in enumerate(lines):
-        if not DIAGNOSIS_RE.search(line):
-            continue
-        picked.append(line)
-        if re.search(r"(error|warning): \[[^\]]*\]$", line.rstrip()):
-            for follow in lines[i + 1 : i + 4]:
-                if not follow.startswith(" ") or "|" in follow[:8]:
-                    break
-                picked.append(follow)
-    return picked
 BACKEND_FAILURE_RE = re.compile(r"\.ll:\d+:\d+: error")
-LEVEL_RE = re.compile(r"LEVEL:\s*(LANGUAGE|STD|PROJECT|PLATFORM)\b")
-
-
-def express(lang_id, lang, only):
-    """Runs the expressibility probes: can the language write the safe version at all."""
-    spec = load_json(os.path.join(ROOT, "harness", "probes.json"))
-    raw_dir = raw_folder("express")
-    raw_path = os.path.join(raw_dir, lang_id + ".json")
-    previous = load_json(raw_path) if os.path.exists(raw_path) and only else {}
-    results = previous.get("results", {})
-    for probe in spec["probes"]:
-        pid = probe["id"]
-        if only and pid not in only:
-            continue
-        src_path = os.path.join(ROOT, lang.get("dir", lang_id), "express", pid + "." + lang["ext"])
-        if not os.path.exists(src_path):
-            results[pid] = {"outcome": "MISSING"}
-            continue
-        source = read(src_path)
-        cannot = CANNOT_RE.search(source)
-        level = LEVEL_RE.search(source)
-        if cannot:
-            record = {"outcome": "NONE", "message": cannot.group(1).strip()}
-        elif not level:
-            record = {"outcome": "ERROR", "message": "no LEVEL: header"}
-        else:
-            # The probe runs without its REJECT! lines and builds once with them, which must fail.
-            runnable = "\n".join(l for l in source.splitlines() if REJECT_MARKER not in l) + "\n"
-            work = stage(lang, "express-" + pid, runnable, "main")
-            ok, compile_out = build(lang, work)
-            refused = True
-            refusal = ""
-            if ok and REJECT_MARKER in source:
-                rwork = stage(lang, "express-" + pid, source, "reject")
-                rok, rout = build(lang, rwork)
-                refused = not rok or any(MUST_USE_RE.search(w) for w in warning_lines(rout, source))
-                diagnoses = diagnosis_lines(rout)
-                refusal = clip("\n".join(diagnoses) or rout, 800)
-                # A failure in code generation is a crash, not a refusal.
-                if refused and (ICE_RE.search(rout) or BACKEND_FAILURE_RE.search(rout)):
-                    refused = False
-                    refusal = "the compiler accepted the line, then failed in code generation:\n" + refusal
-            if not ok:
-                record = {"outcome": "ERROR", "message": clip(compile_out, 1500)}
-            elif not refused:
-                record = {"outcome": "FAIL", "message": refusal or "the line marked REJECT! was accepted"}
-            else:
-                run_cmd = fill(lang["run"], {"dir": work}) + "".join(
-                    " " + shlex.quote(a) for a in probe.get("args", [])
-                )
-                env = {**os.environ, **probe["env"]} if probe.get("env") else None
-                status, timed_out, _, out, err, secs = execute(
-                    run_cmd, work, probe.get("timeout", 20), env
-                )
-                out, err = ANSI_RE.sub("", out), ANSI_RE.sub("", err)
-                exit_ok = {"zero": status == 0, "nonzero": status != 0, "any": True}[
-                    probe.get("exit", "zero")
-                ]
-                passed = exit_ok and not timed_out and re.search(probe["expect"], out.strip())
-                record = {
-                    "outcome": "PASS" if passed else "FAIL",
-                    "refusal": refusal,
-                    "exit": status,
-                    "secs": round(secs, 2),
-                    "stdout": clip(out, 400),
-                    "stderr": clip(err, 800),
-                }
-            record["level"] = level.group(1)
-        results[pid] = record
-        print(f"{lang_id:12} {pid:28} {record['outcome']} {record.get('level', '')}", flush=True)
-    version = subprocess.run(lang["version"], shell=True, capture_output=True, text=True).stdout
-    with open(raw_path, "w", encoding="utf-8") as f:
-        json.dump({"lang": lang_id, "version": version.strip(), "results": results}, f, indent=1)
-    owner = os.stat(ROOT)
-    os.chown(raw_path, owner.st_uid, owner.st_gid)
-
-
 def main():
     lang_id = sys.argv[1]
-    if len(sys.argv) > 2 and sys.argv[2] == "--express":
-        langs = load_json(os.path.join(ROOT, "harness", "langs.json"))
-        lang = langs[lang_id]
-        for step in lang.get("setup", []):
-            subprocess.run(step, shell=True, check=False)
-        express(lang_id, lang, set(sys.argv[3:]))
-        return
     only = set(sys.argv[2:])
     langs = load_json(os.path.join(ROOT, "harness", "langs.json"))
     spec = load_json(os.path.join(ROOT, "harness", "problems.json"))
@@ -445,10 +342,12 @@ def main():
                 control_ok, control_out = build(lang, cwork)
                 if not control_ok:
                     record["control_error"] = clip(control_out, 1500)
-            if control_ok:
-                record["outcome"] = "REJECTED"
-            elif ICE_RE.search(compile_out):
+            # A crash in the compiler or its code generator is not a refusal of the bug.
+            crashed = ICE_RE.search(compile_out) or BACKEND_FAILURE_RE.search(compile_out)
+            if crashed:
                 record["outcome"] = "ICE"
+            elif control_ok:
+                record["outcome"] = "REJECTED"
             else:
                 record["outcome"] = "ERROR"
             record["message"] = clip(compile_out, 1500)

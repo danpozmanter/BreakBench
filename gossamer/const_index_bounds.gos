@@ -1,0 +1,4 @@
+fn main() {
+    let table = [10, 20, 30]
+    println(f"{table[5]}") // CONTROL! println(f"{table[1]}")
+}

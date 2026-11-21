@@ -1,1 +1,0 @@
--- CANNOT-EXPRESS: no named arguments, and a record may be built by position

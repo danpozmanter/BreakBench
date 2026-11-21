@@ -1,9 +1,0 @@
-// LEVEL: LANGUAGE
-
-fn pair(a: i64, b: i64) -> String { f"{a} {b}" }
-
-fn main() {
-    let mut n = 0
-    let next = || { n += 1; n }
-    println(pair(next(), next()))
-}
