@@ -1,0 +1,10 @@
+struct Config {
+    color: String = "blue"
+}
+
+fn main() {
+    let mut cfg = Config {}
+    cfg.colour = "red" // BREAK!
+    cfg.color += "!"
+    println(cfg.color)
+}

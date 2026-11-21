@@ -1,0 +1,14 @@
+// LEVEL: LANGUAGE
+
+use std::errors
+
+fn use_it(fail: bool) -> Result<(), errors::Error> {
+    defer println("released")
+    if fail { return Err(errors::new("bad")) }
+    Ok(())
+}
+
+fn main() {
+    let _ = use_it(false)
+    let _ = use_it(true)
+}

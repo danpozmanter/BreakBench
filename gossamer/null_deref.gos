@@ -1,0 +1,16 @@
+use std::env
+
+struct User {
+    name: String
+}
+
+fn find_user(id: i64) -> Option<User> {
+    if id == 1 { Some(User { name: "alice" }) } else { None }
+}
+
+fn main() {
+    let id = env::args()[0].to_i64().unwrap()
+    let u = find_user(id)
+    println(f"{u.name.len()}") // BREAK!
+    println(f"{u}")
+}

@@ -1,0 +1,15 @@
+use std::env
+
+fn main() {
+    let a = env::args()[0].to_i64().unwrap() != 0
+    let b = true
+    let mut r = "unset"
+    if a {
+        if b {
+            r = "both"
+        }
+    } else {
+        r = "not a"
+    }
+    println(r)
+}

@@ -1,0 +1,534 @@
+{
+ "lang": "mojo",
+ "version": "Mojo 1.2.0 (2016d0cd)",
+ "results": {
+  "threads_shared_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "45",
+   "stderr": "",
+   "level": "PROJECT"
+  },
+  "mutex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "atomic_counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "channel": {
+   "outcome": "NONE",
+   "message": "no channel or blocking queue in the standard library"
+  },
+  "background_task": {
+   "outcome": "NONE",
+   "message": "no way to start a task without waiting for it (parallelize blocks until every task is done)"
+  },
+  "join_with_failure": {
+   "outcome": "NONE",
+   "message": "no way to wait for one task and read its failure (parallelize joins every task and cannot raise)"
+  },
+  "task_timeout": {
+   "outcome": "NONE",
+   "message": "no way to start a task without waiting for it"
+  },
+  "task_cancel": {
+   "outcome": "NONE",
+   "message": "no way to start a task without waiting for it"
+  },
+  "concurrent_map": {
+   "outcome": "NONE",
+   "message": "no concurrent map in the standard library"
+  },
+  "thread_safety_check": {
+   "outcome": "NONE",
+   "message": "nothing refuses an unlocked write to data that threads share"
+  },
+  "lock_owns_data": {
+   "outcome": "NONE",
+   "message": "the standard mutex guards code, not data; an unguarded read is accepted"
+  },
+  "spawn_argv": {
+   "outcome": "NONE",
+   "message": "no subprocess API that takes an argument list"
+  },
+  "exit_status": {
+   "outcome": "NONE",
+   "message": "no subprocess API that reports an exit status"
+  },
+  "env_absent": {
+   "outcome": "NONE",
+   "message": "getenv answers the same default for an absent and an empty variable"
+  },
+  "signal_graceful": {
+   "outcome": "NONE",
+   "message": "no signal handling in the standard library"
+  },
+  "secure_temp_file": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "ok",
+   "stderr": "",
+   "level": "STD"
+  },
+  "file_permissions": {
+   "outcome": "NONE",
+   "message": "no call that creates a file with a given mode"
+  },
+  "process_timeout": {
+   "outcome": "NONE",
+   "message": "std.subprocess can run a command to completion but not stop it"
+  },
+  "regex": {
+   "outcome": "NONE",
+   "message": "no regular expressions in the standard library"
+  },
+  "regex_linear": {
+   "outcome": "NONE",
+   "message": "no regular expressions in the standard library"
+  },
+  "graphemes": {
+   "outcome": "NONE",
+   "message": "no grapheme segmentation in the standard library"
+  },
+  "unicode_normalize": {
+   "outcome": "NONE",
+   "message": "no Unicode normalization in the standard library"
+  },
+  "utf8_validate": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "html_escape": {
+   "outcome": "NONE",
+   "message": "no HTML escaping in the standard library"
+  },
+  "json_parse": {
+   "outcome": "NONE",
+   "message": "no JSON parser in the standard library"
+  },
+  "checked_add": {
+   "outcome": "NONE",
+   "message": "no checked integer addition in the standard library"
+  },
+  "wrapping_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "-9223372036854775808",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "saturating_add": {
+   "outcome": "NONE",
+   "message": "no saturating integer addition in the standard library"
+  },
+  "bigint": {
+   "outcome": "NONE",
+   "message": "no arbitrary-precision integers in the standard library"
+  },
+  "unsigned64": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "18446744073709551615",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "int128": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1267650600228229401496703205376",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "decimal": {
+   "outcome": "NONE",
+   "message": "no decimal type in the standard library"
+  },
+  "checked_narrowing": {
+   "outcome": "NONE",
+   "message": "no checked narrowing conversion; conversions truncate"
+  },
+  "literal_range": {
+   "outcome": "NONE",
+   "message": "an out-of-range literal is accepted and wraps"
+  },
+  "float_to_int_checked": {
+   "outcome": "NONE",
+   "message": "no checked float-to-integer conversion"
+  },
+  "strict_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sorted_map": {
+   "outcome": "NONE",
+   "message": "no sorted map in the standard library"
+  },
+  "sorted_set": {
+   "outcome": "NONE",
+   "message": "no sorted set in the standard library"
+  },
+  "insertion_ordered_map": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "c a b",
+   "stderr": "",
+   "level": "STD"
+  },
+  "deque": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "0 2",
+   "stderr": "",
+   "level": "STD"
+  },
+  "priority_queue": {
+   "outcome": "NONE",
+   "message": "no priority queue in the standard library"
+  },
+  "counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "a=2 b=1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "bitset": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "STD"
+  },
+  "fixed_array_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "tuple": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1 a",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "immutable_collection": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-immutable_collection/reject/main.mojo:4:5: error: invalid call to 'append': invalid use of mutating method on rvalue of type 'List[Int]'\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "readonly_param": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-readonly_param/reject/main.mojo:4:7: error: expression must be mutable in assignment\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "value_struct": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "complete_init": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-complete_init/reject/main.mojo:11:25: error: no matching function in initialization\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "5 3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "composite_key": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "true",
+   "stderr": "",
+   "level": "STD"
+  },
+  "checked_index": {
+   "outcome": "NONE",
+   "message": "no index lookup that returns a missing value"
+  },
+  "sum_type_exhaustive": {
+   "outcome": "NONE",
+   "message": "Variant has no exhaustive match"
+  },
+  "optional_type": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-optional_type/reject/main.mojo:5:15: error: 'Optional[Int]' does not implement the '__add__' method\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "none",
+   "stderr": "",
+   "level": "STD"
+  },
+  "newtype": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-newtype/reject/main.mojo:18:36: error: invalid call to '__add__': value passed to 'o' cannot be converted from 'Seconds' to 'Meters'\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "5.0",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "total_float_sort": {
+   "outcome": "NONE",
+   "message": "no total-order comparison for floats in the standard library"
+  },
+  "date_time_zone": {
+   "outcome": "NONE",
+   "message": "no time zone database in the standard library"
+  },
+  "duration": {
+   "outcome": "NONE",
+   "message": "no duration type in the standard library"
+  },
+  "byte_buffer": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "100000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "error_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "error",
+   "stderr": "",
+   "level": "STD"
+  },
+  "must_handle_error": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-must_handle_error/reject/main.mojo:8:9: error: cannot call function that may raise in a context that cannot raise\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "handled",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_catch": {
+   "outcome": "NONE",
+   "message": "raised errors carry no kind to catch by"
+  },
+  "error_chain": {
+   "outcome": "NONE",
+   "message": "errors carry no cause"
+  },
+  "stack_trace": {
+   "outcome": "NONE",
+   "message": "no stack trace capture in the standard library"
+  },
+  "cleanup_on_error": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "released\nreleased",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "cleanup_on_panic": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "cleanup\nrecovered",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "recover_worker_crash": {
+   "outcome": "NONE",
+   "message": "an error in a parallel task ends the program"
+  },
+  "recover_allocation_failure": {
+   "outcome": "NONE",
+   "message": "allocation failure ends the program"
+  },
+  "recover_stack_overflow": {
+   "outcome": "NONE",
+   "message": "stack overflow ends the program"
+  },
+  "unhandled_hook": {
+   "outcome": "NONE",
+   "message": "no handler for an uncaught error"
+  },
+  "assertion": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 132,
+   "secs": 0.22,
+   "stdout": "before\nAt: /tmp/breakbench/express-assertion/main/main.mojo:8:17: Assert Error: broken invariant",
+   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x00007cf7bcf6cd1e\n1  libKGENCompilerRTShared.so 0x00007cf7bcf69e46\n2  libKGENCompilerRTShared.so 0x00007cf7bcf6d8e0\n3  libc.so.6                  0x00007cf7bcc77cb0\n4  main                       0x000060bfb2f6fc05\n5  main                       0x000060bfb2f6e5f0\n6  main                       0x000060bfb2f6fba9\n7  main                       0x000060bfb2f6e806\n8  libc.so.6                  0x00007cf7bcc5c601\n9  libc.so.6                  0x00007cf7bcc5c718 __libc_start_main + 136\n10 main                       0x000060bfb2f6e155\nIllegal instruction (core dumped)",
+   "level": "STD"
+  },
+  "path_containment": {
+   "outcome": "NONE",
+   "message": "no path normalization in the standard library"
+  },
+  "constant_time_compare": {
+   "outcome": "NONE",
+   "message": "no constant-time comparison in the standard library"
+  },
+  "secure_random": {
+   "outcome": "NONE",
+   "message": "no cryptographic random source in the standard library"
+  },
+  "sha256": {
+   "outcome": "NONE",
+   "message": "no SHA-256 in the standard library"
+  },
+  "password_hash": {
+   "outcome": "NONE",
+   "message": "no password hash in the standard library"
+  },
+  "hmac": {
+   "outcome": "NONE",
+   "message": "no HMAC in the standard library"
+  },
+  "aead_encrypt": {
+   "outcome": "NONE",
+   "message": "no authenticated cipher in the standard library"
+  },
+  "weak_reference": {
+   "outcome": "NONE",
+   "message": "no weak references"
+  },
+  "consumed_value": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-consumed_value/reject/main.mojo:17:10: error: use of uninitialized value 'h'\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to run the pass manager",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "closed",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "no_implicit_conversion": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-no_implicit_conversion/reject/main.mojo:6:24: error: cannot implicitly convert 'Int64' value to 'Int32'\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "42",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "mixed_sign_compare": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-mixed_sign_compare/reject/main.mojo:6:15: error: invalid call to '__lt__': value passed to 'rhs' cannot be converted from 'UInt64' to 'Int64'\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "less",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "nonnull_reference": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-nonnull_reference/reject/main.mojo:10:27: error: cannot implicitly convert 'None' value to 'Config'\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "app",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "definite_assignment": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-definite_assignment/reject/main.mojo:16:10: error: use of uninitialized value 'y'\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to run the pass manager",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "immutable_binding": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-immutable_binding/reject/main.mojo:5:5: error: expression must be mutable in assignment\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unused_value_refused": {
+   "outcome": "NONE",
+   "message": "an unused variable is only a warning"
+  },
+  "exhaustive_return": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-exhaustive_return/reject/main.mojo:7:5: error: return expected at end of function with results\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to run the pass manager",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "exclusive_mutation": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-exclusive_mutation/reject/main.mojo:12:13: error: aliasing values passed mutably to 'source' argument and passed mutably to 'target' argument in 'transfer' call\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "70 30",
+   "stderr": "",
+   "level": "LANGUAGE"
+  }
+ }
+}

@@ -1,0 +1,11 @@
+struct Account {
+    balance: i64
+}
+
+fn main() {
+    let mut accounts = #[Account { balance: 100 }]
+    for acct in accounts {
+        acct.balance += 50 // BREAK!
+    }
+    println(f"{accounts[0].balance}")
+}

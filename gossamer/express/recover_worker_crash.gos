@@ -1,0 +1,6 @@
+// LEVEL: LANGUAGE
+
+fn main() {
+    let worker = spawn(|| -> i64 { panic("boom") })
+    if worker.join().is_err() { println("worker crashed") }
+}

@@ -1,0 +1,7 @@
+ARG version
+FROM haskell:${version}
+
+RUN apt-get update && apt-get install -y --no-install-recommends python3 time libicu-dev pkg-config && apt-get clean
+# Libraries the Haskell project publishes (github.com/haskell), beside the packages GHC ships.
+RUN cabal update && cabal install --lib entropy text-icu vector random aeson --package-env /opt/hsenv \
+    && ln -s /root/.local/state/cabal/store/ghc-*/package.db /opt/hsdb

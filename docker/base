@@ -1,0 +1,40 @@
+FROM ubuntu:26.04
+
+WORKDIR /opt
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Etc/UTC
+
+RUN apt update && apt install -y --no-install-recommends \
+    software-properties-common \
+    apt-transport-https \
+    wget \
+    curl \
+    git \
+    gnupg \
+    build-essential \
+    iputils-ping \
+    ca-certificates \
+    time \
+    tzdata \
+    pkg-config \
+    unzip \
+    xz-utils \
+    zlib1g-dev \
+    libxml2-dev \
+    libssl-dev \
+    libpcre2-dev \ 
+    uthash-dev \
+    libre2-dev \ 
+    libyaml-dev \ 
+    libevent-dev \ 
+    libffi-dev \
+    cmake \
+    vim \
+    mc \
+    less \
+    libzstd-dev \
+    ruby \
+    && apt clean
+
+# Prebuilt toolchains link libxml2.so.2; the distribution ships it as libxml2.so.16.
+RUN ln -sf /usr/lib/x86_64-linux-gnu/libxml2.so.16 /usr/lib/x86_64-linux-gnu/libxml2.so.2

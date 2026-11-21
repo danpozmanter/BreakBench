@@ -1,0 +1,8 @@
+use std::{env, fs, process}
+
+fn main() {
+    let msg = env::args()[0]
+    let _ = fs::remove_file("/tmp/bb_pwned")
+    let _ = process::pipeline_run(#[f"echo {msg}"])
+    println(if fs::exists("/tmp/bb_pwned") { "injected" } else { "safe" })
+}

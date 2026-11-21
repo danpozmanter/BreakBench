@@ -1,0 +1,11 @@
+use std::env
+
+fn main() {
+    let xs = #[1, 2, 3]
+    let i = env::args()[0].to_i64().unwrap()
+    if i < xs.len() {
+        println("less")
+    } else {
+        println("not less")
+    }
+}

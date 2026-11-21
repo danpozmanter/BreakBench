@@ -1,0 +1,10 @@
+// LEVEL: STD
+
+use std::errors
+
+fn main() {
+    let cause = errors::new("not found")
+    let err = errors::wrap(cause, "loading config")
+    println(err)
+    println(err.cause().unwrap())
+}

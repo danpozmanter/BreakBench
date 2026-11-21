@@ -1,0 +1,13 @@
+use std::env
+
+struct Frame {
+    buf: [i64; 4]
+    guard: i64
+}
+
+fn main() {
+    let mut f = Frame { buf: [0; 4], guard: 7 }
+    let idx = env::args()[0].to_i64().unwrap()
+    f.buf[idx] = 99
+    println(f"{f.guard}")
+}

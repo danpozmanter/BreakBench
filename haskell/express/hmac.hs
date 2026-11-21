@@ -1,0 +1,1 @@
+-- CANNOT-EXPRESS: no HMAC in the packages GHC ships or the Haskell project's libraries

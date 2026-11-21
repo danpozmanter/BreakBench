@@ -1,0 +1,649 @@
+{
+ "lang": "clojure",
+ "version": "Clojure 1.12.7",
+ "results": {
+  "threads_shared_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "45",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "mutex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.25,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "atomic_counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.25,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "channel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.24,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "STD"
+  },
+  "background_task": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.28,
+   "stdout": "started\n7",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "join_with_failure": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.23,
+   "stdout": "bad input",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "task_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.33,
+   "stdout": "timed out",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "task_cancel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.24,
+   "stdout": "stopped",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "concurrent_map": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "4000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "thread_safety_check": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "lock_owns_data": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "spawn_argv": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.24,
+   "stdout": "hi; touch /tmp/bb_x",
+   "stderr": "",
+   "level": "STD"
+  },
+  "exit_status": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.23,
+   "stdout": "1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "env_absent": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "absent",
+   "stderr": "",
+   "level": "STD"
+  },
+  "signal_graceful": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.31,
+   "stdout": "cleaned up",
+   "stderr": "Execution error (IOException) at java.lang.ProcessImpl/forkAndExec (ProcessImpl.java:-2).\nExec failed, error: 2 (No such file or directory) \n\nFull report at:\n/tmp/clojure-5545748798741259774.edn",
+   "level": "STD"
+  },
+  "secure_temp_file": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.26,
+   "stdout": "ok",
+   "stderr": "",
+   "level": "STD"
+  },
+  "file_permissions": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "600",
+   "stderr": "",
+   "level": "STD"
+  },
+  "process_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.33,
+   "stdout": "killed",
+   "stderr": "",
+   "level": "STD"
+  },
+  "regex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.23,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "regex_linear": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "no match",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "graphemes": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "abcdefgh\ud83d\udc4d\ud83c\udffd",
+   "stderr": "",
+   "level": "STD"
+  },
+  "unicode_normalize": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "STD"
+  },
+  "utf8_validate": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "html_escape": {
+   "outcome": "NONE",
+   "message": "no HTML escaping in clojure.core, the JDK or the Clojure project's libraries"
+  },
+  "json_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.25,
+   "stdout": "8080 invalid",
+   "stderr": "",
+   "level": "PROJECT"
+  },
+  "checked_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "overflow",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "wrapping_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "-9223372036854775808",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "saturating_add": {
+   "outcome": "NONE",
+   "message": "no saturating addition in the core or the JDK"
+  },
+  "bigint": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "1267650600228229401496703205376",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unsigned64": {
+   "outcome": "NONE",
+   "message": "no unsigned integer types"
+  },
+  "int128": {
+   "outcome": "NONE",
+   "message": "no 128-bit integer type"
+  },
+  "decimal": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "checked_narrowing": {
+   "outcome": "NONE",
+   "message": "no checked conversion to an unsigned byte"
+  },
+  "literal_range": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "float_to_int_checked": {
+   "outcome": "FAIL",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "0",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "strict_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.23,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "sorted_map": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "a b c",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "sorted_set": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "insertion_ordered_map": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "c a b",
+   "stderr": "",
+   "level": "STD"
+  },
+  "deque": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "0 2",
+   "stderr": "",
+   "level": "STD"
+  },
+  "priority_queue": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.23,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "STD"
+  },
+  "counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "a=2 b=1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bitset": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "STD"
+  },
+  "fixed_array_value": {
+   "outcome": "NONE",
+   "message": "vectors are immutable, and mutable Java arrays are references"
+  },
+  "tuple": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "1 a",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "immutable_collection": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "readonly_param": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "value_struct": {
+   "outcome": "NONE",
+   "message": "maps and records are immutable; no mutable record that copies on assignment"
+  },
+  "complete_init": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "composite_key": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "true",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "checked_index": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "none",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "sum_type_exhaustive": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "optional_type": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "newtype": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "total_float_sort": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "1.0 2.0 3.0 NaN",
+   "stderr": "",
+   "level": "STD"
+  },
+  "date_time_zone": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "2026-03-29 03:30",
+   "stderr": "",
+   "level": "STD"
+  },
+  "duration": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "byte_buffer": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "100000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "error_value": {
+   "outcome": "NONE",
+   "message": "no checked return types (type hints are not checks); errors are exceptions"
+  },
+  "must_handle_error": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "typed_catch": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "caught A\npassed B",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "error_chain": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "loading config: not found\nnot found",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "stack_trace": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "inner",
+   "stderr": "",
+   "level": "STD"
+  },
+  "cleanup_on_error": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "released\nreleased",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "cleanup_on_panic": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "cleanup\nrecovered",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "recover_worker_crash": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.23,
+   "stdout": "worker crashed",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "recover_allocation_failure": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.24,
+   "stdout": "allocation failed",
+   "stderr": "",
+   "level": "STD"
+  },
+  "recover_stack_overflow": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "stack overflow",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unhandled_hook": {
+   "outcome": "FAIL",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.28,
+   "stdout": "",
+   "stderr": "Execution error (IllegalStateException) at main/-main (main.clj:6).\nboom\n\nFull report at:\n/tmp/clojure-7210813309789789339.edn",
+   "level": "STD"
+  },
+  "assertion": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.3,
+   "stdout": "before",
+   "stderr": "Execution error (AssertionError) at main/-main (main.clj:7).\nAssert failed: false\n\nFull report at:\n/tmp/clojure-1810226578634065900.edn",
+   "level": "LANGUAGE"
+  },
+  "path_containment": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "outside",
+   "stderr": "",
+   "level": "STD"
+  },
+  "constant_time_compare": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "STD"
+  },
+  "secure_random": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "d2e3379918ecf070187231bdfc185467",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sha256": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+   "stderr": "",
+   "level": "STD"
+  },
+  "password_hash": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.58,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "STD"
+  },
+  "hmac": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.23,
+   "stdout": "f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8",
+   "stderr": "",
+   "level": "STD"
+  },
+  "aead_encrypt": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.25,
+   "stdout": "secret\nrejected",
+   "stderr": "",
+   "level": "STD"
+  },
+  "weak_reference": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "gone",
+   "stderr": "",
+   "level": "STD"
+  },
+  "consumed_value": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "no_implicit_conversion": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "mixed_sign_compare": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "nonnull_reference": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "definite_assignment": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "immutable_binding": {
+   "outcome": "NONE",
+   "message": "a var can be redefined at run time"
+  },
+  "unused_value_refused": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "exhaustive_return": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "exclusive_mutation": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  }
+ }
+}

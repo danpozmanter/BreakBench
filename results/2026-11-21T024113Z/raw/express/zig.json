@@ -1,0 +1,669 @@
+{
+ "lang": "zig",
+ "version": "0.17.1",
+ "results": {
+  "threads_shared_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "45",
+   "stderr": "",
+   "level": "STD"
+  },
+  "mutex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "atomic_counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "channel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "STD"
+  },
+  "background_task": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.05,
+   "stdout": "started\n7",
+   "stderr": "",
+   "level": "STD"
+  },
+  "join_with_failure": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "worker failed: bad input",
+   "stderr": "",
+   "level": "STD"
+  },
+  "task_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "timed out",
+   "stderr": "",
+   "level": "STD"
+  },
+  "task_cancel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "stopped",
+   "stderr": "",
+   "level": "STD"
+  },
+  "concurrent_map": {
+   "outcome": "NONE",
+   "message": "no concurrent map in the standard library"
+  },
+  "thread_safety_check": {
+   "outcome": "NONE",
+   "message": "nothing refuses an unlocked write to data that threads share"
+  },
+  "lock_owns_data": {
+   "outcome": "NONE",
+   "message": "the standard mutex guards code, not data; an unguarded read is accepted"
+  },
+  "spawn_argv": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "hi; touch /tmp/bb_x",
+   "stderr": "",
+   "level": "STD"
+  },
+  "exit_status": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "env_absent": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "absent",
+   "stderr": "",
+   "level": "STD"
+  },
+  "signal_graceful": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "cleaned up",
+   "stderr": "",
+   "level": "STD"
+  },
+  "secure_temp_file": {
+   "outcome": "NONE",
+   "message": "std has no temporary-file call outside std.testing"
+  },
+  "file_permissions": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "600",
+   "stderr": "",
+   "level": "STD"
+  },
+  "process_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "killed",
+   "stderr": "",
+   "level": "STD"
+  },
+  "regex": {
+   "outcome": "NONE",
+   "message": "no regular expressions in the standard library"
+  },
+  "regex_linear": {
+   "outcome": "NONE",
+   "message": "no regular expressions in the standard library"
+  },
+  "graphemes": {
+   "outcome": "NONE",
+   "message": "no grapheme segmentation in the standard library"
+  },
+  "unicode_normalize": {
+   "outcome": "NONE",
+   "message": "no Unicode normalization in the standard library"
+  },
+  "utf8_validate": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "html_escape": {
+   "outcome": "NONE",
+   "message": "no HTML escaping in std"
+  },
+  "json_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "8080 invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "checked_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "overflow",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "wrapping_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "saturating_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "9223372036854775807",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bigint": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1267650600228229401496703205376",
+   "stderr": "",
+   "level": "STD"
+  },
+  "unsigned64": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "18446744073709551615",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "int128": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1267650600228229401496703205376",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "decimal": {
+   "outcome": "NONE",
+   "message": "no decimal type in the standard library"
+  },
+  "checked_narrowing": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "does not fit",
+   "stderr": "",
+   "level": "STD"
+  },
+  "literal_range": {
+   "outcome": "PASS",
+   "refusal": "main.zig:11:25: error: type 'u8' cannot represent integer value '300'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "float_to_int_checked": {
+   "outcome": "NONE",
+   "message": "no checked float-to-integer conversion that reports failure as a value"
+  },
+  "strict_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sorted_map": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a b c",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sorted_set": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "STD"
+  },
+  "insertion_ordered_map": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "c a b",
+   "stderr": "",
+   "level": "STD"
+  },
+  "deque": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0 2",
+   "stderr": "",
+   "level": "STD"
+  },
+  "priority_queue": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "STD"
+  },
+  "counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a=2 b=1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "bitset": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "STD"
+  },
+  "fixed_array_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "tuple": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 a",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "immutable_collection": {
+   "outcome": "PASS",
+   "refusal": "main.zig:13:7: error: cannot assign to constant",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "readonly_param": {
+   "outcome": "PASS",
+   "refusal": "main.zig:6:7: error: cannot assign to constant",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "value_struct": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "complete_init": {
+   "outcome": "PASS",
+   "refusal": "main.zig:16:27: error: missing struct field: retries",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5 3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "composite_key": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "true",
+   "stderr": "",
+   "level": "STD"
+  },
+  "checked_index": {
+   "outcome": "NONE",
+   "message": "no index lookup that returns a missing value"
+  },
+  "sum_type_exhaustive": {
+   "outcome": "PASS",
+   "refusal": "main.zig:18:9: error: switch must handle all possibilities",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "circle",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "optional_type": {
+   "outcome": "PASS",
+   "refusal": "main.zig:13:11: error: invalid operands to binary expression: 'optional' and 'comptime_int'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "none",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "newtype": {
+   "outcome": "PASS",
+   "refusal": "main.zig:19:50: error: expected type 'main.main.Meters', found 'main.main__struct_791'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "total_float_sort": {
+   "outcome": "NONE",
+   "message": "no total-order comparison for floats in the standard library"
+  },
+  "date_time_zone": {
+   "outcome": "NONE",
+   "message": "no time zone database in the standard library"
+  },
+  "duration": {
+   "outcome": "NONE",
+   "message": "the standard duration is a struct of nanoseconds with no arithmetic of its own"
+  },
+  "byte_buffer": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "error_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "error",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "must_handle_error": {
+   "outcome": "PASS",
+   "refusal": "main.zig:17:9: error: error union of type '@typeInfo(@typeInfo(@TypeOf(main.main__struct_791.f)).@\"fn\".return_type.?).error_union.error_set!void' is ignored",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "handled",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_catch": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "caught A\npassed B",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "error_chain": {
+   "outcome": "NONE",
+   "message": "errors carry no payload or cause"
+  },
+  "stack_trace": {
+   "outcome": "NONE",
+   "message": "a captured trace holds addresses; naming them needs the debug-info reader"
+  },
+  "cleanup_on_error": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "released\nreleased",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "cleanup_on_panic": {
+   "outcome": "NONE",
+   "message": "a panic does not unwind; it ends the program"
+  },
+  "recover_worker_crash": {
+   "outcome": "NONE",
+   "message": "a panic in any thread ends the program"
+  },
+  "recover_allocation_failure": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "allocation failed",
+   "stderr": "",
+   "level": "STD"
+  },
+  "recover_stack_overflow": {
+   "outcome": "NONE",
+   "message": "stack overflow ends the program"
+  },
+  "unhandled_hook": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "hook ran",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "assertion": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 134,
+   "secs": 0.13,
+   "stdout": "before",
+   "stderr": "thread 1678 panic: reached unreachable code\n/opt/zig/lib/std/debug.zig:442:14: 0x1029ea9 in assert (std.zig)\n    if (!ok) unreachable; // assertion failure\n             ^\n/tmp/breakbench/express-assertion/main/main.zig:14:21: 0x11e3578 in main (main.zig)\n    std.debug.assert(args.len + 1 == 3);\n                    ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e41e8 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)",
+   "level": "STD"
+  },
+  "path_containment": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "outside",
+   "stderr": "",
+   "level": "STD"
+  },
+  "constant_time_compare": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "STD"
+  },
+  "secure_random": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "e64761cabc2c1f95e36b73e25082dcdd",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sha256": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+   "stderr": "",
+   "level": "STD"
+  },
+  "password_hash": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.2,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "STD"
+  },
+  "hmac": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8",
+   "stderr": "",
+   "level": "STD"
+  },
+  "aead_encrypt": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "secret\nrejected",
+   "stderr": "",
+   "level": "STD"
+  },
+  "weak_reference": {
+   "outcome": "NONE",
+   "message": "no weak references"
+  },
+  "consumed_value": {
+   "outcome": "NONE",
+   "message": "no ownership tracking: a value stays usable after a call that consumes it"
+  },
+  "no_implicit_conversion": {
+   "outcome": "PASS",
+   "refusal": "main.zig:13:24: error: expected type 'i32', found 'i64'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "42",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "mixed_sign_compare": {
+   "outcome": "NONE",
+   "message": "a mixed-sign comparison is accepted"
+  },
+  "nonnull_reference": {
+   "outcome": "PASS",
+   "refusal": "main.zig:13:36: error: expected type '*const main.Config', found '@TypeOf(null)'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "app",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "definite_assignment": {
+   "outcome": "PASS",
+   "refusal": "main.zig:12:15: error: expected '=', found ';'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "immutable_binding": {
+   "outcome": "PASS",
+   "refusal": "main.zig:11:5: error: cannot assign to constant",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unused_value_refused": {
+   "outcome": "PASS",
+   "refusal": "main.zig:13:11: error: unused local constant",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "42",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "exhaustive_return": {
+   "outcome": "PASS",
+   "refusal": "main.zig:9:20: error: function with non-void return type '[]const u8' implicitly returns",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "exclusive_mutation": {
+   "outcome": "NONE",
+   "message": "nothing refuses passing one value as two mutable arguments"
+  }
+ }
+}

@@ -1,0 +1,9 @@
+// LEVEL: LANGUAGE
+
+fn main() {
+    let worker = spawn(|| -> i64 { panic("bad input") })
+    match worker.join() {
+        Ok(v) => println(f"{v}"),
+        Err(e) => println(f"worker failed: {e}"),
+    }
+}

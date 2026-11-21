@@ -1,0 +1,10 @@
+// LEVEL: STD
+
+use std::time
+
+fn main() {
+    let paris = time::Location::lookup("Europe/Paris").unwrap()
+    let t = time::Time::parse_rfc3339("2026-03-29T01:30:00Z").unwrap()
+    let c = t.in_location(paris).civil().unwrap()
+    println(f"{c.year}-{c.month:02}-{c.day:02} {c.hour:02}:{c.minute:02}")
+}

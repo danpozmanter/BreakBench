@@ -1,0 +1,14 @@
+// LEVEL: LANGUAGE
+
+fn transfer(from: &mut i64, to: &mut i64, amount: i64) {
+    *from -= amount;
+    *to += amount;
+}
+
+fn main() {
+    let mut a = 100;
+    let mut b = 0;
+    transfer(&mut a, &mut b, 30);
+    transfer(&mut a, &mut a, 10); // REJECT!
+    println!("{a} {b}");
+}

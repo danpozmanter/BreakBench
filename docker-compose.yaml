@@ -1,0 +1,339 @@
+x-shared: &shared
+  tty: false
+  stdin_open: false
+  volumes:
+    - .:/src
+  working_dir: /src
+  shm_size: '2gb'
+  # Leak problems are judged by peak RSS against this ceiling; a leaking
+  # program is OOM-killed here instead of exhausting the host.
+  mem_limit: 3g
+  memswap_limit: 3g
+  pids_limit: 4096
+
+services:
+  base:
+    <<: *shared
+    image: breakbench:base
+    build: { dockerfile: docker/base }
+
+  base_clang:
+    <<: *shared
+    image: breakbench:base_clang
+    build:
+      dockerfile: docker/base_clang
+      args:
+        # https://github.com/llvm/llvm-project/releases
+        version: "23.1.6"
+    depends_on: [base]
+
+  c:
+    <<: *shared
+    image: breakbench:clang_c
+    build: { dockerfile: docker/clang_c }
+    depends_on: [base_clang]
+
+  cpp:
+    <<: *shared
+    image: breakbench:clang_cpp
+    build: { dockerfile: docker/clang_cpp }
+    depends_on: [base_clang]
+
+  crystal:
+    <<: *shared
+    image: breakbench:crystal
+    build:
+      dockerfile: docker/crystal
+      args:
+        # https://github.com/crystal-lang/crystal/releases
+        version: 1.22.3
+    depends_on: [base]
+
+  rust:
+    <<: *shared
+    image: breakbench:rust
+    build:
+      dockerfile: docker/rust
+      args:
+        # https://github.com/rust-lang/rust/releases
+        version: 1.100.0
+    depends_on: [base]
+
+  zig:
+    <<: *shared
+    image: breakbench:zig
+    build:
+      dockerfile: docker/zig
+      args:
+        # https://ziglang.org/download/
+        version: 0.17.1
+    depends_on: [base]
+
+  dotnet:
+    <<: *shared
+    image: breakbench:dotnet
+    build:
+      dockerfile: docker/dotnet
+      args:
+        # https://dotnet.microsoft.com/en-us/download/dotnet
+        version: "11.0.100"
+    environment:
+      - DOTNET_CLI_TELEMETRY_OPTOUT=1
+      - DOTNET_NOLOGO=1
+      - DOTNET_SKIP_FIRST_TIME_EXPERIENCE=1
+    depends_on: [base]
+
+  csharp:
+    <<: *shared
+    image: breakbench:dotnet
+    environment:
+      - DOTNET_CLI_TELEMETRY_OPTOUT=1
+      - DOTNET_NOLOGO=1
+    volumes:
+      - .:/src
+      - ./cache/nuget:/root/.nuget
+
+  fsharp:
+    <<: *shared
+    image: breakbench:fsharp
+    build: { dockerfile: docker/fsharp }
+    environment:
+      - DOTNET_CLI_TELEMETRY_OPTOUT=1
+      - DOTNET_NOLOGO=1
+    volumes:
+      - .:/src
+      - ./cache/nuget:/root/.nuget
+    depends_on: [dotnet]
+
+  golang:
+    <<: *shared
+    image: breakbench:golang
+    build:
+      dockerfile: docker/golang
+      args:
+        # https://go.dev/dl/
+        version: "1.27.4"
+    volumes:
+      - .:/src
+      - ./cache/go:/root/.cache/go-build
+    depends_on: [base]
+
+  swift:
+    <<: *shared
+    image: breakbench:swift
+    build:
+      dockerfile: docker/swift
+      args:
+        # https://github.com/swiftlang/swift/releases
+        version: "6.4.2"
+    depends_on: [base]
+
+  nodejs:
+    <<: *shared
+    image: breakbench:nodejs
+    build:
+      dockerfile: docker/nodejs
+      args:
+        # https://nodejs.org/en/about/previous-releases
+        version: "26.x"
+    depends_on: [base]
+
+  javascript:
+    <<: *shared
+    image: breakbench:nodejs
+
+  typescript:
+    <<: *shared
+    image: breakbench:typescript
+    build:
+      dockerfile: docker/typescript
+      args:
+        # https://www.npmjs.com/package/typescript
+        version: "7.0.2"
+    depends_on: [nodejs]
+
+  java:
+    <<: *shared
+    image: breakbench:java
+    build:
+      dockerfile: docker/java
+      args:
+        # https://www.java.com/releases/
+        version: "27"
+    depends_on: [base]
+
+  kotlin:
+    <<: *shared
+    image: breakbench:kotlin
+    build:
+      dockerfile: docker/kotlin
+      args:
+        # https://kotlinlang.org/docs/releases.html
+        version: "2.4.21"
+    depends_on: [java]
+
+  scala:
+    <<: *shared
+    image: breakbench:scala
+    build:
+      dockerfile: docker/scala
+      args:
+        # https://www.scala-lang.org/download/
+        version: "3.10.1"
+    volumes:
+      - .:/src
+      - ./cache/scala:/root/.cache
+    depends_on: [java]
+
+  d:
+    <<: *shared
+    image: breakbench:ldc
+    build:
+      dockerfile: docker/ldc
+      args:
+        # https://github.com/ldc-developers/ldc/releases
+        version: "1.43.0"
+    depends_on: [base]
+
+  v:
+    <<: *shared
+    image: breakbench:v_clang
+    build:
+      dockerfile: docker/v_clang
+      args:
+        # https://github.com/vlang/v/releases
+        version: "0.5.2"
+    depends_on: [base_clang]
+
+  gossamer:
+    <<: *shared
+    image: breakbench:gossamer
+    build:
+      dockerfile: docker/gossamer
+      args:
+        # https://github.com/gossamer-lang/gossamer/releases
+        version: "0.83.0"
+    depends_on: [rust]
+
+  goose:
+    <<: *shared
+    image: breakbench:goose_clang
+    build:
+      dockerfile: docker/goose_clang
+      args:
+        # https://github.com/aardappel/goose/commits/master
+        version: "9412b80f52d833c4697cffdbbf1f4eeb5195cd41"
+    depends_on: [base_clang]
+
+  julia:
+    <<: *shared
+    image: breakbench:julia
+    build:
+      dockerfile: docker/julia
+      args:
+        # https://github.com/JuliaLang/julia/releases
+        version: "1.13.4"
+    depends_on: [base]
+
+  nim:
+    <<: *shared
+    image: breakbench:nim_clang
+    build:
+      dockerfile: docker/nim_clang
+      args:
+        # https://nim-lang.org
+        version: "2.4.2"
+    depends_on: [base_clang]
+
+  dart:
+    <<: *shared
+    image: breakbench:dart
+    build:
+      dockerfile: docker/dart
+      args:
+        # https://dart.dev/get-dart/archive#stable-channel
+        version: "3.14.1"
+    depends_on: [base]
+
+  python:
+    <<: *shared
+    image: breakbench:python
+    build:
+      dockerfile: docker/python
+      args:
+        # https://www.python.org/downloads/
+        version: "3.15.2"
+
+  odin:
+    <<: *shared
+    image: breakbench:odin
+    build:
+      dockerfile: docker/odin
+      args:
+        # https://github.com/odin-lang/Odin/releases
+        version: "2026-11a"
+    depends_on: [base_clang]
+
+  c3:
+    <<: *shared
+    image: breakbench:c3
+    build:
+      dockerfile: docker/c3
+      args:
+        # https://github.com/c3lang/c3c/releases
+        version: "0.8.6"
+    depends_on: [base_clang]
+
+  ruby:
+    <<: *shared
+    image: breakbench:ruby4
+    build:
+      dockerfile: docker/ruby4
+      args:
+        # https://www.ruby-lang.org/en/downloads/releases/
+        version: "4.0.10"
+    depends_on: [rust]
+
+  php:
+    <<: *shared
+    image: breakbench:php
+    build:
+      dockerfile: docker/php
+      args:
+        # newest PHP packaged for the base image
+        version: "8.5"
+    depends_on: [base]
+
+  mojo:
+    <<: *shared
+    image: breakbench:mojo
+    build: { dockerfile: docker/mojo }
+    depends_on: [base]
+
+  ocaml:
+    <<: *shared
+    image: breakbench:ocaml
+    build:
+      dockerfile: docker/ocaml
+      args:
+        # https://ocaml.org/releases
+        version: "5.5.2"
+    depends_on: [base]
+
+  haskell:
+    <<: *shared
+    image: breakbench:haskell
+    build:
+      dockerfile: docker/haskell
+      args:
+        # https://www.haskell.org/ghc/
+        version: "9.14"
+
+  clojure:
+    <<: *shared
+    image: breakbench:clojure
+    build:
+      dockerfile: docker/clojure
+      args:
+        # https://clojure.org/releases/downloads
+        version: "temurin-25-tools-deps"

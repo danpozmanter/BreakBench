@@ -1,0 +1,654 @@
+{
+ "lang": "cpp",
+ "version": "clang version 23.1.6 (https://github.com/llvm/llvm-project 5b10d2d74929eae78912771222c9855af97496f4)",
+ "results": {
+  "null_deref": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "main.cpp:7:13: warning: declaration requires an exit-time destructor [-Wexit-time-destructors]\nmain.cpp:7:13: warning: declaration requires a global destructor [-Wglobal-constructors]\n2 warnings generated.",
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.cpp:13:21: runtime error: member access within null pointer of type 'const User'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.cpp:13:21"
+  },
+  "int_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "main.cpp:5:5: warning: 'long long' is incompatible with C++98 [-Wc++98-compat-pedantic]\n1 warning generated.",
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.cpp:6:20: runtime error: signed integer overflow: 9223372036854775807 + 1 cannot be represented in type 'long long'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.cpp:6:20"
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.cpp:6:22: runtime error: division by zero\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.cpp:6:22"
+  },
+  "shift_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.cpp:8:23: runtime error: shift exponent 64 is too large for 64-bit type 'std::uint64_t' (aka 'unsigned long')\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.cpp:8:23"
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "SILENT",
+   "warned": true,
+   "all_warnings": "main.cpp:8:11: warning: comparison of integers of different signs: 'long' and 'size_type' (aka 'unsigned long') [-Wsign-compare]\n1 warning generated.",
+   "warnings": "main.cpp:8:11: warning: comparison of integers of different signs: 'long' and 'size_type' (aka 'unsigned long') [-Wsign-compare]",
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "not less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:6:18: error: no matching function for call to 'add'\n    6 |     std::cout << add(argv[1], 3) << \"\\n\"; // BREAK!\n      |                  ^~~\nmain.cpp:3:13: note: candidate function not viable: no known conversion from 'char *' to 'long' for 1st argument; dereference the argument with *\n    3 | static long add(long a, long b) { return a + b; }\n      |             ^   ~~~~~~\n    4 | \n    5 | int main(int, char **argv) {\n    6 |     std::cout << add(argv[1], 3) << \"\\n\"; // BREAK!\n      |                      \n      |                      *\n1 error generated."
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:8:1: error: non-void function does not return a value in all control paths [-Werror,-Wreturn-type]\n    8 | }\n      | ^\n1 error generated."
+  },
+  "non_exhaustive_match": {
+   "outcome": "SILENT",
+   "warned": true,
+   "all_warnings": "main.cpp:8:5: warning: 'switch' missing 'default' label [-Wswitch-default]\nmain.cpp:8:13: warning: enumeration value 'Blue' not handled in switch [-Wswitch]\n2 warnings generated.",
+   "warnings": "main.cpp:8:13: warning: enumeration value 'Blue' not handled in switch [-Wswitch]",
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "uninitialized_variable": {
+   "outcome": "SILENT",
+   "warned": true,
+   "all_warnings": "main.cpp:7:9: warning: variable 'x' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]\nmain.cpp:6:10: note: initialize the variable 'x' to silence this warning |           = 0\n1 warning generated.",
+   "warnings": "main.cpp:7:9: warning: variable 'x' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]",
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "-874713776",
+   "stderr": ""
+  },
+  "missing_argument": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:6:18: error: no matching function for call to 'area'\n    6 |     std::cout << area(3) << \"\\n\"; // BREAK!\n      |                  ^~~~\nmain.cpp:3:12: note: candidate function not viable: requires 2 arguments, but 1 was provided\n    3 | static int area(int w, int h) { return w * h; }\n      |            ^    ~~~~~~~~~~~~\n1 error generated."
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:8:9: error: no member named 'colour' in 'Config'\n    8 |     cfg.colour = \"red\"; // BREAK!\n      |     ~~~ ^\n1 error generated."
+  },
+  "assign_in_condition": {
+   "outcome": "SILENT",
+   "warned": true,
+   "all_warnings": "main.cpp:6:11: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]\nmain.cpp:6:11: note: place parentheses around the assignment to silence this warning |         (    )\n1 warning generated.",
+   "warnings": "main.cpp:6:11: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]",
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "switch_fallthrough": {
+   "outcome": "SILENT",
+   "warned": true,
+   "all_warnings": "main.cpp:10:5: warning: unannotated fall-through between switch labels [-Wimplicit-fallthrough]\nmain.cpp:10:5: note: insert '[[fallthrough]];' to silence this warning |     [[fallthrough]];\n1 warning generated.",
+   "warnings": "main.cpp:10:5: warning: unannotated fall-through between switch labels [-Wimplicit-fallthrough]\nmain.cpp:10:5: note: insert '[[fallthrough]];' to silence this warning |     [[fallthrough]];",
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "two",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "have 0",
+   "stderr": ""
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "13",
+   "stderr": ""
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:12:28: error: non-const lvalue reference to type 'vector<Animal *>' cannot bind to a value of unrelated type 'vector<Dog *>'\n   12 |     std::vector<Animal *> &animals = dogs; // BREAK!\n      |                            ^         ~~~~\nmain.cpp:7:8: warning: 'Dog' has no out-of-line virtual method definitions; its vtable will be emitted in every translation unit [-Wweak-vtables]\n    7 | struct Dog : Animal { std::string sound() const override { return \"woof\"; } };\n      |        ^\nmain.cpp:6:8: warning: 'Animal' has no out-of-line virtual method definitions; its vtable will be emitted in every translation unit [-Wweak-vtables]\n    6 | struct Animal { virtual ~Animal() = default; virtual std::string sound() const = 0; };\n      |        ^\nmain.cpp:8:8: warning: 'Cat' has no out-of-line virtual method definitions; its vtable will be emitted in every translation unit [-Wweak-vtables]\n    8 | struct Cat : Animal { std::string sound() const override { return \"meow\"; } };\n      |        ^\n3 warnings and 1 error generated."
+  },
+  "mutate_while_iterating": {
+   "outcome": "SILENT",
+   "warned": true,
+   "all_warnings": "main.cpp:7:18: warning: local variable 'xs' is later invalidated [-Wlifetime-safety-invalidation]\n1 warning generated.",
+   "warnings": "main.cpp:7:18: warning: local variable 'xs' is later invalidated [-Wlifetime-safety-invalidation]",
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "1,2,3",
+   "stderr": ""
+  },
+  "self_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "all_warnings": "main.cpp:5:12: warning: variable 'balance' set but not used [-Wunused-but-set-global]\n1 warning generated.",
+   "exit": -9,
+   "rss_mb": 14.5,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "sort_with_nan": {
+   "outcome": "SILENT",
+   "warned": false,
+   "all_warnings": "main.cpp:11:19: warning: implicit conversion increases floating-point precision: 'float' to 'double' [-Wdouble-promotion]\n1 warning generated.",
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "unordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "3.0",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "668",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "SILENT",
+   "warned": true,
+   "all_warnings": "main.cpp:6:19: warning: & has lower precedence than ==; == will be evaluated first [-Wparentheses]\nmain.cpp:6:19: note: place parentheses around the '==' expression to silence this warning |                     (     )\n1 warning generated.",
+   "warnings": "main.cpp:6:19: warning: & has lower precedence than ==; == will be evaluated first [-Wparentheses]\nmain.cpp:6:19: note: place parentheses around the '==' expression to silence this warning |                     (     )",
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "odd",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "SILENT",
+   "warned": true,
+   "all_warnings": "main.cpp:10:5: warning: add explicit braces to avoid dangling else [-Wdangling-else]\n1 warning generated.",
+   "warnings": "main.cpp:10:5: warning: add explicit braces to avoid dangling else [-Wdangling-else]",
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "unset",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:6:25: error: chained comparison 'X < Y < Z' does not behave the same as a mathematical expression [-Wparentheses]\n    6 |     bool inside = 1 < x < 3; // BREAK!\n      |                         ^\nmain.cpp:6:25: warning: result of comparison of constant 3 with expression of type 'bool' is always true [-Wtautological-constant-out-of-range-compare]\n    6 |     bool inside = 1 < x < 3; // BREAK!\n      |                   ~~~~~ ^ ~\n1 warning and 1 error generated."
+  },
+  "lost_update_on_copy": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "hi\ninjected",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "warned": true,
+   "all_warnings": "main.cpp:9:21: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]\n1 warning generated.",
+   "warnings": "main.cpp:9:21: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]",
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "exit": -9,
+   "rss_mb": 14.5,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "path_join_escape": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "escaped",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "HANG",
+   "warned": false,
+   "exit": -9,
+   "rss_mb": 14.5,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "return_in_finally": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "main.cpp:4:13: warning: function 'write_report' could be declared with attribute 'noreturn' [-Wmissing-noreturn]\n1 warning generated.",
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 134,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "terminate called after throwing an instance of 'std::invalid_argument'\n  what():  stol\nAborted"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.05,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:6:9: warning: unused variable 'total' [-Wunused-variable]\n    6 |     int total = 5;\n      |         ^~~~~\nmain.cpp:7:30: error: call to consteval function 'std::basic_format_string<char, int &>::basic_format_string<char[9]>' is not a constant expression\n    7 |     std::cout << std::format(\"{} of {}\", done) << \"\\n\"; // CONTROL! std::cout << std::format(\"{} of {}\", done, total) << \"\\n\";\n      |                              ^\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/format:313:6: note: non-constexpr function '__invalid_arg_id_in_format_string' cannot be used in a constant expression\n  313 |             __format::__invalid_arg_id_in_format_string();\n      |             ^\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../..\n...\nnt_field()'\n 4504 |                     _M_on_replacement_field();\n      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/format:4810:2: note: in call to '__scanner._M_scan()'\n 4810 |         __scanner._M_scan();\n      |         ^~~~~~~~~~~~~~~~~~~\nmain.cpp:7:30: note: in call to 'basic_format_string<char[9]>(\"{} of {}\")'\n    7 |     std::cout << std::format(\"{} of {}\", done) << \"\\n\"; // CONTROL! std::cout << std::format(\"{} of {}\", done, total) << \"\\n\";\n      |                              ^~~~~~~~~~\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/format:259:3: note: declared here\n  259 |   __invalid_arg_id_in_format_string()\n      |   ^\n1 warning and 1 error generated."
+  },
+  "unsigned_subtraction": {
+   "outcome": "SILENT",
+   "warned": true,
+   "all_warnings": "main.cpp:9:17: warning: result of comparison of unsigned expression < 0 is always false [-Wtautological-unsigned-zero-compare]\n1 warning generated.",
+   "warnings": "main.cpp:9:17: warning: result of comparison of unsigned expression < 0 is always false [-Wtautological-unsigned-zero-compare]",
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "18446744073709551614",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "mutable_hash_key": {
+   "outcome": "REJECTED",
+   "message": "In file included from main.cpp:3:\nIn file included from /usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/unordered_set:43:\nIn file included from /usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/unordered_set.h:33:\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/hashtable.h:210:21: error: static assertion failed due to requirement 'std::is_copy_constructible<std::hash<std::vector<int, std::allocator<int>>>>::value': hash function must be copy constructible\n  210 |       static_assert(is_copy_constructible<_Hash>::value,\n      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/unordered_set.h:110:18: note: in instantiation of te\n...\nd::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, true, true>>'\n  139 |       using insert_return_type = typename _Hashtable::insert_return_type;\n      |                                  ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/unordered_set.h:599:7: error: multiple overloads of 'erase' instantiate to the same signature 'iterator (iterator)' (aka 'int (int)')\n  599 |       erase(iterator __position)\n      |       ^\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/unordered_set.h:594:7: note: previous declaration is here\n  594 |       erase(const_iterator __position)\n      |       ^\n13 errors generated."
+  },
+  "shadowed_assignment": {
+   "outcome": "SILENT",
+   "warned": true,
+   "all_warnings": "main.cpp:7:21: warning: declaration shadows a local variable [-Wshadow]\n1 warning generated.",
+   "warnings": "main.cpp:7:21: warning: declaration shadows a local variable [-Wshadow]",
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "pending",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "ADA",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "main.cpp:8:43: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned long') [-Wsign-conversion]\nmain.cpp:8:27: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned long') [-Wsign-conversion]\n2 warnings generated.",
+   "exit": 134,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/stl_vector.h:1263: reference std::vector<int>::operator[](size_type) [_Tp = int, _Alloc = std::allocator<int>]: Assertion '__n < this->size()' failed.\nAborted"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:10:19: error: no matching function for call to object of type 'const __contains_fn'\n   10 |     std::cout << (std::ranges::contains(ids, id) ? \"found\" : \"missing\") << \"\\n\"; // CONTROL! std::cout << (std::ranges::contains(ids, std::stoi(id)) ? \"found\" : \"missing\") << \"\\n\";\n      |                   ^~~~~~~~~~~~~~~~~~~~~\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/ranges_algo.h:3550:7: note: candidate template ignored: constraints not satisfied [with _Range = const std::vector<int> &, _Proj = identity, _Tp = std::string]\n 3550 |       operator()(_Range&& __r, const _Tp& __value, _Proj __proj = {}) const\n      |       ^\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/ranges_algo.h:3547:16: note: b\n...\nble = invocable<_Fn, _Args...>;\n      |                                 ^\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/concepts:362:25: note: because 'is_invocable_v<std::ranges::equal_to &, int &, std::basic_string<char> &>' evaluated to false\n  362 |     concept invocable = is_invocable_v<_Fn, _Args...>;\n      |                         ^\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/ranges_algo.h:3540:7: note: candidate function template not viable: requires at least 3 arguments, but 2 were provided\n 3540 |       operator()(_Iter __first, _Sent __last, const _Tp& __value, _Proj __proj = {}) const\n      |       ^          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n1 error generated."
+  },
+  "use_after_close": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "write failed"
+  },
+  "dead_store": {
+   "outcome": "SILENT",
+   "warned": true,
+   "all_warnings": "main.cpp:7:10: warning: unused variable 'total' [-Wunused-variable]\n1 warning generated.",
+   "warnings": "main.cpp:7:10: warning: unused variable 'total' [-Wunused-variable]",
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 134,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "terminate called after throwing an instance of 'std::runtime_error'\n  what():  crash mid-update\nAborted"
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "main.cpp:10:11: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned long') [-Wsign-conversion]\n1 warning generated.",
+   "exit": 134,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/array:210: reference std::array<int, 4>::operator[](size_type) [_Tp = int, _Nm = 4]: Assertion '__n < this->size()' failed.\nAborted"
+  },
+  "use_after_free": {
+   "outcome": "TRAPPED",
+   "warned": true,
+   "all_warnings": "main.cpp:8:14: warning: local variable 'a' is later invalidated [-Wlifetime-safety-invalidation]\n1 warning generated.",
+   "warnings": "main.cpp:8:14: warning: local variable 'a' is later invalidated [-Wlifetime-safety-invalidation]",
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==1393==ERROR: AddressSanitizer: heap-use-after-free on address 0x768482fe0040 at pc 0x5ce10177cbd2 bp 0x7ffeea57a3b0 sp 0x7ffeea57a3a8\nREAD of size 8 at 0x768482fe0040 thread T0\n    #0 0x5ce10177cbd1 in main /tmp/breakbench/use_after_free/main/main.cpp:11:21\n    #1 0x7a5483c76600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #2 0x7a5483c76717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #3 0x5ce10168b034 in _start (/tmp/breakbench/use_after_free/main/main+0x6f034)\n\n0x768482fe0040 is located 0 bytes inside of 32-byte region [0x768482fe0040,0x7\n...\na fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x768482fe0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==1393==ABORTING"
+  },
+  "double_free": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "main.cpp:11:6: warning: no previous extern declaration for non-static variable 'registry' [-Wmissing-variable-declarations]\nmain.cpp:8:5: warning: definition of implicit copy constructor for 'Session' is deprecated because it has a user-provided destructor [-Wdeprecated-copy-with-user-provided-dtor]\n2 warnings generated.",
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==1418==ERROR: AddressSanitizer: attempting double-free on 0x785e171e0040 in thread T0:\n    #0 0x56a56dfad8d2 in operator delete(void*, unsigned long) /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_new_delete.cpp:187:3\n    #1 0x56a56dfae650 in Session::~Session() /tmp/breakbench/double_free/main/main.cpp:8:18\n    #2 0x56a56dfae1b5 in main /tmp/breakbench/double_free/main/main.cpp:18:5\n    #3 0x7c2e17e95600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #4 0x7c2e17e95717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #5 0x56\n...\nw(unsigned long) /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_new_delete.cpp:109:35\n    #1 0x56a56dfae509 in Session::Session(long) /tmp/breakbench/double_free/main/main.cpp:7:36\n    #2 0x56a56dfae151 in main /tmp/breakbench/double_free/main/main.cpp:15:17\n    #3 0x7c2e17e95600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #4 0x7c2e17e95717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #5 0x56a56debc714 in _start (/tmp/breakbench/double_free/main/main+0x6d714)\n\nSUMMARY: AddressSanitizer: double-free /tmp/breakbench/double_free/main/main.cpp:8:18 in Session::~Session()\n==1418==ABORTING"
+  },
+  "dangling_stack_ref": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:5:12: error: non-const lvalue reference to type 'int' cannot bind to a temporary of type 'int'\n    5 |     return local; // BREAK!\n      |            ^~~~~\n1 error generated."
+  },
+  "container_realloc_dangling": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "main.cpp:6:7: warning: no previous extern declaration for non-static variable 'handles' [-Wmissing-variable-declarations]\n1 warning generated.",
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==1468==ERROR: AddressSanitizer: heap-use-after-free on address 0x72fba73e0010 at pc 0x55f7ffff9cc4 bp 0x7ffec1a57a70 sp 0x7ffec1a57a68\nWRITE of size 4 at 0x72fba73e0010 thread T0\n    #0 0x55f7ffff9cc3 in main /tmp/breakbench/container_realloc_dangling/main/main.cpp:15:21\n    #1 0x76dba7fe3600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #2 0x76dba7fe3717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #3 0x55f7fff07cf4 in _start (/tmp/breakbench/container_realloc_dangling/main/main+0x71cf4)\n\n0x72fba73e0010 is located 0 bytes inside of 4-byte re\n...\na fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x72fba73e0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==1468==ABORTING"
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "main.cpp:11:61: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned long') [-Wsign-conversion]\n1 warning generated.",
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "main.cpp:4:23: warning: 'long long' is incompatible with C++98 [-Wc++98-compat-pedantic]\nmain.cpp:4:8: warning: 'long long' is incompatible with C++98 [-Wc++98-compat-pedantic]\n2 warnings generated.",
+   "exit": 1,
+   "rss_mb": 15.3,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==1517==ERROR: AddressSanitizer: stack-overflow on address 0x7ffd67f90ff0 (pc 0x61bcf624e9e0 bp 0x7ffd67f91000 sp 0x7ffd67f90fc0 T0)\n    #0 0x61bcf624e9e0 in walk(long long) /tmp/breakbench/stack_overflow/main/main.cpp:4\n    #1 0x61bcf624ea2d in walk(long long) /tmp/breakbench/stack_overflow/main/main.cpp:6:13\n    #2 0x61bcf624ea2d in walk(long long) /tmp/breakbench/stack_overflow/main/main.cpp:6:13\n    #3 0x61bcf624ea2d in walk(long long) /tmp/breakbench/stack_overflow/main/main.cpp:6:13\n    #4 0x61bcf624ea2d in walk(long long) /tmp/breakbench/stack_overflow/main/main.cpp:6:13\n    #5 0x61bcf624ea2d in walk(long long) /tmp/breakbench/stack_overfl\n...\n walk(long long) /tmp/breakbench/stack_overflow/main/main.cpp:6:13\n    #241 0x61bcf624ea2d in walk(long long) /tmp/breakbench/stack_overflow/main/main.cpp:6:13\n    #242 0x61bcf624ea2d in walk(long long) /tmp/breakbench/stack_overflow/main/main.cpp:6:13\n    #243 0x61bcf624ea2d in walk(long long) /tmp/breakbench/stack_overflow/main/main.cpp:6:13\n    #244 0x61bcf624ea2d in walk(long long) /tmp/breakbench/stack_overflow/main/main.cpp:6:13\n    #245 0x61bcf624ea2d in walk(long long) /tmp/breakbench/stack_overflow/main/main.cpp:6:13\n    #246 0x61bcf624ea2d in walk(long long) /tmp/breakbench/stack_overflow/main/main.cpp:6:13\n\nSUMMARY: AddressSanitizer: stack-overflow /tmp/breakbench/stack_overflow/main/main.cpp:4 in walk(long long)\n==1517==ABORTING"
+  },
+  "error_path_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "main.cpp:6:20: warning: declaration requires an exit-time destructor [-Wexit-time-destructors]\nmain.cpp:6:20: warning: declaration requires a global destructor [-Wglobal-constructors]\n2 warnings generated.",
+   "exit": 0,
+   "rss_mb": 372.9,
+   "secs": 9.51,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "concurrent_map_write": {
+   "outcome": "CRASH",
+   "runs": 10,
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 22.1,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==1614==ERROR: AddressSanitizer: SEGV on unknown address (pc 0x58ed2d19fb11 bp 0x72e6c76ae8e0 sp 0x72e6c76ae810 T6)\n==1614==The signal is caused by a READ memory access.\n==1614==HINT: this fault was caused by a dereference of a high value address (see register values below).  Disassemble the provided pc to learn which register was used.\n    #0 0x58ed2d19fb11 in std::_Hashtable<long, std::pair<long const, long>, std::allocator<std::pair<long const, long>>, std::__detail::_Select1st, std::equal_to<long>, std::hash<long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hash\n...\nr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/alloc_traits.h:676:4\n    #5 0x58ed2d19ab40 in std::thread& std::vector<std::thread, std::allocator<std::thread>>::emplace_back<main::$_0>(main::$_0&&) /usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/vector.tcc:117:6\n    #6 0x58ed2d19a0db in main /tmp/breakbench/concurrent_map_write/main/main.cpp:10:17\n    #7 0x76e6ceb65600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #8 0x76e6ceb65717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #9 0x58ed2d0a8564 in _start (/tmp/breakbench/concurrent_map_write/main/main+0x7b564)\n\n==1614==ABORTING"
+  },
+  "reference_cycle_leak": {
+   "outcome": "LEAK",
+   "warned": false,
+   "exit": 137,
+   "rss_mb": 3059.4,
+   "secs": 1.47,
+   "stdout": "",
+   "stderr": "Killed"
+  },
+  "view_retention": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 346.3,
+   "secs": 0.3,
+   "stdout": "40000",
+   "stderr": ""
+  },
+  "huge_allocation": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==1755==ERROR: AddressSanitizer: requested allocation size 0x9184e72a000 (0x9184e72b000 after adjustments for alignment, red zones etc.) exceeds maximum supported size of 0x10000000000 (thread T0)\n    #0 0x6020a6b6354d in operator new(unsigned long) /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_new_delete.cpp:109:35\n    #1 0x6020a6b68a1e in std::__new_allocator<unsigned char>::allocate(unsigned long, void const*) /usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/new_allocator.h:151:27\n    #2 0x6020a6b68941 in std::allocator<unsigned char>::allocate(unsigned long) /usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/allocator.\n...\ngned char> const&) /usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/stl_vector.h:587:9\n    #8 0x6020a6b64cb9 in main /tmp/breakbench/huge_allocation/main/main.cpp:7:32\n    #9 0x7d30162ee600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #10 0x7d30162ee717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #11 0x6020a6a72fe4 in _start (/tmp/breakbench/huge_allocation/main/main+0x71fe4)\n\n==1755==HINT: if you don't care about these errors you may set allocator_may_return_null=1\nSUMMARY: AddressSanitizer: allocation-size-too-big /tmp/breakbench/huge_allocation/main/main.cpp:7:32 in main\n==1755==ABORTING"
+  },
+  "fd_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 59.3,
+   "secs": 0.02,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 134,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "terminate called after throwing an instance of 'std::bad_variant_access'\n  what():  std::get: wrong index for variant\nAborted"
+  },
+  "format_string": {
+   "outcome": "CRASH",
+   "warned": true,
+   "all_warnings": "main.cpp:4:17: warning: format string is not a string literal (potentially insecure) [-Wformat-security]\n1 warning generated.",
+   "warnings": "main.cpp:4:17: warning: format string is not a string literal (potentially insecure) [-Wformat-security]",
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==1828==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000001 (pc 0x7a772a9aa8f2 bp 0x7ffdfb8c1290 sp 0x7ffdfb8c0d70 T0)\n==1828==The signal is caused by a WRITE memory access.\n==1828==HINT: address points to the zero page.\n    #0 0x7a772a9aa8f2  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x6f8f2) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #1 0x7a772a9ab767  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x70767) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #2 0x5ddfcb1aff5f in printf /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/../sanitizer_common/sanitizer_common_interceptors.inc:1851:1\n    #3 0x5ddfcb275b86\n...\n27f8d0a68e29d750303f0c6)\n    #6 0x5ddfcb184174 in _start (/tmp/breakbench/format_string/main/main+0x6d174)\n\n==1828==Register values:\nrax = 0x0000000000000006  rbx = 0x00007ffdfb8c12d0  rcx = 0x0000000000000000  rdx = 0x0000000000000006  \nrdi = 0x0000000000000000  rsi = 0x00007a772ab0f360  rbp = 0x00007ffdfb8c1290  rsp = 0x00007ffdfb8c0d70  \n r8 = 0x0000000000000000   r9 = 0x0000000000000000  r10 = 0x00000000ffffffff  r11 = 0x0000000000000000  \nr12 = 0x0000000000000000  r13 = 0x0000000000000000  r14 = 0x0000000000000001  r15 = 0x00007ffdfb8c1ed9  \nAddressSanitizer can not provide additional info.\nSUMMARY: AddressSanitizer: SEGV (/usr/lib/x86_64-linux-gnu/libc.so.6+0x6f8f2) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6) \n==1828==ABORTING"
+  },
+  "deep_structure_release": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 49.7,
+   "secs": 0.22,
+   "stdout": "",
+   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==1853==ERROR: AddressSanitizer: stack-overflow on address 0x7fff0b854ff8 (pc 0x592993524d70 bp 0x7fff0b855000 sp 0x7fff0b854fe0 T0)\n    #0 0x592993524d70 in Node*& std::__get_helper<0ul, Node*, std::default_delete<Node>>(std::_Tuple_impl<0ul, Node*, std::default_delete<Node>>&) /usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/tuple:2429\n    #1 0x592993524d1a in std::tuple_element<0ul, std::tuple<Node*, std::default_delete<Node>>>::type& std::get<0ul, Node*, std::default_delete<Node>>(std::tuple<Node*, std::default_delete<Node>>&) /usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/tuple:2445:14\n    #2 0x592993524c70 in std::__\n...\n.h:92:2\n    #243 0x5929935225ba in std::unique_ptr<Node, std::default_delete<Node>>::~unique_ptr() /usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/unique_ptr.h:398:4\n    #244 0x592993522638 in Node::~Node() /tmp/breakbench/deep_structure_release/main/main.cpp:5:8\n    #245 0x5929935258c0 in std::default_delete<Node>::operator()(Node*) const /usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/unique_ptr.h:92:2\n    #246 0x5929935225ba in std::unique_ptr<Node, std::default_delete<Node>>::~unique_ptr() /usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/unique_ptr.h:398:4\n\nSUMMARY: AddressSanitizer: stack-overflow /tmp/breakbench/deep_structure_release/main/main.cpp:5:8 in Node::~Node()\n==1853==ABORTING"
+  },
+  "abandoned_worker_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 314.9,
+   "secs": 2.16,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "jello",
+   "stderr": ""
+  }
+ }
+}

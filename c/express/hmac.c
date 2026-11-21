@@ -1,0 +1,1 @@
+// CANNOT-EXPRESS: no HMAC in ISO C or POSIX

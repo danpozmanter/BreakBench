@@ -1,0 +1,15 @@
+// LEVEL: STD
+
+use std::{encoding::json, errors}
+
+struct Config {
+    port: i64
+    debug: bool
+}
+
+fn main() -> Result<(), errors::Error> {
+    let good = json::decode::<Config>("{\"port\": 8080, \"debug\": true}")?
+    let bad = json::decode::<Config>("{port: 8080}")
+    println(f"{good.port} {if bad.is_err() { "invalid" } else { "valid" }}")
+    Ok(())
+}

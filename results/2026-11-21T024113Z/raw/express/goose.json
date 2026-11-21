@@ -1,0 +1,549 @@
+{
+ "lang": "goose",
+ "version": "goose 9412b80f",
+ "results": {
+  "threads_shared_memory": {
+   "outcome": "NONE",
+   "message": "threads never share memory"
+  },
+  "mutex": {
+   "outcome": "NONE",
+   "message": "threads never share memory"
+  },
+  "atomic_counter": {
+   "outcome": "NONE",
+   "message": "threads never share memory"
+  },
+  "channel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "background_task": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.05,
+   "stdout": "started\n7",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "join_with_failure": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "worker failed: bad input (main.goose:4)",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "task_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "timed out",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "task_cancel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "stopped",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "concurrent_map": {
+   "outcome": "NONE",
+   "message": "threads never share memory"
+  },
+  "thread_safety_check": {
+   "outcome": "NONE",
+   "message": "threads never share memory, so threads cannot share a list"
+  },
+  "lock_owns_data": {
+   "outcome": "NONE",
+   "message": "threads never share memory"
+  },
+  "spawn_argv": {
+   "outcome": "NONE",
+   "message": "no subprocess API in the standard library"
+  },
+  "exit_status": {
+   "outcome": "NONE",
+   "message": "no subprocess API in the standard library"
+  },
+  "env_absent": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "absent",
+   "stderr": "",
+   "level": "STD"
+  },
+  "signal_graceful": {
+   "outcome": "NONE",
+   "message": "no signal handling in the standard library"
+  },
+  "secure_temp_file": {
+   "outcome": "NONE",
+   "message": "no temporary-file call in the standard library"
+  },
+  "file_permissions": {
+   "outcome": "NONE",
+   "message": "no call that sets file permissions in the standard library"
+  },
+  "process_timeout": {
+   "outcome": "NONE",
+   "message": "no process API in the standard library"
+  },
+  "regex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "STD"
+  },
+  "regex_linear": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "no match",
+   "stderr": "",
+   "level": "STD"
+  },
+  "graphemes": {
+   "outcome": "NONE",
+   "message": "no grapheme segmentation in the standard library"
+  },
+  "unicode_normalize": {
+   "outcome": "NONE",
+   "message": "no Unicode normalization in the standard library"
+  },
+  "utf8_validate": {
+   "outcome": "NONE",
+   "message": "no UTF-8 validation in the standard library"
+  },
+  "html_escape": {
+   "outcome": "NONE",
+   "message": "no HTML escaping in the standard library"
+  },
+  "json_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "8080 invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "checked_add": {
+   "outcome": "NONE",
+   "message": "no checked addition that reports overflow as a value; overflow aborts"
+  },
+  "wrapping_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "saturating_add": {
+   "outcome": "NONE",
+   "message": "no saturating arithmetic"
+  },
+  "bigint": {
+   "outcome": "NONE",
+   "message": "no arbitrary-precision integers in the standard library"
+  },
+  "unsigned64": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "18446744073709551615",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "int128": {
+   "outcome": "NONE",
+   "message": "no 128-bit integer type"
+  },
+  "decimal": {
+   "outcome": "NONE",
+   "message": "no decimal type in the standard library"
+  },
+  "checked_narrowing": {
+   "outcome": "NONE",
+   "message": "no checked narrowing conversion that reports failure as a value"
+  },
+  "literal_range": {
+   "outcome": "PASS",
+   "refusal": "main.goose:5: error: constant 300 does not fit u8",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "float_to_int_checked": {
+   "outcome": "NONE",
+   "message": "no checked float-to-integer conversion that reports failure as a value"
+  },
+  "strict_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sorted_map": {
+   "outcome": "NONE",
+   "message": "no sorted map in the standard library"
+  },
+  "sorted_set": {
+   "outcome": "NONE",
+   "message": "no sorted set in the standard library"
+  },
+  "insertion_ordered_map": {
+   "outcome": "NONE",
+   "message": "no insertion-ordered map in the standard library"
+  },
+  "deque": {
+   "outcome": "NONE",
+   "message": "no deque in the standard library"
+  },
+  "priority_queue": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "STD"
+  },
+  "counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a=2 b=1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "bitset": {
+   "outcome": "NONE",
+   "message": "no bit set in the standard library"
+  },
+  "fixed_array_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "tuple": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 a",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "immutable_collection": {
+   "outcome": "PASS",
+   "refusal": "main.goose:5: error: cannot assign through this path (const, or a read-only instantiation, \u00a79.5)",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "readonly_param": {
+   "outcome": "PASS",
+   "refusal": "main.goose:4: error: cannot assign through this path (const, or a read-only instantiation, \u00a79.5)",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "value_struct": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "complete_init": {
+   "outcome": "PASS",
+   "refusal": "main.goose:7: error: missing initializer for field retries of Config (it has no default)",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5 3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "composite_key": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "true",
+   "stderr": "",
+   "level": "STD"
+  },
+  "checked_index": {
+   "outcome": "NONE",
+   "message": "no index lookup that returns a missing value"
+  },
+  "sum_type_exhaustive": {
+   "outcome": "PASS",
+   "refusal": "main.goose:15: error: match does not cover variant Shape.Square",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "circle",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "optional_type": {
+   "outcome": "PASS",
+   "refusal": "main.goose:5: error: operator + cannot be applied to i64? and i64",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "none",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "newtype": {
+   "outcome": "PASS",
+   "refusal": "main.goose:10: error: no matching overload for call to add",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5.0",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "total_float_sort": {
+   "outcome": "NONE",
+   "message": "no total-order comparison for floats in the standard library"
+  },
+  "date_time_zone": {
+   "outcome": "NONE",
+   "message": "no time zone database in the standard library"
+  },
+  "duration": {
+   "outcome": "NONE",
+   "message": "no duration type in the standard library"
+  },
+  "byte_buffer": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100000",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "error_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "error",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "must_handle_error": {
+   "outcome": "NONE",
+   "message": "a call statement drops its result"
+  },
+  "typed_catch": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "caught A\npassed B",
+   "stderr": "",
+   "level": "STD"
+  },
+  "error_chain": {
+   "outcome": "NONE",
+   "message": "no error values with causes"
+  },
+  "stack_trace": {
+   "outcome": "NONE",
+   "message": "no stack trace capture in the standard library"
+  },
+  "cleanup_on_error": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "released\nreleased",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "cleanup_on_panic": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "cleanup\nrecovered",
+   "stderr": "",
+   "level": "STD"
+  },
+  "recover_worker_crash": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "worker crashed",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "recover_allocation_failure": {
+   "outcome": "NONE",
+   "message": "allocation failure ends the program"
+  },
+  "recover_stack_overflow": {
+   "outcome": "NONE",
+   "message": "native stack exhaustion ends the program"
+  },
+  "unhandled_hook": {
+   "outcome": "NONE",
+   "message": "no handler for an abort"
+  },
+  "assertion": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "goose runtime error: assert failed (main.goose:7)",
+   "level": "LANGUAGE"
+  },
+  "path_containment": {
+   "outcome": "NONE",
+   "message": "no path normalization in the standard library"
+  },
+  "constant_time_compare": {
+   "outcome": "NONE",
+   "message": "no constant-time comparison in the standard library"
+  },
+  "secure_random": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "36de9b475bbd24cd31f5e365e5ba2f6c",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sha256": {
+   "outcome": "NONE",
+   "message": "no SHA-256 in the standard library"
+  },
+  "password_hash": {
+   "outcome": "NONE",
+   "message": "no password hash in the standard library"
+  },
+  "hmac": {
+   "outcome": "NONE",
+   "message": "no HMAC in the standard library"
+  },
+  "aead_encrypt": {
+   "outcome": "NONE",
+   "message": "no authenticated cipher in the standard library"
+  },
+  "weak_reference": {
+   "outcome": "NONE",
+   "message": "no weak references"
+  },
+  "consumed_value": {
+   "outcome": "NONE",
+   "message": "no ownership tracking: a value stays usable after a call that consumes it"
+  },
+  "no_implicit_conversion": {
+   "outcome": "PASS",
+   "refusal": "main.goose:6: error: expected a value of type i32, got i64 (narrowing and sign changes require an explicit `as`)",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "42",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "mixed_sign_compare": {
+   "outcome": "PASS",
+   "refusal": "main.goose:6: error: comparing i64 with u64 needs the signed side to be known non-negative (a literal, .len/.cap, or a `let` bound to one); convert it with `as` otherwise",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "less",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "nonnull_reference": {
+   "outcome": "PASS",
+   "refusal": "main.goose:7: error: null is only a value of optional types, not Config",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "app",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "definite_assignment": {
+   "outcome": "PASS",
+   "refusal": "main.goose:9: error: variable y may be used before it is assigned",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "immutable_binding": {
+   "outcome": "PASS",
+   "refusal": "main.goose:5: error: cannot assign to let x (\u00a74.4)",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unused_value_refused": {
+   "outcome": "NONE",
+   "message": "an unused variable is accepted"
+  },
+  "exhaustive_return": {
+   "outcome": "PASS",
+   "refusal": "main.goose:9: error: function bad must return value(s)",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "exclusive_mutation": {
+   "outcome": "NONE",
+   "message": "nothing refuses passing one value as two mutable arguments"
+  }
+ }
+}

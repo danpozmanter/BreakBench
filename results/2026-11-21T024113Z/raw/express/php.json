@@ -1,0 +1,544 @@
+{
+ "lang": "php",
+ "version": "PHP 8.5.4 (cli) (built: Oct 19 2026 14:35:18) (NTS)",
+ "results": {
+  "threads_shared_memory": {
+   "outcome": "NONE",
+   "message": "no threads in the language or its standard library"
+  },
+  "mutex": {
+   "outcome": "NONE",
+   "message": "no threads in the language or its standard library"
+  },
+  "atomic_counter": {
+   "outcome": "NONE",
+   "message": "no threads in the language or its standard library"
+  },
+  "channel": {
+   "outcome": "NONE",
+   "message": "no threads in the language or its standard library"
+  },
+  "background_task": {
+   "outcome": "NONE",
+   "message": "no threads or asynchronous tasks in the language or its standard library"
+  },
+  "join_with_failure": {
+   "outcome": "NONE",
+   "message": "no threads or asynchronous tasks in the language or its standard library"
+  },
+  "task_timeout": {
+   "outcome": "NONE",
+   "message": "no threads or asynchronous tasks in the language or its standard library"
+  },
+  "task_cancel": {
+   "outcome": "NONE",
+   "message": "no threads or asynchronous tasks in the language or its standard library"
+  },
+  "concurrent_map": {
+   "outcome": "NONE",
+   "message": "no threads in the language or its standard library"
+  },
+  "thread_safety_check": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "lock_owns_data": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "spawn_argv": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "hi; touch /tmp/bb_x",
+   "stderr": "",
+   "level": "STD"
+  },
+  "exit_status": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "env_absent": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "absent",
+   "stderr": "",
+   "level": "STD"
+  },
+  "signal_graceful": {
+   "outcome": "NONE",
+   "message": "signal handling needs the pcntl extension, which PHP does not enable by default"
+  },
+  "secure_temp_file": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "ok",
+   "stderr": "",
+   "level": "STD"
+  },
+  "file_permissions": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "600",
+   "stderr": "",
+   "level": "STD"
+  },
+  "process_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.11,
+   "stdout": "killed",
+   "stderr": "",
+   "level": "STD"
+  },
+  "regex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "STD"
+  },
+  "regex_linear": {
+   "outcome": "NONE",
+   "message": "the standard regex engine backtracks; there is no linear-time engine"
+  },
+  "graphemes": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "abcdefgh\ud83d\udc4d\ud83c\udffd",
+   "stderr": "",
+   "level": "STD"
+  },
+  "unicode_normalize": {
+   "outcome": "NONE",
+   "message": "normalization needs the intl extension, which PHP does not enable by default"
+  },
+  "utf8_validate": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "html_escape": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "&lt;a href=&quot;x&quot;&gt;Tom &amp; Jerry&lt;/a&gt;",
+   "stderr": "",
+   "level": "STD"
+  },
+  "json_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "8080 invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "checked_add": {
+   "outcome": "NONE",
+   "message": "no checked integer addition; int overflows into float"
+  },
+  "wrapping_add": {
+   "outcome": "NONE",
+   "message": "no wrapping integer addition; int overflows into float"
+  },
+  "saturating_add": {
+   "outcome": "NONE",
+   "message": "no fixed-width integer type"
+  },
+  "bigint": {
+   "outcome": "NONE",
+   "message": "arbitrary precision needs the gmp or bcmath extension, which PHP does not enable by default"
+  },
+  "unsigned64": {
+   "outcome": "NONE",
+   "message": "no unsigned integer types"
+  },
+  "int128": {
+   "outcome": "NONE",
+   "message": "no 128-bit integer type"
+  },
+  "decimal": {
+   "outcome": "NONE",
+   "message": "decimal arithmetic needs the bcmath extension, which PHP does not enable by default"
+  },
+  "checked_narrowing": {
+   "outcome": "NONE",
+   "message": "no fixed-width integer type"
+  },
+  "literal_range": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "float_to_int_checked": {
+   "outcome": "NONE",
+   "message": "no checked float-to-integer conversion"
+  },
+  "strict_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sorted_map": {
+   "outcome": "NONE",
+   "message": "no sorted map in the standard library"
+  },
+  "sorted_set": {
+   "outcome": "NONE",
+   "message": "no sorted set in the standard library"
+  },
+  "insertion_ordered_map": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "c a b",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "deque": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0 2",
+   "stderr": "",
+   "level": "STD"
+  },
+  "priority_queue": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "STD"
+  },
+  "counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a=2 b=1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "bitset": {
+   "outcome": "NONE",
+   "message": "no bit set in the standard library"
+  },
+  "fixed_array_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "tuple": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1 a",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "immutable_collection": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "readonly_param": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "value_struct": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "complete_init": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "composite_key": {
+   "outcome": "NONE",
+   "message": "array keys must be integers or strings, and object sets compare by identity"
+  },
+  "checked_index": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "none",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "sum_type_exhaustive": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "optional_type": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "newtype": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "total_float_sort": {
+   "outcome": "NONE",
+   "message": "no total-order comparison for floats"
+  },
+  "date_time_zone": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2026-03-29 03:30",
+   "stderr": "",
+   "level": "STD"
+  },
+  "duration": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "byte_buffer": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "100000",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "error_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "error",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "must_handle_error": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "typed_catch": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "caught A\npassed B",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "error_chain": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "loading config: not found\nnot found",
+   "stderr": "",
+   "level": "STD"
+  },
+  "stack_trace": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "inner",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "cleanup_on_error": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "released\nreleased",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "cleanup_on_panic": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "cleanup\nrecovered",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "recover_worker_crash": {
+   "outcome": "NONE",
+   "message": "no threads in the language or its standard library"
+  },
+  "recover_allocation_failure": {
+   "outcome": "NONE",
+   "message": "exhausting memory is a fatal error, not an exception"
+  },
+  "recover_stack_overflow": {
+   "outcome": "NONE",
+   "message": "deep recursion ends the process"
+  },
+  "unhandled_hook": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "hook ran",
+   "stderr": "",
+   "level": "STD"
+  },
+  "assertion": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 255,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "PHP Fatal error:  Uncaught AssertionError: assert(count($argv) + 1 === 3) in /tmp/breakbench/express-assertion/main/main.php:6\nStack trace:\n#0 /tmp/breakbench/express-assertion/main/main.php(6): assert()\n#1 {main}\n  thrown in /tmp/breakbench/express-assertion/main/main.php on line 6\nFatal error: Uncaught AssertionError: assert(count($argv) + 1 === 3) in /tmp/breakbench/express-assertion/main/main.php:6\nStack trace:\n#0 /tmp/breakbench/express-assertion/main/main.php(6): assert()\n#1 {main}\n  thrown in /tmp/breakbench/express-assertion/main/main.php on line 6",
+   "level": "LANGUAGE"
+  },
+  "path_containment": {
+   "outcome": "NONE",
+   "message": "realpath needs the path to exist; no lexical normalization"
+  },
+  "constant_time_compare": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "STD"
+  },
+  "secure_random": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "6b0f2cd6daeb725a27efbbdfe8d9e8a4",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sha256": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+   "stderr": "",
+   "level": "STD"
+  },
+  "password_hash": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.4,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "STD"
+  },
+  "hmac": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8",
+   "stderr": "",
+   "level": "STD"
+  },
+  "aead_encrypt": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "secret\nrejected",
+   "stderr": "",
+   "level": "STD"
+  },
+  "weak_reference": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "gone",
+   "stderr": "",
+   "level": "STD"
+  },
+  "consumed_value": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "no_implicit_conversion": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "mixed_sign_compare": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "nonnull_reference": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "definite_assignment": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "immutable_binding": {
+   "outcome": "PASS",
+   "refusal": "Errors parsing main.php\nPHP Parse error:  syntax error, unexpected token \"=\" in main.php on line 6",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unused_value_refused": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "exhaustive_return": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "exclusive_mutation": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  }
+ }
+}

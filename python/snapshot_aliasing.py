@@ -1,0 +1,9 @@
+def apply_update(weights):
+    weights[1] = 5
+    weights[3] = 0
+
+
+weights = [3, 3, 3, 3]
+before = weights
+apply_update(weights)
+print(sum(1 for b, w in zip(before, weights) if b != w))

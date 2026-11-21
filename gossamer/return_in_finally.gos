@@ -1,0 +1,17 @@
+use std::errors
+
+fn write_report() -> Result<(), errors::Error> {
+    Err(errors::new("disk full"))
+}
+
+fn close_log() {}
+
+fn save_report() -> Result<(), errors::Error> {
+    defer close_log()
+    write_report()?
+    Ok(())
+}
+
+fn main() {
+    println(if save_report().is_ok() { "saved" } else { "failed" })
+}

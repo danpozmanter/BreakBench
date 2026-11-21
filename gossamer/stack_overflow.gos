@@ -1,0 +1,13 @@
+use std::env
+
+fn walk(n: i64) -> i64 {
+    if n == 0 {
+        return 0
+    }
+    (walk(n - 1) * 31 + n) % 1000000007
+}
+
+fn main() {
+    let n = env::args()[0].to_i64().unwrap()
+    println(f"{walk(n)}")
+}

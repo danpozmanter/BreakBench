@@ -1,0 +1,11 @@
+struct Rec {
+    value: i64
+}
+
+fn main() {
+    let mut a = Some(Rec { value: 1234 })
+    let b = a
+    a = None
+    let c = Rec { value: 6666 }
+    println(f"{b.unwrap().value}")
+}

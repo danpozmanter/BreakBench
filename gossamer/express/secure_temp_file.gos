@@ -1,0 +1,11 @@
+// LEVEL: STD
+
+use std::{errors, fs}
+
+fn main() -> Result<(), errors::Error> {
+    let dir = fs::temp_dir("bb")?
+    let path = f"{dir}/note.txt"
+    fs::write(path, "ok".as_bytes())?
+    println(fs::read_to_string(path)?)
+    Ok(())
+}

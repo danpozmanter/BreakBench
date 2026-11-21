@@ -1,0 +1,10 @@
+// LEVEL: STD
+
+use std::{errors, fs}
+
+fn main() -> Result<(), errors::Error> {
+    let path = "/tmp/bb_perm.txt"
+    fs::write_mode(path, "".as_bytes(), 0o600)?
+    println(f"{fs::permissions(path)? & 0o777:o}")
+    Ok(())
+}

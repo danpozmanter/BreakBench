@@ -1,0 +1,575 @@
+{
+ "lang": "kotlin",
+ "version": "info: kotlinc-jvm 2.4.21 (JRE 27.0.1.1+4)",
+ "results": {
+  "null_deref": {
+   "outcome": "REJECTED",
+   "message": "main.kt:7:14: error: only safe (?.) or non-null asserted (!!.) calls are allowed on a nullable receiver of type 'User?'.\n    println(u.name.length) // BREAK!\n             ^"
+  },
+  "int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 42.0,
+   "secs": 0.02,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 41.2,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArithmeticException: / by zero\n\tat MainKt.main(main.kt:3)"
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 41.7,
+   "secs": 0.02,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 42.4,
+   "secs": 0.02,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 46.4,
+   "secs": 0.03,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "main.kt:5:17: error: argument type mismatch: actual type is 'String', but 'Long' was expected.\n    println(add(raw, 3)) // BREAK!\n                ^^^"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "main.kt:5:1: error: missing return statement.\n}\n^"
+  },
+  "non_exhaustive_match": {
+   "outcome": "REJECTED",
+   "message": "main.kt:3:30: error: 'when' expression must be exhaustive. Add the 'BLUE' branch or an 'else' branch.\nfun name(c: Color): String = when (c) {\n                             ^^^^"
+  },
+  "uninitialized_variable": {
+   "outcome": "REJECTED",
+   "message": "main.kt:5:13: error: variable 'x' must be initialized.\n    println(x) // BREAK!\n            ^"
+  },
+  "missing_argument": {
+   "outcome": "REJECTED",
+   "message": "main.kt:4:13: error: no value passed for parameter 'h'.\n    println(area(3)) // BREAK!\n            ^^^^"
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "main.kt:7:9: error: unresolved reference 'colour' on receiver of type 'Config'.\n    cfg.colour = \"red\" // BREAK!\n        ^^^^^^"
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "main.kt:4:9: error: only expressions are allowed in this context.\n    if (x = 1) label = \"one\" // BREAK!\n        ^^^^^"
+  },
+  "switch_fallthrough": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 42.1,
+   "secs": 0.02,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "REJECTED",
+   "message": "main.kt:4:9: error: condition type mismatch: inferred type is 'Int?' but 'Boolean' was expected.\n    if (qty) present = true // BREAK!\n        ^^^"
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 42.0,
+   "secs": 0.02,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 41.7,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.NumberFormatException: For input string: \"12abc\"\n\tat java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)\n\tat java.base/java.lang.Integer.parseInt(Integer.java:529)\n\tat java.base/java.lang.Integer.parseInt(Integer.java:626)\n\tat MainKt.main(main.kt:2)"
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "main.kt:7:38: error: initializer type mismatch: expected 'MutableList<Animal>', actual 'MutableList<Dog>'.\n    val animals: MutableList<Animal> = dogs // BREAK!\n                                     ^"
+  },
+  "mutate_while_iterating": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 42.5,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.util.ConcurrentModificationException\n\tat java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1104)\n\tat java.base/java.util.ArrayList$Itr.next(ArrayList.java:1058)\n\tat MainKt.main(main.kt:3)\n\tat MainKt.main(main.kt)"
+  },
+  "self_deadlock": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 40.8,
+   "secs": 0.02,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 43.7,
+   "secs": 0.03,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 42.7,
+   "secs": 0.02,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 41.7,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.io.FileNotFoundException: /nonexistent/dir/out.txt (No such file or directory)\n\tat java.base/java.io.FileOutputStream.open0(Native Method)\n\tat java.base/java.io.FileOutputStream.open(FileOutputStream.java:255)\n\tat java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:210)\n\tat java.base/java.io.FileOutputStream.<init>(FileOutputStream.java:171)\n\tat kotlin.io.FilesKt__FileReadWriteKt.writeText(FileReadWrite.kt:145)\n\tat kotlin.io.FilesKt__FileReadWriteKt.writeText$default(FileReadWrite.kt:144)\n\tat MainKt.save(main.kt:4)\n\tat MainKt.main(main.kt:8)\n\tat MainKt.main(main.kt)"
+  },
+  "sort_with_nan": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 42.4,
+   "secs": 0.02,
+   "stdout": "ordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "REJECTED",
+   "message": "main.kt:5:21: error: initializer type mismatch: expected 'Double', actual 'Int'.\n    val avg: Double = sum / count // BREAK!\n                    ^"
+  },
+  "leading_zero_literal": {
+   "outcome": "REJECTED",
+   "message": "main.kt:2:15: error: leading zeros are not allowed in integer literals.\n    val zip = 01234 // BREAK!\n              ^^^^^"
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 41.3,
+   "secs": 0.02,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 46.4,
+   "secs": 0.03,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 41.7,
+   "secs": 0.02,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 41.5,
+   "secs": 0.02,
+   "stdout": "unset",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "main.kt:3:26: error: argument type mismatch: actual type is 'Int', but 'Boolean' was expected.\n    val inside = 1 < x < 3 // BREAK!\n                         ^"
+  },
+  "lost_update_on_copy": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 43.4,
+   "secs": 0.02,
+   "stdout": "150",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "main.kt:5:26: warning: 'fun exec(p0: String!): Process!' is deprecated. Deprecated in Java.",
+   "exit": 0,
+   "rss_mb": 46.1,
+   "secs": 0.03,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 41.8,
+   "secs": 0.02,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "exit": -9,
+   "rss_mb": 14.8,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "path_join_escape": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 41.4,
+   "secs": 0.02,
+   "stdout": "escaped",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 42.3,
+   "secs": 0.02,
+   "stdout": "no match",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 41.7,
+   "secs": 0.02,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "main.kt:4:14: error: syntax error: Expecting ','.\n        \"bob\" // CONTROL! \"bob\",\n             ^"
+  },
+  "return_in_finally": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 41.3,
+   "secs": 0.02,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "REJECTED",
+   "message": "main.kt:2:5: error: return type mismatch: expected 'Long', actual 'Unit'.\n    return // CONTROL! return a + b\n    ^^^^^^"
+  },
+  "worker_failure_lost": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 41.4,
+   "secs": 0.02,
+   "stdout": "total 3",
+   "stderr": "Exception in thread \"Thread-0\" java.lang.NumberFormatException: For input string: \"x\"\n\tat java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)\n\tat java.base/java.lang.Long.parseLong(Long.java:556)\n\tat java.base/java.lang.Long.parseLong(Long.java:660)\n\tat MainKt.main$lambda$0(main.kt:6)\n\tat kotlin.concurrent.ThreadsKt$thread$thread$1.run(Thread.kt:30)"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 41.8,
+   "secs": 0.07,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 46.0,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.util.MissingFormatArgumentException: Format specifier '%d'\n\tat java.base/java.util.Formatter.format(Formatter.java:2760)\n\tat java.base/java.util.Formatter.format(Formatter.java:2698)\n\tat java.base/java.lang.String.format(String.java:4830)\n\tat MainKt.main(main.kt:4)\n\tat MainKt.main(main.kt)"
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 42.1,
+   "secs": 0.02,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "REJECTED",
+   "message": "main.kt:4:25: error: operator call is prohibited on a nullable receiver of type 'Int?'. Use '?.'-qualified call instead.\n    println(stock[name] + 5) // CONTROL! println(stock[name]?.plus(5) ?: \"unknown\")\n                        ^"
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 46.0,
+   "secs": 0.03,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 41.5,
+   "secs": 0.02,
+   "stdout": "pending",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 41.6,
+   "secs": 0.02,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 46.5,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 3\n\tat java.base/java.util.Arrays$ArrayList.get(Arrays.java:4225)\n\tat MainKt.main(main.kt:4)"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 47.3,
+   "secs": 0.03,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "main.kt:4:21: error: type inference failed. The value of the type parameter 'T' must be mentioned in input types (argument types, receiver type, or expected type). Try to specify it explicitly.\n    println(if (ids.contains(id)) \"found\" else \"missing\") // CONTROL! println(if (ids.contains(id.toInt())) \"found\" else \"missing\")\n                    ^^^^^^^^"
+  },
+  "use_after_close": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 41.6,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.io.IOException: Stream closed\n\tat java.base/sun.nio.cs.StreamEncoder.ensureOpen(StreamEncoder.java:50)\n\tat java.base/sun.nio.cs.StreamEncoder.write(StreamEncoder.java:115)\n\tat java.base/sun.nio.cs.StreamEncoder.write(StreamEncoder.java:132)\n\tat java.base/java.io.OutputStreamWriter.write(OutputStreamWriter.java:224)\n\tat java.base/java.io.Writer.write(Writer.java:248)\n\tat MainKt.main(main.kt:7)\n\tat MainKt.main(main.kt)"
+  },
+  "dead_store": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 41.4,
+   "secs": 0.02,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 42.5,
+   "secs": 0.02,
+   "stdout": "unbalanced",
+   "stderr": "Exception in thread \"Thread-0\" java.lang.IllegalStateException: crash mid-update\n\tat MainKt.post(main.kt:12)\n\tat MainKt.main$lambda$0(main.kt:18)\n\tat kotlin.concurrent.ThreadsKt$thread$thread$1.run(Thread.kt:30)"
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 41.6,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4\n\tat MainKt.main(main.kt:9)"
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 41.0,
+   "secs": 0.02,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 40.4,
+   "secs": 0.02,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 40.7,
+   "secs": 0.02,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 43.2,
+   "secs": 0.02,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 45.7,
+   "secs": 0.03,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 43.7,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.StackOverflowError\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(mai\n...\nainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)\n\tat MainKt.walk(main.kt:3)"
+  },
+  "error_path_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 284.4,
+   "secs": 0.48,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "concurrent_map_write": {
+   "outcome": "HANG",
+   "runs": 10,
+   "warned": false,
+   "exit": -9,
+   "rss_mb": 14.8,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "reference_cycle_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 280.0,
+   "secs": 0.24,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "view_retention": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 323.7,
+   "secs": 0.63,
+   "stdout": "40000",
+   "stderr": ""
+  },
+  "huge_allocation": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 60.0,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.OutOfMemoryError: Java heap space\n\tat MainKt.main(main.kt:3)"
+  },
+  "fd_leak": {
+   "outcome": "LEAK",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 42.5,
+   "secs": 0.07,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.io.FileNotFoundException: /tmp/bb_fd.txt (Too many open files)\n\tat java.base/java.io.FileInputStream.open0(Native Method)\n\tat java.base/java.io.FileInputStream.open(FileInputStream.java:185)\n\tat java.base/java.io.FileInputStream.<init>(FileInputStream.java:139)\n\tat java.base/java.io.FileInputStream.<init>(FileInputStream.java:109)\n\tat MainKt.main(main.kt:8)"
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 41.1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ClassCastException: class Value$IntValue cannot be cast to class Value$Text (Value$IntValue and Value$Text are in unnamed module of loader 'app')\n\tat MainKt.main(main.kt:8)\n\tat MainKt.main(main.kt)"
+  },
+  "format_string": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 42.1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.util.MissingFormatArgumentException: Format specifier '%s'\n\tat java.base/java.util.Formatter.format(Formatter.java:2760)\n\tat java.base/java.util.Formatter.format(Formatter.java:2698)\n\tat java.base/java.lang.String.format(String.java:4830)\n\tat MainKt.main(main.kt:2)"
+  },
+  "deep_structure_release": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 72.9,
+   "secs": 0.11,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "abandoned_worker_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 295.5,
+   "secs": 0.24,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "main.kt:3:13: error: no 'set' operator method providing array access.\n    greeting[0] = 'j' // CONTROL! greeting = \"j\" + greeting.substring(1)\n            ^^^"
+  }
+ }
+}

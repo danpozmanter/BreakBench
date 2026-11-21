@@ -1,0 +1,1 @@
+-- CANNOT-EXPRESS: linear types need the LinearTypes extension, an opt-in

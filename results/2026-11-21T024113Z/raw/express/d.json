@@ -1,0 +1,684 @@
+{
+ "lang": "d",
+ "version": "LDC - the LLVM D compiler (1.43.0):",
+ "results": {
+  "threads_shared_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "45",
+   "stderr": "",
+   "level": "STD"
+  },
+  "mutex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "atomic_counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "channel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "STD"
+  },
+  "background_task": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "started\n7",
+   "stderr": "",
+   "level": "STD"
+  },
+  "join_with_failure": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "worker failed: bad input",
+   "stderr": "",
+   "level": "STD"
+  },
+  "task_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "timed out",
+   "stderr": "",
+   "level": "STD"
+  },
+  "task_cancel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "stopped",
+   "stderr": "",
+   "level": "STD"
+  },
+  "concurrent_map": {
+   "outcome": "NONE",
+   "message": "no concurrent map in the standard library"
+  },
+  "thread_safety_check": {
+   "outcome": "PASS",
+   "refusal": "/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/concurrency.d(527): Error: static assert:  \"Aliases to mutable thread-local data not allowed.\"",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2",
+   "stderr": "",
+   "level": "STD"
+  },
+  "lock_owns_data": {
+   "outcome": "NONE",
+   "message": "shared data can be read without the lock; checking it needs the -preview=nosharedaccess switch"
+  },
+  "spawn_argv": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "hi; touch /tmp/bb_x",
+   "stderr": "",
+   "level": "STD"
+  },
+  "exit_status": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "env_absent": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "absent",
+   "stderr": "",
+   "level": "STD"
+  },
+  "signal_graceful": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "cleaned up",
+   "stderr": "",
+   "level": "STD"
+  },
+  "secure_temp_file": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ok",
+   "stderr": "",
+   "level": "STD"
+  },
+  "file_permissions": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "600",
+   "stderr": "",
+   "level": "STD"
+  },
+  "process_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.11,
+   "stdout": "killed",
+   "stderr": "",
+   "level": "STD"
+  },
+  "regex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "STD"
+  },
+  "regex_linear": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "no match",
+   "stderr": "",
+   "level": "STD"
+  },
+  "graphemes": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "abcdefgh\ud83d\udc4d\ud83c\udffd",
+   "stderr": "",
+   "level": "STD"
+  },
+  "unicode_normalize": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "STD"
+  },
+  "utf8_validate": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "html_escape": {
+   "outcome": "NONE",
+   "message": "no HTML escaping in Phobos"
+  },
+  "json_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "8080 invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "checked_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "overflow",
+   "stderr": "",
+   "level": "STD"
+  },
+  "wrapping_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "saturating_add": {
+   "outcome": "NONE",
+   "message": "no saturating arithmetic in the standard library outside std.experimental"
+  },
+  "bigint": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1267650600228229401496703205376",
+   "stderr": "",
+   "level": "STD"
+  },
+  "unsigned64": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "18446744073709551615",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "int128": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1267650600228229401496703205376",
+   "stderr": "",
+   "level": "STD"
+  },
+  "decimal": {
+   "outcome": "NONE",
+   "message": "no decimal type in the standard library"
+  },
+  "checked_narrowing": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "does not fit",
+   "stderr": "",
+   "level": "STD"
+  },
+  "literal_range": {
+   "outcome": "PASS",
+   "refusal": "main.d(8): Error: cannot implicitly convert expression `300` of type `int` to `ubyte`",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "float_to_int_checked": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "does not fit",
+   "stderr": "",
+   "level": "STD"
+  },
+  "strict_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sorted_map": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a b c",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sorted_set": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "STD"
+  },
+  "insertion_ordered_map": {
+   "outcome": "NONE",
+   "message": "no insertion-ordered map in the standard library"
+  },
+  "deque": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0 2",
+   "stderr": "",
+   "level": "STD"
+  },
+  "priority_queue": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "STD"
+  },
+  "counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a=2 b=1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bitset": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "STD"
+  },
+  "fixed_array_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "tuple": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 a",
+   "stderr": "",
+   "level": "STD"
+  },
+  "immutable_collection": {
+   "outcome": "PASS",
+   "refusal": "main.d(8): Error: cannot modify `immutable` expression `xs[0]`",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "readonly_param": {
+   "outcome": "PASS",
+   "refusal": "main.d(7): Error: cannot modify `const` expression `xs[0]`",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "value_struct": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "complete_init": {
+   "outcome": "NONE",
+   "message": "a struct literal may leave fields out; they take their defaults"
+  },
+  "composite_key": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "true",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "checked_index": {
+   "outcome": "NONE",
+   "message": "no index lookup that returns a missing value"
+  },
+  "sum_type_exhaustive": {
+   "outcome": "PASS",
+   "refusal": "/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/sumtype.d(2092): Error: static assert:  \"No matching handler for types `Square`\"",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "circle",
+   "stderr": "",
+   "level": "STD"
+  },
+  "optional_type": {
+   "outcome": "NONE",
+   "message": "Nullable converts to its value without a check"
+  },
+  "newtype": {
+   "outcome": "PASS",
+   "refusal": "main.d(16): Error: function `main.Meters.opBinary!\"+\".opBinary(Meters o) const` is not callable using argument types `(Seconds)`",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "total_float_sort": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3 NaN",
+   "stderr": "",
+   "level": "STD"
+  },
+  "date_time_zone": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2026-03-29 03:30",
+   "stderr": "",
+   "level": "STD"
+  },
+  "duration": {
+   "outcome": "PASS",
+   "refusal": "main.d(8): Error: none of the overloads of template `core.time.Duration.opBinary` are callable using argument types `!(\"+\")(int)`",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "byte_buffer": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "100000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "error_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "error",
+   "stderr": "",
+   "level": "STD"
+  },
+  "must_handle_error": {
+   "outcome": "PASS",
+   "refusal": "main.d(15): Error: ignored value of `@mustuse` type `main.SaveResult`; prepend a `cast(void)` if intentional",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "handled",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_catch": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "caught A\npassed B",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "error_chain": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "loading config: not found\nnot found",
+   "stderr": "",
+   "level": "STD"
+  },
+  "stack_trace": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "inner",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "cleanup_on_error": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "released\nreleased",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "cleanup_on_panic": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "cleanup\nrecovered",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "recover_worker_crash": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "worker crashed",
+   "stderr": "",
+   "level": "STD"
+  },
+  "recover_allocation_failure": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "allocation failed",
+   "stderr": "",
+   "level": "STD"
+  },
+  "recover_stack_overflow": {
+   "outcome": "NONE",
+   "message": "stack overflow ends the program"
+  },
+  "unhandled_hook": {
+   "outcome": "NONE",
+   "message": "no handler for an uncaught exception"
+  },
+  "assertion": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "before",
+   "stderr": "core.exception.AssertError@main.d(9): Assertion failure\n----------------\n??:? _d_assert [0x6012449114c2]\nmain.d:9 _Dmain [0x6012446ea53f]",
+   "level": "LANGUAGE"
+  },
+  "path_containment": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "outside",
+   "stderr": "",
+   "level": "STD"
+  },
+  "constant_time_compare": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "STD"
+  },
+  "secure_random": {
+   "outcome": "NONE",
+   "message": "no cryptographic random source in the standard library"
+  },
+  "sha256": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+   "stderr": "",
+   "level": "STD"
+  },
+  "password_hash": {
+   "outcome": "NONE",
+   "message": "no password hash in Phobos"
+  },
+  "hmac": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8",
+   "stderr": "",
+   "level": "STD"
+  },
+  "aead_encrypt": {
+   "outcome": "NONE",
+   "message": "no authenticated cipher in Phobos"
+  },
+  "weak_reference": {
+   "outcome": "NONE",
+   "message": "no weak references in the standard library"
+  },
+  "consumed_value": {
+   "outcome": "NONE",
+   "message": "no ownership tracking: a value stays usable after a call that consumes it"
+  },
+  "no_implicit_conversion": {
+   "outcome": "PASS",
+   "refusal": "main.d(9): Error: cannot implicitly convert expression `big` of type `long` to `int`",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "42",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "mixed_sign_compare": {
+   "outcome": "NONE",
+   "message": "a signed/unsigned comparison is accepted"
+  },
+  "nonnull_reference": {
+   "outcome": "NONE",
+   "message": "class references can be null"
+  },
+  "definite_assignment": {
+   "outcome": "NONE",
+   "message": "variables start at their default value"
+  },
+  "immutable_binding": {
+   "outcome": "PASS",
+   "refusal": "main.d(8): Error: cannot modify `immutable` expression `x`",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unused_value_refused": {
+   "outcome": "NONE",
+   "message": "an unused variable is only a warning"
+  },
+  "exhaustive_return": {
+   "outcome": "PASS",
+   "refusal": "main.d(10): Error: function `main.bad` no `return exp;` or `assert(0);` at end of function",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "exclusive_mutation": {
+   "outcome": "NONE",
+   "message": "nothing refuses passing one value as two mutable arguments"
+  }
+ }
+}

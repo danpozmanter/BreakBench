@@ -1,0 +1,6 @@
+use std::env
+
+fn main() {
+    let s = "ab" + env::args()[0]
+    println(if s == "abc" { "equal" } else { "different" })
+}

@@ -1,0 +1,16 @@
+fn area(w: i64, h: i64) i64 {
+    return w * h;
+}
+
+const std = @import("std");
+
+pub fn main(init: std.process.Init) !void {
+    const args = try init.minimal.args.toSlice(init.arena.allocator());
+    var out_buf: [256]u8 = undefined;
+    var stdout = std.Io.File.stdout().writerStreaming(init.io, &out_buf);
+    const out = &stdout.interface;
+    defer out.flush() catch {};
+    _ = &args;
+    try out.print("{d}\n", .{area(3)}); // BREAK!
+    try out.print("{d}\n", .{area(3, 4)});
+}

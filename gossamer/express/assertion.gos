@@ -1,0 +1,9 @@
+// LEVEL: STD
+
+use std::env
+
+fn main() {
+    println("before")
+    assert(env::args().len() + 2 == 3)
+    println("after")
+}

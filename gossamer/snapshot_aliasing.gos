@@ -1,0 +1,17 @@
+fn apply_update(weights: &mut Vec<i64>) {
+    weights[1] = 5
+    weights[3] = 0
+}
+
+fn main() {
+    let mut weights = #[3, 3, 3, 3]
+    let before = weights
+    apply_update(&mut weights)
+    let mut changes = 0
+    for i in 0..weights.len() {
+        if before[i] != weights[i] {
+            changes += 1
+        }
+    }
+    println(f"{changes}")
+}

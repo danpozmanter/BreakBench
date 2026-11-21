@@ -1,0 +1,17 @@
+// LEVEL: STD
+
+use std::errors
+
+fn parse_port(s: String) -> Result<i64, errors::Error> {
+    match s.to_i64() {
+        Some(p) => Ok(p),
+        None => Err(errors::new("not a number")),
+    }
+}
+
+fn main() {
+    match parse_port("x") {
+        Ok(p) => println(p),
+        Err(_) => println("error"),
+    }
+}

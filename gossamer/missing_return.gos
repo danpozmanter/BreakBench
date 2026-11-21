@@ -1,0 +1,16 @@
+use std::env
+
+fn grade(score: i64) -> String {
+    if score > 50 {
+        return "pass"
+    }
+    if score < 50 {
+        return "fail"
+    }
+    // CONTROL! "borderline"
+}
+
+fn main() {
+    let score = env::args()[0].to_i64().unwrap()
+    println(grade(score))
+}

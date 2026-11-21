@@ -1,0 +1,679 @@
+{
+ "lang": "nim",
+ "version": "Nim Compiler Version 2.4.2 [Linux: amd64]",
+ "results": {
+  "threads_shared_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "45",
+   "stderr": "",
+   "level": "STD"
+  },
+  "mutex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "atomic_counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "channel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "STD"
+  },
+  "background_task": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.05,
+   "stdout": "started\n7",
+   "stderr": "",
+   "level": "STD"
+  },
+  "join_with_failure": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "worker failed: bad input",
+   "stderr": "",
+   "level": "STD"
+  },
+  "task_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "timed out",
+   "stderr": "",
+   "level": "STD"
+  },
+  "task_cancel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "stopped",
+   "stderr": "",
+   "level": "STD"
+  },
+  "concurrent_map": {
+   "outcome": "NONE",
+   "message": "no concurrent map in the standard library"
+  },
+  "thread_safety_check": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-thread_safety_check/reject/main.nim(9, 6) Error: 'unsafeWorker' is not GC-safe as it accesses 'list' which is a global using GC'ed memory",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "lock_owns_data": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-lock_owns_data/reject/main.nim(21, 8) Error: unguarded access: debits",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2000 2000",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "spawn_argv": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hi; touch /tmp/bb_x",
+   "stderr": "",
+   "level": "STD"
+  },
+  "exit_status": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "env_absent": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "absent",
+   "stderr": "",
+   "level": "STD"
+  },
+  "signal_graceful": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "cleaned up",
+   "stderr": "",
+   "level": "STD"
+  },
+  "secure_temp_file": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ok",
+   "stderr": "",
+   "level": "STD"
+  },
+  "file_permissions": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "600",
+   "stderr": "",
+   "level": "STD"
+  },
+  "process_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "killed",
+   "stderr": "",
+   "level": "STD"
+  },
+  "regex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "STD"
+  },
+  "regex_linear": {
+   "outcome": "NONE",
+   "message": "the standard regex engine backtracks; there is no linear-time engine"
+  },
+  "graphemes": {
+   "outcome": "NONE",
+   "message": "no grapheme segmentation in the standard library"
+  },
+  "unicode_normalize": {
+   "outcome": "NONE",
+   "message": "no Unicode normalization in the standard library"
+  },
+  "utf8_validate": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "html_escape": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "&lt;a href=&quot;x&quot;&gt;Tom &amp; Jerry&lt;/a&gt;",
+   "stderr": "",
+   "level": "STD"
+  },
+  "json_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "8080 invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "checked_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "overflow",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "wrapping_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "saturating_add": {
+   "outcome": "NONE",
+   "message": "no saturating arithmetic in the standard library"
+  },
+  "bigint": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1267650600228229401496703205376",
+   "stderr": "",
+   "level": "PROJECT"
+  },
+  "unsigned64": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "18446744073709551615",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "int128": {
+   "outcome": "NONE",
+   "message": "no 128-bit integer type"
+  },
+  "decimal": {
+   "outcome": "NONE",
+   "message": "no decimal type in the standard library"
+  },
+  "checked_narrowing": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "does not fit",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "literal_range": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-literal_range/reject/main.nim(4, 21) Error: cannot convert 300 to uint8",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "float_to_int_checked": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "does not fit",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "strict_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sorted_map": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a b c",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sorted_set": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "PROJECT"
+  },
+  "insertion_ordered_map": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "c a b",
+   "stderr": "",
+   "level": "STD"
+  },
+  "deque": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0 2",
+   "stderr": "",
+   "level": "STD"
+  },
+  "priority_queue": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "STD"
+  },
+  "counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a=2 b=1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "bitset": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "STD"
+  },
+  "fixed_array_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "tuple": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 a",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "immutable_collection": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-immutable_collection/reject/main.nim(4, 3) Error: type mismatch",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "readonly_param": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-readonly_param/reject/main.nim(4, 5) Error: 'xs[0]' cannot be assigned to",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "value_struct": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "complete_init": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-complete_init/reject/main.nim(8, 21) Error: The Config type requires the following fields to be initialized: retries.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5 3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "composite_key": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "true",
+   "stderr": "",
+   "level": "STD"
+  },
+  "checked_index": {
+   "outcome": "NONE",
+   "message": "no index lookup that returns a missing value"
+  },
+  "sum_type_exhaustive": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-sum_type_exhaustive/reject/main.nim(16, 3) Error: not all cases are covered; missing: {kSquare}",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "circle",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "optional_type": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-optional_type/reject/main.nim(6, 11) Error: type mismatch",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "none",
+   "stderr": "",
+   "level": "STD"
+  },
+  "newtype": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-newtype/reject/main.nim(11, 25) Error: type mismatch",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5.0",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "total_float_sort": {
+   "outcome": "NONE",
+   "message": "no total-order comparison for floats in the standard library"
+  },
+  "date_time_zone": {
+   "outcome": "NONE",
+   "message": "no time zone database in the standard library (only the local zone)"
+  },
+  "duration": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-duration/reject/main.nim(6, 19) Error: type mismatch",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "byte_buffer": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100000",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "error_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "error",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "must_handle_error": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-must_handle_error/reject/main.nim(5, 5) Error: expression 'save()' is of type 'bool' and has to be used (or discarded)",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "handled",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_catch": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "caught A\npassed B",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "error_chain": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "loading config: not found\nnot found",
+   "stderr": "",
+   "level": "STD"
+  },
+  "stack_trace": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "inner",
+   "stderr": "",
+   "level": "STD"
+  },
+  "cleanup_on_error": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "released\nreleased",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "cleanup_on_panic": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "cleanup\nrecovered",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "recover_worker_crash": {
+   "outcome": "NONE",
+   "message": "an exception that leaves a thread ends the program"
+  },
+  "recover_allocation_failure": {
+   "outcome": "NONE",
+   "message": "allocation failure ends the program"
+  },
+  "recover_stack_overflow": {
+   "outcome": "NONE",
+   "message": "stack overflow ends the program"
+  },
+  "unhandled_hook": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "hook ran",
+   "stderr": "",
+   "level": "STD"
+  },
+  "assertion": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "/tmp/breakbench/express-assertion/main/main.nim(6) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/std/assertions.nim(45) failedAssertImpl\n/root/.choosenim/toolchains/nim-2.4.2/lib/std/assertions.nim(40) raiseAssert\n/root/.choosenim/toolchains/nim-2.4.2/lib/system/fatal.nim(62) sysFatal\nError: unhandled exception: /tmp/breakbench/express-assertion/main/main.nim(6, 1) `paramCount() + 2 == 3`  [AssertionDefect]",
+   "level": "STD"
+  },
+  "path_containment": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "outside",
+   "stderr": "",
+   "level": "STD"
+  },
+  "constant_time_compare": {
+   "outcome": "NONE",
+   "message": "no constant-time comparison in the standard library"
+  },
+  "secure_random": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0cc4c05b884fdceca7ca2dc5d71accdb",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sha256": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+   "stderr": "",
+   "level": "PROJECT"
+  },
+  "password_hash": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.43,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "PROJECT"
+  },
+  "hmac": {
+   "outcome": "NONE",
+   "message": "no HMAC in the standard library or the Nim project's packages"
+  },
+  "aead_encrypt": {
+   "outcome": "NONE",
+   "message": "no authenticated cipher in the standard library or the Nim project's packages"
+  },
+  "weak_reference": {
+   "outcome": "NONE",
+   "message": "no weak references"
+  },
+  "consumed_value": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-consumed_value/reject/main.nim(12, 20) Error: '=dup' is not available for type <Handle>, which is inferred from unavailable '=copy'; requires a copy because it's not the last read of 'h'; another read is done here: /tmp/breakbench/express-consumed_value/reject/main.nim(13, 9); routine: main",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "closed",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "no_implicit_conversion": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-no_implicit_conversion/reject/main.nim(5, 20) Error: type mismatch: got 'int64' for 'big' but expected 'int32'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "42",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "mixed_sign_compare": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-mixed_sign_compare/reject/main.nim(5, 8) Error: type mismatch",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "less",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "nonnull_reference": {
+   "outcome": "NONE",
+   "message": "ref types can be nil; checking not nil needs --experimental:strictNotNil"
+  },
+  "definite_assignment": {
+   "outcome": "NONE",
+   "message": "variables start at zero; strictDefs is experimental"
+  },
+  "immutable_binding": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-immutable_binding/reject/main.nim(4, 1) Error: 'x' cannot be assigned to",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unused_value_refused": {
+   "outcome": "NONE",
+   "message": "an unused variable is only a hint"
+  },
+  "exhaustive_return": {
+   "outcome": "NONE",
+   "message": "a function that reaches its end returns the default result"
+  },
+  "exclusive_mutation": {
+   "outcome": "NONE",
+   "message": "nothing refuses passing one value as two mutable arguments"
+  }
+ }
+}

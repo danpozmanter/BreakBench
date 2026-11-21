@@ -1,0 +1,3 @@
+# LEVEL: LANGUAGE
+
+print(2**100)

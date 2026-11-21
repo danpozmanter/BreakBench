@@ -1,0 +1,22 @@
+// LEVEL: STD
+
+use std::errors
+
+fn work(a: bool) -> Result<(), errors::Error> {
+    if a { Err(errors::new("kind A")) } else { Err(errors::new("kind B")) }
+}
+
+fn step(a: bool) -> Result<(), errors::Error> {
+    match work(a) {
+        Err(e) if errors::is(e, "kind A") => { println("caught A"); Ok(()) },
+        other => other,
+    }
+}
+
+fn main() {
+    step(true).unwrap()
+    match step(false) {
+        Err(e) if errors::is(e, "kind B") => println("passed B"),
+        _ => {},
+    }
+}

@@ -1,0 +1,7 @@
+use std::env
+
+fn main() {
+    let ids = #[10, 20, 30]
+    let id = env::args()[0]
+    println(if ids.contains(id) { "found" } else { "missing" }) // CONTROL! println(if ids.contains(id.to_i64().unwrap()) { "found" } else { "missing" })
+}

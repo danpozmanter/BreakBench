@@ -1,0 +1,14 @@
+use std::{env, fs}
+
+fn main() {
+    let n = env::args()[0].to_i64().unwrap()
+    fs::write("/tmp/bb_fd.txt", "x".bytes()).unwrap()
+    for i in 0..n {
+        let mut f = fs::open("/tmp/bb_fd.txt").unwrap()
+        let text = f.read_to_string().unwrap()
+        if text.len() != 1 {
+            println("short read")
+        }
+    }
+    println("done")
+}

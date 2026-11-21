@@ -1,0 +1,10 @@
+// LEVEL: STD
+
+use std::env
+
+fn main() {
+    match env::var("BB_UNSET") {
+        Some(_) => println("present"),
+        None => println("absent"),
+    }
+}

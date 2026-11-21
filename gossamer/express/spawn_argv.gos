@@ -1,0 +1,8 @@
+// LEVEL: STD
+
+use std::process
+
+fn main() {
+    let out = process::run("echo", #["hi; touch /tmp/bb_x"]).unwrap()
+    print(out.stdout)
+}

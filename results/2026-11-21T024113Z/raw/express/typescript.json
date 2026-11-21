@@ -1,0 +1,644 @@
+{
+ "lang": "typescript",
+ "version": "tsc Version 7.0.2 / node v26.13.1",
+ "results": {
+  "threads_shared_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "45",
+   "stderr": "",
+   "level": "STD"
+  },
+  "mutex": {
+   "outcome": "NONE",
+   "message": "no mutex in the language or its standard library"
+  },
+  "atomic_counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "channel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "STD"
+  },
+  "background_task": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "started\n7",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "join_with_failure": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "worker failed: bad input",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "task_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.12,
+   "stdout": "timed out",
+   "stderr": "",
+   "level": "STD"
+  },
+  "task_cancel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "stopped",
+   "stderr": "",
+   "level": "STD"
+  },
+  "concurrent_map": {
+   "outcome": "NONE",
+   "message": "no map that threads share"
+  },
+  "thread_safety_check": {
+   "outcome": "NONE",
+   "message": "worker threads share no ordinary objects, so threads cannot share a list"
+  },
+  "lock_owns_data": {
+   "outcome": "NONE",
+   "message": "no mutex in the language or its standard library"
+  },
+  "spawn_argv": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "hi; touch /tmp/bb_x",
+   "stderr": "",
+   "level": "STD"
+  },
+  "exit_status": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "env_absent": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "absent",
+   "stderr": "",
+   "level": "STD"
+  },
+  "signal_graceful": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "cleaned up",
+   "stderr": "",
+   "level": "STD"
+  },
+  "secure_temp_file": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "ok",
+   "stderr": "",
+   "level": "STD"
+  },
+  "file_permissions": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "600",
+   "stderr": "",
+   "level": "STD"
+  },
+  "process_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.12,
+   "stdout": "killed",
+   "stderr": "",
+   "level": "STD"
+  },
+  "regex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "regex_linear": {
+   "outcome": "NONE",
+   "message": "the standard regex engine backtracks; there is no linear-time engine"
+  },
+  "graphemes": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "abcdefgh\ud83d\udc4d\ud83c\udffd",
+   "stderr": "",
+   "level": "STD"
+  },
+  "unicode_normalize": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "STD"
+  },
+  "utf8_validate": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "html_escape": {
+   "outcome": "NONE",
+   "message": "no HTML escaping in the language or Node's standard library"
+  },
+  "json_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "8080 invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "checked_add": {
+   "outcome": "NONE",
+   "message": "no fixed-width integer type"
+  },
+  "wrapping_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "-9223372036854775808",
+   "stderr": "",
+   "level": "STD"
+  },
+  "saturating_add": {
+   "outcome": "NONE",
+   "message": "no fixed-width integer type"
+  },
+  "bigint": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1267650600228229401496703205376",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unsigned64": {
+   "outcome": "NONE",
+   "message": "no fixed-width integer type"
+  },
+  "int128": {
+   "outcome": "NONE",
+   "message": "no 128-bit integer type"
+  },
+  "decimal": {
+   "outcome": "NONE",
+   "message": "no decimal type in the language or runtime"
+  },
+  "checked_narrowing": {
+   "outcome": "NONE",
+   "message": "no fixed-width integer type"
+  },
+  "literal_range": {
+   "outcome": "NONE",
+   "message": "no 8-bit integer type"
+  },
+  "float_to_int_checked": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "does not fit",
+   "stderr": "",
+   "level": "STD"
+  },
+  "strict_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sorted_map": {
+   "outcome": "NONE",
+   "message": "no sorted map in the language or runtime"
+  },
+  "sorted_set": {
+   "outcome": "NONE",
+   "message": "no sorted set in the language or runtime"
+  },
+  "insertion_ordered_map": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "c a b",
+   "stderr": "",
+   "level": "STD"
+  },
+  "deque": {
+   "outcome": "NONE",
+   "message": "no deque in the language or runtime"
+  },
+  "priority_queue": {
+   "outcome": "NONE",
+   "message": "no priority queue in the language or runtime"
+  },
+  "counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "a=2 b=1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "bitset": {
+   "outcome": "NONE",
+   "message": "no bit set in the language or runtime"
+  },
+  "fixed_array_value": {
+   "outcome": "NONE",
+   "message": "arrays are references; no value array type"
+  },
+  "tuple": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1 a",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "immutable_collection": {
+   "outcome": "PASS",
+   "refusal": "main.ts(4,4): error TS2339: Property 'push' does not exist on type 'readonly number[]'.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "readonly_param": {
+   "outcome": "PASS",
+   "refusal": "main.ts(4,3): error TS2542: Index signature in type 'readonly number[]' only permits reading.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "value_struct": {
+   "outcome": "NONE",
+   "message": "objects are references; no value record type"
+  },
+  "complete_init": {
+   "outcome": "PASS",
+   "refusal": "main.ts(6,7): error TS2741: Property 'retries' is missing in type '{ timeout: number; }' but required in type 'Config'.\nmain.ts(6,7): error TS6133: 'partial' is declared but its value is never read.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "5 3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "composite_key": {
+   "outcome": "NONE",
+   "message": "Set compares arrays and objects by identity"
+  },
+  "checked_index": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "none",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sum_type_exhaustive": {
+   "outcome": "PASS",
+   "refusal": "main.ts(14,25): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "circle",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "optional_type": {
+   "outcome": "PASS",
+   "refusal": "main.ts(4,13): error TS18048: 'o' is possibly 'undefined'.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "none",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "newtype": {
+   "outcome": "PASS",
+   "refusal": "main.ts(8,76): error TS2345: Argument of type 'Seconds' is not assignable to parameter of type 'Meters'.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "total_float_sort": {
+   "outcome": "NONE",
+   "message": "no total-order comparison for numbers"
+  },
+  "date_time_zone": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "2026-03-29 03:30",
+   "stderr": "",
+   "level": "STD"
+  },
+  "duration": {
+   "outcome": "NONE",
+   "message": "no duration type in the language or runtime"
+  },
+  "byte_buffer": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "100000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "error_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "error",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "must_handle_error": {
+   "outcome": "NONE",
+   "message": "exceptions are unchecked"
+  },
+  "typed_catch": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "caught A\npassed B",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "error_chain": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "loading config: not found\nnot found",
+   "stderr": "",
+   "level": "STD"
+  },
+  "stack_trace": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "inner",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "cleanup_on_error": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "released\nreleased",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "cleanup_on_panic": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "cleanup\nrecovered",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "recover_worker_crash": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "worker crashed",
+   "stderr": "",
+   "level": "STD"
+  },
+  "recover_allocation_failure": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "allocation failed",
+   "stderr": "",
+   "level": "STD"
+  },
+  "recover_stack_overflow": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "stack overflow",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unhandled_hook": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "hook ran",
+   "stderr": "",
+   "level": "STD"
+  },
+  "assertion": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "before",
+   "stderr": "node:internal/assert/utils:146\n  throw error;\n  ^\n\nAssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  (process.argv.length === 5)\n\n    at Object.<anonymous> (/tmp/breakbench/express-assertion/main/out/main.js:9:27)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:intern\n...\nt Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: false,\n  expected: true,\n  operator: '==',\n  diff: 'simple'\n}\n\nNode.js v26.13.1",
+   "level": "STD"
+  },
+  "path_containment": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "outside",
+   "stderr": "",
+   "level": "STD"
+  },
+  "constant_time_compare": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "STD"
+  },
+  "secure_random": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "484e1b5936de3561ccd6a13c0694419d",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sha256": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+   "stderr": "",
+   "level": "STD"
+  },
+  "password_hash": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.08,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "STD"
+  },
+  "hmac": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8",
+   "stderr": "",
+   "level": "STD"
+  },
+  "aead_encrypt": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "secret\nrejected",
+   "stderr": "",
+   "level": "STD"
+  },
+  "weak_reference": {
+   "outcome": "NONE",
+   "message": "a collection cannot be forced without a runtime flag"
+  },
+  "consumed_value": {
+   "outcome": "NONE",
+   "message": "no ownership tracking: a value stays usable after a call that consumes it"
+  },
+  "no_implicit_conversion": {
+   "outcome": "NONE",
+   "message": "one number type, so there is nothing to narrow"
+  },
+  "mixed_sign_compare": {
+   "outcome": "NONE",
+   "message": "no unsigned integer types"
+  },
+  "nonnull_reference": {
+   "outcome": "PASS",
+   "refusal": "main.ts(8,7): error TS2322: Type 'null' is not assignable to type 'Config'.\nmain.ts(8,7): error TS6133: 'missing' is declared but its value is never read.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "app",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "definite_assignment": {
+   "outcome": "PASS",
+   "refusal": "main.ts(9,13): error TS2454: Variable 'y' is used before being assigned.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "immutable_binding": {
+   "outcome": "PASS",
+   "refusal": "main.ts(4,1): error TS2588: Cannot assign to 'x' because it is a constant.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unused_value_refused": {
+   "outcome": "PASS",
+   "refusal": "main.ts(5,7): error TS6133: 'doubled' is declared but its value is never read.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "42",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "exhaustive_return": {
+   "outcome": "PASS",
+   "refusal": "main.ts(7,30): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "exclusive_mutation": {
+   "outcome": "NONE",
+   "message": "nothing refuses passing one value as two mutable arguments"
+  }
+ }
+}

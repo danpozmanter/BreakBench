@@ -1,0 +1,13 @@
+FROM breakbench:java
+
+ARG version
+RUN wget -O scala.tar.gz "https://github.com/scala/scala3/releases/download/${version}/scala3-${version}-x86_64-pc-linux.tar.gz" \
+    && mkdir -p /opt/scala \
+    && tar -xzf scala.tar.gz -C /opt/scala --strip-components=1 \
+    && rm scala.tar.gz
+
+ENV PATH="/opt/scala/bin:$PATH"
+
+# scala-xml, published by the Scala project.
+RUN mkdir -p /opt/scalaxml \
+    && wget -q -O /opt/scalaxml/scala-xml.jar https://repo1.maven.org/maven2/org/scala-lang/modules/scala-xml_3/2.5.0/scala-xml_3-2.5.0.jar

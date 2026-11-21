@@ -1,0 +1,11 @@
+FROM breakbench:rust
+
+# Same toolchain setup as docker/gossamer, but the compiler and runtime come from a
+# local checkout staged by build-gossamer-local.sh instead of a release tarball.
+RUN rustup target add x86_64-unknown-linux-musl \
+    && ln -sf $(rustc --print sysroot)/lib/rustlib/$(rustc -vV | grep host | cut -d" " -f2)/bin/opt /usr/local/bin/opt \
+    && ln -sf $(rustc --print sysroot)/lib/rustlib/$(rustc -vV | grep host | cut -d" " -f2)/bin/llc /usr/local/bin/llc
+
+COPY bin /opt/gossamer/bin
+COPY lib /opt/gossamer/lib
+ENV PATH="/opt/gossamer/bin:${PATH}"

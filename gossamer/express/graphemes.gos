@@ -1,0 +1,7 @@
+// LEVEL: STD
+
+use std::unicode
+
+fn main() {
+    println(unicode::graphemes("abcdefgh👍🏽xyz").take(9).join(""))
+}

@@ -1,0 +1,25 @@
+FROM breakbench:base
+
+ARG version
+
+RUN wget https://static.rust-lang.org/rustup/dist/x86_64-unknown-linux-gnu/rustup-init \
+    && chmod +x rustup-init \
+    && ./rustup-init -y \
+        --default-toolchain ${version} \
+        --profile minimal \
+    && rm rustup-init
+
+ENV PATH="/root/.cargo/bin:$PATH"
+
+RUN rustup component add llvm-tools-preview clippy;
+RUN ln -s $(rustc --print sysroot)/lib/rustlib/$(rustc -vV | grep host | cut -d" " -f2)/bin/llvm-profdata /usr/local/bin/llvm-profdata
+
+# The Rust project's own regex crate (rust-lang/regex), built once against this compiler so
+# programs link it offline with --extern, as std has no regular expressions of its own.
+RUN cargo new --lib --vcs none /opt/rustdeps \
+    && cd /opt/rustdeps \
+    && cargo add regex@1 \
+    && cargo build \
+    && mkdir lib \
+    && find target -name '*.rlib' -exec cp {} lib/ \; \
+    && ln -s "$(ls lib/libregex-*.rlib)" /opt/rustdeps/libregex.rlib

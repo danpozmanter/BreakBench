@@ -1,0 +1,644 @@
+{
+ "lang": "cpp",
+ "version": "clang version 23.1.6 (https://github.com/llvm/llvm-project 5b10d2d74929eae78912771222c9855af97496f4)",
+ "results": {
+  "threads_shared_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "45",
+   "stderr": "",
+   "level": "STD"
+  },
+  "mutex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "atomic_counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "channel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "background_task": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.05,
+   "stdout": "started\n7",
+   "stderr": "",
+   "level": "STD"
+  },
+  "join_with_failure": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "worker failed: bad input",
+   "stderr": "",
+   "level": "STD"
+  },
+  "task_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "timed out",
+   "stderr": "",
+   "level": "STD"
+  },
+  "task_cancel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "stopped",
+   "stderr": "",
+   "level": "STD"
+  },
+  "concurrent_map": {
+   "outcome": "NONE",
+   "message": "no concurrent map in the standard library"
+  },
+  "thread_safety_check": {
+   "outcome": "NONE",
+   "message": "nothing refuses an unlocked write to data that threads share"
+  },
+  "lock_owns_data": {
+   "outcome": "NONE",
+   "message": "the standard mutex guards code, not data; an unguarded read is accepted"
+  },
+  "spawn_argv": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hi; touch /tmp/bb_x",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "exit_status": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "env_absent": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "absent",
+   "stderr": "",
+   "level": "STD"
+  },
+  "signal_graceful": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "cleaned up",
+   "stderr": "",
+   "level": "STD"
+  },
+  "secure_temp_file": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ok",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "file_permissions": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "600",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "process_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "killed",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "regex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "STD"
+  },
+  "regex_linear": {
+   "outcome": "NONE",
+   "message": "the standard regex engine backtracks; there is no linear-time engine"
+  },
+  "graphemes": {
+   "outcome": "NONE",
+   "message": "no grapheme segmentation in the standard library"
+  },
+  "unicode_normalize": {
+   "outcome": "NONE",
+   "message": "no Unicode normalization in the standard library"
+  },
+  "utf8_validate": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "html_escape": {
+   "outcome": "NONE",
+   "message": "no HTML escaping in the standard library or ISO C/POSIX"
+  },
+  "json_parse": {
+   "outcome": "NONE",
+   "message": "no JSON parser in the standard library or ISO C/POSIX"
+  },
+  "checked_add": {
+   "outcome": "NONE",
+   "message": "no checked addition in the C++23 standard library"
+  },
+  "wrapping_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "saturating_add": {
+   "outcome": "NONE",
+   "message": "no saturating arithmetic in the C++23 standard library"
+  },
+  "bigint": {
+   "outcome": "NONE",
+   "message": "no arbitrary-precision integers in the standard library"
+  },
+  "unsigned64": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "18446744073709551615",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "int128": {
+   "outcome": "NONE",
+   "message": "no 128-bit integer type in the C++23 standard"
+  },
+  "decimal": {
+   "outcome": "NONE",
+   "message": "no decimal type in the standard library"
+  },
+  "checked_narrowing": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "does not fit",
+   "stderr": "",
+   "level": "STD"
+  },
+  "literal_range": {
+   "outcome": "PASS",
+   "refusal": "main.cpp:8:26: error: constant expression evaluates to 300 which cannot be narrowed to type 'std::uint8_t' (aka 'unsigned char') [-Wc++11-narrowing]\n2 warnings and 1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "float_to_int_checked": {
+   "outcome": "NONE",
+   "message": "no checked float-to-integer conversion in the standard library"
+  },
+  "strict_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sorted_map": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a b c",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sorted_set": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "STD"
+  },
+  "insertion_ordered_map": {
+   "outcome": "NONE",
+   "message": "no insertion-ordered map in the standard library"
+  },
+  "deque": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0 2",
+   "stderr": "",
+   "level": "STD"
+  },
+  "priority_queue": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "STD"
+  },
+  "counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a=2 b=1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "bitset": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "STD"
+  },
+  "fixed_array_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "tuple": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 a",
+   "stderr": "",
+   "level": "STD"
+  },
+  "immutable_collection": {
+   "outcome": "PASS",
+   "refusal": "main.cpp:8:8: error: no matching member function for call to 'push_back'\n1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "readonly_param": {
+   "outcome": "PASS",
+   "refusal": "main.cpp:7:11: error: cannot assign to return value because function 'operator[]' returns a const value\n1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "value_struct": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "complete_init": {
+   "outcome": "NONE",
+   "message": "aggregate initialization may leave fields out; they become zero"
+  },
+  "composite_key": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "true",
+   "stderr": "",
+   "level": "STD"
+  },
+  "checked_index": {
+   "outcome": "NONE",
+   "message": "no index lookup that returns a missing value"
+  },
+  "sum_type_exhaustive": {
+   "outcome": "PASS",
+   "refusal": "/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/type_traits:3297:5: error: no type named 'type' in 'std::invoke_result<overloaded<(lambda at main.cpp:21:34)>, const Square &>'\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/variant:1943:44: error: constexpr variable '__visit_rettypes_match' must be initialized by a constant expression\n/usr/lib/gcc/x86_64-linux-gnu/15/../../\n...\nion expression is not an integral constant expression\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/variant:1951:8: error: non-void constexpr function 'visit<overloaded<(lambda at main.cpp:21:34)>, const std::variant<Circle, Square> &>' should return a value\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/variant:1055:11: error: no matching function for call to '__invoke'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "circle",
+   "stderr": "",
+   "level": "STD"
+  },
+  "optional_type": {
+   "outcome": "PASS",
+   "refusal": "main.cpp:8:15: error: invalid operands to binary expression ('std::optional<int>' and 'int')\n1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "none",
+   "stderr": "",
+   "level": "STD"
+  },
+  "newtype": {
+   "outcome": "PASS",
+   "refusal": "main.cpp:11:28: error: invalid operands to binary expression ('Meters' and 'Seconds')\n1 warning and 1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "total_float_sort": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3 NaN",
+   "stderr": "",
+   "level": "STD"
+  },
+  "date_time_zone": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2026-03-29 03:30",
+   "stderr": "",
+   "level": "STD"
+  },
+  "duration": {
+   "outcome": "PASS",
+   "refusal": "main.cpp:10:36: error: invalid operands to binary expression ('milliseconds' (aka 'duration<long, ratio<1, 1000>>') and 'int')\n1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "byte_buffer": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "100000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "error_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "error",
+   "stderr": "",
+   "level": "STD"
+  },
+  "must_handle_error": {
+   "outcome": "PASS",
+   "refusal": "main.cpp:8:5: warning: ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "handled",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_catch": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "caught A\npassed B",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "error_chain": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "loading config: not found\nnot found",
+   "stderr": "",
+   "level": "STD"
+  },
+  "stack_trace": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "inner",
+   "stderr": "",
+   "level": "STD"
+  },
+  "cleanup_on_error": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "released\nreleased",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "cleanup_on_panic": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "cleanup\nrecovered",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "recover_worker_crash": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "worker crashed",
+   "stderr": "",
+   "level": "STD"
+  },
+  "recover_allocation_failure": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "allocation failed",
+   "stderr": "==1270==WARNING: AddressSanitizer failed to allocate 0x9184e72a000 bytes",
+   "level": "STD"
+  },
+  "recover_stack_overflow": {
+   "outcome": "NONE",
+   "message": "stack overflow ends the program"
+  },
+  "unhandled_hook": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "hook ran",
+   "stderr": "",
+   "level": "STD"
+  },
+  "assertion": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 134,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "main: main.cpp:8: int main(): Assertion `1 + 1 == 3' failed.\nAborted",
+   "level": "STD"
+  },
+  "path_containment": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "outside",
+   "stderr": "",
+   "level": "STD"
+  },
+  "constant_time_compare": {
+   "outcome": "NONE",
+   "message": "no constant-time comparison in the standard library"
+  },
+  "secure_random": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3103123ba55369566aa78302084c9560",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "sha256": {
+   "outcome": "NONE",
+   "message": "no SHA-256 in the standard library"
+  },
+  "password_hash": {
+   "outcome": "NONE",
+   "message": "no password hash in ISO C or POSIX"
+  },
+  "hmac": {
+   "outcome": "NONE",
+   "message": "no HMAC in ISO C or POSIX"
+  },
+  "aead_encrypt": {
+   "outcome": "NONE",
+   "message": "no authenticated cipher in ISO C or POSIX"
+  },
+  "weak_reference": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "gone",
+   "stderr": "",
+   "level": "STD"
+  },
+  "consumed_value": {
+   "outcome": "NONE",
+   "message": "std::move leaves a moved-from object that can still be used"
+  },
+  "no_implicit_conversion": {
+   "outcome": "NONE",
+   "message": "an implicit narrowing conversion is only a warning"
+  },
+  "mixed_sign_compare": {
+   "outcome": "NONE",
+   "message": "a signed/unsigned comparison is only a warning"
+  },
+  "nonnull_reference": {
+   "outcome": "PASS",
+   "refusal": "main.cpp:12:13: error: non-const lvalue reference to type 'Config' cannot bind to a temporary of type 'std::nullptr_t'\n1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "app",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "definite_assignment": {
+   "outcome": "NONE",
+   "message": "reading a variable before it is set is only a warning"
+  },
+  "immutable_binding": {
+   "outcome": "PASS",
+   "refusal": "main.cpp:7:7: error: cannot assign to variable 'x' with const-qualified type 'const int'\n1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unused_value_refused": {
+   "outcome": "NONE",
+   "message": "an unused variable is only a warning"
+  },
+  "exhaustive_return": {
+   "outcome": "PASS",
+   "refusal": "main.cpp:11:1: error: non-void function does not return a value in all control paths [-Werror,-Wreturn-type]\n1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "exclusive_mutation": {
+   "outcome": "NONE",
+   "message": "nothing refuses passing one value as two mutable arguments"
+  }
+ }
+}

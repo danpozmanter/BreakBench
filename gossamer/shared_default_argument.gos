@@ -1,0 +1,10 @@
+fn add_item(item: String, mut cart: Vec<String> = #[]) -> Vec<String> {
+    cart.push(item)
+    cart
+}
+
+fn main() {
+    let a = add_item("x")
+    let b = add_item("y")
+    println(f"{a.len() * 0 + b.len()}")
+}

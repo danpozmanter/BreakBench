@@ -1,0 +1,679 @@
+{
+ "lang": "rust",
+ "version": "rustc 1.100.0 (0ef1bc386 2026-11-09)",
+ "results": {
+  "threads_shared_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "45",
+   "stderr": "",
+   "level": "STD"
+  },
+  "mutex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "atomic_counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "channel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "STD"
+  },
+  "background_task": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.05,
+   "stdout": "started\n7",
+   "stderr": "",
+   "level": "STD"
+  },
+  "join_with_failure": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "worker failed: bad input",
+   "stderr": "",
+   "level": "STD"
+  },
+  "task_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "timed out",
+   "stderr": "",
+   "level": "STD"
+  },
+  "task_cancel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "stopped",
+   "stderr": "",
+   "level": "STD"
+  },
+  "concurrent_map": {
+   "outcome": "NONE",
+   "message": "no concurrent map in the standard library"
+  },
+  "thread_safety_check": {
+   "outcome": "PASS",
+   "refusal": "error[E0499]: cannot borrow `unguarded` as mutable more than once at a time\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0499`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": "",
+   "level": "STD"
+  },
+  "lock_owns_data": {
+   "outcome": "PASS",
+   "refusal": "error[E0609]: no field `debits` on type `std::sync::Mutex<Ledger>`\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0609`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2000 2000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "spawn_argv": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hi; touch /tmp/bb_x",
+   "stderr": "",
+   "level": "STD"
+  },
+  "exit_status": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "env_absent": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "absent",
+   "stderr": "",
+   "level": "STD"
+  },
+  "signal_graceful": {
+   "outcome": "NONE",
+   "message": "no signal handling in the standard library"
+  },
+  "secure_temp_file": {
+   "outcome": "NONE",
+   "message": "std has no temporary-file call; tempfile is a third-party crate"
+  },
+  "file_permissions": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "600",
+   "stderr": "",
+   "level": "STD"
+  },
+  "process_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "killed",
+   "stderr": "",
+   "level": "STD"
+  },
+  "regex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "PROJECT"
+  },
+  "regex_linear": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "no match",
+   "stderr": "",
+   "level": "PROJECT"
+  },
+  "graphemes": {
+   "outcome": "NONE",
+   "message": "no grapheme segmentation in the standard library or the Rust project's crates"
+  },
+  "unicode_normalize": {
+   "outcome": "NONE",
+   "message": "no Unicode normalization in the standard library or the Rust project's crates"
+  },
+  "utf8_validate": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "html_escape": {
+   "outcome": "NONE",
+   "message": "no HTML escaping in std or the Rust project's crates"
+  },
+  "json_parse": {
+   "outcome": "NONE",
+   "message": "no JSON parser in std or the Rust project's crates; serde_json is third-party"
+  },
+  "checked_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "overflow",
+   "stderr": "",
+   "level": "STD"
+  },
+  "wrapping_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": "",
+   "level": "STD"
+  },
+  "saturating_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "9223372036854775807",
+   "stderr": "",
+   "level": "STD"
+  },
+  "bigint": {
+   "outcome": "NONE",
+   "message": "no arbitrary-precision integers in the standard library or the Rust project's crates"
+  },
+  "unsigned64": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "18446744073709551615",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "int128": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1267650600228229401496703205376",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "decimal": {
+   "outcome": "NONE",
+   "message": "no decimal type in the standard library"
+  },
+  "checked_narrowing": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "does not fit",
+   "stderr": "",
+   "level": "STD"
+  },
+  "literal_range": {
+   "outcome": "PASS",
+   "refusal": "error: literal out of range for `u8`\nerror: aborting due to 1 previous error",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "float_to_int_checked": {
+   "outcome": "NONE",
+   "message": "no checked float-to-integer conversion; `as` saturates and maps NaN to 0"
+  },
+  "strict_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sorted_map": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a b c",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sorted_set": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "STD"
+  },
+  "insertion_ordered_map": {
+   "outcome": "NONE",
+   "message": "no insertion-ordered map in the standard library"
+  },
+  "deque": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0 2",
+   "stderr": "",
+   "level": "STD"
+  },
+  "priority_queue": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "STD"
+  },
+  "counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a=2 b=1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "bitset": {
+   "outcome": "NONE",
+   "message": "no bit set in the standard library"
+  },
+  "fixed_array_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "tuple": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 a",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "immutable_collection": {
+   "outcome": "PASS",
+   "refusal": "error[E0596]: cannot borrow `xs` as mutable, as it is not declared as mutable\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0596`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "readonly_param": {
+   "outcome": "PASS",
+   "refusal": "error[E0594]: cannot assign to `xs[_]`, which is behind a `&` reference\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0594`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "value_struct": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "complete_init": {
+   "outcome": "PASS",
+   "refusal": "error[E0063]: missing field `retries` in initializer of `Config`\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0063`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5 3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "composite_key": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "true",
+   "stderr": "",
+   "level": "STD"
+  },
+  "checked_index": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "none",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sum_type_exhaustive": {
+   "outcome": "PASS",
+   "refusal": "error[E0004]: non-exhaustive patterns: `&Shape::Square(_)` not covered\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0004`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "circle",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "optional_type": {
+   "outcome": "PASS",
+   "refusal": "error[E0369]: cannot add `{integer}` to `std::option::Option<i64>`\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0369`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "none",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "newtype": {
+   "outcome": "PASS",
+   "refusal": "error[E0308]: mismatched types\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0308`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "total_float_sort": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3 NaN",
+   "stderr": "",
+   "level": "STD"
+  },
+  "date_time_zone": {
+   "outcome": "NONE",
+   "message": "no time zone database in the standard library"
+  },
+  "duration": {
+   "outcome": "PASS",
+   "refusal": "error[E0308]: mismatched types\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0308`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "byte_buffer": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "error_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "error",
+   "stderr": "",
+   "level": "STD"
+  },
+  "must_handle_error": {
+   "outcome": "PASS",
+   "refusal": "warning: unused `std::result::Result` that must be used",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "handled",
+   "stderr": "",
+   "level": "STD"
+  },
+  "typed_catch": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "caught A\npassed B",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "error_chain": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "loading config: not found\nnot found",
+   "stderr": "",
+   "level": "STD"
+  },
+  "stack_trace": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "inner",
+   "stderr": "",
+   "level": "STD"
+  },
+  "cleanup_on_error": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "released\nreleased",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "cleanup_on_panic": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "cleanup\nrecovered",
+   "stderr": "",
+   "level": "STD"
+  },
+  "recover_worker_crash": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "worker crashed",
+   "stderr": "",
+   "level": "STD"
+  },
+  "recover_allocation_failure": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "allocation failed",
+   "stderr": "",
+   "level": "STD"
+  },
+  "recover_stack_overflow": {
+   "outcome": "NONE",
+   "message": "stack overflow ends the program"
+  },
+  "unhandled_hook": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "hook ran",
+   "stderr": "",
+   "level": "STD"
+  },
+  "assertion": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "thread 'main' (2257) panicked at main.rs:6:5:\nassertion failed: two == 3\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+   "level": "LANGUAGE"
+  },
+  "path_containment": {
+   "outcome": "NONE",
+   "message": "no lexical path normalization in the standard library"
+  },
+  "constant_time_compare": {
+   "outcome": "NONE",
+   "message": "no constant-time comparison in the standard library"
+  },
+  "secure_random": {
+   "outcome": "NONE",
+   "message": "no cryptographic random source in the standard library"
+  },
+  "sha256": {
+   "outcome": "NONE",
+   "message": "no SHA-256 in the standard library or the Rust project's crates"
+  },
+  "password_hash": {
+   "outcome": "NONE",
+   "message": "std has no cryptography; the RustCrypto crates are third-party"
+  },
+  "hmac": {
+   "outcome": "NONE",
+   "message": "std has no cryptography; the RustCrypto crates are third-party"
+  },
+  "aead_encrypt": {
+   "outcome": "NONE",
+   "message": "std has no cryptography; the RustCrypto crates are third-party"
+  },
+  "weak_reference": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "gone",
+   "stderr": "",
+   "level": "STD"
+  },
+  "consumed_value": {
+   "outcome": "PASS",
+   "refusal": "error[E0382]: borrow of moved value: `h`\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0382`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "closed",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "no_implicit_conversion": {
+   "outcome": "PASS",
+   "refusal": "error[E0308]: mismatched types\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0308`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "42",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "mixed_sign_compare": {
+   "outcome": "PASS",
+   "refusal": "error[E0308]: mismatched types\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0308`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "less",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "nonnull_reference": {
+   "outcome": "PASS",
+   "refusal": "error[E0308]: mismatched types\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0308`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "app",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "definite_assignment": {
+   "outcome": "PASS",
+   "refusal": "error[E0381]: used binding `y` is possibly-uninitialized\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0381`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "immutable_binding": {
+   "outcome": "PASS",
+   "refusal": "error[E0384]: cannot assign twice to immutable variable `x`\nerror: aborting due to 1 previous error; 1 warning emitted\nFor more information about this error, try `rustc --explain E0384`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unused_value_refused": {
+   "outcome": "NONE",
+   "message": "an unused variable is only a warning"
+  },
+  "exhaustive_return": {
+   "outcome": "PASS",
+   "refusal": "error[E0317]: `if` may be missing an `else` clause\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0317`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "exclusive_mutation": {
+   "outcome": "PASS",
+   "refusal": "error[E0499]: cannot borrow `a` as mutable more than once at a time\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0499`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "70 30",
+   "stderr": "",
+   "level": "LANGUAGE"
+  }
+ }
+}

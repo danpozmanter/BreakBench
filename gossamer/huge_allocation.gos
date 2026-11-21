@@ -1,0 +1,8 @@
+use std::env
+
+fn main() {
+    let n = env::args()[0].to_i64().unwrap()
+    let mut buf = #[0u8; n]
+    buf[n - 1] = 1
+    println(f"{buf.len()}")
+}

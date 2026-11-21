@@ -1,0 +1,6 @@
+use std::{env, regex}
+
+fn main() {
+    let re = regex::new("^(a+)+$").unwrap()
+    println(if regex::is_match(re, env::args()[0]) { "match" } else { "no match" })
+}

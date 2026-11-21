@@ -1,0 +1,14 @@
+// LEVEL: STD
+
+use std::{crypto::{aead, rand}, errors}
+
+fn main() -> Result<(), errors::Error> {
+    let key = rand::bytes(32)?
+    let nonce = rand::bytes(12)?
+    let mut sealed = aead::aes_256_gcm_seal(key, nonce, "secret".as_bytes(), #[])?
+    let plain = aead::aes_256_gcm_open(key, nonce, sealed, #[])?
+    println(String::from_utf8(plain)?)
+    sealed[0] = sealed[0] ^ 1
+    println(if aead::aes_256_gcm_open(key, nonce, sealed, #[]).is_err() { "rejected" } else { "accepted" })
+    Ok(())
+}

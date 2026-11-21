@@ -1,0 +1,644 @@
+{
+ "lang": "haskell",
+ "version": "The Glorious Glasgow Haskell Compilation System, version 9.14.1",
+ "results": {
+  "threads_shared_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "45",
+   "stderr": "",
+   "level": "STD"
+  },
+  "mutex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "atomic_counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "channel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "STD"
+  },
+  "background_task": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.05,
+   "stdout": "started\n7",
+   "stderr": "",
+   "level": "STD"
+  },
+  "join_with_failure": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "user error (bad input)",
+   "stderr": "",
+   "level": "STD"
+  },
+  "task_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "timed out",
+   "stderr": "",
+   "level": "STD"
+  },
+  "task_cancel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "stopped",
+   "stderr": "",
+   "level": "STD"
+  },
+  "concurrent_map": {
+   "outcome": "NONE",
+   "message": "no concurrent map in the standard library"
+  },
+  "thread_safety_check": {
+   "outcome": "NONE",
+   "message": "nothing refuses an unlocked write to data that threads share"
+  },
+  "lock_owns_data": {
+   "outcome": "PASS",
+   "refusal": "main.hs:18:17: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Ledger\u2019\n                  with actual type \u2018MVar Ledger\u2019\n    \u2022 In the first argument of \u2018debits\u2019, namely \u2018ledger\u2019",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2000 2000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "spawn_argv": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "hi; touch /tmp/bb_x",
+   "stderr": "",
+   "level": "STD"
+  },
+  "exit_status": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "env_absent": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "absent",
+   "stderr": "",
+   "level": "STD"
+  },
+  "signal_graceful": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "cleaned up",
+   "stderr": "",
+   "level": "STD"
+  },
+  "secure_temp_file": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ok",
+   "stderr": "",
+   "level": "STD"
+  },
+  "file_permissions": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "600",
+   "stderr": "",
+   "level": "STD"
+  },
+  "process_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.11,
+   "stdout": "killed",
+   "stderr": "",
+   "level": "STD"
+  },
+  "regex": {
+   "outcome": "NONE",
+   "message": "no regular expressions in the packages GHC ships or the Haskell project's libraries"
+  },
+  "regex_linear": {
+   "outcome": "NONE",
+   "message": "no regular expressions in the packages GHC ships or the Haskell project's libraries"
+  },
+  "graphemes": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "abcdefgh\ud83d\udc4d\ud83c\udffd",
+   "stderr": "",
+   "level": "PROJECT"
+  },
+  "unicode_normalize": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "PROJECT"
+  },
+  "utf8_validate": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "html_escape": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "&lt;a href=&quot;x&quot;&gt;Tom &amp; Jerry&lt;/a&gt;",
+   "stderr": "",
+   "level": "STD"
+  },
+  "json_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "8080 invalid",
+   "stderr": "",
+   "level": "PROJECT"
+  },
+  "checked_add": {
+   "outcome": "NONE",
+   "message": "no checked addition in the standard library"
+  },
+  "wrapping_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": "",
+   "level": "STD"
+  },
+  "saturating_add": {
+   "outcome": "NONE",
+   "message": "no saturating addition in the standard library"
+  },
+  "bigint": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1267650600228229401496703205376",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unsigned64": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "18446744073709551615",
+   "stderr": "",
+   "level": "STD"
+  },
+  "int128": {
+   "outcome": "NONE",
+   "message": "no 128-bit integer type"
+  },
+  "decimal": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "STD"
+  },
+  "checked_narrowing": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "does not fit",
+   "stderr": "",
+   "level": "STD"
+  },
+  "literal_range": {
+   "outcome": "NONE",
+   "message": "an out-of-range literal is only a warning (-Woverflowed-literals)"
+  },
+  "float_to_int_checked": {
+   "outcome": "NONE",
+   "message": "no checked float-to-integer conversion; truncate turns NaN into an arbitrary integer"
+  },
+  "strict_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sorted_map": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a b c",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sorted_set": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "STD"
+  },
+  "insertion_ordered_map": {
+   "outcome": "NONE",
+   "message": "no insertion-ordered map in the standard library"
+  },
+  "deque": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0 2",
+   "stderr": "",
+   "level": "STD"
+  },
+  "priority_queue": {
+   "outcome": "NONE",
+   "message": "no priority queue in the standard library"
+  },
+  "counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a=2 b=1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "bitset": {
+   "outcome": "NONE",
+   "message": "no bit set in the standard library"
+  },
+  "fixed_array_value": {
+   "outcome": "NONE",
+   "message": "arrays that change in place are references (IOArray); immutable arrays have no in-place write"
+  },
+  "tuple": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 a",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "immutable_collection": {
+   "outcome": "PASS",
+   "refusal": "main.hs:8:14: error: [GHC-83865]\n    \u2022 Couldn't match type \u2018[]\u2019 with \u2018a0 i0\u2019\n      Expected: a0 i0 Int\n        Actual: [Int]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "readonly_param": {
+   "outcome": "PASS",
+   "refusal": "main.hs:7:14: error: [GHC-83865]\n    \u2022 Couldn't match type \u2018[]\u2019 with \u2018a0 i0\u2019\n      Expected: a0 i0 Int\n        Actual: [Int]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "value_struct": {
+   "outcome": "NONE",
+   "message": "records are immutable; no mutable record that copies on assignment"
+  },
+  "complete_init": {
+   "outcome": "NONE",
+   "message": "a record built without a field is only a warning (-Wmissing-fields)"
+  },
+  "composite_key": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "true",
+   "stderr": "",
+   "level": "STD"
+  },
+  "checked_index": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "none",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sum_type_exhaustive": {
+   "outcome": "NONE",
+   "message": "a missing case is a warning (-Wincomplete-patterns), not an error"
+  },
+  "optional_type": {
+   "outcome": "PASS",
+   "refusal": "main.hs:6:12: error: [GHC-39999]\n    \u2022 No instance for \u2018Num (Maybe Int)\u2019 arising from a use of \u2018+\u2019\n    \u2022 In the first argument of \u2018print\u2019, namely \u2018(o + 1)\u2019\n      In a stmt of a 'do' block: print (o + 1)",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "none",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "newtype": {
+   "outcome": "PASS",
+   "refusal": "main.hs:12:39: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Meters\u2019 with actual type \u2018Seconds\u2019\n    \u2022 In the second argument of \u2018addM\u2019, namely \u2018(Seconds 3)\u2019\n      In the expression: addM (Meters 2) (Seconds 3)",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "total_float_sort": {
+   "outcome": "NONE",
+   "message": "no total order for floats in the standard library; compare on NaN is inconsistent"
+  },
+  "date_time_zone": {
+   "outcome": "NONE",
+   "message": "no time zone database in the standard library (the time package knows only the local zone)"
+  },
+  "duration": {
+   "outcome": "NONE",
+   "message": "numeric literals convert to NominalDiffTime, so a duration plus a plain number is accepted"
+  },
+  "byte_buffer": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "100000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "error_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "error",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "must_handle_error": {
+   "outcome": "PASS",
+   "refusal": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:8:3: warning: [GHC-81995] [-Wunused-do-bind]\n    A do-notation statement discarded a result of type\n      \u2018Either String ()\u2019\n    Suggested fix: Suppress this warning by saying \u2018_ <- save\u2019\n  |\n8 |   save -- REJECT!\n  |   ^^^^",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "handled",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_catch": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "caught A\npassed B",
+   "stderr": "",
+   "level": "STD"
+  },
+  "error_chain": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "loading config: not found\nnot found",
+   "stderr": "",
+   "level": "STD"
+  },
+  "stack_trace": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "inner",
+   "stderr": "",
+   "level": "STD"
+  },
+  "cleanup_on_error": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "released\nreleased",
+   "stderr": "",
+   "level": "STD"
+  },
+  "cleanup_on_panic": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "cleanup\nrecovered",
+   "stderr": "",
+   "level": "STD"
+  },
+  "recover_worker_crash": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "worker crashed",
+   "stderr": "",
+   "level": "STD"
+  },
+  "recover_allocation_failure": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "allocation failed",
+   "stderr": "",
+   "level": "STD"
+  },
+  "recover_stack_overflow": {
+   "outcome": "FAIL",
+   "refusal": "",
+   "exit": 137,
+   "secs": 2.54,
+   "stdout": "",
+   "stderr": "Killed",
+   "level": "STD"
+  },
+  "unhandled_hook": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "hook ran",
+   "stderr": "",
+   "level": "STD"
+  },
+  "assertion": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.AssertionFailed:\n\nAssertion failed\n\nHasCallStack backtrace:\n  throwIO, called at libraries/ghc-internal/src/GHC/Internal/IO/Exception.hs:446:5 in ghc-internal:GHC.Internal.IO.Exception\n  assert, called at main.hs:8:3 in main:Main",
+   "level": "STD"
+  },
+  "path_containment": {
+   "outcome": "NONE",
+   "message": "normalise keeps .. segments; no lexical path normalization in the standard library"
+  },
+  "constant_time_compare": {
+   "outcome": "NONE",
+   "message": "no constant-time comparison in the standard library or the Haskell project's libraries"
+  },
+  "secure_random": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "bf35dd030bf916e88fc85beb134e9093",
+   "stderr": "",
+   "level": "PROJECT"
+  },
+  "sha256": {
+   "outcome": "NONE",
+   "message": "no SHA-256 in the standard library or the Haskell project's libraries"
+  },
+  "password_hash": {
+   "outcome": "NONE",
+   "message": "no password hash in the packages GHC ships or the Haskell project's libraries"
+  },
+  "hmac": {
+   "outcome": "NONE",
+   "message": "no HMAC in the packages GHC ships or the Haskell project's libraries"
+  },
+  "aead_encrypt": {
+   "outcome": "NONE",
+   "message": "no authenticated cipher in the packages GHC ships or the Haskell project's libraries"
+  },
+  "weak_reference": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "gone",
+   "stderr": "",
+   "level": "STD"
+  },
+  "consumed_value": {
+   "outcome": "NONE",
+   "message": "linear types need the LinearTypes extension, an opt-in"
+  },
+  "no_implicit_conversion": {
+   "outcome": "PASS",
+   "refusal": "main.hs:9:10: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Int32\u2019 with actual type \u2018Int64\u2019\n    \u2022 In the first argument of \u2018print\u2019, namely \u2018(big :: Int32)\u2019\n      In a stmt of a 'do' block: print (big :: Int32)",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "42",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "mixed_sign_compare": {
+   "outcome": "PASS",
+   "refusal": "main.hs:9:14: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Int\u2019 with actual type \u2018Word\u2019\n    \u2022 In the second argument of \u2018(<)\u2019, namely \u2018n\u2019\n      In the first argument of \u2018print\u2019, namely \u2018(i < n)\u2019",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "less",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "nonnull_reference": {
+   "outcome": "PASS",
+   "refusal": "main.hs:8:19: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Config\u2019 with actual type \u2018Maybe a0\u2019\n    \u2022 In the first argument of \u2018name\u2019, namely \u2018(Nothing :: Config)\u2019\n      In the first argument of \u2018putStrLn\u2019, namely",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "app",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "definite_assignment": {
+   "outcome": "PASS",
+   "refusal": "main.hs:10:7: error: [GHC-44432]\n    The type signature for \u2018y\u2019 lacks an accompanying binding",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "immutable_binding": {
+   "outcome": "PASS",
+   "refusal": "main.hs:8:14: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018GHC.Internal.IORef.IORef a0\u2019\n                  with actual type \u2018Int\u2019\n    \u2022 In the first argument of \u2018writeIORef\u2019, namely \u2018x\u2019",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unused_value_refused": {
+   "outcome": "NONE",
+   "message": "an unused variable is only a warning"
+  },
+  "exhaustive_return": {
+   "outcome": "NONE",
+   "message": "guards that miss a case are only a warning"
+  },
+  "exclusive_mutation": {
+   "outcome": "NONE",
+   "message": "nothing refuses passing one value as two mutable arguments"
+  }
+ }
+}

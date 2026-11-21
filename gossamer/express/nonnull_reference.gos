@@ -1,0 +1,11 @@
+// LEVEL: LANGUAGE
+
+struct Config {
+    name: String
+}
+
+fn main() {
+    let c = Config { name: "app" }
+    let missing: Config = None // REJECT!
+    println(c.name)
+}

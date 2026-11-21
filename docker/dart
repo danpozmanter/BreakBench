@@ -1,0 +1,14 @@
+FROM breakbench:base
+
+ARG version
+RUN wget https://storage.googleapis.com/dart-archive/channels/stable/release/$version/sdk/dartsdk-linux-x64-release.zip \
+	&& unzip dartsdk-linux-x64-release.zip \
+	&& rm dartsdk-linux-x64-release.zip
+ENV PATH="/opt/dart-sdk/bin:$PATH"
+
+# The Dart team's lint set (package:lints), which every `dart create` project enables, and
+# the Dart team's own packages characters, collection, crypto, path and timezone.
+RUN mkdir /opt/dartlints \
+	&& cd /opt/dartlints \
+	&& printf 'name: bb\nenvironment:\n  sdk: ^%s\ndependencies:\n  characters: any\n  collection: any\n  crypto: any\n  path: any\n  timezone: any\ndev_dependencies:\n  lints: any\n' "$version" > pubspec.yaml \
+	&& dart pub get

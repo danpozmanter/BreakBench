@@ -1,0 +1,12 @@
+enum Value {
+    Int(i64),
+    Text(String),
+}
+
+fn main() {
+    let v = Value::Int(42);
+    let Value::Text(s) = v; // BREAK!
+    // CONTROL! let Value::Text(s) = v else { panic!("not text") };
+    println!("{}", s.len());
+    let _ = Value::Int(0);
+}

@@ -1,0 +1,13 @@
+// LEVEL: STD
+
+use std::sync::Map
+
+fn main() {
+    let mut m = Map::new()
+    let mut tasks = #[]
+    for t in 0..4 {
+        tasks.push(spawn(|| for k in 0..1000 { m.insert(f"{t * 1000 + k}", f"{k}") }))
+    }
+    for task in tasks { task.join().unwrap() }
+    println(m.len())
+}

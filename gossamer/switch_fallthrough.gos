@@ -1,0 +1,11 @@
+use std::env
+
+fn main() {
+    let n = env::args()[0].to_i64().unwrap()
+    let name = match n {
+        1 => "one",
+        2 => "two",
+        _ => "other",
+    }
+    println(name)
+}

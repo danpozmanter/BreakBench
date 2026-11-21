@@ -1,0 +1,8 @@
+// LEVEL: STD
+
+use std::crypto::rand
+
+fn main() {
+    let buf = rand::bytes(16).unwrap()
+    println(buf.map(|b| f"{b:02x}").join(""))
+}

@@ -1,0 +1,29 @@
+use std::env
+
+struct Node {
+    next: Option<Node>
+    payload: [u8; 2048]
+}
+
+struct Obj {
+    payload: [u8; 2048]
+    callback: Option<Fn() -> i64>
+}
+
+fn main() {
+    let n = env::args()[0].to_i64().unwrap()
+    let mut total = 0
+    let mut i = 0
+    while i < n {
+        let mut a = Box::new(Node { next: None, payload: [0u8; 2048] })
+        let b = Box::new(Node { next: Some(a), payload: [1u8; 2048] })
+        a.next = Some(b)
+        let mut o = Box::new(Obj { payload: [0u8; 2048], callback: None })
+        o.callback = Some(|| o.payload.len())
+        if let Some(cb) = o.callback {
+            total += cb()
+        }
+        i += 1
+    }
+    println(if total < 0 { "unreachable" } else { "done" })
+}

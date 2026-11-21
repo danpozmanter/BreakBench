@@ -1,0 +1,11 @@
+FROM breakbench:base
+
+ARG version
+
+RUN wget -O jdk.tar.gz "https://api.adoptium.net/v3/binary/latest/$version/ga/linux/x64/jdk/hotspot/normal/eclipse" \
+    && mkdir -p /opt/jdk \
+    && tar -xzf jdk.tar.gz -C /opt/jdk --strip-components=1 \
+    && rm jdk.tar.gz
+
+ENV JAVA_HOME="/opt/jdk"
+ENV PATH="${JAVA_HOME}/bin:${PATH}"

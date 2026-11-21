@@ -1,0 +1,12 @@
+// LEVEL: STD
+
+use std::os::signal
+use std::process
+
+fn main() {
+    let n = signal::on(signal::SIGTERM)
+    process::run("kill", #["-TERM", f"{process::id()}"]).unwrap()
+    if n.wait() {
+        println("cleaned up")
+    }
+}

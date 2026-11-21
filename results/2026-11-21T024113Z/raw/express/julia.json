@@ -1,0 +1,604 @@
+{
+ "lang": "julia",
+ "version": "julia version 1.13.4",
+ "results": {
+  "threads_shared_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.14,
+   "stdout": "45",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "mutex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.15,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "atomic_counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.15,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "channel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.14,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "background_task": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.16,
+   "stdout": "started\n7",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "join_with_failure": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.13,
+   "stdout": "worker failed: bad input",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "task_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.2,
+   "stdout": "timed out",
+   "stderr": "",
+   "level": "STD"
+  },
+  "task_cancel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.13,
+   "stdout": "stopped",
+   "stderr": "",
+   "level": "STD"
+  },
+  "concurrent_map": {
+   "outcome": "NONE",
+   "message": "no concurrent map in the standard library"
+  },
+  "thread_safety_check": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "lock_owns_data": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "spawn_argv": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.14,
+   "stdout": "hi; touch /tmp/bb_x",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "exit_status": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.11,
+   "stdout": "1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "env_absent": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "absent",
+   "stderr": "",
+   "level": "STD"
+  },
+  "signal_graceful": {
+   "outcome": "NONE",
+   "message": "no signal handling in the standard library beyond SIGINT"
+  },
+  "secure_temp_file": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "ok",
+   "stderr": "",
+   "level": "STD"
+  },
+  "file_permissions": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "600",
+   "stderr": "",
+   "level": "STD"
+  },
+  "process_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "killed",
+   "stderr": "",
+   "level": "STD"
+  },
+  "regex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "regex_linear": {
+   "outcome": "NONE",
+   "message": "the standard regex engine backtracks; there is no linear-time engine"
+  },
+  "graphemes": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.15,
+   "stdout": "abcdefgh\ud83d\udc4d\ud83c\udffd",
+   "stderr": "",
+   "level": "STD"
+  },
+  "unicode_normalize": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "STD"
+  },
+  "utf8_validate": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.12,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "html_escape": {
+   "outcome": "NONE",
+   "message": "no HTML escaping in Base or the standard libraries"
+  },
+  "json_parse": {
+   "outcome": "NONE",
+   "message": "no JSON parser in Base or the standard libraries"
+  },
+  "checked_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "overflow",
+   "stderr": "",
+   "level": "STD"
+  },
+  "wrapping_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "-9223372036854775808",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "saturating_add": {
+   "outcome": "NONE",
+   "message": "no saturating arithmetic in Base"
+  },
+  "bigint": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "1267650600228229401496703205376",
+   "stderr": "",
+   "level": "STD"
+  },
+  "unsigned64": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "18446744073709551615",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "int128": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "1267650600228229401496703205376",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "decimal": {
+   "outcome": "NONE",
+   "message": "no decimal type in Base"
+  },
+  "checked_narrowing": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "does not fit",
+   "stderr": "",
+   "level": "STD"
+  },
+  "literal_range": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "float_to_int_checked": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.08,
+   "stdout": "does not fit",
+   "stderr": "",
+   "level": "STD"
+  },
+  "strict_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.08,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sorted_map": {
+   "outcome": "NONE",
+   "message": "no sorted map in Base"
+  },
+  "sorted_set": {
+   "outcome": "NONE",
+   "message": "no sorted set in Base"
+  },
+  "insertion_ordered_map": {
+   "outcome": "NONE",
+   "message": "no insertion-ordered dictionary in Base (OrderedDict is in a package)"
+  },
+  "deque": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "0 2",
+   "stderr": "",
+   "level": "STD"
+  },
+  "priority_queue": {
+   "outcome": "NONE",
+   "message": "no priority queue in Base (it is in DataStructures.jl, a package)"
+  },
+  "counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.11,
+   "stdout": "a=2 b=1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "bitset": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "STD"
+  },
+  "fixed_array_value": {
+   "outcome": "NONE",
+   "message": "arrays are references; tuples cannot be changed in place"
+  },
+  "tuple": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "1 a",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "immutable_collection": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "readonly_param": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "value_struct": {
+   "outcome": "NONE",
+   "message": "immutable structs cannot change a field, and mutable structs are references"
+  },
+  "complete_init": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "composite_key": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.16,
+   "stdout": "true",
+   "stderr": "",
+   "level": "STD"
+  },
+  "checked_index": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.08,
+   "stdout": "none",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sum_type_exhaustive": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "optional_type": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "newtype": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "total_float_sort": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.56,
+   "stdout": "1 2 3 NaN",
+   "stderr": "",
+   "level": "STD"
+  },
+  "date_time_zone": {
+   "outcome": "NONE",
+   "message": "no time zone database in the standard library (TimeZones.jl is a package)"
+  },
+  "duration": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "byte_buffer": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "100000",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "error_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "error",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "must_handle_error": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "typed_catch": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "caught A\npassed B",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "error_chain": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "loading config: not found\nnot found",
+   "stderr": "",
+   "level": "STD"
+  },
+  "stack_trace": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.16,
+   "stdout": "inner",
+   "stderr": "",
+   "level": "STD"
+  },
+  "cleanup_on_error": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "released\nreleased",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "cleanup_on_panic": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "cleanup\nrecovered",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "recover_worker_crash": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.11,
+   "stdout": "worker crashed",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "recover_allocation_failure": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.08,
+   "stdout": "allocation failed",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "recover_stack_overflow": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "stack overflow",
+   "stderr": "Warning: detected a stack overflow; program state may be corrupted, so further execution might be unreliable.",
+   "level": "LANGUAGE"
+  },
+  "unhandled_hook": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.78,
+   "stdout": "hook ran",
+   "stderr": "ERROR: LoadError: boom\nStacktrace:\n [1] error(s::String)\n   @ Base ./error.jl:44\n [2] top-level scope\n   @ /tmp/breakbench/express-unhandled_hook/main/main.jl:4\n [3] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [4] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [5] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/express-unhandled_hook/main/main.jl:4",
+   "level": "STD"
+  },
+  "assertion": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.81,
+   "stdout": "before",
+   "stderr": "ERROR: LoadError: AssertionError: length(ARGS) + 1 == 3\nStacktrace:\n [1] top-level scope\n   @ /tmp/breakbench/express-assertion/main/main.jl:4\n [2] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [3] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [4] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/express-assertion/main/main.jl:4",
+   "level": "STD"
+  },
+  "path_containment": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.08,
+   "stdout": "outside",
+   "stderr": "",
+   "level": "STD"
+  },
+  "constant_time_compare": {
+   "outcome": "NONE",
+   "message": "no constant-time comparison in the standard library"
+  },
+  "secure_random": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.14,
+   "stdout": "1490bee0263b3300ba6f4da2d4135ced",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sha256": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+   "stderr": "",
+   "level": "STD"
+  },
+  "password_hash": {
+   "outcome": "NONE",
+   "message": "no password hash in Base or the standard libraries"
+  },
+  "hmac": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8",
+   "stderr": "",
+   "level": "STD"
+  },
+  "aead_encrypt": {
+   "outcome": "NONE",
+   "message": "no authenticated cipher in Base or the standard libraries"
+  },
+  "weak_reference": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "gone",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "consumed_value": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "no_implicit_conversion": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "mixed_sign_compare": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "nonnull_reference": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "definite_assignment": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "immutable_binding": {
+   "outcome": "NONE",
+   "message": "redefining a constant fails only at run time"
+  },
+  "unused_value_refused": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "exhaustive_return": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "exclusive_mutation": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  }
+ }
+}

@@ -1,0 +1,20 @@
+use std::sync::{Mutex, Shared}
+
+fn post(lock: Mutex, debits: Shared<i64>, credits: Shared<i64>) {
+    lock.lock()
+    defer lock.unlock()
+    debits.update(|d| d + 50)
+    if debits.get() > 0 { panic("crash mid-update") }
+    credits.update(|c| c + 50)
+}
+
+fn main() {
+    let lock = Mutex::new()
+    let debits = Shared::new(0)
+    let credits = Shared::new(0)
+    let worker = spawn(|| post(lock, debits, credits))
+    if worker.join().is_err() { eprintln("worker failed") }
+    lock.lock()
+    defer lock.unlock()
+    println(if debits.get() == credits.get() { "balanced" } else { "unbalanced" })
+}

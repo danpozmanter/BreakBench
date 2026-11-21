@@ -1,0 +1,12 @@
+fn main() {
+    let mut xs = #[5.0, f64::NAN, 3.0, 1.0, f64::NAN, 4.0, 2.0]
+    xs.sort()
+    let mut prev = f64::NEG_INFINITY
+    let mut ordered = true
+    for x in xs {
+        if x.is_nan() { continue }
+        if x < prev { ordered = false }
+        prev = x
+    }
+    println(if ordered { "ordered" } else { "unordered" })
+}

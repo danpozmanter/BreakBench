@@ -1,0 +1,22 @@
+use std::{env, errors}
+
+fn sum(xs: Vec<String>) -> i64 {
+    let mut total = 0
+    for x in xs {
+        total += x.to_i64().unwrap()
+    }
+    total
+}
+
+fn run() -> Result<(), errors::Error> {
+    let args = env::args()
+    cohort {
+        let worker = spawn(|| sum(args))
+        let total = worker.join()?
+        println(f"total {total}")
+    }
+}
+
+fn main() {
+    run().unwrap()
+}

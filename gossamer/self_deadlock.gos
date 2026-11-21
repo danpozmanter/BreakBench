@@ -1,0 +1,16 @@
+use std::sync::Mutex
+
+fn deposit(lock: Mutex, balance: &mut i64, amount: i64) {
+    lock.lock()
+    defer lock.unlock()
+    *balance += amount
+}
+
+fn main() {
+    let lock = Mutex::new()
+    let mut balance = 0
+    lock.lock()
+    deposit(lock, &mut balance, 10)
+    lock.unlock()
+    println("done")
+}

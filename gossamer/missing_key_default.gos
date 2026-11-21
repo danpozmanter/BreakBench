@@ -1,0 +1,7 @@
+use std::env
+
+fn main() {
+    let stock = {"apple": 3, "plum": 4}
+    let name = env::args()[0]
+    println(stock[name] + 5)
+}

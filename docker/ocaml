@@ -1,0 +1,10 @@
+FROM breakbench:base
+
+ARG version
+RUN apt update && apt install -y --no-install-recommends opam bubblewrap libgmp-dev && apt clean
+# re and zarith are libraries the OCaml project publishes (github.com/ocaml).
+RUN opam init --bare -y --disable-sandboxing \
+    && opam switch create $version --yes \
+    && opam install -y dune re zarith
+ENV OPAM_SWITCH_PREFIX=/root/.opam/$version
+ENV PATH=/root/.opam/$version/bin:$PATH

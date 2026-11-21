@@ -1,0 +1,18 @@
+fn make() -> &mut i64 { // BREAK!
+// CONTROL! fn make() -> i64 {
+    let mut local = 4242
+    &mut local // BREAK!
+    // CONTROL! local
+}
+
+fn clobber() -> i64 {
+    let junk = [7; 64]
+    junk[63]
+}
+
+fn main() {
+    let r = make()
+    clobber()
+    println(f"{*r}") // BREAK!
+    // CONTROL! println(f"{r}")
+}

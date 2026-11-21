@@ -1,0 +1,1 @@
+-- CANNOT-EXPRESS: arrays that change in place are references (IOArray); immutable arrays have no in-place write

@@ -1,0 +1,14 @@
+struct Dog {}
+struct Cat {}
+
+enum Animal {
+    DogAnimal(Dog)
+    CatAnimal(Cat)
+}
+
+fn main() {
+    let dogs: Vec<Dog> = #[Dog {}]
+    let mut animals: Vec<Animal> = dogs // BREAK!
+    animals[0] = Animal::CatAnimal(Cat {}) // BREAK!
+    println(if dogs.len() == 1 { "woof" } else { "none" })
+}

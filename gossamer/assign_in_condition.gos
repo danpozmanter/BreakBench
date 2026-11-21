@@ -1,0 +1,9 @@
+use std::env
+
+fn main() {
+    let mut x = env::args()[0].to_i64().unwrap()
+    let label = if x = 1 { "one" } else { "not one" } // BREAK!
+    // CONTROL! let label = if x == 1 { "one" } else { "not one" }
+    x += 0
+    println(f"{label} {x}")
+}

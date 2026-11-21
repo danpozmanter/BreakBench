@@ -1,0 +1,574 @@
+{
+ "lang": "d",
+ "version": "LDC - the LLVM D compiler (1.43.0):",
+ "results": {
+  "null_deref": {
+   "outcome": "CRASH",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==18==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000010 (pc 0x5aa1cc2006b7 bp 0x7ffd563d5330 sp 0x7ffd563d5300 T0)\n==18==The signal is caused by a READ memory access.\n==18==Hint: address points to the zero page.\n    #0 0x5aa1cc2006b7  (/tmp/breakbench/null_deref/main/main+0x20d6b7) (BuildId: f465d419541b9627f27f22917ec0d3e0bae486f2)\n    #1 0x5aa1cc440a3c  (/tmp/breakbench/null_deref/main/main+0x44da3c) (BuildId: f465d419541b9627f27f22917ec0d3e0bae486f2)\n    #2 0x5aa1cc440861  (/tmp/breakbench/null_deref/main/main+0x44d861) (BuildId: f465d419541b9627f27f22917ec0d3e0bae486f2)\n    #3 0x5aa1cc4406cc  (/tmp/breakbench/null_deref/main/mai\n...\nc200404  (/tmp/breakbench/null_deref/main/main+0x20d404) (BuildId: f465d419541b9627f27f22917ec0d3e0bae486f2)\n\n==18==Register values:\nrax = 0x0000000000000010  rbx = 0x00007ffd563d53d0  rcx = 0x00000f5922a16000  rdx = 0xf5f5f5f5f5f5f5f5  \nrdi = 0x0000000000000002  rsi = 0x00007ffd563d53a7  rbp = 0x00007ffd563d5330  rsp = 0x00007ffd563d5300  \n r8 = 0x0000000000000000   r9 = 0x00007fffffffff01  r10 = 0x00007fffffffff01  r11 = 0x0000000000000201  \nr12 = 0x0000000000000001  r13 = 0x0000000000000000  r14 = 0x00007ffd563d5468  r15 = 0x0000000000000002  \nAddressSanitizer can not provide additional info.\nSUMMARY: AddressSanitizer: SEGV (/tmp/breakbench/null_deref/main/main+0x20d6b7) (BuildId: f465d419541b9627f27f22917ec0d3e0bae486f2) \n==18==ABORTING"
+  },
+  "int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "outcome": "CRASH",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==36==ERROR: AddressSanitizer: FPE on unknown address 0x5fd18429b52e (pc 0x5fd18429b52e bp 0x7ffee7ba8ad0 sp 0x7ffee7ba8aa0 T0)\n    #0 0x5fd18429b52e  (/tmp/breakbench/div_by_zero/main/main+0x20c52e) (BuildId: 7ab3b26de897241f954d2ff07217f84c3c396fb0)\n    #1 0x5fd1844db8ac  (/tmp/breakbench/div_by_zero/main/main+0x44c8ac) (BuildId: 7ab3b26de897241f954d2ff07217f84c3c396fb0)\n    #2 0x5fd1844db6d1  (/tmp/breakbench/div_by_zero/main/main+0x44c6d1) (BuildId: 7ab3b26de897241f954d2ff07217f84c3c396fb0)\n    #3 0x5fd1844db53c  (/tmp/breakbench/div_by_zero/main/main+0x44c53c) (BuildId: 7ab3b26de897241f954d2ff07217f84c3c396fb0)\n    #4 0x5fd18429b741  (/tmp/b\n...\n29b404  (/tmp/breakbench/div_by_zero/main/main+0x20c404) (BuildId: 7ab3b26de897241f954d2ff07217f84c3c396fb0)\n\n==36==Register values:\nrax = 0x0000000000000064  rbx = 0x00007ffee7ba8b70  rcx = 0x00000ee7572d6000  rdx = 0x0000000000000000  \nrdi = 0x00000ee6d72de004  rsi = 0x00007ffee7ba8b47  rbp = 0x00007ffee7ba8ad0  rsp = 0x00007ffee7ba8aa0  \n r8 = 0x0000000000000000   r9 = 0x00007fffffffff01  r10 = 0x00007fffffffff01  r11 = 0x0000000000000201  \nr12 = 0x0000000000000001  r13 = 0x0000000000000000  r14 = 0x00007ffee7ba8c08  r15 = 0x0000000000000002  \nAddressSanitizer can not provide additional info.\nSUMMARY: AddressSanitizer: FPE (/tmp/breakbench/div_by_zero/main/main+0x20c52e) (BuildId: 7ab3b26de897241f954d2ff07217f84c3c396fb0) \n==36==ABORTING"
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "not less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "main.d(8): Error: function `add` is not callable using argument types `(string, int)`\n    writeln(add(raw, 3)); // BREAK!\n               ^\nmain.d(8):        cannot pass argument `raw` of type `string` to parameter `long a`\n    writeln(add(raw, 3)); // BREAK!\n                ^\nmain.d(3):        `main.add(long a, long b)` declared here\nlong add(long a, long b) { return a + b; }\n     ^"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "main.d(3): Error: function `main.grade` no `return exp;` or `assert(0);` at end of function\nstring grade(int score)\n       ^"
+  },
+  "non_exhaustive_match": {
+   "outcome": "REJECTED",
+   "message": "main.d(7): Error: `switch` statement without a `default`; use `final switch` or add `default: assert(0);` or add `default: break;`\n    switch (c)\n    ^"
+  },
+  "uninitialized_variable": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "missing_argument": {
+   "outcome": "REJECTED",
+   "message": "main.d(7): Error: function `area` is not callable using argument types `(int)`\n    writeln(area(3)); // BREAK!\n                ^\nmain.d(7):        too few arguments, expected 2, got 1\n    writeln(area(3)); // BREAK!\n                ^\nmain.d(3):        `main.area(int w, int h)` declared here\nint area(int w, int h) { return w * h; }\n    ^"
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "main.d(8): Error: no property `colour` for type `Config`\n    cfg.colour = \"red\"; // BREAK!\n       ^\nmain.d(3):        did you mean `color`?\nstruct Config { string color = \"blue\"; }\n                       ^"
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "main.d(7): Error: assignment cannot be used as a condition, perhaps `==` was meant?\n    if (x = 1) label = \"one\"; // BREAK!\n          ^"
+  },
+  "switch_fallthrough": {
+   "outcome": "REJECTED",
+   "message": "main.d(12): Error: switch case fallthrough - use 'goto case;' if intended\n        case 2:\n        ^"
+  },
+  "zero_is_falsy": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "have 0",
+   "stderr": ""
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "std.conv.ConvException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d(2033): Unexpected 'a' when converting from type string to type int\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:2033 pure @safe int std.conv.toImpl!(int, immutable(char)[]).toImpl(immutable(char)[]) [0x5e3495e2c858]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:214 pure @safe int std.conv.to!(int).to!(immutable(char)[]).to(immutable(char)[]) [0x5e3495e2b57c]\nmain.d:5 _Dmain [0x5e3495e2b524]"
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "main.d(10): Error: cannot implicitly convert expression `dogs` of type `Dog[]` to `Animal[]`\n    Animal[] animals = dogs; // BREAK!\n                       ^"
+  },
+  "mutate_while_iterating": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "1,2,3",
+   "stderr": ""
+  },
+  "self_deadlock": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "3,3,3",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "std.file.FileException@std/file.d(840): /nonexistent/dir/out.txt: No such file or directory\n----------------\n??:? @trusted void std.file.writeImpl(scope const(char)[], scope const(char)*, scope const(void)[], bool) [0x57e3dacd5def]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/file.d:745 @safe void std.file.write!(immutable(char)[]).write(immutable(char)[], const(void[])) [0x57e3dabf9623]\nmain.d:3 void main.save(immutable(char)[]) [0x57e3dabf94f8]\nmain.d:7 _Dmain [0x57e3dabf96e4]"
+  },
+  "sort_with_nan": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "unordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "3.0",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "outcome": "REJECTED",
+   "message": "main.d(5): Error: octal literals `01234` are no longer supported, use `std.conv.octal!\"1234\"` instead\n    int zip = 01234; // BREAK!\n              ^"
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "REJECTED",
+   "message": "main.d(6): Error: `1 == 0` must be surrounded by parentheses when next to operator `&`\n    bool even = x & 1 == 0; // BREAK!\n                      ^"
+  },
+  "dangling_else": {
+   "outcome": "REJECTED",
+   "message": "main.d(10): Error: else is dangling, add { } after condition at main.d(8)\n    else // BREAK!\n    ^"
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "main.d(6): Error: semicolon needed to end declaration of `inside` instead of `<`\n    bool inside = 1 < x < 3; // BREAK!\n                        ^\nmain.d(6): Error: found `<` instead of statement\n    bool inside = 1 < x < 3; // BREAK!\n                        ^"
+  },
+  "lost_update_on_copy": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.01,
+   "stdout": "injected",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "exit": -9,
+   "rss_mb": 14.5,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "path_join_escape": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "escaped",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "no match",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "main.d(8): Error: implicit string concatenation is error-prone and disallowed in D\n        \"carol\",\n        ^\nmain.d(8):        Use the explicit syntax instead (concatenating literals is `@nogc`): \"bob\" ~ \"carol\"\n        \"carol\",\n        ^"
+  },
+  "return_in_finally": {
+   "outcome": "REJECTED",
+   "message": "main.d(21): Error: `return` statements cannot be in `finally` bodies\n        return; // BREAK!\n        ^"
+  },
+  "return_line_break": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "std.conv.ConvException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d(2571): Unexpected 'x' when converting from type string to type long\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:2571 pure @safe long std.conv.parse!(long, immutable(char)[], 0).parse(scope ref immutable(char)[]) [0x5f4bf39ac629]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:2036 pure @safe long std.conv.toImpl!(long, immutable(char)[]).toImpl(immutable(char)[]) [0x5f4bf39aa997]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:214 pure @safe long std.conv.to!(long).to!(immutable(char)[]).to(immutable(char)[]) [0x5f4bf39a97ac]\nmain.d:10 [0x5f4bf39a9754]\n??:? thread_entryPoint [0x5f4bf3bdfa60]\n<unknown dir>/<unknown file>:246 [0x5f4bf3a47206]\n??:? [0x738686926db9]\n??:? __clone [0x7386869ba393]"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.06,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.01,
+   "stdout": "3 of",
+   "stderr": "std.format.FormatException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/format/write.d(544): Orphan format specifier: %d\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/exception.d:522 pure @safe noreturn std.exception.bailOut!(std.format.FormatException).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x5818c0cf865b]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/exception.d:442 pure @safe bool std.exception.enforce!(std.format.FormatException).enforce!(bool).enforce(bool, lazy const(char)[], immutable(char)[], ulong) [0x5818c0cebe96]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/format/write.d:544 @safe uint std.format.write.formattedWrite!(std.stdio.File.LockingTextWriter, char, int).formattedWrite(ref std.stdio.File.LockingTextWriter, scope const(char[]), int) [0x5818c0cea95d]\nmain.d:1774 @safe void std.stdio.File.writefln!(char, int).writefln(in char[], int) [0x5818c0cea6fb]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/stdio.d:4492 @safe void std.stdio.writefln!(char, int).writefln(in char[], int) [0x5818c0ce95f1]\nmain.d:7 _Dmain [0x5818c0ce9501]"
+  },
+  "unsigned_subtraction": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "18446744073709551614",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "core.exception.RangeError@main.d(7): Range violation\n----------------\n??:? onRangeError [0x564b3c2d4c68]\n??:? _d_arraybounds [0x564b3c2d4ec7]\nmain.d:7 _Dmain [0x564b3c2d5806]"
+  },
+  "mutable_hash_key": {
+   "outcome": "REJECTED",
+   "message": "main.d(7): Error: associative arrays can only be assigned values with immutable keys, not `int[]`\n    seen[key] = true; // CONTROL! seen[key.idup] = true;\n    ^"
+  },
+  "shadowed_assignment": {
+   "outcome": "REJECTED",
+   "message": "main.d(8): Error: variable `status` is shadowing variable `main.main.status`\n        string status = \"done\"; // CONTROL! status = \"done\";\n        ^\nmain.d(5):        declared here\n    string status = \"pending\";\n           ^"
+  },
+  "discarded_pure_result": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "core.exception.ArrayIndexError@main.d(7): index [18446744073709551615] is out of bounds for array of length 3\n----------------\n??:? onArrayIndexError [0x58358d95bcfd]\n??:? _d_arraybounds_index [0x58358d95bf5d]\nmain.d:7 _Dmain [0x58358d95c724]"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "missing",
+   "stderr": ""
+  },
+  "use_after_close": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "object.Exception@std/stdio.d(3176): Attempting to write to closed File\n----------------\n??:? pure @safe noreturn std.exception.bailOut!(Exception).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x62aa0931f315]\n??:? pure @safe bool std.exception.enforce!().enforce!(bool).enforce(bool, lazy const(char)[], immutable(char)[], ulong) [0x62aa0931f25d]\n??:? ref @trusted std.stdio.File.LockingTextWriter std.stdio.File.LockingTextWriter.__ctor(ref std.stdio.File) [0x62aa093553af]\n??:? @safe std.stdio.File.LockingTextWriter std.stdio.File.lockingTextWriter() [0x62aa09355779]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/stdio.d:1667 @safe void std.stdio.File.write!(immutable(char)[]).write(immutable(char)[]) [0x62aa09245784]\nmain.d:8 _Dmain [0x62aa092455ee]"
+  },
+  "dead_store": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.01,
+   "stdout": "unbalanced",
+   "stderr": "worker failed: crash mid-update"
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "core.exception.ArrayIndexError@main.d(13): index [4] is out of bounds for array of length 4\n----------------\n??:? onArrayIndexError [0x5bbb2a1cacfd]\n??:? _d_arraybounds_index [0x5bbb2a1caf5d]\nmain.d:13 _Dmain [0x5bbb2a1cb6dc]"
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "outcome": "REJECTED",
+   "message": "main.d(6): Error: returning `& local` escapes a reference to local variable `local`\n    return &local; // BREAK!\n           ^"
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 17.9,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==1287==ERROR: AddressSanitizer: stack-overflow on address 0x7ffd5b3d3ff8 (pc 0x5fe46c0f24d8 bp 0x7ffd5b3d4000 sp 0x7ffd5b3d3ff0 T0)\n    #0 0x5fe46c0f24d8  (/tmp/breakbench/stack_overflow/main/main+0x20d4d8) (BuildId: 659088464138f625d1f5b1107b0dc067b581cb3b)\n    #1 0x5fe46c0f24f7  (/tmp/breakbench/stack_overflow/main/main+0x20d4f7) (BuildId: 659088464138f625d1f5b1107b0dc067b581cb3b)\n    #2 0x5fe46c0f24f7  (/tmp/breakbench/stack_overflow/main/main+0x20d4f7) (BuildId: 659088464138f625d1f5b1107b0dc067b581cb3b)\n    #3 0x5fe46c0f24f7  (/tmp/breakbench/stack_overflow/main/main+0x20d4f7) (BuildId: 659088464138f625d1f5b1107b0dc067b581cb3b)\n    #4 0x5fe4\n...\nin/main+0x20d4f7) (BuildId: 659088464138f625d1f5b1107b0dc067b581cb3b)\n    #243 0x5fe46c0f24f7  (/tmp/breakbench/stack_overflow/main/main+0x20d4f7) (BuildId: 659088464138f625d1f5b1107b0dc067b581cb3b)\n    #244 0x5fe46c0f24f7  (/tmp/breakbench/stack_overflow/main/main+0x20d4f7) (BuildId: 659088464138f625d1f5b1107b0dc067b581cb3b)\n    #245 0x5fe46c0f24f7  (/tmp/breakbench/stack_overflow/main/main+0x20d4f7) (BuildId: 659088464138f625d1f5b1107b0dc067b581cb3b)\n    #246 0x5fe46c0f24f7  (/tmp/breakbench/stack_overflow/main/main+0x20d4f7) (BuildId: 659088464138f625d1f5b1107b0dc067b581cb3b)\n\nSUMMARY: AddressSanitizer: stack-overflow (/tmp/breakbench/stack_overflow/main/main+0x20d4d8) (BuildId: 659088464138f625d1f5b1107b0dc067b581cb3b) \n==1287==ABORTING"
+  },
+  "error_path_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 366.5,
+   "secs": 12.15,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "concurrent_map_write": {
+   "outcome": "HANG",
+   "runs": 10,
+   "warned": false,
+   "exit": -9,
+   "rss_mb": 14.5,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "reference_cycle_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 15.6,
+   "secs": 0.55,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "view_retention": {
+   "outcome": "LEAK",
+   "warned": false,
+   "exit": 137,
+   "rss_mb": 3054.0,
+   "secs": 1.05,
+   "stdout": "",
+   "stderr": "Killed"
+  },
+  "huge_allocation": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "core.exception.OutOfMemoryError@core/internal/gc/impl/conservative/gc.d(531): Memory allocation failed\n----------------\n??:? onOutOfMemoryError [0x5d4b5ccced66]\n??:? nothrow void* core.internal.gc.impl.conservative.gc.ConservativeGC.runLocked!(core.internal.gc.impl.conservative.gc.ConservativeGC.mallocNoSync(ulong, uint, ref ulong, const(TypeInfo)), core.internal.gc.impl.conservative.gc.mallocTime, core.internal.gc.impl.conservative.gc.numMallocs, immutable(ulong), uint, ulong, const(TypeInfo)).runLocked(ref immutable(ulong), ref uint, ref ulong, ref const(TypeInfo)) [0x5d4b5cf30f49]\n??:? nothrow void* core.internal.gc.impl.conservative.gc.ConservativeGC.malloc(ulong, uint, const(TypeInfo)) [0x5d4b5cf30d9c]\n??:? _d_newarrayU [0x5d4b5cf1141b]\n??:? _d_newarrayT [0x5d4b5cf11462]\nmain.d:6 _Dmain [0x5d4b5cccf540]"
+  },
+  "fd_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 45.0,
+   "secs": 0.02,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "std.variant.VariantException@std/variant.d(1908): Variant: attempting to use incompatible types int and immutable(char)[]\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/variant.d:937 inout @property inout(immutable(char)[]) std.variant.VariantN!(32uL).VariantN.get!(immutable(char)[]).get() [0x630a1287eb1d]\nmain.d:6 _Dmain [0x630a1287e5b1]"
+  },
+  "format_string": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "std.format.FormatException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/format/write.d(544): Orphan format specifier: %s\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/exception.d:522 pure @safe noreturn std.exception.bailOut!(std.format.FormatException).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x64c841c5732b]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/exception.d:442 pure @safe bool std.exception.enforce!(std.format.FormatException).enforce!(bool).enforce(bool, lazy const(char)[], immutable(char)[], ulong) [0x64c841c4ae36]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/format/write.d:544 @safe uint std.format.write.formattedWrite!(std.stdio.File.LockingTextWriter, char).formattedWrite(ref std.stdio.File.LockingTextWriter, scope const(char[])) [0x64c841c49978]\nmain.d:1774 @safe void std.stdio.File.writefln!(char).writefln(in char[]) [0x64c841c4972f]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/stdio.d:4492 @safe void std.stdio.writefln!(char).writefln(in char[]) [0x64c841c48635]\nmain.d:5 _Dmain [0x64c841c48524]"
+  },
+  "deep_structure_release": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 44.0,
+   "secs": 0.04,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "abandoned_worker_leak": {
+   "outcome": "LEAK",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 2525.0,
+   "secs": 20.35,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "main.d(6): Error: cannot modify `immutable` expression `greeting[0]`\n    greeting[0] = 'j'; // CONTROL! greeting = \"j\" ~ greeting[1 .. $];\n            ^"
+  }
+ }
+}

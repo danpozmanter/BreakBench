@@ -1,0 +1,13 @@
+use std::env
+
+const HEADER: i64 = 5
+
+fn main() {
+    let message = env::args()[0]
+    let payload = message.byte_len() - HEADER
+    if payload < 0 {
+        println("short")
+    } else {
+        println(payload)
+    }
+}

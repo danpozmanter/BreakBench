@@ -1,0 +1,1 @@
+-- CANNOT-EXPRESS: a record built without a field is only a warning (-Wmissing-fields)

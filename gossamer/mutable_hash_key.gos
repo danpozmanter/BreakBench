@@ -1,0 +1,9 @@
+fn main() {
+    let mut seen = Set::new()
+    let mut key = #[1, 2]
+    seen.insert(key)
+    key[0] = 9
+    for e in seen {
+        println(if seen.contains(e) { "found" } else { "lost" })
+    }
+}

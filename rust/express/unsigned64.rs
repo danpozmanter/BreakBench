@@ -1,0 +1,6 @@
+// LEVEL: LANGUAGE
+
+fn main() {
+    let x: u64 = u64::MAX;
+    println!("{x}");
+}

@@ -1,0 +1,1 @@
+// CANNOT-EXPRESS: no SHA-256 in ISO C or POSIX

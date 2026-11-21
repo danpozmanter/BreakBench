@@ -1,0 +1,17 @@
+fn main() {
+    let mut map: Map<i64, i64> = Map::new()
+    let mut handles = #[]
+    for t in 0..8 {
+        handles.push(spawn(|| {
+            for k in 0..100000 {
+                map[t * 100000 + k] = k // BREAK!
+            }
+            t
+        }))
+    }
+    for h in handles {
+        h.join().unwrap()
+    }
+    map[0] = 0
+    println(f"{map.len()}")
+}

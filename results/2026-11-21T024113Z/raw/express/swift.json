@@ -1,0 +1,714 @@
+{
+ "lang": "swift",
+ "version": "Swift version 6.4.2 (swift-6.4.2-RELEASE)",
+ "results": {
+  "threads_shared_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "45",
+   "stderr": "",
+   "level": "STD"
+  },
+  "mutex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "atomic_counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "channel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "STD"
+  },
+  "background_task": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.05,
+   "stdout": "started\n7",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "join_with_failure": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "worker failed: bad input",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "task_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "timed out",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "task_cancel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "stopped",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "concurrent_map": {
+   "outcome": "NONE",
+   "message": "no concurrent map in the standard library"
+  },
+  "thread_safety_check": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:9:25: error: main actor-isolated var 'unguarded' can not be mutated from a nonisolated context\n   |                         |- error: main actor-isolated var 'unguarded' can not be mutated from a nonisolated context",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "lock_owns_data": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:15:24: error: value of type 'Mutex<Ledger>' has no member 'debits'\n   |                        `- error: value of type 'Mutex<Ledger>' has no member 'debits'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2000 2000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "spawn_argv": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "hi; touch /tmp/bb_x",
+   "stderr": "",
+   "level": "STD"
+  },
+  "exit_status": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "1",
+   "stderr": "",
+   "level": "STD"
+  },
+  "env_absent": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "absent",
+   "stderr": "",
+   "level": "STD"
+  },
+  "signal_graceful": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "cleaned up",
+   "stderr": "",
+   "level": "STD"
+  },
+  "secure_temp_file": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "ok",
+   "stderr": "",
+   "level": "STD"
+  },
+  "file_permissions": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "600",
+   "stderr": "",
+   "level": "STD"
+  },
+  "process_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.16,
+   "stdout": "killed",
+   "stderr": "",
+   "level": "STD"
+  },
+  "regex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "STD"
+  },
+  "regex_linear": {
+   "outcome": "NONE",
+   "message": "the standard regex engine backtracks; there is no linear-time engine"
+  },
+  "graphemes": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "abcdefgh\ud83d\udc4d\ud83c\udffd",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unicode_normalize": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "STD"
+  },
+  "utf8_validate": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "html_escape": {
+   "outcome": "NONE",
+   "message": "no HTML escaping in Foundation or the Swift project's packages"
+  },
+  "json_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "8080 invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "checked_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "overflow",
+   "stderr": "",
+   "level": "STD"
+  },
+  "wrapping_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "saturating_add": {
+   "outcome": "NONE",
+   "message": "no saturating arithmetic in the standard library"
+  },
+  "bigint": {
+   "outcome": "NONE",
+   "message": "no arbitrary-precision integers in the standard library"
+  },
+  "unsigned64": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "18446744073709551615",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "int128": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1267650600228229401496703205376",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "decimal": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "equal",
+   "stderr": "",
+   "level": "STD"
+  },
+  "checked_narrowing": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "does not fit",
+   "stderr": "",
+   "level": "STD"
+  },
+  "literal_range": {
+   "outcome": "PASS",
+   "refusal": "main.swift:4:21: error: integer literal '300' overflows when stored into 'UInt8'\n  |                     `- error: integer literal '300' overflows when stored into 'UInt8'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "float_to_int_checked": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "does not fit",
+   "stderr": "",
+   "level": "STD"
+  },
+  "strict_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sorted_map": {
+   "outcome": "NONE",
+   "message": "no sorted map in the standard library"
+  },
+  "sorted_set": {
+   "outcome": "NONE",
+   "message": "no sorted set in the standard library"
+  },
+  "insertion_ordered_map": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "c a b",
+   "stderr": "",
+   "level": "PROJECT"
+  },
+  "deque": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0 2",
+   "stderr": "",
+   "level": "PROJECT"
+  },
+  "priority_queue": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "PROJECT"
+  },
+  "counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a=2 b=1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "bitset": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "PROJECT"
+  },
+  "fixed_array_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "tuple": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 a",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "immutable_collection": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:4:4: error: cannot use mutating member on immutable value: 'xs' is a 'let' constant\n  |    `- error: cannot use mutating member on immutable value: 'xs' is a 'let' constant",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "readonly_param": {
+   "outcome": "PASS",
+   "refusal": "main.swift:4:7: error: cannot assign through subscript: 'xs' is a 'let' constant\n  |       `- error: cannot assign through subscript: 'xs' is a 'let' constant",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "value_struct": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "complete_init": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:9:32: error: missing argument for parameter 'retries' in call\n   |                                `- error: missing argument for parameter 'retries' in call",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5 3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "composite_key": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "true",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "checked_index": {
+   "outcome": "NONE",
+   "message": "no index lookup that returns a missing value; an out-of-range index traps"
+  },
+  "sum_type_exhaustive": {
+   "outcome": "PASS",
+   "refusal": "main.swift:15:34: error: switch must be exhaustive\n   |                                  |- error: switch must be exhaustive",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "circle",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "optional_type": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:4:9: error: value of optional type 'Int?' must be unwrapped to a value of type 'Int'\n  |         |- error: value of optional type 'Int?' must be unwrapped to a value of type 'Int'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "none",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "newtype": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:8:28: error: cannot convert value of type 'Seconds' to expected argument type 'Meters'\n   |                            `- error: cannot convert value of type 'Seconds' to expected argument type 'Meters'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5.0",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "total_float_sort": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3 NaN",
+   "stderr": "",
+   "level": "STD"
+  },
+  "date_time_zone": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "2026-03-29 03:30",
+   "stderr": "",
+   "level": "STD"
+  },
+  "duration": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:5:19: error: binary operator '+' cannot be applied to operands of type 'Duration' and 'Int'\n  |                   |- error: binary operator '+' cannot be applied to operands of type 'Duration' and 'Int'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "byte_buffer": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "100000",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "error_value": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "error",
+   "stderr": "",
+   "level": "STD"
+  },
+  "must_handle_error": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:7:1: error: call can throw but is not marked with 'try'\n   | |- error: call can throw but is not marked with 'try'\n   | |- note: did you mean to handle error as optional value?\n   | `- note: did you mean to disable error propagation?",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "handled",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_catch": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "caught A\npassed B",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "error_chain": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "loading config: not found\nnot found",
+   "stderr": "",
+   "level": "STD"
+  },
+  "stack_trace": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "inner",
+   "stderr": "",
+   "level": "STD"
+  },
+  "cleanup_on_error": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "released\nreleased",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "cleanup_on_panic": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "cleanup\nrecovered",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "recover_worker_crash": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "worker crashed",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "recover_allocation_failure": {
+   "outcome": "NONE",
+   "message": "allocation failure ends the program"
+  },
+  "recover_stack_overflow": {
+   "outcome": "NONE",
+   "message": "stack overflow ends the program"
+  },
+  "unhandled_hook": {
+   "outcome": "NONE",
+   "message": "no handler for an uncaught error"
+  },
+  "assertion": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 132,
+   "secs": 0.1,
+   "stdout": "before",
+   "stderr": "main/main.swift:6: Assertion failed\n\n*** Signal 4: Backtracing from 0x7754f1ae6fbf... done ***\n\n*** Program crashed: Illegal instruction at 0x00007754f1ae6fbf ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0      0x00007754f1ae6fbf _assertionFailure(_:_:file:line:flags:) + 303 in libswiftCore.so\n1 [ra] 0x0000593b7013b6cf main + 430 in main at /tmp/breakbench/express-as\n...\nd173 main            /tmp/breakbench/express-assertion/main/main\n0x00007754effff000\u20130x00007754f01be819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6       /usr/lib/x86_64-linux-gnu/libc.so.6\n0x00007754f17dd000\u20130x00007754f1db6b70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.01s\n\nIllegal instruction (core dumped)",
+   "level": "STD"
+  },
+  "path_containment": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "outside",
+   "stderr": "",
+   "level": "STD"
+  },
+  "constant_time_compare": {
+   "outcome": "NONE",
+   "message": "no constant-time comparison in the standard library"
+  },
+  "secure_random": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "78d4565c5022f43d5b05670e01b1bbe7",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sha256": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+   "stderr": "",
+   "level": "PROJECT"
+  },
+  "password_hash": {
+   "outcome": "NONE",
+   "message": "only swift-crypto's _CryptoExtras, outside its stable API, has PBKDF2 or scrypt"
+  },
+  "hmac": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8",
+   "stderr": "",
+   "level": "PROJECT"
+  },
+  "aead_encrypt": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "secret\nrejected",
+   "stderr": "",
+   "level": "PROJECT"
+  },
+  "weak_reference": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "gone",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "consumed_value": {
+   "outcome": "PASS",
+   "refusal": "main.swift:10:9: error: 'h' used after consume\n   |         `- error: 'h' used after consume",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "closed",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "no_implicit_conversion": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:5:20: error: cannot convert value of type 'Int64' to specified type 'Int32'\n  |                    `- error: cannot convert value of type 'Int64' to specified type 'Int32'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "42",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "mixed_sign_compare": {
+   "outcome": "NONE",
+   "message": "a mixed-sign comparison is accepted (Swift compares the values correctly)"
+  },
+  "nonnull_reference": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:10:23: error: 'nil' cannot initialize specified type 'Config'\n   |              |        `- error: 'nil' cannot initialize specified type 'Config'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "app",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "definite_assignment": {
+   "outcome": "PASS",
+   "refusal": "main.swift:8:7: error: constant 'y' used before being initialized\n   |       `- error: constant 'y' used before being initialized",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "immutable_binding": {
+   "outcome": "PASS",
+   "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:4:1: error: cannot assign to value: 'x' is a 'let' constant\n  | `- error: cannot assign to value: 'x' is a 'let' constant",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unused_value_refused": {
+   "outcome": "NONE",
+   "message": "an unused variable is only a warning"
+  },
+  "exhaustive_return": {
+   "outcome": "PASS",
+   "refusal": "main.swift:9:1: error: missing return in global function expected to return 'String'\n   | `- error: missing return in global function expected to return 'String'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "exclusive_mutation": {
+   "outcome": "PASS",
+   "refusal": "main.swift:12:18: error: inout arguments are not allowed to alias each other\n   |              |   `- error: inout arguments are not allowed to alias each other",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "70 30",
+   "stderr": "",
+   "level": "LANGUAGE"
+  }
+ }
+}

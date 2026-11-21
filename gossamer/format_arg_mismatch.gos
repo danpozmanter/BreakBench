@@ -1,0 +1,5 @@
+fn main() {
+    let done = 3
+    let total = 5
+    println(format("{} of {}", done)) // CONTROL! println(format("{} of {}", done, total))
+}

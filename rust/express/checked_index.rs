@@ -1,0 +1,9 @@
+// LEVEL: STD
+
+fn main() {
+    let xs = [10, 20, 30];
+    match xs.get(5) {
+        Some(v) => println!("{v}"),
+        None => println!("none"),
+    }
+}

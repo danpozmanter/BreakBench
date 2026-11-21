@@ -1,0 +1,25 @@
+use std::errors
+use std::sync::Mutex
+use std::time
+
+fn transfer(first: Mutex, second: Mutex) {
+    first.lock()
+    defer first.unlock()
+    time::sleep(100)
+    second.lock()
+    defer second.unlock()
+}
+
+fn run() -> Result<(), errors::Error> {
+    let a = Mutex::new()
+    let b = Mutex::new()
+    cohort {
+        spawn(|| transfer(a, b))
+        spawn(|| transfer(b, a))
+    }
+}
+
+fn main() {
+    run().unwrap()
+    println("finished")
+}

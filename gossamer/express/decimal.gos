@@ -1,0 +1,9 @@
+// LEVEL: STD
+
+use std::{errors, math::Decimal}
+
+fn main() -> Result<(), errors::Error> {
+    let sum = Decimal::parse("0.1")? + Decimal::parse("0.2")?
+    println(if sum == Decimal::parse("0.3")? { "equal" } else { "not equal" })
+    Ok(())
+}

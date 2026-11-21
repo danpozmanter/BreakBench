@@ -1,0 +1,11 @@
+// LEVEL: STD
+
+fn main() {
+    let mut m = BTreeMap::new()
+    m.insert("c", 1)
+    m.insert("a", 2)
+    m.insert("b", 3)
+    let mut keys = #[]
+    for (k, _) in m.iter() { keys.push(k) }
+    println(keys.join(" "))
+}

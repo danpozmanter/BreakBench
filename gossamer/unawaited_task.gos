@@ -1,0 +1,13 @@
+use std::sync::Shared
+use std::time
+
+fn save(saved: Shared<i64>) -> () {
+    time::sleep(50)
+    saved.update(|n| n + 1)
+}
+
+fn main() {
+    let saved = Shared::new(0)
+    let task = spawn(|| save(saved)) // CONTROL! let task = spawn(|| save(saved)); task.join().unwrap()
+    println(f"{saved.get()}")
+}

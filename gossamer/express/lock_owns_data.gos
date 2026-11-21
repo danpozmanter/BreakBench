@@ -1,0 +1,1 @@
+// CANNOT-EXPRESS: sync::Shared holds only an integer, and sync::Mutex guards code, not data

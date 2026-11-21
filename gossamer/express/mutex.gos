@@ -1,0 +1,13 @@
+// LEVEL: STD
+
+use std::sync::{Mutex, Shared}
+
+fn main() {
+    let counter = Shared::new(0)
+    let lock = Mutex::new()
+    let a = spawn(|| for _ in 0..100000 { lock.lock(); counter.update(|v| v + 1); lock.unlock() })
+    let b = spawn(|| for _ in 0..100000 { lock.lock(); counter.update(|v| v + 1); lock.unlock() })
+    a.join().unwrap()
+    b.join().unwrap()
+    println(counter.get())
+}

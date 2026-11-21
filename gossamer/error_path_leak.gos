@@ -1,0 +1,24 @@
+use std::env
+
+fn process(request: String, id: i64) -> Result<(), String> {
+    let mut buf = #[0u8; 4096]
+    let text = f"{request}#{id}".bytes()
+    for j in 0..text.len() {
+        buf[j] = text[j]
+    }
+    if buf[0] != 123 {
+        return Err("invalid request")
+    }
+    Ok(())
+}
+
+fn main() {
+    let n = env::args()[0].to_i64().unwrap()
+    let mut failures = 0
+    for i in 0..n {
+        if process("not json", i).is_err() {
+            failures += 1
+        }
+    }
+    println(if failures == n { "done" } else { "unexpected" })
+}

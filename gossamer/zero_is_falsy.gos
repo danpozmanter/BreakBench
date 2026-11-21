@@ -1,0 +1,12 @@
+use std::env
+
+fn main() {
+    let qty = env::args()[0].to_i64()
+    let present = if qty { true } else { false } // BREAK!
+    // CONTROL! let present = qty.is_some()
+    if present {
+        println(f"have {qty.unwrap()}")
+    } else {
+        println("missing")
+    }
+}

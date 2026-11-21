@@ -1,0 +1,9 @@
+// LEVEL: LANGUAGE
+
+use std::time
+
+fn main() {
+    let task = spawn(|| { time::sleep(50); 7 })
+    println("started")
+    println(task.join().unwrap())
+}

@@ -1,0 +1,8 @@
+import System.Environment (getArgs)
+import qualified Data.Map as M
+
+main :: IO ()
+main = do
+  args <- getArgs
+  let stock = M.fromList [("apple", 3), ("plum", 4 :: Int)]
+  print (stock M.! head args + 5)

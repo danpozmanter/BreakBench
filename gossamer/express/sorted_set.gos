@@ -1,0 +1,11 @@
+// LEVEL: STD
+
+fn main() {
+    let mut s = BTreeSet::new()
+    s.insert(3)
+    s.insert(1)
+    s.insert(2)
+    let mut items = #[]
+    for v in s { items.push(f"{v}") }
+    println(items.join(" "))
+}

@@ -1,0 +1,12 @@
+// LEVEL: LANGUAGE
+
+use std::errors
+
+fn save() -> Result<(), errors::Error> {
+    Err(errors::new("disk full"))
+}
+
+fn main() {
+    save() // REJECT!
+    if save().is_err() { println("handled") }
+}

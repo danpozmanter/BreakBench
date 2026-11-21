@@ -1,0 +1,7 @@
+use std::env
+
+fn main() {
+    let s = env::args()[0].to_i64().unwrap()
+    let one: u64 = 1
+    println(f"{one << s}")
+}

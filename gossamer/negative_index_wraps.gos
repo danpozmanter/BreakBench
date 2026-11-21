@@ -1,0 +1,7 @@
+use std::env
+
+fn main() {
+    let readings = [10, 20, 30]
+    let i = env::args()[0].to_i64().unwrap()
+    println(readings[i] - readings[i - 1])
+}

@@ -1,0 +1,7 @@
+fn main() {
+    let mut fs = #[]
+    for i in 0..3 {
+        fs.push(|| i)
+    }
+    println(fs.map(|f| f"{f()}").join(","))
+}

@@ -1,0 +1,7 @@
+use std::env
+
+fn main() {
+    let price = env::args()[0].to_i64().unwrap()
+    let total = price + 2
+    println(f"{price}") // CONTROL! println(f"{total}")
+}

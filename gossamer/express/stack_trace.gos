@@ -1,0 +1,9 @@
+// LEVEL: STD
+
+use std::runtime
+
+fn inner() -> String { runtime::backtrace() }
+
+fn main() {
+    println(if inner().contains("inner") { "inner" } else { "missing" })
+}

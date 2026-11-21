@@ -1,0 +1,8 @@
+use std::env
+
+fn main() {
+    let x = env::args()[0].to_i64().unwrap()
+    let even = x & 1 == 0 // BREAK!
+    // CONTROL! let even = (x & 1) == 0
+    println(if even { "even" } else { "odd" })
+}

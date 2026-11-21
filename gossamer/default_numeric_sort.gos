@@ -1,0 +1,5 @@
+fn main() {
+    let mut scores = #[10, 9, 1]
+    scores.sort()
+    println(scores.map(|s| f"{s}").join(" "))
+}

@@ -1,0 +1,7 @@
+FROM breakbench:nodejs
+
+ARG version
+RUN npm install -g \
+    typescript@$version \
+    ts-node@latest \
+    @types/node@latest

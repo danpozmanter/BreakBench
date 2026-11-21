@@ -1,0 +1,10 @@
+use std::env
+
+fn is_odd(n: i64) -> bool {
+    n % 2 == 1
+}
+
+fn main() {
+    let n = env::args()[0].to_i64().unwrap()
+    println(if is_odd(n) { "odd" } else { "even" })
+}

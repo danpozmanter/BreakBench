@@ -1,0 +1,351 @@
+{
+  "c": {
+    "name": "C",
+    "service": "c",
+    "ext": "c",
+    "file": "main.c",
+    "build": [
+      "clang -std=c23 -Weverything -Wno-declaration-after-statement -Wno-unsafe-buffer-usage -Wno-c++98-compat -Wno-pre-c23-compat -Wno-padded -Werror=return-type -Werror=address -O0 -g -fsanitize=address,undefined -fno-sanitize-recover=undefined -fno-omit-frame-pointer -pthread -o main main.c"
+    ],
+    "run": "ASAN_OPTIONS=${ASAN_OPTIONS:-detect_leaks=0} ./main",
+    "version": "clang --version | head -1"
+  },
+  "cpp": {
+    "name": "C++",
+    "service": "cpp",
+    "ext": "cpp",
+    "file": "main.cpp",
+    "build": [
+      "clang++ -std=c++23 -Weverything -Wno-declaration-after-statement -Wno-unsafe-buffer-usage -Wno-c++98-compat -Wno-pre-c23-compat -Wno-padded -Werror=return-type -Werror=address -O0 -g -fsanitize=address,undefined -fno-sanitize-recover=undefined -fno-omit-frame-pointer -pthread -o main main.cpp -lstdc++exp"
+    ],
+    "run": "ASAN_OPTIONS=${ASAN_OPTIONS:-detect_leaks=0} ./main",
+    "version": "clang++ --version | head -1"
+  },
+  "rust": {
+    "name": "Rust",
+    "service": "rust",
+    "ext": "rs",
+    "file": "main.rs",
+    "build": [
+      "clippy-driver --edition 2024 -g --extern regex=/opt/rustdeps/libregex.rlib -L dependency=/opt/rustdeps/lib -o main main.rs"
+    ],
+    "run": "./main",
+    "version": "rustc --version"
+  },
+  "zig": {
+    "name": "Zig",
+    "service": "zig",
+    "ext": "zig",
+    "file": "main.zig",
+    "build": [
+      "zig build-exe -O Debug -femit-bin=main main.zig"
+    ],
+    "run": "./main",
+    "version": "zig version"
+  },
+  "golang": {
+    "name": "Go",
+    "service": "golang",
+    "ext": "go",
+    "file": "main.go",
+    "build": [
+      "cp /opt/gomod/go.mod /opt/gomod/go.sum . && GOFLAGS=-buildvcs=false go vet main.go 2>&1 || true",
+      "GOFLAGS=-buildvcs=false go build -o main main.go"
+    ],
+    "run": "./main",
+    "version": "go version",
+    "warn_line": "^(\\./)?main\\.go:\\d+:\\d+: "
+  },
+  "swift": {
+    "name": "Swift",
+    "service": "swift",
+    "ext": "swift",
+    "file": "main.swift",
+    "build": [
+      "swiftc -swift-version 6 -Onone -g -I /opt/swiftdeps/.build/debug -o main main.swift /opt/swiftdeps/.build/debug/libDeps.a -lstdc++"
+    ],
+    "run": "./main",
+    "version": "swiftc --version 2>&1 | head -1"
+  },
+  "crystal": {
+    "name": "Crystal",
+    "service": "crystal",
+    "ext": "cr",
+    "file": "main.cr",
+    "build": [
+      "crystal build -o main main.cr"
+    ],
+    "run": "./main",
+    "version": "crystal --version | head -1"
+  },
+  "d": {
+    "name": "D",
+    "service": "d",
+    "ext": "d",
+    "file": "main.d",
+    "build": [
+      "ldc2 -g -L--export-dynamic -wi -fsanitize=address -of=main main.d"
+    ],
+    "run": "ASAN_OPTIONS=${ASAN_OPTIONS:-detect_leaks=0} ./main",
+    "version": "ldc2 --version | head -1"
+  },
+  "nim": {
+    "name": "Nim",
+    "service": "nim",
+    "ext": "nim",
+    "file": "main.nim",
+    "build": [
+      "nim c --cc:clang --threads:on --hints:off --verbosity:0 -o:main main.nim"
+    ],
+    "run": "./main",
+    "version": "nim --version | head -1"
+  },
+  "v": {
+    "name": "V",
+    "service": "v",
+    "ext": "v",
+    "file": "main.v",
+    "build": [
+      "v vet main.v 2>&1 || true",
+      "v -cc clang -o main main.v"
+    ],
+    "run": "./main",
+    "version": "v version"
+  },
+  "odin": {
+    "name": "Odin",
+    "service": "odin",
+    "ext": "odin",
+    "file": "main.odin",
+    "build": [
+      "odin build main.odin -file -debug -vet -sanitize:address -out:main"
+    ],
+    "run": "ASAN_OPTIONS=${ASAN_OPTIONS:-detect_leaks=0} ./main",
+    "version": "odin version"
+  },
+  "c3": {
+    "name": "C3",
+    "service": "c3",
+    "ext": "c3",
+    "file": "main.c3",
+    "build": [
+      "c3c compile -O0 --sanitize=address -o main main.c3"
+    ],
+    "run": "ASAN_OPTIONS=${ASAN_OPTIONS:-detect_leaks=0} ./main",
+    "version": "c3c --version | head -1"
+  },
+  "mojo": {
+    "name": "Mojo",
+    "service": "mojo",
+    "ext": "mojo",
+    "file": "main.mojo",
+    "build": [
+      "pixi run --manifest-path /opt/mojo-ws/pixi.toml mojo build -O0 -D ASSERT=all -o main main.mojo"
+    ],
+    "run": "./main",
+    "version": "pixi run --manifest-path /opt/mojo-ws/pixi.toml mojo --version 2>/dev/null"
+  },
+  "gossamer": {
+    "name": "Gossamer",
+    "service": "gossamer",
+    "ext": "gos",
+    "file": "main.gos",
+    "build": [
+      "gos lint main.gos 2>&1 || true",
+      "gos build main.gos"
+    ],
+    "run": "./target/debug/main",
+    "version": "gos --version"
+  },
+  "goose": {
+    "name": "Goose",
+    "service": "goose",
+    "ext": "goose",
+    "file": "main.goose",
+    "build": [
+      "goose --debug --standalone -o main.c main.goose",
+      "cc -g -O0 -w main.c -o main -lm -pthread"
+    ],
+    "run": "./main",
+    "version": "cd /opt/goose && echo goose $(git rev-parse --short HEAD)"
+  },
+  "java": {
+    "name": "Java",
+    "service": "java",
+    "ext": "java",
+    "file": "Main.java",
+    "build": [
+      "javac -Xlint:all -d out Main.java"
+    ],
+    "run": "java -ea -cp out Main",
+    "version": "java -version 2>&1 | head -1"
+  },
+  "kotlin": {
+    "name": "Kotlin",
+    "service": "kotlin",
+    "ext": "kt",
+    "file": "main.kt",
+    "build": [
+      "kotlinc main.kt -cp $(ls /opt/kotlinx/*.jar | tr '\\n' ':') -include-runtime -d main.jar 2>&1 | grep -v '^warning' ; test -f main.jar"
+    ],
+    "run": "java -ea -cp main.jar:$(ls /opt/kotlinx/*.jar | tr '\\n' ':') MainKt",
+    "version": "kotlinc -version 2>&1 | tail -1"
+  },
+  "scala": {
+    "name": "Scala",
+    "service": "scala",
+    "ext": "scala",
+    "file": "main.scala",
+    "build": [
+      "mkdir -p out && scalac -Wall -cp /opt/scalaxml/scala-xml.jar -d out main.scala"
+    ],
+    "run": "java -ea -cp out:/opt/scalaxml/scala-xml.jar:$(find /opt/scala/maven2 -name \"scala*-library*.jar\" | tr \"\\n\" \":\") Main",
+    "version": "scalac -version 2>&1 | tail -1"
+  },
+  "csharp": {
+    "name": "C#",
+    "service": "csharp",
+    "ext": "cs",
+    "file": "Program.cs",
+    "extra_files": {
+      "bb.csproj": "<Project Sdk=\"Microsoft.NET.Sdk\"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net11.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><AllowUnsafeBlocks>false</AllowUnsafeBlocks><CheckForOverflowUnderflow>true</CheckForOverflowUnderflow><AnalysisMode>All</AnalysisMode><WarningLevel>9999</WarningLevel></PropertyGroup></Project>"
+    },
+    "build": [
+      "dotnet build -c Debug -o out -nologo -v minimal -clp:NoSummary"
+    ],
+    "run": "dotnet out/bb.dll",
+    "version": "dotnet --version"
+  },
+  "fsharp": {
+    "name": "F#",
+    "service": "fsharp",
+    "ext": "fs",
+    "file": "Program.fs",
+    "extra_files": {
+      "bb.fsproj": "<Project Sdk=\"Microsoft.NET.Sdk\"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net11.0</TargetFramework><OtherFlags>--checked+</OtherFlags><WarningLevel>5</WarningLevel></PropertyGroup><ItemGroup><Compile Include=\"Program.fs\" /></ItemGroup></Project>"
+    },
+    "build": [
+      "dotnet build -c Debug -o out -nologo -v minimal -clp:NoSummary"
+    ],
+    "run": "dotnet out/bb.dll",
+    "version": "dotnet --version"
+  },
+  "dart": {
+    "name": "Dart",
+    "service": "dart",
+    "ext": "dart",
+    "file": "main.dart",
+    "build": [
+      "cp -r /opt/dartlints/.dart_tool /opt/dartlints/pubspec.yaml . && dart analyze main.dart 2>&1 || true",
+      "dart compile kernel -o main.dill main.dart"
+    ],
+    "run": "dart --enable-asserts main.dill",
+    "version": "dart --version 2>&1",
+    "extra_files": {
+      "analysis_options.yaml": "include: package:lints/recommended.yaml\n"
+    }
+  },
+  "typescript": {
+    "name": "TypeScript",
+    "service": "typescript",
+    "ext": "ts",
+    "file": "main.ts",
+    "build": [
+      "tsc --strict --noImplicitReturns --noFallthroughCasesInSwitch --noUncheckedIndexedAccess --noImplicitOverride --noUnusedLocals --noUnusedParameters --noPropertyAccessFromIndexSignature --exactOptionalPropertyTypes --allowUnreachableCode false --allowUnusedLabels false --target es2024 --module nodenext --typeRoots /usr/lib/node_modules/@types --types node --outDir out main.ts"
+    ],
+    "run": "node out/main.js",
+    "version": "echo tsc $(tsc --version) / node $(node --version)"
+  },
+  "javascript": {
+    "name": "JavaScript",
+    "service": "javascript",
+    "ext": "js",
+    "file": "main.js",
+    "build": [
+      "node --use_strict --check main.js"
+    ],
+    "run": "node main.js",
+    "version": "echo node $(node --version)"
+  },
+  "python": {
+    "name": "Python",
+    "service": "python",
+    "ext": "py",
+    "file": "main.py",
+    "build": [
+      "python3 -X dev -m py_compile main.py"
+    ],
+    "run": "python3 -X dev main.py",
+    "version": "python3 --version"
+  },
+  "ruby": {
+    "name": "Ruby",
+    "service": "ruby",
+    "ext": "rb",
+    "file": "main.rb",
+    "build": [
+      "ruby -c main.rb"
+    ],
+    "run": "ruby -w main.rb",
+    "version": "ruby --version"
+  },
+  "php": {
+    "name": "PHP",
+    "service": "php",
+    "ext": "php",
+    "file": "main.php",
+    "build": [
+      "php -l main.php"
+    ],
+    "run": "php -d error_reporting=E_ALL -d display_errors=stderr -d zend.assertions=1 main.php",
+    "version": "php --version | head -1"
+  },
+  "julia": {
+    "name": "Julia",
+    "service": "julia",
+    "ext": "jl",
+    "file": "main.jl",
+    "build": [
+      "julia --startup-file=no -e 'src = read(\"main.jl\", String); ex = Meta.parseall(src); bad(e) = e isa Expr && (e.head in (:error, :incomplete) || any(bad, e.args)); bad(ex) && exit(1)'"
+    ],
+    "run": "julia --startup-file=no --check-bounds=yes -t 8 main.jl",
+    "version": "julia --version"
+  },
+  "ocaml": {
+    "name": "OCaml",
+    "service": "ocaml",
+    "ext": "ml",
+    "file": "main.ml",
+    "extra_files": {
+      "dune": "(executable (name main) (libraries str unix threads.posix re zarith))\n",
+      "dune-project": "(lang dune 3.0)\n"
+    },
+    "build": [
+      "dune build ./main.exe 2>&1"
+    ],
+    "run": "./_build/default/main.exe",
+    "version": "ocaml -version"
+  },
+  "haskell": {
+    "name": "Haskell",
+    "service": "haskell",
+    "ext": "hs",
+    "file": "main.hs",
+    "build": [
+      "ghc -Wall -O0 -threaded -package-db /opt/hsdb -o main main.hs"
+    ],
+    "run": "./main",
+    "version": "ghc --version"
+  },
+  "clojure": {
+    "name": "Clojure",
+    "service": "clojure",
+    "ext": "clj",
+    "file": "main.clj",
+    "build": [
+      "cp /opt/clj/deps.edn . && mkdir -p classes && clojure -M -e \"(set! *warn-on-reflection* true) (compile (quote main))\""
+    ],
+    "run": "clojure -M -m main",
+    "version": "clojure -M -e '(println \"Clojure\" (clojure-version))'"
+  }
+}

@@ -1,0 +1,7 @@
+// LEVEL: STD
+
+fn main() {
+    let mut counts = {}
+    for w in #["a", "b", "a"] { counts.inc(w) }
+    println(f"a={counts["a"]} b={counts["b"]}")
+}

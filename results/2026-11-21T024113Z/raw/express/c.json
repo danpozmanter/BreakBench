@@ -1,0 +1,569 @@
+{
+ "lang": "c",
+ "version": "clang version 23.1.6 (https://github.com/llvm/llvm-project 5b10d2d74929eae78912771222c9855af97496f4)",
+ "results": {
+  "threads_shared_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "45",
+   "stderr": "",
+   "level": "STD"
+  },
+  "mutex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "atomic_counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "200000",
+   "stderr": "",
+   "level": "STD"
+  },
+  "channel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "background_task": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.05,
+   "stdout": "started\n7",
+   "stderr": "",
+   "level": "STD"
+  },
+  "join_with_failure": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "worker failed: bad input",
+   "stderr": "",
+   "level": "STD"
+  },
+  "task_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "timed out",
+   "stderr": "",
+   "level": "STD"
+  },
+  "task_cancel": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "stopped",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "concurrent_map": {
+   "outcome": "NONE",
+   "message": "no map type in ISO C or POSIX"
+  },
+  "thread_safety_check": {
+   "outcome": "NONE",
+   "message": "nothing refuses an unlocked write to data that threads share"
+  },
+  "lock_owns_data": {
+   "outcome": "NONE",
+   "message": "the standard mutex guards code, not data; an unguarded read is accepted"
+  },
+  "spawn_argv": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hi; touch /tmp/bb_x",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "exit_status": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "env_absent": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "absent",
+   "stderr": "",
+   "level": "STD"
+  },
+  "signal_graceful": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "cleaned up",
+   "stderr": "",
+   "level": "STD"
+  },
+  "secure_temp_file": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ok",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "file_permissions": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "600",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "process_timeout": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "killed",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "regex": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "true false",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "regex_linear": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "no match",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "graphemes": {
+   "outcome": "NONE",
+   "message": "no grapheme segmentation in ISO C or POSIX"
+  },
+  "unicode_normalize": {
+   "outcome": "NONE",
+   "message": "no Unicode normalization in ISO C or POSIX"
+  },
+  "utf8_validate": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "html_escape": {
+   "outcome": "NONE",
+   "message": "no HTML escaping in ISO C or POSIX"
+  },
+  "json_parse": {
+   "outcome": "NONE",
+   "message": "no JSON parser in ISO C or POSIX"
+  },
+  "checked_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "overflow",
+   "stderr": "",
+   "level": "STD"
+  },
+  "wrapping_add": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": "",
+   "level": "STD"
+  },
+  "saturating_add": {
+   "outcome": "NONE",
+   "message": "no saturating arithmetic in ISO C"
+  },
+  "bigint": {
+   "outcome": "NONE",
+   "message": "no arbitrary-precision integers in ISO C or POSIX"
+  },
+  "unsigned64": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "18446744073709551615",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "int128": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1267650600228229401496703205376",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "decimal": {
+   "outcome": "NONE",
+   "message": "no decimal floating type in the compiler's C23 support"
+  },
+  "checked_narrowing": {
+   "outcome": "NONE",
+   "message": "no checked narrowing conversion in ISO C"
+  },
+  "literal_range": {
+   "outcome": "PASS",
+   "refusal": "main.c:7:39: error: constexpr initializer evaluates to 300 which is not exactly representable in type 'const unsigned char'\n1 warning and 1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "float_to_int_checked": {
+   "outcome": "NONE",
+   "message": "no checked float-to-integer conversion in ISO C"
+  },
+  "strict_parse": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": "",
+   "level": "STD"
+  },
+  "sorted_map": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a b c",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "sorted_set": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "insertion_ordered_map": {
+   "outcome": "NONE",
+   "message": "no map type in ISO C or POSIX"
+  },
+  "deque": {
+   "outcome": "NONE",
+   "message": "no deque in ISO C or POSIX"
+  },
+  "priority_queue": {
+   "outcome": "NONE",
+   "message": "no heap in ISO C or POSIX"
+  },
+  "counter": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a=2 b=1",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "bitset": {
+   "outcome": "NONE",
+   "message": "no bit set in ISO C or POSIX"
+  },
+  "fixed_array_value": {
+   "outcome": "NONE",
+   "message": "arrays do not copy on assignment"
+  },
+  "tuple": {
+   "outcome": "NONE",
+   "message": "no tuples; a struct return cannot be destructured"
+  },
+  "immutable_collection": {
+   "outcome": "PASS",
+   "refusal": "main.c:7:11: error: cannot assign to variable 'xs' with const-qualified type 'const int[3]'\n1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "readonly_param": {
+   "outcome": "PASS",
+   "refusal": "main.c:7:11: error: read-only variable is not assignable\n1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "value_struct": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "complete_init": {
+   "outcome": "NONE",
+   "message": "an initializer may leave fields out; they become zero"
+  },
+  "composite_key": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "true",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "checked_index": {
+   "outcome": "NONE",
+   "message": "no index lookup that returns a missing value"
+  },
+  "sum_type_exhaustive": {
+   "outcome": "NONE",
+   "message": "no tagged unions"
+  },
+  "optional_type": {
+   "outcome": "NONE",
+   "message": "no optional type"
+  },
+  "newtype": {
+   "outcome": "PASS",
+   "refusal": "main.c:12:37: error: passing 'Seconds' to parameter of incompatible type 'Meters'\n1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "total_float_sort": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2 3 NaN",
+   "stderr": "",
+   "level": "STD"
+  },
+  "date_time_zone": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2026-03-29 03:30",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "duration": {
+   "outcome": "NONE",
+   "message": "no duration type"
+  },
+  "byte_buffer": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100000",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "error_value": {
+   "outcome": "NONE",
+   "message": "no checked union or sum type (C unions carry no tag), and errors are codes"
+  },
+  "must_handle_error": {
+   "outcome": "PASS",
+   "refusal": "main.c:8:5: warning: ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "handled",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "typed_catch": {
+   "outcome": "NONE",
+   "message": "no error kinds to catch"
+  },
+  "error_chain": {
+   "outcome": "NONE",
+   "message": "no error values with causes"
+  },
+  "stack_trace": {
+   "outcome": "NONE",
+   "message": "no stack trace API in ISO C or POSIX"
+  },
+  "cleanup_on_error": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "released\nreleased",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "cleanup_on_panic": {
+   "outcome": "NONE",
+   "message": "no unwinding"
+  },
+  "recover_worker_crash": {
+   "outcome": "NONE",
+   "message": "a crashing thread ends the program"
+  },
+  "recover_allocation_failure": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "allocation failed",
+   "stderr": "==970==WARNING: AddressSanitizer failed to allocate 0x9184e72a000 bytes",
+   "level": "STD"
+  },
+  "recover_stack_overflow": {
+   "outcome": "NONE",
+   "message": "stack overflow ends the program"
+  },
+  "unhandled_hook": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "hook ran",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "assertion": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 134,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "main: main.c:9: int main(void): Assertion `1 + 1 == 3' failed.\nAborted",
+   "level": "STD"
+  },
+  "path_containment": {
+   "outcome": "NONE",
+   "message": "realpath needs the path to exist; no lexical normalization"
+  },
+  "constant_time_compare": {
+   "outcome": "NONE",
+   "message": "no constant-time comparison in ISO C or POSIX"
+  },
+  "secure_random": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "552e0ff595eaa370b1a91e743e1608ac",
+   "stderr": "",
+   "level": "PLATFORM"
+  },
+  "sha256": {
+   "outcome": "NONE",
+   "message": "no SHA-256 in ISO C or POSIX"
+  },
+  "password_hash": {
+   "outcome": "NONE",
+   "message": "no password hash in ISO C or POSIX"
+  },
+  "hmac": {
+   "outcome": "NONE",
+   "message": "no HMAC in ISO C or POSIX"
+  },
+  "aead_encrypt": {
+   "outcome": "NONE",
+   "message": "no authenticated cipher in ISO C or POSIX"
+  },
+  "weak_reference": {
+   "outcome": "NONE",
+   "message": "no weak references"
+  },
+  "consumed_value": {
+   "outcome": "NONE",
+   "message": "no ownership tracking: a value stays usable after a call that consumes it"
+  },
+  "no_implicit_conversion": {
+   "outcome": "NONE",
+   "message": "an implicit narrowing conversion is only a warning"
+  },
+  "mixed_sign_compare": {
+   "outcome": "NONE",
+   "message": "a signed/unsigned comparison is only a warning"
+  },
+  "nonnull_reference": {
+   "outcome": "NONE",
+   "message": "pointers can be NULL"
+  },
+  "definite_assignment": {
+   "outcome": "NONE",
+   "message": "reading a variable before it is set is only a warning"
+  },
+  "immutable_binding": {
+   "outcome": "PASS",
+   "refusal": "main.c:7:7: error: cannot assign to variable 'x' with const-qualified type 'const int'\n1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "unused_value_refused": {
+   "outcome": "NONE",
+   "message": "an unused variable is only a warning"
+  },
+  "exhaustive_return": {
+   "outcome": "PASS",
+   "refusal": "main.c:11:1: error: non-void function does not return a value in all control paths [-Werror,-Wreturn-type]\n1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pass",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "exclusive_mutation": {
+   "outcome": "NONE",
+   "message": "nothing refuses passing one value as two mutable arguments"
+  }
+ }
+}

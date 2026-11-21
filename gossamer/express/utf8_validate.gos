@@ -1,0 +1,9 @@
+// LEVEL: STD
+
+fn main() {
+    let bytes = #[0x61 as u8, 0xFF as u8]
+    match String::from_utf8(bytes) {
+        Ok(_) => println("valid"),
+        Err(_) => println("invalid"),
+    }
+}

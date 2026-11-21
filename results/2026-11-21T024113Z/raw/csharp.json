@@ -1,0 +1,647 @@
+{
+ "lang": "csharp",
+ "version": "11.0.100",
+ "results": {
+  "null_deref": {
+   "outcome": "TRAPPED",
+   "warned": true,
+   "all_warnings": "/tmp/breakbench/null_deref/main/Program.cs(4,19): warning CS8602: Dereference of a possibly null reference. [/tmp/breakbench/null_deref/main/bb.csproj]\n/tmp/breakbench/null_deref/main/Program.cs(3,18): warning CA1305: The behavior of 'long.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'long.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/null_deref/main/bb.csproj]\n/tmp/breakbench/null_deref/main/Program.cs(6,8): warning CA1852: Type 'User' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/null_deref/main/bb.csproj] bb -> /tmp/breakbench/null_deref/main/out/bb.dll\n/tmp/breakbench/null_deref/main/Program.cs(6,8): warning CA1852: Type 'User' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/null_deref/main/bb.csproj]\n3 Warning(s) 0 Error(s)",
+   "warnings": "/tmp/breakbench/null_deref/main/Program.cs(4,19): warning CS8602: Dereference of a possibly null reference. [/tmp/breakbench/null_deref/main/bb.csproj]",
+   "exit": 134,
+   "rss_mb": 33.7,
+   "secs": 0.18,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/null_deref/main/Program.cs:line 4\nAborted (core dumped)"
+  },
+  "int_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/int_overflow/main/Program.cs(1,10): warning CA1305: The behavior of 'long.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'long.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/int_overflow/main/bb.csproj] bb -> /tmp/breakbench/int_overflow/main/out/bb.dll\n/tmp/breakbench/int_overflow/main/Program.cs(1,10): warning CA1305: The behavior of 'long.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'long.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/int_overflow/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 33.2,
+   "secs": 0.18,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/int_overflow/main/Program.cs:line 2\nAborted (core dumped)"
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/div_by_zero/main/Program.cs(1,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/div_by_zero/main/bb.csproj] bb -> /tmp/breakbench/div_by_zero/main/out/bb.dll\n/tmp/breakbench/div_by_zero/main/Program.cs(1,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/div_by_zero/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 33.1,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.DivideByZeroException: Attempted to divide by zero.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/div_by_zero/main/Program.cs:line 2\nAborted (core dumped)"
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/shift_overflow/main/Program.cs(1,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/shift_overflow/main/bb.csproj] bb -> /tmp/breakbench/shift_overflow/main/out/bb.dll\n/tmp/breakbench/shift_overflow/main/Program.cs(1,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/shift_overflow/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 25.8,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/narrowing_cast/main/Program.cs(1,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/narrowing_cast/main/bb.csproj] bb -> /tmp/breakbench/narrowing_cast/main/out/bb.dll\n/tmp/breakbench/narrowing_cast/main/Program.cs(1,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/narrowing_cast/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 32.8,
+   "secs": 0.13,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/narrowing_cast/main/Program.cs:line 2\nAborted (core dumped)"
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/signed_unsigned_compare/main/Program.cs(2,10): warning CA1305: The behavior of 'long.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'long.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/signed_unsigned_compare/main/bb.csproj]\n/tmp/breakbench/signed_unsigned_compare/main/Program.cs(3,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"less, not less\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/signed_unsigned_compare/main/bb.csproj] bb -> /tmp/breakbench/signed_unsigned_compare/main/out/bb.dll\n/tmp/breakbench/signed_unsigned_compare/main/Program.cs(3,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"less, not less\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/signed_unsigned_compare/main/bb.csproj]\n2 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 26.4,
+   "secs": 0.01,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/type_confusion/main/bb.csproj (in 33 ms).\n/tmp/breakbench/type_confusion/main/Program.cs(4,23): error CS1503: Argument 1: cannot convert from 'string' to 'long' [/tmp/breakbench/type_confusion/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/type_confusion/main/Program.cs(4,23): error CS1503: Argument 1: cannot convert from 'string' to 'long' [/tmp/breakbench/type_confusion/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.00"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/missing_return/main/bb.csproj (in 35 ms).\n/tmp/breakbench/missing_return/main/Program.cs(1,15): error CS0161: 'Grade(int)': not all code paths return a value [/tmp/breakbench/missing_return/main/bb.csproj]\n/tmp/breakbench/missing_return/main/Program.cs(8,25): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/missing_return/main/bb.csproj]\n/tmp/breakbench/missing_return/main/Program.cs(8,19): warning CA1303: Method\n...\n/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/missing_return/main/bb.csproj]\n/tmp/breakbench/missing_return/main/Program.cs(8,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"fail, pass\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/missing_return/main/bb.csproj]\n/tmp/breakbench/missing_return/main/Program.cs(1,15): error CS0161: 'Grade(int)': not all code paths return a value [/tmp/breakbench/missing_return/main/bb.csproj]\n    2 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.05"
+  },
+  "non_exhaustive_match": {
+   "outcome": "TRAPPED",
+   "warned": true,
+   "all_warnings": "/tmp/breakbench/non_exhaustive_match/main/Program.cs(1,34): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'Color.Blue' is not covered. [/tmp/breakbench/non_exhaustive_match/main/bb.csproj]\n/tmp/breakbench/non_exhaustive_match/main/Program.cs(7,31): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/non_exhaustive_match/main/bb.csproj]\n/tmp/breakbench/non_exhaustive_match/main/Progra\n...\nring? value)'. Retrieve the following string(s) from a resource table instead: \"green, red\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/non_exhaustive_match/main/bb.csproj] bb -> /tmp/breakbench/non_exhaustive_match/main/out/bb.dll\n/tmp/breakbench/non_exhaustive_match/main/Program.cs(7,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"green, red\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/non_exhaustive_match/main/bb.csproj]\n3 Warning(s) 0 Error(s)",
+   "warnings": "/tmp/breakbench/non_exhaustive_match/main/Program.cs(1,34): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'Color.Blue' is not covered. [/tmp/breakbench/non_exhaustive_match/main/bb.csproj]",
+   "exit": 134,
+   "rss_mb": 33.5,
+   "secs": 0.14,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.Runtime.CompilerServices.SwitchExpressionException: Non-exhaustive switch expression failed to match its input.\nUnmatched value was Blue.\n   at <PrivateImplementationDetails>.ThrowSwitchExpressionException(Object unmatchedValue)\n   at Program.<<Main>$>g__Name|0_0(Color c) in /tmp/breakbench/non_exhaustive_match/main/Program.cs:line 1\n   at Program.<Main>$(String[] args) in /tmp/breakbench/non_exhaustive_match/main/Program.cs:line 7\nAborted (core dumped)"
+  },
+  "uninitialized_variable": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/uninitialized_variable/main/bb.csproj (in 34 ms).\n/tmp/breakbench/uninitialized_variable/main/Program.cs(4,19): error CS0165: Use of unassigned local variable 'x' [/tmp/breakbench/uninitialized_variable/main/bb.csproj]\n/tmp/breakbench/uninitialized_variable/main/Program.cs(1,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/uninitialized_variable/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/uninitialized_variable/main/Program.cs(1,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/uninitialized_variable/main/bb.csproj]\n/tmp/breakbench/uninitialized_variable/main/Program.cs(4,19): error CS0165: Use of unassigned local variable 'x' [/tmp/breakbench/uninitialized_variable/main/bb.csproj]\n    1 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.03"
+  },
+  "missing_argument": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/missing_argument/main/bb.csproj (in 35 ms).\n/tmp/breakbench/missing_argument/main/Program.cs(3,19): error CS7036: There is no argument given that corresponds to the required parameter 'h' of 'Area(int, int)' [/tmp/breakbench/missing_argument/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/missing_argument/main/Program.cs(3,19): error CS7036: There is no argument given that corresponds to the required parameter 'h' of 'Area(int, int)' [/tmp/breakbench/missing_argument/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.98"
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/misspelled_field/main/bb.csproj (in 33 ms).\n/tmp/breakbench/misspelled_field/main/Program.cs(2,5): error CS1061: 'Config' does not contain a definition for 'Colour' and no accessible extension method 'Colour' accepting a first argument of type 'Config' could be found (are you missing a using directive or an assembly reference?) [/tmp/breakbench/misspelled_field/main/bb.csproj]\n/tmp/breakbench/misspelled_field/main/Program.cs(5,7): warning CA1852: Type 'Config' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/misspelled_field/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/misspelled_field/main/Program.cs(5,7): warning CA1852: Type 'Config' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/misspelled_field/main/bb.csproj]\n/tmp/breakbench/misspelled_field/main/Program.cs(2,5): error CS1061: 'Config' does not contain a definition for 'Colour' and no accessible extension method 'Colour' accepting a first argument of type 'Config' could be found (are you missing a using directive or an assembly reference?) [/tmp/breakbench/misspelled_field/main/bb.csproj]\n    1 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.99"
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/assign_in_condition/main/bb.csproj (in 33 ms).\n/tmp/breakbench/assign_in_condition/main/Program.cs(3,5): error CS0029: Cannot implicitly convert type 'int' to 'bool' [/tmp/breakbench/assign_in_condition/main/bb.csproj]\n/tmp/breakbench/assign_in_condition/main/Program.cs(1,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/assign_in_condition/main/bb.csproj]\n/tmp/breakbench/assign_in_condition/main/Program.cs(5,\n...\n-analysis/quality-rules/ca1305) [/tmp/breakbench/assign_in_condition/main/bb.csproj]\n/tmp/breakbench/assign_in_condition/main/Program.cs(5,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"not one, one\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/assign_in_condition/main/bb.csproj]\n/tmp/breakbench/assign_in_condition/main/Program.cs(3,5): error CS0029: Cannot implicitly convert type 'int' to 'bool' [/tmp/breakbench/assign_in_condition/main/bb.csproj]\n    2 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.02"
+  },
+  "switch_fallthrough": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/switch_fallthrough/main/bb.csproj (in 33 ms).\n/tmp/breakbench/switch_fallthrough/main/Program.cs(5,5): error CS0163: Control cannot fall through from one case label ('case 1:') to another [/tmp/breakbench/switch_fallthrough/main/bb.csproj]\n/tmp/breakbench/switch_fallthrough/main/Program.cs(1,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/switch_fallthrough/main/bb.csproj]\n/tmp/breakbench/switch_fallthrough/\n...\n/ca1305) [/tmp/breakbench/switch_fallthrough/main/bb.csproj]\n/tmp/breakbench/switch_fallthrough/main/Program.cs(15,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"one, other, two\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/switch_fallthrough/main/bb.csproj]\n/tmp/breakbench/switch_fallthrough/main/Program.cs(5,5): error CS0163: Control cannot fall through from one case label ('case 1:') to another [/tmp/breakbench/switch_fallthrough/main/bb.csproj]\n    2 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.03"
+  },
+  "zero_is_falsy": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/zero_is_falsy/main/bb.csproj (in 34 ms).\n/tmp/breakbench/zero_is_falsy/main/Program.cs(3,5): error CS0029: Cannot implicitly convert type 'int?' to 'bool' [/tmp/breakbench/zero_is_falsy/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/zero_is_falsy/main/Program.cs(3,5): error CS0029: Cannot implicitly convert type 'int?' to 'bool' [/tmp/breakbench/zero_is_falsy/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.02"
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/string_equality/main/Program.cs(2,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"different, equal\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/string_equality/main/bb.csproj] bb -> /tmp/breakbench/string_equality/main/out/bb.dll\n/tmp/breakbench/string_equality/main/Program.cs(2,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"different, equal\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/string_equality/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 21.8,
+   "secs": 0.01,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/parse_invalid_number/main/Program.cs(1,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/parse_invalid_number/main/bb.csproj] bb -> /tmp/breakbench/parse_invalid_number/main/out/bb.dll\n/tmp/breakbench/parse_invalid_number/main/Program.cs(1,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/parse_invalid_number/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 33.2,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.FormatException: The input string '12abc' was not in a correct format.\n   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)\n   at System.Int32.Parse(String s)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/parse_invalid_number/main/Program.cs:line 1\nAborted (core dumped)"
+  },
+  "covariant_array_write": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/covariant_array_write/main/Program.cs(8,7): warning CA1852: Type 'Cat' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/covariant_array_write/main/bb.csproj]\n/tmp/breakbench/covariant_array_write/main/Program.cs(7,7): warning CA1852: Type 'Dog' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/covariant_array_write/main/bb.csproj] bb -> /tmp/breakbench/covariant_array_write/main/out/bb.dll\n/tmp/breakbench/covariant_array_write/main/Program.cs(7,7): warning CA1852: Type 'Dog' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/covariant_array_write/main/bb.csproj]\n2 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 33.4,
+   "secs": 0.19,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.ArrayTypeMismatchException: Attempted to access an element as a type incompatible with the array.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/covariant_array_write/main/Program.cs:line 3\nAborted (core dumped)"
+  },
+  "mutate_while_iterating": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 34.1,
+   "secs": 0.14,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.InvalidOperationException: Collection was modified; enumeration operation may not execute.\n   at System.Collections.Generic.List`1.Enumerator.MoveNext()\n   at Program.<Main>$(String[] args) in /tmp/breakbench/mutate_while_iterating/main/Program.cs:line 2\nAborted (core dumped)"
+  },
+  "self_deadlock": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/self_deadlock/main/Program.cs(3,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"done\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/self_deadlock/main/bb.csproj]\n/tmp/breakbench/self_deadlock/main/Program.cs(5,7): warning CA1852: Type 'Bank' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/self_deadlock/main/bb.csproj] bb -> /tmp/breakbench/self_deadlock/main/out/bb.dll\n/tmp/breakbench/self_deadlock/main/Program.cs(5,7): warning CA1852: Type 'Bank' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/self_deadlock/main/bb.csproj]\n2 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 22.3,
+   "secs": 0.01,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "SILENT",
+   "warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 27.7,
+   "secs": 0.01,
+   "stdout": "3,3,3",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 27.2,
+   "secs": 0.01,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/ignored_error_result/main/Program.cs(4,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"saved\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/ignored_error_result/main/bb.csproj] bb -> /tmp/breakbench/ignored_error_result/main/out/bb.dll\n/tmp/breakbench/ignored_error_result/main/Program.cs(4,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"saved\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/ignored_error_result/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 33.7,
+   "secs": 0.14,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IO.DirectoryNotFoundException: Could not find a part of the path '/nonexistent/dir/out.txt'.\nDirectory path: '/nonexistent/dir/out.txt'\n   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)\n   at System.IO.File.OpenHandle(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)\n   at System.IO.File.WriteToFile(String path, FileMode mode, ReadOnlySpan`1 contents, Encoding encoding)\n   at Program.<<Main>$>g__Save|0_0(String path) in /tmp/breakbench/ignored_error_result/main/Program.cs:line 1\n   at Program.<Main>$(String[] args) in /tmp/breakbench/ignored_error_result/main/Program.cs:line 3\nAborted (core dumped)"
+  },
+  "sort_with_nan": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/sort_with_nan/main/Program.cs(5,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"ordered, unordered\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/sort_with_nan/main/bb.csproj] bb -> /tmp/breakbench/sort_with_nan/main/out/bb.dll\n/tmp/breakbench/sort_with_nan/main/Program.cs(5,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"ordered, unordered\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/sort_with_nan/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 24.3,
+   "secs": 0.01,
+   "stdout": "ordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "SILENT",
+   "warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 27.4,
+   "secs": 0.01,
+   "stdout": "3.0",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 25.8,
+   "secs": 0.01,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 25.9,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/reused_iterator/main/Program.cs(3,13): warning CA1851: Possible multiple enumerations of 'IEnumerable' collection. Consider using an implementation that avoids multiple enumerations. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1851) [/tmp/breakbench/reused_iterator/main/bb.csproj]\n/tmp/breakbench/reused_iterator/main/Program.cs(4,13): warning CA1851: Possible multiple enumerations of 'IEnumerable' collection. Consider using an implementation that avoids multiple enumerations. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1851) [/tmp/breakbench/reused_iterator/main/bb.csproj] bb -> /tmp/breakbench/reused_iterator/main/out/bb.dll\n/tmp/breakbench/reused_iterator/main/Program.cs(4,13): warning CA1851: Possible multiple enumerations of 'IEnumerable' collection. Consider using an implementation that avoids multiple enumerations. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1851) [/tmp/breakbench/reused_iterator/main/bb.csproj]\n2 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 23.8,
+   "secs": 0.01,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/bitwise_precedence/main/bb.csproj (in 33 ms).\n/tmp/breakbench/bitwise_precedence/main/Program.cs(2,13): error CS0019: Operator '&' cannot be applied to operands of type 'int' and 'bool' [/tmp/breakbench/bitwise_precedence/main/bb.csproj]\n/tmp/breakbench/bitwise_precedence/main/Program.cs(1,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/bitwise_precedence/main/bb.csproj]\n/tmp/breakbench/bitwise_precedence/ma\n...\nity-rules/ca1305) [/tmp/breakbench/bitwise_precedence/main/bb.csproj]\n/tmp/breakbench/bitwise_precedence/main/Program.cs(4,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"even, odd\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/bitwise_precedence/main/bb.csproj]\n/tmp/breakbench/bitwise_precedence/main/Program.cs(2,13): error CS0019: Operator '&' cannot be applied to operands of type 'int' and 'bool' [/tmp/breakbench/bitwise_precedence/main/bb.csproj]\n    2 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.04"
+  },
+  "dangling_else": {
+   "outcome": "SILENT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/dangling_else/main/Program.cs(1,10): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/dangling_else/main/bb.csproj]\n/tmp/breakbench/dangling_else/main/Program.cs(8,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"both, not a, unset\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/dangling_else/main/bb.csproj] bb -> /tmp/breakbench/dangling_else/main/out/bb.dll\n/tmp/breakbench/dangling_else/main/Program.cs(8,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"both, not a, unset\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/dangling_else/main/bb.csproj]\n2 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 25.3,
+   "secs": 0.01,
+   "stdout": "unset",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/chained_comparison/main/bb.csproj (in 34 ms).\n/tmp/breakbench/chained_comparison/main/Program.cs(2,15): error CS0019: Operator '<' cannot be applied to operands of type 'bool' and 'int' [/tmp/breakbench/chained_comparison/main/bb.csproj]\n/tmp/breakbench/chained_comparison/main/Program.cs(1,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/chained_comparison/main/bb.csproj]\n/tmp/breakbench/chained_comparison/ma\n...\nles/ca1305) [/tmp/breakbench/chained_comparison/main/bb.csproj]\n/tmp/breakbench/chained_comparison/main/Program.cs(4,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"inside, outside\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/chained_comparison/main/bb.csproj]\n/tmp/breakbench/chained_comparison/main/Program.cs(2,15): error CS0019: Operator '<' cannot be applied to operands of type 'bool' and 'int' [/tmp/breakbench/chained_comparison/main/bb.csproj]\n    2 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.03"
+  },
+  "lost_update_on_copy": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/lost_update_on_copy/main/Program.cs(5,7): warning CA1852: Type 'Account' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/lost_update_on_copy/main/bb.csproj] bb -> /tmp/breakbench/lost_update_on_copy/main/out/bb.dll\n/tmp/breakbench/lost_update_on_copy/main/Program.cs(5,7): warning CA1852: Type 'Account' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/lost_update_on_copy/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 25.9,
+   "secs": 0.01,
+   "stdout": "150",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/command_injection/main/Program.cs(6,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"injected, safe\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/command_injection/main/bb.csproj] bb -> /tmp/breakbench/command_injection/main/out/bb.dll\n/tmp/breakbench/command_injection/main/Program.cs(6,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"injected, safe\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/command_injection/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 28.8,
+   "secs": 0.01,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/float_equality/main/Program.cs(6,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"equal, not equal\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/float_equality/main/bb.csproj] bb -> /tmp/breakbench/float_equality/main/out/bb.dll\n/tmp/breakbench/float_equality/main/Program.cs(6,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"equal, not equal\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/float_equality/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 25.6,
+   "secs": 0.01,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/lock_order_deadlock/main/Program.cs(19,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"finished\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/lock_order_deadlock/main/bb.csproj] bb -> /tmp/breakbench/lock_order_deadlock/main/out/bb.dll\n/tmp/breakbench/lock_order_deadlock/main/Program.cs(19,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"finished\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/lock_order_deadlock/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": -9,
+   "rss_mb": 14.3,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "path_join_escape": {
+   "outcome": "SILENT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/path_join_escape/main/Program.cs(2,19): warning CA1310: The behavior of 'string.StartsWith(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'string.StartsWith(string, System.StringComparison)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1310) [/tmp/breakbench/path_join_escape/main/bb.csproj]\n/tmp/breakbench/path_join_escape/main/Program.cs(2,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"escaped, inside\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/path_join_escape/main/bb.csproj] bb -> /tmp/breakbench/path_join_escape/main/out/bb.dll\n/tmp/breakbench/path_join_escape/main/Program.cs(2,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"escaped, inside\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/path_join_escape/main/bb.csproj]\n2 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 26.1,
+   "secs": 0.01,
+   "stdout": "escaped",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "HANG",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/regex_backtracking/main/Program.cs(3,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"match, no match\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/regex_backtracking/main/bb.csproj] bb -> /tmp/breakbench/regex_backtracking/main/out/bb.dll\n/tmp/breakbench/regex_backtracking/main/Program.cs(3,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"match, no match\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/regex_backtracking/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": -9,
+   "rss_mb": 14.3,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/negative_remainder/main/Program.cs(3,25): warning CA1305: The behavior of 'long.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'long.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/negative_remainder/main/bb.csproj]\n/tmp/breakbench/negative_remainder/main/Program.cs(3,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"even, odd\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/negative_remainder/main/bb.csproj] bb -> /tmp/breakbench/negative_remainder/main/out/bb.dll\n/tmp/breakbench/negative_remainder/main/Program.cs(3,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"even, odd\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/negative_remainder/main/bb.csproj]\n2 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 25.6,
+   "secs": 0.01,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/missing_comma_concat/main/bb.csproj (in 33 ms).\n/tmp/breakbench/missing_comma_concat/main/Program.cs(4,10): error CS1003: Syntax error, ',' expected [/tmp/breakbench/missing_comma_concat/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/missing_comma_concat/main/Program.cs(4,10): error CS1003: Syntax error, ',' expected [/tmp/breakbench/missing_comma_concat/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.54"
+  },
+  "return_in_finally": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/return_in_finally/main/bb.csproj (in 33 ms).\n/tmp/breakbench/return_in_finally/main/Program.cs(14,9): error CS0157: Control cannot leave the body of a finally clause [/tmp/breakbench/return_in_finally/main/bb.csproj]\n/tmp/breakbench/return_in_finally/main/Program.cs(21,23): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"saved\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/return_in_finally/main/bb.csproj]\n/tmp/breakbench/return_in_finally/main/Progra\n...\nentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/return_in_finally/main/bb.csproj]\n/tmp/breakbench/return_in_finally/main/Program.cs(25,23): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"failed\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/return_in_finally/main/bb.csproj]\n/tmp/breakbench/return_in_finally/main/Program.cs(14,9): error CS0157: Control cannot leave the body of a finally clause [/tmp/breakbench/return_in_finally/main/bb.csproj]\n    2 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.04"
+  },
+  "return_line_break": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 25.7,
+   "secs": 0.01,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/worker_failure_lost/main/Program.cs(2,19): warning CA2007: Consider calling ConfigureAwait on the awaited task (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2007) [/tmp/breakbench/worker_failure_lost/main/bb.csproj] bb -> /tmp/breakbench/worker_failure_lost/main/out/bb.dll\n/tmp/breakbench/worker_failure_lost/main/Program.cs(2,19): warning CA2007: Consider calling ConfigureAwait on the awaited task (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2007) [/tmp/breakbench/worker_failure_lost/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 36.0,
+   "secs": 0.19,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.FormatException: The input string 'x' was not in a correct format.\n   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)\n   at System.Int64.Parse(String s)\n   at System.Linq.Enumerable.Sum[TSource,TResult,TAccumulator](IEnumerable`1 source, Func`2 selector)\n   at Program.<>c__DisplayClass0_0.<<Main>$>b__0() in /tmp/breakbench/worker_failure_lost/main/Program.cs:line 1\n   at System.Threading.Tasks.Task`1.InnerInvoke()\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\n--- End of stack trace from previous location ---\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\n   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)\n--- End of stack trace from previous location ---\n   at Program.<Main>$(String[] args) in /tmp/breakbench/worker_failure_lost/main/Program.cs:line 2\n   at Program.<Main>(String[] args)\nAborted (core dumped)"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "warned": true,
+   "all_warnings": "/tmp/breakbench/unawaited_task/main/Program.cs(9,1): warning CS4014: Because this call is not awaited, execution of the current method continues before the call is completed. Consider applying the 'await' operator to the result of the call. [/tmp/breakbench/unawaited_task/main/bb.csproj]\n/tmp/breakbench/unawaited_task/main/Program.cs(5,11): warning CA2007: Consider calling ConfigureAwait on the awaited task (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2007) [/tmp/breakbench/unawaited_task/main/bb.csproj] bb -> /tmp/breakbench/unawaited_task/main/out/bb.dll\n/tmp/breakbench/unawaited_task/main/Program.cs(5,11): warning CA2007: Consider calling ConfigureAwait on the awaited task (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2007) [/tmp/breakbench/unawaited_task/main/bb.csproj]\n2 Warning(s) 0 Error(s)",
+   "warnings": "/tmp/breakbench/unawaited_task/main/Program.cs(9,1): warning CS4014: Because this call is not awaited, execution of the current method continues before the call is completed. Consider applying the 'await' operator to the result of the call. [/tmp/breakbench/unawaited_task/main/bb.csproj]\n/tmp/breakbench/unawaited_task/main/Program.cs(5,11): warning CA2007: Consider calling ConfigureAwait on the aw\n...\namentals/code-analysis/quality-rules/ca2007) [/tmp/breakbench/unawaited_task/main/bb.csproj] bb -> /tmp/breakbench/unawaited_task/main/out/bb.dll\n/tmp/breakbench/unawaited_task/main/Program.cs(5,11): warning CA2007: Consider calling ConfigureAwait on the awaited task (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2007) [/tmp/breakbench/unawaited_task/main/bb.csproj]",
+   "exit": 0,
+   "rss_mb": 26.7,
+   "secs": 0.01,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "TRAPPED",
+   "warned": true,
+   "all_warnings": "/tmp/breakbench/format_arg_mismatch/main/Program.cs(2,5): warning CS0219: The variable 'total' is assigned but its value is never used [/tmp/breakbench/format_arg_mismatch/main/bb.csproj]\n/tmp/breakbench/format_arg_mismatch/main/Program.cs(3,19): warning CA2241: Provide correct arguments to formatting methods (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2241) [/tmp/breakbench/format_arg_mismatch/main/bb.csproj]\n/tmp/breakbench/format_arg_mismatch/main/Program.cs(3,19): warning CA1305: The behavior of 'string.Format(string, object)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'string.Format(IFormatProvider, string, params object[])'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/format_arg_mismatch/main/bb.csproj] bb -> /tmp/breakbench/format_arg_mismatch/main/out/bb.dll\n/tmp/breakbench/format_arg_mismatch/main/Program.cs(3,19): warning CA1305: The behavior of 'string.Format(string, object)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'string.Format(IFormatProvider, string, params object[])'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/format_arg_mismatch/main/bb.csproj]\n3 Warning(s) 0 Error(s)",
+   "warnings": "/tmp/breakbench/format_arg_mismatch/main/Program.cs(3,19): warning CA2241: Provide correct arguments to formatting methods (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2241) [/tmp/breakbench/format_arg_mismatch/main/bb.csproj]\n/tmp/breakbench/format_arg_mismatch/main/Program.cs(3,19): warning CA1305: The behavior of 'string.Format(string, object)' could vary based\n...\n.cs(3,19): warning CA1305: The behavior of 'string.Format(string, object)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'string.Format(IFormatProvider, string, params object[])'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/format_arg_mismatch/main/bb.csproj]",
+   "exit": 134,
+   "rss_mb": 34.0,
+   "secs": 0.14,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.FormatException: Index (zero based) must be greater than or equal to zero and less than the size of the argument list.\n   at System.Text.ValueStringBuilder.AppendFormatHelper(IFormatProvider provider, String format, ReadOnlySpan`1 args)\n   at System.String.FormatHelper(IFormatProvider provider, String format, ReadOnlySpan`1 args)\n   at System.String.Format(String format, Object arg0)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/format_arg_mismatch/main/Program.cs:line 3\nAborted (core dumped)"
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/unsigned_subtraction/main/Program.cs(7,23): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"short\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/unsigned_subtraction/main/bb.csproj] bb -> /tmp/breakbench/unsigned_subtraction/main/out/bb.dll\n/tmp/breakbench/unsigned_subtraction/main/Program.cs(7,23): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"short\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/unsigned_subtraction/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 22.5,
+   "secs": 0.01,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 34.0,
+   "secs": 0.15,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'pear' was not present in the dictionary.\n   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/missing_key_default/main/Program.cs:line 3\nAborted (core dumped)"
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/mutable_hash_key/main/Program.cs(7,23): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"found, lost\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/mutable_hash_key/main/bb.csproj] bb -> /tmp/breakbench/mutable_hash_key/main/out/bb.dll\n/tmp/breakbench/mutable_hash_key/main/Program.cs(7,23): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"found, lost\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/mutable_hash_key/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 23.2,
+   "secs": 0.01,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/shadowed_assignment/main/bb.csproj (in 33 ms).\n/tmp/breakbench/shadowed_assignment/main/Program.cs(4,9): error CS0136: A local or parameter named 'status' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter [/tmp/breakbench/shadowed_assignment/main/bb.csproj]\n/tmp/breakbench/shadowed_assignment/main/Program.cs(7,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"pending\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/qualit\n...\nhadowed_assignment/main/Program.cs(7,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"pending\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/shadowed_assignment/main/bb.csproj]\n/tmp/breakbench/shadowed_assignment/main/Program.cs(4,9): error CS0136: A local or parameter named 'status' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter [/tmp/breakbench/shadowed_assignment/main/bb.csproj]\n    1 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.05"
+  },
+  "discarded_pure_result": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/discarded_pure_result/main/Program.cs(2,1): warning CA1806: <Main>$ calls ToUpper but does not use the new string instance that the method returns. Pass the instance as an argument to another method, assign the instance to a variable, or remove the call if it is unnecessary. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1806) [/tmp/breakbench/discarded_pure_result/main/bb.csproj] bb -> /tmp/breakbench/discarded_pure_result/main/out/bb.dll\n/tmp/breakbench/discarded_pure_result/main/Program.cs(2,1): warning CA1806: <Main>$ calls ToUpper but does not use the new string instance that the method returns. Pass the instance as an argument to another method, assign the instance to a variable, or remove the call if it is unnecessary. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1806) [/tmp/breakbench/discarded_pure_result/main/bb.csproj]",
+   "must_use": true
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/negative_index_wraps/main/Program.cs(2,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/negative_index_wraps/main/bb.csproj] bb -> /tmp/breakbench/negative_index_wraps/main/out/bb.dll\n/tmp/breakbench/negative_index_wraps/main/Program.cs(2,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/negative_index_wraps/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 33.4,
+   "secs": 0.18,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/negative_index_wraps/main/Program.cs:line 3\nAborted (core dumped)"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 27.2,
+   "secs": 0.01,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/unrelated_type_lookup/main/bb.csproj (in 33 ms).\n/tmp/breakbench/unrelated_type_lookup/main/Program.cs(3,32): error CS1503: Argument 1: cannot convert from 'string' to 'int' [/tmp/breakbench/unrelated_type_lookup/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/unrelated_type_lookup/main/Program.cs(3,32): error CS1503: Argument 1: cannot convert from 'string' to 'int' [/tmp/breakbench/unrelated_type_lookup/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.98"
+  },
+  "use_after_close": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/use_after_close/main/Program.cs(5,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"ok\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/use_after_close/main/bb.csproj] bb -> /tmp/breakbench/use_after_close/main/out/bb.dll\n/tmp/breakbench/use_after_close/main/Program.cs(5,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"ok\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/use_after_close/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 34.1,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.ObjectDisposedException: Cannot write to a closed TextWriter.\nObject name: 'StreamWriter'.\n   at System.IO.StreamWriter.<ThrowIfDisposed>g__ThrowObjectDisposedException|83_0()\n   at System.IO.StreamWriter.Write(String value)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/use_after_close/main/Program.cs:line 4\nAborted (core dumped)"
+  },
+  "dead_store": {
+   "outcome": "SILENT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/dead_store/main/Program.cs(1,14): warning CA1305: The behavior of 'long.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'long.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/dead_store/main/bb.csproj] bb -> /tmp/breakbench/dead_store/main/out/bb.dll\n/tmp/breakbench/dead_store/main/Program.cs(1,14): warning CA1305: The behavior of 'long.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'long.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/dead_store/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 25.8,
+   "secs": 0.01,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "outcome": "SILENT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/panic_under_lock/main/Program.cs(8,5): warning CA1849: 'TextWriter.WriteLine(string?)' synchronously blocks. Await 'TextWriter.WriteLineAsync()' instead. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1849) [/tmp/breakbench/panic_under_lock/main/bb.csproj]\n/tmp/breakbench/panic_under_lock/main/Program.cs(4,11): warning CA2007: Consider calling ConfigureAwait on the awaited task (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2007) [/tmp/breakbench/panic_under_lock/main/bb.csproj]\n/tmp/breakbench/panic_under_lock/main/Program.cs(10,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Conso\n...\n/panic_under_lock/main/bb.csproj]\n/tmp/breakbench/panic_under_lock/main/Program.cs(12,7): warning CA1852: Type 'Ledger' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/panic_under_lock/main/bb.csproj] bb -> /tmp/breakbench/panic_under_lock/main/out/bb.dll\n/tmp/breakbench/panic_under_lock/main/Program.cs(12,7): warning CA1852: Type 'Ledger' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/panic_under_lock/main/bb.csproj]\n4 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 23.6,
+   "secs": 0.01,
+   "stdout": "unbalanced",
+   "stderr": "worker failed: crash mid-update"
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/oob_write/main/Program.cs(2,7): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/oob_write/main/bb.csproj]\n/tmp/breakbench/oob_write/main/Program.cs(5,7): warning CA1852: Type 'Frame' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/oob_write/main/bb.csproj] bb -> /tmp/breakbench/oob_write/main/out/bb.dll\n/tmp/breakbench/oob_write/main/Program.cs(5,7): warning CA1852: Type 'Frame' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/oob_write/main/bb.csproj]\n2 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 33.9,
+   "secs": 0.18,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/oob_write/main/Program.cs:line 2\nAborted (core dumped)"
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/use_after_free/main/Program.cs(7,7): warning CA1852: Type 'Rec' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/use_after_free/main/bb.csproj] bb -> /tmp/breakbench/use_after_free/main/out/bb.dll\n/tmp/breakbench/use_after_free/main/Program.cs(7,7): warning CA1852: Type 'Rec' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/use_after_free/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 25.7,
+   "secs": 0.01,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/double_free/main/Program.cs(8,7): warning CA1852: Type 'Rec' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/double_free/main/bb.csproj] bb -> /tmp/breakbench/double_free/main/out/bb.dll\n/tmp/breakbench/double_free/main/Program.cs(8,7): warning CA1852: Type 'Rec' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/double_free/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 25.8,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/dangling_stack_ref/main/Program.cs(13,7): warning CA1852: Type 'IntBox' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/dangling_stack_ref/main/bb.csproj] bb -> /tmp/breakbench/dangling_stack_ref/main/out/bb.dll\n/tmp/breakbench/dangling_stack_ref/main/Program.cs(13,7): warning CA1852: Type 'IntBox' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/dangling_stack_ref/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 26.8,
+   "secs": 0.01,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/container_realloc_dangling/main/Program.cs(8,7): warning CA1852: Type 'Item' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/container_realloc_dangling/main/bb.csproj] bb -> /tmp/breakbench/container_realloc_dangling/main/out/bb.dll\n/tmp/breakbench/container_realloc_dangling/main/Program.cs(8,7): warning CA1852: Type 'Item' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/container_realloc_dangling/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 26.3,
+   "secs": 0.01,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/uninit_heap_read/main/Program.cs(5,19): warning CA1308: In method '<Main>$', replace the call to 'ToLowerInvariant' with 'ToUpperInvariant' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1308) [/tmp/breakbench/uninit_heap_read/main/bb.csproj] bb -> /tmp/breakbench/uninit_heap_read/main/out/bb.dll\n/tmp/breakbench/uninit_heap_read/main/Program.cs(5,19): warning CA1308: In method '<Main>$', replace the call to 'ToLowerInvariant' with 'ToUpperInvariant' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1308) [/tmp/breakbench/uninit_heap_read/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 22.8,
+   "secs": 0.01,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/stack_overflow/main/Program.cs(3,24): warning CA1305: The behavior of 'long.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'long.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/stack_overflow/main/bb.csproj] bb -> /tmp/breakbench/stack_overflow/main/out/bb.dll\n/tmp/breakbench/stack_overflow/main/Program.cs(3,24): warning CA1305: The behavior of 'long.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'long.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/stack_overflow/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 35.8,
+   "secs": 0.19,
+   "stdout": "",
+   "stderr": "Stack overflow.\nRepeated 174495 times:\n--------------------------------\n   at Program.<<Main>$>g__Walk|0_0(Int64)\n--------------------------------\n   at Program.<Main>$(System.String[])\nAborted (core dumped)"
+  },
+  "error_path_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/error_path_leak/main/Program.cs(8,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/error_path_leak/main/bb.csproj]\n/tmp/breakbench/error_path_leak/main/Program.cs(15,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"done, unexpected\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/error_path_leak/main/bb.csproj] bb -> /tmp/breakbench/error_path_leak/main/out/bb.dll\n/tmp/breakbench/error_path_leak/main/Program.cs(15,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"done, unexpected\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/error_path_leak/main/bb.csproj]\n2 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 45.4,
+   "secs": 0.96,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "concurrent_map_write": {
+   "outcome": "TRAPPED",
+   "runs": 10,
+   "warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 35.4,
+   "secs": 0.18,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.ArgumentException: Destination array was not long enough. Check the destination index, length, and the array's lower bounds. (Parameter 'destinationArray')\n   at System.Array.CopyImpl(Array sourceArray, Int32 sourceIndex, Array destinationArray, Int32 destinationIndex, Int32 length, Boolean reliable)\n   at System.Collections.Generic.Dictionary`2.Resize(Int32 newSize, Boolean forceNewHashCodes)\n   at System.Collections.Generic.Dictionary`2.Resize()\n   at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\n   at System.Collections.Generic.Dictionary`2.set_Item(TKey key, TValue value)\n   at Program.<>c__DisplayClass0_1.<<Main>$>b__3() in /tmp/breakbench/concurrent_ma\n...\nh, and the array's lower bounds. (Parameter 'destinationArray')\n   at System.Array.CopyImpl(Array sourceArray, Int32 sourceIndex, Array destinationArray, Int32 destinationIndex, Int32 length, Boolean reliable)\n   at System.Collections.Generic.Dictionary`2.Resize(Int32 newSize, Boolean forceNewHashCodes)\n   at System.Collections.Generic.Dictionary`2.Resize()\n   at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\n   at System.Collections.Generic.Dictionary`2.set_Item(TKey key, TValue value)\n   at Program.<>c__DisplayClass0_1.<<Main>$>b__3() in /tmp/breakbench/concurrent_map_write/main/Program.cs:line 4\n   at System.Threading.Thread.StartCallback(Thread* pThread)\n\n\n\n\n\n\n\nAborted (core dumped)"
+  },
+  "reference_cycle_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/reference_cycle_leak/main/Program.cs(1,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/reference_cycle_leak/main/bb.csproj]\n/tmp/breakbench/reference_cycle_leak/main/Program.cs(13,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"done, unreachable\". (https://learn.microsoft.com\n...\neak/main/bb.csproj]\n/tmp/breakbench/reference_cycle_leak/main/Program.cs(21,7): warning CA1852: Type 'Obj' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/reference_cycle_leak/main/bb.csproj] bb -> /tmp/breakbench/reference_cycle_leak/main/out/bb.dll\n/tmp/breakbench/reference_cycle_leak/main/Program.cs(21,7): warning CA1852: Type 'Obj' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/reference_cycle_leak/main/bb.csproj]\n4 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 41.8,
+   "secs": 0.07,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "view_retention": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/view_retention/main/Program.cs(1,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/view_retention/main/bb.csproj] bb -> /tmp/breakbench/view_retention/main/out/bb.dll\n/tmp/breakbench/view_retention/main/Program.cs(1,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/view_retention/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 50.2,
+   "secs": 0.15,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/view_retention/main/Program.cs:line 7\nAborted (core dumped)"
+  },
+  "huge_allocation": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/huge_allocation/main/Program.cs(1,10): warning CA1305: The behavior of 'long.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'long.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/huge_allocation/main/bb.csproj] bb -> /tmp/breakbench/huge_allocation/main/out/bb.dll\n/tmp/breakbench/huge_allocation/main/Program.cs(1,10): warning CA1305: The behavior of 'long.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'long.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/huge_allocation/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 33.8,
+   "secs": 0.17,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/huge_allocation/main/Program.cs:line 2\nAborted (core dumped)"
+  },
+  "fd_leak": {
+   "outcome": "LEAK",
+   "warned": true,
+   "all_warnings": "/tmp/breakbench/fd_leak/main/Program.cs(1,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/fd_leak/main/bb.csproj]\n/tmp/breakbench/fd_leak/main/Program.cs(5,13): warning CA2000: Call System.IDisposable.Dispose on object created by 'new FileStream(\"/tmp/bb_fd.txt\", FileMode.Open, FileAccess.Read)' before all references to it are out of scope (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2000) [/tmp/breakbench/fd_leak/main/bb.csproj]\n/tmp/\n...\ning as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"done\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/fd_leak/main/bb.csproj] bb -> /tmp/breakbench/fd_leak/main/out/bb.dll\n/tmp/breakbench/fd_leak/main/Program.cs(8,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"done\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/fd_leak/main/bb.csproj]\n3 Warning(s) 0 Error(s)",
+   "warnings": "/tmp/breakbench/fd_leak/main/Program.cs(5,13): warning CA2000: Call System.IDisposable.Dispose on object created by 'new FileStream(\"/tmp/bb_fd.txt\", FileMode.Open, FileAccess.Read)' before all references to it are out of scope (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2000) [/tmp/breakbench/fd_leak/main/bb.csproj]",
+   "exit": 134,
+   "rss_mb": 33.4,
+   "secs": 0.22,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IO.IOException: Too many open files : '/tmp/bb_fd.txt'\n   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)\n   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)\n   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access)\n   at Program.<Main>$(String[] args)\nAborted (core dumped)"
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 34.5,
+   "secs": 0.13,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.InvalidCastException: Unable to cast object of type 'System.Int32' to type 'System.String'.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/wrong_variant_access/main/Program.cs:line 2\nAborted (core dumped)"
+  },
+  "format_string": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/format_string/main/Program.cs(1,19): warning CA1305: The behavior of 'string.Format(string, params ReadOnlySpan<object>)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'string.Format(IFormatProvider, string, params ReadOnlySpan<object>)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/format_string/main/bb.csproj] bb -> /tmp/breakbench/format_string/main/out/bb.dll\n/tmp/breakbench/format_string/main/Program.cs(1,19): warning CA1305: The behavior of 'string.Format(string, params ReadOnlySpan<object>)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'string.Format(IFormatProvider, string, params ReadOnlySpan<object>)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/format_string/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 33.6,
+   "secs": 0.14,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.FormatException: Input string was not in a correct format. Failure to parse near offset 7. Expected an ASCII digit.\n   at System.Text.ValueStringBuilder.AppendFormatHelper(IFormatProvider provider, String format, ReadOnlySpan`1 args)\n   at System.String.FormatHelper(IFormatProvider provider, String format, ReadOnlySpan`1 args)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/format_string/main/Program.cs:line 1\nAborted (core dumped)"
+  },
+  "deep_structure_release": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/deep_structure_release/main/Program.cs(8,17): warning CA1305: The behavior of 'long.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'long.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/deep_structure_release/main/bb.csproj]\n/tmp/breakbench/deep_structure_release/main/Program.cs(10,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"done\". (https://learn.microsoft.com/dot\n...\ncsproj]\n/tmp/breakbench/deep_structure_release/main/Program.cs(12,8): warning CA1852: Type 'Node' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/deep_structure_release/main/bb.csproj] bb -> /tmp/breakbench/deep_structure_release/main/out/bb.dll\n/tmp/breakbench/deep_structure_release/main/Program.cs(12,8): warning CA1852: Type 'Node' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/deep_structure_release/main/bb.csproj]\n3 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 56.3,
+   "secs": 0.03,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "abandoned_worker_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/abandoned_worker_leak/main/Program.cs(1,14): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/abandoned_worker_leak/main/bb.csproj]\n/tmp/breakbench/abandoned_worker_leak/main/Program.cs(7,23): warning CA2007: Consider calling ConfigureAwait on the awaited task (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2007) [/tmp/breakbench/abandoned_worker_leak/main/bb.csproj]\n/tmp/breakbench/abandoned_worker_leak/main/Program.cs(7,29): \n...\nLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"done\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/abandoned_worker_leak/main/bb.csproj] bb -> /tmp/breakbench/abandoned_worker_leak/main/out/bb.dll\n/tmp/breakbench/abandoned_worker_leak/main/Program.cs(10,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"done\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/abandoned_worker_leak/main/bb.csproj]\n5 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 44.9,
+   "secs": 0.06,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/string_literal_write/main/bb.csproj (in 33 ms).\n/tmp/breakbench/string_literal_write/main/Program.cs(2,1): error CS0200: Property or indexer 'string.this[int]' cannot be assigned to -- it is read only [/tmp/breakbench/string_literal_write/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/string_literal_write/main/Program.cs(2,1): error CS0200: Property or indexer 'string.this[int]' cannot be assigned to -- it is read only [/tmp/breakbench/string_literal_write/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.00"
+  }
+ }
+}

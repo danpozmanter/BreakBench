@@ -1,0 +1,1 @@
+-- CANNOT-EXPRESS: normalise keeps .. segments; no lexical path normalization in the standard library

@@ -1,0 +1,12 @@
+use std::{errors, fs}
+
+fn save(path: String) -> Result<(), errors::Error> {
+    fs::write(path, "data".bytes())?
+    Ok(())
+}
+
+fn main() {
+    save("/nonexistent/dir/out.txt") // BREAK!
+    // CONTROL! if save("/nonexistent/dir/out.txt").is_err() { println("failed") }
+    println("saved")
+}

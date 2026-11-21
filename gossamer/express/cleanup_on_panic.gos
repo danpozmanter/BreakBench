@@ -1,0 +1,11 @@
+// LEVEL: LANGUAGE
+
+fn work() -> i64 {
+    defer println("cleanup")
+    panic("boom")
+}
+
+fn main() {
+    let worker = spawn(|| work())
+    if worker.join().is_err() { println("recovered") }
+}

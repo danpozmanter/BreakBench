@@ -1,0 +1,12 @@
+struct Rec {
+    value: i64
+}
+
+fn main() {
+    let mut a = Some(Rec { value: 0 })
+    a = None
+    a = None
+    let x = Rec { value: 1 }
+    let y = Rec { value: 2 }
+    println(f"{x.value}")
+}

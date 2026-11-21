@@ -1,0 +1,9 @@
+use std::env
+
+fn add(a: i64, b: i64) -> i64 { a + b }
+
+fn main() {
+    let raw = env::args()[0]
+    println(f"{add(raw, 3)}") // BREAK!
+    println(f"{raw} {add(1, 2)}")
+}

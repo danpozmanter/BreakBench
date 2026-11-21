@@ -1,0 +1,42 @@
+FROM breakbench:base
+
+RUN apt install -y --no-install-recommends \
+    libcurl4-openssl-dev \
+    libedit2 \
+    libgcc-11-dev \
+    libpython3-dev \
+    libsqlite3-dev \
+    libstdc++-11-dev \
+    libz3-dev \
+    libncurses6 \
+    && apt clean
+
+ARG version
+
+RUN SWIFT_VERSION="swift-$version-RELEASE" \
+    && SWIFT_PLATFORM="ubuntu24.04" \
+    && SWIFT_BRANCH="swift-$version-release" \
+    && SWIFT_URL="https://download.swift.org/$SWIFT_BRANCH/$(echo $SWIFT_PLATFORM | tr -d .)/$SWIFT_VERSION/$SWIFT_VERSION-$SWIFT_PLATFORM.tar.gz" \
+    && wget $SWIFT_URL \
+    && tar xzf $SWIFT_VERSION-$SWIFT_PLATFORM.tar.gz \
+    && mv $SWIFT_VERSION-$SWIFT_PLATFORM /usr/share/swift \
+    && rm $SWIFT_VERSION-$SWIFT_PLATFORM.tar.gz
+
+ENV PATH="/usr/share/swift/usr/bin:${PATH}"
+
+# The Swift project's swift-collections and swift-crypto packages, built once as a static
+# library so programs link it offline.
+RUN mkdir -p /opt/swiftdeps/Sources/Deps \
+    && cd /opt/swiftdeps \
+    && printf '%s\n' \
+        '// swift-tools-version:6.0' \
+        'import PackageDescription' \
+        'let package = Package(name: "Deps",' \
+        '  products: [.library(name: "Deps", type: .static, targets: ["Deps"])],' \
+        '  dependencies: [.package(url: "https://github.com/apple/swift-collections", from: "1.1.0"),' \
+        '    .package(url: "https://github.com/apple/swift-crypto", from: "3.0.0")],' \
+        '  targets: [.target(name: "Deps", dependencies: [.product(name: "Collections", package: "swift-collections"),' \
+        '    .product(name: "Crypto", package: "swift-crypto")])])' \
+        > Package.swift \
+    && printf '@_exported import Collections\n@_exported import Crypto\n' > Sources/Deps/Deps.swift \
+    && swift build -c debug

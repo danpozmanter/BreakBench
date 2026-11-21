@@ -1,0 +1,964 @@
+{
+  "leak_threshold_mb": 1024,
+  "kinds": {
+    "static": {
+      "REJECTED": 1,
+      "CORRECT": 1,
+      "TRAPPED": 0.5,
+      "SILENT": 0,
+      "CORRUPT": 0,
+      "CRASH": 0,
+      "HANG": 0,
+      "LEAK": 0
+    },
+    "dynamic": {
+      "REJECTED": 1,
+      "CORRECT": 1,
+      "TRAPPED": 1,
+      "SILENT": 0,
+      "CORRUPT": 0,
+      "CRASH": 0,
+      "HANG": 0,
+      "LEAK": 0
+    },
+    "memory": {
+      "REJECTED": 1,
+      "CORRECT": 1,
+      "TRAPPED": 1,
+      "SILENT": 0.5,
+      "CORRUPT": 0,
+      "CRASH": 0,
+      "HANG": 0,
+      "LEAK": 0,
+      "ICE": 0
+    },
+    "leak": {
+      "REJECTED": 1,
+      "CORRECT": 1,
+      "TRAPPED": 0,
+      "SILENT": 0,
+      "CORRUPT": 0,
+      "CRASH": 0,
+      "HANG": 0,
+      "LEAK": 0
+    },
+    "valid": {
+      "REJECTED": 0,
+      "CORRECT": 1,
+      "TRAPPED": 0,
+      "SILENT": 0,
+      "CORRUPT": 0,
+      "CRASH": 0,
+      "HANG": 0,
+      "LEAK": 0,
+      "ICE": 0
+    }
+  },
+  "problems": [
+    {
+      "id": "null_deref",
+      "category": "correctness",
+      "kind": "static",
+      "args": [
+        "2"
+      ],
+      "expect": null,
+      "title": "Using a value that may be missing",
+      "scenario": "find_user(id) returns a user only when id is 1. The program calls it with 2 and reads the length of the user's name without checking.",
+      "best": "The compiler refuses to read from a value that may be missing.",
+      "warn": "null|\\bnil\\b|optional|dereferenc|CS8602|possibly"
+    },
+    {
+      "id": "int_overflow",
+      "category": "correctness",
+      "kind": "dynamic",
+      "args": [
+        "9223372036854775807"
+      ],
+      "expect": "^9223372036854775808$",
+      "title": "Adding past the largest 64-bit integer",
+      "scenario": "The program reads the largest 64-bit integer from the command line and adds 1.",
+      "best": "The exact sum, or an overflow error. Wrapping around to a negative number is a silent wrong answer.",
+      "warn": "overflow"
+    },
+    {
+      "id": "div_by_zero",
+      "category": "correctness",
+      "kind": "dynamic",
+      "args": [
+        "0"
+      ],
+      "expect": null,
+      "title": "Dividing an integer by zero",
+      "scenario": "The program divides 100 by a number it reads at run time: 0.",
+      "best": "A clear error. Infinity, NaN or a hardware crash fails.",
+      "warn": "division by zero|divide by zero|div.?zero"
+    },
+    {
+      "id": "shift_overflow",
+      "category": "correctness",
+      "kind": "dynamic",
+      "args": [
+        "64"
+      ],
+      "expect": "^18446744073709551616$",
+      "title": "Shifting past the integer's width",
+      "scenario": "The program shifts 1 left by a count it reads at run time (64), using the language's 64-bit integer.",
+      "best": "The exact value 2^64, or an error. Getting 1 or 0 back is a silent wrong answer.",
+      "warn": "shift"
+    },
+    {
+      "id": "narrowing_cast",
+      "category": "correctness",
+      "kind": "dynamic",
+      "args": [
+        "300"
+      ],
+      "expect": null,
+      "title": "Squeezing 300 into a byte",
+      "scenario": "The program converts 300, read at run time, to an unsigned 8-bit number with the language's standard conversion.",
+      "best": "An error, because 300 does not fit in 8 bits. Printing 44 silently drops the high bits.",
+      "warn": "narrow|implicit conversion|truncat|lossy|loses (precision|information)|changes value"
+    },
+    {
+      "id": "signed_unsigned_compare",
+      "category": "correctness",
+      "kind": "static",
+      "args": [
+        "-1"
+      ],
+      "expect": "^less$",
+      "title": "Comparing a negative index with a length",
+      "scenario": "The program checks whether i = -1 is less than the length of a 3-item list.",
+      "best": "\"less\", or the compiler refuses to compare a signed and an unsigned number. C converts -1 to a huge unsigned number and says no.",
+      "warn": "sign(ed)?[- ]?(compar|ness|ed and unsigned)|different signs|unsigned"
+    },
+    {
+      "id": "type_confusion",
+      "category": "correctness",
+      "kind": "static",
+      "args": [
+        "5"
+      ],
+      "expect": null,
+      "title": "Passing text where a number is expected",
+      "scenario": "add(a, b) adds two integers. The program calls it with the command-line text \"5\" and the number 3.",
+      "best": "The compiler refuses the call. \"53\" or a silent 8 fails; a run-time type error earns half.",
+      "warn": "incompatible (integer|pointer|type)|type mismatch"
+    },
+    {
+      "id": "missing_return",
+      "category": "correctness",
+      "kind": "static",
+      "args": [
+        "50"
+      ],
+      "expect": null,
+      "title": "A function that can end without a result",
+      "scenario": "grade(score) returns \"pass\" above 50 and \"fail\" below 50. For exactly 50 it reaches the end without returning anything.",
+      "best": "The compiler refuses a function that can end without a result. Returning nothing, undefined or garbage fails.",
+      "warn": "return|non-exhaustive"
+    },
+    {
+      "id": "non_exhaustive_match",
+      "category": "correctness",
+      "kind": "static",
+      "args": [
+        "2"
+      ],
+      "expect": null,
+      "title": "A match that forgets a case",
+      "scenario": "Color is Red, Green or Blue. name(c) handles only Red and Green, and the program calls it with Blue.",
+      "best": "The compiler refuses the match because it misses Blue.",
+      "warn": "exhaustive|not handled|enumeration value|incomplete (pattern )?match|match may not"
+    },
+    {
+      "id": "uninitialized_variable",
+      "category": "correctness",
+      "kind": "static",
+      "args": [
+        "1"
+      ],
+      "expect": null,
+      "title": "Reading a variable before it has a value",
+      "scenario": "The program declares x without a value and sets it only when n > 5. n is 1, and the program prints x.",
+      "best": "The compiler refuses to read x before it is set. An implicit 0 or undefined is a silent wrong answer.",
+      "warn": "uninitiali|never assigned|may be used|unassigned|before (being )?assigned|undefined variable"
+    },
+    {
+      "id": "missing_argument",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": null,
+      "title": "Calling a function with too few arguments",
+      "scenario": "The program calls area(w, h) as area(3).",
+      "best": "The compiler refuses the call. Getting NaN from the missing argument fails.",
+      "warn": "argument"
+    },
+    {
+      "id": "misspelled_field",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": null,
+      "title": "Setting a misspelled field",
+      "scenario": "Config has a field color that starts as \"blue\". The program sets cfg.colour = \"red\" and prints cfg.color.",
+      "best": "The compiler refuses, because colour does not exist. Quietly creating a new field and printing \"blue\" fails.",
+      "warn": "dynamic property|creation of|undefined (property|field)|no field|unknown field"
+    },
+    {
+      "id": "assign_in_condition",
+      "category": "correctness",
+      "kind": "static",
+      "args": [
+        "5"
+      ],
+      "expect": "^not one$",
+      "title": "Assigning inside an if",
+      "scenario": "x is 5. The program writes if (x = 1), meaning x == 1.",
+      "best": "\"not one\": the language refuses an assignment as a condition. Taking the branch fails.",
+      "warn": "assignment.*(condition|parenthes)|result of an assignment|found .= in conditional|assigned in condition|in conditional, should be =="
+    },
+    {
+      "id": "switch_fallthrough",
+      "category": "correctness",
+      "kind": "static",
+      "args": [
+        "1"
+      ],
+      "expect": "^one$",
+      "title": "A switch case without break",
+      "scenario": "n is 1. Case 1 sets name to \"one\" but has no break, and case 2 sets it to \"two\".",
+      "best": "\"one\": cases do not fall through, or the compiler refuses. Printing \"two\" fails.",
+      "warn": "fall.?through"
+    },
+    {
+      "id": "zero_is_falsy",
+      "category": "correctness",
+      "kind": "static",
+      "args": [
+        "0"
+      ],
+      "expect": "^have 0$",
+      "title": "Treating zero as missing",
+      "scenario": "The program parses a quantity of 0 into an optional and tests it with if (qty).",
+      "best": "\"have 0\", or the compiler refuses to use an optional as a true/false value. Printing \"missing\" fails.",
+      "warn": "truth|implicit(ly)? (conver|bool)"
+    },
+    {
+      "id": "string_equality",
+      "category": "correctness",
+      "kind": "static",
+      "args": [
+        "c"
+      ],
+      "expect": "^equal$",
+      "title": "Comparing built strings with ==",
+      "scenario": "The program builds s = \"ab\" + the command-line text \"c\" and compares s == \"abc\".",
+      "best": "\"equal\". Comparing object identity and printing \"different\" fails.",
+      "warn": "string literal|address of|reference (equality|comparison)|comparing strings|string comparison"
+    },
+    {
+      "id": "parse_invalid_number",
+      "category": "correctness",
+      "kind": "dynamic",
+      "args": [
+        "12abc"
+      ],
+      "expect": null,
+      "title": "Parsing \"12abc\" as a number",
+      "scenario": "The program parses \"12abc\" with the shortest standard call that returns an integer, then adds 1.",
+      "best": "An error, or a failure the program must handle. Getting 13, 1 or NaN fails.",
+      "warn": "atoi|unchecked parse|error (return )?value.*(unused|ignored)"
+    },
+    {
+      "id": "covariant_array_write",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^woof$",
+      "title": "Putting a cat in a list of dogs",
+      "scenario": "The program treats a list of Dogs as a list of Animals, stores a Cat through it, then prints the sound of dogs[0].",
+      "best": "\"woof\": the compiler refuses the view, or the view is a copy. A store-time run-time error earns half; \"meow\" from the dog list fails.",
+      "warn": "covarian|array store"
+    },
+    {
+      "id": "mutate_while_iterating",
+      "category": "correctness",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^1,3$",
+      "title": "Removing items while looping over them",
+      "scenario": "The program loops over [1, 2, 2, 3] and removes each 2 from the list as it goes, then prints the list.",
+      "best": "\"1,3\", a modification error, or a refusal. Skipping the second 2 fails.",
+      "warn": "modif.*(iterat|loop)|while iterating|concurrent modification|invalidat"
+    },
+    {
+      "id": "self_deadlock",
+      "category": "correctness",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^done$",
+      "title": "Locking a mutex twice",
+      "scenario": "The program locks a mutex, then calls a helper that locks the same mutex.",
+      "best": "\"done\" because the lock is re-entrant, or a deadlock error. Hanging forever fails.",
+      "warn": "deadlock|re-?entran|recursive lock"
+    },
+    {
+      "id": "loop_closure_capture",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^0,1,2$",
+      "title": "Closures made in a loop",
+      "scenario": "The program makes one closure in each pass of a loop over i = 0, 1, 2. Each closure returns i. It calls all three.",
+      "best": "\"0,1,2\". \"3,3,3\" or \"2,2,2\" fails.",
+      "warn": "captur.*(loop|variable)|loop variable|modified closure|access to modified"
+    },
+    {
+      "id": "snapshot_aliasing",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^2$",
+      "title": "Taking a snapshot by assignment",
+      "scenario": "The program saves before = weights, sets weights[1] = 5 and weights[3] = 0, then counts the positions where before differs.",
+      "best": "2. If assignment shares the list instead of copying it, the program sees 0 changes.",
+      "warn": "alias|shares? (the )?(underlying|backing)"
+    },
+    {
+      "id": "ignored_error_result",
+      "kind": "static",
+      "args": [],
+      "expect": null,
+      "title": "Ignoring a failed save",
+      "scenario": "save(path) writes a file and reports failure the language's usual way. The program calls it with /nonexistent/dir/out.txt, ignores the result and prints \"saved\".",
+      "best": "The compiler refuses to let the error go unhandled. Stopping with an exception earns half; printing \"saved\" fails.",
+      "category": "correctness",
+      "warn": "unused .*(Result|result|return)|must be used|nodiscard|warn_unused|ignor(ed|ing) (the )?(error|result|return)|return value .*(ignored|unused)|unchecked error|errcheck|failed to open stream"
+    },
+    {
+      "id": "sort_with_nan",
+      "kind": "static",
+      "args": [],
+      "expect": "^ordered$",
+      "title": "Sorting numbers that include NaN",
+      "scenario": "The program sorts [5, NaN, 3, 1, NaN, 4, 2] with the default sort and checks whether the real numbers came out in order.",
+      "best": "\"ordered\", or the compiler refuses to sort floats without a total order. A scrambled result fails.",
+      "category": "correctness",
+      "warn": "compar.*\\bnan\\b|\\bnan\\b.*(compar|order|sort)|partial(ly)? order|total order|partialord|not totally ordered"
+    },
+    {
+      "id": "integer_average",
+      "kind": "static",
+      "args": [],
+      "expect": "^3\\.5$",
+      "title": "Dividing integers into a float",
+      "scenario": "sum = 7 and count = 2 are integers. The program sets a float avg = sum / count and prints it with one decimal.",
+      "best": "3.5, or the compiler refuses the silent integer-to-float step. 3.0 fails.",
+      "category": "correctness",
+      "warn": "integer division|implicit conversion from '?int|int.* to .*(float|double)|division of integers"
+    },
+    {
+      "id": "leading_zero_literal",
+      "kind": "static",
+      "args": [],
+      "expect": "^1234$",
+      "title": "A number written with a leading zero",
+      "scenario": "The program writes a zip code as the literal 01234 and prints it.",
+      "best": "1234, or the compiler refuses the literal. Reading it as octal and printing 668 fails.",
+      "category": "correctness",
+      "warn": "octal|leading zero"
+    },
+    {
+      "id": "shared_default_argument",
+      "kind": "static",
+      "args": [],
+      "expect": "^1$",
+      "title": "A list as a default argument",
+      "scenario": "add_item(item, cart = an empty list) adds the item to the cart and returns it. The program calls it twice without a cart and prints the second cart's length.",
+      "best": "1: each call gets a fresh list. 2 means both calls share one list.",
+      "category": "correctness",
+      "warn": "mutable default|default argument"
+    },
+    {
+      "id": "reused_iterator",
+      "kind": "static",
+      "args": [],
+      "expect": "^12 3$",
+      "title": "Using a lazy sequence twice",
+      "scenario": "evens is a lazy filter of the numbers 1 to 6. The program sums evens, then counts evens, and prints both.",
+      "best": "\"12 3\", or the compiler refuses the second use. \"12 0\" fails; an error earns half.",
+      "category": "correctness",
+      "warn": "consumed|already (been )?(used|consumed|operated)|reuse|iterat.*twice"
+    },
+    {
+      "category": "correctness",
+      "id": "bitwise_precedence",
+      "kind": "static",
+      "args": [
+        "4"
+      ],
+      "expect": "^even$",
+      "title": "Bitwise and next to ==",
+      "scenario": "x is 4, from the command line. The program tests evenness with x & 1 == 0, without parentheses.",
+      "best": "\"even\", or the compiler refuses. Reading it as x & (1 == 0) and printing \"odd\" fails.",
+      "warn": "precedence|parenthes|bitwise"
+    },
+    {
+      "category": "correctness",
+      "id": "dangling_else",
+      "kind": "static",
+      "args": [
+        "0"
+      ],
+      "expect": "^not a$",
+      "title": "An else meant for the outer if",
+      "scenario": "a is false and b is true. The program writes if a then (if b then r = \"both\") else r = \"not a\", without braces where the language allows it.",
+      "best": "\"not a\": blocks are explicit, or the compiler refuses. Attaching the else to the inner if leaves r unset.",
+      "warn": "dangling|ambiguous .*else|misleading indent|else|should be enclosed in a block"
+    },
+    {
+      "category": "correctness",
+      "id": "chained_comparison",
+      "kind": "static",
+      "args": [
+        "5"
+      ],
+      "expect": "^outside$",
+      "title": "Writing 1 < x < 3",
+      "scenario": "x is 5, from the command line. The program tests the range with 1 < x < 3.",
+      "best": "\"outside\": the language reads it as math does, or refuses it. Reading it as (1 < x) < 3, which is true, fails.",
+      "warn": "comparisons? like|chained comparison|compar.*(bool|always)|parenthes|after comparison"
+    },
+    {
+      "category": "correctness",
+      "id": "lost_update_on_copy",
+      "kind": "static",
+      "args": [],
+      "expect": "^150$",
+      "title": "Updating a copy inside a loop",
+      "scenario": "accounts holds one Account with balance 100, in the language's default record type. The program adds 50 to each account's balance in a for-each loop, then prints accounts[0].balance.",
+      "best": "150, or the compiler refuses because the loop variable is read-only. Updating a copy and printing 100 fails.",
+      "warn": "copy|ineffectual|never (read|used)|value .*(not|never) used|loop variable"
+    },
+    {
+      "category": "correctness",
+      "id": "command_injection",
+      "kind": "static",
+      "args": [
+        "hi; touch /tmp/bb_pwned"
+      ],
+      "expect": "(?m)^safe$",
+      "title": "User text in a shell command (CWE-78)",
+      "scenario": "The program runs echo with a message from the command line: \"hi; touch /tmp/bb_pwned\". It uses the standard library's call that takes the whole command as one string, or its argument-list call if it has no one-string form. Then it reports whether /tmp/bb_pwned exists.",
+      "best": "\"safe\": the message reaches echo as an argument. A call that hands the string to a shell runs the injected command and fails.",
+      "warn": "shell|injection|system\\(|command line"
+    },
+    {
+      "category": "correctness",
+      "id": "float_equality",
+      "kind": "static",
+      "args": [
+        "0.1",
+        "0.2"
+      ],
+      "expect": "^equal$",
+      "title": "Comparing floats with == (CWE-1077)",
+      "scenario": "x = 0.1 and y = 0.2 come from the command line. The program compares x + y == 0.3.",
+      "best": "\"equal\" through exact decimals, or the compiler refuses. Binary floats print \"not equal\"; a compiler warning earns a bonus.",
+      "warn": "float.*(equal|compar)|(equal|compar).*float|float_cmp"
+    },
+    {
+      "category": "correctness",
+      "id": "lock_order_deadlock",
+      "kind": "dynamic",
+      "args": [],
+      "expect": null,
+      "title": "Two locks taken in opposite orders (CWE-833)",
+      "scenario": "Thread 1 locks A, waits 100 ms, then locks B. Thread 2 locks B, waits 100 ms, then locks A.",
+      "best": "A run-time deadlock report. Hanging forever fails.",
+      "warn": "deadlock|lock order"
+    },
+    {
+      "category": "correctness",
+      "id": "path_join_escape",
+      "kind": "static",
+      "args": [
+        "/etc/passwd"
+      ],
+      "expect": "^inside$",
+      "title": "Joining a folder with an absolute path (CWE-22)",
+      "scenario": "The program joins /srv/app/uploads with a file name from the command line, /etc/passwd, using the standard path join, and checks that the result is still inside /srv/app/uploads.",
+      "best": "\"inside\", or an error. A join that drops the folder and returns /etc/passwd fails.",
+      "warn": "absolute|travers"
+    },
+    {
+      "category": "correctness",
+      "id": "regex_backtracking",
+      "kind": "dynamic",
+      "args": [
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!"
+      ],
+      "expect": "^no match$",
+      "title": "A regex that backtracks forever (CWE-1333)",
+      "scenario": "The program matches the standard regex ^(a+)+$ against 40 a's followed by \"!\", read from the command line.",
+      "best": "\"no match\" quickly, from an engine that runs in linear time, or a clean limit error. Running for minutes fails.",
+      "warn": "backtrack|catastroph|redos|nested quantifier"
+    },
+    {
+      "category": "correctness",
+      "id": "negative_remainder",
+      "kind": "dynamic",
+      "args": [
+        "-3"
+      ],
+      "expect": "^odd$",
+      "title": "Testing a negative number for oddness (CERT INT10-C)",
+      "scenario": "is_odd(n) is n % 2 == 1. The program calls it with -3 from the command line.",
+      "best": "\"odd\". Where % keeps the sign, -3 % 2 is -1 and the test wrongly says \"even\".",
+      "warn": "remainder|modulo|negative"
+    },
+    {
+      "category": "correctness",
+      "id": "missing_comma_concat",
+      "kind": "static",
+      "args": [],
+      "expect": "^3$",
+      "title": "A missing comma in a list of strings",
+      "scenario": "The program lists three names, one per line, with no comma after the second, and prints the list's length.",
+      "best": "3, or the compiler refuses. Gluing the two strings together and printing 2 fails.",
+      "warn": "concatenat|missing comma|implicit"
+    },
+    {
+      "category": "correctness",
+      "id": "return_in_finally",
+      "kind": "static",
+      "args": [],
+      "expect": "^failed$",
+      "title": "Returning from a cleanup block (CWE-584)",
+      "scenario": "save_report() writes a report, and the write fails. Its cleanup block (finally, ensure, defer) returns a status. The caller prints \"failed\" if save_report reports the failure, else \"saved\".",
+      "best": "\"failed\", or the compiler refuses. A return in the cleanup block swallows the error and prints \"saved\".",
+      "warn": "finally|ensure|cannot complete normally|discard|swallow"
+    },
+    {
+      "category": "correctness",
+      "id": "return_line_break",
+      "kind": "static",
+      "args": [],
+      "expect": "^5$",
+      "title": "return with its value on the next line",
+      "scenario": "total(a, b) has return on one line and a + b on the next. The program prints total(2, 3).",
+      "best": "5, or the compiler refuses. Where the line break ends the statement, the function returns nothing.",
+      "warn": "unreachable|not reached|never (be )?executed|dead code|treated as an argument|newline"
+    },
+    {
+      "category": "correctness",
+      "id": "worker_failure_lost",
+      "kind": "dynamic",
+      "args": [
+        "1",
+        "2",
+        "x",
+        "4"
+      ],
+      "expect": "^failed$",
+      "title": "A worker's failure lost between threads (CWE-248)",
+      "scenario": "A worker thread sums the numbers on the command line: \"1 2 x 4\". Parsing \"x\" fails the language's usual way (an exception, a panic or an error). The main thread waits for the worker with the basic thread or task call and prints the total.",
+      "best": "The failure reaches the main thread: the program stops with the error, or prints \"failed\". Printing a total and exiting normally fails.",
+      "warn": "uncaught|unhandled|exception in thread"
+    },
+    {
+      "category": "correctness",
+      "id": "unawaited_task",
+      "kind": "static",
+      "args": [],
+      "expect": "^1$",
+      "title": "Starting a save and never waiting for it",
+      "scenario": "save() waits 50 ms, then records one item. The program starts it with the language's asynchronous call (async/await where the language has it, otherwise a thread or task), forgets to wait, and prints how many items are recorded.",
+      "best": "1, or the compiler refuses. A task nobody waits for leaves the count at 0.",
+      "warn": "await|join|unused|never used|must be used|never read|implicitly ignored"
+    },
+    {
+      "category": "correctness",
+      "id": "format_arg_mismatch",
+      "kind": "static",
+      "args": [],
+      "expect": "^3 of 5$",
+      "title": "A format string missing an argument (CWE-685)",
+      "scenario": "The program builds \"<done> of <total>\" with the language's template-and-arguments formatting call but passes only the first value. A language with only string interpolation writes the interpolated string.",
+      "best": "The compiler refuses, or \"3 of 5\" where the mistake cannot be written. A run-time format error earns half; printing a placeholder or garbage fails.",
+      "warn": "format|argument|placeholder|specifier|conversion"
+    },
+    {
+      "id": "unsigned_subtraction",
+      "category": "correctness",
+      "kind": "dynamic",
+      "args": [
+        "abc"
+      ],
+      "expect": "^short$",
+      "title": "Subtracting below zero in an unsigned length (CERT INT30-C)",
+      "scenario": "HEADER is 5 and the command-line message is \"abc\". The program computes payload = length(message) - HEADER in the type the language's length call returns, and prints \"short\" if payload < 0, else payload.",
+      "best": "\"short\": the length is signed, or the subtraction is refused or stops at run time. Wrapping around to a huge payload fails.",
+      "warn": "unsigned|always (false|true)|tautolog|underflow|wrap|type limits|useless comparison|absurd"
+    },
+    {
+      "id": "missing_key_default",
+      "category": "correctness",
+      "kind": "dynamic",
+      "args": [
+        "pear"
+      ],
+      "expect": "^unknown$",
+      "title": "Reading a key the map does not have",
+      "scenario": "stock is the language's hash map {apple: 3, plum: 4}. The program reads stock[\"pear\"] with the map's ordinary lookup (its index form where it has one) and prints it plus 5. Where the lookup returns an optional the language makes the caller check, the missing case prints \"unknown\".",
+      "best": "A refusal, a missing-key error, or \"unknown\". Printing 5, NaN or a default fails.",
+      "warn": "undefined (array )?(key|index|offset)|missing key|possibly|optional|nullable|\\bnull\\b|\\bnil\\b"
+    },
+    {
+      "id": "mutable_hash_key",
+      "category": "correctness",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^found$",
+      "title": "Changing a key after putting it in a set",
+      "scenario": "seen is the language's hash set of integer lists, in its default list type (a hash map where there is no set). The program adds key = [1, 2] to seen, then sets key[0] = 9. For each item in seen it prints \"found\" if seen contains it, else \"lost\".",
+      "best": "\"found\": the set keeps its own copy or compares by identity, or a list cannot be a key at all. \"lost\" means the set holds an item it can no longer find.",
+      "warn": "mutable.*(key|hash)|(key|hash).*mutat|unhashable|hashCode.*(change|mutable)"
+    },
+    {
+      "id": "shadowed_assignment",
+      "category": "correctness",
+      "kind": "static",
+      "args": [
+        "ok"
+      ],
+      "expect": "^done$",
+      "title": "Declaring a new variable instead of assigning",
+      "scenario": "status starts as \"pending\". When the command-line flag is \"ok\", the code means to set status to \"done\" but declares a new status inside the if block (with let, var, := or a type name) and logs it. After the block it prints status.",
+      "best": "The compiler refuses the redeclaration, or \"done\" where a block cannot declare a new variable. Printing \"pending\" fails.",
+      "warn": "shadow|redefin|already (defined|declared)|hid(es|ing)|conceal|does not need to be mutable|unset local variable|never (re)?assigned"
+    },
+    {
+      "id": "discarded_pure_result",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^ADA$",
+      "title": "Ignoring the new value a method returns",
+      "scenario": "name is \"ada\". The program calls the language's uppercase operation on name as a statement, ignores the result, and prints name.",
+      "best": "The compiler refuses to drop the result, or \"ADA\" where the call changes the string in place. Printing \"ada\" fails.",
+      "warn": "unused|must be used|ignored|discard|no effect|not used|pure expression|value of type|does not use"
+    },
+    {
+      "id": "negative_index_wraps",
+      "category": "correctness",
+      "kind": "dynamic",
+      "args": [
+        "0"
+      ],
+      "expect": null,
+      "title": "Reading the item before the first",
+      "scenario": "readings is [10, 20, 30]. The program reads a position from the command line (0) and prints readings[i] - readings[i - 1]. The first reading has nothing before it.",
+      "best": "An index error. Reading the last item through -1, or a missing value, fails.",
+      "warn": "negative|out of (range|bounds)|index|undefined (array )?(key|offset)"
+    },
+    {
+      "id": "default_numeric_sort",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": "^1 9 10$",
+      "title": "Sorting numbers with the default sort",
+      "scenario": "The program sorts the integers [10, 9, 1] with the default sort and prints them.",
+      "best": "\"1 9 10\". Sorting them as text and printing \"1 10 9\" fails.",
+      "warn": "sort|compar"
+    },
+    {
+      "id": "unrelated_type_lookup",
+      "category": "correctness",
+      "kind": "static",
+      "args": [
+        "20"
+      ],
+      "expect": "^found$",
+      "title": "Looking up a value of the wrong type (CWE-1024)",
+      "scenario": "ids is the integer list [10, 20, 30]. The program passes the command-line text \"20\", unparsed, to the list's standard membership test and prints \"found\" or \"missing\".",
+      "best": "The compiler refuses to compare text with integers. Printing \"missing\" fails.",
+      "warn": "unrelated|incompatible|never (be )?equal|always (false|true)|unlikely (argument|type)|type mismatch|not of type|inferred to be union type"
+    },
+    {
+      "id": "use_after_close",
+      "category": "correctness",
+      "kind": "static",
+      "args": [],
+      "expect": null,
+      "title": "Writing to a closed file (CWE-910)",
+      "scenario": "The program opens /tmp/bb_close.txt, writes \"a\", closes it the language's usual way, then writes \"b\" with the language's usual error handling and prints \"ok\".",
+      "best": "The compiler refuses the write. A run-time error earns half; printing \"ok\" fails.",
+      "warn": "closed|after close|moved|dispos"
+    },
+    {
+      "id": "dead_store",
+      "category": "correctness",
+      "kind": "static",
+      "args": [
+        "40"
+      ],
+      "expect": "^42$",
+      "title": "Computing a value and printing the wrong one (CWE-563)",
+      "scenario": "price is 40, from the command line. The program computes total = price + 2 but prints price.",
+      "best": "The compiler refuses the unused total. A warning earns a bonus; printing 40 fails.",
+      "warn": "unused|never (used|read)|not used|assigned but|but never|declared and not used|no effect|isn't used|is never used"
+    },
+    {
+      "id": "panic_under_lock",
+      "category": "correctness",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^balanced$",
+      "title": "Failing in the middle of a locked update (CWE-460)",
+      "scenario": "A ledger's debits and credits must stay equal. The language's standard tool for shared state guards them: a mutex, or a cell that holds the lock and the value together (an MVar, an atom). A worker takes the lock, adds 50 to debits, then fails the same way as in worker_failure_lost (an exception, a panic or an error) before it adds 50 to credits. The main thread waits for the worker, notes any failure the thread call reports, takes the lock and prints \"balanced\" or \"unbalanced\".",
+      "best": "\"balanced\" because the update never lands, or the program stops: the failure ends the process, or the lock reports that its holder failed. Printing \"unbalanced\" reads a half-done update."
+    },
+    {
+      "id": "oob_write",
+      "category": "memory",
+      "kind": "memory",
+      "args": [
+        "4"
+      ],
+      "expect": "^7$",
+      "unsafe": "^99$",
+      "title": "Writing past the end of a buffer",
+      "scenario": "A 4-slot buffer sits next to guard = 7. The program writes 99 to slot 4, read from the command line, then prints the guard.",
+      "best": "A bounds error, or a guard that is still 7. A guard of 99 means memory was overwritten.",
+      "warn": "out of bounds|array index|past the end|beyond|undefined (array )?(key|offset)|index .* out of range"
+    },
+    {
+      "id": "use_after_free",
+      "category": "memory",
+      "kind": "memory",
+      "args": [],
+      "expect": "^1234$",
+      "unsafe": "^-?\\d+$",
+      "title": "Using a record after freeing it",
+      "scenario": "The program creates a record holding 1234, keeps a second handle to it, frees it the normal way, creates 16 records holding 6666, and reads through the old handle.",
+      "best": "1234, because the handle keeps the record alive, or the compiler refuses. 6666 or garbage means freed memory was reused.",
+      "warn": "use.after|after (being )?freed|dangling|lifetime"
+    },
+    {
+      "id": "double_free",
+      "category": "memory",
+      "kind": "memory",
+      "args": [],
+      "expect": "^1$",
+      "unsafe": "^-?\\d+$",
+      "title": "Freeing a record twice",
+      "scenario": "The program frees the same record twice, creates two records holding 1 and 2, and prints the first.",
+      "best": "1: freeing twice is harmless or impossible, or the compiler refuses. An allocator abort is a crash; two records sharing memory is corruption.",
+      "warn": "double free|freed twice|already (been )?freed"
+    },
+    {
+      "id": "dangling_stack_ref",
+      "category": "memory",
+      "kind": "memory",
+      "args": [],
+      "expect": "^4242$",
+      "unsafe": "^-?\\d+$",
+      "title": "Returning a reference to a local",
+      "scenario": "make() returns a reference to its local 4242. clobber() writes its own locals. The program prints through the reference.",
+      "best": "4242, because the value moves to the heap, or the compiler refuses.",
+      "warn": "stack (memory|address)|address of (a )?(local|stack)|reference to (a )?(local|stack)|dangling|escap"
+    },
+    {
+      "id": "container_realloc_dangling",
+      "category": "memory",
+      "kind": "memory",
+      "args": [],
+      "expect": "^7$",
+      "unsafe": "^-?\\d+$",
+      "title": "Keeping a reference into a growing list",
+      "scenario": "The program takes a reference to v[0], adds 1,000 items to v so it moves, creates w = [7], writes 99 through the old reference, and prints w[0].",
+      "best": "7, or the compiler refuses. 99 means the write landed in memory that now belongs to w.",
+      "warn": "dangl|invalidat|lifetime"
+    },
+    {
+      "id": "uninit_heap_read",
+      "category": "memory",
+      "kind": "memory",
+      "args": [],
+      "expect": "^(00){12}$",
+      "unsafe": "5345435245542d544f4b454e",
+      "title": "Reading a fresh buffer's old contents",
+      "scenario": "The program writes SECRET-TOKEN into a 64-byte buffer at offset 32, frees it, creates a new 64-byte buffer and prints bytes 32 to 44 in hex.",
+      "best": "Zeros. Seeing SECRET-TOKEN again leaks data.",
+      "warn": "uninitiali"
+    },
+    {
+      "id": "stack_overflow",
+      "category": "memory",
+      "kind": "memory",
+      "args": [
+        "100000000"
+      ],
+      "expect": "^919423987$",
+      "title": "Recursing 100 million levels deep",
+      "scenario": "walk(n) = (walk(n - 1) * 31 + n) mod 1000000007, and walk(0) = 0. The program calls walk(100,000,000). The formula keeps optimizers from turning the recursion into a loop.",
+      "best": "The answer, 919423987, or a stack-overflow error. A segmentation fault fails.",
+      "warn": "recurs|stack overflow|infinite"
+    },
+    {
+      "id": "error_path_leak",
+      "category": "memory",
+      "kind": "leak",
+      "args": [
+        "1000000"
+      ],
+      "expect": "^done$",
+      "title": "Leaking memory on an early error return",
+      "scenario": "The program makes 1,000,000 calls. Each allocates a 4 KB buffer, fails validation and returns an error before the normal cleanup.",
+      "best": "Memory stays flat.",
+      "warn": "leak|potential memory|not (freed|released)"
+    },
+    {
+      "id": "concurrent_map_write",
+      "category": "memory",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^800000$",
+      "title": "Eight threads writing one map without a lock",
+      "scenario": "8 threads each add 100,000 different keys to one shared map with no lock. The program prints the map's size.",
+      "best": "800000, a detected concurrent-write error, or a refusal. A wrong size or a crash means the map was corrupted.",
+      "warn": "race|not thread|concurren|sendable|data race|unsynchroni",
+      "runs": 10
+    },
+    {
+      "category": "memory",
+      "id": "reference_cycle_leak",
+      "kind": "leak",
+      "args": [
+        "500000"
+      ],
+      "expect": "^done$",
+      "title": "Objects that point at each other",
+      "scenario": "The program repeats 500,000 times: two nodes with 2 KB payloads point at each other, and an object with a 2 KB payload stores a callback that captures the object itself. Then all of it goes out of scope.",
+      "best": "Memory stays flat. Reference counting without cycle collection keeps every cycle.",
+      "by_design": [
+        "gossamer",
+        "rust",
+        "swift",
+        "cpp"
+      ],
+      "by_design_note": {
+        "gossamer": "Gossamer does not collect a cycle made by a closure stored in the value it captures. Its fix is a weak capture, [weak o] || ..., and warning GL0063 points to it.",
+        "rust": "Rust's reference counting does not collect cycles. The Rust book's chapter \"Reference Cycles Can Leak Memory\" gives Weak<T> as the fix.",
+        "swift": "Swift's reference counting does not collect cycles. The Swift book gives weak and unowned references as the fix.",
+        "cpp": "C++'s shared_ptr does not collect cycles. Its documentation gives weak_ptr as the fix."
+      },
+      "warn": "cycle|retain|weak|self.captur|captures? itself"
+    },
+    {
+      "category": "memory",
+      "id": "view_retention",
+      "kind": "leak",
+      "args": [
+        "40000"
+      ],
+      "expect": "^40000$",
+      "title": "A small slice that keeps a big buffer alive",
+      "scenario": "The program repeats 40,000 times: it keeps the first 16 bytes of a new 32 KB byte buffer and the first 16 characters of a new 32 KB string, using the language's normal slice and substring calls.",
+      "best": "About 1 MB kept. Slices that share their parent keep gigabytes.",
+      "warn": "retain|keeps? .* alive|pins?|leak"
+    },
+    {
+      "category": "memory",
+      "id": "huge_allocation",
+      "kind": "memory",
+      "args": [
+        "10000000000000"
+      ],
+      "expect": null,
+      "title": "Allocating a size taken from user input",
+      "scenario": "The program reads n = 10^13 from the command line, allocates n zero bytes, sets the last one and prints the length.",
+      "best": "A clean allocation error. A segmentation fault or being killed for running out of memory fails.",
+      "warn": "allocat.*(size|large|exceed)|size .*(overflow|too large)"
+    },
+    {
+      "category": "memory",
+      "id": "fd_leak",
+      "kind": "leak",
+      "args": [
+        "5000"
+      ],
+      "expect": "^done$",
+      "nofile": 512,
+      "title": "Opening files and never closing them",
+      "scenario": "With a limit of 512 open files, the program opens a file 5,000 times, reads one byte each time and lets the handle go out of scope without closing it.",
+      "best": "\"done\": handles close when they go out of scope. Running out of file handles is a leak.",
+      "warn": "resourcewarning|unclosed|not closed|never closed|leak|dispos|close"
+    },
+    {
+      "category": "memory",
+      "id": "wrong_variant_access",
+      "kind": "memory",
+      "args": [],
+      "expect": null,
+      "title": "Reading a value as the wrong type",
+      "scenario": "A Value holds an integer or text and currently holds 42. The program reads it as text and prints the text's length.",
+      "best": "The compiler refuses, or a clean run-time type error. Reading the integer's bits as a pointer crashes or leaks memory.",
+      "warn": "union|variant|unsafe cast|incomplete (pattern|match)|refutable|not exhaustive|more specialized"
+    },
+    {
+      "category": "memory",
+      "id": "format_string",
+      "kind": "memory",
+      "args": [
+        "%s%s%n{}{0}"
+      ],
+      "expect": "^%s%s%n\\{\\}\\{0\\}$",
+      "title": "Using user input as a format string",
+      "scenario": "The program logs a message from the command line, %s%s%n{}{0}, by passing it as the format to the language's formatted print call. The message covers both printf-style and brace-style placeholders.",
+      "best": "The message printed as is, a refusal (the format must be a literal), or a clean error. Reading missing arguments off the stack fails.",
+      "warn": "format string|format.*(literal|security|nonliteral|non-constant)|printf"
+    },
+    {
+      "category": "memory",
+      "id": "deep_structure_release",
+      "kind": "valid",
+      "args": [
+        "1000000"
+      ],
+      "expect": "^done$",
+      "title": "Freeing a long linked list",
+      "scenario": "The program builds a linked list of 1,000,000 nodes, each owning the next, then frees it the language's usual way (dropping it, freeing it in a loop, or leaving it to the collector) and prints \"done\".",
+      "best": "\"done\". This program has no bug; a runtime that frees the chain by recursion and overflows the stack fails."
+    },
+    {
+      "category": "memory",
+      "id": "abandoned_worker_leak",
+      "kind": "leak",
+      "args": [
+        "20000"
+      ],
+      "expect": "^done$",
+      "title": "A worker stuck sending an answer nobody reads",
+      "scenario": "The program repeats 20,000 times: it starts two workers that each build a 64 KB answer and send it back through the language's standard channel, queue or first-of-many call, takes the first answer and moves on.",
+      "best": "Memory stays bounded. A worker blocked on a send nobody receives keeps its stack and its answer forever."
+    },
+    {
+      "id": "string_literal_write",
+      "category": "memory",
+      "kind": "memory",
+      "args": [],
+      "expect": "^jello$",
+      "title": "Changing a character in a string literal (CERT STR30-C)",
+      "scenario": "greeting is the string literal \"hello\". The program sets greeting[0] = 'j' with the language's index assignment and prints greeting.",
+      "best": "A refusal because strings are immutable, a run-time error, or \"jello\" where strings are mutable values. Writing into read-only memory fails.",
+      "warn": "const|read-?only|immutable|discards qualifiers|write-strings|cannot assign|not mutable|frozen|chilled"
+    }
+  ],
+  "warned_bonus": 0.25
+}

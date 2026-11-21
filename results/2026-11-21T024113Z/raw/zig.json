@@ -1,0 +1,524 @@
+{
+ "lang": "zig",
+ "version": "0.17.1",
+ "results": {
+  "null_deref": {
+   "outcome": "REJECTED",
+   "message": "main.zig:16:31: error: optional type '?main.User' does not support field access\n    try out.print(\"{d}\\n\", .{u.name.len}); // BREAK!\n                             ~^~~~~\nmain.zig:16:31: note: consider using '.?', 'orelse', or 'if'\nreferenced by:\n    callMain [inlined]: /opt/zig/lib/std/start.zig:827:30\n    callMainWithArgs [inlined]: /opt/zig/lib/std/start.zig:729:20\n    posixCallMainAndExit: /opt/zig/lib/std/start.zig:681:38\n    2 reference(s) hidden; use '-freference-trace=5' to see all references"
+  },
+  "int_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 134,
+   "rss_mb": 14.7,
+   "secs": 0.14,
+   "stdout": "",
+   "stderr": "thread 90 panic: integer overflow\n/tmp/breakbench/int_overflow/main/main.zig:10:32: 0x11e34ef in main (main.zig)\n    try out.print(\"{d}\\n\", .{n + 1});\n                               ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4148 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 134,
+   "rss_mb": 14.7,
+   "secs": 0.13,
+   "stdout": "",
+   "stderr": "thread 119 panic: division by zero\n/tmp/breakbench/div_by_zero/main/main.zig:11:30: 0x11e34c7 in main (main.zig)\n    try out.print(\"{d}\\n\", .{@divTrunc(100, d)});\n                             ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4128 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+  },
+  "shift_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 134,
+   "rss_mb": 14.7,
+   "secs": 0.12,
+   "stdout": "",
+   "stderr": "thread 148 panic: integer does not fit in destination type\n/tmp/breakbench/shift_overflow/main/main.zig:12:37: 0x11e34be in main (main.zig)\n    try out.print(\"{d}\\n\", .{one << @intCast(s)});\n                                    ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4108 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+  },
+  "narrowing_cast": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 134,
+   "rss_mb": 14.7,
+   "secs": 0.13,
+   "stdout": "",
+   "stderr": "thread 177 panic: integer does not fit in destination type\n/tmp/breakbench/narrowing_cast/main/main.zig:11:19: 0x11e34e1 in main (main.zig)\n    const b: u8 = @intCast(v);\n                  ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4148 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "main.zig:15:34: error: expected type 'i64', found '[:0]const u8'\n    try out.print(\"{d}\\n\", .{add(raw, 3)}); // BREAK!\n                                 ^~~\nmain.zig:1:11: note: parameter type declared here\nfn add(a: i64, b: i64) i64 {\n          ^~~\nreferenced by:\n    callMain [inlined]: /opt/zig/lib/std/start.zig:827:30\n    callMainWithArgs [inlined]: /opt/zig/lib/std/start.zig:729:20\n    posixCallMainAndExit: /opt/zig/lib/std/start.zig:681:38\n    2 reference(s) hidden; use '-freference-trace=5' to see all references"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "main.zig:1:22: error: function with non-void return type '[]const u8' implicitly returns\nfn grade(score: i64) []const u8 {\n                     ^~~~~~~~~~\nmain.zig:5:1: note: control flow reaches end of body here\n}\n^\nreferenced by:\n    main: main.zig:16:35\n    callMain [inlined]: /opt/zig/lib/std/start.zig:827:30\n    callMainWithArgs [inlined]: /opt/zig/lib/std/start.zig:729:20\n    posixCallMainAndExit: /opt/zig/lib/std/start.zig:681:38\n    2 reference(s) hidden; use '-freference-trace=6' to see all references"
+  },
+  "non_exhaustive_match": {
+   "outcome": "REJECTED",
+   "message": "main.zig:4:12: error: switch must handle all possibilities\n    return switch (c) {\n           ^~~~~~\nmain.zig:1:34: note: unhandled enumeration value: 'blue'\nconst Color = enum { red, green, blue };\n                                 ^~~~\nmain.zig:1:15: note: enum 'main.Color' declared here\nconst Color = enum { red, green, blue };\n              ^~~~~~~~~~~~~~~~~~~~~~~~~\nreferenced by:\n    main: main.zig:21:34\n    callMain [inlined]: /opt/zig/lib/std/start.zig:827:30\n    callMainWithArgs [inlined]: /opt/zig/lib/std/start.zig:729:20\n    posixCallMainAndExit: /opt/zig/lib/std/start.zig:681:38\n    2 reference(s) hidden; use '-freference-trace=6' to see all references"
+  },
+  "uninitialized_variable": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "-6148914691236517206",
+   "stderr": ""
+  },
+  "missing_argument": {
+   "outcome": "REJECTED",
+   "message": "main.zig:14:30: error: expected 2 argument(s), found 1\n    try out.print(\"{d}\\n\", .{area(3)}); // BREAK!\n                             ^~~~\nmain.zig:1:1: note: function declared here\nfn area(w: i64, h: i64) i64 {\n^~~~~~~~~~~~~~~~~~~~~~~~~~~\nreferenced by:\n    callMain [inlined]: /opt/zig/lib/std/start.zig:827:30\n    callMainWithArgs [inlined]: /opt/zig/lib/std/start.zig:729:20\n    posixCallMainAndExit: /opt/zig/lib/std/start.zig:681:38\n    2 reference(s) hidden; use '-freference-trace=5' to see all references"
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "main.zig:13:9: error: no field named 'colour' in struct 'main.Config'\n    cfg.colour = \"red\"; // BREAK!\n        ^~~~~~\nmain.zig:1:16: note: struct declared here\nconst Config = struct { color: []const u8 = \"blue\" };\n               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nreferenced by:\n    callMain [inlined]: /opt/zig/lib/std/start.zig:827:30\n    callMainWithArgs [inlined]: /opt/zig/lib/std/start.zig:729:20\n    posixCallMainAndExit: /opt/zig/lib/std/start.zig:681:38\n    2 reference(s) hidden; use '-freference-trace=5' to see all references"
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "main.zig:12:11: error: expected ')', found '='\n    if (x = 1) label = \"one\"; // BREAK!\n          ^"
+  },
+  "switch_fallthrough": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "REJECTED",
+   "message": "main.zig:12:9: error: expected type 'bool', found '?i64'\n    if (qty) present = true; // BREAK!\n        ^~~\nreferenced by:\n    callMain [inlined]: /opt/zig/lib/std/start.zig:827:30\n    callMainWithArgs [inlined]: /opt/zig/lib/std/start.zig:729:20\n    posixCallMainAndExit: /opt/zig/lib/std/start.zig:681:38\n    2 reference(s) hidden; use '-freference-trace=5' to see all references"
+  },
+  "string_equality": {
+   "outcome": "REJECTED",
+   "message": "main.zig:12:20: error: cannot compare strings with ==\n    const same = s == \"abc\"; // BREAK!\n                 ~~^~~~~~~~"
+  },
+  "parse_invalid_number": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.7,
+   "secs": 0.06,
+   "stdout": "",
+   "stderr": "error: InvalidCharacter\n/opt/zig/lib/std/fmt.zig:583:24: 0x10f4e5a in charToDigit (std.zig)\n    if (value >= base) return error.InvalidCharacter;\n                       ^\n/opt/zig/lib/std/fmt.zig:448:23: 0x11f3b6a in parseIntWithSign__func_829 (std.zig)\n        const digit = try charToDigit(math.cast(u8, c) orelse return error.InvalidCharacter, buf_base);\n                      ^\n/opt/zig/lib/std/fmt.zig:336:5: 0x11f0417 in parseIntWithGenericCharacter__func_828 (std.zig)\n    return parseIntWithSign(Result, Character, buf, base, .pos);\n    ^\n/opt/zig/lib/std/fmt.zig:323:5: 0x11eff65 in parseInt__func_791 (std.zig)\n    return parseIntWithGenericCharacter(T, u8, buf, base);\n    ^\n/tmp/breakbench/parse_invalid_number/main/main.zig:10:15: 0x11e3484 in main (main.zig)\n    const n = try std.fmt.parseInt(i64, args[1], 10);\n              ^"
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "main.zig:24:29: error: expected type '[]main.Animal', found '*[1]main.Dog'\n    var animals: []Animal = &dogs; // BREAK!\n                            ^~~~~\nmain.zig:24:29: note: pointer type child 'main.Dog' cannot cast into pointer type child 'main.Animal'\nmain.zig:1:13: note: struct declared here\nconst Dog = struct {\n            ^~~~~~\nmain.zig:12:16: note: union declared here\nconst Animal = union(enum) { dog: Dog, cat: Cat };\n               ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nreferenced by:\n    callMain [inlined]: /opt/zig/lib/std/start.zig:827:30\n    callMainWithArgs [inlined]: /opt/zig/lib/std/start.zig:729:20\n    posixCallMainAndExit: /opt/zig/lib/std/start.zig:681:38\n    2 reference(s) hidden; use '-freference-trace=5' to see all references"
+  },
+  "mutate_while_iterating": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "1,2,3",
+   "stderr": ""
+  },
+  "self_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "exit": -9,
+   "rss_mb": 14.7,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "REJECTED",
+   "message": "main.zig:16:9: error: error union of type '@typeInfo(@typeInfo(@TypeOf(main.save)).@\"fn\".return_type.?).error_union.error_set!void' is ignored\n    save(init.io, \"/nonexistent/dir/out.txt\"); // BREAK!\n    ~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nmain.zig:16:9: note: consider using 'try', 'catch', or 'if'\nreferenced by:\n    callMain [inlined]: /opt/zig/lib/std/start.zig:827:30\n    callMainWithArgs [inlined]: /opt/zig/lib/std/start.zig:729:20\n    posixCallMainAndExit: /opt/zig/lib/std/start.zig:681:38\n    2 reference(s) hidden; use '-freference-trace=5' to see all references"
+  },
+  "sort_with_nan": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "ordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "REJECTED",
+   "message": "main.zig:14:22: error: expected type 'f64', found 'i64'\n    const avg: f64 = @divTrunc(sum, count); // BREAK!\n                     ^~~~~~~~~~~~~~~~~~~~~\nreferenced by:\n    callMain [inlined]: /opt/zig/lib/std/start.zig:827:30\n    callMainWithArgs [inlined]: /opt/zig/lib/std/start.zig:729:20\n    posixCallMainAndExit: /opt/zig/lib/std/start.zig:681:38\n    2 reference(s) hidden; use '-freference-trace=5' to see all references"
+  },
+  "leading_zero_literal": {
+   "outcome": "REJECTED",
+   "message": "main.zig:10:17: error: number '01234' has leading zero\n    const zip = 01234; // BREAK!\n                ^~~~~\nmain.zig:10:17: note: use '0o' prefix for octal literals"
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "12 0",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "REJECTED",
+   "message": "main.zig:14:9: error: invalid left-hand side to assignment\n        if (b) r = \"both\" // BREAK!\n        ^~~~~~~~"
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "main.zig:11:26: error: comparison operators cannot be chained\n    const inside = 1 < x < 3; // BREAK!\n                         ^"
+  },
+  "lost_update_on_copy": {
+   "outcome": "REJECTED",
+   "message": "main.zig:12:9: error: local variable is never mutated\n    var accounts = [_]Account{.{ .balance = 100 }};\n        ^~~~~~~~\nmain.zig:12:9: note: consider using 'const'\nmain.zig:13:31: error: cannot assign to constant\n    for (accounts) |acct| acct.balance += 50; // BREAK!\n                          ~~~~^~~~~~~~\nreferenced by:\n    callMain [inlined]: /opt/zig/lib/std/start.zig:827:30\n    callMainWithArgs [inlined]: /opt/zig/lib/std/start.zig:729:20\n    posixCallMainAndExit: /opt/zig/lib/std/start.zig:681:38\n    2 reference(s) hidden; use '-freference-trace=5' to see all references"
+  },
+  "command_injection": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.06,
+   "stdout": "safe",
+   "stderr": "error(SafeAllocator): leaked [addr: 7c4decad30b8, len: 24 (0x18) align: 1] allocated at: \n/opt/zig/lib/std/Io/File/MultiReader.zig:136:36: 0x11f0a50 in toOwnedSlice (std.zig)\n        const new = try gpa.realloc(r.buffer, r.end);\n                                   ^\n/opt/zig/lib/std/process.zig:549:55: 0x11ef856 in run (std.zig)\n    const stdout_slice = try multi_reader.toOwnedSlice(0);\n                                                      ^\n/tmp/breakbench/command_injection/main/main.zig:12:39: 0x11e3604 in main (main.zig)\n    const result = try std.process.run(init.gpa, init.io, .{ .argv = &.{ \"echo\", args[1] } });\n                                      ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e44d8 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^"
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "exit": -9,
+   "rss_mb": 14.7,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "path_join_escape": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.06,
+   "stdout": "inside",
+   "stderr": "error(SafeAllocator): leaked [addr: 7bac649ecb48, len: 27 (0x1b) align: 1] allocated at: \n/opt/zig/lib/std/fs/path.zig:104:36: 0x1050b3c in joinSepMaybeZ__func_108 (std.zig)\n    const buf = try allocator.alloc(u8, total_len);\n                                   ^\n/opt/zig/lib/std/fs/path.zig:136:25: 0x1051cbd in join (std.zig)\n    return joinSepMaybeZ(allocator, sep, isSep, paths, false);\n                        ^\n/tmp/breakbench/path_join_escape/main/main.zig:10:40: 0x11e3466 in main (main.zig)\n    const joined = try std.fs.path.join(init.gpa, &.{ \"/srv/app/uploads\", args[1] });\n                                       ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4228 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^"
+  },
+  "regex_backtracking": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no regular expressions in the standard library"
+  },
+  "negative_remainder": {
+   "outcome": "REJECTED",
+   "message": "main.zig:2:12: error: remainder division with 'i64' and 'comptime_int': signed integers and floats must use @rem or @mod\n    return n % 2 == 1; // CONTROL! return @mod(n, 2) == 1;\n           ^\nreferenced by:\n    main: main.zig:15:39\n    callMain [inlined]: /opt/zig/lib/std/start.zig:827:30\n    callMainWithArgs [inlined]: /opt/zig/lib/std/start.zig:729:20\n    posixCallMainAndExit: /opt/zig/lib/std/start.zig:681:38\n    2 reference(s) hidden; use '-freference-trace=6' to see all references"
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "main.zig:12:14: error: expected ',' after initializer\n        \"bob\" // CONTROL! \"bob\",\n             ^"
+  },
+  "return_in_finally": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.06,
+   "stdout": "total 3",
+   "stderr": "error: InvalidCharacter\n/opt/zig/lib/std/fmt.zig:583:24: 0x10f5e5a in charToDigit (std.zig)\n    if (value >= base) return error.InvalidCharacter;\n                       ^\n/opt/zig/lib/std/fmt.zig:448:23: 0x11f6daa in parseIntWithSign__func_834 (std.zig)\n        const digit = try charToDigit(math.cast(u8, c) orelse return error.InvalidCharacter, buf_base);\n                      ^\n/opt/zig/lib/std/fmt.zig:336:5: 0x11f5247 in parseIntWithGenericCharacter__func_833 (std.zig)\n    return parseIntWithSign(Result, Character, buf, base, .pos);\n    ^\n/opt/zig/lib/std/fmt.zig:323:5: 0x11f4ec5 in parseInt__func_830 (std.zig)\n    return parseIntWithGenericCharacter(T, u8, buf, base);\n    ^\n/tmp/breakbench/worker_failure_lost/main/main.zig:2:35: 0x11f26fd in sum (main.zig)\n    for (items) |item| total.* += try std.fmt.parseInt(i64, item, 10);\n                                  ^"
+  },
+  "unawaited_task": {
+   "outcome": "REJECTED",
+   "message": "main.zig:17:11: error: unused local constant\n    const task = try std.Thread.spawn(.{}, save, .{init.io}); // CONTROL! const task = try std.Thread.spawn(.{}, save, .{init.io}); task.join();\n          ^~~~"
+  },
+  "format_arg_mismatch": {
+   "outcome": "REJECTED",
+   "message": "/opt/zig/lib/std/Io/Writer.zig:803:13: error: too few arguments\n            @compileError(\"too few arguments\");\n            ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nreferenced by:\n    main: main.zig:13:18\n    callMain [inlined]: /opt/zig/lib/std/start.zig:827:30\n    callMainWithArgs [inlined]: /opt/zig/lib/std/start.zig:729:20\n    posixCallMainAndExit: /opt/zig/lib/std/start.zig:681:38\n    2 reference(s) hidden; use '-freference-trace=6' to see all references"
+  },
+  "unsigned_subtraction": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 134,
+   "rss_mb": 14.7,
+   "secs": 0.13,
+   "stdout": "",
+   "stderr": "thread 1749 panic: integer overflow\n/tmp/breakbench/unsigned_subtraction/main/main.zig:12:33: 0x11e342e in main (main.zig)\n    const payload = message.len - HEADER;\n                                ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4058 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+  },
+  "missing_key_default": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 134,
+   "rss_mb": 14.7,
+   "secs": 0.13,
+   "stdout": "",
+   "stderr": "thread 1778 panic: attempt to use null value\n/tmp/breakbench/missing_key_default/main/main.zig:14:45: 0x11e365f in main (main.zig)\n    try out.print(\"{d}\\n\", .{stock.get(name).? + 5});\n                                            ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4378 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "REJECTED",
+   "message": "main.zig:12:15: error: local constant 'status' shadows local variable from outer scope\n        const status: []const u8 = \"done\"; // CONTROL! status = \"done\";\n              ^~~~~~\nmain.zig:10:9: note: previous declaration here\n    var status: []const u8 = \"pending\";\n        ^~~~~~"
+  },
+  "discarded_pure_result": {
+   "outcome": "REJECTED",
+   "message": "main.zig:12:26: error: value of type '[]u8' ignored\n    std.ascii.upperString(&buf, name); // CONTROL! _ = std.ascii.upperString(&buf, name);\n    ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~\nmain.zig:12:26: note: all non-void values must be used\nmain.zig:12:26: note: to discard the value, assign it to '_'\nreferenced by:\n    callMain [inlined]: /opt/zig/lib/std/start.zig:827:30\n    callMainWithArgs [inlined]: /opt/zig/lib/std/start.zig:729:20\n    posixCallMainAndExit: /opt/zig/lib/std/start.zig:681:38\n    2 reference(s) hidden; use '-freference-trace=5' to see all references"
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 134,
+   "rss_mb": 14.7,
+   "secs": 0.12,
+   "stdout": "",
+   "stderr": "thread 1940 panic: integer overflow\n/tmp/breakbench/negative_index_wraps/main/main.zig:12:55: 0x11e354c in main (main.zig)\n    try out.print(\"{d}\\n\", .{readings[i] - readings[i - 1]});\n                                                      ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4268 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "main.zig:12:52: error: expected type 'i64', found '[:0]const u8'\n    const found = std.mem.indexOfScalar(i64, &ids, id) != null; // CONTROL! const found = std.mem.indexOfScalar(i64, &ids, try std.fmt.parseInt(i64, id, 10)) != null;\n                                                   ^~\n/opt/zig/lib/std/mem.zig:1287:62: note: parameter type declared here\npub fn findScalar(comptime T: type, slice: []const T, value: T) ?usize {\n                                                             ^\nreferenced by:\n    callMain [inlined]: /opt/zig/lib/std/start.zig:827:30\n    callMainWithArgs [inlined]: /opt/zig/lib/std/start.zig:729:20\n    posixCallMainAndExit: /opt/zig/lib/std/start.zig:681:38\n    2 reference(s) hidden; use '-freference-trace=5' to see all references"
+  },
+  "use_after_close": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.7,
+   "secs": 0.06,
+   "stdout": "",
+   "stderr": "error: NotOpenForWriting\n/opt/zig/lib/std/Io/File.zig:611:5: 0x11eef7a in writeStreaming (std.zig)\n    return (try io.operate(.{ .file_write_streaming = .{\n    ^\n/opt/zig/lib/std/Io/File.zig:623:18: 0x11eea58 in writeStreamingAll (std.zig)\n        index += try writeStreaming(file, io, &.{}, &.{bytes[index..]}, 1);\n                 ^\n/tmp/breakbench/use_after_close/main/main.zig:13:5: 0x11e36db in main (main.zig)\n    try f.writeStreamingAll(init.io, \"b\"); // BREAK!\n    ^"
+  },
+  "dead_store": {
+   "outcome": "REJECTED",
+   "message": "main.zig:11:11: error: unused local constant\n    const total = price + 2;\n          ^~~~~"
+  },
+  "panic_under_lock": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.03,
+   "stdout": "unbalanced",
+   "stderr": "error: CrashMidUpdate\n/tmp/breakbench/panic_under_lock/main/main.zig:11:21: 0x11f13cf in post (main.zig)\n    if (debits > 0) return error.CrashMidUpdate;\n                    ^"
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 134,
+   "rss_mb": 14.7,
+   "secs": 0.13,
+   "stdout": "",
+   "stderr": "thread 2161 panic: index out of bounds: index 4, len 4\n/tmp/breakbench/oob_write/main/main.zig:14:10: 0x11e34f0 in main (main.zig)\n    f.buf[idx] = 99;\n         ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4178 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+  },
+  "use_after_free": {
+   "outcome": "CORRUPT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.07,
+   "stdout": "6148914691236517205",
+   "stderr": "error(SafeAllocator): leaked [addr: 78474682d5c8, len: 32 (0x20) align: 8] allocated at: \n/tmp/breakbench/use_after_free/main/main.zig:18:33: 0x11e3557 in main (main.zig)\n        const c = try gpa.create(Rec);\n                                ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4348 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\n\nerror(SafeAllocator): leaked [addr: 78474682d520, len: 32 (0x20) align: 8] allocated at: \n/tmp/breakbench/use_after_free/main/main.zig:18:33: 0x11e3557 in main (main.zig)\n        const c = try gpa.create(Rec);\n                                ^\n/opt/zig/lib/std/st\n...\n                    ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4348 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\n\nerror(SafeAllocator): leaked [addr: 78474682cbf0, len: 32 (0x20) align: 8] allocated at: \n/tmp/breakbench/use_after_free/main/main.zig:18:33: 0x11e3557 in main (main.zig)\n        const c = try gpa.create(Rec);\n                                ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4348 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^"
+  },
+  "double_free": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 134,
+   "rss_mb": 14.7,
+   "secs": 0.13,
+   "stdout": "",
+   "stderr": "thread 2219 panic: double free of [addr: 73d3c5fb8b40, len: 32 (0x20) align: 8]\nalloc: \n/tmp/breakbench/double_free/main/main.zig:13:29: 0x11e33c7 in main (main.zig)\n    const a = try gpa.create(Rec);\n                            ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4478 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\n\nfirst free: \n/tmp/breakbench/double_free/main/main.zig:15:16: 0x11e34e1 in main (main.zig)\n    gpa.destroy(a);\n               ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4478 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/\n...\nic(\n                             ^\n/opt/zig/lib/std/heap/SafeAllocator.zig:1121:18: 0x120db0e in free (std.zig)\n    f.startModify(.freeing, s, .{ .memory = memory, .alignment = alignment });\n                 ^\n/opt/zig/lib/std/mem/Allocator.zig:165:25: 0x11f0331 in rawFree (std.zig)\n    return a.vtable.free(a.ptr, memory, alignment, ret_addr);\n                        ^\n/tmp/breakbench/double_free/main/main.zig:16:16: 0x11e350e in main (main.zig)\n    gpa.destroy(a);\n               ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4478 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+  },
+  "dangling_stack_ref": {
+   "outcome": "REJECTED",
+   "message": "main.zig:3:13: error: returning address of expired local variable 'local'\n    return &local; // BREAK!\n            ^~~~~\nmain.zig:2:9: note: declared runtime-known here\n    var local: i64 = 4242;\n        ^~~~~"
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRUPT",
+   "warned": false,
+   "exit": 134,
+   "rss_mb": 14.7,
+   "secs": 0.13,
+   "stdout": "7",
+   "stderr": "error(SafeAllocator): leaked [addr: 7bab5b827d28, len: 136 (0x88) align: 8] allocated at: \n/opt/zig/lib/std/array_list.zig:1375:56: 0x11f0cb1 in ensureTotalCapacityPrecise (std.zig)\n                const new_memory = try gpa.alignedAlloc(T, alignment, new_capacity);\n                                                       ^\n/opt/zig/lib/std/array_list.zig:1349:51: 0x11f0a39 in ensureTotalCapacity (std.zig)\n            return self.ensureTotalCapacityPrecise(gpa, growCapacity(new_capacity));\n                                                  ^\n/opt/zig/lib/std/array_list.zig:1406:41: 0x11f055d in addOne (std.zig)\n            try self.ensureTotalCapacity(gpa, newlen);\n                                        ^\n/opt/zig/lib/std/array_list.zig:1027:\n...\nzig)\n            .freed => s.checkFreed(footer),\n                                  ^\n/opt/zig/lib/std/heap/SafeAllocator.zig:672:61: 0x11e519f in deinitLog (std.zig)\n                    .bucket => leaks += s.deinitLeakedBucket(ent.toBucket(), log),\n                                                            ^\n/opt/zig/lib/std/heap/SafeAllocator.zig:654:23: 0x11e4e46 in deinit (std.zig)\n    return s.deinitLog(true);\n                      ^\n/opt/zig/lib/std/start.zig:806:34: 0x11e45bb in callMain (std.zig)\n        _ = safe_allocator.deinit(); // Leaks do not affect return code.\n                                 ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+  },
+  "uninit_heap_read": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "aaaaaaaaaaaaaaaaaaaaaaaa",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "CRASH",
+   "warned": false,
+   "exit": 134,
+   "rss_mb": 23.3,
+   "secs": 0.47,
+   "stdout": "",
+   "stderr": "Segmentation fault at address 0x7fffcb9eafa0\n/tmp/breakbench/stack_overflow/main/main.zig:1:21: 0x11f0ecb in walk (main.zig)\nfn walk(n: i64) i64 {\n                    ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 + n, 1_000_000_007);\n                    ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 + n, 1_000_000_007);\n                    ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 + n, 1_000_000_007);\n                    ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 \n...\n                  ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 + n, 1_000_000_007);\n                    ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 + n, 1_000_000_007);\n                    ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 + n, 1_000_000_007);\n                    ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 + n, 1_000_000_007);\n                    ^\nStopping trace after 10001 frames (large frame count may indicate broken debug info)\nAborted (core dumped)"
+  },
+  "error_path_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 19.2,
+   "secs": 16.02,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "concurrent_map_write": {
+   "outcome": "TRAPPED",
+   "runs": 10,
+   "warned": false,
+   "exit": 134,
+   "rss_mb": 19.2,
+   "secs": 0.27,
+   "stdout": "",
+   "stderr": "thread 2418 panic: reached unreachable code\n/opt/zig/lib/std/debug.zig:442:14: 0x102aea9 in assert (std.zig)\n    if (!ok) unreachable; // assertion failure\n             ^\n/opt/zig/lib/std/debug.zig:1870:15: 0x10696aa in lock (std.zig)\n        assert(l.state == .unlocked);\n              ^\n/opt/zig/lib/std/hash_map.zig:1116:44: 0x11f26ae in getOrPutContextAdapted__func_827 (std.zig)\n                self.pointer_stability.lock();\n                                           ^\n/opt/zig/lib/std/hash_map.zig:1103:56: 0x11f20d6 in getOrPutContext (std.zig)\n            const gop = try self.getOrPutContextAdapted(allocator, key, ctx, ctx);\n                                                       ^\n/opt/zig/lib/std/hash_map.zig:1029:52: 0x11f1d7b in putC\n...\nig:1026:35: 0x11f1c58 in put (std.zig)\n            return self.putContext(allocator, key, value, undefined);\n                                  ^\n/tmp/breakbench/concurrent_map_write/main/main.zig:5:43: 0x11f19b6 in writer (main.zig)\n    while (k < 100_000) : (k += 1) map.put(gpa, t * 100_000 + k, k) catch return;\n                                          ^\n/opt/zig/lib/std/Thread.zig:422:13: 0x11f17aa in callFn__func_826 (std.zig)\n            @call(.auto, f, args);\n            ^\n/opt/zig/lib/std/Thread.zig:1451:30: 0x11f14b9 in entryFn (std.zig)\n                return callFn(f, self.fn_args);\n                             ^\n/opt/zig/lib/std/os/linux/x86_64.zig:134:5: 0x11b8735 in clone (std.zig)\n    asm volatile (\n    ^\nAborted (core dumped)"
+  },
+  "reference_cycle_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 19.2,
+   "secs": 10.6,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "view_retention": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 25.0,
+   "secs": 57.24,
+   "stdout": "40000",
+   "stderr": "error(SafeAllocator): leaked [addr: 777f7c95bef0, len: 16 (0x10) align: 1] allocated at: \n/opt/zig/lib/std/mem/Allocator.zig:481:40: 0x10535ce in dupe__func_109 (std.zig)\n    const new_buf = try allocator.alloc(T, m.len);\n                                       ^\n/tmp/breakbench/view_retention/main/main.zig:22:46: 0x11e3b5b in main (main.zig)\n        try prefixes.append(gpa, try gpa.dupe(u8, big[0..16]));\n                                             ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4dd8 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\n\nerror(SafeAllocator): leaked [addr: 777f7c95be58, le\n...\nt (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\n\nerror(SafeAllocator): leaked [addr: 777fb877c010, len: 16 (0x10) align: 1] allocated at: \n/opt/zig/lib/std/mem/Allocator.zig:481:40: 0x10535ce in dupe__func_109 (std.zig)\n    const new_buf = try allocator.alloc(T, m.len);\n                                       ^\n/tmp/breakbench/view_retention/main/main.zig:18:43: 0x11e3701 in main (main.zig)\n        try heads.append(gpa, try gpa.dupe(u8, buf[0..16]));\n                                          ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4dd8 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^"
+  },
+  "huge_allocation": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 185.3,
+   "secs": 0.06,
+   "stdout": "",
+   "stderr": "error: OutOfMemory\n/opt/zig/lib/std/mem/Allocator.zig:325:82: 0x1053403 in allocBytesAligned__func_113 (std.zig)\n    const byte_ptr = self.rawAlloc(byte_count, alignment, return_address) orelse return error.OutOfMemory;\n                                                                                 ^\n/opt/zig/lib/std/mem/Allocator.zig:311:5: 0x105326e in allocWithSizeAndAlignment__func_112 (std.zig)\n    return self.allocBytesAligned(alignment, byte_count, return_address);\n    ^\n/opt/zig/lib/std/mem/Allocator.zig:299:55: 0x1052dc4 in allocAdvancedWithRetAddr (std.zig)\n    const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));\n                                                      ^\n/opt/zig/lib/std/mem/Allocator.zig:223:5: 0x1052ec1 in alloc__func_110 (std.zig)\n    return self.allocAdvancedWithRetAddr(T, null, n, @returnAddress());\n    ^\n/tmp/breakbench/huge_allocation/main/main.zig:11:17: 0x11e3577 in main (main.zig)\n    const buf = try init.gpa.alloc(u8, n);\n                ^"
+  },
+  "fd_leak": {
+   "outcome": "LEAK",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 185.3,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "error: ProcessFdQuotaExceeded\n???:?:?: 0x119bde0 in ??? (./main)\n???:?:?: 0x1037140 in ??? (./main)\n???:?:?: 0x11e3855 in ??? (./main)"
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 134,
+   "rss_mb": 185.3,
+   "secs": 0.15,
+   "stdout": "",
+   "stderr": "thread 2668 panic: access of union field 'text' while field 'int' is active\n/tmp/breakbench/wrong_variant_access/main/main.zig:14:31: 0x11e43cc in main (main.zig)\n    try out.print(\"{d}\\n\", .{v.text.len});\n                              ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4fb8 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e4121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+  },
+  "format_string": {
+   "outcome": "REJECTED",
+   "message": "main.zig:11:19: error: unable to resolve comptime value\n    try out.print(msg, .{}); // BREAK!\n                  ^~~\nmain.zig:11:19: note: argument to comptime parameter must be comptime-known\n/opt/zig/lib/std/Io/Writer.zig:698:26: note: parameter declared comptime here\npub fn print(w: *Writer, comptime fmt: []const u8, args: anytype) Error!void {\n                         ^~~~~~~~\nreferenced by:\n    callMain [inlined]: /opt/zig/lib/std/start.zig:827:30\n    callMainWithArgs [inlined]: /opt/zig/lib/std/start.zig:729:20\n    posixCallMainAndExit: /opt/zig/lib/std/start.zig:681:38\n    2 reference(s) hidden; use '-freference-trace=5' to see all references"
+  },
+  "deep_structure_release": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 185.3,
+   "secs": 4.24,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "abandoned_worker_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 185.3,
+   "secs": 2.62,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "main.zig:11:13: error: cannot assign to constant\n    greeting[0] = 'j'; // CONTROL! _ = greeting.len;\n    ~~~~~~~~^~~\nreferenced by:\n    callMain [inlined]: /opt/zig/lib/std/start.zig:827:30\n    callMainWithArgs [inlined]: /opt/zig/lib/std/start.zig:729:20\n    posixCallMainAndExit: /opt/zig/lib/std/start.zig:681:38\n    2 reference(s) hidden; use '-freference-trace=5' to see all references"
+  }
+ }
+}

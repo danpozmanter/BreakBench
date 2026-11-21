@@ -1,0 +1,21 @@
+FROM breakbench:base_clang
+
+ARG version
+RUN curl https://nim-lang.org/choosenim/init.sh -sSf | sh -s -- --yes --version $version
+ENV PATH=/root/.choosenim/toolchains/nim-$version/bin:$PATH
+
+# Nim's std/re loads PCRE1 at run time, which current distributions no longer package.
+RUN cd /tmp \
+    && wget -q -O pcre.tar.bz2 "https://sourceforge.net/projects/pcre/files/pcre/8.45/pcre-8.45.tar.bz2/download" \
+    && echo "4dae6fdcd2bb0bb6c37b5f97c33c2be954da743985369cddac3546e3218bffb8  pcre.tar.bz2" | sha256sum -c \
+    && tar xjf pcre.tar.bz2 \
+    && cd pcre-8.45 \
+    && ./configure --prefix=/usr/local --disable-static --disable-cpp \
+    && make -j"$(nproc)" \
+    && make install \
+    && ldconfig \
+    && cd /tmp && rm -rf pcre-8.45 pcre.tar.bz2
+
+# The Nim project's own packages (nim-lang/checksums, bigints, fusion), installed once so
+# programs import them offline.
+RUN nimble install -y checksums bigints fusion

@@ -1,0 +1,8 @@
+use std::env
+
+fn main() {
+    let x = env::args()[0].to_i64().unwrap()
+    let inside = 1 < x < 3 // BREAK!
+    // CONTROL! let inside = 1 < x && x < 3
+    println(if inside { "inside" } else { "outside" })
+}

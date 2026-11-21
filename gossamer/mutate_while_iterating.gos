@@ -1,0 +1,10 @@
+fn main() {
+    let mut xs = #[1, 2, 2, 3]
+    for x in xs {
+        if x == 2 {
+            let pos = xs.iter().position(|y| y == x).unwrap()
+            xs.remove(pos).unwrap()
+        }
+    }
+    println(xs.map(|x| f"{x}").join(","))
+}

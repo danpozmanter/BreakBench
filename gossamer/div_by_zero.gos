@@ -1,0 +1,6 @@
+use std::env
+
+fn main() {
+    let d = env::args()[0].to_i64().unwrap()
+    println(f"{100 / d}")
+}

@@ -1,0 +1,1 @@
+-- CANNOT-EXPRESS: no constant-time comparison in the standard library or the Haskell project's libraries

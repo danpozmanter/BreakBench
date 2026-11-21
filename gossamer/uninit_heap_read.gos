@@ -1,0 +1,14 @@
+fn main() {
+    let mut session = #[0u8; 64]
+    let secret = "SECRET-TOKEN".bytes()
+    for i in 0..12 {
+        session[32 + i] = secret[i]
+    }
+    session = #[]
+    let reply = #[0u8; 64]
+    let mut hex = ""
+    for i in 32..44 {
+        hex += f"{reply[i]:02x}"
+    }
+    println(hex)
+}

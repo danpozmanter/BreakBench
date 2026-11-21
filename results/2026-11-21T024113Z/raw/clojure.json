@@ -1,0 +1,662 @@
+{
+ "lang": "clojure",
+ "version": "Clojure 1.12.7",
+ "results": {
+  "null_deref": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 99.4,
+   "secs": 0.22,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "int_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 109.9,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (ArithmeticException) at java.lang.Math/addExact (Math.java:935).\nlong overflow\n\nFull report at:\n/tmp/clojure-4408868900428935293.edn"
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 106.7,
+   "secs": 0.27,
+   "stdout": "",
+   "stderr": "Execution error (ArithmeticException) at main/-main (main.clj:4).\nDivide by zero\n\nFull report at:\n/tmp/clojure-5750759355684965636.edn"
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 95.5,
+   "secs": 0.21,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 109.5,
+   "secs": 0.3,
+   "stdout": "",
+   "stderr": "Execution error (IllegalArgumentException) at main/-main (main.clj:4).\nValue out of range for byte: 300\n\nFull report at:\n/tmp/clojure-8203517941059569703.edn"
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 99.2,
+   "secs": 0.23,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 108.8,
+   "secs": 0.28,
+   "stdout": "",
+   "stderr": "Execution error (ClassCastException) at main/add (main.clj:3).\nclass java.lang.String cannot be cast to class java.lang.Number (java.lang.String and java.lang.Number are in module java.base of loader 'bootstrap')\n\nFull report at:\n/tmp/clojure-14065666287075501531.edn"
+  },
+  "missing_return": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 96.7,
+   "secs": 0.21,
+   "stdout": "nil",
+   "stderr": ""
+  },
+  "non_exhaustive_match": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 108.7,
+   "secs": 0.28,
+   "stdout": "",
+   "stderr": "Execution error (IllegalArgumentException) at main/color-name (main.clj:4).\nNo matching clause: :blue\n\nFull report at:\n/tmp/clojure-17840105292388321300.edn"
+  },
+  "uninitialized_variable": {
+   "outcome": "REJECTED",
+   "message": "true\n\nSyntax error macroexpanding clojure.core/let at (main.clj:4:3).\n[n (parse-long (first args)) x] - failed: even-number-of-forms? at: [:bindings] spec: :clojure.core.specs.alpha/bindings\n\nFull report at:\n/tmp/clojure-3598135359495240018.edn"
+  },
+  "missing_argument": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 107.7,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (ArityException) at main/-main (main.clj:6).\nWrong number of args (1) passed to: main/area\n\nFull report at:\n/tmp/clojure-1104708938190124927.edn"
+  },
+  "misspelled_field": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 99.0,
+   "secs": 0.22,
+   "stdout": "blue",
+   "stderr": ""
+  },
+  "assign_in_condition": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 100.7,
+   "secs": 0.22,
+   "stdout": "not one",
+   "stderr": ""
+  },
+  "switch_fallthrough": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "Performance warning, main.clj:4:12 - case has int tests, but tested expression is not primitive.",
+   "exit": 0,
+   "rss_mb": 100.1,
+   "secs": 0.22,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 96.1,
+   "secs": 0.22,
+   "stdout": "have 0",
+   "stderr": ""
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 98.9,
+   "secs": 0.22,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 111.2,
+   "secs": 0.34,
+   "stdout": "",
+   "stderr": "Execution error (NullPointerException) at main/-main (main.clj:4).\nCannot invoke \"Object.getClass()\" because \"x\" is null\n\nFull report at:\n/tmp/clojure-15373575784142510178.edn"
+  },
+  "covariant_array_write": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 98.7,
+   "secs": 0.21,
+   "stdout": "woof",
+   "stderr": "meow"
+  },
+  "mutate_while_iterating": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 101.2,
+   "secs": 0.22,
+   "stdout": "1,3",
+   "stderr": ""
+  },
+  "self_deadlock": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 95.2,
+   "secs": 0.21,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 100.6,
+   "secs": 0.22,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 100.1,
+   "secs": 0.22,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 109.7,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (FileNotFoundException) at java.io.FileOutputStream/open0 (FileOutputStream.java:-2).\n/nonexistent/dir/out.txt (No such file or directory)\n\nFull report at:\n/tmp/clojure-2278111404150575424.edn"
+  },
+  "sort_with_nan": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 98.0,
+   "secs": 0.21,
+   "stdout": "unordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 96.1,
+   "secs": 0.22,
+   "stdout": "3.5",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 96.6,
+   "secs": 0.21,
+   "stdout": "668",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 97.2,
+   "secs": 0.22,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 97.7,
+   "secs": 0.21,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 100.2,
+   "secs": 0.21,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 97.0,
+   "secs": 0.22,
+   "stdout": "not a",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 95.1,
+   "secs": 0.21,
+   "stdout": "outside",
+   "stderr": ""
+  },
+  "lost_update_on_copy": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 99.1,
+   "secs": 0.21,
+   "stdout": "150",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 99.1,
+   "secs": 0.23,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 99.4,
+   "secs": 0.22,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "exit": -9,
+   "rss_mb": 12.1,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "path_join_escape": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 109.1,
+   "secs": 0.28,
+   "stdout": "",
+   "stderr": "Execution error (IllegalArgumentException) at main/-main (main.clj:6).\n/etc/passwd is not a relative path\n\nFull report at:\n/tmp/clojure-4233566867874583230.edn"
+  },
+  "regex_backtracking": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 96.4,
+   "secs": 0.22,
+   "stdout": "no match",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 98.3,
+   "secs": 0.21,
+   "stdout": "odd",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 95.6,
+   "secs": 0.22,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "return_in_finally": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 101.0,
+   "secs": 0.22,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 96.6,
+   "secs": 0.22,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 108.2,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (NullPointerException) at main/-main$fn (main.clj:4).\nCannot invoke \"Object.getClass()\" because \"x\" is null\n\nFull report at:\n/tmp/clojure-16621228463477693271.edn"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 99.0,
+   "secs": 0.27,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 108.7,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (MissingFormatArgumentException) at java.util.Formatter/format (Formatter.java:2760).\nFormat specifier '%d'\n\nFull report at:\n/tmp/clojure-750707288033046983.edn"
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 96.2,
+   "secs": 0.21,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 110.2,
+   "secs": 0.28,
+   "stdout": "",
+   "stderr": "Execution error (NullPointerException) at main/-main (main.clj:5).\nCannot invoke \"Object.getClass()\" because \"x\" is null\n\nFull report at:\n/tmp/clojure-9947571466302179980.edn"
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 96.2,
+   "secs": 0.21,
+   "stdout": "found",
+   "stderr": "[9 2]"
+  },
+  "shadowed_assignment": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 98.9,
+   "secs": 0.22,
+   "stdout": "pending",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 97.4,
+   "secs": 0.21,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 110.7,
+   "secs": 0.28,
+   "stdout": "",
+   "stderr": "Execution error (IndexOutOfBoundsException) at main/-main (main.clj:6).\nnull\n\nFull report at:\n/tmp/clojure-13810885825326448515.edn"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 98.1,
+   "secs": 0.22,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 98.4,
+   "secs": 0.21,
+   "stdout": "missing",
+   "stderr": ""
+  },
+  "use_after_close": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 107.4,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (IOException) at java.io.BufferedWriter/ensureOpen (BufferedWriter.java:137).\nStream closed\n\nFull report at:\n/tmp/clojure-9301906875436615136.edn"
+  },
+  "dead_store": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 97.0,
+   "secs": 0.22,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 98.3,
+   "secs": 0.22,
+   "stdout": "balanced",
+   "stderr": "worker failed: crash mid-update"
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "Reflection warning, main.clj:5:5 - call to static method aset on clojure.lang.RT can't be resolved (argument types: unknown, int, long).",
+   "exit": 1,
+   "rss_mb": 109.8,
+   "secs": 0.3,
+   "stdout": "",
+   "stderr": "Execution error (ArrayIndexOutOfBoundsException) at jdk.internal.reflect.DirectMethodHandleAccessor/null (DirectMethodHandleAccessor.java:104).\nIndex 4 out of bounds for length 4\n\nFull report at:\n/tmp/clojure-11266748327416915292.edn"
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 97.9,
+   "secs": 0.22,
+   "stdout": "1234",
+   "stderr": "16"
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 99.2,
+   "secs": 0.21,
+   "stdout": "1",
+   "stderr": "2"
+  },
+  "dangling_stack_ref": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 101.0,
+   "secs": 0.21,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 99.2,
+   "secs": 0.21,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 98.5,
+   "secs": 0.22,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 170.4,
+   "secs": 0.41,
+   "stdout": "",
+   "stderr": "Execution error (StackOverflowError) at main/walk (main.clj:4).\nnull\n\nFull report at:\n/tmp/clojure-16715228886125634770.edn"
+  },
+  "error_path_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 178.8,
+   "secs": 4.57,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "concurrent_map_write": {
+   "outcome": "CORRECT",
+   "runs": 10,
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 555.1,
+   "secs": 0.53,
+   "stdout": "800000",
+   "stderr": ""
+  },
+  "reference_cycle_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 359.1,
+   "secs": 0.5,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "view_retention": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 387.5,
+   "secs": 0.56,
+   "stdout": "40000",
+   "stderr": "40000"
+  },
+  "huge_allocation": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 135.5,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (OutOfMemoryError) at main/-main (main.clj:5).\nJava heap space\n\nFull report at:\n/tmp/clojure-7285722817467832960.edn"
+  },
+  "fd_leak": {
+   "outcome": "LEAK",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 107.7,
+   "secs": 0.31,
+   "stdout": "",
+   "stderr": "Execution error (FileNotFoundException) at java.io.FileInputStream/open0 (FileInputStream.java:-2).\n/tmp/bb_fd.txt (Too many open files)\n\nFull report at:\n/tmp/clojure-14474232805426792541.edn"
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 110.0,
+   "secs": 0.28,
+   "stdout": "",
+   "stderr": "Execution error (UnsupportedOperationException) at main/-main (main.clj:5).\ncount not supported on this type: Long\n\nFull report at:\n/tmp/clojure-9876756735855347022.edn"
+  },
+  "format_string": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 111.1,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (MissingFormatArgumentException) at java.util.Formatter/format (Formatter.java:2760).\nFormat specifier '%s'\n\nFull report at:\n/tmp/clojure-15951759360605557392.edn"
+  },
+  "deep_structure_release": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 204.9,
+   "secs": 0.42,
+   "stdout": "done",
+   "stderr": "999999"
+  },
+  "abandoned_worker_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 333.3,
+   "secs": 0.4,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "Reflection warning, main.clj:5:5 - call to static method aset on clojure.lang.RT can't be resolved (argument types: java.lang.String, int, java.lang.Character).",
+   "exit": 1,
+   "rss_mb": 109.1,
+   "secs": 0.3,
+   "stdout": "",
+   "stderr": "Execution error (IllegalArgumentException) at main/-main (main.clj:5).\nNo matching method aset found taking 3 args\n\nFull report at:\n/tmp/clojure-3889025240198573924.edn"
+  }
+ }
+}

@@ -1,0 +1,7 @@
+// LEVEL: STD
+
+use std::crypto::sha256
+
+fn main() {
+    println(sha256::hex("abc".bytes()))
+}
