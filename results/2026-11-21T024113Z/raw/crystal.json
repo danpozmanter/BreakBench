@@ -595,6 +595,33 @@
   "string_literal_write": {
    "outcome": "REJECTED",
    "message": "Showing last frame. Use --error-trace for full trace.\n\nIn main.cr:2:9\n\n 2 | greeting[0] = 'j' # CONTROL! greeting = \"j\" + greeting[1..]\n             ^\nError: undefined method '[]=' for String"
+  },
+  "float_to_int_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Arithmetic overflow (OverflowError)\n  from main.cr:2:7 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "split_character": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "a\ud83d\udc4d",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Index out of bounds (IndexError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/indexable.cr:89:20 in '[]'\n  from main.cr:7:6 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
   }
  }
 }

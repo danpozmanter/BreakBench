@@ -616,6 +616,36 @@
   "string_literal_write": {
    "outcome": "REJECTED",
    "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:6:14: error: [GHC-83865]\n    \u2022 Couldn't match type \u2018[]\u2019 with \u2018a0 i0\u2019\n      Expected: a0 i0 Char\n        Actual: String\n    \u2022 In the first argument of \u2018writeArray\u2019, namely \u2018greeting\u2019\n      In a stmt of a 'do' block: writeArray greeting 0 'j'\n      In the expression:\n        do let greeting = \"hello\"\n           writeArray greeting 0 'j'\n           putStrLn greeting\n  |\n6 |   writeArray greeting 0 'j' -- BREAK!\n  |              ^^^^^^^^"
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "all_warnings": "main.hs:7:17: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 0,
+   "rss_mb": 12.0,
+   "secs": 0.0,
+   "stdout": "7766279631452241920",
+   "stderr": ""
+  },
+  "split_character": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "main.hs:7:17: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 0,
+   "rss_mb": 12.0,
+   "secs": 0.0,
+   "stdout": "a\ud83d\udc4d",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "main.hs:10:24: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 1,
+   "rss_mb": 12.0,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nIx{Int}.index: Index (4) out of range ((0,3))"
   }
  }
 }

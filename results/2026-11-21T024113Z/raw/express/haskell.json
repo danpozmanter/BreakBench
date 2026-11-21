@@ -639,6 +639,33 @@
   "exclusive_mutation": {
    "outcome": "NONE",
    "message": "nothing refuses passing one value as two mutable arguments"
+  },
+  "strong_enum": {
+   "outcome": "PASS",
+   "refusal": "main.hs:13:18: error: [GHC-39999]\n    \u2022 No instance for \u2018Num Color\u2019 arising from the literal \u20187\u2019\n    \u2022 In the first argument of \u2018name\u2019, namely \u20187\u2019\n      In the first argument of \u2018putStrLn\u2019, namely \u2018(name 7)\u2019",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "green",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "override_check": {
+   "outcome": "PASS",
+   "refusal": "main.hs:11:3: error: [GHC-54721]\n    \u2018descibe\u2019 is not a (visible) method of class \u2018Shape\u2019",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "circle",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "automatic_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.15,
+   "stdout": "3999999",
+   "stderr": "",
+   "level": "LANGUAGE"
   }
  }
 }

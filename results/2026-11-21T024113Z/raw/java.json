@@ -589,6 +589,33 @@
   "string_literal_write": {
    "outcome": "REJECTED",
    "message": "Main.java:5: error: array required, but String found\n        greeting[0] = 'j'; // CONTROL! greeting = \"j\" + greeting.substring(1);\n                ^\n1 error"
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 38.9,
+   "secs": 0.01,
+   "stdout": "9223372036854775807",
+   "stderr": ""
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 38.1,
+   "secs": 0.01,
+   "stdout": "a?",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 38.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4\n\tat Main.main(Main.java:10)"
   }
  }
 }

@@ -644,6 +644,23 @@
   "exclusive_mutation": {
    "outcome": "NONE",
    "message": "nothing refuses passing one value as two mutable arguments"
+  },
+  "strong_enum": {
+   "outcome": "NONE",
+   "message": "an untyped constant converts to any integer-based type, so name(7) is accepted"
+  },
+  "override_check": {
+   "outcome": "NONE",
+   "message": "no way to mark a method as implementing an interface; a misspelled method is just another method"
+  },
+  "automatic_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.29,
+   "stdout": "3999999",
+   "stderr": "",
+   "level": "LANGUAGE"
   }
  }
 }

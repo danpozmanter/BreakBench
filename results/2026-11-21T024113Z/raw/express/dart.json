@@ -624,6 +624,28 @@
   "exclusive_mutation": {
    "outcome": "NONE",
    "message": "nothing refuses passing one value as two mutable arguments"
+  },
+  "strong_enum": {
+   "outcome": "PASS",
+   "refusal": "error - main.dart:13:14 - The argument type 'int' can't be assigned to the parameter type 'Color'.  - argument_type_not_assignable\nmain.dart:13:14: Error: The argument type 'int' can't be assigned to the parameter type 'Color'.",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "green",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "override_check": {
+   "outcome": "NONE",
+   "message": "an @override that overrides nothing is only an analyzer warning (override_on_non_overriding_member)"
+  },
+  "automatic_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.13,
+   "stdout": "3999999",
+   "stderr": "",
+   "level": "LANGUAGE"
   }
  }
 }

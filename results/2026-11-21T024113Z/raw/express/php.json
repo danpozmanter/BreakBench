@@ -539,6 +539,28 @@
   "exclusive_mutation": {
    "outcome": "NONE",
    "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "strong_enum": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "override_check": {
+   "outcome": "PASS",
+   "refusal": "Errors parsing main.php\nPHP Fatal error:  Circle::descibe() has #[\\Override] attribute, but no matching parent method exists in main.php on line 20",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "circle",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "automatic_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "3999999",
+   "stderr": "",
+   "level": "LANGUAGE"
   }
  }
 }

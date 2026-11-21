@@ -543,6 +543,33 @@
   "string_literal_write": {
    "outcome": "REJECTED",
    "message": "main.ts(2,1): error TS2542: Index signature in type 'String' only permits reading."
+  },
+  "float_to_int_overflow": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 41.2,
+   "secs": 0.02,
+   "stdout": "100000000000000000000",
+   "stderr": ""
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 41.3,
+   "secs": 0.01,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 41.5,
+   "secs": 0.02,
+   "stdout": "undefined",
+   "stderr": ""
   }
  }
 }

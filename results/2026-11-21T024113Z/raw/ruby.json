@@ -669,6 +669,33 @@
    "secs": 0.02,
    "stdout": "jello",
    "stderr": "main.rb:2: warning: literal string will be frozen in the future (run with --debug-frozen-string-literal for more information)"
+  },
+  "float_to_int_overflow": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.04,
+   "stdout": "100000000000000000000",
+   "stderr": ""
+  },
+  "split_character": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.02,
+   "stdout": "a\ud83d\udc4d",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": ""
   }
  }
 }

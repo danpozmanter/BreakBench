@@ -641,6 +641,36 @@
   "string_literal_write": {
    "outcome": "REJECTED",
    "message": "Determining projects to restore...\n  Restored /tmp/breakbench/string_literal_write/main/bb.fsproj (in 112 ms).\n/tmp/breakbench/string_literal_write/main/Program.fs(4,5): error FS0810: Property 'Chars' cannot be set [/tmp/breakbench/string_literal_write/main/bb.fsproj]\n/tmp/breakbench/string_literal_write/main/Program.fs(4,5): error FS0257: Invalid mutation of a constant expression. Consider copying the expression to a mutable local, e.g. 'let mutable x = ...'. [/tmp/breakbench/string_literal_write/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/string_literal_write/main/Program.fs(4,5): error FS0810: Property 'Chars' cannot be set [/tmp/breakbench/string_literal_write/main/bb.fsproj]\n/tmp/breakbench/string_literal_write/main/Program.fs(4,5): error FS0257: Invalid mutation of a constant expression. Consider copying the expression to a mutable local, e.g. 'let mutable x = ...'. [/tmp/breakbench/string_literal_write/main/bb.fsproj]\n    0 Warning(s)\n    2 Error(s)\n\nTime Elapsed 00:00:00.79"
+  },
+  "float_to_int_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 34.6,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.main(String[] argv) in /tmp/breakbench/float_to_int_overflow/main/Program.fs:line 4\nAborted (core dumped)"
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 29.0,
+   "secs": 0.02,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 37.9,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.main(String[] argv) in /tmp/breakbench/oob_read/main/Program.fs:line 6\nAborted (core dumped)"
   }
  }
 }

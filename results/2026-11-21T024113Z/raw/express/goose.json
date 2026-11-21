@@ -544,6 +544,28 @@
   "exclusive_mutation": {
    "outcome": "NONE",
    "message": "nothing refuses passing one value as two mutable arguments"
+  },
+  "strong_enum": {
+   "outcome": "PASS",
+   "refusal": "main.goose:15: error: no matching overload for call to name",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "green",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "override_check": {
+   "outcome": "NONE",
+   "message": "no traits, interfaces or inheritance"
+  },
+  "automatic_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "3999999",
+   "stderr": "",
+   "level": "LANGUAGE"
   }
  }
 }

@@ -578,6 +578,33 @@
   "string_literal_write": {
    "outcome": "REJECTED",
    "message": "main.v:3:10: error: cannot assign to s[i] since V strings are immutable\n(note, that variables may be mutable but string values are always immutable, like in Go and Java)\n    1 | fn main() {\n    2 |     mut greeting := 'hello'\n    3 |     greeting[0] = `j` // CONTROL! greeting = 'j' + greeting[1..]\n      |             ~~~\n    4 |     println(greeting)\n    5 | }"
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.7,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "V panic: fixed array index out of range (index: 4, len: 4)\n v hash: 7647ce1\n    pid: 0x134\n    tid: 0x134\n                                                        | 0x64235a59c710 | ./main(+0x17710) \n                                                        | 0x64235a5a20c6 | ./main(+0x1d0c6) \n                                                        | 0x64235a5a236c | ./main(+0x1d36c) \n                                                        | 0x7b24e83af601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x7b24e83af718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x64235a5956d5 | ./main(+0x106d5)"
   }
  }
 }

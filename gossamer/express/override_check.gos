@@ -1,0 +1,18 @@
+// LEVEL: LANGUAGE
+
+trait Shape {
+    fn describe(&self) -> String
+}
+
+struct Circle {}
+
+impl Shape for Circle {
+    fn describe(&self) -> String { "circle" }
+    fn descibe(&self) -> String { "circle" } // REJECT!
+}
+
+fn show<T: Shape>(s: T) -> String { s.describe() }
+
+fn main() {
+    println(show(Circle {}))
+}

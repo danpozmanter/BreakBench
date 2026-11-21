@@ -564,6 +564,33 @@
   "string_literal_write": {
    "outcome": "REJECTED",
    "message": "/tmp/breakbench/string_literal_write/main/main.odin(7:2) Error: Cannot assign to 'greeting[0]' \n\tgreeting[0] = 'j' // CONTROL! greeting = \"jello\" \n\t^~~~~~~~~~^"
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 15.0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 15.0,
+   "secs": 0.0,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 132,
+   "rss_mb": 15.0,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/oob_read/main/main.odin(15:20) Bounds check failed: 4 is out of range 0..<4\nIllegal instruction"
   }
  }
 }

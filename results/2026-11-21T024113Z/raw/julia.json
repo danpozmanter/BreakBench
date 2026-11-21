@@ -656,6 +656,33 @@
    "secs": 0.86,
    "stdout": "",
    "stderr": "ERROR: LoadError: MethodError: no method matching setindex!(::String, ::Char, ::Int64)\nThe function `setindex!` exists, but no method is defined for this combination of argument types.\nStacktrace:\n [1] top-level scope\n   @ /tmp/breakbench/string_literal_write/main/main.jl:2\n [2] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [3] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [4] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/string_literal_write/main/main.jl:2"
+  },
+  "float_to_int_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 346.0,
+   "secs": 0.98,
+   "stdout": "",
+   "stderr": "ERROR: LoadError: InexactError: Int64(1.0e20)\nStacktrace:\n [1] Int64\n   @ ./float.jl:925 [inlined]\n [2] main()\n   @ Main /tmp/breakbench/float_to_int_overflow/main/main.jl:3\n [3] top-level scope\n   @ /tmp/breakbench/float_to_int_overflow/main/main.jl:7\n [4] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [5] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [6] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/float_to_int_overflow/main/main.jl:7"
+  },
+  "split_character": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 197.7,
+   "secs": 0.1,
+   "stdout": "a\ud83d\udc4d",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 347.9,
+   "secs": 0.83,
+   "stdout": "",
+   "stderr": "ERROR: LoadError: BoundsError: attempt to access 4-element Vector{Int64} at index [5]\nStacktrace:\n [1] throw_boundserror(A::Vector{Int64}, I::Tuple{Int64})\n   @ Base ./essentials.jl:14\n [2] checkbounds\n   @ ./essentials.jl:389 [inlined]\n [3] getindex\n   @ ./essentials.jl:974 [inlined]\n [4] main()\n   @ Main /tmp/breakbench/oob_read/main/main.jl:9\n [5] top-level scope\n   @ /tmp/breakbench/oob_read/main/main.jl:12\n [6] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [7] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [8] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/oob_read/main/main.jl:12"
   }
  }
 }

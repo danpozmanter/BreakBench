@@ -674,6 +674,33 @@
    "stdout": "70 30",
    "stderr": "",
    "level": "LANGUAGE"
+  },
+  "strong_enum": {
+   "outcome": "PASS",
+   "refusal": "error[E0308]: mismatched types\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0308`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "green",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "override_check": {
+   "outcome": "PASS",
+   "refusal": "error[E0407]: method `descibe` is not a member of trait `Shape`\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0407`.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "circle",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "automatic_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.11,
+   "stdout": "3999999",
+   "stderr": "",
+   "level": "LANGUAGE"
   }
  }
 }

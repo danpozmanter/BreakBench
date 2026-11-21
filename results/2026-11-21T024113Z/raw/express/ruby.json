@@ -594,6 +594,23 @@
   "exclusive_mutation": {
    "outcome": "NONE",
    "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "strong_enum": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "override_check": {
+   "outcome": "NONE",
+   "message": "no static type checking, so nothing is refused before the program runs"
+  },
+  "automatic_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.59,
+   "stdout": "3999999",
+   "stderr": "",
+   "level": "LANGUAGE"
   }
  }
 }

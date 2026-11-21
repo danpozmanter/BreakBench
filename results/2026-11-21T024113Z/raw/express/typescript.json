@@ -639,6 +639,33 @@
   "exclusive_mutation": {
    "outcome": "NONE",
    "message": "nothing refuses passing one value as two mutable arguments"
+  },
+  "strong_enum": {
+   "outcome": "PASS",
+   "refusal": "main.ts(21,18): error TS2345: Argument of type '7' is not assignable to parameter of type 'Color'.",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "green",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "override_check": {
+   "outcome": "PASS",
+   "refusal": "main.ts(13,12): error TS4117: This member cannot have an 'override' modifier because it is not declared in the base class 'Shape'. Did you mean 'describe'?",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "circle",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "automatic_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 2.58,
+   "stdout": "3999999",
+   "stderr": "",
+   "level": "LANGUAGE"
   }
  }
 }

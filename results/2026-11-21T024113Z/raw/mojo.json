@@ -548,6 +548,28 @@
   "string_literal_write": {
    "outcome": "REJECTED",
    "message": "/tmp/breakbench/string_literal_write/main/main.mojo:3:13: error: String does not support direct positional indexing like `s[i]` because Mojo strings are UTF-8 encoded, and the same position can mean three different things. Use one of: `s[byte=i]` for a raw UTF-8 byte, `s[codepoint=i]` for a Unicode code point, or `s[grapheme=i]` for a user-visible character (grapheme cluster).\n    greeting[0] = \"j\"  # CONTROL! greeting = \"jello\"\n    ~~~~~~~~^~~\n<unknown>:0: note: '__getitem__' declared here\n/tmp/breakbench/string_literal_write/main/main.mojo:3:13: error: expression must be mutable in assignment\n    greeting[0] = \"j\"  # CONTROL! greeting = \"jello\"\n    ~~~~~~~~^~~\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module"
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.3,
+   "secs": 0.01,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "split_character": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/split_character/main/main.mojo:7:15: error: String does not support direct positional slicing like `s[a:b]` because Mojo strings are UTF-8 encoded, and the same range can mean different things. Use `s[byte=a:b]` to slice by raw UTF-8 byte positions, or `s[codepoint=a:b]` to slice by Unicode code points.\n    print(name[0:n]) # CONTROL! print(name[codepoint=0:n])\n          ~~~~^~~~~\n<unknown>:0: note: '__getitem__' declared here\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 132,
+   "rss_mb": 14.3,
+   "secs": 0.22,
+   "stdout": "At: /tmp/breakbench/oob_read/main/main.mojo:14:16: Assert Error: index 4 is out of bounds, valid range is 0 to 3",
+   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x0000754f5d5c4d1e\n1  libKGENCompilerRTShared.so 0x0000754f5d5c1e46\n2  libKGENCompilerRTShared.so 0x0000754f5d5c58e0\n3  libc.so.6                  0x0000754f5d2cfcb0\n4  main                       0x00005769026d5ce5\n5  main                       0x00005769026d5826\n6  main                       0x00005769026c1c06\n7  main                       0x00005769026d4ef3\n8  main                       0x00005769026c1f0e\n9  libc.so.6                  0x0000754f5d2b4601\n10 libc.so.6                  0x0000754f5d2b4718 __libc_start_main + 136\n11 main                       0x00005769026c0175\nIllegal instruction (core dumped)"
   }
  }
 }

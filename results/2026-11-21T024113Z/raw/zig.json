@@ -519,6 +519,33 @@
   "string_literal_write": {
    "outcome": "REJECTED",
    "message": "main.zig:11:13: error: cannot assign to constant\n    greeting[0] = 'j'; // CONTROL! _ = greeting.len;\n    ~~~~~~~~^~~\nreferenced by:\n    callMain [inlined]: /opt/zig/lib/std/start.zig:827:30\n    callMainWithArgs [inlined]: /opt/zig/lib/std/start.zig:729:20\n    posixCallMainAndExit: /opt/zig/lib/std/start.zig:681:38\n    2 reference(s) hidden; use '-freference-trace=5' to see all references"
+  },
+  "float_to_int_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 134,
+   "rss_mb": 15.0,
+   "secs": 0.14,
+   "stdout": "",
+   "stderr": "thread 37 panic: integer part of floating point value out of bounds\n/tmp/breakbench/float_to_int_overflow/main/main.zig:10:20: 0x11e34f3 in main (main.zig)\n    const v: i64 = @intFromFloat(x);\n                   ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4168 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 15.0,
+   "secs": 0.0,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 134,
+   "rss_mb": 15.0,
+   "secs": 0.14,
+   "stdout": "",
+   "stderr": "thread 95 panic: index out of bounds: index 4, len 4\n/tmp/breakbench/oob_read/main/main.zig:13:35: 0x11e34f8 in main (main.zig)\n    try out.print(\"{d}\\n\", .{f.buf[idx]});\n                                  ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4158 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
   }
  }
 }

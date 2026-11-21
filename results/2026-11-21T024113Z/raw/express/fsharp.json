@@ -744,6 +744,33 @@
   "exclusive_mutation": {
    "outcome": "NONE",
    "message": "nothing refuses passing one value as two mutable arguments"
+  },
+  "strong_enum": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-strong_enum/reject/Program.fs(17,24): error FS0001: This expression was expected to have type\n/tmp/breakbench/express-strong_enum/reject/Program.fs(17,24): error FS0001: This expression was expected to have type\n    1 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "green",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "override_check": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-override_check/reject/Program.fs(10,16): error FS0855: No abstract or interface member was found that corresponds to this override [/tmp/breakbench/express-override_check/reject/bb.fsproj]\n/tmp/breakbench/express-override_check/reject/Program.fs(10,16): error FS0855: No abstract or interface member was found that corresponds to this override [/tmp/breakbench/express-override_check/reject/bb.fsproj]\n    1 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "circle",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "automatic_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "3999999",
+   "stderr": "",
+   "level": "LANGUAGE"
   }
  }
 }

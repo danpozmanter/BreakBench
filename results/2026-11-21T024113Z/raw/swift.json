@@ -559,6 +559,33 @@
   "string_literal_write": {
    "outcome": "REJECTED",
    "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:2:9: error: cannot assign through subscript: subscript is get-only\n1 | var greeting = \"hello\"\n2 | greeting[0] = \"j\" // CONTROL! greeting = \"j\" + greeting.dropFirst()\n  |         `- error: cannot assign through subscript: subscript is get-only\n3 | print(greeting)\n4 |"
+  },
+  "float_to_int_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 132,
+   "rss_mb": 18.4,
+   "secs": 0.12,
+   "stdout": "",
+   "stderr": "Swift/IntegerTypes.swift:6896: Fatal error: Double value cannot be converted to Int64 because the result would be greater than Int64.max\n\n*** Signal 4: Backtracing from 0x7510327311ef... done ***\n\n*** Program crashed: Illegal instruction at 0x00007510327311ef ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0      0x00007510327311ef closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 623 in libswiftCore.so\n1 [ra] 0x00007510328c82cc _assertionFailure(_:_:file:line:flags:) + 283 in libswiftCore.so\n2 [ra] 0x0000638b304fd77e main + 653 in main at /tmp/breakbench/float_to_int_overflow/main/main.swift:2:9\n3 [ra] 0x0000751030e0a601 <unknown> in libc.so.6\n4 [ra] 0x0000751030e0a718 <unknown> in libc.so.6\n\n...\n\u00b7\u00b7\u00fd\u00b7\u00b7\u00b7\u00e4\u00b7\u00b7\u00b7\u00fd\u00b7\u00b7\u00b7\nr13 0x0000000000000002  2\nr14 0x0000000000000001  1\nr15 0x000000000000000b  11\nrip 0x00007510327311ef  0f 0b 48 83 ec 08 48 8d 05 24 78 49 00 48 8d 3d  \u00b7\u00b7H\u00b7\u00ec\u00b7H\u00b7\u00b7$xI\u00b7H\u00b7=\n\nrflags 0x0000000000010206  PF\n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (19 omitted):\n\n0x0000638b304fc000\u20130x0000638b304fd829 33c78e2fa406b3e9ed8429e865dc1005b4db41a4 main            /tmp/breakbench/float_to_int_overflow/main/main\n0x0000751030de0000\u20130x0000751030f9f819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6       /usr/lib/x86_64-linux-gnu/libc.so.6\n0x00007510325be000\u20130x0000751032b97b70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.02s\n\nIllegal instruction (core dumped)"
+  },
+  "split_character": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 17.4,
+   "secs": 0.0,
+   "stdout": "a\ud83d\udc4d",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 132,
+   "rss_mb": 18.5,
+   "secs": 0.12,
+   "stdout": "",
+   "stderr": "Swift/ContiguousArrayBuffer.swift:695: Fatal error: Index out of range\n\n*** Signal 4: Backtracing from 0x7b95d5e131ef... done ***\n\n*** Program crashed: Illegal instruction at 0x00007b95d5e131ef ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0      0x00007b95d5e131ef closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 623 in libswiftCore.so\n1 [ra] 0x00007b95d5faa2cc _assertionFailure(_:_:file:line:flags:) + 283 in libswiftCore.so\n2 [ra] 0x00007b95d63e9355 specialized Array.subscript.getter + 84 in libswiftSwiftOnoneSupport.so\n3 [ra] 0x000057fae808ea56 main + 373 in main at /tmp/breakbench/oob_read/main/main.swift:8:12\n4 [ra] 0x00007b95d44ec601 <unknown> in libc.so.6\n5 [ra] 0x00007b95d44ec718 <un\n...\n000000010202  \n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (18 omitted):\n\n0x000057fae808d000\u20130x000057fae808eb69 7f24a74e1fa0906faa2a3f944438eefc5a310362 main                         /tmp/breakbench/oob_read/main/main\n0x00007b95d44c2000\u20130x00007b95d4681819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6                    /usr/lib/x86_64-linux-gnu/libc.so.6\n0x00007b95d5ca0000\u20130x00007b95d6279b70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so              /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n0x00007b95d63be000\u20130x00007b95d63fd540 85f9cbbfda04f75d9d670b1584a694452da8ccae libswiftSwiftOnoneSupport.so /usr/share/swift/usr/lib/swift/linux/libswiftSwiftOnoneSupport.so\n\nBacktrace took 0.02s\n\nIllegal instruction (core dumped)"
   }
  }
 }

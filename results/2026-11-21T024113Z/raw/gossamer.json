@@ -601,6 +601,36 @@
   "string_literal_write": {
    "outcome": "REJECTED",
    "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GT0130]: a `String` cannot be written by index\n  --> main.gos:3:5\n     3 |     greeting[0] = 'j' // CONTROL! greeting = \"jello\"\n       |     ^^^^^^^^^^^\n  = help: build the new text: `greeting = greeting.replacen(old, new, 1)`, or edit a `Vec<char>` and join it back: `let mut cs: Vec<char> = greeting.chars().collect()`, then `greeting = cs.map(|c| c.to_string()).join(\"\")`\n\nerror: 1 front-end error(s); refusing to build"
+  },
+  "float_to_int_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "warning[GL0062]: this `as` panics when the `f64` value is NaN or past the range of `i64` --> /tmp/breakbench/float_to_int_overflow/main/main.gos:5:13 = note: lint: lossy_cast\nlint: 1 warning(s), 0 error(s)",
+   "exit": 101,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "error[GX0005]: panic: cast overflow: 1e20 does not fit i64\n  call stack (outermost first):\n    at main (main.gos:5:13)"
+  },
+  "split_character": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "a\ud83d\udc4d",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "exit": 101,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "error[GX0005]: panic: array index out of bounds: the len is 4 but the index is 4\n  call stack (outermost first):\n    at main (main.gos:11:16)"
   }
  }
 }

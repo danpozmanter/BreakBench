@@ -10,8 +10,10 @@ programs, and covers LangArena's 27 languages plus OCaml, Haskell and Clojure. I
   program stop with an error, or does it quietly print the wrong answer?
 - **Built-in safety**: which mistakes does the language rule out on its own, before you reach for
   a library?
-- **Library coverage**: which safety tools come with the language, and which do you have to find
+- **Ecosystem coverage**: which safety tools come with the language, and which do you have to find
   on a package registry?
+
+Each bench scores a language as a percentage, and the **overall** ranking is the mean of the three.
 
 Each language runs its latest release, built from LangArena's Dockerfiles or the language's own
 images.
@@ -26,8 +28,9 @@ images.
 
 ## Correctness
 
-73 problems: 55 logic bugs (null dereference, overflow, missing match cases, command injection,
-deadlocks, ...) and 18 memory-safety bugs (use after free, out-of-bounds writes, leaks, ...). Each
+76 problems: 58 logic and resource bugs (null dereference, overflow, missing match cases, command
+injection, deadlocks, a string cut mid-character, leaked file handles, ...) and 18 memory-safety bugs
+(use after free, out-of-bounds reads and writes, leaks, ...). Each
 has a CWE or CERT entry or appears in a language's pitfall list, reads the same in every language,
 and tests a mistake no other problem tests. `harness/problems.json` describes each one.
 
@@ -66,12 +69,12 @@ and tests a mistake no other problem tests. `harness/problems.json` describes ea
 - **N/A**: a problem the language cannot write (a mutex in JavaScript, regex in Zig) does not count
   toward its score. A language that can write it but lacks the bug scores CORRECT. Each N/A
   program says why in a `CANNOT-EXPRESS:` line.
-- **Score**: the mean over the problems the language can write, times 100.
+- **Score**: the mean over the problems the language can write, as a percentage.
 
 **Robustness.** The site also scores the results five other ways: a run-time stop counts as a
 refusal, no warning bonus, correctness and memory weighed 50/50, near-universal passes removed, and
 N/A counted as 0. Under every scheme Gossamer and Rust stay first and second and JavaScript stays
-last. Haskell, Zig and F# trade third place, and no other language moves more than eight places.
+last. Haskell, Swift, F# and Zig trade third place, and no language moves more than seven places.
 
 ### Build mode
 
@@ -124,28 +127,29 @@ All three benches allow:
 
 GNU and BSD extensions, third-party packages and FFI do not count.
 
-## Built-in safety and library coverage
+## Built-in safety and ecosystem coverage
 
 Both benches use probes: small tasks tied to a common mistake, such as `mutex` for
 `self_deadlock` or `checked_add` for `int_overflow`. A probe counts only if the language, its
-standard library or its project's own libraries can do it. `harness/probes.json` lists all 87
+standard library or its project's own libraries can do it. `harness/probes.json` lists all 90
 probes and tags each one with its bench.
 
-**Built-in safety** (30 probes) asks what the language itself prevents:
+**Built-in safety** (29 probes) asks what the language itself prevents:
 
-- 20 compiler-checked probes need the compiler to refuse the unsafe version: a match that misses a
+- 22 compiler-checked probes need the compiler to refuse the unsafe version: a match that misses a
   case, a null in a non-null type, two mutable references to one value, a narrowing conversion
-  without a cast. Dynamic languages cannot pass these by design.
-- 10 language-feature probes need a safe construct in the language: value types, tuples, typed
-  errors, cleanup blocks, 128-bit and unsigned integers.
+  without a cast, an integer where an enum belongs, an override that overrides nothing. Dynamic
+  languages cannot pass most of these by design.
+- 7 language-feature probes need a safe construct in the language: value types, typed errors,
+  cleanup blocks, memory freed without a free call.
 
 A compiler-checked probe marks the offending lines `REJECT!`. The bench runs the program without
 them, then builds it with them, and that build must fail or report a must-use diagnostic. The site
 shows the refusal.
 
-**Library coverage** (57 probes) asks which safe tools ship with the language: threads and
-channels, process control, regular expressions, JSON, exact numbers, data structures, error chains,
-and cryptography. Some languages keep a small standard library on purpose and leave these tools to
+**Ecosystem coverage** (61 probes) asks which safe tools ship with the language: threads and
+channels, process control, regular expressions, JSON, exact numbers, 128-bit and unsigned integers,
+tuples and other data structures, assertions, error chains, and cryptography. Some languages keep a small standard library on purpose and leave these tools to
 packages, so this bench is a profile of what ships, not a measure of how safe a language is.
 
 | Result | Meaning |
@@ -157,7 +161,12 @@ packages, so this bench is a profile of what ships, not a measure of how safe a 
 | Not covered | Needs a third-party package, or cannot be done at all; the program says why |
 | Broken | Exists but gives the wrong result |
 
-Each probe bench ranks languages by the probes they cover. Neither feeds into the correctness score.
+Each probe bench ranks languages by the share of its probes they cover.
+
+## Overall
+
+The overall ranking is the mean of the three bench scores: the correctness score and the share of
+probes covered in each probe bench. Each bench weighs a third.
 
 ## Running
 
@@ -171,13 +180,14 @@ Requires `docker`, `docker compose` and [`uv`](https://docs.astral.sh/uv/).
     uv run bench.py --aggregate                 # rebuild the rankings and the site
 
 Each full run writes a folder named for its start time, `results/YYYY-MM-DDTHHMMSSZ/`, holding raw
-results in `raw/` and the rankings in `correctness.json` and `coverage.json` (both probe benches).
+results in `raw/` and the rankings in `correctness.json`, `coverage.json` (both probe benches) and
+`overall.json`.
 Partial runs update the newest folder. The site goes to `docs/index.html`.
 
 ## Layout
 
     <language>/<problem>.<ext>          correctness programs
-    <language>/express/<probe>.<ext>    probe programs (built-in safety and library coverage)
+    <language>/express/<probe>.<ext>    probe programs (built-in safety and ecosystem coverage)
     harness/problems.json               problems and scoring
     harness/probes.json                 probes
     harness/langs.json                  build and run commands

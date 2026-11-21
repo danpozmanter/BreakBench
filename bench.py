@@ -8,11 +8,11 @@ Usage:
     uv run bench.py                        # full run of both benches into a new results folder
     uv run bench.py rust gossamer          # rerun languages in the newest folder
     uv run bench.py rust --only int_overflow,oob_write
-    uv run bench.py --express [LANG ...]   # safety coverage instead of correctness
+    uv run bench.py --express [LANG ...]   # the probe benches (built-in safety, ecosystem coverage)
     uv run bench.py --aggregate            # rebuild the newest folder's rankings and the site
 
 Each full run gets a folder named by its UTC start time, results/YYYY-MM-DDTHHMMSSZ, holding
-raw/ plus correctness.json and coverage.json. Partial runs update the newest folder in place.
+raw/ plus correctness.json, coverage.json and overall.json. Partial runs update the newest folder in place.
 """
 
 import argparse
@@ -96,12 +96,12 @@ def aggregate(run):
                 "version": raw.get("version", ""),
                 "correctness": percent(totals["correctness"]),
                 "memory": percent(totals["memory"]),
-                "overall": percent(every),
+                "score": percent(every),
                 "scored": len(every),
                 "results": per_problem,
             }
         )
-    rows.sort(key=lambda r: (-r["overall"], -r["correctness"], r["name"]))
+    rows.sort(key=lambda r: (-r["score"], -r["correctness"], r["name"]))
     for rank, row in enumerate(rows, 1):
         row["rank"] = rank
     out = {
@@ -117,9 +117,12 @@ def aggregate(run):
     express = aggregate_express(run, langs)
     with open(os.path.join(run, "coverage.json"), "w", encoding="utf-8") as f:
         json.dump(express, f, indent=1, ensure_ascii=False)
+    overall = combine(rows, express)
+    with open(os.path.join(run, "overall.json"), "w", encoding="utf-8") as f:
+        json.dump(overall, f, indent=1, ensure_ascii=False)
     with open(os.path.join(ROOT, "docs", "data.js"), "w", encoding="utf-8") as f:
         f.write("window.BREAKBENCH = ")
-        json.dump(site_payload(out) | {"express": express_payload(express)}, f,
+        json.dump(site_payload(out) | {"express": express_payload(express), "overall": overall}, f,
                   ensure_ascii=False, separators=(",", ":"))
         f.write(";\n")
     with open(os.path.join(ROOT, "docs", "page.html"), encoding="utf-8") as f:
@@ -130,10 +133,32 @@ def aggregate(run):
                 '<style>body{margin:0}[hidden]{display:none!important}</style>\n</head>\n<body>\n')
         f.write(page)
         f.write("\n</body>\n</html>\n")
+    for row in overall:
+        print(f"{row['rank']:>2}. {row['name']:<12} overall {row['overall']:5.1f}%  "
+              f"correctness {row['correctness']:5.1f}%  built-in {row['builtin']:5.1f}%  "
+              f"ecosystem {row['ecosystem']:5.1f}%")
+
+
+def combine(rows, express):
+    """The overall ranking: the mean of the three bench scores, each a percentage."""
+    totals = {b: sum(p["bench"] == b for p in express["probes"]) for b in ("builtin", "ecosystem")}
+    covered = {row["id"]: row for row in express["languages"]}
+    ranked = []
     for row in rows:
-        print(f"{row['rank']:>2}. {row['name']:<12} overall {row['overall']:5.1f}  "
-              f"correctness {row['correctness']:5.1f}  memory {row['memory']:5.1f}  "
-              f"scored on {row['scored']}")
+        probes = covered.get(row["id"])
+        if probes is None:
+            continue
+        parts = {
+            "correctness": row["score"],
+            "builtin": round(100 * probes["builtin"] / totals["builtin"], 1),
+            "ecosystem": round(100 * probes["ecosystem"] / totals["ecosystem"], 1),
+        }
+        ranked.append({"id": row["id"], "name": row["name"], **parts,
+                       "overall": round(sum(parts.values()) / len(parts), 1)})
+    ranked.sort(key=lambda r: (-r["overall"], r["name"]))
+    for rank, row in enumerate(ranked, 1):
+        row["rank"] = rank
+    return ranked
 
 
 def aggregate_express(run, langs):
@@ -153,7 +178,7 @@ def aggregate_express(run, langs):
             "version": raw.get("version", ""),
             "expressed": len(passed),
             "builtin": sum(p["id"] in passed for p in spec["probes"] if p["bench"] == "builtin"),
-            "library": sum(p["id"] in passed for p in spec["probes"] if p["bench"] == "library"),
+            "ecosystem": sum(p["id"] in passed for p in spec["probes"] if p["bench"] == "ecosystem"),
             "results": results,
         })
     rows.sort(key=lambda r: (-r["expressed"], r["name"]))
@@ -210,7 +235,7 @@ def site_payload(out):
                 "rss": rec.get("rss_mb"),
                 "w": (rec.get("warnings") or "")[:400],
             }
-        langs.append({k: row[k] for k in ("id", "name", "version", "rank", "overall",
+        langs.append({k: row[k] for k in ("id", "name", "version", "rank", "score",
                                            "correctness", "memory", "scored")} | {"results": results})
     return {**{k: out[k] for k in ("generated", "kinds", "leak_threshold_mb", "problems")},
             "languages": langs}

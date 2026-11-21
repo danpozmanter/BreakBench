@@ -570,6 +570,33 @@
   "string_literal_write": {
    "outcome": "REJECTED",
    "message": "main.kt:3:13: error: no 'set' operator method providing array access.\n    greeting[0] = 'j' // CONTROL! greeting = \"j\" + greeting.substring(1)\n            ^^^"
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 42.1,
+   "secs": 0.02,
+   "stdout": "9223372036854775807",
+   "stderr": ""
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 41.5,
+   "secs": 0.02,
+   "stdout": "a?",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 41.4,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4\n\tat MainKt.main(main.kt:9)"
   }
  }
 }

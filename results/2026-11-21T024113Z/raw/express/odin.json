@@ -679,6 +679,23 @@
   "exclusive_mutation": {
    "outcome": "NONE",
    "message": "nothing refuses passing one value as two mutable arguments"
+  },
+  "strong_enum": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-strong_enum/reject/main.odin(20:19) Error: Cannot convert untyped value '7' to 'Color' from 'untyped integer'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "green",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "override_check": {
+   "outcome": "NONE",
+   "message": "no methods or inheritance, so nothing marks a replacement method"
+  },
+  "automatic_memory": {
+   "outcome": "NONE",
+   "message": "every allocation needs an explicit free, delete or free_all"
   }
  }
 }

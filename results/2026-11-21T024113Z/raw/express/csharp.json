@@ -719,6 +719,33 @@
   "exclusive_mutation": {
    "outcome": "NONE",
    "message": "nothing refuses passing one value as two mutable arguments"
+  },
+  "strong_enum": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-strong_enum/reject/Program.cs(4,24): error CS1503: Argument 1: cannot convert from 'int' to 'Color' [/tmp/breakbench/express-strong_enum/reject/bb.csproj]\n/tmp/breakbench/express-strong_enum/reject/Program.cs(4,24): error CS1503: Argument 1: cannot convert from 'int' to 'Color' [/tmp/breakbench/express-strong_enum/reject/bb.csproj]\n    1 Error(s)",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "green",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "override_check": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-override_check/reject/Program.cs(14,28): error CS0115: 'Circle.Descibe()': no suitable method found to override [/tmp/breakbench/express-override_check/reject/bb.csproj]\n/tmp/breakbench/express-override_check/reject/Program.cs(14,28): error CS0115: 'Circle.Descibe()': no suitable method found to override [/tmp/breakbench/express-override_check/reject/bb.csproj]\n    1 Error(s)",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "circle",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "automatic_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "3999999",
+   "stderr": "",
+   "level": "LANGUAGE"
   }
  }
 }

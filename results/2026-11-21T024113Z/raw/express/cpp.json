@@ -639,6 +639,33 @@
   "exclusive_mutation": {
    "outcome": "NONE",
    "message": "nothing refuses passing one value as two mutable arguments"
+  },
+  "strong_enum": {
+   "outcome": "PASS",
+   "refusal": "main.cpp:18:18: error: no matching function for call to 'name'\n1 warning and 1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "green",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "override_check": {
+   "outcome": "PASS",
+   "refusal": "main.cpp:14:33: error: only virtual member functions can be marked 'override'\n2 warnings and 1 error generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "circle",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "automatic_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 1.36,
+   "stdout": "3999999",
+   "stderr": "",
+   "level": "STD"
   }
  }
 }

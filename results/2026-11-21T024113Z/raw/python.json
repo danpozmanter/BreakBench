@@ -655,6 +655,33 @@
    "secs": 0.03,
    "stdout": "",
    "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/string_literal_write/main/main.py\", line 2, in <module>\n    greeting[0] = \"j\"\n    ~~~~~~~~^^^\nTypeError: 'str' object does not support item assignment"
+  },
+  "float_to_int_overflow": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 18.5,
+   "secs": 0.01,
+   "stdout": "100000000000000000000",
+   "stderr": ""
+  },
+  "split_character": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 18.5,
+   "secs": 0.01,
+   "stdout": "a\ud83d\udc4d",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 18.5,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/oob_read/main/main.py\", line 11, in <module>\n    print(f.buf[int(sys.argv[1])])\n          ~~~~~^^^^^^^^^^^^^^^^^^\nIndexError: list index out of range"
   }
  }
 }

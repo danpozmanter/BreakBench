@@ -664,6 +664,23 @@
   "exclusive_mutation": {
    "outcome": "NONE",
    "message": "nothing refuses passing one value as two mutable arguments"
+  },
+  "strong_enum": {
+   "outcome": "PASS",
+   "refusal": "main.zig:23:35: error: expected type 'main.Color', found 'comptime_int'",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "green",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "override_check": {
+   "outcome": "NONE",
+   "message": "no inheritance or interfaces, so nothing marks a replacement method"
+  },
+  "automatic_memory": {
+   "outcome": "NONE",
+   "message": "every allocation goes through an allocator and needs an explicit free or deinit"
   }
  }
 }

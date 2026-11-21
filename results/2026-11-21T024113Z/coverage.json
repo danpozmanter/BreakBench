@@ -9,6 +9,10 @@
    "title": "Mutation and sharing"
   },
   {
+   "id": "memory",
+   "title": "Memory"
+  },
+  {
    "id": "control",
    "title": "Errors and control flow"
   },
@@ -44,12 +48,12 @@
  "probes": [
   {
    "id": "tuple",
-   "group": "types",
+   "group": "data",
    "title": "Tuples",
    "task": "A function returns 1 and \"a\" together as a tuple. The caller unpacks them and prints both.",
    "for": "out-parameter mistakes",
    "expect": "^1 a$",
-   "bench": "builtin"
+   "bench": "ecosystem"
   },
   {
    "id": "complete_init",
@@ -88,6 +92,26 @@
    "task": "Meters and Seconds both store a 64-bit float, and the compiler refuses to add one to the other. The program prints 2 m + 3 m.",
    "for": "type_confusion",
    "expect": "^5(\\.0)?$",
+   "checked": true,
+   "bench": "builtin"
+  },
+  {
+   "id": "strong_enum",
+   "group": "types",
+   "title": "Refusing an integer where an enum is expected",
+   "task": "Color is Red, Green or Blue, and name(c) returns its name. The program prints name(Green). The compiler refuses name(7).",
+   "for": "type_confusion",
+   "expect": "^green$",
+   "checked": true,
+   "bench": "builtin"
+  },
+  {
+   "id": "override_check",
+   "group": "types",
+   "title": "Refusing an override that overrides nothing",
+   "task": "Circle replaces Shape's describe() method, and the program prints describe() of a Circle used as a Shape: circle. The compiler refuses a method in Circle marked as a replacement (override, a trait or interface implementation) whose misspelled name, descibe, matches nothing in Shape.",
+   "for": "misspelled_field",
+   "expect": "^circle$",
    "checked": true,
    "bench": "builtin"
   },
@@ -210,6 +234,15 @@
    "bench": "builtin"
   },
   {
+   "id": "automatic_memory",
+   "group": "memory",
+   "title": "Memory freed without a free call",
+   "task": "The program allocates 4,000,000 records of 1 KB on the heap in a loop, keeps only the last, and prints its id, 3999999. Nothing in the program frees memory: garbage collection, reference counting or ownership reclaims each record once nothing uses it. The loop allocates 4 GB in all, more than the 3 GB limit, so memory that is never reclaimed fails the probe.",
+   "for": "use_after_free, double_free, error_path_leak",
+   "expect": "^3999999$",
+   "bench": "builtin"
+  },
+  {
    "id": "error_value",
    "group": "control",
    "title": "Errors as return values",
@@ -257,13 +290,13 @@
   },
   {
    "id": "assertion",
-   "group": "control",
+   "group": "errors",
    "title": "Assertions",
    "task": "The program prints \"before\", then asserts false with the language's assertion. It must stop with a nonzero status.",
    "for": "silent invariant breaks",
    "expect": "^before(?![\\s\\S]*after)",
    "exit": "nonzero",
-   "bench": "builtin"
+   "bench": "ecosystem"
   },
   {
    "id": "unused_value_refused",
@@ -292,7 +325,7 @@
    "task": "The program stores 2^64 - 1 in an unsigned 64-bit integer and prints it.",
    "for": "unsigned_subtraction",
    "expect": "^18446744073709551615$",
-   "bench": "builtin"
+   "bench": "ecosystem"
   },
   {
    "id": "int128",
@@ -301,7 +334,7 @@
    "task": "The program stores 2^100 in a fixed-size 128-bit integer and prints it.",
    "for": "int_overflow",
    "expect": "^1267650600228229401496703205376$",
-   "bench": "builtin"
+   "bench": "ecosystem"
   },
   {
    "id": "literal_range",
@@ -340,7 +373,7 @@
    "task": "Two threads fill the two halves of one shared 10-slot array with the numbers 0 to 9. After both finish, the program prints the sum.",
    "for": "concurrent_map_write",
    "expect": "^45$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "mutex",
@@ -349,7 +382,7 @@
    "task": "Two threads each add 1 to a shared counter 100,000 times, holding the standard mutex for each step. The program prints the total.",
    "for": "self_deadlock, lock_order_deadlock",
    "expect": "^200000$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "atomic_counter",
@@ -358,7 +391,7 @@
    "task": "Two threads each add 1 to a shared counter 100,000 times with an atomic add. The program prints the total.",
    "for": "data races",
    "expect": "^200000$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "channel",
@@ -367,7 +400,7 @@
    "task": "A worker sends 1, 2 and 3 through the standard channel or blocking queue. The main thread receives and prints them.",
    "for": "abandoned_worker_leak",
    "expect": "^1 2 3$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "background_task",
@@ -376,7 +409,7 @@
    "task": "The program starts a task that sleeps 50 ms and returns 7, prints \"started\" without waiting, then waits for the task and prints its result.",
    "for": "unawaited_task",
    "expect": "^started\\s+7$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "join_with_failure",
@@ -385,7 +418,7 @@
    "task": "A worker fails with \"bad input\" the language's usual way. The main thread waits for it and prints the failure.",
    "for": "worker_failure_lost",
    "expect": "bad input",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "task_timeout",
@@ -395,7 +428,7 @@
    "for": "hangs",
    "expect": "^timed out$",
    "timeout": 4,
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "task_cancel",
@@ -405,7 +438,7 @@
    "for": "abandoned work",
    "expect": "^stopped$",
    "timeout": 10,
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "concurrent_map",
@@ -414,7 +447,7 @@
    "task": "Four threads each add 1,000 different keys to one map from the standard library that needs no outside lock. The program prints the size.",
    "for": "concurrent_map_write",
    "expect": "^4000$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "spawn_argv",
@@ -423,7 +456,7 @@
    "task": "The program runs echo with the single argument \"hi; touch /tmp/bb_x\", passed as an argument list with no shell, and prints its output.",
    "for": "command_injection",
    "expect": "^hi; touch /tmp/bb_x$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "exit_status",
@@ -432,7 +465,7 @@
    "task": "The program runs false and prints its exit status.",
    "for": "ignored_error_result",
    "expect": "^1$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "env_absent",
@@ -441,7 +474,7 @@
    "task": "The program looks up the unset variable BB_UNSET with a call that tells \"not set\" apart from \"empty\", and prints \"absent\".",
    "for": "null_deref",
    "expect": "^absent$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "signal_graceful",
@@ -451,7 +484,7 @@
    "for": "lost cleanup",
    "expect": "^cleaned up$",
    "timeout": 10,
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "secure_temp_file",
@@ -460,7 +493,7 @@
    "task": "The program creates a new temporary file or folder in one call that cannot collide with another process, writes \"ok\" to a file in it, reads it back and prints it.",
    "for": "CWE-377",
    "expect": "^ok$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "file_permissions",
@@ -469,7 +502,7 @@
    "task": "The program creates a file that only its owner can read and write (mode 600) and prints its permission bits in octal.",
    "for": "CWE-732",
    "expect": "^600$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "process_timeout",
@@ -478,7 +511,7 @@
    "task": "The program starts sleep 10 as a child process, stops it after 100 ms, waits for it to end, and prints \"killed\".",
    "for": "hangs",
    "expect": "^killed$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "regex",
@@ -487,7 +520,7 @@
    "task": "The program matches ^[a-z]+[0-9]{2}$ against \"abc12\" and \"abc1\" and prints both results.",
    "for": "regex_backtracking",
    "expect": "^true false$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "regex_linear",
@@ -497,7 +530,7 @@
    "for": "regex_backtracking",
    "expect": "^no match$",
    "timeout": 5,
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "graphemes",
@@ -506,7 +539,7 @@
    "task": "The program takes the first 9 characters, as a reader counts them, of \"abcdefgh👍🏽xyz\" and prints them.",
    "for": "text truncation",
    "expect": "^abcdefgh👍🏽$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "unicode_normalize",
@@ -515,7 +548,7 @@
    "task": "The program normalizes \"e\" plus U+0301 to NFC, compares it with U+00E9, and prints \"equal\".",
    "for": "CWE-176",
    "expect": "^equal$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "utf8_validate",
@@ -524,7 +557,7 @@
    "task": "The program decodes the bytes 0x61 0xFF as UTF-8 so that bad bytes report an error instead of turning into replacement characters, and prints \"invalid\".",
    "for": "CWE-172",
    "expect": "^invalid$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "html_escape",
@@ -533,7 +566,7 @@
    "task": "The program escapes <a href=\"x\">Tom & Jerry</a> for HTML with a library call and prints the result.",
    "for": "CWE-79",
    "expect": "^&lt;a href=(&quot;|&#34;|&#x22;)x(&quot;|&#34;|&#x22;)&gt;Tom &amp; Jerry&lt;(/|&#x2F;|&#47;)a&gt;$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "json_parse",
@@ -542,7 +575,7 @@
    "task": "The program parses {\"port\": 8080, \"debug\": true} with a library call and prints the port, then parses {port: 8080}, gets an error, and prints \"invalid\".",
    "for": "CWE-20",
    "expect": "^8080 invalid$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "checked_add",
@@ -554,7 +587,7 @@
    "args": [
     "9223372036854775807"
    ],
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "wrapping_add",
@@ -566,7 +599,7 @@
    "args": [
     "9223372036854775807"
    ],
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "saturating_add",
@@ -578,7 +611,7 @@
    "args": [
     "9223372036854775807"
    ],
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "bigint",
@@ -587,7 +620,7 @@
    "task": "The program computes 2^100 exactly and prints it.",
    "for": "int_overflow",
    "expect": "^1267650600228229401496703205376$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "decimal",
@@ -596,7 +629,7 @@
    "task": "The program adds 0.1 and 0.2 as decimals, compares the sum with 0.3, and prints \"equal\".",
    "for": "float_equality",
    "expect": "^equal$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "checked_narrowing",
@@ -608,7 +641,7 @@
    "args": [
     "300"
    ],
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "float_to_int_checked",
@@ -617,7 +650,7 @@
    "task": "The program converts NaN to a 64-bit integer, with the failure reported as a value or an error it can catch, and prints \"does not fit\".",
    "for": "CERT FLP34-C",
    "expect": "^does not fit$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "strict_parse",
@@ -629,7 +662,7 @@
    "args": [
     "12abc"
    ],
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "sorted_map",
@@ -638,7 +671,7 @@
    "task": "The program inserts the keys c, a and b into a map that keeps keys in order, and prints the keys.",
    "for": "iteration-order bugs",
    "expect": "^a b c$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "sorted_set",
@@ -647,7 +680,7 @@
    "task": "The program inserts 3, 1 and 2 into a set that keeps items in order, and prints them.",
    "for": "iteration-order bugs",
    "expect": "^1 2 3$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "insertion_ordered_map",
@@ -656,7 +689,7 @@
    "task": "The program inserts the keys c, a and b into a map that keeps them in the order added, and prints the keys.",
    "for": "iteration-order bugs",
    "expect": "^c a b$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "deque",
@@ -665,7 +698,7 @@
    "task": "The program adds 1 at the back, 0 at the front and 2 at the back, then takes one item off each end and prints them.",
    "for": "queue misuse",
    "expect": "^0 2$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "priority_queue",
@@ -674,7 +707,7 @@
    "task": "The program pushes 3, 1 and 2 into a min-heap, then pops and prints all of them.",
    "for": "ordering bugs",
    "expect": "^1 2 3$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "counter",
@@ -683,7 +716,7 @@
    "task": "The program counts the words a, b, a with a counting map or bag type and prints the counts in key order.",
    "for": "missing_key_default",
    "expect": "^a=2 b=1$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "bitset",
@@ -692,7 +725,7 @@
    "task": "The program sets bit 1000 in a compact bit set, tests bits 1000 and 999, and prints both results.",
    "for": "manual bit arithmetic",
    "expect": "^true false$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "composite_key",
@@ -701,7 +734,7 @@
    "task": "The program puts the pair (1, 2) in a set as one key compared by value, checks for (1, 2), and prints the result.",
    "for": "mutable_hash_key",
    "expect": "^true$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "checked_index",
@@ -710,7 +743,7 @@
    "task": "The program reads index 5 of [10, 20, 30] with a lookup that returns a missing value (an optional, null or nil) instead of failing, and prints \"none\".",
    "for": "oob_write, negative_index_wraps",
    "expect": "^none$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "total_float_sort",
@@ -719,7 +752,7 @@
    "task": "The program sorts [3, NaN, 1, 2] with the standard comparison that puts every float, NaN included, in order, and prints the values with NaN written as \"NaN\".",
    "for": "sort_with_nan",
    "expect": "^(NaN 1(\\.0)? 2(\\.0)? 3(\\.0)?|1(\\.0)? 2(\\.0)? 3(\\.0)? NaN)$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "date_time_zone",
@@ -728,7 +761,7 @@
    "task": "The program converts 2026-03-29 01:30 UTC to local time in Europe/Paris, just after the switch to summer time, and prints it.",
    "for": "time-zone bugs",
    "expect": "^2026-03-29 03:30$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "byte_buffer",
@@ -737,7 +770,7 @@
    "task": "The program appends 100,000 bytes one at a time to a growable byte buffer and prints its length.",
    "for": "quadratic copying",
    "expect": "^100000$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "weak_reference",
@@ -746,7 +779,7 @@
    "task": "The program holds a weak reference to an object, drops the last strong reference (forcing a collection where needed), and prints \"gone\" once the weak reference no longer reaches the object.",
    "for": "reference_cycle_leak",
    "expect": "^gone$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "error_chain",
@@ -755,7 +788,7 @@
    "task": "The program wraps the error \"not found\" with the context \"loading config\", prints the message, then reads the original cause back from the wrapper and prints it.",
    "for": "lost diagnostics",
    "expect": "loading config.*not found\\s+not found$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "stack_trace",
@@ -764,7 +797,7 @@
    "task": "Function inner captures the call stack as a value. The program prints \"inner\" if the trace names it.",
    "for": "lost diagnostics",
    "expect": "^inner$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "recover_worker_crash",
@@ -773,7 +806,7 @@
    "task": "A worker panics or throws. The main thread keeps running, prints \"worker crashed\" and exits with status 0.",
    "for": "worker_failure_lost",
    "expect": "^worker crashed$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "recover_allocation_failure",
@@ -788,7 +821,7 @@
    "env": {
     "ASAN_OPTIONS": "detect_leaks=0:allocator_may_return_null=1"
    },
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "recover_stack_overflow",
@@ -797,7 +830,7 @@
    "task": "Runaway recursion becomes an error the program handles. It prints \"stack overflow\" and exits with status 0.",
    "for": "stack_overflow",
    "expect": "^stack overflow$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "unhandled_hook",
@@ -807,7 +840,7 @@
    "for": "lost diagnostics",
    "expect": "^hook ran$",
    "exit": "any",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "path_containment",
@@ -816,7 +849,7 @@
    "task": "The program joins /srv/app with ../../etc/passwd, normalizes the result, checks whether it stays under /srv/app, and prints \"outside\".",
    "for": "path_join_escape",
    "expect": "^outside$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "constant_time_compare",
@@ -825,7 +858,7 @@
    "task": "The program compares two equal 16-byte secrets with a constant-time function and prints \"equal\".",
    "for": "CWE-208",
    "expect": "^equal$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "secure_random",
@@ -834,7 +867,7 @@
    "task": "The program reads 16 bytes from a cryptographic random source and prints them in hex.",
    "for": "CWE-338",
    "expect": "^[0-9a-f]{32}$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "sha256",
@@ -843,7 +876,7 @@
    "task": "The program hashes \"abc\" with SHA-256 and prints the hex digest.",
    "for": "CWE-328",
    "expect": "^ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "password_hash",
@@ -852,7 +885,7 @@
    "task": "The program hashes the password \"hunter2\" with a slow password hash (PBKDF2, bcrypt, scrypt or Argon2), checks \"hunter2\" and \"wrong\" against it, and prints both results.",
    "for": "CWE-916",
    "expect": "^true false$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "hmac",
@@ -861,7 +894,7 @@
    "task": "The program computes HMAC-SHA256 of \"The quick brown fox jumps over the lazy dog\" with the key \"key\" and prints the tag in hex.",
    "for": "CWE-345",
    "expect": "^f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8$",
-   "bench": "library"
+   "bench": "ecosystem"
   },
   {
    "id": "aead_encrypt",
@@ -870,7 +903,7 @@
    "task": "The program encrypts \"secret\" with AES-GCM or ChaCha20-Poly1305 under a random key and nonce, decrypts it and prints it, then flips one bit of the ciphertext and prints \"rejected\" when decryption fails.",
    "for": "CWE-327",
    "expect": "^secret\\s+rejected$",
-   "bench": "library"
+   "bench": "ecosystem"
   }
  ],
  "languages": [
@@ -878,9 +911,9 @@
    "id": "gossamer",
    "name": "Gossamer",
    "version": "gos 0.83.0",
-   "expressed": 81,
+   "expressed": 84,
    "builtin": 26,
-   "library": 55,
+   "ecosystem": 58,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -924,6 +957,24 @@
      "exit": 0,
      "secs": 0.0,
      "stdout": "5",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "PASS",
+     "refusal": "lint: 0 warning(s), 0 error(s)\nerror[GT0001]: type mismatch: expected `Color`, found `i64`\nerror: 1 front-end error(s); refusing to build",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "green",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "PASS",
+     "refusal": "lint: 0 warning(s), 0 error(s)\nerror[GT0072]: `descibe` is not a member of trait `Shape`\nerror: 1 front-end error(s); refusing to build",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "circle",
      "stderr": "",
      "level": "LANGUAGE"
     },
@@ -1022,6 +1073,15 @@
      "exit": 0,
      "secs": 0.0,
      "stdout": "70 30",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.08,
+     "stdout": "3999999",
      "stderr": "",
      "level": "LANGUAGE"
     },
@@ -1642,9 +1702,9 @@
    "id": "fsharp",
    "name": "F#",
    "version": "11.0.100",
-   "expressed": 79,
-   "builtin": 23,
-   "library": 56,
+   "expressed": 82,
+   "builtin": 22,
+   "ecosystem": 60,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -1683,6 +1743,24 @@
      "exit": 0,
      "secs": 0.02,
      "stdout": "5",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "PASS",
+     "refusal": "/tmp/breakbench/express-strong_enum/reject/Program.fs(17,24): error FS0001: This expression was expected to have type\n/tmp/breakbench/express-strong_enum/reject/Program.fs(17,24): error FS0001: This expression was expected to have type\n    1 Error(s)",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "green",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "PASS",
+     "refusal": "/tmp/breakbench/express-override_check/reject/Program.fs(10,16): error FS0855: No abstract or interface member was found that corresponds to this override [/tmp/breakbench/express-override_check/reject/bb.fsproj]\n/tmp/breakbench/express-override_check/reject/Program.fs(10,16): error FS0855: No abstract or interface member was found that corresponds to this override [/tmp/breakbench/express-override_check/reject/bb.fsproj]\n    1 Error(s)",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "circle",
      "stderr": "",
      "level": "LANGUAGE"
     },
@@ -1768,6 +1846,15 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "nothing refuses passing one value as two mutable arguments"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.1,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "error_value": {
      "outcome": "PASS",
@@ -2396,9 +2483,9 @@
    "id": "csharp",
    "name": "C#",
    "version": "11.0.100",
-   "expressed": 74,
-   "builtin": 19,
-   "library": 55,
+   "expressed": 77,
+   "builtin": 18,
+   "ecosystem": 59,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -2432,6 +2519,24 @@
      "exit": 0,
      "secs": 0.01,
      "stdout": "5",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "PASS",
+     "refusal": "/tmp/breakbench/express-strong_enum/reject/Program.cs(4,24): error CS1503: Argument 1: cannot convert from 'int' to 'Color' [/tmp/breakbench/express-strong_enum/reject/bb.csproj]\n/tmp/breakbench/express-strong_enum/reject/Program.cs(4,24): error CS1503: Argument 1: cannot convert from 'int' to 'Color' [/tmp/breakbench/express-strong_enum/reject/bb.csproj]\n    1 Error(s)",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "green",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "PASS",
+     "refusal": "/tmp/breakbench/express-override_check/reject/Program.cs(14,28): error CS0115: 'Circle.Descibe()': no suitable method found to override [/tmp/breakbench/express-override_check/reject/bb.csproj]\n/tmp/breakbench/express-override_check/reject/Program.cs(14,28): error CS0115: 'Circle.Descibe()': no suitable method found to override [/tmp/breakbench/express-override_check/reject/bb.csproj]\n    1 Error(s)",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "circle",
      "stderr": "",
      "level": "LANGUAGE"
     },
@@ -2517,6 +2622,15 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "nothing refuses passing one value as two mutable arguments"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.09,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "error_value": {
      "outcome": "NONE",
@@ -3125,9 +3239,9 @@
    "id": "kotlin",
    "name": "Kotlin",
    "version": "info: kotlinc-jvm 2.4.21 (JRE 27.0.1.1+4)",
-   "expressed": 74,
+   "expressed": 77,
    "builtin": 21,
-   "library": 53,
+   "ecosystem": 56,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -3171,6 +3285,24 @@
      "exit": 0,
      "secs": 0.02,
      "stdout": "5.0",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "PASS",
+     "refusal": "main.kt:13:18: error: argument type mismatch: actual type is 'Int', but 'Color' was expected.",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "green",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "PASS",
+     "refusal": "main.kt:9:5: error: 'descibe' overrides nothing.",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "circle",
      "stderr": "",
      "level": "LANGUAGE"
     },
@@ -3251,6 +3383,15 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "nothing refuses passing one value as two mutable arguments"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.25,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "error_value": {
      "outcome": "PASS",
@@ -3854,9 +3995,9 @@
    "id": "swift",
    "name": "Swift",
    "version": "Swift version 6.4.2 (swift-6.4.2-RELEASE)",
-   "expressed": 72,
-   "builtin": 28,
-   "library": 44,
+   "expressed": 75,
+   "builtin": 27,
+   "ecosystem": 48,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -3900,6 +4041,24 @@
      "exit": 0,
      "secs": 0.0,
      "stdout": "5.0",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "PASS",
+     "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:16:12: error: cannot convert value of type 'Int' to expected argument type 'Color'\n   |            `- error: cannot convert value of type 'Int' to expected argument type 'Color'",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "green",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "PASS",
+     "refusal": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:9:19: error: method does not override any method from its superclass\n   |                   `- error: method does not override any method from its superclass",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "circle",
      "stderr": "",
      "level": "LANGUAGE"
     },
@@ -4008,6 +4167,15 @@
      "exit": 0,
      "secs": 0.0,
      "stdout": "70 30",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.21,
+     "stdout": "3999999",
      "stderr": "",
      "level": "LANGUAGE"
     },
@@ -4573,9 +4741,9 @@
    "id": "scala",
    "name": "Scala",
    "version": "Scala compiler version 3.10.1 -- Copyright 2002-2026, LAMP/EPFL",
-   "expressed": 70,
-   "builtin": 17,
-   "library": 53,
+   "expressed": 73,
+   "builtin": 18,
+   "ecosystem": 55,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -4614,6 +4782,24 @@
      "exit": 0,
      "secs": 0.07,
      "stdout": "5.0",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "PASS",
+     "refusal": "-- [E007] Type Mismatch Error: main.scala:14:17 --------------------------------\n1 error found",
+     "exit": 0,
+     "secs": 0.07,
+     "stdout": "green",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "PASS",
+     "refusal": "-- [E037] Declaration Error: main.scala:9:15 -----------------------------------\n1 error found",
+     "exit": 0,
+     "secs": 0.06,
+     "stdout": "circle",
      "stderr": "",
      "level": "LANGUAGE"
     },
@@ -4689,6 +4875,15 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "nothing refuses passing one value as two mutable arguments"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.28,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "error_value": {
      "outcome": "PASS",
@@ -5282,9 +5477,9 @@
    "id": "java",
    "name": "Java",
    "version": "openjdk version \"27.0.1.1\" 2026-11-17",
-   "expressed": 68,
-   "builtin": 17,
-   "library": 51,
+   "expressed": 71,
+   "builtin": 18,
+   "ecosystem": 53,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -5328,6 +5523,24 @@
      "exit": 0,
      "secs": 0.01,
      "stdout": "5.0",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "PASS",
+     "refusal": "Main.java:16: error: incompatible types: int cannot be converted to Color\n1 error",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "green",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "PASS",
+     "refusal": "Main.java:12: error: descibe() in Circle does not override or implement a method from a supertype\n1 error",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "circle",
      "stderr": "",
      "level": "LANGUAGE"
     },
@@ -5393,6 +5606,15 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "nothing refuses passing one value as two mutable arguments"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.25,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "error_value": {
      "outcome": "PASS",
@@ -5981,9 +6203,9 @@
    "id": "crystal",
    "name": "Crystal",
    "version": "Crystal 1.22.3 [3462c0774] (2026-11-13)",
-   "expressed": 67,
-   "builtin": 19,
-   "library": 48,
+   "expressed": 69,
+   "builtin": 18,
+   "ecosystem": 51,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -6029,6 +6251,19 @@
      "stdout": "5.0",
      "stderr": "",
      "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "PASS",
+     "refusal": "Showing last frame. Use --error-trace for full trace.\nError: expected argument #1 to 'name' to be Color, not Int32",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "green",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "NONE",
+     "message": "no override marker; a misspelled method is a new method"
     },
     "duration": {
      "outcome": "PASS",
@@ -6107,6 +6342,15 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "nothing refuses passing one value as two mutable arguments"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.75,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "error_value": {
      "outcome": "PASS",
@@ -6675,9 +6919,9 @@
    "id": "d",
    "name": "D",
    "version": "LDC - the LLVM D compiler (1.43.0):",
-   "expressed": 66,
-   "builtin": 21,
-   "library": 45,
+   "expressed": 69,
+   "builtin": 20,
+   "ecosystem": 49,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -6711,6 +6955,24 @@
      "exit": 0,
      "secs": 0.01,
      "stdout": "5",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "PASS",
+     "refusal": "main.d(20): Error: function `name` is not callable using argument types `(int)`",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "green",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "PASS",
+     "refusal": "main.d(13): Error: function `string main.Circle.descibe()` does not override any function",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "circle",
      "stderr": "",
      "level": "LANGUAGE"
     },
@@ -6796,6 +7058,15 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "nothing refuses passing one value as two mutable arguments"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.96,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "error_value": {
      "outcome": "PASS",
@@ -7361,12 +7632,723 @@
    "rank": 9
   },
   {
+   "id": "rust",
+   "name": "Rust",
+   "version": "rustc 1.100.0 (0ef1bc386 2026-11-09)",
+   "expressed": 68,
+   "builtin": 28,
+   "ecosystem": 40,
+   "results": {
+    "tuple": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "1 a",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "complete_init": {
+     "outcome": "PASS",
+     "refusal": "error[E0063]: missing field `retries` in initializer of `Config`\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0063`.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "5 3",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "sum_type_exhaustive": {
+     "outcome": "PASS",
+     "refusal": "error[E0004]: non-exhaustive patterns: `&Shape::Square(_)` not covered\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0004`.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "circle",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "optional_type": {
+     "outcome": "PASS",
+     "refusal": "error[E0369]: cannot add `{integer}` to `std::option::Option<i64>`\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0369`.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "none",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "newtype": {
+     "outcome": "PASS",
+     "refusal": "error[E0308]: mismatched types\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0308`.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "5",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "PASS",
+     "refusal": "error[E0308]: mismatched types\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0308`.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "green",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "PASS",
+     "refusal": "error[E0407]: method `descibe` is not a member of trait `Shape`\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0407`.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "circle",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "duration": {
+     "outcome": "PASS",
+     "refusal": "error[E0308]: mismatched types\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0308`.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "2000",
+     "stderr": "",
+     "level": "STD"
+    },
+    "nonnull_reference": {
+     "outcome": "PASS",
+     "refusal": "error[E0308]: mismatched types\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0308`.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "app",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "definite_assignment": {
+     "outcome": "PASS",
+     "refusal": "error[E0381]: used binding `y` is possibly-uninitialized\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0381`.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "5",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "thread_safety_check": {
+     "outcome": "PASS",
+     "refusal": "error[E0499]: cannot borrow `unguarded` as mutable more than once at a time\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0499`.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "2",
+     "stderr": "",
+     "level": "STD"
+    },
+    "lock_owns_data": {
+     "outcome": "PASS",
+     "refusal": "error[E0609]: no field `debits` on type `std::sync::Mutex<Ledger>`\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0609`.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "2000 2000",
+     "stderr": "",
+     "level": "STD"
+    },
+    "fixed_array_value": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "1",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "immutable_collection": {
+     "outcome": "PASS",
+     "refusal": "error[E0596]: cannot borrow `xs` as mutable, as it is not declared as mutable\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0596`.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "3",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "readonly_param": {
+     "outcome": "PASS",
+     "refusal": "error[E0594]: cannot assign to `xs[_]`, which is behind a `&` reference\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0594`.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "3",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "value_struct": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "1",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "immutable_binding": {
+     "outcome": "PASS",
+     "refusal": "error[E0384]: cannot assign twice to immutable variable `x`\nerror: aborting due to 1 previous error; 1 warning emitted\nFor more information about this error, try `rustc --explain E0384`.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "1",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "consumed_value": {
+     "outcome": "PASS",
+     "refusal": "error[E0382]: borrow of moved value: `h`\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0382`.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "closed",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "exclusive_mutation": {
+     "outcome": "PASS",
+     "refusal": "error[E0499]: cannot borrow `a` as mutable more than once at a time\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0499`.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "70 30",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.11,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "error_value": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "error",
+     "stderr": "",
+     "level": "STD"
+    },
+    "must_handle_error": {
+     "outcome": "PASS",
+     "refusal": "warning: unused `std::result::Result` that must be used",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "handled",
+     "stderr": "",
+     "level": "STD"
+    },
+    "typed_catch": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "caught A\npassed B",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "cleanup_on_error": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "released\nreleased",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "cleanup_on_panic": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "cleanup\nrecovered",
+     "stderr": "",
+     "level": "STD"
+    },
+    "assertion": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 101,
+     "secs": 0.0,
+     "stdout": "before",
+     "stderr": "thread 'main' (2257) panicked at main.rs:6:5:\nassertion failed: two == 3\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+     "level": "LANGUAGE"
+    },
+    "unused_value_refused": {
+     "outcome": "NONE",
+     "message": "an unused variable is only a warning"
+    },
+    "exhaustive_return": {
+     "outcome": "PASS",
+     "refusal": "error[E0317]: `if` may be missing an `else` clause\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0317`.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "pass",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "unsigned64": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "18446744073709551615",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "int128": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "1267650600228229401496703205376",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "literal_range": {
+     "outcome": "PASS",
+     "refusal": "error: literal out of range for `u8`\nerror: aborting due to 1 previous error",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "100",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "no_implicit_conversion": {
+     "outcome": "PASS",
+     "refusal": "error[E0308]: mismatched types\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0308`.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "42",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "mixed_sign_compare": {
+     "outcome": "PASS",
+     "refusal": "error[E0308]: mismatched types\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0308`.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "less",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "threads_shared_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "45",
+     "stderr": "",
+     "level": "STD"
+    },
+    "mutex": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "200000",
+     "stderr": "",
+     "level": "STD"
+    },
+    "atomic_counter": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "200000",
+     "stderr": "",
+     "level": "STD"
+    },
+    "channel": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "1 2 3",
+     "stderr": "",
+     "level": "STD"
+    },
+    "background_task": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.05,
+     "stdout": "started\n7",
+     "stderr": "",
+     "level": "STD"
+    },
+    "join_with_failure": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "worker failed: bad input",
+     "stderr": "",
+     "level": "STD"
+    },
+    "task_timeout": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.1,
+     "stdout": "timed out",
+     "stderr": "",
+     "level": "STD"
+    },
+    "task_cancel": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "stopped",
+     "stderr": "",
+     "level": "STD"
+    },
+    "concurrent_map": {
+     "outcome": "NONE",
+     "message": "no concurrent map in the standard library"
+    },
+    "spawn_argv": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "hi; touch /tmp/bb_x",
+     "stderr": "",
+     "level": "STD"
+    },
+    "exit_status": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "1",
+     "stderr": "",
+     "level": "STD"
+    },
+    "env_absent": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "absent",
+     "stderr": "",
+     "level": "STD"
+    },
+    "signal_graceful": {
+     "outcome": "NONE",
+     "message": "no signal handling in the standard library"
+    },
+    "secure_temp_file": {
+     "outcome": "NONE",
+     "message": "std has no temporary-file call; tempfile is a third-party crate"
+    },
+    "file_permissions": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "600",
+     "stderr": "",
+     "level": "STD"
+    },
+    "process_timeout": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.1,
+     "stdout": "killed",
+     "stderr": "",
+     "level": "STD"
+    },
+    "regex": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "true false",
+     "stderr": "",
+     "level": "PROJECT"
+    },
+    "regex_linear": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "no match",
+     "stderr": "",
+     "level": "PROJECT"
+    },
+    "graphemes": {
+     "outcome": "NONE",
+     "message": "no grapheme segmentation in the standard library or the Rust project's crates"
+    },
+    "unicode_normalize": {
+     "outcome": "NONE",
+     "message": "no Unicode normalization in the standard library or the Rust project's crates"
+    },
+    "utf8_validate": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "invalid",
+     "stderr": "",
+     "level": "STD"
+    },
+    "html_escape": {
+     "outcome": "NONE",
+     "message": "no HTML escaping in std or the Rust project's crates"
+    },
+    "json_parse": {
+     "outcome": "NONE",
+     "message": "no JSON parser in std or the Rust project's crates; serde_json is third-party"
+    },
+    "checked_add": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "overflow",
+     "stderr": "",
+     "level": "STD"
+    },
+    "wrapping_add": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "-9223372036854775808",
+     "stderr": "",
+     "level": "STD"
+    },
+    "saturating_add": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "9223372036854775807",
+     "stderr": "",
+     "level": "STD"
+    },
+    "bigint": {
+     "outcome": "NONE",
+     "message": "no arbitrary-precision integers in the standard library or the Rust project's crates"
+    },
+    "decimal": {
+     "outcome": "NONE",
+     "message": "no decimal type in the standard library"
+    },
+    "checked_narrowing": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "does not fit",
+     "stderr": "",
+     "level": "STD"
+    },
+    "float_to_int_checked": {
+     "outcome": "NONE",
+     "message": "no checked float-to-integer conversion; `as` saturates and maps NaN to 0"
+    },
+    "strict_parse": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "invalid",
+     "stderr": "",
+     "level": "STD"
+    },
+    "sorted_map": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "a b c",
+     "stderr": "",
+     "level": "STD"
+    },
+    "sorted_set": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "1 2 3",
+     "stderr": "",
+     "level": "STD"
+    },
+    "insertion_ordered_map": {
+     "outcome": "NONE",
+     "message": "no insertion-ordered map in the standard library"
+    },
+    "deque": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "0 2",
+     "stderr": "",
+     "level": "STD"
+    },
+    "priority_queue": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "1 2 3",
+     "stderr": "",
+     "level": "STD"
+    },
+    "counter": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "a=2 b=1",
+     "stderr": "",
+     "level": "STD"
+    },
+    "bitset": {
+     "outcome": "NONE",
+     "message": "no bit set in the standard library"
+    },
+    "composite_key": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "true",
+     "stderr": "",
+     "level": "STD"
+    },
+    "checked_index": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "none",
+     "stderr": "",
+     "level": "STD"
+    },
+    "total_float_sort": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "1 2 3 NaN",
+     "stderr": "",
+     "level": "STD"
+    },
+    "date_time_zone": {
+     "outcome": "NONE",
+     "message": "no time zone database in the standard library"
+    },
+    "byte_buffer": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "100000",
+     "stderr": "",
+     "level": "STD"
+    },
+    "weak_reference": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "gone",
+     "stderr": "",
+     "level": "STD"
+    },
+    "error_chain": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "loading config: not found\nnot found",
+     "stderr": "",
+     "level": "STD"
+    },
+    "stack_trace": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "inner",
+     "stderr": "",
+     "level": "STD"
+    },
+    "recover_worker_crash": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "worker crashed",
+     "stderr": "",
+     "level": "STD"
+    },
+    "recover_allocation_failure": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "allocation failed",
+     "stderr": "",
+     "level": "STD"
+    },
+    "recover_stack_overflow": {
+     "outcome": "NONE",
+     "message": "stack overflow ends the program"
+    },
+    "unhandled_hook": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 101,
+     "secs": 0.0,
+     "stdout": "hook ran",
+     "stderr": "",
+     "level": "STD"
+    },
+    "path_containment": {
+     "outcome": "NONE",
+     "message": "no lexical path normalization in the standard library"
+    },
+    "constant_time_compare": {
+     "outcome": "NONE",
+     "message": "no constant-time comparison in the standard library"
+    },
+    "secure_random": {
+     "outcome": "NONE",
+     "message": "no cryptographic random source in the standard library"
+    },
+    "sha256": {
+     "outcome": "NONE",
+     "message": "no SHA-256 in the standard library or the Rust project's crates"
+    },
+    "password_hash": {
+     "outcome": "NONE",
+     "message": "std has no cryptography; the RustCrypto crates are third-party"
+    },
+    "hmac": {
+     "outcome": "NONE",
+     "message": "std has no cryptography; the RustCrypto crates are third-party"
+    },
+    "aead_encrypt": {
+     "outcome": "NONE",
+     "message": "std has no cryptography; the RustCrypto crates are third-party"
+    }
+   },
+   "rank": 10
+  },
+  {
    "id": "nim",
    "name": "Nim",
    "version": "Nim Compiler Version 2.4.2 [Linux: amd64]",
-   "expressed": 65,
-   "builtin": 24,
-   "library": 41,
+   "expressed": 67,
+   "builtin": 23,
+   "ecosystem": 44,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -7412,6 +8394,19 @@
      "stdout": "5.0",
      "stderr": "",
      "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "PASS",
+     "refusal": "/tmp/breakbench/express-strong_enum/reject/main.nim(13, 10) Error: type mismatch",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "green",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "NONE",
+     "message": "no override marker; a misspelled method is a new method"
     },
     "duration": {
      "outcome": "PASS",
@@ -7505,6 +8500,15 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "nothing refuses passing one value as two mutable arguments"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.22,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "error_value": {
      "outcome": "PASS",
@@ -8042,15 +9046,15 @@
      "message": "no authenticated cipher in the standard library or the Nim project's packages"
     }
    },
-   "rank": 10
+   "rank": 11
   },
   {
    "id": "odin",
    "name": "Odin",
    "version": "odin version dev-2026-11-nightly:9a69916",
-   "expressed": 65,
-   "builtin": 21,
-   "library": 44,
+   "expressed": 66,
+   "builtin": 18,
+   "ecosystem": 48,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -8091,6 +9095,19 @@
      "stdout": "5",
      "stderr": "",
      "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "PASS",
+     "refusal": "/tmp/breakbench/express-strong_enum/reject/main.odin(20:19) Error: Cannot convert untyped value '7' to 'Color' from 'untyped integer'",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "green",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "NONE",
+     "message": "no methods or inheritance, so nothing marks a replacement method"
     },
     "duration": {
      "outcome": "PASS",
@@ -8164,6 +9181,10 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "nothing refuses passing one value as two mutable arguments"
+    },
+    "automatic_memory": {
+     "outcome": "NONE",
+     "message": "every allocation needs an explicit free, delete or free_all"
     },
     "error_value": {
      "outcome": "PASS",
@@ -8731,699 +9752,15 @@
      "level": "STD"
     }
    },
-   "rank": 11
-  },
-  {
-   "id": "rust",
-   "name": "Rust",
-   "version": "rustc 1.100.0 (0ef1bc386 2026-11-09)",
-   "expressed": 65,
-   "builtin": 29,
-   "library": 36,
-   "results": {
-    "tuple": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "1 a",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "complete_init": {
-     "outcome": "PASS",
-     "refusal": "error[E0063]: missing field `retries` in initializer of `Config`\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0063`.",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "5 3",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "sum_type_exhaustive": {
-     "outcome": "PASS",
-     "refusal": "error[E0004]: non-exhaustive patterns: `&Shape::Square(_)` not covered\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0004`.",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "circle",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "optional_type": {
-     "outcome": "PASS",
-     "refusal": "error[E0369]: cannot add `{integer}` to `std::option::Option<i64>`\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0369`.",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "none",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "newtype": {
-     "outcome": "PASS",
-     "refusal": "error[E0308]: mismatched types\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0308`.",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "5",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "duration": {
-     "outcome": "PASS",
-     "refusal": "error[E0308]: mismatched types\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0308`.",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "2000",
-     "stderr": "",
-     "level": "STD"
-    },
-    "nonnull_reference": {
-     "outcome": "PASS",
-     "refusal": "error[E0308]: mismatched types\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0308`.",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "app",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "definite_assignment": {
-     "outcome": "PASS",
-     "refusal": "error[E0381]: used binding `y` is possibly-uninitialized\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0381`.",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "5",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "thread_safety_check": {
-     "outcome": "PASS",
-     "refusal": "error[E0499]: cannot borrow `unguarded` as mutable more than once at a time\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0499`.",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "2",
-     "stderr": "",
-     "level": "STD"
-    },
-    "lock_owns_data": {
-     "outcome": "PASS",
-     "refusal": "error[E0609]: no field `debits` on type `std::sync::Mutex<Ledger>`\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0609`.",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "2000 2000",
-     "stderr": "",
-     "level": "STD"
-    },
-    "fixed_array_value": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "1",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "immutable_collection": {
-     "outcome": "PASS",
-     "refusal": "error[E0596]: cannot borrow `xs` as mutable, as it is not declared as mutable\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0596`.",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "3",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "readonly_param": {
-     "outcome": "PASS",
-     "refusal": "error[E0594]: cannot assign to `xs[_]`, which is behind a `&` reference\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0594`.",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "3",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "value_struct": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "1",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "immutable_binding": {
-     "outcome": "PASS",
-     "refusal": "error[E0384]: cannot assign twice to immutable variable `x`\nerror: aborting due to 1 previous error; 1 warning emitted\nFor more information about this error, try `rustc --explain E0384`.",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "1",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "consumed_value": {
-     "outcome": "PASS",
-     "refusal": "error[E0382]: borrow of moved value: `h`\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0382`.",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "closed",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "exclusive_mutation": {
-     "outcome": "PASS",
-     "refusal": "error[E0499]: cannot borrow `a` as mutable more than once at a time\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0499`.",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "70 30",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "error_value": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "error",
-     "stderr": "",
-     "level": "STD"
-    },
-    "must_handle_error": {
-     "outcome": "PASS",
-     "refusal": "warning: unused `std::result::Result` that must be used",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "handled",
-     "stderr": "",
-     "level": "STD"
-    },
-    "typed_catch": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "caught A\npassed B",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "cleanup_on_error": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "released\nreleased",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "cleanup_on_panic": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "cleanup\nrecovered",
-     "stderr": "",
-     "level": "STD"
-    },
-    "assertion": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 101,
-     "secs": 0.0,
-     "stdout": "before",
-     "stderr": "thread 'main' (2257) panicked at main.rs:6:5:\nassertion failed: two == 3\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
-     "level": "LANGUAGE"
-    },
-    "unused_value_refused": {
-     "outcome": "NONE",
-     "message": "an unused variable is only a warning"
-    },
-    "exhaustive_return": {
-     "outcome": "PASS",
-     "refusal": "error[E0317]: `if` may be missing an `else` clause\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0317`.",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "pass",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "unsigned64": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "18446744073709551615",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "int128": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "1267650600228229401496703205376",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "literal_range": {
-     "outcome": "PASS",
-     "refusal": "error: literal out of range for `u8`\nerror: aborting due to 1 previous error",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "100",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "no_implicit_conversion": {
-     "outcome": "PASS",
-     "refusal": "error[E0308]: mismatched types\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0308`.",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "42",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "mixed_sign_compare": {
-     "outcome": "PASS",
-     "refusal": "error[E0308]: mismatched types\nerror: aborting due to 1 previous error\nFor more information about this error, try `rustc --explain E0308`.",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "less",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "threads_shared_memory": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "45",
-     "stderr": "",
-     "level": "STD"
-    },
-    "mutex": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "200000",
-     "stderr": "",
-     "level": "STD"
-    },
-    "atomic_counter": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "200000",
-     "stderr": "",
-     "level": "STD"
-    },
-    "channel": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "1 2 3",
-     "stderr": "",
-     "level": "STD"
-    },
-    "background_task": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.05,
-     "stdout": "started\n7",
-     "stderr": "",
-     "level": "STD"
-    },
-    "join_with_failure": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "worker failed: bad input",
-     "stderr": "",
-     "level": "STD"
-    },
-    "task_timeout": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.1,
-     "stdout": "timed out",
-     "stderr": "",
-     "level": "STD"
-    },
-    "task_cancel": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "stopped",
-     "stderr": "",
-     "level": "STD"
-    },
-    "concurrent_map": {
-     "outcome": "NONE",
-     "message": "no concurrent map in the standard library"
-    },
-    "spawn_argv": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "hi; touch /tmp/bb_x",
-     "stderr": "",
-     "level": "STD"
-    },
-    "exit_status": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "1",
-     "stderr": "",
-     "level": "STD"
-    },
-    "env_absent": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "absent",
-     "stderr": "",
-     "level": "STD"
-    },
-    "signal_graceful": {
-     "outcome": "NONE",
-     "message": "no signal handling in the standard library"
-    },
-    "secure_temp_file": {
-     "outcome": "NONE",
-     "message": "std has no temporary-file call; tempfile is a third-party crate"
-    },
-    "file_permissions": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "600",
-     "stderr": "",
-     "level": "STD"
-    },
-    "process_timeout": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.1,
-     "stdout": "killed",
-     "stderr": "",
-     "level": "STD"
-    },
-    "regex": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "true false",
-     "stderr": "",
-     "level": "PROJECT"
-    },
-    "regex_linear": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "no match",
-     "stderr": "",
-     "level": "PROJECT"
-    },
-    "graphemes": {
-     "outcome": "NONE",
-     "message": "no grapheme segmentation in the standard library or the Rust project's crates"
-    },
-    "unicode_normalize": {
-     "outcome": "NONE",
-     "message": "no Unicode normalization in the standard library or the Rust project's crates"
-    },
-    "utf8_validate": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "invalid",
-     "stderr": "",
-     "level": "STD"
-    },
-    "html_escape": {
-     "outcome": "NONE",
-     "message": "no HTML escaping in std or the Rust project's crates"
-    },
-    "json_parse": {
-     "outcome": "NONE",
-     "message": "no JSON parser in std or the Rust project's crates; serde_json is third-party"
-    },
-    "checked_add": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "overflow",
-     "stderr": "",
-     "level": "STD"
-    },
-    "wrapping_add": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "-9223372036854775808",
-     "stderr": "",
-     "level": "STD"
-    },
-    "saturating_add": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "9223372036854775807",
-     "stderr": "",
-     "level": "STD"
-    },
-    "bigint": {
-     "outcome": "NONE",
-     "message": "no arbitrary-precision integers in the standard library or the Rust project's crates"
-    },
-    "decimal": {
-     "outcome": "NONE",
-     "message": "no decimal type in the standard library"
-    },
-    "checked_narrowing": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "does not fit",
-     "stderr": "",
-     "level": "STD"
-    },
-    "float_to_int_checked": {
-     "outcome": "NONE",
-     "message": "no checked float-to-integer conversion; `as` saturates and maps NaN to 0"
-    },
-    "strict_parse": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "invalid",
-     "stderr": "",
-     "level": "STD"
-    },
-    "sorted_map": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "a b c",
-     "stderr": "",
-     "level": "STD"
-    },
-    "sorted_set": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "1 2 3",
-     "stderr": "",
-     "level": "STD"
-    },
-    "insertion_ordered_map": {
-     "outcome": "NONE",
-     "message": "no insertion-ordered map in the standard library"
-    },
-    "deque": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "0 2",
-     "stderr": "",
-     "level": "STD"
-    },
-    "priority_queue": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "1 2 3",
-     "stderr": "",
-     "level": "STD"
-    },
-    "counter": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "a=2 b=1",
-     "stderr": "",
-     "level": "STD"
-    },
-    "bitset": {
-     "outcome": "NONE",
-     "message": "no bit set in the standard library"
-    },
-    "composite_key": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "true",
-     "stderr": "",
-     "level": "STD"
-    },
-    "checked_index": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "none",
-     "stderr": "",
-     "level": "STD"
-    },
-    "total_float_sort": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "1 2 3 NaN",
-     "stderr": "",
-     "level": "STD"
-    },
-    "date_time_zone": {
-     "outcome": "NONE",
-     "message": "no time zone database in the standard library"
-    },
-    "byte_buffer": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "100000",
-     "stderr": "",
-     "level": "STD"
-    },
-    "weak_reference": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "gone",
-     "stderr": "",
-     "level": "STD"
-    },
-    "error_chain": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "loading config: not found\nnot found",
-     "stderr": "",
-     "level": "STD"
-    },
-    "stack_trace": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "inner",
-     "stderr": "",
-     "level": "STD"
-    },
-    "recover_worker_crash": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "worker crashed",
-     "stderr": "",
-     "level": "STD"
-    },
-    "recover_allocation_failure": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "allocation failed",
-     "stderr": "",
-     "level": "STD"
-    },
-    "recover_stack_overflow": {
-     "outcome": "NONE",
-     "message": "stack overflow ends the program"
-    },
-    "unhandled_hook": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 101,
-     "secs": 0.0,
-     "stdout": "hook ran",
-     "stderr": "",
-     "level": "STD"
-    },
-    "path_containment": {
-     "outcome": "NONE",
-     "message": "no lexical path normalization in the standard library"
-    },
-    "constant_time_compare": {
-     "outcome": "NONE",
-     "message": "no constant-time comparison in the standard library"
-    },
-    "secure_random": {
-     "outcome": "NONE",
-     "message": "no cryptographic random source in the standard library"
-    },
-    "sha256": {
-     "outcome": "NONE",
-     "message": "no SHA-256 in the standard library or the Rust project's crates"
-    },
-    "password_hash": {
-     "outcome": "NONE",
-     "message": "std has no cryptography; the RustCrypto crates are third-party"
-    },
-    "hmac": {
-     "outcome": "NONE",
-     "message": "std has no cryptography; the RustCrypto crates are third-party"
-    },
-    "aead_encrypt": {
-     "outcome": "NONE",
-     "message": "std has no cryptography; the RustCrypto crates are third-party"
-    }
-   },
    "rank": 12
   },
   {
    "id": "zig",
    "name": "Zig",
    "version": "0.17.1",
-   "expressed": 63,
-   "builtin": 23,
-   "library": 40,
+   "expressed": 64,
+   "builtin": 20,
+   "ecosystem": 44,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -9469,6 +9806,19 @@
      "stdout": "5",
      "stderr": "",
      "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "PASS",
+     "refusal": "main.zig:23:35: error: expected type 'main.Color', found 'comptime_int'",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "green",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "NONE",
+     "message": "no inheritance or interfaces, so nothing marks a replacement method"
     },
     "duration": {
      "outcome": "NONE",
@@ -9552,6 +9902,10 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "nothing refuses passing one value as two mutable arguments"
+    },
+    "automatic_memory": {
+     "outcome": "NONE",
+     "message": "every allocation goes through an allocator and needs an explicit free or deinit"
     },
     "error_value": {
      "outcome": "PASS",
@@ -10095,9 +10449,9 @@
    "id": "v",
    "name": "V",
    "version": "V 0.5.2 7647ce1",
-   "expressed": 60,
-   "builtin": 22,
-   "library": 38,
+   "expressed": 62,
+   "builtin": 20,
+   "ecosystem": 42,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -10143,6 +10497,19 @@
      "stdout": "5.0",
      "stderr": "",
      "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "PASS",
+     "refusal": "main.v:19:15: error: cannot use `int literal` as `Color` in argument 1 to `name`",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "green",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "NONE",
+     "message": "no way to mark a method as implementing an interface; a misspelled method is just another method"
     },
     "duration": {
      "outcome": "NONE",
@@ -10226,6 +10593,15 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "nothing refuses passing one value as two mutable arguments"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.82,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "error_value": {
      "outcome": "PASS",
@@ -10751,12 +11127,1364 @@
    "rank": 14
   },
   {
+   "id": "cpp",
+   "name": "C++",
+   "version": "clang version 23.1.6 (https://github.com/llvm/llvm-project 5b10d2d74929eae78912771222c9855af97496f4)",
+   "expressed": 61,
+   "builtin": 20,
+   "ecosystem": 41,
+   "results": {
+    "tuple": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "1 a",
+     "stderr": "",
+     "level": "STD"
+    },
+    "complete_init": {
+     "outcome": "NONE",
+     "message": "aggregate initialization may leave fields out; they become zero"
+    },
+    "sum_type_exhaustive": {
+     "outcome": "PASS",
+     "refusal": "/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/type_traits:3297:5: error: no type named 'type' in 'std::invoke_result<overloaded<(lambda at main.cpp:21:34)>, const Square &>'\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/variant:1943:44: error: constexpr variable '__visit_rettypes_match' must be initialized by a constant expression\n/usr/lib/gcc/x86_64-linux-gnu/15/../../\n...\nion expression is not an integral constant expression\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/variant:1951:8: error: non-void constexpr function 'visit<overloaded<(lambda at main.cpp:21:34)>, const std::variant<Circle, Square> &>' should return a value\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/variant:1055:11: error: no matching function for call to '__invoke'",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "circle",
+     "stderr": "",
+     "level": "STD"
+    },
+    "optional_type": {
+     "outcome": "PASS",
+     "refusal": "main.cpp:8:15: error: invalid operands to binary expression ('std::optional<int>' and 'int')\n1 error generated.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "none",
+     "stderr": "",
+     "level": "STD"
+    },
+    "newtype": {
+     "outcome": "PASS",
+     "refusal": "main.cpp:11:28: error: invalid operands to binary expression ('Meters' and 'Seconds')\n1 warning and 1 error generated.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "5",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "PASS",
+     "refusal": "main.cpp:18:18: error: no matching function for call to 'name'\n1 warning and 1 error generated.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "green",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "PASS",
+     "refusal": "main.cpp:14:33: error: only virtual member functions can be marked 'override'\n2 warnings and 1 error generated.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "circle",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "duration": {
+     "outcome": "PASS",
+     "refusal": "main.cpp:10:36: error: invalid operands to binary expression ('milliseconds' (aka 'duration<long, ratio<1, 1000>>') and 'int')\n1 error generated.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "2000",
+     "stderr": "",
+     "level": "STD"
+    },
+    "nonnull_reference": {
+     "outcome": "PASS",
+     "refusal": "main.cpp:12:13: error: non-const lvalue reference to type 'Config' cannot bind to a temporary of type 'std::nullptr_t'\n1 error generated.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "app",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "definite_assignment": {
+     "outcome": "NONE",
+     "message": "reading a variable before it is set is only a warning"
+    },
+    "thread_safety_check": {
+     "outcome": "NONE",
+     "message": "nothing refuses an unlocked write to data that threads share"
+    },
+    "lock_owns_data": {
+     "outcome": "NONE",
+     "message": "the standard mutex guards code, not data; an unguarded read is accepted"
+    },
+    "fixed_array_value": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "1",
+     "stderr": "",
+     "level": "STD"
+    },
+    "immutable_collection": {
+     "outcome": "PASS",
+     "refusal": "main.cpp:8:8: error: no matching member function for call to 'push_back'\n1 error generated.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "3",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "readonly_param": {
+     "outcome": "PASS",
+     "refusal": "main.cpp:7:11: error: cannot assign to return value because function 'operator[]' returns a const value\n1 error generated.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "3",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "value_struct": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "1",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "immutable_binding": {
+     "outcome": "PASS",
+     "refusal": "main.cpp:7:7: error: cannot assign to variable 'x' with const-qualified type 'const int'\n1 error generated.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "1",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "consumed_value": {
+     "outcome": "NONE",
+     "message": "std::move leaves a moved-from object that can still be used"
+    },
+    "exclusive_mutation": {
+     "outcome": "NONE",
+     "message": "nothing refuses passing one value as two mutable arguments"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 1.36,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "STD"
+    },
+    "error_value": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "error",
+     "stderr": "",
+     "level": "STD"
+    },
+    "must_handle_error": {
+     "outcome": "PASS",
+     "refusal": "main.cpp:8:5: warning: ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "handled",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "typed_catch": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "caught A\npassed B",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "cleanup_on_error": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "released\nreleased",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "cleanup_on_panic": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "cleanup\nrecovered",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "assertion": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 134,
+     "secs": 0.0,
+     "stdout": "before",
+     "stderr": "main: main.cpp:8: int main(): Assertion `1 + 1 == 3' failed.\nAborted",
+     "level": "STD"
+    },
+    "unused_value_refused": {
+     "outcome": "NONE",
+     "message": "an unused variable is only a warning"
+    },
+    "exhaustive_return": {
+     "outcome": "PASS",
+     "refusal": "main.cpp:11:1: error: non-void function does not return a value in all control paths [-Werror,-Wreturn-type]\n1 error generated.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "pass",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "unsigned64": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "18446744073709551615",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "int128": {
+     "outcome": "NONE",
+     "message": "no 128-bit integer type in the C++23 standard"
+    },
+    "literal_range": {
+     "outcome": "PASS",
+     "refusal": "main.cpp:8:26: error: constant expression evaluates to 300 which cannot be narrowed to type 'std::uint8_t' (aka 'unsigned char') [-Wc++11-narrowing]\n2 warnings and 1 error generated.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "100",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "no_implicit_conversion": {
+     "outcome": "NONE",
+     "message": "an implicit narrowing conversion is only a warning"
+    },
+    "mixed_sign_compare": {
+     "outcome": "NONE",
+     "message": "a signed/unsigned comparison is only a warning"
+    },
+    "threads_shared_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "45",
+     "stderr": "",
+     "level": "STD"
+    },
+    "mutex": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "200000",
+     "stderr": "",
+     "level": "STD"
+    },
+    "atomic_counter": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "200000",
+     "stderr": "",
+     "level": "STD"
+    },
+    "channel": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "1 2 3",
+     "stderr": "",
+     "level": "PLATFORM"
+    },
+    "background_task": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.05,
+     "stdout": "started\n7",
+     "stderr": "",
+     "level": "STD"
+    },
+    "join_with_failure": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "worker failed: bad input",
+     "stderr": "",
+     "level": "STD"
+    },
+    "task_timeout": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.1,
+     "stdout": "timed out",
+     "stderr": "",
+     "level": "STD"
+    },
+    "task_cancel": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "stopped",
+     "stderr": "",
+     "level": "STD"
+    },
+    "concurrent_map": {
+     "outcome": "NONE",
+     "message": "no concurrent map in the standard library"
+    },
+    "spawn_argv": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "hi; touch /tmp/bb_x",
+     "stderr": "",
+     "level": "PLATFORM"
+    },
+    "exit_status": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "1",
+     "stderr": "",
+     "level": "PLATFORM"
+    },
+    "env_absent": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "absent",
+     "stderr": "",
+     "level": "STD"
+    },
+    "signal_graceful": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "cleaned up",
+     "stderr": "",
+     "level": "STD"
+    },
+    "secure_temp_file": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "ok",
+     "stderr": "",
+     "level": "PLATFORM"
+    },
+    "file_permissions": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "600",
+     "stderr": "",
+     "level": "PLATFORM"
+    },
+    "process_timeout": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.1,
+     "stdout": "killed",
+     "stderr": "",
+     "level": "PLATFORM"
+    },
+    "regex": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "true false",
+     "stderr": "",
+     "level": "STD"
+    },
+    "regex_linear": {
+     "outcome": "NONE",
+     "message": "the standard regex engine backtracks; there is no linear-time engine"
+    },
+    "graphemes": {
+     "outcome": "NONE",
+     "message": "no grapheme segmentation in the standard library"
+    },
+    "unicode_normalize": {
+     "outcome": "NONE",
+     "message": "no Unicode normalization in the standard library"
+    },
+    "utf8_validate": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "invalid",
+     "stderr": "",
+     "level": "STD"
+    },
+    "html_escape": {
+     "outcome": "NONE",
+     "message": "no HTML escaping in the standard library or ISO C/POSIX"
+    },
+    "json_parse": {
+     "outcome": "NONE",
+     "message": "no JSON parser in the standard library or ISO C/POSIX"
+    },
+    "checked_add": {
+     "outcome": "NONE",
+     "message": "no checked addition in the C++23 standard library"
+    },
+    "wrapping_add": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "-9223372036854775808",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "saturating_add": {
+     "outcome": "NONE",
+     "message": "no saturating arithmetic in the C++23 standard library"
+    },
+    "bigint": {
+     "outcome": "NONE",
+     "message": "no arbitrary-precision integers in the standard library"
+    },
+    "decimal": {
+     "outcome": "NONE",
+     "message": "no decimal type in the standard library"
+    },
+    "checked_narrowing": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "does not fit",
+     "stderr": "",
+     "level": "STD"
+    },
+    "float_to_int_checked": {
+     "outcome": "NONE",
+     "message": "no checked float-to-integer conversion in the standard library"
+    },
+    "strict_parse": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "invalid",
+     "stderr": "",
+     "level": "STD"
+    },
+    "sorted_map": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "a b c",
+     "stderr": "",
+     "level": "STD"
+    },
+    "sorted_set": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "1 2 3",
+     "stderr": "",
+     "level": "STD"
+    },
+    "insertion_ordered_map": {
+     "outcome": "NONE",
+     "message": "no insertion-ordered map in the standard library"
+    },
+    "deque": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "0 2",
+     "stderr": "",
+     "level": "STD"
+    },
+    "priority_queue": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "1 2 3",
+     "stderr": "",
+     "level": "STD"
+    },
+    "counter": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "a=2 b=1",
+     "stderr": "",
+     "level": "STD"
+    },
+    "bitset": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "true false",
+     "stderr": "",
+     "level": "STD"
+    },
+    "composite_key": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "true",
+     "stderr": "",
+     "level": "STD"
+    },
+    "checked_index": {
+     "outcome": "NONE",
+     "message": "no index lookup that returns a missing value"
+    },
+    "total_float_sort": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "1 2 3 NaN",
+     "stderr": "",
+     "level": "STD"
+    },
+    "date_time_zone": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "2026-03-29 03:30",
+     "stderr": "",
+     "level": "STD"
+    },
+    "byte_buffer": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "100000",
+     "stderr": "",
+     "level": "STD"
+    },
+    "weak_reference": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "gone",
+     "stderr": "",
+     "level": "STD"
+    },
+    "error_chain": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "loading config: not found\nnot found",
+     "stderr": "",
+     "level": "STD"
+    },
+    "stack_trace": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "inner",
+     "stderr": "",
+     "level": "STD"
+    },
+    "recover_worker_crash": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "worker crashed",
+     "stderr": "",
+     "level": "STD"
+    },
+    "recover_allocation_failure": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "allocation failed",
+     "stderr": "==1270==WARNING: AddressSanitizer failed to allocate 0x9184e72a000 bytes",
+     "level": "STD"
+    },
+    "recover_stack_overflow": {
+     "outcome": "NONE",
+     "message": "stack overflow ends the program"
+    },
+    "unhandled_hook": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 1,
+     "secs": 0.0,
+     "stdout": "hook ran",
+     "stderr": "",
+     "level": "STD"
+    },
+    "path_containment": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "outside",
+     "stderr": "",
+     "level": "STD"
+    },
+    "constant_time_compare": {
+     "outcome": "NONE",
+     "message": "no constant-time comparison in the standard library"
+    },
+    "secure_random": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "3103123ba55369566aa78302084c9560",
+     "stderr": "",
+     "level": "PLATFORM"
+    },
+    "sha256": {
+     "outcome": "NONE",
+     "message": "no SHA-256 in the standard library"
+    },
+    "password_hash": {
+     "outcome": "NONE",
+     "message": "no password hash in ISO C or POSIX"
+    },
+    "hmac": {
+     "outcome": "NONE",
+     "message": "no HMAC in ISO C or POSIX"
+    },
+    "aead_encrypt": {
+     "outcome": "NONE",
+     "message": "no authenticated cipher in ISO C or POSIX"
+    }
+   },
+   "rank": 15
+  },
+  {
+   "id": "typescript",
+   "name": "TypeScript",
+   "version": "tsc Version 7.0.2 / node v26.13.1",
+   "expressed": 61,
+   "builtin": 18,
+   "ecosystem": 43,
+   "results": {
+    "tuple": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "1 a",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "complete_init": {
+     "outcome": "PASS",
+     "refusal": "main.ts(6,7): error TS2741: Property 'retries' is missing in type '{ timeout: number; }' but required in type 'Config'.\nmain.ts(6,7): error TS6133: 'partial' is declared but its value is never read.",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "5 3",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "sum_type_exhaustive": {
+     "outcome": "PASS",
+     "refusal": "main.ts(14,25): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "circle",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "optional_type": {
+     "outcome": "PASS",
+     "refusal": "main.ts(4,13): error TS18048: 'o' is possibly 'undefined'.",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "none",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "newtype": {
+     "outcome": "PASS",
+     "refusal": "main.ts(8,76): error TS2345: Argument of type 'Seconds' is not assignable to parameter of type 'Meters'.",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "5",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "PASS",
+     "refusal": "main.ts(21,18): error TS2345: Argument of type '7' is not assignable to parameter of type 'Color'.",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "green",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "PASS",
+     "refusal": "main.ts(13,12): error TS4117: This member cannot have an 'override' modifier because it is not declared in the base class 'Shape'. Did you mean 'describe'?",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "circle",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "duration": {
+     "outcome": "NONE",
+     "message": "no duration type in the language or runtime"
+    },
+    "nonnull_reference": {
+     "outcome": "PASS",
+     "refusal": "main.ts(8,7): error TS2322: Type 'null' is not assignable to type 'Config'.\nmain.ts(8,7): error TS6133: 'missing' is declared but its value is never read.",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "app",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "definite_assignment": {
+     "outcome": "PASS",
+     "refusal": "main.ts(9,13): error TS2454: Variable 'y' is used before being assigned.",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "5",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "thread_safety_check": {
+     "outcome": "NONE",
+     "message": "worker threads share no ordinary objects, so threads cannot share a list"
+    },
+    "lock_owns_data": {
+     "outcome": "NONE",
+     "message": "no mutex in the language or its standard library"
+    },
+    "fixed_array_value": {
+     "outcome": "NONE",
+     "message": "arrays are references; no value array type"
+    },
+    "immutable_collection": {
+     "outcome": "PASS",
+     "refusal": "main.ts(4,4): error TS2339: Property 'push' does not exist on type 'readonly number[]'.",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "3",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "readonly_param": {
+     "outcome": "PASS",
+     "refusal": "main.ts(4,3): error TS2542: Index signature in type 'readonly number[]' only permits reading.",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "3",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "value_struct": {
+     "outcome": "NONE",
+     "message": "objects are references; no value record type"
+    },
+    "immutable_binding": {
+     "outcome": "PASS",
+     "refusal": "main.ts(4,1): error TS2588: Cannot assign to 'x' because it is a constant.",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "1",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "consumed_value": {
+     "outcome": "NONE",
+     "message": "no ownership tracking: a value stays usable after a call that consumes it"
+    },
+    "exclusive_mutation": {
+     "outcome": "NONE",
+     "message": "nothing refuses passing one value as two mutable arguments"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 2.58,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "error_value": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "error",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "must_handle_error": {
+     "outcome": "NONE",
+     "message": "exceptions are unchecked"
+    },
+    "typed_catch": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "caught A\npassed B",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "cleanup_on_error": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "released\nreleased",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "cleanup_on_panic": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "cleanup\nrecovered",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "assertion": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 1,
+     "secs": 0.02,
+     "stdout": "before",
+     "stderr": "node:internal/assert/utils:146\n  throw error;\n  ^\n\nAssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  (process.argv.length === 5)\n\n    at Object.<anonymous> (/tmp/breakbench/express-assertion/main/out/main.js:9:27)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:intern\n...\nt Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: false,\n  expected: true,\n  operator: '==',\n  diff: 'simple'\n}\n\nNode.js v26.13.1",
+     "level": "STD"
+    },
+    "unused_value_refused": {
+     "outcome": "PASS",
+     "refusal": "main.ts(5,7): error TS6133: 'doubled' is declared but its value is never read.",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "42",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "exhaustive_return": {
+     "outcome": "PASS",
+     "refusal": "main.ts(7,30): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "pass",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "unsigned64": {
+     "outcome": "NONE",
+     "message": "no fixed-width integer type"
+    },
+    "int128": {
+     "outcome": "NONE",
+     "message": "no 128-bit integer type"
+    },
+    "literal_range": {
+     "outcome": "NONE",
+     "message": "no 8-bit integer type"
+    },
+    "no_implicit_conversion": {
+     "outcome": "NONE",
+     "message": "one number type, so there is nothing to narrow"
+    },
+    "mixed_sign_compare": {
+     "outcome": "NONE",
+     "message": "no unsigned integer types"
+    },
+    "threads_shared_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "45",
+     "stderr": "",
+     "level": "STD"
+    },
+    "mutex": {
+     "outcome": "NONE",
+     "message": "no mutex in the language or its standard library"
+    },
+    "atomic_counter": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "200000",
+     "stderr": "",
+     "level": "STD"
+    },
+    "channel": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "1 2 3",
+     "stderr": "",
+     "level": "STD"
+    },
+    "background_task": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.06,
+     "stdout": "started\n7",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "join_with_failure": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "worker failed: bad input",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "task_timeout": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.12,
+     "stdout": "timed out",
+     "stderr": "",
+     "level": "STD"
+    },
+    "task_cancel": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "stopped",
+     "stderr": "",
+     "level": "STD"
+    },
+    "concurrent_map": {
+     "outcome": "NONE",
+     "message": "no map that threads share"
+    },
+    "spawn_argv": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "hi; touch /tmp/bb_x",
+     "stderr": "",
+     "level": "STD"
+    },
+    "exit_status": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "1",
+     "stderr": "",
+     "level": "STD"
+    },
+    "env_absent": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "absent",
+     "stderr": "",
+     "level": "STD"
+    },
+    "signal_graceful": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "cleaned up",
+     "stderr": "",
+     "level": "STD"
+    },
+    "secure_temp_file": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "ok",
+     "stderr": "",
+     "level": "STD"
+    },
+    "file_permissions": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "600",
+     "stderr": "",
+     "level": "STD"
+    },
+    "process_timeout": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.12,
+     "stdout": "killed",
+     "stderr": "",
+     "level": "STD"
+    },
+    "regex": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "true false",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "regex_linear": {
+     "outcome": "NONE",
+     "message": "the standard regex engine backtracks; there is no linear-time engine"
+    },
+    "graphemes": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.06,
+     "stdout": "abcdefgh👍🏽",
+     "stderr": "",
+     "level": "STD"
+    },
+    "unicode_normalize": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "equal",
+     "stderr": "",
+     "level": "STD"
+    },
+    "utf8_validate": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "invalid",
+     "stderr": "",
+     "level": "STD"
+    },
+    "html_escape": {
+     "outcome": "NONE",
+     "message": "no HTML escaping in the language or Node's standard library"
+    },
+    "json_parse": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "8080 invalid",
+     "stderr": "",
+     "level": "STD"
+    },
+    "checked_add": {
+     "outcome": "NONE",
+     "message": "no fixed-width integer type"
+    },
+    "wrapping_add": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "-9223372036854775808",
+     "stderr": "",
+     "level": "STD"
+    },
+    "saturating_add": {
+     "outcome": "NONE",
+     "message": "no fixed-width integer type"
+    },
+    "bigint": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "1267650600228229401496703205376",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "decimal": {
+     "outcome": "NONE",
+     "message": "no decimal type in the language or runtime"
+    },
+    "checked_narrowing": {
+     "outcome": "NONE",
+     "message": "no fixed-width integer type"
+    },
+    "float_to_int_checked": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "does not fit",
+     "stderr": "",
+     "level": "STD"
+    },
+    "strict_parse": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "invalid",
+     "stderr": "",
+     "level": "STD"
+    },
+    "sorted_map": {
+     "outcome": "NONE",
+     "message": "no sorted map in the language or runtime"
+    },
+    "sorted_set": {
+     "outcome": "NONE",
+     "message": "no sorted set in the language or runtime"
+    },
+    "insertion_ordered_map": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "c a b",
+     "stderr": "",
+     "level": "STD"
+    },
+    "deque": {
+     "outcome": "NONE",
+     "message": "no deque in the language or runtime"
+    },
+    "priority_queue": {
+     "outcome": "NONE",
+     "message": "no priority queue in the language or runtime"
+    },
+    "counter": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "a=2 b=1",
+     "stderr": "",
+     "level": "STD"
+    },
+    "bitset": {
+     "outcome": "NONE",
+     "message": "no bit set in the language or runtime"
+    },
+    "composite_key": {
+     "outcome": "NONE",
+     "message": "Set compares arrays and objects by identity"
+    },
+    "checked_index": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "none",
+     "stderr": "",
+     "level": "STD"
+    },
+    "total_float_sort": {
+     "outcome": "NONE",
+     "message": "no total-order comparison for numbers"
+    },
+    "date_time_zone": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.04,
+     "stdout": "2026-03-29 03:30",
+     "stderr": "",
+     "level": "STD"
+    },
+    "byte_buffer": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "100000",
+     "stderr": "",
+     "level": "STD"
+    },
+    "weak_reference": {
+     "outcome": "NONE",
+     "message": "a collection cannot be forced without a runtime flag"
+    },
+    "error_chain": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "loading config: not found\nnot found",
+     "stderr": "",
+     "level": "STD"
+    },
+    "stack_trace": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "inner",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "recover_worker_crash": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "worker crashed",
+     "stderr": "",
+     "level": "STD"
+    },
+    "recover_allocation_failure": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "allocation failed",
+     "stderr": "",
+     "level": "STD"
+    },
+    "recover_stack_overflow": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "stack overflow",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "unhandled_hook": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 1,
+     "secs": 0.02,
+     "stdout": "hook ran",
+     "stderr": "",
+     "level": "STD"
+    },
+    "path_containment": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "outside",
+     "stderr": "",
+     "level": "STD"
+    },
+    "constant_time_compare": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "equal",
+     "stderr": "",
+     "level": "STD"
+    },
+    "secure_random": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "484e1b5936de3561ccd6a13c0694419d",
+     "stderr": "",
+     "level": "STD"
+    },
+    "sha256": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+     "stderr": "",
+     "level": "STD"
+    },
+    "password_hash": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.08,
+     "stdout": "true false",
+     "stderr": "",
+     "level": "STD"
+    },
+    "hmac": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8",
+     "stderr": "",
+     "level": "STD"
+    },
+    "aead_encrypt": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "secret\nrejected",
+     "stderr": "",
+     "level": "STD"
+    }
+   },
+   "rank": 16
+  },
+  {
    "id": "c3",
    "name": "C3",
    "version": "C3 Compiler Version:       0.8.6",
-   "expressed": 59,
-   "builtin": 20,
-   "library": 39,
+   "expressed": 60,
+   "builtin": 17,
+   "ecosystem": 43,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -10792,6 +12520,19 @@
      "stdout": "5",
      "stderr": "",
      "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "PASS",
+     "refusal": "/tmp/breakbench/express-strong_enum/reject/main.c3:25:18: error: Implicitly casting 'int' to 'Color' is not permitted, but you may do an explicit cast by placing '(Color)' before the expression.",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "green",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "NONE",
+     "message": "a @dynamic method that matches no interface method is accepted as a new method"
     },
     "duration": {
      "outcome": "PASS",
@@ -10870,6 +12611,10 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "nothing refuses passing one value as two mutable arguments"
+    },
+    "automatic_memory": {
+     "outcome": "NONE",
+     "message": "every heap allocation needs an explicit free; a @pool frees at the end of its scope, not when the memory is no longer used"
     },
     "error_value": {
      "outcome": "PASS",
@@ -11402,15 +13147,15 @@
      "message": "no authenticated cipher; AES, ChaCha20 and Poly1305 come only as separate parts"
     }
    },
-   "rank": 15
+   "rank": 17
   },
   {
    "id": "golang",
    "name": "Go",
    "version": "go version go1.27.4 linux/amd64",
-   "expressed": 59,
-   "builtin": 16,
-   "library": 43,
+   "expressed": 60,
+   "builtin": 15,
+   "ecosystem": 45,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -11441,6 +13186,14 @@
      "stdout": "5",
      "stderr": "",
      "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "NONE",
+     "message": "an untyped constant converts to any integer-based type, so name(7) is accepted"
+    },
+    "override_check": {
+     "outcome": "NONE",
+     "message": "no way to mark a method as implementing an interface; a misspelled method is just another method"
     },
     "duration": {
      "outcome": "PASS",
@@ -11509,6 +13262,15 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "nothing refuses passing one value as two mutable arguments"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.29,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "error_value": {
      "outcome": "PASS",
@@ -12056,15 +13818,15 @@
      "level": "STD"
     }
    },
-   "rank": 16
+   "rank": 18
   },
   {
-   "id": "cpp",
-   "name": "C++",
-   "version": "clang version 23.1.6 (https://github.com/llvm/llvm-project 5b10d2d74929eae78912771222c9855af97496f4)",
-   "expressed": 58,
-   "builtin": 20,
-   "library": 38,
+   "id": "haskell",
+   "name": "Haskell",
+   "version": "The Glorious Glasgow Haskell Compilation System, version 9.14.1",
+   "expressed": 60,
+   "builtin": 18,
+   "ecosystem": 42,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -12073,51 +13835,59 @@
      "secs": 0.0,
      "stdout": "1 a",
      "stderr": "",
-     "level": "STD"
+     "level": "LANGUAGE"
     },
     "complete_init": {
      "outcome": "NONE",
-     "message": "aggregate initialization may leave fields out; they become zero"
+     "message": "a record built without a field is only a warning (-Wmissing-fields)"
     },
     "sum_type_exhaustive": {
-     "outcome": "PASS",
-     "refusal": "/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/type_traits:3297:5: error: no type named 'type' in 'std::invoke_result<overloaded<(lambda at main.cpp:21:34)>, const Square &>'\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/variant:1943:44: error: constexpr variable '__visit_rettypes_match' must be initialized by a constant expression\n/usr/lib/gcc/x86_64-linux-gnu/15/../../\n...\nion expression is not an integral constant expression\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/variant:1951:8: error: non-void constexpr function 'visit<overloaded<(lambda at main.cpp:21:34)>, const std::variant<Circle, Square> &>' should return a value\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/variant:1055:11: error: no matching function for call to '__invoke'",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "circle",
-     "stderr": "",
-     "level": "STD"
+     "outcome": "NONE",
+     "message": "a missing case is a warning (-Wincomplete-patterns), not an error"
     },
     "optional_type": {
      "outcome": "PASS",
-     "refusal": "main.cpp:8:15: error: invalid operands to binary expression ('std::optional<int>' and 'int')\n1 error generated.",
+     "refusal": "main.hs:6:12: error: [GHC-39999]\n    • No instance for ‘Num (Maybe Int)’ arising from a use of ‘+’\n    • In the first argument of ‘print’, namely ‘(o + 1)’\n      In a stmt of a 'do' block: print (o + 1)",
      "exit": 0,
      "secs": 0.0,
      "stdout": "none",
      "stderr": "",
-     "level": "STD"
+     "level": "LANGUAGE"
     },
     "newtype": {
      "outcome": "PASS",
-     "refusal": "main.cpp:11:28: error: invalid operands to binary expression ('Meters' and 'Seconds')\n1 warning and 1 error generated.",
+     "refusal": "main.hs:12:39: error: [GHC-83865]\n    • Couldn't match expected type ‘Meters’ with actual type ‘Seconds’\n    • In the second argument of ‘addM’, namely ‘(Seconds 3)’\n      In the expression: addM (Meters 2) (Seconds 3)",
      "exit": 0,
      "secs": 0.0,
      "stdout": "5",
      "stderr": "",
      "level": "LANGUAGE"
     },
-    "duration": {
+    "strong_enum": {
      "outcome": "PASS",
-     "refusal": "main.cpp:10:36: error: invalid operands to binary expression ('milliseconds' (aka 'duration<long, ratio<1, 1000>>') and 'int')\n1 error generated.",
+     "refusal": "main.hs:13:18: error: [GHC-39999]\n    • No instance for ‘Num Color’ arising from the literal ‘7’\n    • In the first argument of ‘name’, namely ‘7’\n      In the first argument of ‘putStrLn’, namely ‘(name 7)’",
      "exit": 0,
      "secs": 0.0,
-     "stdout": "2000",
+     "stdout": "green",
      "stderr": "",
-     "level": "STD"
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "PASS",
+     "refusal": "main.hs:11:3: error: [GHC-54721]\n    ‘descibe’ is not a (visible) method of class ‘Shape’",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "circle",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "duration": {
+     "outcome": "NONE",
+     "message": "numeric literals convert to NominalDiffTime, so a duration plus a plain number is accepted"
     },
     "nonnull_reference": {
      "outcome": "PASS",
-     "refusal": "main.cpp:12:13: error: non-const lvalue reference to type 'Config' cannot bind to a temporary of type 'std::nullptr_t'\n1 error generated.",
+     "refusal": "main.hs:8:19: error: [GHC-83865]\n    • Couldn't match expected type ‘Config’ with actual type ‘Maybe a0’\n    • In the first argument of ‘name’, namely ‘(Nothing :: Config)’\n      In the first argument of ‘putStrLn’, namely",
      "exit": 0,
      "secs": 0.0,
      "stdout": "app",
@@ -12125,29 +13895,34 @@
      "level": "LANGUAGE"
     },
     "definite_assignment": {
-     "outcome": "NONE",
-     "message": "reading a variable before it is set is only a warning"
+     "outcome": "PASS",
+     "refusal": "main.hs:10:7: error: [GHC-44432]\n    The type signature for ‘y’ lacks an accompanying binding",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "5",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "thread_safety_check": {
      "outcome": "NONE",
      "message": "nothing refuses an unlocked write to data that threads share"
     },
     "lock_owns_data": {
-     "outcome": "NONE",
-     "message": "the standard mutex guards code, not data; an unguarded read is accepted"
-    },
-    "fixed_array_value": {
      "outcome": "PASS",
-     "refusal": "",
+     "refusal": "main.hs:18:17: error: [GHC-83865]\n    • Couldn't match expected type ‘Ledger’\n                  with actual type ‘MVar Ledger’\n    • In the first argument of ‘debits’, namely ‘ledger’",
      "exit": 0,
      "secs": 0.0,
-     "stdout": "1",
+     "stdout": "2000 2000",
      "stderr": "",
      "level": "STD"
     },
+    "fixed_array_value": {
+     "outcome": "NONE",
+     "message": "arrays that change in place are references (IOArray); immutable arrays have no in-place write"
+    },
     "immutable_collection": {
      "outcome": "PASS",
-     "refusal": "main.cpp:8:8: error: no matching member function for call to 'push_back'\n1 error generated.",
+     "refusal": "main.hs:8:14: error: [GHC-83865]\n    • Couldn't match type ‘[]’ with ‘a0 i0’\n      Expected: a0 i0 Int\n        Actual: [Int]",
      "exit": 0,
      "secs": 0.0,
      "stdout": "3",
@@ -12156,7 +13931,7 @@
     },
     "readonly_param": {
      "outcome": "PASS",
-     "refusal": "main.cpp:7:11: error: cannot assign to return value because function 'operator[]' returns a const value\n1 error generated.",
+     "refusal": "main.hs:7:14: error: [GHC-83865]\n    • Couldn't match type ‘[]’ with ‘a0 i0’\n      Expected: a0 i0 Int\n        Actual: [Int]",
      "exit": 0,
      "secs": 0.0,
      "stdout": "3",
@@ -12164,17 +13939,12 @@
      "level": "LANGUAGE"
     },
     "value_struct": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "1",
-     "stderr": "",
-     "level": "LANGUAGE"
+     "outcome": "NONE",
+     "message": "records are immutable; no mutable record that copies on assignment"
     },
     "immutable_binding": {
      "outcome": "PASS",
-     "refusal": "main.cpp:7:7: error: cannot assign to variable 'x' with const-qualified type 'const int'\n1 error generated.",
+     "refusal": "main.hs:8:14: error: [GHC-83865]\n    • Couldn't match expected type ‘GHC.Internal.IORef.IORef a0’\n                  with actual type ‘Int’\n    • In the first argument of ‘writeIORef’, namely ‘x’",
      "exit": 0,
      "secs": 0.0,
      "stdout": "1",
@@ -12183,11 +13953,20 @@
     },
     "consumed_value": {
      "outcome": "NONE",
-     "message": "std::move leaves a moved-from object that can still be used"
+     "message": "linear types need the LinearTypes extension, an opt-in"
     },
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "nothing refuses passing one value as two mutable arguments"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.15,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "error_value": {
      "outcome": "PASS",
@@ -12196,11 +13975,11 @@
      "secs": 0.0,
      "stdout": "error",
      "stderr": "",
-     "level": "STD"
+     "level": "LANGUAGE"
     },
     "must_handle_error": {
      "outcome": "PASS",
-     "refusal": "main.cpp:8:5: warning: ignoring return value of function declared with 'nodiscard' attribute [-Wunused-result]",
+     "refusal": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:8:3: warning: [GHC-81995] [-Wunused-do-bind]\n    A do-notation statement discarded a result of type\n      ‘Either String ()’\n    Suggested fix: Suppress this warning by saying ‘_ <- save’\n  |\n8 |   save -- REJECT!\n  |   ^^^^",
      "exit": 0,
      "secs": 0.0,
      "stdout": "handled",
@@ -12214,7 +13993,7 @@
      "secs": 0.0,
      "stdout": "caught A\npassed B",
      "stderr": "",
-     "level": "LANGUAGE"
+     "level": "STD"
     },
     "cleanup_on_error": {
      "outcome": "PASS",
@@ -12223,7 +14002,7 @@
      "secs": 0.0,
      "stdout": "released\nreleased",
      "stderr": "",
-     "level": "LANGUAGE"
+     "level": "STD"
     },
     "cleanup_on_panic": {
      "outcome": "PASS",
@@ -12232,15 +14011,15 @@
      "secs": 0.0,
      "stdout": "cleanup\nrecovered",
      "stderr": "",
-     "level": "LANGUAGE"
+     "level": "STD"
     },
     "assertion": {
      "outcome": "PASS",
      "refusal": "",
-     "exit": 134,
+     "exit": 1,
      "secs": 0.0,
      "stdout": "before",
-     "stderr": "main: main.cpp:8: int main(): Assertion `1 + 1 == 3' failed.\nAborted",
+     "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.AssertionFailed:\n\nAssertion failed\n\nHasCallStack backtrace:\n  throwIO, called at libraries/ghc-internal/src/GHC/Internal/IO/Exception.hs:446:5 in ghc-internal:GHC.Internal.IO.Exception\n  assert, called at main.hs:8:3 in main:Main",
      "level": "STD"
     },
     "unused_value_refused": {
@@ -12248,13 +14027,8 @@
      "message": "an unused variable is only a warning"
     },
     "exhaustive_return": {
-     "outcome": "PASS",
-     "refusal": "main.cpp:11:1: error: non-void function does not return a value in all control paths [-Werror,-Wreturn-type]\n1 error generated.",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "pass",
-     "stderr": "",
-     "level": "LANGUAGE"
+     "outcome": "NONE",
+     "message": "guards that miss a case are only a warning"
     },
     "unsigned64": {
      "outcome": "PASS",
@@ -12263,28 +14037,33 @@
      "secs": 0.0,
      "stdout": "18446744073709551615",
      "stderr": "",
-     "level": "LANGUAGE"
+     "level": "STD"
     },
     "int128": {
      "outcome": "NONE",
-     "message": "no 128-bit integer type in the C++23 standard"
+     "message": "no 128-bit integer type"
     },
     "literal_range": {
+     "outcome": "NONE",
+     "message": "an out-of-range literal is only a warning (-Woverflowed-literals)"
+    },
+    "no_implicit_conversion": {
      "outcome": "PASS",
-     "refusal": "main.cpp:8:26: error: constant expression evaluates to 300 which cannot be narrowed to type 'std::uint8_t' (aka 'unsigned char') [-Wc++11-narrowing]\n2 warnings and 1 error generated.",
+     "refusal": "main.hs:9:10: error: [GHC-83865]\n    • Couldn't match expected type ‘Int32’ with actual type ‘Int64’\n    • In the first argument of ‘print’, namely ‘(big :: Int32)’\n      In a stmt of a 'do' block: print (big :: Int32)",
      "exit": 0,
      "secs": 0.0,
-     "stdout": "100",
+     "stdout": "42",
      "stderr": "",
      "level": "LANGUAGE"
     },
-    "no_implicit_conversion": {
-     "outcome": "NONE",
-     "message": "an implicit narrowing conversion is only a warning"
-    },
     "mixed_sign_compare": {
-     "outcome": "NONE",
-     "message": "a signed/unsigned comparison is only a warning"
+     "outcome": "PASS",
+     "refusal": "main.hs:9:14: error: [GHC-83865]\n    • Couldn't match expected type ‘Int’ with actual type ‘Word’\n    • In the second argument of ‘(<)’, namely ‘n’\n      In the first argument of ‘print’, namely ‘(i < n)’",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "less",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "threads_shared_memory": {
      "outcome": "PASS",
@@ -12299,7 +14078,7 @@
      "outcome": "PASS",
      "refusal": "",
      "exit": 0,
-     "secs": 0.01,
+     "secs": 0.02,
      "stdout": "200000",
      "stderr": "",
      "level": "STD"
@@ -12308,7 +14087,7 @@
      "outcome": "PASS",
      "refusal": "",
      "exit": 0,
-     "secs": 0.0,
+     "secs": 0.01,
      "stdout": "200000",
      "stderr": "",
      "level": "STD"
@@ -12320,7 +14099,7 @@
      "secs": 0.0,
      "stdout": "1 2 3",
      "stderr": "",
-     "level": "PLATFORM"
+     "level": "STD"
     },
     "background_task": {
      "outcome": "PASS",
@@ -12336,7 +14115,7 @@
      "refusal": "",
      "exit": 0,
      "secs": 0.0,
-     "stdout": "worker failed: bad input",
+     "stdout": "user error (bad input)",
      "stderr": "",
      "level": "STD"
     },
@@ -12366,19 +14145,19 @@
      "outcome": "PASS",
      "refusal": "",
      "exit": 0,
-     "secs": 0.0,
+     "secs": 0.01,
      "stdout": "hi; touch /tmp/bb_x",
      "stderr": "",
-     "level": "PLATFORM"
+     "level": "STD"
     },
     "exit_status": {
      "outcome": "PASS",
      "refusal": "",
      "exit": 0,
-     "secs": 0.0,
+     "secs": 0.01,
      "stdout": "1",
      "stderr": "",
-     "level": "PLATFORM"
+     "level": "STD"
     },
     "env_absent": {
      "outcome": "PASS",
@@ -12405,7 +14184,7 @@
      "secs": 0.0,
      "stdout": "ok",
      "stderr": "",
-     "level": "PLATFORM"
+     "level": "STD"
     },
     "file_permissions": {
      "outcome": "PASS",
@@ -12414,37 +14193,42 @@
      "secs": 0.0,
      "stdout": "600",
      "stderr": "",
-     "level": "PLATFORM"
+     "level": "STD"
     },
     "process_timeout": {
      "outcome": "PASS",
      "refusal": "",
      "exit": 0,
-     "secs": 0.1,
+     "secs": 0.11,
      "stdout": "killed",
      "stderr": "",
-     "level": "PLATFORM"
+     "level": "STD"
     },
     "regex": {
+     "outcome": "NONE",
+     "message": "no regular expressions in the packages GHC ships or the Haskell project's libraries"
+    },
+    "regex_linear": {
+     "outcome": "NONE",
+     "message": "no regular expressions in the packages GHC ships or the Haskell project's libraries"
+    },
+    "graphemes": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "abcdefgh👍🏽",
+     "stderr": "",
+     "level": "PROJECT"
+    },
+    "unicode_normalize": {
      "outcome": "PASS",
      "refusal": "",
      "exit": 0,
      "secs": 0.0,
-     "stdout": "true false",
+     "stdout": "equal",
      "stderr": "",
-     "level": "STD"
-    },
-    "regex_linear": {
-     "outcome": "NONE",
-     "message": "the standard regex engine backtracks; there is no linear-time engine"
-    },
-    "graphemes": {
-     "outcome": "NONE",
-     "message": "no grapheme segmentation in the standard library"
-    },
-    "unicode_normalize": {
-     "outcome": "NONE",
-     "message": "no Unicode normalization in the standard library"
+     "level": "PROJECT"
     },
     "utf8_validate": {
      "outcome": "PASS",
@@ -12456,16 +14240,26 @@
      "level": "STD"
     },
     "html_escape": {
-     "outcome": "NONE",
-     "message": "no HTML escaping in the standard library or ISO C/POSIX"
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "&lt;a href=&quot;x&quot;&gt;Tom &amp; Jerry&lt;/a&gt;",
+     "stderr": "",
+     "level": "STD"
     },
     "json_parse": {
-     "outcome": "NONE",
-     "message": "no JSON parser in the standard library or ISO C/POSIX"
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "8080 invalid",
+     "stderr": "",
+     "level": "PROJECT"
     },
     "checked_add": {
      "outcome": "NONE",
-     "message": "no checked addition in the C++23 standard library"
+     "message": "no checked addition in the standard library"
     },
     "wrapping_add": {
      "outcome": "PASS",
@@ -12474,19 +14268,29 @@
      "secs": 0.0,
      "stdout": "-9223372036854775808",
      "stderr": "",
-     "level": "LANGUAGE"
+     "level": "STD"
     },
     "saturating_add": {
      "outcome": "NONE",
-     "message": "no saturating arithmetic in the C++23 standard library"
+     "message": "no saturating addition in the standard library"
     },
     "bigint": {
-     "outcome": "NONE",
-     "message": "no arbitrary-precision integers in the standard library"
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "1267650600228229401496703205376",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "decimal": {
-     "outcome": "NONE",
-     "message": "no decimal type in the standard library"
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "equal",
+     "stderr": "",
+     "level": "STD"
     },
     "checked_narrowing": {
      "outcome": "PASS",
@@ -12499,7 +14303,7 @@
     },
     "float_to_int_checked": {
      "outcome": "NONE",
-     "message": "no checked float-to-integer conversion in the standard library"
+     "message": "no checked float-to-integer conversion; truncate turns NaN into an arbitrary integer"
     },
     "strict_parse": {
      "outcome": "PASS",
@@ -12542,13 +14346,8 @@
      "level": "STD"
     },
     "priority_queue": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "1 2 3",
-     "stderr": "",
-     "level": "STD"
+     "outcome": "NONE",
+     "message": "no priority queue in the standard library"
     },
     "counter": {
      "outcome": "PASS",
@@ -12560,13 +14359,8 @@
      "level": "STD"
     },
     "bitset": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "true false",
-     "stderr": "",
-     "level": "STD"
+     "outcome": "NONE",
+     "message": "no bit set in the standard library"
     },
     "composite_key": {
      "outcome": "PASS",
@@ -12578,26 +14372,21 @@
      "level": "STD"
     },
     "checked_index": {
-     "outcome": "NONE",
-     "message": "no index lookup that returns a missing value"
-    },
-    "total_float_sort": {
      "outcome": "PASS",
      "refusal": "",
      "exit": 0,
      "secs": 0.0,
-     "stdout": "1 2 3 NaN",
+     "stdout": "none",
      "stderr": "",
      "level": "STD"
     },
+    "total_float_sort": {
+     "outcome": "NONE",
+     "message": "no total order for floats in the standard library; compare on NaN is inconsistent"
+    },
     "date_time_zone": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "2026-03-29 03:30",
-     "stderr": "",
-     "level": "STD"
+     "outcome": "NONE",
+     "message": "no time zone database in the standard library (the time package knows only the local zone)"
     },
     "byte_buffer": {
      "outcome": "PASS",
@@ -12650,12 +14439,17 @@
      "exit": 0,
      "secs": 0.0,
      "stdout": "allocation failed",
-     "stderr": "==1270==WARNING: AddressSanitizer failed to allocate 0x9184e72a000 bytes",
+     "stderr": "",
      "level": "STD"
     },
     "recover_stack_overflow": {
-     "outcome": "NONE",
-     "message": "stack overflow ends the program"
+     "outcome": "FAIL",
+     "refusal": "",
+     "exit": 137,
+     "secs": 2.54,
+     "stdout": "",
+     "stderr": "Killed",
+     "level": "STD"
     },
     "unhandled_hook": {
      "outcome": "PASS",
@@ -12667,702 +14461,48 @@
      "level": "STD"
     },
     "path_containment": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "outside",
-     "stderr": "",
-     "level": "STD"
+     "outcome": "NONE",
+     "message": "normalise keeps .. segments; no lexical path normalization in the standard library"
     },
     "constant_time_compare": {
      "outcome": "NONE",
-     "message": "no constant-time comparison in the standard library"
+     "message": "no constant-time comparison in the standard library or the Haskell project's libraries"
     },
     "secure_random": {
      "outcome": "PASS",
      "refusal": "",
      "exit": 0,
      "secs": 0.0,
-     "stdout": "3103123ba55369566aa78302084c9560",
+     "stdout": "bf35dd030bf916e88fc85beb134e9093",
      "stderr": "",
-     "level": "PLATFORM"
+     "level": "PROJECT"
     },
     "sha256": {
      "outcome": "NONE",
-     "message": "no SHA-256 in the standard library"
+     "message": "no SHA-256 in the standard library or the Haskell project's libraries"
     },
     "password_hash": {
      "outcome": "NONE",
-     "message": "no password hash in ISO C or POSIX"
+     "message": "no password hash in the packages GHC ships or the Haskell project's libraries"
     },
     "hmac": {
      "outcome": "NONE",
-     "message": "no HMAC in ISO C or POSIX"
+     "message": "no HMAC in the packages GHC ships or the Haskell project's libraries"
     },
     "aead_encrypt": {
      "outcome": "NONE",
-     "message": "no authenticated cipher in ISO C or POSIX"
+     "message": "no authenticated cipher in the packages GHC ships or the Haskell project's libraries"
     }
    },
-   "rank": 17
-  },
-  {
-   "id": "typescript",
-   "name": "TypeScript",
-   "version": "tsc Version 7.0.2 / node v26.13.1",
-   "expressed": 58,
-   "builtin": 17,
-   "library": 41,
-   "results": {
-    "tuple": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "1 a",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "complete_init": {
-     "outcome": "PASS",
-     "refusal": "main.ts(6,7): error TS2741: Property 'retries' is missing in type '{ timeout: number; }' but required in type 'Config'.\nmain.ts(6,7): error TS6133: 'partial' is declared but its value is never read.",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "5 3",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "sum_type_exhaustive": {
-     "outcome": "PASS",
-     "refusal": "main.ts(14,25): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "circle",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "optional_type": {
-     "outcome": "PASS",
-     "refusal": "main.ts(4,13): error TS18048: 'o' is possibly 'undefined'.",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "none",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "newtype": {
-     "outcome": "PASS",
-     "refusal": "main.ts(8,76): error TS2345: Argument of type 'Seconds' is not assignable to parameter of type 'Meters'.",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "5",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "duration": {
-     "outcome": "NONE",
-     "message": "no duration type in the language or runtime"
-    },
-    "nonnull_reference": {
-     "outcome": "PASS",
-     "refusal": "main.ts(8,7): error TS2322: Type 'null' is not assignable to type 'Config'.\nmain.ts(8,7): error TS6133: 'missing' is declared but its value is never read.",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "app",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "definite_assignment": {
-     "outcome": "PASS",
-     "refusal": "main.ts(9,13): error TS2454: Variable 'y' is used before being assigned.",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "5",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "thread_safety_check": {
-     "outcome": "NONE",
-     "message": "worker threads share no ordinary objects, so threads cannot share a list"
-    },
-    "lock_owns_data": {
-     "outcome": "NONE",
-     "message": "no mutex in the language or its standard library"
-    },
-    "fixed_array_value": {
-     "outcome": "NONE",
-     "message": "arrays are references; no value array type"
-    },
-    "immutable_collection": {
-     "outcome": "PASS",
-     "refusal": "main.ts(4,4): error TS2339: Property 'push' does not exist on type 'readonly number[]'.",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "3",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "readonly_param": {
-     "outcome": "PASS",
-     "refusal": "main.ts(4,3): error TS2542: Index signature in type 'readonly number[]' only permits reading.",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "3",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "value_struct": {
-     "outcome": "NONE",
-     "message": "objects are references; no value record type"
-    },
-    "immutable_binding": {
-     "outcome": "PASS",
-     "refusal": "main.ts(4,1): error TS2588: Cannot assign to 'x' because it is a constant.",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "1",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "consumed_value": {
-     "outcome": "NONE",
-     "message": "no ownership tracking: a value stays usable after a call that consumes it"
-    },
-    "exclusive_mutation": {
-     "outcome": "NONE",
-     "message": "nothing refuses passing one value as two mutable arguments"
-    },
-    "error_value": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "error",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "must_handle_error": {
-     "outcome": "NONE",
-     "message": "exceptions are unchecked"
-    },
-    "typed_catch": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "caught A\npassed B",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "cleanup_on_error": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "released\nreleased",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "cleanup_on_panic": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "cleanup\nrecovered",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "assertion": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 1,
-     "secs": 0.02,
-     "stdout": "before",
-     "stderr": "node:internal/assert/utils:146\n  throw error;\n  ^\n\nAssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:\n\n  (process.argv.length === 5)\n\n    at Object.<anonymous> (/tmp/breakbench/express-assertion/main/out/main.js:9:27)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:intern\n...\nt Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  generatedMessage: true,\n  code: 'ERR_ASSERTION',\n  actual: false,\n  expected: true,\n  operator: '==',\n  diff: 'simple'\n}\n\nNode.js v26.13.1",
-     "level": "STD"
-    },
-    "unused_value_refused": {
-     "outcome": "PASS",
-     "refusal": "main.ts(5,7): error TS6133: 'doubled' is declared but its value is never read.",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "42",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "exhaustive_return": {
-     "outcome": "PASS",
-     "refusal": "main.ts(7,30): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "pass",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "unsigned64": {
-     "outcome": "NONE",
-     "message": "no fixed-width integer type"
-    },
-    "int128": {
-     "outcome": "NONE",
-     "message": "no 128-bit integer type"
-    },
-    "literal_range": {
-     "outcome": "NONE",
-     "message": "no 8-bit integer type"
-    },
-    "no_implicit_conversion": {
-     "outcome": "NONE",
-     "message": "one number type, so there is nothing to narrow"
-    },
-    "mixed_sign_compare": {
-     "outcome": "NONE",
-     "message": "no unsigned integer types"
-    },
-    "threads_shared_memory": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "45",
-     "stderr": "",
-     "level": "STD"
-    },
-    "mutex": {
-     "outcome": "NONE",
-     "message": "no mutex in the language or its standard library"
-    },
-    "atomic_counter": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "200000",
-     "stderr": "",
-     "level": "STD"
-    },
-    "channel": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "1 2 3",
-     "stderr": "",
-     "level": "STD"
-    },
-    "background_task": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.06,
-     "stdout": "started\n7",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "join_with_failure": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "worker failed: bad input",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "task_timeout": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.12,
-     "stdout": "timed out",
-     "stderr": "",
-     "level": "STD"
-    },
-    "task_cancel": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "stopped",
-     "stderr": "",
-     "level": "STD"
-    },
-    "concurrent_map": {
-     "outcome": "NONE",
-     "message": "no map that threads share"
-    },
-    "spawn_argv": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "hi; touch /tmp/bb_x",
-     "stderr": "",
-     "level": "STD"
-    },
-    "exit_status": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "1",
-     "stderr": "",
-     "level": "STD"
-    },
-    "env_absent": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "absent",
-     "stderr": "",
-     "level": "STD"
-    },
-    "signal_graceful": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "cleaned up",
-     "stderr": "",
-     "level": "STD"
-    },
-    "secure_temp_file": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "ok",
-     "stderr": "",
-     "level": "STD"
-    },
-    "file_permissions": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "600",
-     "stderr": "",
-     "level": "STD"
-    },
-    "process_timeout": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.12,
-     "stdout": "killed",
-     "stderr": "",
-     "level": "STD"
-    },
-    "regex": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "true false",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "regex_linear": {
-     "outcome": "NONE",
-     "message": "the standard regex engine backtracks; there is no linear-time engine"
-    },
-    "graphemes": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.06,
-     "stdout": "abcdefgh👍🏽",
-     "stderr": "",
-     "level": "STD"
-    },
-    "unicode_normalize": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "equal",
-     "stderr": "",
-     "level": "STD"
-    },
-    "utf8_validate": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "invalid",
-     "stderr": "",
-     "level": "STD"
-    },
-    "html_escape": {
-     "outcome": "NONE",
-     "message": "no HTML escaping in the language or Node's standard library"
-    },
-    "json_parse": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "8080 invalid",
-     "stderr": "",
-     "level": "STD"
-    },
-    "checked_add": {
-     "outcome": "NONE",
-     "message": "no fixed-width integer type"
-    },
-    "wrapping_add": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "-9223372036854775808",
-     "stderr": "",
-     "level": "STD"
-    },
-    "saturating_add": {
-     "outcome": "NONE",
-     "message": "no fixed-width integer type"
-    },
-    "bigint": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "1267650600228229401496703205376",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "decimal": {
-     "outcome": "NONE",
-     "message": "no decimal type in the language or runtime"
-    },
-    "checked_narrowing": {
-     "outcome": "NONE",
-     "message": "no fixed-width integer type"
-    },
-    "float_to_int_checked": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "does not fit",
-     "stderr": "",
-     "level": "STD"
-    },
-    "strict_parse": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "invalid",
-     "stderr": "",
-     "level": "STD"
-    },
-    "sorted_map": {
-     "outcome": "NONE",
-     "message": "no sorted map in the language or runtime"
-    },
-    "sorted_set": {
-     "outcome": "NONE",
-     "message": "no sorted set in the language or runtime"
-    },
-    "insertion_ordered_map": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "c a b",
-     "stderr": "",
-     "level": "STD"
-    },
-    "deque": {
-     "outcome": "NONE",
-     "message": "no deque in the language or runtime"
-    },
-    "priority_queue": {
-     "outcome": "NONE",
-     "message": "no priority queue in the language or runtime"
-    },
-    "counter": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "a=2 b=1",
-     "stderr": "",
-     "level": "STD"
-    },
-    "bitset": {
-     "outcome": "NONE",
-     "message": "no bit set in the language or runtime"
-    },
-    "composite_key": {
-     "outcome": "NONE",
-     "message": "Set compares arrays and objects by identity"
-    },
-    "checked_index": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "none",
-     "stderr": "",
-     "level": "STD"
-    },
-    "total_float_sort": {
-     "outcome": "NONE",
-     "message": "no total-order comparison for numbers"
-    },
-    "date_time_zone": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.04,
-     "stdout": "2026-03-29 03:30",
-     "stderr": "",
-     "level": "STD"
-    },
-    "byte_buffer": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "100000",
-     "stderr": "",
-     "level": "STD"
-    },
-    "weak_reference": {
-     "outcome": "NONE",
-     "message": "a collection cannot be forced without a runtime flag"
-    },
-    "error_chain": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "loading config: not found\nnot found",
-     "stderr": "",
-     "level": "STD"
-    },
-    "stack_trace": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "inner",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "recover_worker_crash": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "worker crashed",
-     "stderr": "",
-     "level": "STD"
-    },
-    "recover_allocation_failure": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "allocation failed",
-     "stderr": "",
-     "level": "STD"
-    },
-    "recover_stack_overflow": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "stack overflow",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "unhandled_hook": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 1,
-     "secs": 0.02,
-     "stdout": "hook ran",
-     "stderr": "",
-     "level": "STD"
-    },
-    "path_containment": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "outside",
-     "stderr": "",
-     "level": "STD"
-    },
-    "constant_time_compare": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "equal",
-     "stderr": "",
-     "level": "STD"
-    },
-    "secure_random": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "484e1b5936de3561ccd6a13c0694419d",
-     "stderr": "",
-     "level": "STD"
-    },
-    "sha256": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
-     "stderr": "",
-     "level": "STD"
-    },
-    "password_hash": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.08,
-     "stdout": "true false",
-     "stderr": "",
-     "level": "STD"
-    },
-    "hmac": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8",
-     "stderr": "",
-     "level": "STD"
-    },
-    "aead_encrypt": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "secret\nrejected",
-     "stderr": "",
-     "level": "STD"
-    }
-   },
-   "rank": 18
+   "rank": 19
   },
   {
    "id": "clojure",
    "name": "Clojure",
    "version": "Clojure 1.12.7",
-   "expressed": 57,
+   "expressed": 59,
    "builtin": 5,
-   "library": 52,
+   "ecosystem": 54,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -13388,6 +14528,19 @@
     "newtype": {
      "outcome": "NONE",
      "message": "no static type checking, so nothing is refused before the program runs"
+    },
+    "strong_enum": {
+     "outcome": "NONE",
+     "message": "no static type checking, so nothing is refused before the program runs"
+    },
+    "override_check": {
+     "outcome": "PASS",
+     "refusal": "Syntax error (IllegalArgumentException) compiling deftype* at (main.clj:8:1).",
+     "exit": 0,
+     "secs": 0.24,
+     "stdout": "circle",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "duration": {
      "outcome": "NONE",
@@ -13436,6 +14589,15 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "no static type checking, so nothing is refused before the program runs"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.5,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "error_value": {
      "outcome": "NONE",
@@ -14008,664 +15170,15 @@
      "level": "STD"
     }
    },
-   "rank": 19
-  },
-  {
-   "id": "haskell",
-   "name": "Haskell",
-   "version": "The Glorious Glasgow Haskell Compilation System, version 9.14.1",
-   "expressed": 57,
-   "builtin": 18,
-   "library": 39,
-   "results": {
-    "tuple": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "1 a",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "complete_init": {
-     "outcome": "NONE",
-     "message": "a record built without a field is only a warning (-Wmissing-fields)"
-    },
-    "sum_type_exhaustive": {
-     "outcome": "NONE",
-     "message": "a missing case is a warning (-Wincomplete-patterns), not an error"
-    },
-    "optional_type": {
-     "outcome": "PASS",
-     "refusal": "main.hs:6:12: error: [GHC-39999]\n    • No instance for ‘Num (Maybe Int)’ arising from a use of ‘+’\n    • In the first argument of ‘print’, namely ‘(o + 1)’\n      In a stmt of a 'do' block: print (o + 1)",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "none",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "newtype": {
-     "outcome": "PASS",
-     "refusal": "main.hs:12:39: error: [GHC-83865]\n    • Couldn't match expected type ‘Meters’ with actual type ‘Seconds’\n    • In the second argument of ‘addM’, namely ‘(Seconds 3)’\n      In the expression: addM (Meters 2) (Seconds 3)",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "5",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "duration": {
-     "outcome": "NONE",
-     "message": "numeric literals convert to NominalDiffTime, so a duration plus a plain number is accepted"
-    },
-    "nonnull_reference": {
-     "outcome": "PASS",
-     "refusal": "main.hs:8:19: error: [GHC-83865]\n    • Couldn't match expected type ‘Config’ with actual type ‘Maybe a0’\n    • In the first argument of ‘name’, namely ‘(Nothing :: Config)’\n      In the first argument of ‘putStrLn’, namely",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "app",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "definite_assignment": {
-     "outcome": "PASS",
-     "refusal": "main.hs:10:7: error: [GHC-44432]\n    The type signature for ‘y’ lacks an accompanying binding",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "5",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "thread_safety_check": {
-     "outcome": "NONE",
-     "message": "nothing refuses an unlocked write to data that threads share"
-    },
-    "lock_owns_data": {
-     "outcome": "PASS",
-     "refusal": "main.hs:18:17: error: [GHC-83865]\n    • Couldn't match expected type ‘Ledger’\n                  with actual type ‘MVar Ledger’\n    • In the first argument of ‘debits’, namely ‘ledger’",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "2000 2000",
-     "stderr": "",
-     "level": "STD"
-    },
-    "fixed_array_value": {
-     "outcome": "NONE",
-     "message": "arrays that change in place are references (IOArray); immutable arrays have no in-place write"
-    },
-    "immutable_collection": {
-     "outcome": "PASS",
-     "refusal": "main.hs:8:14: error: [GHC-83865]\n    • Couldn't match type ‘[]’ with ‘a0 i0’\n      Expected: a0 i0 Int\n        Actual: [Int]",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "3",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "readonly_param": {
-     "outcome": "PASS",
-     "refusal": "main.hs:7:14: error: [GHC-83865]\n    • Couldn't match type ‘[]’ with ‘a0 i0’\n      Expected: a0 i0 Int\n        Actual: [Int]",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "3",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "value_struct": {
-     "outcome": "NONE",
-     "message": "records are immutable; no mutable record that copies on assignment"
-    },
-    "immutable_binding": {
-     "outcome": "PASS",
-     "refusal": "main.hs:8:14: error: [GHC-83865]\n    • Couldn't match expected type ‘GHC.Internal.IORef.IORef a0’\n                  with actual type ‘Int’\n    • In the first argument of ‘writeIORef’, namely ‘x’",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "1",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "consumed_value": {
-     "outcome": "NONE",
-     "message": "linear types need the LinearTypes extension, an opt-in"
-    },
-    "exclusive_mutation": {
-     "outcome": "NONE",
-     "message": "nothing refuses passing one value as two mutable arguments"
-    },
-    "error_value": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "error",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "must_handle_error": {
-     "outcome": "PASS",
-     "refusal": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:8:3: warning: [GHC-81995] [-Wunused-do-bind]\n    A do-notation statement discarded a result of type\n      ‘Either String ()’\n    Suggested fix: Suppress this warning by saying ‘_ <- save’\n  |\n8 |   save -- REJECT!\n  |   ^^^^",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "handled",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "typed_catch": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "caught A\npassed B",
-     "stderr": "",
-     "level": "STD"
-    },
-    "cleanup_on_error": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "released\nreleased",
-     "stderr": "",
-     "level": "STD"
-    },
-    "cleanup_on_panic": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "cleanup\nrecovered",
-     "stderr": "",
-     "level": "STD"
-    },
-    "assertion": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 1,
-     "secs": 0.0,
-     "stdout": "before",
-     "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.AssertionFailed:\n\nAssertion failed\n\nHasCallStack backtrace:\n  throwIO, called at libraries/ghc-internal/src/GHC/Internal/IO/Exception.hs:446:5 in ghc-internal:GHC.Internal.IO.Exception\n  assert, called at main.hs:8:3 in main:Main",
-     "level": "STD"
-    },
-    "unused_value_refused": {
-     "outcome": "NONE",
-     "message": "an unused variable is only a warning"
-    },
-    "exhaustive_return": {
-     "outcome": "NONE",
-     "message": "guards that miss a case are only a warning"
-    },
-    "unsigned64": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "18446744073709551615",
-     "stderr": "",
-     "level": "STD"
-    },
-    "int128": {
-     "outcome": "NONE",
-     "message": "no 128-bit integer type"
-    },
-    "literal_range": {
-     "outcome": "NONE",
-     "message": "an out-of-range literal is only a warning (-Woverflowed-literals)"
-    },
-    "no_implicit_conversion": {
-     "outcome": "PASS",
-     "refusal": "main.hs:9:10: error: [GHC-83865]\n    • Couldn't match expected type ‘Int32’ with actual type ‘Int64’\n    • In the first argument of ‘print’, namely ‘(big :: Int32)’\n      In a stmt of a 'do' block: print (big :: Int32)",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "42",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "mixed_sign_compare": {
-     "outcome": "PASS",
-     "refusal": "main.hs:9:14: error: [GHC-83865]\n    • Couldn't match expected type ‘Int’ with actual type ‘Word’\n    • In the second argument of ‘(<)’, namely ‘n’\n      In the first argument of ‘print’, namely ‘(i < n)’",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "less",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "threads_shared_memory": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "45",
-     "stderr": "",
-     "level": "STD"
-    },
-    "mutex": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "200000",
-     "stderr": "",
-     "level": "STD"
-    },
-    "atomic_counter": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "200000",
-     "stderr": "",
-     "level": "STD"
-    },
-    "channel": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "1 2 3",
-     "stderr": "",
-     "level": "STD"
-    },
-    "background_task": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.05,
-     "stdout": "started\n7",
-     "stderr": "",
-     "level": "STD"
-    },
-    "join_with_failure": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "user error (bad input)",
-     "stderr": "",
-     "level": "STD"
-    },
-    "task_timeout": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.1,
-     "stdout": "timed out",
-     "stderr": "",
-     "level": "STD"
-    },
-    "task_cancel": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "stopped",
-     "stderr": "",
-     "level": "STD"
-    },
-    "concurrent_map": {
-     "outcome": "NONE",
-     "message": "no concurrent map in the standard library"
-    },
-    "spawn_argv": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "hi; touch /tmp/bb_x",
-     "stderr": "",
-     "level": "STD"
-    },
-    "exit_status": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "1",
-     "stderr": "",
-     "level": "STD"
-    },
-    "env_absent": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "absent",
-     "stderr": "",
-     "level": "STD"
-    },
-    "signal_graceful": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "cleaned up",
-     "stderr": "",
-     "level": "STD"
-    },
-    "secure_temp_file": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "ok",
-     "stderr": "",
-     "level": "STD"
-    },
-    "file_permissions": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "600",
-     "stderr": "",
-     "level": "STD"
-    },
-    "process_timeout": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.11,
-     "stdout": "killed",
-     "stderr": "",
-     "level": "STD"
-    },
-    "regex": {
-     "outcome": "NONE",
-     "message": "no regular expressions in the packages GHC ships or the Haskell project's libraries"
-    },
-    "regex_linear": {
-     "outcome": "NONE",
-     "message": "no regular expressions in the packages GHC ships or the Haskell project's libraries"
-    },
-    "graphemes": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "abcdefgh👍🏽",
-     "stderr": "",
-     "level": "PROJECT"
-    },
-    "unicode_normalize": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "equal",
-     "stderr": "",
-     "level": "PROJECT"
-    },
-    "utf8_validate": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "invalid",
-     "stderr": "",
-     "level": "STD"
-    },
-    "html_escape": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "&lt;a href=&quot;x&quot;&gt;Tom &amp; Jerry&lt;/a&gt;",
-     "stderr": "",
-     "level": "STD"
-    },
-    "json_parse": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "8080 invalid",
-     "stderr": "",
-     "level": "PROJECT"
-    },
-    "checked_add": {
-     "outcome": "NONE",
-     "message": "no checked addition in the standard library"
-    },
-    "wrapping_add": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "-9223372036854775808",
-     "stderr": "",
-     "level": "STD"
-    },
-    "saturating_add": {
-     "outcome": "NONE",
-     "message": "no saturating addition in the standard library"
-    },
-    "bigint": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "1267650600228229401496703205376",
-     "stderr": "",
-     "level": "LANGUAGE"
-    },
-    "decimal": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "equal",
-     "stderr": "",
-     "level": "STD"
-    },
-    "checked_narrowing": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "does not fit",
-     "stderr": "",
-     "level": "STD"
-    },
-    "float_to_int_checked": {
-     "outcome": "NONE",
-     "message": "no checked float-to-integer conversion; truncate turns NaN into an arbitrary integer"
-    },
-    "strict_parse": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "invalid",
-     "stderr": "",
-     "level": "STD"
-    },
-    "sorted_map": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "a b c",
-     "stderr": "",
-     "level": "STD"
-    },
-    "sorted_set": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "1 2 3",
-     "stderr": "",
-     "level": "STD"
-    },
-    "insertion_ordered_map": {
-     "outcome": "NONE",
-     "message": "no insertion-ordered map in the standard library"
-    },
-    "deque": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "0 2",
-     "stderr": "",
-     "level": "STD"
-    },
-    "priority_queue": {
-     "outcome": "NONE",
-     "message": "no priority queue in the standard library"
-    },
-    "counter": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "a=2 b=1",
-     "stderr": "",
-     "level": "STD"
-    },
-    "bitset": {
-     "outcome": "NONE",
-     "message": "no bit set in the standard library"
-    },
-    "composite_key": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "true",
-     "stderr": "",
-     "level": "STD"
-    },
-    "checked_index": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "none",
-     "stderr": "",
-     "level": "STD"
-    },
-    "total_float_sort": {
-     "outcome": "NONE",
-     "message": "no total order for floats in the standard library; compare on NaN is inconsistent"
-    },
-    "date_time_zone": {
-     "outcome": "NONE",
-     "message": "no time zone database in the standard library (the time package knows only the local zone)"
-    },
-    "byte_buffer": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "100000",
-     "stderr": "",
-     "level": "STD"
-    },
-    "weak_reference": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "gone",
-     "stderr": "",
-     "level": "STD"
-    },
-    "error_chain": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "loading config: not found\nnot found",
-     "stderr": "",
-     "level": "STD"
-    },
-    "stack_trace": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "inner",
-     "stderr": "",
-     "level": "STD"
-    },
-    "recover_worker_crash": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "worker crashed",
-     "stderr": "",
-     "level": "STD"
-    },
-    "recover_allocation_failure": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "allocation failed",
-     "stderr": "",
-     "level": "STD"
-    },
-    "recover_stack_overflow": {
-     "outcome": "FAIL",
-     "refusal": "",
-     "exit": 137,
-     "secs": 2.54,
-     "stdout": "",
-     "stderr": "Killed",
-     "level": "STD"
-    },
-    "unhandled_hook": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 1,
-     "secs": 0.0,
-     "stdout": "hook ran",
-     "stderr": "",
-     "level": "STD"
-    },
-    "path_containment": {
-     "outcome": "NONE",
-     "message": "normalise keeps .. segments; no lexical path normalization in the standard library"
-    },
-    "constant_time_compare": {
-     "outcome": "NONE",
-     "message": "no constant-time comparison in the standard library or the Haskell project's libraries"
-    },
-    "secure_random": {
-     "outcome": "PASS",
-     "refusal": "",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "bf35dd030bf916e88fc85beb134e9093",
-     "stderr": "",
-     "level": "PROJECT"
-    },
-    "sha256": {
-     "outcome": "NONE",
-     "message": "no SHA-256 in the standard library or the Haskell project's libraries"
-    },
-    "password_hash": {
-     "outcome": "NONE",
-     "message": "no password hash in the packages GHC ships or the Haskell project's libraries"
-    },
-    "hmac": {
-     "outcome": "NONE",
-     "message": "no HMAC in the packages GHC ships or the Haskell project's libraries"
-    },
-    "aead_encrypt": {
-     "outcome": "NONE",
-     "message": "no authenticated cipher in the packages GHC ships or the Haskell project's libraries"
-    }
-   },
    "rank": 20
   },
   {
    "id": "dart",
    "name": "Dart",
    "version": "Dart SDK version: 3.14.1 (stable) (Tue Nov 17 00:01:24 2026 -0800) on \"linux_x64\"",
-   "expressed": 55,
+   "expressed": 57,
    "builtin": 15,
-   "library": 40,
+   "ecosystem": 42,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -14711,6 +15224,19 @@
      "stdout": "5.0",
      "stderr": "",
      "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "PASS",
+     "refusal": "error - main.dart:13:14 - The argument type 'int' can't be assigned to the parameter type 'Color'.  - argument_type_not_assignable\nmain.dart:13:14: Error: The argument type 'int' can't be assigned to the parameter type 'Color'.",
+     "exit": 0,
+     "secs": 0.06,
+     "stdout": "green",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "NONE",
+     "message": "an @override that overrides nothing is only an analyzer warning (override_on_non_overriding_member)"
     },
     "duration": {
      "outcome": "PASS",
@@ -14779,6 +15305,15 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "nothing refuses passing one value as two mutable arguments"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.13,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "error_value": {
      "outcome": "PASS",
@@ -15297,9 +15832,9 @@
    "id": "ocaml",
    "name": "OCaml",
    "version": "The OCaml toplevel, version 5.5.2",
-   "expressed": 54,
-   "builtin": 19,
-   "library": 35,
+   "expressed": 57,
+   "builtin": 20,
+   "ecosystem": 37,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -15343,6 +15878,24 @@
      "exit": 0,
      "secs": 0.0,
      "stdout": "5",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "PASS",
+     "refusal": "Error: The constant 7 has type int but an expression was expected of type",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "green",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "PASS",
+     "refusal": "Error: The method descibe has no previous definition",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "circle",
      "stderr": "",
      "level": "LANGUAGE"
     },
@@ -15418,6 +15971,15 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "nothing refuses passing one value as two mutable arguments"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.04,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "error_value": {
      "outcome": "PASS",
@@ -15926,9 +16488,9 @@
    "id": "julia",
    "name": "Julia",
    "version": "julia version 1.13.4",
-   "expressed": 50,
-   "builtin": 8,
-   "library": 42,
+   "expressed": 51,
+   "builtin": 5,
+   "ecosystem": 46,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -15952,6 +16514,14 @@
      "message": "no static type checking, so nothing is refused before the program runs"
     },
     "newtype": {
+     "outcome": "NONE",
+     "message": "no static type checking, so nothing is refused before the program runs"
+    },
+    "strong_enum": {
+     "outcome": "NONE",
+     "message": "no static type checking, so nothing is refused before the program runs"
+    },
+    "override_check": {
      "outcome": "NONE",
      "message": "no static type checking, so nothing is refused before the program runs"
     },
@@ -16002,6 +16572,15 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "no static type checking, so nothing is refused before the program runs"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.14,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "error_value": {
      "outcome": "PASS",
@@ -16535,9 +17114,9 @@
    "id": "python",
    "name": "Python",
    "version": "Python 3.15.2",
-   "expressed": 50,
-   "builtin": 5,
-   "library": 45,
+   "expressed": 51,
+   "builtin": 4,
+   "ecosystem": 47,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -16561,6 +17140,14 @@
      "message": "no static type checking, so nothing is refused before the program runs"
     },
     "newtype": {
+     "outcome": "NONE",
+     "message": "no static type checking, so nothing is refused before the program runs"
+    },
+    "strong_enum": {
+     "outcome": "NONE",
+     "message": "no static type checking, so nothing is refused before the program runs"
+    },
+    "override_check": {
      "outcome": "NONE",
      "message": "no static type checking, so nothing is refused before the program runs"
     },
@@ -16611,6 +17198,15 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "no static type checking, so nothing is refused before the program runs"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 1.09,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "error_value": {
      "outcome": "NONE",
@@ -17144,9 +17740,9 @@
    "id": "ruby",
    "name": "Ruby",
    "version": "ruby 4.0.10 (2026-11-19 revision a704b7cd95) +PRISM [x86_64-linux]",
-   "expressed": 49,
+   "expressed": 50,
    "builtin": 4,
-   "library": 45,
+   "ecosystem": 46,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -17170,6 +17766,14 @@
      "message": "no static type checking, so nothing is refused before the program runs"
     },
     "newtype": {
+     "outcome": "NONE",
+     "message": "no static type checking, so nothing is refused before the program runs"
+    },
+    "strong_enum": {
+     "outcome": "NONE",
+     "message": "no static type checking, so nothing is refused before the program runs"
+    },
+    "override_check": {
      "outcome": "NONE",
      "message": "no static type checking, so nothing is refused before the program runs"
     },
@@ -17220,6 +17824,15 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "no static type checking, so nothing is refused before the program runs"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.59,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "error_value": {
      "outcome": "NONE",
@@ -17748,9 +18361,9 @@
    "id": "javascript",
    "name": "JavaScript",
    "version": "node v26.13.1",
-   "expressed": 46,
-   "builtin": 5,
-   "library": 41,
+   "expressed": 47,
+   "builtin": 4,
+   "ecosystem": 43,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -17774,6 +18387,14 @@
      "message": "no static type checking, so nothing is refused before the program runs"
     },
     "newtype": {
+     "outcome": "NONE",
+     "message": "no static type checking, so nothing is refused before the program runs"
+    },
+    "strong_enum": {
+     "outcome": "NONE",
+     "message": "no static type checking, so nothing is refused before the program runs"
+    },
+    "override_check": {
      "outcome": "NONE",
      "message": "no static type checking, so nothing is refused before the program runs"
     },
@@ -17824,6 +18445,15 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "no static type checking, so nothing is refused before the program runs"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 2.51,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "error_value": {
      "outcome": "NONE",
@@ -18338,8 +18968,8 @@
    "name": "C",
    "version": "clang version 23.1.6 (https://github.com/llvm/llvm-project 5b10d2d74929eae78912771222c9855af97496f4)",
    "expressed": 43,
-   "builtin": 12,
-   "library": 31,
+   "builtin": 9,
+   "ecosystem": 34,
    "results": {
     "tuple": {
      "outcome": "NONE",
@@ -18365,6 +18995,14 @@
      "stdout": "5",
      "stderr": "",
      "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "NONE",
+     "message": "an enum is a plain int, so name(7) is only a warning (-Wassign-enum)"
+    },
+    "override_check": {
+     "outcome": "NONE",
+     "message": "no methods or inheritance, so nothing marks a replacement method"
     },
     "duration": {
      "outcome": "NONE",
@@ -18433,6 +19071,10 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "nothing refuses passing one value as two mutable arguments"
+    },
+    "automatic_memory": {
+     "outcome": "NONE",
+     "message": "every heap allocation needs an explicit free"
     },
     "error_value": {
      "outcome": "NONE",
@@ -18911,9 +19553,9 @@
    "id": "goose",
    "name": "Goose",
    "version": "goose 9412b80f",
-   "expressed": 39,
-   "builtin": 22,
-   "library": 17,
+   "expressed": 41,
+   "builtin": 21,
+   "ecosystem": 20,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -18959,6 +19601,19 @@
      "stdout": "5.0",
      "stderr": "",
      "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "PASS",
+     "refusal": "main.goose:15: error: no matching overload for call to name",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "green",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "NONE",
+     "message": "no traits, interfaces or inheritance"
     },
     "duration": {
      "outcome": "NONE",
@@ -19042,6 +19697,15 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "nothing refuses passing one value as two mutable arguments"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "error_value": {
      "outcome": "PASS",
@@ -19465,9 +20129,9 @@
    "id": "php",
    "name": "PHP",
    "version": "PHP 8.5.4 (cli) (built: Oct 19 2026 14:35:18) (NTS)",
-   "expressed": 38,
+   "expressed": 40,
    "builtin": 9,
-   "library": 29,
+   "ecosystem": 31,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -19493,6 +20157,19 @@
     "newtype": {
      "outcome": "NONE",
      "message": "no static type checking, so nothing is refused before the program runs"
+    },
+    "strong_enum": {
+     "outcome": "NONE",
+     "message": "no static type checking, so nothing is refused before the program runs"
+    },
+    "override_check": {
+     "outcome": "PASS",
+     "refusal": "Errors parsing main.php\nPHP Fatal error:  Circle::descibe() has #[\\Override] attribute, but no matching parent method exists in main.php on line 20",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "circle",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "duration": {
      "outcome": "NONE",
@@ -19556,6 +20233,15 @@
     "exclusive_mutation": {
      "outcome": "NONE",
      "message": "no static type checking, so nothing is refused before the program runs"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 0.21,
+     "stdout": "3999999",
+     "stderr": "",
+     "level": "LANGUAGE"
     },
     "error_value": {
      "outcome": "PASS",
@@ -20014,9 +20700,9 @@
    "id": "mojo",
    "name": "Mojo",
    "version": "Mojo 1.2.0 (2016d0cd)",
-   "expressed": 36,
-   "builtin": 23,
-   "library": 13,
+   "expressed": 38,
+   "builtin": 21,
+   "ecosystem": 17,
    "results": {
     "tuple": {
      "outcome": "PASS",
@@ -20057,6 +20743,19 @@
      "stdout": "5.0",
      "stderr": "",
      "level": "LANGUAGE"
+    },
+    "strong_enum": {
+     "outcome": "PASS",
+     "refusal": "/tmp/breakbench/express-strong_enum/reject/main.mojo:18:16: error: invalid call to 'name': value passed to 'c' cannot be converted from 'IntLiteral[7]' to 'Color'\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "green",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "override_check": {
+     "outcome": "NONE",
+     "message": "no way to mark a method as implementing a trait; a misspelled method is just another method"
     },
     "duration": {
      "outcome": "NONE",
@@ -20148,6 +20847,15 @@
      "exit": 0,
      "secs": 0.01,
      "stdout": "70 30",
+     "stderr": "",
+     "level": "LANGUAGE"
+    },
+    "automatic_memory": {
+     "outcome": "PASS",
+     "refusal": "",
+     "exit": 0,
+     "secs": 15.56,
+     "stdout": "3999999",
      "stderr": "",
      "level": "LANGUAGE"
     },

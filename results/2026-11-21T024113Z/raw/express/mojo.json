@@ -529,6 +529,28 @@
    "stdout": "70 30",
    "stderr": "",
    "level": "LANGUAGE"
+  },
+  "strong_enum": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-strong_enum/reject/main.mojo:18:16: error: invalid call to 'name': value passed to 'c' cannot be converted from 'IntLiteral[7]' to 'Color'\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "green",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "override_check": {
+   "outcome": "NONE",
+   "message": "no way to mark a method as implementing a trait; a misspelled method is just another method"
+  },
+  "automatic_memory": {
+   "outcome": "PASS",
+   "refusal": "",
+   "exit": 0,
+   "secs": 15.56,
+   "stdout": "3999999",
+   "stderr": "",
+   "level": "LANGUAGE"
   }
  }
 }

@@ -642,6 +642,36 @@
   "string_literal_write": {
    "outcome": "REJECTED",
    "message": "Determining projects to restore...\n  Restored /tmp/breakbench/string_literal_write/main/bb.csproj (in 33 ms).\n/tmp/breakbench/string_literal_write/main/Program.cs(2,1): error CS0200: Property or indexer 'string.this[int]' cannot be assigned to -- it is read only [/tmp/breakbench/string_literal_write/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/string_literal_write/main/Program.cs(2,1): error CS0200: Property or indexer 'string.this[int]' cannot be assigned to -- it is read only [/tmp/breakbench/string_literal_write/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.00"
+  },
+  "float_to_int_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/float_to_int_overflow/main/Program.cs(1,12): warning CA1305: The behavior of 'double.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'double.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/float_to_int_overflow/main/bb.csproj] bb -> /tmp/breakbench/float_to_int_overflow/main/out/bb.dll\n/tmp/breakbench/float_to_int_overflow/main/Program.cs(1,12): warning CA1305: The behavior of 'double.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'double.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/float_to_int_overflow/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 33.5,
+   "secs": 0.15,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/float_to_int_overflow/main/Program.cs:line 2\nAborted (core dumped)"
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/split_character/main/Program.cs(2,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/split_character/main/bb.csproj] bb -> /tmp/breakbench/split_character/main/out/bb.dll\n/tmp/breakbench/split_character/main/Program.cs(2,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/split_character/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 25.7,
+   "secs": 0.01,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "/tmp/breakbench/oob_read/main/Program.cs(2,25): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/oob_read/main/bb.csproj]\n/tmp/breakbench/oob_read/main/Program.cs(4,7): warning CA1852: Type 'Frame' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/oob_read/main/bb.csproj] bb -> /tmp/breakbench/oob_read/main/out/bb.dll\n/tmp/breakbench/oob_read/main/Program.cs(4,7): warning CA1852: Type 'Frame' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/oob_read/main/bb.csproj]\n2 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 33.1,
+   "secs": 0.15,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/oob_read/main/Program.cs:line 2\nAborted (core dumped)"
   }
  }
 }

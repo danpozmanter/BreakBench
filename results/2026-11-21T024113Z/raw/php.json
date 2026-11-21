@@ -625,6 +625,37 @@
    "secs": 0.01,
    "stdout": "jello",
    "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "warned": true,
+   "all_warnings": "PHP Warning:  The float 1.0E+20 is not representable as an int, cast occurred in /tmp/breakbench/float_to_int_overflow/main/main.php on line 5\nWarning: The float 1.0E+20 is not representable as an int, cast occurred in /tmp/breakbench/float_to_int_overflow/main/main.php on line 5",
+   "warnings": "PHP Warning:  The float 1.0E+20 is not representable as an int, cast occurred in /tmp/breakbench/float_to_int_overflow/main/main.php on line 5\nWarning: The float 1.0E+20 is not representable as an int, cast occurred in /tmp/breakbench/float_to_int_overflow/main/main.php on line 5",
+   "exit": 0,
+   "rss_mb": 18.6,
+   "secs": 0.01,
+   "stdout": "7766279631452241920",
+   "stderr": "PHP Warning:  The float 1.0E+20 is not representable as an int, cast occurred in /tmp/breakbench/float_to_int_overflow/main/main.php on line 5\nWarning: The float 1.0E+20 is not representable as an int, cast occurred in /tmp/breakbench/float_to_int_overflow/main/main.php on line 5"
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 18.0,
+   "secs": 0.01,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "SILENT",
+   "warned": true,
+   "all_warnings": "PHP Warning:  Undefined array key 4 in /tmp/breakbench/oob_read/main/main.php on line 11\nWarning: Undefined array key 4 in /tmp/breakbench/oob_read/main/main.php on line 11",
+   "warnings": "PHP Warning:  Undefined array key 4 in /tmp/breakbench/oob_read/main/main.php on line 11\nWarning: Undefined array key 4 in /tmp/breakbench/oob_read/main/main.php on line 11",
+   "exit": 0,
+   "rss_mb": 18.6,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "PHP Warning:  Undefined array key 4 in /tmp/breakbench/oob_read/main/main.php on line 11\nWarning: Undefined array key 4 in /tmp/breakbench/oob_read/main/main.php on line 11"
   }
  }
 }

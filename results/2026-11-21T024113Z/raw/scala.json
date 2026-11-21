@@ -617,6 +617,33 @@
   "string_literal_write": {
    "outcome": "REJECTED",
    "message": "-- [E008] Not Found Error: main.scala:5:4 --------------------------------------\n5 |    greeting(0) = 'j' // CONTROL! greeting = \"j\" + greeting.substring(1)\n  |    ^^^^^^^^\n  |    value update is not a member of String\n1 error found"
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 51.6,
+   "secs": 0.07,
+   "stdout": "9223372036854775807",
+   "stderr": ""
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 51.5,
+   "secs": 0.07,
+   "stdout": "a?",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 50.8,
+   "secs": 0.06,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4\n\tat Main$.main(main.scala:9)\n\tat Main.main(main.scala)"
   }
  }
 }

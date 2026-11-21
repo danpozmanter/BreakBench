@@ -569,6 +569,33 @@
   "string_literal_write": {
    "outcome": "REJECTED",
    "message": "main.d(6): Error: cannot modify `immutable` expression `greeting[0]`\n    greeting[0] = 'j'; // CONTROL! greeting = \"j\" ~ greeting[1 .. $];\n            ^"
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.9,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.9,
+   "secs": 0.0,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.9,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "core.exception.ArrayIndexError@main.d(13): index [4] is out of bounds for array of length 4\n----------------\n??:? onArrayIndexError [0x58f88708fcfd]\n??:? _d_arraybounds_index [0x58f88708ff5d]\nmain.d:13 _Dmain [0x58f8870906d1]"
   }
  }
 }

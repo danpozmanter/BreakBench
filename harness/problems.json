@@ -121,6 +121,19 @@
       "warn": "narrow|implicit conversion|truncat|lossy|loses (precision|information)|changes value"
     },
     {
+      "id": "float_to_int_overflow",
+      "category": "correctness",
+      "kind": "dynamic",
+      "args": [
+        "1e20"
+      ],
+      "expect": "^100000000000000000000$",
+      "title": "Converting 1e20 to a 64-bit integer (CERT FLP34-C)",
+      "scenario": "The program reads 1e20 from the command line as a 64-bit float, converts it to a 64-bit integer with the language's standard conversion, and prints it.",
+      "best": "An error, because 1e20 does not fit in 64 bits, or the exact 100000000000000000000 where integers have no fixed size. A clamped or wrapped number is a silent wrong answer.",
+      "warn": "overflow|out of range|not representable|float-cast|implicit conversion|truncat"
+    },
+    {
       "id": "signed_unsigned_compare",
       "category": "correctness",
       "kind": "static",
@@ -724,6 +737,19 @@
       "best": "\"balanced\" because the update never lands, or the program stops: the failure ends the process, or the lock reports that its holder failed. Printing \"unbalanced\" reads a half-done update."
     },
     {
+      "id": "split_character",
+      "category": "correctness",
+      "kind": "dynamic",
+      "args": [
+        "2"
+      ],
+      "expect": "^a👍$",
+      "title": "Cutting a string in the middle of a character (CWE-135)",
+      "scenario": "name is \"a👍b\". The program keeps the first n characters of name, with n = 2 read from the command line, using the language's usual slice or substring call, and prints them.",
+      "best": "a👍, or an error. Half a character, a replacement mark or a question mark is a silent wrong answer.",
+      "warn": "char(acter)? boundary|surrogate|utf-?8|code unit|codepoint"
+    },
+    {
       "id": "oob_write",
       "category": "memory",
       "kind": "memory",
@@ -735,6 +761,20 @@
       "title": "Writing past the end of a buffer",
       "scenario": "A 4-slot buffer sits next to guard = 7. The program writes 99 to slot 4, read from the command line, then prints the guard.",
       "best": "A bounds error, or a guard that is still 7. A guard of 99 means memory was overwritten.",
+      "warn": "out of bounds|array index|past the end|beyond|undefined (array )?(key|offset)|index .* out of range"
+    },
+    {
+      "id": "oob_read",
+      "category": "memory",
+      "kind": "memory",
+      "args": [
+        "4"
+      ],
+      "expect": null,
+      "unsafe": "^42$",
+      "title": "Reading past the end of a buffer (CWE-125)",
+      "scenario": "A 4-slot buffer holding 1, 2, 3 and 4 sits next to secret = 42. The program reads slot 4, taken from the command line, and prints it.",
+      "best": "A bounds error. Printing 42 means the program read memory it does not own; printing a placeholder such as nil or undefined is a silent wrong answer.",
       "warn": "out of bounds|array index|past the end|beyond|undefined (array )?(key|offset)|index .* out of range"
     },
     {
@@ -887,7 +927,7 @@
       "warn": "allocat.*(size|large|exceed)|size .*(overflow|too large)"
     },
     {
-      "category": "memory",
+      "category": "correctness",
       "id": "fd_leak",
       "kind": "leak",
       "args": [

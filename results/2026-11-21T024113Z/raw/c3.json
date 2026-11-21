@@ -570,6 +570,33 @@
    "secs": 0.08,
    "stdout": "",
    "stderr": "ERROR: 'Out of bounds memory access.'\n  in __sigaction (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in main (source unavailable) [./main] [inline]\n  in __libc_init_first (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in __libc_start_main (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in _start (source unavailable) [./main] [inline]"
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 15.0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 15.0,
+   "secs": 0.0,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 132,
+   "rss_mb": 32.5,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "ERROR: 'Array index out of bounds (array had size 4, index was 4)'\n  in main.main (/tmp/breakbench/oob_read/main/main.c3:13) [./main] [inline]"
   }
  }
 }

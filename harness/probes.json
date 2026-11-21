@@ -9,6 +9,10 @@
       "title": "Mutation and sharing"
     },
     {
+      "id": "memory",
+      "title": "Memory"
+    },
+    {
       "id": "control",
       "title": "Errors and control flow"
     },
@@ -44,12 +48,12 @@
   "probes": [
     {
       "id": "tuple",
-      "group": "types",
+      "group": "data",
       "title": "Tuples",
       "task": "A function returns 1 and \"a\" together as a tuple. The caller unpacks them and prints both.",
       "for": "out-parameter mistakes",
       "expect": "^1 a$",
-      "bench": "builtin"
+      "bench": "ecosystem"
     },
     {
       "id": "complete_init",
@@ -88,6 +92,26 @@
       "task": "Meters and Seconds both store a 64-bit float, and the compiler refuses to add one to the other. The program prints 2 m + 3 m.",
       "for": "type_confusion",
       "expect": "^5(\\.0)?$",
+      "checked": true,
+      "bench": "builtin"
+    },
+    {
+      "id": "strong_enum",
+      "group": "types",
+      "title": "Refusing an integer where an enum is expected",
+      "task": "Color is Red, Green or Blue, and name(c) returns its name. The program prints name(Green). The compiler refuses name(7).",
+      "for": "type_confusion",
+      "expect": "^green$",
+      "checked": true,
+      "bench": "builtin"
+    },
+    {
+      "id": "override_check",
+      "group": "types",
+      "title": "Refusing an override that overrides nothing",
+      "task": "Circle replaces Shape's describe() method, and the program prints describe() of a Circle used as a Shape: circle. The compiler refuses a method in Circle marked as a replacement (override, a trait or interface implementation) whose misspelled name, descibe, matches nothing in Shape.",
+      "for": "misspelled_field",
+      "expect": "^circle$",
       "checked": true,
       "bench": "builtin"
     },
@@ -210,6 +234,15 @@
       "bench": "builtin"
     },
     {
+      "id": "automatic_memory",
+      "group": "memory",
+      "title": "Memory freed without a free call",
+      "task": "The program allocates 4,000,000 records of 1 KB on the heap in a loop, keeps only the last, and prints its id, 3999999. Nothing in the program frees memory: garbage collection, reference counting or ownership reclaims each record once nothing uses it. The loop allocates 4 GB in all, more than the 3 GB limit, so memory that is never reclaimed fails the probe.",
+      "for": "use_after_free, double_free, error_path_leak",
+      "expect": "^3999999$",
+      "bench": "builtin"
+    },
+    {
       "id": "error_value",
       "group": "control",
       "title": "Errors as return values",
@@ -257,13 +290,13 @@
     },
     {
       "id": "assertion",
-      "group": "control",
+      "group": "errors",
       "title": "Assertions",
       "task": "The program prints \"before\", then asserts false with the language's assertion. It must stop with a nonzero status.",
       "for": "silent invariant breaks",
       "expect": "^before(?![\\s\\S]*after)",
       "exit": "nonzero",
-      "bench": "builtin"
+      "bench": "ecosystem"
     },
     {
       "id": "unused_value_refused",
@@ -292,7 +325,7 @@
       "task": "The program stores 2^64 - 1 in an unsigned 64-bit integer and prints it.",
       "for": "unsigned_subtraction",
       "expect": "^18446744073709551615$",
-      "bench": "builtin"
+      "bench": "ecosystem"
     },
     {
       "id": "int128",
@@ -301,7 +334,7 @@
       "task": "The program stores 2^100 in a fixed-size 128-bit integer and prints it.",
       "for": "int_overflow",
       "expect": "^1267650600228229401496703205376$",
-      "bench": "builtin"
+      "bench": "ecosystem"
     },
     {
       "id": "literal_range",
@@ -340,7 +373,7 @@
       "task": "Two threads fill the two halves of one shared 10-slot array with the numbers 0 to 9. After both finish, the program prints the sum.",
       "for": "concurrent_map_write",
       "expect": "^45$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "mutex",
@@ -349,7 +382,7 @@
       "task": "Two threads each add 1 to a shared counter 100,000 times, holding the standard mutex for each step. The program prints the total.",
       "for": "self_deadlock, lock_order_deadlock",
       "expect": "^200000$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "atomic_counter",
@@ -358,7 +391,7 @@
       "task": "Two threads each add 1 to a shared counter 100,000 times with an atomic add. The program prints the total.",
       "for": "data races",
       "expect": "^200000$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "channel",
@@ -367,7 +400,7 @@
       "task": "A worker sends 1, 2 and 3 through the standard channel or blocking queue. The main thread receives and prints them.",
       "for": "abandoned_worker_leak",
       "expect": "^1 2 3$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "background_task",
@@ -376,7 +409,7 @@
       "task": "The program starts a task that sleeps 50 ms and returns 7, prints \"started\" without waiting, then waits for the task and prints its result.",
       "for": "unawaited_task",
       "expect": "^started\\s+7$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "join_with_failure",
@@ -385,7 +418,7 @@
       "task": "A worker fails with \"bad input\" the language's usual way. The main thread waits for it and prints the failure.",
       "for": "worker_failure_lost",
       "expect": "bad input",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "task_timeout",
@@ -395,7 +428,7 @@
       "for": "hangs",
       "expect": "^timed out$",
       "timeout": 4,
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "task_cancel",
@@ -405,7 +438,7 @@
       "for": "abandoned work",
       "expect": "^stopped$",
       "timeout": 10,
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "concurrent_map",
@@ -414,7 +447,7 @@
       "task": "Four threads each add 1,000 different keys to one map from the standard library that needs no outside lock. The program prints the size.",
       "for": "concurrent_map_write",
       "expect": "^4000$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "spawn_argv",
@@ -423,7 +456,7 @@
       "task": "The program runs echo with the single argument \"hi; touch /tmp/bb_x\", passed as an argument list with no shell, and prints its output.",
       "for": "command_injection",
       "expect": "^hi; touch /tmp/bb_x$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "exit_status",
@@ -432,7 +465,7 @@
       "task": "The program runs false and prints its exit status.",
       "for": "ignored_error_result",
       "expect": "^1$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "env_absent",
@@ -441,7 +474,7 @@
       "task": "The program looks up the unset variable BB_UNSET with a call that tells \"not set\" apart from \"empty\", and prints \"absent\".",
       "for": "null_deref",
       "expect": "^absent$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "signal_graceful",
@@ -451,7 +484,7 @@
       "for": "lost cleanup",
       "expect": "^cleaned up$",
       "timeout": 10,
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "secure_temp_file",
@@ -460,7 +493,7 @@
       "task": "The program creates a new temporary file or folder in one call that cannot collide with another process, writes \"ok\" to a file in it, reads it back and prints it.",
       "for": "CWE-377",
       "expect": "^ok$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "file_permissions",
@@ -469,7 +502,7 @@
       "task": "The program creates a file that only its owner can read and write (mode 600) and prints its permission bits in octal.",
       "for": "CWE-732",
       "expect": "^600$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "process_timeout",
@@ -478,7 +511,7 @@
       "task": "The program starts sleep 10 as a child process, stops it after 100 ms, waits for it to end, and prints \"killed\".",
       "for": "hangs",
       "expect": "^killed$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "regex",
@@ -487,7 +520,7 @@
       "task": "The program matches ^[a-z]+[0-9]{2}$ against \"abc12\" and \"abc1\" and prints both results.",
       "for": "regex_backtracking",
       "expect": "^true false$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "regex_linear",
@@ -497,7 +530,7 @@
       "for": "regex_backtracking",
       "expect": "^no match$",
       "timeout": 5,
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "graphemes",
@@ -506,7 +539,7 @@
       "task": "The program takes the first 9 characters, as a reader counts them, of \"abcdefgh👍🏽xyz\" and prints them.",
       "for": "text truncation",
       "expect": "^abcdefgh👍🏽$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "unicode_normalize",
@@ -515,7 +548,7 @@
       "task": "The program normalizes \"e\" plus U+0301 to NFC, compares it with U+00E9, and prints \"equal\".",
       "for": "CWE-176",
       "expect": "^equal$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "utf8_validate",
@@ -524,7 +557,7 @@
       "task": "The program decodes the bytes 0x61 0xFF as UTF-8 so that bad bytes report an error instead of turning into replacement characters, and prints \"invalid\".",
       "for": "CWE-172",
       "expect": "^invalid$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "html_escape",
@@ -533,7 +566,7 @@
       "task": "The program escapes <a href=\"x\">Tom & Jerry</a> for HTML with a library call and prints the result.",
       "for": "CWE-79",
       "expect": "^&lt;a href=(&quot;|&#34;|&#x22;)x(&quot;|&#34;|&#x22;)&gt;Tom &amp; Jerry&lt;(/|&#x2F;|&#47;)a&gt;$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "json_parse",
@@ -542,7 +575,7 @@
       "task": "The program parses {\"port\": 8080, \"debug\": true} with a library call and prints the port, then parses {port: 8080}, gets an error, and prints \"invalid\".",
       "for": "CWE-20",
       "expect": "^8080 invalid$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "checked_add",
@@ -554,7 +587,7 @@
       "args": [
         "9223372036854775807"
       ],
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "wrapping_add",
@@ -566,7 +599,7 @@
       "args": [
         "9223372036854775807"
       ],
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "saturating_add",
@@ -578,7 +611,7 @@
       "args": [
         "9223372036854775807"
       ],
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "bigint",
@@ -587,7 +620,7 @@
       "task": "The program computes 2^100 exactly and prints it.",
       "for": "int_overflow",
       "expect": "^1267650600228229401496703205376$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "decimal",
@@ -596,7 +629,7 @@
       "task": "The program adds 0.1 and 0.2 as decimals, compares the sum with 0.3, and prints \"equal\".",
       "for": "float_equality",
       "expect": "^equal$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "checked_narrowing",
@@ -608,7 +641,7 @@
       "args": [
         "300"
       ],
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "float_to_int_checked",
@@ -617,7 +650,7 @@
       "task": "The program converts NaN to a 64-bit integer, with the failure reported as a value or an error it can catch, and prints \"does not fit\".",
       "for": "CERT FLP34-C",
       "expect": "^does not fit$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "strict_parse",
@@ -629,7 +662,7 @@
       "args": [
         "12abc"
       ],
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "sorted_map",
@@ -638,7 +671,7 @@
       "task": "The program inserts the keys c, a and b into a map that keeps keys in order, and prints the keys.",
       "for": "iteration-order bugs",
       "expect": "^a b c$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "sorted_set",
@@ -647,7 +680,7 @@
       "task": "The program inserts 3, 1 and 2 into a set that keeps items in order, and prints them.",
       "for": "iteration-order bugs",
       "expect": "^1 2 3$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "insertion_ordered_map",
@@ -656,7 +689,7 @@
       "task": "The program inserts the keys c, a and b into a map that keeps them in the order added, and prints the keys.",
       "for": "iteration-order bugs",
       "expect": "^c a b$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "deque",
@@ -665,7 +698,7 @@
       "task": "The program adds 1 at the back, 0 at the front and 2 at the back, then takes one item off each end and prints them.",
       "for": "queue misuse",
       "expect": "^0 2$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "priority_queue",
@@ -674,7 +707,7 @@
       "task": "The program pushes 3, 1 and 2 into a min-heap, then pops and prints all of them.",
       "for": "ordering bugs",
       "expect": "^1 2 3$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "counter",
@@ -683,7 +716,7 @@
       "task": "The program counts the words a, b, a with a counting map or bag type and prints the counts in key order.",
       "for": "missing_key_default",
       "expect": "^a=2 b=1$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "bitset",
@@ -692,7 +725,7 @@
       "task": "The program sets bit 1000 in a compact bit set, tests bits 1000 and 999, and prints both results.",
       "for": "manual bit arithmetic",
       "expect": "^true false$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "composite_key",
@@ -701,7 +734,7 @@
       "task": "The program puts the pair (1, 2) in a set as one key compared by value, checks for (1, 2), and prints the result.",
       "for": "mutable_hash_key",
       "expect": "^true$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "checked_index",
@@ -710,7 +743,7 @@
       "task": "The program reads index 5 of [10, 20, 30] with a lookup that returns a missing value (an optional, null or nil) instead of failing, and prints \"none\".",
       "for": "oob_write, negative_index_wraps",
       "expect": "^none$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "total_float_sort",
@@ -719,7 +752,7 @@
       "task": "The program sorts [3, NaN, 1, 2] with the standard comparison that puts every float, NaN included, in order, and prints the values with NaN written as \"NaN\".",
       "for": "sort_with_nan",
       "expect": "^(NaN 1(\\.0)? 2(\\.0)? 3(\\.0)?|1(\\.0)? 2(\\.0)? 3(\\.0)? NaN)$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "date_time_zone",
@@ -728,7 +761,7 @@
       "task": "The program converts 2026-03-29 01:30 UTC to local time in Europe/Paris, just after the switch to summer time, and prints it.",
       "for": "time-zone bugs",
       "expect": "^2026-03-29 03:30$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "byte_buffer",
@@ -737,7 +770,7 @@
       "task": "The program appends 100,000 bytes one at a time to a growable byte buffer and prints its length.",
       "for": "quadratic copying",
       "expect": "^100000$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "weak_reference",
@@ -746,7 +779,7 @@
       "task": "The program holds a weak reference to an object, drops the last strong reference (forcing a collection where needed), and prints \"gone\" once the weak reference no longer reaches the object.",
       "for": "reference_cycle_leak",
       "expect": "^gone$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "error_chain",
@@ -755,7 +788,7 @@
       "task": "The program wraps the error \"not found\" with the context \"loading config\", prints the message, then reads the original cause back from the wrapper and prints it.",
       "for": "lost diagnostics",
       "expect": "loading config.*not found\\s+not found$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "stack_trace",
@@ -764,7 +797,7 @@
       "task": "Function inner captures the call stack as a value. The program prints \"inner\" if the trace names it.",
       "for": "lost diagnostics",
       "expect": "^inner$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "recover_worker_crash",
@@ -773,7 +806,7 @@
       "task": "A worker panics or throws. The main thread keeps running, prints \"worker crashed\" and exits with status 0.",
       "for": "worker_failure_lost",
       "expect": "^worker crashed$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "recover_allocation_failure",
@@ -788,7 +821,7 @@
       "env": {
         "ASAN_OPTIONS": "detect_leaks=0:allocator_may_return_null=1"
       },
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "recover_stack_overflow",
@@ -797,7 +830,7 @@
       "task": "Runaway recursion becomes an error the program handles. It prints \"stack overflow\" and exits with status 0.",
       "for": "stack_overflow",
       "expect": "^stack overflow$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "unhandled_hook",
@@ -807,7 +840,7 @@
       "for": "lost diagnostics",
       "expect": "^hook ran$",
       "exit": "any",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "path_containment",
@@ -816,7 +849,7 @@
       "task": "The program joins /srv/app with ../../etc/passwd, normalizes the result, checks whether it stays under /srv/app, and prints \"outside\".",
       "for": "path_join_escape",
       "expect": "^outside$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "constant_time_compare",
@@ -825,7 +858,7 @@
       "task": "The program compares two equal 16-byte secrets with a constant-time function and prints \"equal\".",
       "for": "CWE-208",
       "expect": "^equal$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "secure_random",
@@ -834,7 +867,7 @@
       "task": "The program reads 16 bytes from a cryptographic random source and prints them in hex.",
       "for": "CWE-338",
       "expect": "^[0-9a-f]{32}$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "sha256",
@@ -843,7 +876,7 @@
       "task": "The program hashes \"abc\" with SHA-256 and prints the hex digest.",
       "for": "CWE-328",
       "expect": "^ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "password_hash",
@@ -852,7 +885,7 @@
       "task": "The program hashes the password \"hunter2\" with a slow password hash (PBKDF2, bcrypt, scrypt or Argon2), checks \"hunter2\" and \"wrong\" against it, and prints both results.",
       "for": "CWE-916",
       "expect": "^true false$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "hmac",
@@ -861,7 +894,7 @@
       "task": "The program computes HMAC-SHA256 of \"The quick brown fox jumps over the lazy dog\" with the key \"key\" and prints the tag in hex.",
       "for": "CWE-345",
       "expect": "^f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8$",
-      "bench": "library"
+      "bench": "ecosystem"
     },
     {
       "id": "aead_encrypt",
@@ -870,7 +903,7 @@
       "task": "The program encrypts \"secret\" with AES-GCM or ChaCha20-Poly1305 under a random key and nonce, decrypts it and prints it, then flips one bit of the ciphertext and prints \"rejected\" when decryption fails.",
       "for": "CWE-327",
       "expect": "^secret\\s+rejected$",
-      "bench": "library"
+      "bench": "ecosystem"
     }
   ]
 }

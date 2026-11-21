@@ -644,6 +644,23 @@
   "exclusive_mutation": {
    "outcome": "NONE",
    "message": "nothing refuses passing one value as two mutable arguments"
+  },
+  "strong_enum": {
+   "outcome": "PASS",
+   "refusal": "/tmp/breakbench/express-strong_enum/reject/main.c3:25:18: error: Implicitly casting 'int' to 'Color' is not permitted, but you may do an explicit cast by placing '(Color)' before the expression.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "green",
+   "stderr": "",
+   "level": "LANGUAGE"
+  },
+  "override_check": {
+   "outcome": "NONE",
+   "message": "a @dynamic method that matches no interface method is accepted as a new method"
+  },
+  "automatic_memory": {
+   "outcome": "NONE",
+   "message": "every heap allocation needs an explicit free; a @pool frees at the end of its scope, not when the memory is no longer used"
   }
  }
 }

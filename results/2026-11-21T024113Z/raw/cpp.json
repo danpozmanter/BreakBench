@@ -649,6 +649,34 @@
    "secs": 0.0,
    "stdout": "jello",
    "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.cpp:7:40: runtime error: 1e+20 is outside the range of representable values of type 'long'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.cpp:7:40"
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "all_warnings": "main.cpp:10:24: warning: implicit conversion changes signedness: 'int' to 'size_type' (aka 'unsigned long') [-Wsign-conversion]\n1 warning generated.",
+   "exit": 134,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/array:210: reference std::array<int, 4>::operator[](size_type) [_Tp = int, _Nm = 4]: Assertion '__n < this->size()' failed.\nAborted"
   }
  }
 }

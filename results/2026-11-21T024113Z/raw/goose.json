@@ -539,6 +539,33 @@
   "string_literal_write": {
    "outcome": "REJECTED",
    "message": "main.goose:5: error: cannot assign through this path (const, or a read-only instantiation, \u00a79.5)\n    greeting[0] = 'j'; // CONTROL! greeting = \"jello\";\n    ^~~~~~~~~~~~~~~~~~\n  in fn main() instantiated from main.goose:3"
+  },
+  "float_to_int_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.3,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "goose runtime error: as conversion out of range (debug): 1e+20 as i64 (main.goose:6)"
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "goose runtime error: index 4 out of bounds (length 4) (main.goose:9)"
   }
  }
 }

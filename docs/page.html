@@ -164,14 +164,19 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
     <a href="#" data-view="home">Overview</a>
     <a href="#correctness" data-view="correctness">Correctness</a>
     <a href="#builtin" data-view="builtin">Built-in safety</a>
-    <a href="#library" data-view="library">Library coverage</a>
+    <a href="#ecosystem" data-view="ecosystem">Ecosystem coverage</a>
   </nav>
 
   <div class="view" id="view-home">
     <header>
       <h1>BreakBench</h1>
-      <p>What 30 programming languages do about common bugs. Correctness: each program has one classic bug in it; does the compiler catch it, does the program stop with an error, or does it quietly print the wrong answer? Built-in safety: which mistakes does the language rule out on its own? Library coverage: which safety tools come with the language, and which do you have to find on a package registry?</p>
+      <p>What 30 programming languages do about common bugs. Correctness: each program has one classic bug in it; does the compiler catch it, does the program stop with an error, or does it quietly print the wrong answer? Built-in safety: which mistakes does the language rule out on its own? Ecosystem coverage: which safety tools come with the language, and which do you have to find on a package registry?</p>
     </header>
+    <section aria-labelledby="overall-h">
+      <h2 id="overall-h">Overall ranking</h2>
+      <p class="muted">The overall score is the mean of the three bench scores, each a percentage: correctness is the mean problem score, and each probe bench is the share of its probes covered.</p>
+      <div class="scroll"><table id="overall"></table></div>
+    </section>
     <div class="cards">
       <div class="card">
         <h2><a class="go" href="#correctness">Correctness and memory safety</a></h2>
@@ -184,9 +189,9 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
         <div class="scroll"><table id="home-b"></table></div>
       </div>
       <div class="card">
-        <h2><a class="go" href="#library">Library coverage</a></h2>
-        <p class="muted" id="home-l-meta"></p>
-        <div class="scroll"><table id="home-l"></table></div>
+        <h2><a class="go" href="#ecosystem">Ecosystem coverage</a></h2>
+        <p class="muted" id="home-e-meta"></p>
+        <div class="scroll"><table id="home-e"></table></div>
       </div>
     </div>
   </div>
@@ -201,7 +206,7 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
 
     <section aria-labelledby="rank-h">
       <h2 id="rank-h">Ranking</h2>
-      <p class="muted">The score is the average over the problems a language can write, out of 100. The correctness and memory columns break it down; they are not separate rankings.</p>
+      <p class="muted">The score is the average over the problems a language can write, as a percentage. The correctness and memory columns break it down; they are not separate rankings.</p>
       <div class="scroll"><table id="ranking"></table></div>
     </section>
 
@@ -245,7 +250,7 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
     </header>
     <section aria-labelledby="b-rank-h">
       <h2 id="b-rank-h">Ranking</h2>
-      <p class="muted">Languages are ranked by how many probes they cover. Compiler-checked probes need a compiler that refuses unsafe code, so dynamic languages cannot pass them; language-feature probes need a construct in the language itself.</p>
+      <p class="muted">Languages are ranked by the share of probes they cover. Compiler-checked probes need a compiler that refuses unsafe code, so dynamic languages pass few of them; language-feature probes need a construct in the language itself.</p>
       <div class="legend" id="b-legend"></div>
       <div class="scroll"><table id="b-ranking"></table></div>
     </section>
@@ -259,27 +264,27 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
       <div class="case" id="b-case"></div>
     </section>
   </div>
-  <div class="view" id="view-library" hidden>
+  <div class="view" id="view-ecosystem" hidden>
     <header>
-      <span class="eyebrow">Library coverage</span>
+      <span class="eyebrow">Ecosystem coverage</span>
       <h1>Which safe tools ship with the language?</h1>
       <p>Each probe asks whether the language ships a tool for a common mistake, such as a mutex, a JSON parser or password hashing. It counts if the standard library or a library the language's own project publishes provides it, plus ISO C and POSIX for C and C++. Some languages keep a small standard library on purpose and leave these tools to packages, so this is a profile of what ships, not a measure of how safe a language is.</p>
-      <div class="meta" id="l-meta"></div>
+      <div class="meta" id="e-meta"></div>
     </header>
-    <section aria-labelledby="l-rank-h">
-      <h2 id="l-rank-h">Ranking</h2>
-      <p class="muted">Languages are ranked by how many probes their own sources cover. The columns show where each covered probe comes from.</p>
-      <div class="legend" id="l-legend"></div>
-      <div class="scroll"><table id="l-ranking"></table></div>
+    <section aria-labelledby="e-rank-h">
+      <h2 id="e-rank-h">Ranking</h2>
+      <p class="muted">Languages are ranked by the share of probes their own sources cover. The columns show where each covered probe comes from.</p>
+      <div class="legend" id="e-legend"></div>
+      <div class="scroll"><table id="e-ranking"></table></div>
     </section>
-    <section aria-labelledby="l-grid-h">
-      <h2 id="l-grid-h">Every probe</h2>
+    <section aria-labelledby="e-grid-h">
+      <h2 id="e-grid-h">Every probe</h2>
       <p class="muted">Select a cell to see the task and the evidence: the output, the compiler's refusal, or why the language cannot do it.</p>
-      <div class="scroll grid-wrap"><table class="grid" id="l-grid"></table></div>
+      <div class="scroll grid-wrap"><table class="grid" id="e-grid"></table></div>
     </section>
-    <section aria-labelledby="l-case-h" id="l-cases">
-      <h2 id="l-case-h">Probe detail</h2>
-      <div class="case" id="l-case"></div>
+    <section aria-labelledby="e-case-h" id="e-cases">
+      <h2 id="e-case-h">Probe detail</h2>
+      <div class="case" id="e-case"></div>
     </section>
   </div>
 </div>
@@ -330,12 +335,13 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
   [["Languages", D.languages.length], ["Problems", probs.length], ["Correctness", nCorr], ["Memory safety", probs.length - nCorr], ["Run", D.generated]]
     .forEach(([k, v]) => meta.append(el("span", {}, k + " ", el("b", { text: String(v) }))));
 
-  let sortKey = "overall";
-  const bar = (v, cls) => el("span", { class: "score" }, el("span", { class: "bar " + cls }, (() => { const i = el("i"); i.style.width = v + "%"; return i; })()), el("span", { class: "num", text: v.toFixed(1) }));
+  const pct = (v) => v.toFixed(1) + "%";
+  let sortKey = "score";
+  const bar = (v, cls) => el("span", { class: "score" }, el("span", { class: "bar " + cls }, (() => { const i = el("i"); i.style.width = v + "%"; return i; })()), el("span", { class: "num", text: pct(v) }));
   function renderRanking() {
     const t = document.getElementById("ranking");
     t.replaceChildren();
-    const cols = [["overall", "Score", ""]];
+    const cols = [["score", "Score", ""]];
     const head = el("tr", {}, el("th", { class: "rank", text: "#" }), el("th", { text: "Language" }));
     cols.forEach(([k, label]) => {
       const b = el("button", { type: "button", "aria-pressed": String(sortKey === k), text: label + (sortKey === k ? " ↓" : "") });
@@ -356,9 +362,9 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
       const tr = el("tr", { "data-lang": L.id },
         el("td", { class: "rank", text: String(L.rank) }),
         el("td", { class: "lang" }, L.name, el("span", { class: "ver", title: L.version, text: L.version })),
-        el("td", {}, bar(L.overall, "")),
-        el("td", { class: "breakdown", text: L.correctness.toFixed(1) }),
-        el("td", { class: "breakdown", text: L.memory.toFixed(1) }),
+        el("td", {}, bar(L.score, "")),
+        el("td", { class: "breakdown", text: pct(L.correctness) }),
+        el("td", { class: "breakdown", text: pct(L.memory) }),
         el("td", { class: "breakdown", text: L.scored + " of " + probs.length }),
         ...present.map((o) => el("td", { class: "count" + (counts[o] ? "" : " zero"), text: counts[o] ? String(counts[o]) : "0" })),
         (() => { const n = Object.values(L.results).filter((r) => r.w && r.o !== "REJECTED" && r.o !== "CORRECT").length; return el("td", { class: "count" + (n ? "" : " zero"), text: String(n) }); })());
@@ -405,7 +411,7 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
       body.append(tr);
     });
     const foot = el("tr", {}, el("th", { class: "pname", text: CAT[c] + " score" }));
-    D.languages.forEach((L) => foot.append(el("td", { class: "gscore", text: L[c].toFixed(1) })));
+    D.languages.forEach((L) => foot.append(el("td", { class: "gscore", text: pct(L[c]) })));
     t.append(el("thead", {}, head), body, el("tfoot", {}, foot));
     grids.append(el("div", { class: "scroll grid-wrap" }, t));
   });
@@ -532,8 +538,8 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
       parts: [["Compiler-checked", (L, ps) => covered(L, ps.filter((p) => p.checked)) + " / " + ps.filter((p) => p.checked).length],
               ["Language features", (L, ps) => covered(L, ps.filter((p) => !p.checked)) + " / " + ps.filter((p) => !p.checked).length]],
     },
-    library: {
-      probes: X.probes.filter((p) => p.bench === "library"),
+    ecosystem: {
+      probes: X.probes.filter((p) => p.bench === "ecosystem"),
       parts: ["LANGUAGE", "STD", "PROJECT", "PLATFORM"].map((lv) =>
         [LEVEL[lv], (L, ps) => String(ps.filter((p) => L.results[p.id]?.o === "PASS" && L.results[p.id].l === lv).length)]),
     },
@@ -555,15 +561,14 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
     ["LANGUAGE", "STD", "PROJECT", "PLATFORM", "NONE", "FAIL"].forEach((lv) =>
       leg.append(el("span", {}, el("span", { class: "swatch l-" + lv, "aria-hidden": "true" }), el("strong", { text: LEVEL[lv] }), LDESC[lv])));
     const t = document.getElementById(k + "ranking");
-    const head = el("tr", {}, el("th", { class: "rank", text: "#" }), el("th", { text: "Language" }), el("th", { text: "Covered" }));
+    const head = el("tr", {}, el("th", { class: "rank", text: "#" }), el("th", { text: "Language" }), el("th", { text: "Covered" }), el("th", { class: "breakdown", text: "Probes" }));
     B.parts.forEach(([name]) => head.append(el("th", { class: "breakdown", text: name })));
     B.groups.forEach((g) => head.append(el("th", { class: "breakdown", text: g.title })));
     t.append(el("thead", {}, head));
     const tb = el("tbody");
     B.ranked.forEach(({ L, n, rank }) => {
       const tr = el("tr", {}, el("td", { class: "rank", text: String(rank) }), el("td", { class: "lang", text: L.name }),
-        el("td", {}, bar(100 * n / B.probes.length, "c")));
-      tr.lastChild.querySelector(".num").textContent = n + " / " + B.probes.length;
+        el("td", {}, bar(100 * n / B.probes.length, "c")), el("td", { class: "breakdown", text: n + " / " + B.probes.length }));
       B.parts.forEach(([, f]) => tr.append(el("td", { class: "breakdown", text: f(L, B.probes) })));
       B.groups.forEach((g) => {
         const ps = B.probes.filter((p) => p.group === g.id);
@@ -594,7 +599,7 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
     g.append(el("thead", {}, gh), gb);
   }
   renderBench("builtin");
-  renderBench("library");
+  renderBench("ecosystem");
 
   function openProbe(id, langId, scroll) {
     const p = X.probes.find((x) => x.id === id) || X.probes[0];
@@ -621,40 +626,46 @@ nav.top .brand { color: var(--fg); font-weight: 700; margin-right: 6px; }
     if (scroll) document.getElementById(k + "cases").scrollIntoView({ behavior: "smooth", block: "start" });
   }
   openProbe(BENCH.builtin.probes[0].id, null, null);
-  openProbe(BENCH.library.probes[0].id, null, null);
+  openProbe(BENCH.ecosystem.probes[0].id, null, null);
 
   (function () {
-    document.getElementById("home-c-meta").textContent = D.problems.length + " problems, " + D.languages.length + " languages. Score out of 100.";
+    document.getElementById("home-c-meta").textContent = D.problems.length + " problems, " + D.languages.length + " languages. Mean problem score.";
     const c = document.getElementById("home-c");
     c.append(el("thead", {}, el("tr", {}, el("th", { class: "rank", text: "#" }), el("th", { text: "Language" }), el("th", { text: "Score" }))));
     const cb = el("tbody");
-    [...D.languages].sort((a, b) => a.rank - b.rank).forEach((L) => cb.append(el("tr", {}, el("td", { class: "rank", text: String(L.rank) }), el("td", { class: "lang", text: L.name }), el("td", {}, bar(L.overall, "")))));
+    [...D.languages].sort((a, b) => a.rank - b.rank).forEach((L) => cb.append(el("tr", {}, el("td", { class: "rank", text: String(L.rank) }), el("td", { class: "lang", text: L.name }), el("td", {}, bar(L.score, "")))));
     c.append(cb);
-    ["builtin", "library"].forEach((key) => {
+    const o = document.getElementById("overall");
+    o.append(el("thead", {}, el("tr", {}, el("th", { class: "rank", text: "#" }), el("th", { text: "Language" }), el("th", { text: "Overall" }),
+      el("th", { class: "breakdown", text: "Correctness" }), el("th", { class: "breakdown", text: "Built-in safety" }), el("th", { class: "breakdown", text: "Ecosystem" }))));
+    const ob = el("tbody");
+    D.overall.forEach((r) => ob.append(el("tr", {}, el("td", { class: "rank", text: String(r.rank) }), el("td", { class: "lang", text: r.name }), el("td", {}, bar(r.overall, "")),
+      el("td", { class: "breakdown", text: pct(r.correctness) }), el("td", { class: "breakdown", text: pct(r.builtin) }), el("td", { class: "breakdown", text: pct(r.ecosystem) }))));
+    o.append(ob);
+    ["builtin", "ecosystem"].forEach((key) => {
       const B = BENCH[key], k = "home-" + key[0];
-      document.getElementById(k + "-meta").textContent = B.probes.length + " probes, " + X.languages.length + " languages. Probes covered.";
+      document.getElementById(k + "-meta").textContent = B.probes.length + " probes, " + X.languages.length + " languages. Share of probes covered.";
       const x = document.getElementById(k);
       x.append(el("thead", {}, el("tr", {}, el("th", { class: "rank", text: "#" }), el("th", { text: "Language" }), el("th", { text: "Covered" }))));
       const xb = el("tbody");
       B.ranked.forEach(({ L, n, rank }) => {
         const cell = el("td", {}, bar(100 * n / B.probes.length, "c"));
-        cell.querySelector(".num").textContent = n + " / " + B.probes.length;
         xb.append(el("tr", {}, el("td", { class: "rank", text: String(rank) }), el("td", { class: "lang", text: L.name }), cell));
       });
       x.append(xb);
     });
   })();
 
-  // Views: the hash names the page (#correctness, #builtin, #library) or an item on it (#p-..., #x-...).
-  // #coverage and #expressibility are older names for #builtin.
+  // Views: the hash names the page (#correctness, #builtin, #ecosystem) or an item on it (#p-..., #x-...).
+  // #coverage and #expressibility are older names for #builtin, and #library for #ecosystem.
   function route() {
     const h = location.hash.slice(1);
     const probe = h.startsWith("x-") ? h.slice(2).replace(/-/g, "_") : null;
     const view = h === "correctness" || h.startsWith("p-") ? "correctness"
       : probe ? benchOf(probe)
-      : h === "library" ? "library"
+      : h === "ecosystem" || h === "library" ? "ecosystem"
       : h === "builtin" || h === "coverage" || h === "expressibility" ? "builtin" : "home";
-    ["home", "correctness", "builtin", "library"].forEach((v) => (document.getElementById("view-" + v).hidden = v !== view));
+    ["home", "correctness", "builtin", "ecosystem"].forEach((v) => (document.getElementById("view-" + v).hidden = v !== view));
     document.querySelectorAll("nav.top a").forEach((a) => a.setAttribute("aria-current", a.dataset.view === view ? "page" : "false"));
     if (h.startsWith("p-")) {
       const id = h.slice(2).replace(/-/g, "_");

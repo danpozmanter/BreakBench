@@ -593,6 +593,33 @@
   "string_literal_write": {
    "outcome": "REJECTED",
    "message": "# command-line-arguments\n# [command-line-arguments]\nvet: ./main.go:7:2: cannot assign to greeting[0] (neither addressable nor a map index expression)\n\n\n\n# command-line-arguments\n./main.go:7:2: cannot assign to greeting[0] (neither addressable nor a map index expression)"
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.9,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.9,
+   "secs": 0.0,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 2,
+   "rss_mb": 14.9,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "panic: runtime error: index out of range [4] with length 4\n\ngoroutine 1 [running]:\nmain.main()\n\t/tmp/breakbench/oob_read/main/main.go:17 +0xb6"
   }
  }
 }

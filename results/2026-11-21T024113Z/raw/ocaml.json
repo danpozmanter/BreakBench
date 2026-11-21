@@ -564,6 +564,33 @@
   "string_literal_write": {
    "outcome": "REJECTED",
    "message": "File \"main.ml\", line 3, characters 2-21:\n3 |   greeting.[0] <- 'j'; (* BREAK! *)\n      ^^^^^^^^^^^^^^^^^^^\nError: Syntax error: strings are immutable, there is no assignment syntax for\n       them.\nHint: Mutable sequences of bytes are available in the Bytes module.\nHint: Did you mean to use Bytes.set?"
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 2,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Invalid_argument(\"index out of bounds\")"
   }
  }
 }

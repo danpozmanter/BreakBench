@@ -668,6 +668,33 @@
    "secs": 0.01,
    "stdout": "",
    "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==41900==ERROR: AddressSanitizer: SEGV on unknown address 0x5b2bbb1b6980 (pc 0x5b2bbb2ccc41 bp 0x7fff3203c760 sp 0x7fff3203c740 T0)\n==41900==The signal is caused by a WRITE memory access.\n    #0 0x5b2bbb2ccc41 in main /tmp/breakbench/string_literal_write/main/main.c:5:17\n    #1 0x7b145fbdf600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #2 0x7b145fbdf717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #3 0x5b2bbb1dc6e4 in _start (/tmp/breakbench/string_literal_write/main/main+0x6c6e4)\n\n==41900==Register values:\nrax = 0x00005b2bbb1b6980  rbx = 0x0000000000000000  rcx = 0x00005b2bbb2ce006  rdx = 0x00007fff3203c8a8  \nrdi = 0x0000000000000001  rsi = 0x00007fff3203c898  rbp = 0x00007fff3203c760  rsp = 0x00007fff3203c740  \n r8 = 0xffffff0000000000   r9 = 0x0000000000000000  r10 = 0xafffff00000fffff  r11 = 0x4000000000000000  \nr12 = 0x00007fff3203c898  r13 = 0x0000000000000001  r14 = 0x00007b145ff8b000  r15 = 0x00005b2bbb2ce000  \nAddressSanitizer can not provide additional info.\nSUMMARY: AddressSanitizer: SEGV /tmp/breakbench/string_literal_write/main/main.c:5:17 in main\n==41900==ABORTING"
+  },
+  "float_to_int_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 15.1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.c:7:19: runtime error: 1e+20 is outside the range of representable values of type 'long long'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.c:7:19"
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "exit": 0,
+   "rss_mb": 15.1,
+   "secs": 0.0,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "exit": 1,
+   "rss_mb": 15.1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.c:10:20: runtime error: index 4 out of bounds for type 'int[4]'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.c:10:20"
   }
  }
 }
