@@ -489,11 +489,12 @@
   },
   "use_after_close": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 1,
    "rss_mb": 14.5,
-   "secs": 0.03,
+   "secs": 0.02,
    "stdout": "",
    "stderr": "main.rb:4:in 'IO#write': closed stream (IOError)\n\tfrom main.rb:4:in '<main>'"
   },
@@ -612,11 +613,12 @@
   },
   "concurrent_map_write": {
    "outcome": "CORRECT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
-   "rss_mb": 50.5,
-   "secs": 0.1,
+   "rss_mb": 50.2,
+   "secs": 0.13,
    "stdout": "800000",
    "stderr": ""
   },
@@ -822,10 +824,11 @@
   },
   "racy_counter": {
    "outcome": "CORRECT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.5,
    "secs": 0.06,
    "stdout": "2000000",
    "stderr": ""
@@ -955,8 +958,9 @@
   "bitwise_on_bool": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.5,
    "secs": 0.02,
    "stdout": "no",
    "stderr": ""
@@ -982,6 +986,26 @@
   "contracts": {
    "outcome": "INEXPRESSIBLE",
    "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.02,
+   "stdout": "hello,",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "main.rb:1:in 'IO#close': No space left on device @ fptr_finalize_flush - /dev/full (Errno::ENOSPC)\n\tfrom main.rb:1:in 'IO.open'\n\tfrom main.rb:1:in '<main>'"
   }
  }
 }

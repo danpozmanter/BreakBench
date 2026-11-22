@@ -393,14 +393,15 @@
   },
   "use_after_close": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "all_warnings": "main.swift:4:21: warning: result of call to 'createFile(atPath:contents:attributes:)' is unused [#NoUsage]\n|                     `- warning: result of call to 'createFile(atPath:contents:attributes:)' is unused [#NoUsage]",
    "exit": 132,
    "rss_mb": 20.3,
-   "secs": 0.16,
+   "secs": 0.12,
    "stdout": "",
-   "stderr": "Swift/ErrorType.swift:254: Fatal error: Error raised at top level: Error Domain=NSCocoaErrorDomain Code=512 \"(null)\"\n\n*** Signal 4: Backtracing from 0x753ea5019fbf... done ***\n\n*** Program crashed: Illegal instruction at 0x0000753ea5019fbf ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0               0x0000753ea5019fbf _assertionFailure(_:_:file:line:flags:) + 303 in libswiftCore.so\n1 [ra]          0x0000753ea50798fe swift_errorInMain + 765 in libswiftCore.so\n2 [ra] [system] 0x0000650ff28e4181 main + 912 in main at //<compiler-generated>\n3 [ra]          0x0000753ea355c601 <unknown> in libc.so.6\n4 [ra]          0x0000753ea355c718 <unknown> in libc.so.6\n\n\nRegisters:\n\nrax 0x0000000200000003  8589934595\nrdx 0x00000\n...\nf 65 00 00  L\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00f0Pca\u00f8\u00b7e\u00b7\u00b7\nr14 0xf00000000000004c  17293822569102704716\nr15 0x0000000000000000  0\nrip 0x0000753ea5019fbf  0f 0b 48 83 ec 08 48 8d 05 94 16 30 00 48 8d 3d  \u00b7\u00b7H\u00b7\u00ec\u00b7H\u00b7\u00b7\u00b7\u00b70\u00b7H\u00b7=\n\nrflags 0x0000000000010206  PF\n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (19 omitted):\n\n0x0000650ff28e1000\u20130x0000650ff28e423d 8fffe395e75baf7919e133220da5e1e42d7fde76 main            /tmp/breakbench/use_after_close/main/main\n0x0000753ea3532000\u20130x0000753ea36f1819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6       /usr/lib/x86_64-linux-gnu/libc.so.6\n0x0000753ea4d10000\u20130x0000753ea52e9b70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.02s\n\nIllegal instruction (core dumped)"
+   "stderr": "Swift/ErrorType.swift:254: Fatal error: Error raised at top level: Error Domain=NSCocoaErrorDomain Code=512 \"(null)\"\n\n*** Signal 4: Backtracing from 0x76341a4b3fbf... done ***\n\n*** Program crashed: Illegal instruction at 0x000076341a4b3fbf ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0               0x000076341a4b3fbf _assertionFailure(_:_:file:line:flags:) + 303 in libswiftCore.so\n1 [ra]          0x000076341a5138fe swift_errorInMain + 765 in libswiftCore.so\n2 [ra] [system] 0x000055862fd66181 main + 912 in main at //<compiler-generated>\n3 [ra]          0x00007634189f6601 <unknown> in libc.so.6\n4 [ra]          0x00007634189f6718 <unknown> in libc.so.6\n\n\nRegisters:\n\nrax 0x0000000200000003  8589934595\nrdx 0x00000\n...\n 86 55 00 00  L\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00f0PcEF\u00b7U\u00b7\u00b7\nr14 0xf00000000000004c  17293822569102704716\nr15 0x0000000000000000  0\nrip 0x000076341a4b3fbf  0f 0b 48 83 ec 08 48 8d 05 94 16 30 00 48 8d 3d  \u00b7\u00b7H\u00b7\u00ec\u00b7H\u00b7\u00b7\u00b7\u00b70\u00b7H\u00b7=\n\nrflags 0x0000000000010202  \n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (19 omitted):\n\n0x000055862fd63000\u20130x000055862fd6623d 3ff8dc8068693e9e3b26fa3f0fdae583cbf061f2 main            /tmp/breakbench/use_after_close/main/main\n0x00007634189cc000\u20130x0000763418b8b819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6       /usr/lib/x86_64-linux-gnu/libc.so.6\n0x000076341a1aa000\u20130x000076341a783b70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.01s\n\nIllegal instruction (core dumped)"
   },
   "dead_store": {
    "outcome": "SILENT",
@@ -776,6 +777,28 @@
   "contracts": {
    "outcome": "INEXPRESSIBLE",
    "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.swift:6:17: warning: string interpolation produces a debug description for an optional value; did you mean to make this explicit?\n|                 |- warning: string interpolation produces a debug description for an optional value; did you mean to make this explicit?\n|                 |- note: provide a default value to avoid this warning\n|                 `- note: use 'String(describing:)' to silence this warning",
+   "warnings": "main.swift:6:17: warning: string interpolation produces a debug description for an optional value; did you mean to make this explicit?\n|                 |- warning: string interpolation produces a debug description for an optional value; did you mean to make this explicit?",
+   "exit": 0,
+   "rss_mb": 17.1,
+   "secs": 0.0,
+   "stdout": "hello, nil",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "rss_mb": 20.6,
+   "secs": 0.12,
+   "stdout": "",
+   "stderr": "Swift/ErrorType.swift:254: Fatal error: Error raised at top level: Error Domain=NSCocoaErrorDomain Code=640 \"There isn\u2019t enough space.\"UserInfo={NSUnderlyingError=Error Domain=NSPOSIXErrorDomain Code=28 \"No space left on device\", NSURL=file:///dev/full, NSFilePath=/dev/full}\n\n*** Signal 4: Backtracing from 0x7cf835a47fbf... done ***\n\n*** Program crashed: Illegal instruction at 0x00007cf835a47fbf ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0               0x00007cf835a47fbf _assertionFailure(_:_:file:line:flags:) + 303 in libswiftCore.so\n1 [ra]          0x00007cf835aa78fe swift_errorInMain + 765 in libswiftCore.so\n2 [ra] [system] 0x00005a293e22d67d main + 380 in main at //<compiler-generated>\n3 [ra]          0\n...\n 29 5a 00 00  \u00ed\u00b7\u00b7\u00b7\u00b7\u00b7\u00b70P\u00b7xp)Z\u00b7\u00b7\nr14 0x30000000000000ed  3458764513820541165\nr15 0x0000000000000000  0\nrip 0x00007cf835a47fbf  0f 0b 48 83 ec 08 48 8d 05 94 16 30 00 48 8d 3d  \u00b7\u00b7H\u00b7\u00ec\u00b7H\u00b7\u00b7\u00b7\u00b70\u00b7H\u00b7=\n\nrflags 0x0000000000010202  \n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (19 omitted):\n\n0x00005a293e22c000\u20130x00005a293e22d68d 0fc9023a14efe7be394c368cacaabdbb772c3bab main            /tmp/breakbench/lost_write_error/main/main\n0x00007cf833f60000\u20130x00007cf83411f819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6       /usr/lib/x86_64-linux-gnu/libc.so.6\n0x00007cf83573e000\u20130x00007cf835d17b70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.01s\n\nIllegal instruction (core dumped)"
   }
  }
 }

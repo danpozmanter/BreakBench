@@ -406,10 +406,11 @@
   },
   "use_after_close": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 2,
-   "rss_mb": 14.5,
+   "rss_mb": 14.8,
    "secs": 0.0,
    "stdout": "",
    "stderr": "Fatal error: exception Sys_error(\"Bad file descriptor\")"
@@ -519,12 +520,13 @@
   },
   "concurrent_map_write": {
    "outcome": "SILENT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
-   "rss_mb": 59.0,
-   "secs": 0.09,
-   "stdout": "422871",
+   "rss_mb": 72.7,
+   "secs": 0.1,
+   "stdout": "312711",
    "stderr": ""
   },
   "reference_cycle_leak": {
@@ -677,12 +679,13 @@
   },
   "racy_counter": {
    "outcome": "SILENT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
-   "rss_mb": 14.2,
+   "rss_mb": 14.8,
    "secs": 0.0,
-   "stdout": "1072634",
+   "stdout": "1237261",
    "stderr": ""
   },
   "unreachable_code": {
@@ -786,6 +789,20 @@
   "contracts": {
    "outcome": "INEXPRESSIBLE",
    "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "null_in_text": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 5, characters 29-33:\n5 |   print_endline (\"hello, \" ^ name) (* CONTROL! print_endline (\"hello, \" ^ Option.value name ~default:\"nobody\") *)\n                                 ^^^^\nError: The value name has type string option\n       but an expression was expected of type string"
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "rss_mb": 14.3,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Sys_error(\"No space left on device\")"
   }
  }
 }

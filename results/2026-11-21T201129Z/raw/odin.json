@@ -401,13 +401,14 @@
   },
   "use_after_close": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 1,
    "rss_mb": 14.4,
    "secs": 0.02,
    "stdout": "",
-   "stderr": "=================================================================\n==56==ERROR: AddressSanitizer: heap-use-after-free on address 0x72d22b5e0050 at pc 0x56a175f8557d bp 0x7ffe572fceb0 sp 0x7ffe572fcea8\nREAD of size 8 at 0x72d22b5e0050 thread T0\n    #0 0x56a175f8557c in os::write /opt/odin/core/os/file.odin:294:3\n    #1 0x56a175f2a856 in os::write_string /opt/odin/core/os/file_util.odin:12:2\n    #2 0x56a175f7e9ab in main::main /tmp/breakbench/use_after_close/main/main.odin:17:5\n    #3 0x56a175efdbd9 in main /opt/odin/base/runtime/entry_unix.odin:71:4\n    #4 0x76122c2aa600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #5 0x76122c2aa717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.\n...\n fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x72d22b5e0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==56==ABORTING"
+   "stderr": "=================================================================\n==56==ERROR: AddressSanitizer: heap-use-after-free on address 0x7bb48c3e0050 at pc 0x615db395eb6d bp 0x7ffe8c2039f0 sp 0x7ffe8c2039e8\nREAD of size 8 at 0x7bb48c3e0050 thread T0\n    #0 0x615db395eb6c in os::write /opt/odin/core/os/file.odin:294:3\n    #1 0x615db39748d6 in os::write_string /opt/odin/core/os/file_util.odin:12:2\n    #2 0x615db395408b in main::main /tmp/breakbench/use_after_close/main/main.odin:17:5\n    #3 0x615db398e109 in main /opt/odin/base/runtime/entry_unix.odin:71:4\n    #4 0x7ef48d05e600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #5 0x7ef48d05e717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.\n...\n fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x7bb48c3e0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==56==ABORTING"
   },
   "dead_store": {
    "outcome": "REJECTED",
@@ -509,13 +510,14 @@
   },
   "concurrent_map_write": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 1,
-   "rss_mb": 14.6,
+   "rss_mb": 14.4,
    "secs": 0.02,
    "stdout": "",
-   "stderr": "=================================================================\n==3667==ERROR: AddressSanitizer: attempting double-free on 0x76cc32e10040 in thread T3:\n    #0 0x64101c2ebf36 in free /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:51:3\n    #1 0x64101c3d0ae8 in runtime::[heap_allocator_unix.odin]::_heap_free /opt/odin/base/runtime/heap_allocator_unix.odin:37:2\n    #2 0x64101c341dd8 in runtime::heap_free /opt/odin/base/runtime/heap_allocator.odin:123:2\n    #3 0x64101c342150 in runtime::heap_allocator_proc.aligned_free-2190 /opt/odin/base/runtime/heap_allocator.odin:65:4\n    #4 0x64101c341c27 in runtime::heap_allocator_proc /opt/odin/base/runtime/heap_allocator.odin:91:3\n    #5 0x64101c34573c in runtime:\n...\n317:3\n    #1 0x64101c37c23e in thread::[thread_unix.odin]::_create /opt/odin/core/thread/thread_unix.odin:126:2\n    #2 0x64101c37c8f5 in thread::create /opt/odin/core/thread/thread.odin:119:2\n    #3 0x64101c3cb554 in main::main /tmp/breakbench/concurrent_map_write/main/main.odin:18:28\n    #4 0x64101c3f65f9 in main /opt/odin/base/runtime/entry_unix.odin:71:4\n    #5 0x798c33b87717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #6 0x64101c23dcc4 in _start (/tmp/breakbench/concurrent_map_write/main/main+0xa1cc4)\n\nSUMMARY: AddressSanitizer: double-free /opt/odin/base/runtime/heap_allocator_unix.odin:37:2 in runtime::[heap_allocator_unix.odin]::_heap_free\n==3667==ABORTING"
+   "stderr": "=================================================================\n==301==ERROR: AddressSanitizer: attempting double-free on 0x6fb2f6250040 in thread T6:\n    #0 0x640f4cdf1f06 in free /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:51:3\n    #1 0x640f4ce40b28 in runtime::[heap_allocator_unix.odin]::_heap_free /opt/odin/base/runtime/heap_allocator_unix.odin:37:2\n    #2 0x640f4cef5f08 in runtime::heap_free /opt/odin/base/runtime/heap_allocator.odin:123:2\n    #3 0x640f4cef6280 in runtime::heap_allocator_proc.aligned_free-2190 /opt/odin/base/runtime/heap_allocator.odin:65:4\n    #4 0x640f4cef5d57 in runtime::heap_allocator_proc /opt/odin/base/runtime/heap_allocator.odin:91:3\n    #5 0x640f4ceb854c in runtime::\n...\n:317:3\n    #1 0x640f4cefc6be in thread::[thread_unix.odin]::_create /opt/odin/core/thread/thread_unix.odin:126:2\n    #2 0x640f4cefcd75 in thread::create /opt/odin/core/thread/thread.odin:119:2\n    #3 0x640f4ce3ff14 in main::main /tmp/breakbench/concurrent_map_write/main/main.odin:18:28\n    #4 0x640f4cea99f9 in main /opt/odin/base/runtime/entry_unix.odin:71:4\n    #5 0x7272f6fbe717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #6 0x640f4cd43c94 in _start (/tmp/breakbench/concurrent_map_write/main/main+0xa1c94)\n\nSUMMARY: AddressSanitizer: double-free /opt/odin/base/runtime/heap_allocator_unix.odin:37:2 in runtime::[heap_allocator_unix.odin]::_heap_free\n==301==ABORTING"
   },
   "reference_cycle_leak": {
    "outcome": "CORRECT",
@@ -667,12 +669,13 @@
   },
   "racy_counter": {
    "outcome": "SILENT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
-   "rss_mb": 14.6,
-   "secs": 0.0,
-   "stdout": "1143108",
+   "rss_mb": 14.4,
+   "secs": 0.01,
+   "stdout": "995061",
    "stderr": ""
   },
   "unreachable_code": {
@@ -769,8 +772,9 @@
   "bitwise_on_bool": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "exit": 132,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "",
    "stderr": "/tmp/breakbench/bitwise_on_bool/main/main.odin(7:41) Bounds check failed: 0 is out of range 0..<0\nIllegal instruction"
@@ -791,6 +795,26 @@
   "contracts": {
    "outcome": "INEXPRESSIBLE",
    "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "hello, nil",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.3,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "write: ENOSPC"
   }
  }
 }

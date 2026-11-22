@@ -475,8 +475,9 @@
   },
   "use_after_close": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 1,
    "rss_mb": 14.5,
    "secs": 0.0,
@@ -601,13 +602,14 @@
   },
   "concurrent_map_write": {
    "outcome": "CRASH",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 1,
-   "rss_mb": 15.7,
+   "rss_mb": 18.5,
    "secs": 0.03,
    "stdout": "",
-   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==1722==ERROR: AddressSanitizer: SEGV on unknown address (pc 0x57058f065b14 bp 0x77427bbc9810 sp 0x77427bbc96f0 T4)\n==1722==The signal is caused by a READ memory access.\n==1722==HINT: this fault was caused by a dereference of a high value address (see register values below).  Disassemble the provided pc to learn which register was used.\n    #0 0x57058f065b14 in std::_Hashtable<long, std::pair<long const, long>, std::allocator<std::pair<long const, long>>, std::__detail::_Select1st, std::equal_to<long>, std::hash<long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hash\n...\nr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/alloc_traits.h:676:4\n    #5 0x57058f05db40 in std::thread& std::vector<std::thread, std::allocator<std::thread>>::emplace_back<main::$_0>(main::$_0&&) /usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/vector.tcc:117:6\n    #6 0x57058f05d0db in main /tmp/breakbench/concurrent_map_write/main/main.cpp:10:17\n    #7 0x7b4281413600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #8 0x7b4281413717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #9 0x57058ef6b564 in _start (/tmp/breakbench/concurrent_map_write/main/main+0x7b564)\n\n==1722==ABORTING"
+   "stderr": "AddressSanitizer:DEADLYSIGNAL\nAddressSanitizer:DEADLYSIGNAL\n=================================================================\n==204==ERROR: AddressSanitizer: SEGV on unknown address (pc 0x60868e6dab11 bp 0x6c15a19fc8e0 sp 0x6c15a19fc810 T3)\n==204==The signal is caused by a READ memory access.\n==204==HINT: this fault was caused by a dereference of a high value address (see register values below).  Disassemble the provided pc to learn which register was used.\n    #0 0x60868e6dab11 in std::_Hashtable<long, std::pair<long const, long>, std::allocator<std::pair<long const, long>>, std::__detail::_Select1st, std::equal_to<long>, std::hash<long>, std::__detail::_Mod_range_hashing, std::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_p\n...\n /usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/vector.tcc:586:2\n    #6 0x60868e6d5c8f in std::thread& std::vector<std::thread, std::allocator<std::thread>>::emplace_back<main::$_0>(main::$_0&&) /usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/vector.tcc:123:4\n    #7 0x60868e6d50db in main /tmp/breakbench/concurrent_map_write/main/main.cpp:10:17\n    #8 0x7015a558d600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #9 0x7015a558d717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #10 0x60868e5e3564 in _start (/tmp/breakbench/concurrent_map_write/main/main+0x7b564)\n\n==204==ABORTING"
   },
   "reference_cycle_leak": {
    "outcome": "LEAK",
@@ -786,12 +788,13 @@
   },
   "racy_counter": {
    "outcome": "SILENT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
    "rss_mb": 14.5,
    "secs": 0.01,
-   "stdout": "1026997",
+   "stdout": "1031990",
    "stderr": ""
   },
   "unreachable_code": {
@@ -914,10 +917,11 @@
   "bitwise_on_bool": {
    "outcome": "CORRECT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.cpp:6:48: warning: operator '?:' has lower precedence than '&'; '&' will be evaluated first [-Wbitwise-conditional-parentheses]\nmain.cpp:6:48: note: place parentheses around the '&' expression to silence this warning |                   (                           )\nmain.cpp:6:19: warning: use of bitwise '&' with boolean operands [-Wbitwise-instead-of-logical] |                                &&\nmain.cpp:6:19: note: cast one or both operands to int to silence this warning\n2 warnings generated.",
    "warnings": "main.cpp:6:48: warning: operator '?:' has lower precedence than '&'; '&' will be evaluated first [-Wbitwise-conditional-parentheses]\nmain.cpp:6:19: warning: use of bitwise '&' with boolean operands [-Wbitwise-instead-of-logical] |                                &&",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.0,
    "secs": 0.0,
    "stdout": "no",
    "stderr": ""
@@ -939,6 +943,20 @@
   "contracts": {
    "outcome": "INEXPRESSIBLE",
    "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "null_in_text": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:13:28: error: invalid operands to binary expression ('basic_ostream<char, std::char_traits<char>>' and 'std::optional<std::string>' (aka 'std::optional<basic_string<char>>'))\n   13 |     std::cout << \"hello, \" << name << \"\\n\"; // CONTROL! std::cout << \"hello, \" << name.value_or(\"nobody\") << \"\\n\";\n      |     ~~~~~~~~~~~~~~~~~~~~~~ ^  ~~~~\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/system_error:341:5: note: candidate function template not viable: no known conversion from 'std::optional<std::string>' (aka 'std::optional<basic_string<char>>') to 'const error_code' for 2nd argument\n  341 |     operator<<(basic_ostream<_CharT, _Traits>& __os, const error_code& __e)\n      |     ^                                          \n...\n7: note: candidate function not viable: no known conversion from 'std::optional<std::string>' (aka 'std::optional<basic_string<char>>') to 'const volatile void *' for 1st argument; take the address of the argument with &\n  313 |       operator<<(const volatile void* __p)\n      |       ^          ~~~~~~~~~~~~~~~~~~~~~~~~\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/ostream.h:339:7: note: candidate function not viable: no known conversion from 'std::optional<std::string>' (aka 'std::optional<basic_string<char>>') to '__streambuf_type *' (aka 'basic_streambuf<char, std::char_traits<char>> *') for 1st argument\n  339 |       operator<<(__streambuf_type* __sb);\n      |       ^          ~~~~~~~~~~~~~~~~~~~~~~\n1 error generated."
+  },
+  "lost_write_error": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.0,
+   "secs": 0.0,
+   "stdout": "saved",
+   "stderr": ""
   }
  }
 }

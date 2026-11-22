@@ -476,11 +476,12 @@
   },
   "use_after_close": {
    "outcome": "SILENT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
    "rss_mb": 194.2,
-   "secs": 0.1,
+   "secs": 0.09,
    "stdout": "ok",
    "stderr": ""
   },
@@ -597,12 +598,13 @@
   },
   "concurrent_map_write": {
    "outcome": "SILENT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
-   "rss_mb": 280.5,
-   "secs": 0.23,
-   "stdout": "444849",
+   "rss_mb": 293.5,
+   "secs": 0.22,
+   "stdout": "521102",
    "stderr": ""
   },
   "reference_cycle_leak": {
@@ -805,11 +807,12 @@
   },
   "racy_counter": {
    "outcome": "SILENT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
-   "rss_mb": 234.1,
-   "secs": 0.18,
+   "rss_mb": 233.6,
+   "secs": 0.15,
    "stdout": "1000000",
    "stderr": ""
   },
@@ -942,9 +945,10 @@
   "bitwise_on_bool": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "exit": 1,
-   "rss_mb": 349.1,
-   "secs": 0.98,
+   "rss_mb": 348.0,
+   "secs": 0.79,
    "stdout": "",
    "stderr": "ERROR: LoadError: BoundsError: attempt to access empty String at index [1]\nStacktrace:\n [1] checkbounds\n   @ ./strings/basic.jl:212 [inlined]\n [2] codeunit(s::String, i::Int64)\n   @ Base ./strings/string.jl:166\n [3] getindex\n   @ ./strings/string.jl:489 [inlined]\n [4] main()\n   @ Main /tmp/breakbench/bitwise_on_bool/main/main.jl:3\n [5] top-level scope\n   @ /tmp/breakbench/bitwise_on_bool/main/main.jl:6\n [6] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [7] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [8] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/bitwise_on_bool/main/main.jl:6"
   },
@@ -969,6 +973,26 @@
   "contracts": {
    "outcome": "INEXPRESSIBLE",
    "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 195.8,
+   "secs": 0.09,
+   "stdout": "hello, nothing",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 355.6,
+   "secs": 0.79,
+   "stdout": "",
+   "stderr": "ERROR: LoadError: SystemError: close: No space left on device\nStacktrace:\n  [1] systemerror(p::String, errno::Int32; extrainfo::Nothing)\n    @ Base ./error.jl:186\n  [2] systemerror\n    @ ./error.jl:185 [inlined]\n  [3] close(s::IOStream)\n    @ Base ./iostream.jl:92\n  [4] #open#324\n    @ ./io.jl:431 [inlined]\n  [5] open\n    @ ./io.jl:426 [inlined]\n  [6] main()\n    @ Main /tmp/breakbench/lost_write_error/main/main.jl:2\n  [7] top-level scope\n    @ /tmp/breakbench/lost_write_error/main/main.jl:8\n  [8] include(mod::Module, _path::String)\n    @ Base ./Base.jl:309\n  [9] exec_options(opts::Base.JLOptions)\n    @ Base ./client.jl:344\n [10] _start()\n    @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/lost_write_error/main/main.jl:8"
   }
  }
 }

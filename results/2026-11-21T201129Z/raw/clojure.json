@@ -477,13 +477,14 @@
   },
   "use_after_close": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 1,
-   "rss_mb": 111.7,
-   "secs": 0.34,
+   "rss_mb": 108.8,
+   "secs": 0.3,
    "stdout": "",
-   "stderr": "Execution error (IOException) at java.io.BufferedWriter/ensureOpen (BufferedWriter.java:137).\nStream closed\n\nFull report at:\n/tmp/clojure-12123033498588102719.edn"
+   "stderr": "Execution error (IOException) at java.io.BufferedWriter/ensureOpen (BufferedWriter.java:137).\nStream closed\n\nFull report at:\n/tmp/clojure-198288607939834228.edn"
   },
   "dead_store": {
    "outcome": "SILENT",
@@ -596,11 +597,12 @@
   },
   "concurrent_map_write": {
    "outcome": "CORRECT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
-   "rss_mb": 555.8,
-   "secs": 0.57,
+   "rss_mb": 535.7,
+   "secs": 0.52,
    "stdout": "800000",
    "stderr": ""
   },
@@ -795,11 +797,12 @@
   },
   "racy_counter": {
    "outcome": "CORRECT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
-   "rss_mb": 102.8,
-   "secs": 0.34,
+   "rss_mb": 105.2,
+   "secs": 0.3,
    "stdout": "2000000",
    "stderr": ""
   },
@@ -901,15 +904,14 @@
   },
   "bitwise_on_bool": {
    "outcome": "TRAPPED",
-   "warned": true,
+   "warned": false,
    "run_warned": false,
    "all_warnings": "Reflection warning, main.clj:5:18 - call to static method and on clojure.lang.Numbers can't be resolved (argument types: boolean, boolean).",
-   "warnings": "Reflection warning, main.clj:5:18 - call to static method and on clojure.lang.Numbers can't be resolved (argument types: boolean, boolean).",
    "exit": 1,
-   "rss_mb": 107.3,
-   "secs": 0.3,
+   "rss_mb": 107.5,
+   "secs": 0.31,
    "stdout": "",
-   "stderr": "Execution error (StringIndexOutOfBoundsException) at jdk.internal.util.Preconditions$1/apply (Preconditions.java:55).\nIndex 0 out of bounds for length 0\n\nFull report at:\n/tmp/clojure-11180375559879150073.edn"
+   "stderr": "Execution error (StringIndexOutOfBoundsException) at jdk.internal.util.Preconditions$1/apply (Preconditions.java:55).\nIndex 0 out of bounds for length 0\n\nFull report at:\n/tmp/clojure-2150123912266639599.edn"
   },
   "readonly_field": {
    "outcome": "TRAPPED",
@@ -938,6 +940,26 @@
    "secs": 0.31,
    "stdout": "before",
    "stderr": "Execution error (AssertionError) at main/isqrt (main.clj:3).\nAssert failed: (>= x 0)\n\nFull report at:\n/tmp/clojure-17768410266111508932.edn"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 96.4,
+   "secs": 0.22,
+   "stdout": "hello,",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 109.2,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (IOException) at java.io.FileOutputStream/writeBytes (FileOutputStream.java:-2).\nNo space left on device\n\nFull report at:\n/tmp/clojure-11877629572924590173.edn"
   }
  }
 }

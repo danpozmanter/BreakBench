@@ -409,13 +409,14 @@
   },
   "use_after_close": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 1,
-   "rss_mb": 13.9,
+   "rss_mb": 14.1,
    "secs": 0.01,
    "stdout": "",
-   "stderr": "V panic: result not set (os: file not opened)\n v hash: 7647ce1\n    pid: 0x7a\n    tid: 0x7a\n                                                        | 0x6005f4cb6705 | ./main(+0x1a705) \n                                                        | 0x6005f4cb88b2 | ./main(+0x1c8b2) \n                                                        | 0x6005f4cb8b7c | ./main(+0x1cb7c) \n                                                        | 0x7fd0bae4f601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x7fd0bae4f718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x6005f4cac6d5 | ./main(+0x106d5)"
+   "stderr": "V panic: result not set (os: file not opened)\n v hash: 7647ce1\n    pid: 0x7a\n    tid: 0x7a\n                                                        | 0x5b3c280a7705 | ./main(+0x1a705) \n                                                        | 0x5b3c280a98b2 | ./main(+0x1c8b2) \n                                                        | 0x5b3c280a9b7c | ./main(+0x1cb7c) \n                                                        | 0x728bc82cd601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x728bc82cd718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x5b3c2809d6d5 | ./main(+0x106d5)"
   },
   "dead_store": {
    "outcome": "SILENT",
@@ -525,10 +526,11 @@
   },
   "concurrent_map_write": {
    "outcome": "HANG",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": -9,
-   "rss_mb": 14.8,
+   "rss_mb": 14.1,
    "secs": 20.0,
    "stdout": "",
    "stderr": ""
@@ -683,10 +685,11 @@
   },
   "racy_counter": {
    "outcome": "SILENT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
-   "rss_mb": 14.8,
+   "rss_mb": 14.1,
    "secs": 0.0,
    "stdout": "0",
    "stderr": ""
@@ -792,6 +795,26 @@
   "contracts": {
    "outcome": "INEXPRESSIBLE",
    "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "hello, Option(none)",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "saved",
+   "stderr": ""
   }
  }
 }

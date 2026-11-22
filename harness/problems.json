@@ -722,7 +722,7 @@
       "scenario": "The program opens /tmp/bb_close.txt, writes \"a\", closes it the language's usual way, then writes \"b\" with the language's usual error handling and prints \"ok\".",
       "best": "The compiler refuses the write. A run-time error earns half; printing \"ok\" fails.",
       "warn": "closed|after close|moved|dispos",
-      "runs": 10
+      "runs": 50
     },
     {
       "id": "dead_store",
@@ -883,8 +883,8 @@
       "title": "Eight threads writing one map without a lock",
       "scenario": "8 threads each add 100,000 different keys to one shared map with no lock. The program prints the map's size.",
       "best": "800000, a detected concurrent-write error, or a refusal. A wrong size or a crash means the map was corrupted.",
-      "warn": "race|not thread|concurren|sendable|data race|unsynchroni",
-      "runs": 10
+      "warn": "\\brace\\b|data race|race condition|not thread|concurren|sendable|unsynchroni",
+      "runs": 50
     },
     {
       "category": "memory",
@@ -1065,6 +1065,19 @@
       "best": "The program stops there with an error. Printing a number, NaN or a placeholder is a silent wrong answer."
     },
     {
+      "id": "null_in_text",
+      "category": "null",
+      "kind": "static",
+      "args": [
+        "2"
+      ],
+      "expect": null,
+      "title": "A missing value printed as text",
+      "scenario": "find_name(id) returns a name only when id is 1, the same way find_user does in null_deref. The program calls it with 2 and prints a greeting with the name, using the language's string interpolation (or its usual formatting where it has none) without checking.",
+      "best": "A refusal to put a value that may be missing into text without saying what missing means. Printing hello, null, hello, None, hello, nil or hello, followed by nothing is a silent wrong answer that reaches users.",
+      "warn": "optional|debug description|\\bnil\\b|\\bnull\\b|nullable|possibly|interpolat"
+    },
+    {
       "id": "readonly_param",
       "category": "correctness",
       "kind": "static",
@@ -1162,8 +1175,8 @@
       "title": "Two threads adding to one counter without a lock (CWE-362)",
       "scenario": "count is a local variable. The program starts two threads that each add 1 to count 1,000,000 times with the language's ordinary update and no lock, waits for both, and prints count.",
       "best": "2000000, or a refusal to let two threads change count without synchronization. A smaller number means lost updates.",
-      "warn": "race|not thread|sendable|concurren|data race|captured",
-      "runs": 10
+      "warn": "\\brace\\b|data race|race condition|not thread|sendable|concurren|\\bcaptured\\b",
+      "runs": 50
     },
     {
       "id": "unreachable_code",
@@ -1325,7 +1338,7 @@
       "title": "& where && was meant (CWE-768)",
       "scenario": "s is empty. The program tests that s is not empty and starts with a, using & where && was meant, and prints yes or no.",
       "best": "no, or a refusal of & between booleans. With & both sides run, so reading the first letter of an empty string may stop the program.",
-      "warn": "bitwise|&&|boolean"
+      "warn": "bitwise|&&|not allowed for boolean|short-circuit"
     },
     {
       "id": "readonly_field",
@@ -1358,6 +1371,17 @@
       "title": "Calling a function outside its precondition",
       "scenario": "isqrt(x) requires x >= 0, written as part of its declaration. The program calls isqrt(-1).",
       "best": "The program stops with an error naming the broken precondition. Any printed result is a silent wrong answer."
+    },
+    {
+      "id": "lost_write_error",
+      "category": "correctness",
+      "kind": "dynamic",
+      "args": [],
+      "expect": null,
+      "title": "A failed write lost when the file closes (CWE-252)",
+      "scenario": "The program writes the line data to /dev/full, a device where every write fails with no space left, using the language's usual file writer, closes it the usual way (the end of a block, defer, with or using, or a close call whose result it does not check) and prints saved.",
+      "best": "An error that stops the program. Printing saved means the data was lost with no sign, as when a disk fills up in production.",
+      "warn": "no space|space left|ENOSPC|bytes written|must be used|unchecked|result .*(unused|ignored)"
     }
   ]
 }

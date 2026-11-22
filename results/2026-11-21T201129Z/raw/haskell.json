@@ -433,10 +433,11 @@
   },
   "use_after_close": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 1,
-   "rss_mb": 11.7,
+   "rss_mb": 11.6,
    "secs": 0.0,
    "stdout": "",
    "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.IOException:\n\n/tmp/bb_close.txt: hPutStr: illegal operation (handle is closed)\n\nHasCallStack backtrace:\n  ioException, called at libraries/ghc-internal/src/GHC/Internal/IO/Handle/Internals.hs:347:20 in ghc-internal:GHC.Internal.IO.Handle.Internals"
@@ -560,11 +561,12 @@
   },
   "concurrent_map_write": {
    "outcome": "CORRECT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
-   "rss_mb": 84.1,
-   "secs": 0.35,
+   "rss_mb": 89.1,
+   "secs": 0.32,
    "stdout": "800000",
    "stderr": ""
   },
@@ -740,12 +742,13 @@
   },
   "racy_counter": {
    "outcome": "SILENT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
    "rss_mb": 46.0,
-   "secs": 0.06,
-   "stdout": "1246470",
+   "secs": 0.05,
+   "stdout": "1285398",
    "stderr": ""
   },
   "unreachable_code": {
@@ -874,6 +877,20 @@
   "contracts": {
    "outcome": "INEXPRESSIBLE",
    "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "null_in_text": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:11:26: error: [GHC-83865]\n    \u2022 Couldn't match expected type: [Char]\n                  with actual type: Maybe String\n    \u2022 In the second argument of \u2018(++)\u2019, namely \u2018name\u2019\n      In the first argument of \u2018putStrLn\u2019, namely \u2018(\"hello, \" ++ name)\u2019\n      In a stmt of a 'do' block: putStrLn (\"hello, \" ++ name)\n   |\n11 |   putStrLn (\"hello, \" ++ name) -- CONTROL! putStrLn (\"hello, \" ++ fromMaybe \"nobody\" name)\n   |                          ^^^^"
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 11.6,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.IOException:\n\n/dev/full: withFile: resource exhausted (No space left on device)\n\nHasCallStack backtrace:\n  ioError, called at libraries/ghc-internal/src/GHC/Internal/IO/Handle/Internals.hs:887:17 in ghc-internal:GHC.Internal.IO.Handle.Internals"
   }
  }
 }

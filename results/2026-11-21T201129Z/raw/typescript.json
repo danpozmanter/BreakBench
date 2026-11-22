@@ -391,11 +391,12 @@
   },
   "use_after_close": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 1,
-   "rss_mb": 42.3,
-   "secs": 0.01,
+   "rss_mb": 41.7,
+   "secs": 0.02,
    "stdout": "",
    "stderr": "node:internal/fs/utils:437\n    throw err;\n    ^\n\nError: EBADF: bad file descriptor, write\n    at Object.writeSync (node:fs:1237:3)\n    at Object.<anonymous> (/tmp/breakbench/use_after_close/main/out/main.js:40:4)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  errno: -9,\n  syscall: 'write',\n  code: 'EBADF'\n}\n\nNode.js v26.13.1"
   },
@@ -774,6 +775,26 @@
   "contracts": {
    "outcome": "INEXPRESSIBLE",
    "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 40.8,
+   "secs": 0.01,
+   "stdout": "hello, null",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 41.8,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "node:fs:3028\n    return binding.writeFileUtf8(\n                   ^\n\nError: ENOSPC: no space left on device, write\n    at writeFileSync (node:fs:3028:20)\n    at Object.<anonymous> (/tmp/breakbench/lost_write_error/main/out/main.js:4:29)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  errno: -28,\n  code: 'ENOSPC',\n  syscall: 'write'\n}\n\nNode.js v26.13.1"
   }
  }
 }

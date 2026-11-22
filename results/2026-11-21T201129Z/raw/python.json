@@ -477,11 +477,12 @@
   },
   "use_after_close": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 1,
    "rss_mb": 18.2,
-   "secs": 0.05,
+   "secs": 0.04,
    "stdout": "",
    "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/use_after_close/main/main.py\", line 4, in <module>\n    f.write(\"b\")\n    ~~~~~~~^^^^^\nValueError: I/O operation on closed file."
   },
@@ -595,11 +596,12 @@
   },
   "concurrent_map_write": {
    "outcome": "CORRECT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
-   "rss_mb": 155.7,
-   "secs": 0.13,
+   "rss_mb": 155.5,
+   "secs": 0.12,
    "stdout": "800000",
    "stderr": ""
   },
@@ -805,11 +807,12 @@
   },
   "racy_counter": {
    "outcome": "CORRECT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
-   "rss_mb": 17.7,
-   "secs": 0.04,
+   "rss_mb": 18.2,
+   "secs": 0.05,
    "stdout": "2000000",
    "stderr": ""
   },
@@ -932,9 +935,10 @@
   "bitwise_on_bool": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "exit": 1,
-   "rss_mb": 17.7,
-   "secs": 0.03,
+   "rss_mb": 18.3,
+   "secs": 0.04,
    "stdout": "",
    "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/bitwise_on_bool/main/main.py\", line 2, in <module>\n    print(\"yes\" if (len(s) > 0) & (s[0] == \"a\") else \"no\")\n                                   ~^^^\nIndexError: string index out of range"
   },
@@ -959,6 +963,26 @@
   "contracts": {
    "outcome": "INEXPRESSIBLE",
    "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 18.3,
+   "secs": 0.01,
+   "stdout": "hello, None",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 18.3,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "OSError: [Errno 28] No space left on device\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/tmp/breakbench/lost_write_error/main/main.py\", line 1, in <module>\n    with open(\"/dev/full\", \"w\") as f:\n         ~~~~^^^^^^^^^^^^^^^^^^\nOSError: [Errno 28] No space left on device"
   }
  }
 }

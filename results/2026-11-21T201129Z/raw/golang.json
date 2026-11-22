@@ -424,13 +424,14 @@
   },
   "use_after_close": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 1,
-   "rss_mb": 14.5,
+   "rss_mb": 14.8,
    "secs": 0.0,
    "stdout": "",
-   "stderr": "2026/11/21 21:19:37 write /tmp/bb_close.txt: file already closed"
+   "stderr": "2026/11/22 03:37:32 write /tmp/bb_close.txt: file already closed"
   },
   "dead_store": {
    "outcome": "REJECTED",
@@ -537,13 +538,14 @@
   },
   "concurrent_map_write": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 2,
    "rss_mb": 14.8,
    "secs": 0.01,
    "stdout": "",
-   "stderr": "fatal error: concurrent map writes\n\ngoroutine 9 [running]:\ninternal/runtime/maps.fatal({0x49dfcd?, 0x0?})\n\t/usr/local/go/src/runtime/panic.go:1197 +0x18\nmain.main.func1()\n\t/tmp/breakbench/concurrent_map_write/main/main.go:16 +0x74\ncreated by main.main in goroutine 1\n\t/tmp/breakbench/concurrent_map_write/main/main.go:13 +0x58"
+   "stderr": "fatal error: concurrent map writes\n\ngoroutine 21 [running]:\ninternal/runtime/maps.fatal({0x49dfcd?, 0x0?})\n\t/usr/local/go/src/runtime/panic.go:1197 +0x18\nmain.main.func1()\n\t/tmp/breakbench/concurrent_map_write/main/main.go:16 +0x74\ncreated by main.main in goroutine 1\n\t/tmp/breakbench/concurrent_map_write/main/main.go:13 +0x58"
   },
   "reference_cycle_leak": {
    "outcome": "CORRECT",
@@ -708,12 +710,13 @@
   },
   "racy_counter": {
    "outcome": "SILENT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
    "rss_mb": 14.8,
    "secs": 0.0,
-   "stdout": "1559360",
+   "stdout": "1568595",
    "stderr": ""
   },
   "unreachable_code": {
@@ -840,6 +843,27 @@
   "contracts": {
    "outcome": "INEXPRESSIBLE",
    "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.go:20:21: fmt.Printf format %s has arg name of wrong type *string",
+   "exit": 0,
+   "rss_mb": 14.3,
+   "secs": 0.0,
+   "stdout": "hello, %!s(*string=<nil>)",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.3,
+   "secs": 0.0,
+   "stdout": "saved",
+   "stderr": ""
   }
  }
 }

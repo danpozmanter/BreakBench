@@ -460,13 +460,13 @@
   },
   "use_after_close": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
    "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 1,
-   "rss_mb": 14.7,
-   "secs": 0.02,
+   "rss_mb": 14.9,
+   "secs": 0.0,
    "stdout": "",
    "stderr": "File::write: stale handle"
   },
@@ -839,8 +839,8 @@
    "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 101,
-   "rss_mb": 14.7,
-   "secs": 0.02,
+   "rss_mb": 14.6,
+   "secs": 0.0,
    "stdout": "",
    "stderr": "error[GX0005]: panic: vec index out of bounds: the len is 0 but the index is 0\n  call stack (outermost first):\n    at main (main.gos:3:32)"
   },
@@ -855,6 +855,28 @@
   "contracts": {
    "outcome": "INEXPRESSIBLE",
    "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "exit": 0,
+   "rss_mb": 14.6,
+   "secs": 0.0,
+   "stdout": "hello, None",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "exit": 1,
+   "rss_mb": 14.6,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "io: File::write: No space left on device (os error 28)"
   }
  }
 }

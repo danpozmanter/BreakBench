@@ -413,14 +413,15 @@
    "message": "/tmp/breakbench/unrelated_type_lookup/main/main.nim(5, 12) Error: type mismatch\nExpression: contains(ids, id)\n  [1] ids: seq[int]\n  [2] id: string\n\nExpected one of (first mismatch at [position]):\n[1] func contains(s, sub: string): bool\n[1] func contains(s: string; chars: set[char]): bool\n[1] func contains[T](x: set[T]; y: T): bool\n[1] proc contains[U, V, W](s: HSlice[U, V]; value: W): bool\n[2] proc contains[T](a: openArray[T]; item: T): bool"
   },
   "use_after_close": {
-   "outcome": "CRASH",
-   "runs": 10,
+   "outcome": "SILENT",
+   "runs": 50,
    "warned": false,
-   "exit": 139,
-   "rss_mb": 14.3,
-   "secs": 0.1,
-   "stdout": "",
-   "stderr": "Traceback (most recent call last)\n/tmp/breakbench/use_after_close/main/main.nim(4) main\nSIGSEGV: Illegal storage access. (Attempt to read from nil?)\nSegmentation fault (core dumped)"
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "ok",
+   "stderr": ""
   },
   "dead_store": {
    "outcome": "SILENT",
@@ -796,6 +797,26 @@
   "contracts": {
    "outcome": "INEXPRESSIBLE",
    "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "hello, none(string)",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "saved",
+   "stderr": ""
   }
  }
 }

@@ -456,11 +456,12 @@
   },
   "use_after_close": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "all_warnings": "0 Warning(s) 0 Error(s)",
    "exit": 134,
-   "rss_mb": 35.0,
+   "rss_mb": 34.7,
    "secs": 0.15,
    "stdout": "",
    "stderr": "Unhandled exception. System.ObjectDisposedException: Cannot write to a closed TextWriter.\nObject name: 'StreamWriter'.\n   at System.IO.StreamWriter.<ThrowIfDisposed>g__ThrowObjectDisposedException|83_0()\n   at System.IO.StreamWriter.Write(String value)\n   at Program.main(String[] _arg1) in /tmp/breakbench/use_after_close/main/Program.fs:line 8\nAborted (core dumped)"
@@ -587,14 +588,15 @@
   },
   "concurrent_map_write": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "all_warnings": "0 Warning(s) 0 Error(s)",
    "exit": 134,
-   "rss_mb": 42.4,
-   "secs": 0.23,
+   "rss_mb": 41.6,
+   "secs": 0.22,
    "stdout": "",
-   "stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\n   at System.Collections.Generic.Dictionary`2.set_Item(TKey key, TValue value)\n   at Program.threads@9.Invoke() in /tmp/breakbench/concurrent_map_write/main/Program.fs:line 11\n   at System.Threading.Thread.StartCallback(Thread* pThread)Unhandled exception. System.InvalidOperationException: Operations that change non-concurrent collections must have exclusive access. A concurrent update was performed on this collection and corrupted its state. The collection's state is no longer correct.\n   at System.Collections.Generic.Dictionary`2.TryInse\n...\nation index, length, and the array's lower bounds. (Parameter 'destinationArray')\n   at System.Array.CopyImpl(Array sourceArray, Int32 sourceIndex, Array destinationArray, Int32 destinationIndex, Int32 length, Boolean reliable)\n   at System.Collections.Generic.Dictionary`2.Resize(Int32 newSize, Boolean forceNewHashCodes)\n   at System.Collections.Generic.Dictionary`2.Resize()\n   at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\n   at System.Collections.Generic.Dictionary`2.set_Item(TKey key, TValue value)\n   at Program.threads@9.Invoke() in /tmp/breakbench/concurrent_map_write/main/Program.fs:line 11\n   at System.Threading.Thread.StartCallback(Thread* pThread)\n\n\n\n\n\n\nAborted (core dumped)"
+   "stderr": "Unhandled exception. System.InvalidOperationException: Operations that change non-concurrent collections must have exclusive access. A concurrent update was performed on this collection and corrupted its state. The collection's state is no longer correct.\n   at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\n   at System.Collections.Generic.Dictionary`2.set_Item(TKey key, TValue value)\n   at Program.threads@9.Invoke() in /tmp/breakbench/concurrent_map_write/main/Program.fs:line 11\n   at System.Threading.Thread.StartCallback(Thread* pThread)Unhandled exception. System.InvalidOperationException: Operations that change non-concurrent collections must have exclusive access. A concurrent upda\n...\n /tmp/breakbench/concurrent_map_write/main/Program.fs:line 11\n   at System.Threading.Thread.StartCallback(Thread* pThread)Unhandled exception. System.InvalidOperationException: Operations that change non-concurrent collections must have exclusive access. A concurrent update was performed on this collection and corrupted its state. The collection's state is no longer correct.\n   at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\n   at System.Collections.Generic.Dictionary`2.set_Item(TKey key, TValue value)\n   at Program.threads@9.Invoke() in /tmp/breakbench/concurrent_map_write/main/Program.fs:line 11\n   at System.Threading.Thread.StartCallback(Thread* pThread)\n\n\n\n\n\n\nAborted (core dumped)"
   },
   "reference_cycle_leak": {
    "outcome": "CORRECT",
@@ -754,13 +756,14 @@
   },
   "racy_counter": {
    "outcome": "SILENT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "all_warnings": "0 Warning(s) 0 Error(s)",
    "exit": 0,
-   "rss_mb": 31.0,
-   "secs": 0.04,
-   "stdout": "1145885",
+   "rss_mb": 31.4,
+   "secs": 0.03,
+   "stdout": "1054253",
    "stderr": ""
   },
   "unreachable_code": {
@@ -874,7 +877,7 @@
   },
   "bitwise_on_bool": {
    "outcome": "REJECTED",
-   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/bitwise_on_bool/main/bb.fsproj (in 129 ms).\n/tmp/breakbench/bitwise_on_bool/main/Program.fs(5,8): error FS0001: The type 'bool' does not support the operator '&&&' [/tmp/breakbench/bitwise_on_bool/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/bitwise_on_bool/main/Program.fs(5,8): error FS0001: The type 'bool' does not support the operator '&&&' [/tmp/breakbench/bitwise_on_bool/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.94"
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/bitwise_on_bool/main/bb.fsproj (in 114 ms).\n/tmp/breakbench/bitwise_on_bool/main/Program.fs(5,8): error FS0001: The type 'bool' does not support the operator '&&&' [/tmp/breakbench/bitwise_on_bool/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/bitwise_on_bool/main/Program.fs(5,8): error FS0001: The type 'bool' does not support the operator '&&&' [/tmp/breakbench/bitwise_on_bool/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.81"
   },
   "readonly_field": {
    "outcome": "REJECTED",
@@ -887,6 +890,28 @@
   "contracts": {
    "outcome": "INEXPRESSIBLE",
    "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 29.2,
+   "secs": 0.02,
+   "stdout": "hello,",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 34.4,
+   "secs": 0.23,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IO.IOException: No space left on device : '/dev/full'\n   at System.IO.RandomAccess.WriteAtOffset(SafeFileHandle handle, ReadOnlySpan`1 buffer, Int64& fileOffset)\n   at System.IO.Strategies.BufferedFileStreamStrategy.Flush(Boolean flushToDisk)\n   at System.IO.StreamWriter.Flush(Boolean flushStream, Boolean flushEncoder)\n   at System.IO.StreamWriter.Dispose(Boolean disposing)\n   at System.IO.TextWriter.Dispose()\n   at Program.main(String[] _arg1) in /tmp/breakbench/lost_write_error/main/Program.fs:line 7\n   at Program.main(String[] _arg1) in /tmp/breakbench/lost_write_error/main/Program.fs:line 6\nAborted (core dumped)"
   }
  }
 }

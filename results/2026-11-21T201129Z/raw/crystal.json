@@ -421,10 +421,11 @@
   },
   "use_after_close": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 1,
-   "rss_mb": 14.1,
+   "rss_mb": 14.7,
    "secs": 0.01,
    "stdout": "",
    "stderr": "Unhandled exception: Closed stream (IO::Error)\n  from /opt/crystal-1.22.3-1/share/crystal/src/io.cr:121:5 in 'check_open'\n  from /opt/crystal-1.22.3-1/share/crystal/src/io/buffered.cr:140:5 in 'write'\n  from /opt/crystal-1.22.3-1/share/crystal/src/io.cr:488:7 in 'write_string'\n  from /opt/crystal-1.22.3-1/share/crystal/src/string.cr:5614:5 in 'to_s'\n  from /opt/crystal-1.22.3-1/share/crystal/src/io.cr:179:5 in '<<'\n  from /opt/crystal-1.22.3-1/share/crystal/src/io.cr:193:5 in 'print'\n  from main.cr:4:1 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
@@ -539,11 +540,12 @@
   },
   "concurrent_map_write": {
    "outcome": "CORRECT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
-   "rss_mb": 59.4,
-   "secs": 0.25,
+   "rss_mb": 61.6,
+   "secs": 0.1,
    "stdout": "800000",
    "stderr": ""
   },
@@ -708,8 +710,9 @@
   },
   "racy_counter": {
    "outcome": "CORRECT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
    "rss_mb": 14.7,
    "secs": 0.0,
@@ -820,8 +823,9 @@
   "bitwise_on_bool": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "exit": 1,
-   "rss_mb": 14.7,
+   "rss_mb": 14.5,
    "secs": 0.01,
    "stdout": "",
    "stderr": "Unhandled exception: Index out of bounds (IndexError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/string.cr:807:22 in '[]'\n  from main.cr:2:21 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
@@ -842,6 +846,26 @@
   "contracts": {
    "outcome": "INEXPRESSIBLE",
    "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "hello,",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: write (/dev/full): No space left on device (IO::Error)\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/event_loop/polling.cr:221:9 in 'write'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/file_descriptor.cr:44:5 in 'system_write'\n  from /opt/crystal-1.22.3-1/share/crystal/src/io/file_descriptor.cr:357:33 in 'unbuffered_write'\n  from /opt/crystal-1.22.3-1/share/crystal/src/io/buffered.cr:250:5 in 'flush'\n  from /opt/crystal-1.22.3-1/share/crystal/src/io/buffered.cr:258:5 in 'close'\n  from /opt/crystal-1.22.3-1/share/crystal/src/file.cr:550:7 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
   }
  }
 }

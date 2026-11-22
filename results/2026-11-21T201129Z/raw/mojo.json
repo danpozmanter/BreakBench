@@ -383,13 +383,14 @@
   },
   "use_after_close": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 132,
-   "rss_mb": 14.3,
-   "secs": 0.24,
+   "rss_mb": 14.8,
+   "secs": 0.23,
    "stdout": "At: Mojo/stdlib/std/io/file.mojo:630:28: Assert Error: invalid file handle in write()",
-   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x000077adb980ed1e\n1  libKGENCompilerRTShared.so 0x000077adb980be46\n2  libKGENCompilerRTShared.so 0x000077adb980f8e0\n3  libc.so.6                  0x000077adb9519cb0\n4  main                       0x000063b97d682145\n5  main                       0x000063b97d67f7a9\n6  main                       0x000063b97d6607a6\n7  main                       0x000063b97d6816b3\n8  main                       0x000063b97d660b0e\n9  libc.so.6                  0x000077adb94fe601\n10 libc.so.6                  0x000077adb94fe718 __libc_start_main + 136\n11 main                       0x000063b97d6601d5\nIllegal instruction (core dumped)"
+   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x000073cce7554d1e\n1  libKGENCompilerRTShared.so 0x000073cce7551e46\n2  libKGENCompilerRTShared.so 0x000073cce75558e0\n3  libc.so.6                  0x000073cce725fcb0\n4  main                       0x0000587ecbf6b145\n5  main                       0x0000587ecbf687a9\n6  main                       0x0000587ecbf497a6\n7  main                       0x0000587ecbf6a6b3\n8  main                       0x0000587ecbf49b0e\n9  libc.so.6                  0x000073cce7244601\n10 libc.so.6                  0x000073cce7244718 __libc_start_main + 136\n11 main                       0x0000587ecbf491d5\nIllegal instruction (core dumped)"
   },
   "dead_store": {
    "outcome": "SILENT",
@@ -489,12 +490,13 @@
   },
   "concurrent_map_write": {
    "outcome": "CRASH",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 139,
-   "rss_mb": 14.3,
-   "secs": 3.08,
-   "stdout": "At: Mojo/stdlib/std/collections/dict.mojo:1972:16: Assert Error: order length doesn't match _len after resize\nAt: Mojo/stdlib/std/collections/dict.mojo:1972:16: Assert Error: order length doesn't matc\n...\n/collections/dict.mojo:1972:16: Assert Error: order length doesn't match _len after resize\nAt: Mojo/stdlib/std/collections/dict.mojo:1972:16: Assert Error: order length doesn't match _len after resize",
+   "rss_mb": 14.8,
+   "secs": 0.23,
+   "stdout": "",
    "stderr": "Segmentation fault (core dumped)"
   },
   "reference_cycle_leak": {
@@ -647,12 +649,13 @@
   },
   "racy_counter": {
    "outcome": "SILENT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
-   "rss_mb": 14.3,
-   "secs": 0.03,
-   "stdout": "1190267",
+   "rss_mb": 14.8,
+   "secs": 0.02,
+   "stdout": "1091093",
    "stderr": ""
   },
   "unreachable_code": {
@@ -756,11 +759,12 @@
   "bitwise_on_bool": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "exit": 132,
-   "rss_mb": 14.3,
-   "secs": 0.26,
+   "rss_mb": 14.5,
+   "secs": 0.25,
    "stdout": "At: /tmp/breakbench/bitwise_on_bool/main/main.mojo:3:52: Assert Error: index 0 is out of bounds, valid range is 0 to -1",
-   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x000077a83fd07d1e\n1  libKGENCompilerRTShared.so 0x000077a83fd04e46\n2  libKGENCompilerRTShared.so 0x000077a83fd088e0\n3  libc.so.6                  0x000077a83fa12cb0\n4  main                       0x0000598a7392c7e5\n5  main                       0x0000598a7392c486\n6  main                       0x0000598a73925d9c\n7  main                       0x0000598a7392c2c9\n8  main                       0x0000598a73926436\n9  libc.so.6                  0x000077a83f9f7601\n10 libc.so.6                  0x000077a83f9f7718 __libc_start_main + 136\n11 main                       0x0000598a73925145\nIllegal instruction (core dumped)"
+   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x00007f7086a2ed1e\n1  libKGENCompilerRTShared.so 0x00007f7086a2be46\n2  libKGENCompilerRTShared.so 0x00007f7086a2f8e0\n3  libc.so.6                  0x00007f7086739cb0\n4  main                       0x0000574b636797e5\n5  main                       0x0000574b63679486\n6  main                       0x0000574b63672d9c\n7  main                       0x0000574b636792c9\n8  main                       0x0000574b63673436\n9  libc.so.6                  0x00007f708671e601\n10 libc.so.6                  0x00007f708671e718 __libc_start_main + 136\n11 main                       0x0000574b63672145\nIllegal instruction (core dumped)"
   },
   "readonly_field": {
    "outcome": "SILENT",
@@ -783,6 +787,26 @@
   "contracts": {
    "outcome": "INEXPRESSIBLE",
    "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.01,
+   "stdout": "hello, None",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "rss_mb": 14.5,
+   "secs": 0.29,
+   "stdout": "At: Mojo/stdlib/std/io/file_descriptor.mojo:81:24: Assert Error: expected amount of bytes not written",
+   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x00007f84d80cad1e\n1  libKGENCompilerRTShared.so 0x00007f84d80c7e46\n2  libKGENCompilerRTShared.so 0x00007f84d80cb8e0\n3  libc.so.6                  0x00007f84d7dd5cb0\n4  main                       0x0000562d6f2daf15\n5  main                       0x0000562d6f2d8785\n6  main                       0x0000562d6f2d6782\n7  main                       0x0000562d6f2d85c0\n8  main                       0x0000562d6f2b9588\n9  main                       0x0000562d6f2da483\n10 main                       0x0000562d6f2b98d6\n11 libc.so.6                  0x00007f84d7dba601\n12 libc.so.6                  0x00007f84d7dba718 __libc_start_main + 136\n13 main                       0x0000562d6f2b91d5\nIllegal instruction (core dumped)"
   }
  }
 }

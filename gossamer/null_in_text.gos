@@ -1,0 +1,11 @@
+use std::env
+
+fn find_name(id: i64) -> Option<String> {
+    if id == 1 { Some("alice") } else { None }
+}
+
+fn main() {
+    let id = env::args()[0].to_i64().unwrap()
+    let name = find_name(id)
+    println(f"hello, {name}")
+}

@@ -11,7 +11,7 @@ the language help you find errors fast, and does it keep you from the big ones, 
 billion-dollar null? Each test is an ordinary program with one classic bug in it. Does the compiler
 catch it, does the program stop with a clear error, or does it quietly print the wrong answer?
 
-A language scores the mean over all 108 tests, as a percentage. The size of a language's standard
+A language scores the mean over all 110 tests, as a percentage. The size of a language's standard
 library plays no part.
 
 Each language runs its latest release, built from LangArena's Dockerfiles or the language's own
@@ -27,14 +27,14 @@ images.
 
 ## Tests
 
-108 tests in four categories. Each has a CWE or CERT entry or appears in a language's pitfall list,
+110 tests in four categories. Each has a CWE or CERT entry or appears in a language's pitfall list,
 reads the same in every language, and covers a mistake no other test covers.
 `harness/problems.json` describes each one.
 
 | Category | Tests | The bug |
 |---|---|---|
-| Correctness | 79 | The program computes the wrong answer: overflow, a missing match case, arguments in the wrong order, a misspelled name, a comparison where an assignment was meant, command injection, ... |
-| Null safety | 4 | The program uses a value that may be missing as if it were there |
+| Correctness | 80 | The program computes the wrong answer or loses data: overflow, a missing match case, arguments in the wrong order, a misspelled name, a comparison where an assignment was meant, command injection, a write error lost at close, ... |
+| Null safety | 5 | The program uses a value that may be missing as if it were there, or prints it |
 | Memory safety | 17 | The program reads or writes memory it does not own, or never frees it: use after free, out-of-bounds reads and writes, leaks, ... |
 | Concurrency | 8 | Threads or tasks interfere: a data race, a deadlock, a failure lost between threads, ... |
 
@@ -92,9 +92,9 @@ must run to the end: refusing, stopping or warning about it scores 0.
 
 **Robustness.** The site also scores the results five other ways: a run-time stop counts as a
 refusal, no credit for warnings, each category weighed equally, near-universal passes removed, and
-N/A left out of the average. Under every scheme Rust, Swift and Gossamer take the top three
-places and JavaScript stays last. The largest move is 12 places: Julia when a run-time stop
-counts as a refusal, and V when each category weighs equally.
+N/A left out of the average. Under every scheme Gossamer, Rust and Swift take the top three places
+and JavaScript stays last. The largest move is 13 places: Julia when a run-time stop counts as a
+refusal.
 
 ### Build mode
 
@@ -184,7 +184,9 @@ results in `raw/` and the ranking in `results.json`. Partial runs update the new
   20 s (120 s for leak tests). A leak is peak memory over 1,024 MB. `fd_leak` runs with 512 file
   descriptors.
 - Tests whose outcome can change from run to run (races, and `use_after_close`, which writes
-  through a freed C `FILE` in some languages) run ten times and keep the worst outcome.
+  through a freed C `FILE` in some languages) run up to fifty times and keep the worst outcome,
+  stopping early once a run scores 0. Fifty runs catch an outcome that happens one time in twenty
+  with about 92% probability.
 - C-family programs keep stale pointers in data structures, so the optimizer cannot remove the
   access.
 - Zig's debug allocator never reuses a freed slot, so a stale pointer reads the old record. Odin and

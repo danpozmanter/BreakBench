@@ -438,11 +438,12 @@
   },
   "use_after_close": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 1,
-   "rss_mb": 38.4,
-   "secs": 0.03,
+   "rss_mb": 38.2,
+   "secs": 0.01,
    "stdout": "",
    "stderr": "Exception in thread \"main\" java.io.IOException: Stream closed\n\tat java.base/sun.nio.cs.StreamEncoder.ensureOpen(StreamEncoder.java:50)\n\tat java.base/sun.nio.cs.StreamEncoder.write(StreamEncoder.java:115)\n\tat java.base/sun.nio.cs.StreamEncoder.write(StreamEncoder.java:132)\n\tat java.base/java.io.OutputStreamWriter.write(OutputStreamWriter.java:224)\n\tat java.base/java.io.Writer.write(Writer.java:248)\n\tat Main$.main(main.scala:8)\n\tat Main.main(main.scala)"
   },
@@ -564,13 +565,14 @@
   },
   "concurrent_map_write": {
    "outcome": "SILENT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
-   "rss_mb": 148.0,
-   "secs": 0.23,
-   "stdout": "347442",
-   "stderr": ""
+   "rss_mb": 105.9,
+   "secs": 0.19,
+   "stdout": "214314",
+   "stderr": "Exception in thread \"Thread-5\" Exception in thread \"Thread-4\" Exception in thread \"Thread-0\" java.lang.ArrayIndexOutOfBoundsException: Index 39 out of bounds for length 32\n\tat scala.collection.mutable.HashMap.growTable(HashMap.scala:431)\n\tat scala.collection.mutable.HashMap.put0(HashMap.scala:250)\n\tat scala.collection.mutable.HashMap.update(HashMap.scala:508)\n\tat Main$.$anonfun$2$$anonfun$1(main.scala:7)\n\tat scala.runtime.java8.JFunction1$mcVJ$sp.apply(JFunction1$mcVJ$sp.scala:20)\n\tat scala.collection.immutable.NumericRange.foreach(NumericRange.scala:129)\n\tat Main$.$anonfun$2(main.scala:7)\n\tat java.base/java.lang.Thread.run(Thread.java:1527)\njava.lang.ArrayIndexOutOfBoundsException: Index 42 out of bounds for length 32\n\tat scala.collection.\n...\n(JFunction1$mcVJ$sp.scala:20)\n\tat scala.collection.immutable.NumericRange.foreach(NumericRange.scala:129)\n\tat Main$.$anonfun$2(main.scala:7)\n\tat java.base/java.lang.Thread.run(Thread.java:1527)\njava.lang.ArrayIndexOutOfBoundsException: Index 39 out of bounds for length 32\n\tat scala.collection.mutable.HashMap.growTable(HashMap.scala:431)\n\tat scala.collection.mutable.HashMap.put0(HashMap.scala:250)\n\tat scala.collection.mutable.HashMap.update(HashMap.scala:508)\n\tat Main$.$anonfun$2$$anonfun$1(main.scala:7)\n\tat scala.runtime.java8.JFunction1$mcVJ$sp.apply(JFunction1$mcVJ$sp.scala:20)\n\tat scala.collection.immutable.NumericRange.foreach(NumericRange.scala:129)\n\tat Main$.$anonfun$2(main.scala:7)\n\tat java.base/java.lang.Thread.run(Thread.java:1527)"
   },
   "reference_cycle_leak": {
    "outcome": "CORRECT",
@@ -732,12 +734,13 @@
   },
   "racy_counter": {
    "outcome": "SILENT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
-   "rss_mb": 52.1,
-   "secs": 0.12,
-   "stdout": "1300011",
+   "rss_mb": 51.3,
+   "secs": 0.09,
+   "stdout": "1234677",
    "stderr": ""
   },
   "unreachable_code": {
@@ -866,8 +869,9 @@
   "bitwise_on_bool": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "exit": 1,
-   "rss_mb": 50.9,
+   "rss_mb": 51.1,
    "secs": 0.07,
    "stdout": "",
    "stderr": "Exception in thread \"main\" java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0\n\tat java.base/jdk.internal.util.Preconditions$1.apply(Preconditions.java:55)\n\tat java.base/jdk.internal.util.Preconditions$1.apply(Preconditions.java:52)\n\tat java.base/jdk.internal.util.Preconditions$4.apply(Preconditions.java:213)\n\tat java.base/jdk.internal.util.Preconditions$4.apply(Preconditions.java:210)\n\tat java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:98)\n\tat java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:106)\n\tat java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:302)\n\tat java.base/java.lang.String.checkIndex(String.java:5279)\n\tat java.base/java.lang.StringLatin1.charAt(StringLatin1.java:58)\n\tat java.base/java.lang.String.charAt(String.java:1843)\n\tat scala.collection.StringOps$.apply$extension(StringOps.scala:210)\n\tat Main$.main(main.scala:4)\n\tat Main.main(main.scala)"
@@ -883,6 +887,28 @@
   "contracts": {
    "outcome": "INEXPRESSIBLE",
    "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "-- [E209] Interpolation Warning: main.scala:6:22 ------------------------------- |                      interpolation uses toString\n1 warning found",
+   "warnings": "-- [E209] Interpolation Warning: main.scala:6:22 ------------------------------- |                      interpolation uses toString",
+   "exit": 0,
+   "rss_mb": 51.1,
+   "secs": 0.07,
+   "stdout": "hello, None",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 41.9,
+   "secs": 0.06,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.io.IOException: No space left on device\n\tat java.base/sun.nio.ch.UnixFileDispatcherImpl.write0(Native Method)\n\tat java.base/sun.nio.ch.UnixFileDispatcherImpl.write(UnixFileDispatcherImpl.java:65)\n\tat java.base/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:137)\n\tat java.base/sun.nio.ch.IOUtil.write(IOUtil.java:102)\n\tat java.base/sun.nio.ch.IOUtil.write(IOUtil.java:72)\n\tat java.base/sun.nio.ch.FileChannelImpl.implWrite(FileChannelImpl.java:359)\n\tat java.base/sun.nio.ch.FileChannelImpl.write(FileChannelImpl.java:339)\n\tat java.base/sun.nio.ch.ChannelOutputStream.writeFully(ChannelOutputStream.java:71)\n\tat java.base/sun.nio.ch.ChannelOutputStream.write(ChannelOutputStream.java:110)\n\tat java.base/sun.nio.cs.StreamEncoder.writeBytes(StreamEncoder.java:220)\n\tat java.base/sun.nio.cs.StreamEncoder.implClose(StreamEncoder.java:340)\n\tat java.base/sun.nio.cs.StreamEncoder.close(StreamEncoder.java:159)\n\tat java.base/java.io.OutputStreamWriter.close(OutputStreamWriter.java:253)\n\tat java.base/java.io.BufferedWriter.close(BufferedWriter.java:318)\n\tat scala.util.Using$Releasable$AutoCloseableIsReleasable$.release(Using.scala:453)\n\tat scala.util.Using$Releasable$AutoCloseableIsReleasable$.release(Using.scala:453)\n\tat scala.util.Using$.resource(Using.scala:324)\n\tat Main$.main(main.scala:6)\n\tat Main.main(main.scala)"
   }
  }
 }

@@ -453,12 +453,13 @@
   },
   "use_after_close": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "all_warnings": "/tmp/breakbench/use_after_close/main/Program.cs(5,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"ok\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/use_after_close/main/bb.csproj] bb -> /tmp/breakbench/use_after_close/main/out/bb.dll\n/tmp/breakbench/use_after_close/main/Program.cs(5,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"ok\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/use_after_close/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
    "exit": 134,
-   "rss_mb": 33.8,
-   "secs": 0.16,
+   "rss_mb": 33.2,
+   "secs": 0.14,
    "stdout": "",
    "stderr": "Unhandled exception. System.ObjectDisposedException: Cannot write to a closed TextWriter.\nObject name: 'StreamWriter'.\n   at System.IO.StreamWriter.<ThrowIfDisposed>g__ThrowObjectDisposedException|83_0()\n   at System.IO.StreamWriter.Write(String value)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/use_after_close/main/Program.cs:line 4\nAborted (core dumped)"
   },
@@ -584,14 +585,15 @@
   },
   "concurrent_map_write": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "all_warnings": "0 Warning(s) 0 Error(s)",
    "exit": 134,
-   "rss_mb": 42.2,
-   "secs": 0.21,
+   "rss_mb": 34.5,
+   "secs": 0.2,
    "stdout": "",
-   "stderr": "Unhandled exception. System.InvalidOperationException: Operations that change non-concurrent collections must have exclusive access. A concurrent update was performed on this collection and corrupted its state. The collection's state is no longer correct.\n   at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\n   at System.Collections.Generic.Dictionary`2.set_Item(TKey key, TValue value)\n   at Program.<>c__DisplayClass0_1.<<Main>$>b__3() in /tmp/breakbench/concurrent_map_write/main/Program.cs:line 4\n   at System.Threading.Thread.StartCallback(Thread* pThread)Unhandled exception. System.InvalidOperationException: Operations that change non-concurrent collections must have exclusive access. \n...\n/concurrent_map_write/main/Program.cs:line 4\n   at System.Threading.Thread.StartCallback(Thread* pThread)Unhandled exception. System.InvalidOperationException: Operations that change non-concurrent collections must have exclusive access. A concurrent update was performed on this collection and corrupted its state. The collection's state is no longer correct.\n   at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\n   at System.Collections.Generic.Dictionary`2.set_Item(TKey key, TValue value)\n   at Program.<>c__DisplayClass0_1.<<Main>$>b__3() in /tmp/breakbench/concurrent_map_write/main/Program.cs:line 4\n   at System.Threading.Thread.StartCallback(Thread* pThread)\n\n\n\n\n\n\nAborted (core dumped)"
+   "stderr": "Unhandled exception. System.InvalidOperationException: Operations that change non-concurrent collections must have exclusive access. A concurrent update was performed on this collection and corrupted its state. The collection's state is no longer correct.\n   at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\n   at System.Collections.Generic.Dictionary`2.set_Item(TKey key, TValue value)\n   at Program.<>c__DisplayClass0_1.<<Main>$>b__3() in /tmp/breakbench/concurrent_map_write/main/Program.cs:line 4\n   at System.Threading.Thread.StartCallback(Thread* pThread)Unhandled exception. System.InvalidOperationException: Operations that change non-concurrent collections must have exclusive access. \n...\nh, and the array's lower bounds. (Parameter 'destinationArray')\n   at System.Array.CopyImpl(Array sourceArray, Int32 sourceIndex, Array destinationArray, Int32 destinationIndex, Int32 length, Boolean reliable)\n   at System.Collections.Generic.Dictionary`2.Resize(Int32 newSize, Boolean forceNewHashCodes)\n   at System.Collections.Generic.Dictionary`2.Resize()\n   at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\n   at System.Collections.Generic.Dictionary`2.set_Item(TKey key, TValue value)\n   at Program.<>c__DisplayClass0_1.<<Main>$>b__3() in /tmp/breakbench/concurrent_map_write/main/Program.cs:line 4\n   at System.Threading.Thread.StartCallback(Thread* pThread)\n\n\n\n\n\n\n\nAborted (core dumped)"
   },
   "reference_cycle_leak": {
    "outcome": "CORRECT",
@@ -757,13 +759,14 @@
   },
   "racy_counter": {
    "outcome": "SILENT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "all_warnings": "0 Warning(s) 0 Error(s)",
    "exit": 0,
    "rss_mb": 25.8,
-   "secs": 0.02,
-   "stdout": "1056347",
+   "secs": 0.01,
+   "stdout": "1132474",
    "stderr": ""
   },
   "unreachable_code": {
@@ -895,10 +898,11 @@
   "bitwise_on_bool": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "/tmp/breakbench/bitwise_on_bool/main/Program.cs(2,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"no, yes\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/bitwise_on_bool/main/bb.csproj] bb -> /tmp/breakbench/bitwise_on_bool/main/out/bb.dll\n/tmp/breakbench/bitwise_on_bool/main/Program.cs(2,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"no, yes\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/bitwise_on_bool/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
    "exit": 134,
-   "rss_mb": 33.7,
-   "secs": 0.17,
+   "rss_mb": 33.8,
+   "secs": 0.16,
    "stdout": "",
    "stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at System.String.get_Chars(Int32 index)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/bitwise_on_bool/main/Program.cs:line 2\nAborted (core dumped)"
   },
@@ -913,6 +917,28 @@
   "contracts": {
    "outcome": "INEXPRESSIBLE",
    "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/null_in_text/main/Program.cs(3,21): warning CA1305: The behavior of 'long.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'long.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/null_in_text/main/bb.csproj] bb -> /tmp/breakbench/null_in_text/main/out/bb.dll\n/tmp/breakbench/null_in_text/main/Program.cs(3,21): warning CA1305: The behavior of 'long.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'long.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/null_in_text/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 25.9,
+   "secs": 0.01,
+   "stdout": "hello,",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/lost_write_error/main/Program.cs(5,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"saved\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/lost_write_error/main/bb.csproj] bb -> /tmp/breakbench/lost_write_error/main/out/bb.dll\n/tmp/breakbench/lost_write_error/main/Program.cs(5,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"saved\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/lost_write_error/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 34.3,
+   "secs": 0.17,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IO.IOException: No space left on device : '/dev/full'\n   at System.IO.RandomAccess.WriteAtOffset(SafeFileHandle handle, ReadOnlySpan`1 buffer, Int64& fileOffset)\n   at System.IO.Strategies.BufferedFileStreamStrategy.Flush(Boolean flushToDisk)\n   at System.IO.StreamWriter.Flush(Boolean flushStream, Boolean flushEncoder)\n   at System.IO.StreamWriter.Dispose(Boolean disposing)\n   at System.IO.TextWriter.Dispose()\n   at Program.<Main>$(String[] args) in /tmp/breakbench/lost_write_error/main/Program.cs:line 4\n   at Program.<Main>$(String[] args) in /tmp/breakbench/lost_write_error/main/Program.cs:line 1\nAborted (core dumped)"
   }
  }
 }

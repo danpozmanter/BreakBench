@@ -361,10 +361,11 @@
   },
   "use_after_close": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 1,
-   "rss_mb": 14.3,
+   "rss_mb": 14.5,
    "secs": 0.06,
    "stdout": "",
    "stderr": "error: NotOpenForWriting\n/opt/zig/lib/std/Io/File.zig:611:5: 0x11eef7a in writeStreaming (std.zig)\n    return (try io.operate(.{ .file_write_streaming = .{\n    ^\n/opt/zig/lib/std/Io/File.zig:623:18: 0x11eea58 in writeStreamingAll (std.zig)\n        index += try writeStreaming(file, io, &.{}, &.{bytes[index..]}, 1);\n                 ^\n/tmp/breakbench/use_after_close/main/main.zig:13:5: 0x11e36db in main (main.zig)\n    try f.writeStreamingAll(init.io, \"b\"); // BREAK!\n    ^"
@@ -469,13 +470,14 @@
   },
   "concurrent_map_write": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 134,
-   "rss_mb": 18.9,
+   "rss_mb": 16.6,
    "secs": 0.26,
    "stdout": "",
-   "stderr": "thread 2504 panic: reached unreachable code\n/opt/zig/lib/std/debug.zig:442:14: 0x102aea9 in assert (std.zig)\n    if (!ok) unreachable; // assertion failure\n             ^\n/opt/zig/lib/std/debug.zig:1870:15: 0x10696aa in lock (std.zig)\n        assert(l.state == .unlocked);\n              ^\n/opt/zig/lib/std/hash_map.zig:1116:44: 0x11f26ae in getOrPutContextAdapted__func_827 (std.zig)\n                self.pointer_stability.lock();\n                                           ^\n/opt/zig/lib/std/hash_map.zig:1103:56: 0x11f20d6 in getOrPutContext (std.zig)\n            const gop = try self.getOrPutContextAdapted(allocator, key, ctx, ctx);\n                                                       ^\n/opt/zig/lib/std/hash_map.zig:1029:52: 0x11f1d7b in putC\n...\nig:1026:35: 0x11f1c58 in put (std.zig)\n            return self.putContext(allocator, key, value, undefined);\n                                  ^\n/tmp/breakbench/concurrent_map_write/main/main.zig:5:43: 0x11f19b6 in writer (main.zig)\n    while (k < 100_000) : (k += 1) map.put(gpa, t * 100_000 + k, k) catch return;\n                                          ^\n/opt/zig/lib/std/Thread.zig:422:13: 0x11f17aa in callFn__func_826 (std.zig)\n            @call(.auto, f, args);\n            ^\n/opt/zig/lib/std/Thread.zig:1451:30: 0x11f14b9 in entryFn (std.zig)\n                return callFn(f, self.fn_args);\n                             ^\n/opt/zig/lib/std/os/linux/x86_64.zig:134:5: 0x11b8735 in clone (std.zig)\n    asm volatile (\n    ^\nAborted (core dumped)"
+   "stderr": "thread 215 panic: reached unreachable code\n/opt/zig/lib/std/debug.zig:442:14: 0x102aea9 in assert (std.zig)\n    if (!ok) unreachable; // assertion failure\n             ^\n/opt/zig/lib/std/debug.zig:1870:15: 0x10696aa in lock (std.zig)\n        assert(l.state == .unlocked);\n              ^\n/opt/zig/lib/std/hash_map.zig:1116:44: 0x11f26ae in getOrPutContextAdapted__func_827 (std.zig)\n                self.pointer_stability.lock();\n                                           ^\n/opt/zig/lib/std/hash_map.zig:1103:56: 0x11f20d6 in getOrPutContext (std.zig)\n            const gop = try self.getOrPutContextAdapted(allocator, key, ctx, ctx);\n                                                       ^\n/opt/zig/lib/std/hash_map.zig:1029:52: 0x11f1d7b in putCo\n...\nig:1026:35: 0x11f1c58 in put (std.zig)\n            return self.putContext(allocator, key, value, undefined);\n                                  ^\n/tmp/breakbench/concurrent_map_write/main/main.zig:5:43: 0x11f19b6 in writer (main.zig)\n    while (k < 100_000) : (k += 1) map.put(gpa, t * 100_000 + k, k) catch return;\n                                          ^\n/opt/zig/lib/std/Thread.zig:422:13: 0x11f17aa in callFn__func_826 (std.zig)\n            @call(.auto, f, args);\n            ^\n/opt/zig/lib/std/Thread.zig:1451:30: 0x11f14b9 in entryFn (std.zig)\n                return callFn(f, self.fn_args);\n                             ^\n/opt/zig/lib/std/os/linux/x86_64.zig:134:5: 0x11b8735 in clone (std.zig)\n    asm volatile (\n    ^\nAborted (core dumped)"
   },
   "reference_cycle_leak": {
    "outcome": "CORRECT",
@@ -612,12 +614,13 @@
   },
   "racy_counter": {
    "outcome": "SILENT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
-   "rss_mb": 184.6,
+   "rss_mb": 14.5,
    "secs": 0.01,
-   "stdout": "1299706",
+   "stdout": "1071626",
    "stderr": ""
   },
   "unreachable_code": {
@@ -699,11 +702,12 @@
   "bitwise_on_bool": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "exit": 134,
-   "rss_mb": 184.6,
-   "secs": 0.15,
+   "rss_mb": 14.3,
+   "secs": 0.14,
    "stdout": "",
-   "stderr": "thread 44131 panic: index out of bounds: index 0, len 0\n/tmp/breakbench/bitwise_on_bool/main/main.zig:12:33: 0x11e33cc in main (main.zig)\n    const yes = (s.len > 0) & (s[0] == 'a'); // CONTROL! const yes = s.len > 0 and s[0] == 'a';\n                                ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4068 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+   "stderr": "thread 301 panic: index out of bounds: index 0, len 0\n/tmp/breakbench/bitwise_on_bool/main/main.zig:12:33: 0x11e33cc in main (main.zig)\n    const yes = (s.len > 0) & (s[0] == 'a'); // CONTROL! const yes = s.len > 0 and s[0] == 'a';\n                                ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4068 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
   },
   "readonly_field": {
    "outcome": "REJECTED",
@@ -716,6 +720,20 @@
   "contracts": {
    "outcome": "INEXPRESSIBLE",
    "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "null_in_text": {
+   "outcome": "REJECTED",
+   "message": "/opt/zig/lib/std/Io/Writer.zig:1935:5: error: invalid format string 's' for type '?[]const u8'\n    @compileError(\"invalid format string '\" ++ fmt ++ \"' for type '\" ++ @typeName(@TypeOf(value)) ++ \"'\");\n    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nreferenced by:\n    printValue__func_821: /opt/zig/lib/std/Io/Writer.zig:1271:40\n    print__func_792: /opt/zig/lib/std/Io/Writer.zig:805:25\n    6 reference(s) hidden; use '-freference-trace=8' to see all references"
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.3,
+   "secs": 0.06,
+   "stdout": "",
+   "stderr": "error: WriteFailed\n/opt/zig/lib/std/Io/File.zig:611:5: 0x11f15fa in writeStreaming (std.zig)\n    return (try io.operate(.{ .file_write_streaming = .{\n    ^\n/opt/zig/lib/std/Io/File/Writer.zig:128:9: 0x11f0d70 in drainStreaming (std.zig)\n        return error.WriteFailed;\n        ^\n/opt/zig/lib/std/Io/File/Writer.zig:93:42: 0x11f07d2 in drain (std.zig)\n        .streaming, .streaming_simple => return drainStreaming(w, data, splat),\n                                         ^\n/opt/zig/lib/std/Io/Writer.zig:394:28: 0x103a883 in defaultFlush (std.zig)\n    while (w.end != 0) _ = try drainFn(w, &.{\"\"}, 1);\n                           ^\n/opt/zig/lib/std/Io/Writer.zig:388:5: 0x1132c53 in flush (std.zig)\n    return w.vtable.flush(w);\n    ^\n/tmp/breakbench/lost_write_error/main/main.zig:15:5: 0x11e378d in main (main.zig)\n    try fw.interface.flush();\n    ^"
   }
  }
 }

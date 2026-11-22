@@ -1,0 +1,9 @@
+use std::{errors, fs}
+
+fn main() -> Result<(), errors::Error> {
+    let mut f = fs::create("/dev/full")?
+    defer f.close()
+    f.write("data\n")?
+    println("saved")
+    Ok(())
+}

@@ -373,6 +373,9 @@ def main():
             score = spec["kinds"][problem["kind"]].get(outcome, 0)
             if worst is None or score < worst[0]:
                 worst = (score, outcome, status, maxrss_mb, out, err, secs)
+            # No later run can score below zero, so the worst case is already known.
+            if worst[0] == 0:
+                break
         _, record["outcome"], status, maxrss_mb, out, err, secs = worst
         if runs > 1:
             record["runs"] = runs

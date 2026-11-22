@@ -401,13 +401,14 @@
   },
   "use_after_close": {
    "outcome": "TRAPPED",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 1,
-   "rss_mb": 13.9,
+   "rss_mb": 14.3,
    "secs": 0.01,
    "stdout": "",
-   "stderr": "object.Exception@std/stdio.d(3176): Attempting to write to closed File\n----------------\n??:? pure @safe noreturn std.exception.bailOut!(Exception).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x63fb0eb4c315]\n??:? pure @safe bool std.exception.enforce!().enforce!(bool).enforce(bool, lazy const(char)[], immutable(char)[], ulong) [0x63fb0eb4c25d]\n??:? ref @trusted std.stdio.File.LockingTextWriter std.stdio.File.LockingTextWriter.__ctor(ref std.stdio.File) [0x63fb0eb823af]\n??:? @safe std.stdio.File.LockingTextWriter std.stdio.File.lockingTextWriter() [0x63fb0eb82779]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/stdio.d:1667 @safe void std.stdio.File.write!(immutable(char)[]).write(immutable(char)[]) [0x63fb0ea72784]\nmain.d:8 _Dmain [0x63fb0ea725ee]"
+   "stderr": "object.Exception@std/stdio.d(3176): Attempting to write to closed File\n----------------\n??:? pure @safe noreturn std.exception.bailOut!(Exception).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x5f4eed33d315]\n??:? pure @safe bool std.exception.enforce!().enforce!(bool).enforce(bool, lazy const(char)[], immutable(char)[], ulong) [0x5f4eed33d25d]\n??:? ref @trusted std.stdio.File.LockingTextWriter std.stdio.File.LockingTextWriter.__ctor(ref std.stdio.File) [0x5f4eed3733af]\n??:? @safe std.stdio.File.LockingTextWriter std.stdio.File.lockingTextWriter() [0x5f4eed373779]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/stdio.d:1667 @safe void std.stdio.File.write!(immutable(char)[]).write(immutable(char)[]) [0x5f4eed263784]\nmain.d:8 _Dmain [0x5f4eed2635ee]"
   },
   "dead_store": {
    "outcome": "SILENT",
@@ -514,8 +515,9 @@
   },
   "concurrent_map_write": {
    "outcome": "HANG",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": -9,
    "rss_mb": 14.3,
    "secs": 20.0,
@@ -677,12 +679,13 @@
   },
   "racy_counter": {
    "outcome": "SILENT",
-   "runs": 10,
+   "runs": 50,
    "warned": false,
+   "run_warned": false,
    "exit": 0,
    "rss_mb": 14.3,
    "secs": 0.01,
-   "stdout": "1119707",
+   "stdout": "1091417",
    "stderr": ""
   },
   "unreachable_code": {
@@ -794,11 +797,12 @@
   "bitwise_on_bool": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "exit": 1,
-   "rss_mb": 14.3,
+   "rss_mb": 14.5,
    "secs": 0.01,
    "stdout": "",
-   "stderr": "core.exception.ArrayIndexError@main.d(6): index [0] is out of bounds for array of length 0\n----------------\n??:? onArrayIndexError [0x60de0b00fcfd]\n??:? _d_arraybounds_index [0x60de0b00ff5d]\nmain.d:6 _Dmain [0x60de0b010570]"
+   "stderr": "core.exception.ArrayIndexError@main.d(6): index [0] is out of bounds for array of length 0\n----------------\n??:? onArrayIndexError [0x61dddafc5cfd]\n??:? _d_arraybounds_index [0x61dddafc5f5d]\nmain.d:6 _Dmain [0x61dddafc6570]"
   },
   "readonly_field": {
    "outcome": "REJECTED",
@@ -821,6 +825,26 @@
    "secs": 0.01,
    "stdout": "before",
    "stderr": "core.exception.AssertError@main.d(4): Assertion failure\n----------------\n??:? _d_assert [0x6096cc5f5242]\nmain.d:4 int main.isqrt(int) [0x6096cc3cd52a]\nmain.d:16 _Dmain [0x6096cc3cd55b]"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "hello,",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "std.exception.ErrnoException@std/stdio.d(711): Could not close file `/dev/full' (No space left on device)\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/exception.d:522 @safe noreturn std.exception.bailOut!(std.exception.ErrnoException).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x629948d65851]\n??:? @safe bool std.exception.enforce!(std.exception.ErrnoException).enforce!(bool).enforce(bool, lazy const(char)[], immutable(char)[], ulong) [0x629948e3e57d]\n??:? @trusted void std.stdio.File.detach() [0x629948e729c1]\nmain.d:6 _Dmain [0x629948d645db]"
   }
  }
 }
