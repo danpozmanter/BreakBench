@@ -5,8 +5,9 @@ enum Shape {
 
 fn describe(s: Shape) -> String {
     match s {
-        _ => "other",
+        _ => "other", // BREAK!
         Shape::Circle => "circle",
+        // CONTROL! _ => "other",
     }
 }
 

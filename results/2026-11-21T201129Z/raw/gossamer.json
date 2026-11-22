@@ -1,6 +1,6 @@
 {
  "lang": "gossamer",
- "version": "gos 0.83.0",
+ "version": "gos 0.84.0",
  "results": {
   "null_deref": {
    "outcome": "REJECTED",
@@ -9,9 +9,10 @@
   "int_overflow": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 101,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "",
    "stderr": "error[GX0005]: panic: attempt to add with overflow\n  call stack (outermost first):\n    at main (main.gos:5:16)"
@@ -19,9 +20,10 @@
   "div_by_zero": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 101,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "",
    "stderr": "error[GX0005]: panic: divide by zero\n  call stack (outermost first):\n    at main (main.gos:5:16)"
@@ -29,9 +31,10 @@
   "shift_overflow": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 101,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "",
    "stderr": "error[GX0005]: panic: attempt to shift left with overflow\n  call stack (outermost first):\n    at main (main.gos:6:16)"
@@ -51,9 +54,10 @@
   "float_to_int_overflow": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "warning[GL0062]: this `as` panics when the `f64` value is NaN or past the range of `i64` --> /tmp/breakbench/float_to_int_overflow/main/main.gos:5:13 = note: lint: lossy_cast\nlint: 1 warning(s), 0 error(s)",
    "exit": 101,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "",
    "stderr": "error[GX0005]: panic: cast overflow: 1e20 does not fit i64\n  call stack (outermost first):\n    at main (main.gos:5:13)"
@@ -61,9 +65,10 @@
   "signed_unsigned_compare": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "less",
    "stderr": ""
@@ -99,9 +104,10 @@
   "switch_fallthrough": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "one",
    "stderr": ""
@@ -113,9 +119,10 @@
   "string_equality": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "equal",
    "stderr": ""
@@ -123,9 +130,10 @@
   "parse_invalid_number": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 101,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "",
    "stderr": "error[GX0005]: panic: called `Option::unwrap()` on a `None` value\n  call stack (outermost first):\n    at main (main.gos:4:13)"
@@ -137,9 +145,10 @@
   "mutate_while_iterating": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "1,3",
    "stderr": ""
@@ -147,9 +156,10 @@
   "self_deadlock": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 101,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "",
    "stderr": "error[GX0005]: panic: all goroutines are asleep - deadlock! (Mutex::lock can never complete)\n  call stack (outermost first):\n    at main (main.gos:13:5)\n    at deposit (main.gos:4:5)"
@@ -157,9 +167,10 @@
   "loop_closure_capture": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "0,1,2",
    "stderr": ""
@@ -167,9 +178,10 @@
   "snapshot_aliasing": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "2",
    "stderr": ""
@@ -181,9 +193,10 @@
   "sort_with_nan": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "ordered",
    "stderr": ""
@@ -195,9 +208,10 @@
   "leading_zero_literal": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "warning[GL0040]: large integer literal `01234` is hard to scan without underscores --> main.gos:2:15 = note: lint: large_unreadable_literal\nlint: 1 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "1234",
    "stderr": ""
@@ -205,9 +219,10 @@
   "shared_default_argument": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "1",
    "stderr": ""
@@ -219,9 +234,10 @@
   "bitwise_precedence": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "even",
    "stderr": ""
@@ -229,9 +245,10 @@
   "dangling_else": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "not a",
    "stderr": ""
@@ -247,9 +264,10 @@
   "command_injection": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "safe",
    "stderr": ""
@@ -269,9 +287,10 @@
   "lock_order_deadlock": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 101,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.1,
    "stdout": "",
    "stderr": "error[GX0005]: panic: all goroutines are asleep - deadlock! (cohort join can never complete)"
@@ -279,9 +298,10 @@
   "path_join_escape": {
    "outcome": "SILENT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "escaped",
    "stderr": ""
@@ -289,9 +309,10 @@
   "regex_backtracking": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "no match",
    "stderr": ""
@@ -311,9 +332,10 @@
   "missing_comma_concat": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "3",
    "stderr": ""
@@ -321,30 +343,26 @@
   "return_in_finally": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
-   "secs": 0.0,
+   "rss_mb": 14.7,
+   "secs": 0.01,
    "stdout": "failed",
    "stderr": ""
   },
   "return_line_break": {
-   "outcome": "CORRECT",
-   "warned": false,
-   "all_warnings": "warning[GL0004]: needless `return` at end of block --> main.gos:2:5 = note: lint: needless_return\nlint: 1 warning(s), 0 error(s)",
-   "exit": 0,
-   "rss_mb": 14.6,
-   "secs": 0.0,
-   "stdout": "5",
-   "stderr": ""
+   "outcome": "REJECTED",
+   "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GT0001]: type mismatch: expected `i64`, found `()`\n  --> main.gos:2:5\n     2 |     return // CONTROL! return a + b\n       |     ^^^^^^\n\nerror[GT0135]: unreachable code: the statement before this one never completes\n  --> main.gos:3:9\n     3 |         a + b // BREAK!\n       |         ^^^^^\n  = help: delete the code, or move it before the statement that leaves the block\n\nerror: 2 front-end error(s); refusing to build"
   },
   "worker_failure_lost": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 101,
-   "rss_mb": 14.6,
-   "secs": 0.0,
+   "rss_mb": 14.7,
+   "secs": 0.05,
    "stdout": "",
    "stderr": "error[GX0005]: panic: called `Result::unwrap()` on an `Err` value: called `Option::unwrap()` on a `None` value\n  call stack (outermost first):\n    at main (main.gos:21:5)"
   },
@@ -367,9 +385,10 @@
   "unsigned_subtraction": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "short",
    "stderr": ""
@@ -377,19 +396,21 @@
   "missing_key_default": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 101,
-   "rss_mb": 14.6,
-   "secs": 0.0,
+   "rss_mb": 14.7,
+   "secs": 0.01,
    "stdout": "",
    "stderr": "error[GX0005]: panic: key \"pear\" is not in the map\n  call stack (outermost first):\n    at main (main.gos:6:13)"
   },
   "mutable_hash_key": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "found",
    "stderr": ""
@@ -402,7 +423,7 @@
    "warnings": "warning[GL0003]: `status` is declared `mut` but never reassigned --> main.gos:4:9 = note: lint: unused_mut_variable\nwarning[GL0008]: `status` declares a new binding in this block, hiding the mutable `status` outside it, which keeps its value --> main.gos:6:13 = note: lint: shadowed_binding",
    "exit": 0,
    "rss_mb": 14.7,
-   "secs": 0.0,
+   "secs": 0.02,
    "stdout": "pending",
    "stderr": "status: done"
   },
@@ -414,9 +435,10 @@
   "negative_index_wraps": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 101,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "",
    "stderr": "error[GX0005]: panic: array index out of bounds: the len is 3 but the index is -1\n  call stack (outermost first):\n    at main (main.gos:6:27)"
@@ -424,10 +446,11 @@
   "default_numeric_sort": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
-   "secs": 0.0,
+   "rss_mb": 14.7,
+   "secs": 0.03,
    "stdout": "1 9 10",
    "stderr": ""
   },
@@ -439,10 +462,11 @@
    "outcome": "TRAPPED",
    "runs": 10,
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 1,
-   "rss_mb": 14.3,
-   "secs": 0.0,
+   "rss_mb": 14.7,
+   "secs": 0.02,
    "stdout": "",
    "stderr": "File::write: stale handle"
   },
@@ -461,29 +485,32 @@
   "panic_under_lock": {
    "outcome": "SILENT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
-   "secs": 0.0,
+   "rss_mb": 14.7,
+   "secs": 0.02,
    "stdout": "unbalanced",
    "stderr": "worker failed"
   },
   "split_character": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
-   "secs": 0.0,
+   "rss_mb": 14.7,
+   "secs": 0.04,
    "stdout": "a\ud83d\udc4d",
    "stderr": ""
   },
   "oob_write": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 101,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "",
    "stderr": "error[GX0005]: panic: array index out of bounds: the len is 4 but the index is 4\n  call stack (outermost first):\n    at main (main.gos:11:5)"
@@ -491,19 +518,21 @@
   "oob_read": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 101,
-   "rss_mb": 14.6,
-   "secs": 0.0,
+   "rss_mb": 14.7,
+   "secs": 0.06,
    "stdout": "",
    "stderr": "error[GX0005]: panic: array index out of bounds: the len is 4 but the index is 4\n  call stack (outermost first):\n    at main (main.gos:11:16)"
   },
   "use_after_free": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "warning[GL0001]: unused variable `c` --> main.gos:9:9 = note: lint: unused_variable\nlint: 1 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "1234",
    "stderr": ""
@@ -511,10 +540,11 @@
   "double_free": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "warning[GL0001]: unused variable `y` --> main.gos:10:9 = note: lint: unused_variable\nwarning[GL0039]: two back-to-back assignments to the same place - the first one is dead --> main.gos:8:5 = note: lint: consecutive_assignment\nlint: 2 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
-   "secs": 0.0,
+   "rss_mb": 14.7,
+   "secs": 0.04,
    "stdout": "1",
    "stderr": ""
   },
@@ -529,19 +559,21 @@
   "uninit_heap_read": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
-   "secs": 0.0,
+   "rss_mb": 14.7,
+   "secs": 0.06,
    "stdout": "000000000000000000000000",
    "stderr": ""
   },
   "stack_overflow": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "warning[GL0040]: large integer literal `1000000007` is hard to scan without underscores --> main.gos:7:30 = note: lint: large_unreadable_literal\nlint: 1 warning(s), 0 error(s)",
    "exit": 101,
-   "rss_mb": 22.5,
+   "rss_mb": 22.6,
    "secs": 0.01,
    "stdout": "",
    "stderr": "error[GX0008]: stack overflow - recursion exceeded the available stack"
@@ -549,10 +581,11 @@
   "error_path_leak": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
-   "secs": 0.13,
+   "rss_mb": 14.7,
+   "secs": 0.19,
    "stdout": "done",
    "stderr": ""
   },
@@ -567,17 +600,18 @@
    "all_warnings": "warning[GL0063]: this closure is stored in `o`, which it captures: the two hold each other, and the cycle is never freed --> /tmp/breakbench/reference_cycle_leak/main/main.gos:22:9 = note: lint: closure_self_cycle\nlint: 1 warning(s), 0 error(s)",
    "warnings": "warning[GL0063]: this closure is stored in `o`, which it captures: the two hold each other, and the cycle is never freed --> /tmp/breakbench/reference_cycle_leak/main/main.gos:22:9 = note: lint: closure_self_cycle",
    "exit": 137,
-   "rss_mb": 3058.7,
-   "secs": 1.78,
+   "rss_mb": 3059.0,
+   "secs": 41.23,
    "stdout": "",
    "stderr": "Killed"
   },
   "view_retention": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "warning[GL0040]: large integer literal `32768` is hard to scan without underscores --> main.gos:9:38 = note: lint: large_unreadable_literal\nwarning[GL0040]: large integer literal `32768` is hard to scan without underscores --> main.gos:11:74 = note: lint: large_unreadable_literal\nwarning[GL0062]: this `as` panics when the `i64` value does not fit `u8` --> /tmp/breakbench/view_retention/main/main.gos:9:21 = note: lint: lossy_cast\nlint: 3 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.05,
    "stdout": "40000",
    "stderr": ""
@@ -585,9 +619,10 @@
   "huge_allocation": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 101,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "",
    "stderr": "error[GX0005]: panic: out of memory: cannot allocate 10000000000000 bytes\n  call stack (outermost first):\n    at main (main.gos:5:5)"
@@ -595,9 +630,10 @@
   "fd_leak": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.01,
    "stdout": "done",
    "stderr": ""
@@ -609,9 +645,10 @@
   "format_string": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "%s%s%n{}{0}",
    "stderr": ""
@@ -619,9 +656,10 @@
   "deep_structure_release": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 33.8,
+   "rss_mb": 33.6,
    "secs": 0.03,
    "stdout": "done",
    "stderr": ""
@@ -629,10 +667,11 @@
   "abandoned_worker_leak": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
-   "secs": 0.21,
+   "rss_mb": 14.7,
+   "secs": 0.17,
    "stdout": "done",
    "stderr": ""
   },
@@ -659,10 +698,11 @@
   "forced_unwrap": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 101,
-   "rss_mb": 14.6,
-   "secs": 0.0,
+   "rss_mb": 14.7,
+   "secs": 0.01,
    "stdout": "before",
    "stderr": "error[GX0005]: panic: called `Option::unwrap()` on a `None` value\n  call stack (outermost first):\n    at main (main.gos:7:16)"
   },
@@ -685,9 +725,10 @@
   "generic_constraint": {
    "outcome": "SILENT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "1",
    "stderr": ""
@@ -697,45 +738,28 @@
    "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GT0001]: type mismatch: expected `f64`, found `i64`\n  --> main.gos:8:10\n     8 |     show(n) // BREAK!\n       |          ^\n  = help: write an integer literal as a float (`1.0`), or cast with `<expr> as f64`\n\nerror: 1 front-end error(s); refusing to build"
   },
   "const_index_bounds": {
-   "outcome": "TRAPPED",
-   "warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
-   "exit": 101,
-   "rss_mb": 14.6,
-   "secs": 0.0,
-   "stdout": "",
-   "stderr": "error[GX0005]: panic: array index out of bounds: the len is 3 but the index is 5\n  call stack (outermost first):\n    at main (main.gos:3:16)"
+   "outcome": "REJECTED",
+   "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GT0133]: index 5 is out of bounds for an array of 3 element(s)\n  --> main.gos:3:22\n     3 |     println(f\"{table[5]}\") // CONTROL! println(f\"{table[1]}\")\n       |                      ^\n  = help: an index of this array is in 0..3\n\nerror: 1 front-end error(s); refusing to build"
   },
   "const_overflow": {
-   "outcome": "SILENT",
-   "warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
-   "exit": 0,
-   "rss_mb": 14.6,
-   "secs": 0.0,
-   "stdout": "-8985944073709551616",
-   "stderr": ""
+   "outcome": "REJECTED",
+   "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GT0134]: constant arithmetic fails: 31536000000000000 * 300 overflows `i64`\n  --> main.gos:1:19\n     1 | const SPAN: i64 = 1_000_000_000 * 60 * 60 * 24 * 365 * 300 // CONTROL! const SPAN: u64 = 1_000_000_000 * 60 * 60 * 24 * 365 * 300\n       |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  = help: a constant's value must fit its declared type at every step: widen the type, change the operands, or use a wrapping operator (`+%`, `*%`) where wrapping is meant\n\nerror: 1 front-end error(s); refusing to build"
   },
   "racy_counter": {
    "outcome": "REJECTED",
    "message": "warning[GL0001]: unused variable `safe`\n  --> main.gos:5:9\n     5 |     let safe = Shared::new(0)\n       |         ^^^^\n  = note: lint: unused_variable\n  = help: prefix with `_` to silence: `_safe`\n\nwarning[GL0040]: large integer literal `1000000` is hard to scan without underscores\n  --> main.gos:6:36\n     6 |     let a = spawn(|| { for _ in 0..1000000 { count += 1 } }) // CONTROL! let a = spawn(|| { for _ in 0..1000000 { safe.update(|n| n + 1) } })\n       |                                    ^^^^^^^\n  = note: lint: large_unreadable_literal\n  = help: insert `_` as thousands separators, e.g. `1_000_000`\n\nwarning[GL0040]: large integer literal `1000000` is hard to scan without underscores\n  --> main.gos:7:36\n     7 |     let b = spawn(|| { f\n...\n       ^^^^^\n     error: a spawned closure takes a snapshot of `count` at the spawn\n  = help: return the value and read it with `join()`, send it on a channel, or share an integer through a `sync::Shared`\n\nerror[GT0114]: this write changes the goroutine's own snapshot of `count`\n  --> main.gos:7:46\n     7 |     let b = spawn(|| { for _ in 0..1000000 { count += 1 } }) // CONTROL! let b = spawn(|| { for _ in 0..1000000 { safe.update(|n| n + 1) } })\n       |                                              ^^^^^\n     error: a spawned closure takes a snapshot of `count` at the spawn\n  = help: return the value and read it with `join()`, send it on a channel, or share an integer through a `sync::Shared`\n\nerror: 2 front-end error(s); refusing to build"
   },
   "unreachable_code": {
-   "outcome": "SILENT",
-   "warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
-   "exit": 0,
-   "rss_mb": 14.6,
-   "secs": 0.0,
-   "stdout": "ok",
-   "stderr": ""
+   "outcome": "REJECTED",
+   "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GT0135]: unreachable code: the statement before this one never completes\n  --> main.gos:4:5\n     4 |     let step = \"checked\"\n       |     ^^^^^^^^^^^^^^^^^^^^\n  = help: delete the code, or move it before the statement that leaves the block\n\nerror: 1 front-end error(s); refusing to build"
   },
   "nan_key": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "found",
    "stderr": ""
@@ -747,68 +771,44 @@
   "evaluation_order": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "1 2",
    "stderr": ""
   },
   "dominated_case": {
-   "outcome": "SILENT",
-   "warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
-   "exit": 0,
-   "rss_mb": 14.6,
-   "secs": 0.0,
-   "stdout": "other",
-   "stderr": ""
+   "outcome": "REJECTED",
+   "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GM0002]: unreachable pattern: earlier arm already matches this value\n  --> main.gos:9:9\n     9 |         Shape::Circle => \"circle\",\n       |         ^^^^^^^^^^^^^\n  = help: delete the arm, or move it above the earlier arm that already matches its values\n\nerror: 1 front-end error(s); refusing to build"
   },
   "duplicate_key": {
-   "outcome": "SILENT",
-   "warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
-   "exit": 0,
-   "rss_mb": 14.6,
-   "secs": 0.0,
-   "stdout": "1",
-   "stderr": ""
+   "outcome": "REJECTED",
+   "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GT0137]: the key \"a\" appears more than once in this map literal\n  --> main.gos:2:22\n     2 |     let m = {\"a\": 1, \"a\": 2} // CONTROL! let m = {\"a\": 1, \"b\": 2}\n       |                      ^^^\n  = help: a map holds one value per key, so the later entry would replace the earlier one: keep one entry for the key\n\nerror: 1 front-end error(s); refusing to build"
   },
   "char_arithmetic": {
    "outcome": "REJECTED",
    "message": "warning[GL0001]: unused variable `m`\n  --> main.gos:5:9\n     5 |     let m: i64 = c + 1 // BREAK!\n       |         ^\n  = note: lint: unused_variable\n  = help: prefix with `_` to silence: `_m`\n\nlint: 1 warning(s), 0 error(s)\n\n\n\nerror[GT0001]: type mismatch: expected `i64`, found `char`\n  --> main.gos:5:18\n     5 |     let m: i64 = c + 1 // BREAK!\n       |                  ^^^^^\n\nerror[GT0001]: type mismatch: expected `char`, found `i64`\n  --> main.gos:5:18\n     5 |     let m: i64 = c + 1 // BREAK!\n       |                  ^^^^^\n\nerror[GT0003]: cannot apply `+` to `char` and `char`\n  --> main.gos:5:18\n     5 |     let m: i64 = c + 1 // BREAK!\n       |                  ^^^^^\n  = note: operator `+` requires matching operand types; got `char` and `char`\n\nerror: 3 front-end error(s); refusing to build"
   },
   "comparison_statement": {
-   "outcome": "SILENT",
-   "warned": true,
-   "run_warned": false,
-   "all_warnings": "warning[GL0003]: `count` is declared `mut` but never reassigned --> main.gos:2:9 = note: lint: unused_mut_variable\nwarning[GL0056]: this expression's value is not used --> main.gos:3:5 = note: lint: no_effect_statement\nlint: 2 warning(s), 0 error(s)",
-   "warnings": "warning[GL0003]: `count` is declared `mut` but never reassigned --> main.gos:2:9 = note: lint: unused_mut_variable\nwarning[GL0056]: this expression's value is not used --> main.gos:3:5 = note: lint: no_effect_statement",
-   "exit": 0,
-   "rss_mb": 14.7,
-   "secs": 0.0,
-   "stdout": "0",
-   "stderr": ""
+   "outcome": "REJECTED",
+   "message": "warning[GL0003]: `count` is declared `mut` but never reassigned\n  --> main.gos:2:9\n     2 |     let mut count = 0\n       |         ^^^^^^^^^\n  = note: lint: unused_mut_variable\n  = help: remove the `mut` keyword\n\nlint: 1 warning(s), 0 error(s)\n\n\n\nerror[GT0136]: a comparison is used as a statement and its answer is dropped\n  --> main.gos:3:5\n     3 |     count == 5 // CONTROL! count = 5\n       |     ^^^^^^^^^^\n  = help: write `=` to assign, `assert(..)` to check, or use the comparison as a condition (`if a == b { .. }`)\n\nerror: 1 front-end error(s); refusing to build"
   },
   "structural_equality": {
    "outcome": "CORRECT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "equal",
    "stderr": ""
   },
   "hash_matches_equality": {
-   "outcome": "SILENT",
-   "warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
-   "exit": 0,
-   "rss_mb": 14.6,
-   "secs": 0.0,
-   "stdout": "2",
-   "stderr": ""
+   "outcome": "REJECTED",
+   "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GT0138]: `Point` keys a hashed container, but `Point` compares by a hand-written `eq` the container never calls\n  --> main.gos:12:13\n    12 |     let s = #{Point { x: 1, y: 2, label: \"a\" }, Point { x: 1, y: 2, label: \"b\" }} // CONTROL! let a = Point { x: 1, y: 2, label: \"a\" }; let b = Point { x: 1, y: 2, label: \"b\" }; let s = #{(a.x, a.y), (b.x, b.y)}\n       |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  = note: a `Map` or `Set` hashes and compares its keys structurally, field by field, so it never calls a hand-written `eq`\n  = help: key on exactly what `Point`'s `eq` compares (a tuple of those fields), or give `Point` an `impl Ord` that agrees with `eq` and use a `BTreeMap` / `BTreeSet`\n\nerror: 1 front-end error(s); refusing to build"
   },
   "array_literal_length": {
    "outcome": "REJECTED",
@@ -817,10 +817,11 @@
   "required_names": {
    "outcome": "SILENT",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "rss_mb": 14.6,
-   "secs": 0.0,
+   "rss_mb": 14.7,
+   "secs": 0.02,
    "stdout": "4 3",
    "stderr": ""
   },
@@ -835,10 +836,11 @@
   "bitwise_on_bool": {
    "outcome": "TRAPPED",
    "warned": false,
+   "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 101,
-   "rss_mb": 14.6,
-   "secs": 0.0,
+   "rss_mb": 14.7,
+   "secs": 0.02,
    "stdout": "",
    "stderr": "error[GX0005]: panic: vec index out of bounds: the len is 0 but the index is 0\n  call stack (outermost first):\n    at main (main.gos:3:32)"
   },
