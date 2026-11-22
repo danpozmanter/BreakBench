@@ -71,11 +71,12 @@
   "non_exhaustive_match": {
    "outcome": "TRAPPED",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "-- [E235] Potential Issue Warning: main.scala:2:19 ----------------------------- |                   Catching everything can lead to unexpected behavior | longer explanation available when compiling with `-explain`\n-- [E029] Pattern Match Exhaustivity Warning: main.scala:6:31 ------------------ |                               match may not be exhaustive. |                               It would fail on pattern case: Blue\n2 warnings found",
    "warnings": "-- [E029] Pattern Match Exhaustivity Warning: main.scala:6:31 ------------------ |                               match may not be exhaustive. |                               It would fail on pattern case: Blue",
    "exit": 1,
-   "rss_mb": 54.9,
-   "secs": 0.07,
+   "rss_mb": 54.6,
+   "secs": 0.16,
    "stdout": "",
    "stderr": "Exception in thread \"main\" scala.MatchError: Blue (of class Color$$anon$1)\n\tat Main$.name(main.scala:8)\n\tat Main$.main(main.scala:12)\n\tat Main.main(main.scala)"
   },
@@ -338,11 +339,12 @@
   "unawaited_task": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "-- [E175] Potential Issue Warning: main.scala:7:25 ----------------------------- |   discarded non-Unit value of type Int. Add `: Unit` to discard silently.\n-- [E198] Unused Symbol Warning: main.scala:12:8 ------------------------------- |        unused local definition\n2 warnings found",
    "warnings": "-- [E198] Unused Symbol Warning: main.scala:12:8 ------------------------------- |        unused local definition",
    "exit": 0,
-   "rss_mb": 59.5,
-   "secs": 0.11,
+   "rss_mb": 60.4,
+   "secs": 0.1,
    "stdout": "0",
    "stderr": ""
   },
@@ -386,10 +388,11 @@
   "shadowed_assignment": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "-- [E198] Unused Symbol Warning: main.scala:4:8 -------------------------------- |        unset local variable, consider using an immutable val instead\n1 warning found",
    "warnings": "-- [E198] Unused Symbol Warning: main.scala:4:8 -------------------------------- |        unset local variable, consider using an immutable val instead",
    "exit": 0,
-   "rss_mb": 50.9,
+   "rss_mb": 50.5,
    "secs": 0.07,
    "stdout": "pending",
    "stderr": "status: done"
@@ -424,10 +427,11 @@
   "unrelated_type_lookup": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "-- [E225] Type Warning: main.scala:5:19 ---------------------------------------- |               A type argument was inferred to be union type Int | String |               This may indicate a programming error.\n1 warning found",
    "warnings": "-- [E225] Type Warning: main.scala:5:19 ---------------------------------------- |               A type argument was inferred to be union type Int | String |               This may indicate a programming error.",
    "exit": 0,
-   "rss_mb": 50.6,
+   "rss_mb": 51.1,
    "secs": 0.07,
    "stdout": "missing",
    "stderr": ""
@@ -445,10 +449,11 @@
   "dead_store": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "-- [E198] Unused Symbol Warning: main.scala:4:8 -------------------------------- |        unused local definition\n1 warning found",
    "warnings": "-- [E198] Unused Symbol Warning: main.scala:4:8 -------------------------------- |        unused local definition",
    "exit": 0,
-   "rss_mb": 51.0,
+   "rss_mb": 51.4,
    "secs": 0.07,
    "stdout": "40",
    "stderr": ""
@@ -606,11 +611,12 @@
   "wrong_variant_access": {
    "outcome": "TRAPPED",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "-- Warning: main.scala:9:24 ---------------------------------------------------- |pattern's type Value.Text is more specialized than the right hand side expression's type Value |If the narrowing is intentional, this can be communicated by adding `.runtimeChecked` after the expression,\n1 warning found",
    "warnings": "-- Warning: main.scala:9:24 ---------------------------------------------------- |pattern's type Value.Text is more specialized than the right hand side expression's type Value |If the narrowing is intentional, this can be communicated by adding `.runtimeChecked` after the expression,",
    "exit": 1,
-   "rss_mb": 47.2,
-   "secs": 0.05,
+   "rss_mb": 46.8,
+   "secs": 0.13,
    "stdout": "",
    "stderr": "Exception in thread \"main\" scala.MatchError: IntValue(42) (of class Value$IntValue)\n\tat Main$.main(main.scala:9)\n\tat Main.main(main.scala)"
   },
@@ -768,11 +774,12 @@
   "dominated_case": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "-- [E235] Potential Issue Warning: main.scala:2:15 ----------------------------- |               Catching everything can lead to unexpected behavior | longer explanation available when compiling with `-explain`\n-- [E030] Match case Unreachable Warning: main.scala:6:13 ---------------------- |       Unreachable case\n2 warnings found",
    "warnings": "-- [E030] Match case Unreachable Warning: main.scala:6:13 ---------------------- |       Unreachable case",
    "exit": 0,
-   "rss_mb": 51.3,
-   "secs": 0.1,
+   "rss_mb": 50.5,
+   "secs": 0.07,
    "stdout": "other",
    "stderr": ""
   },
@@ -797,10 +804,11 @@
   "comparison_statement": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "-- [E176] Potential Issue Warning: main.scala:4:4 ------------------------------ |    unused value of type Boolean\n-- [E198] Unused Symbol Warning: main.scala:3:8 -------------------------------- |        unset local variable, consider using an immutable val instead\n2 warnings found",
    "warnings": "-- [E176] Potential Issue Warning: main.scala:4:4 ------------------------------ |    unused value of type Boolean\n-- [E198] Unused Symbol Warning: main.scala:3:8 -------------------------------- |        unset local variable, consider using an immutable val instead",
    "exit": 0,
-   "rss_mb": 51.2,
+   "rss_mb": 50.8,
    "secs": 0.07,
    "stdout": "0",
    "stderr": ""

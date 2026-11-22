@@ -346,6 +346,7 @@
   "format_arg_mismatch": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.go:8:20: fmt.Printf format %d reads arg #2, but call has 1 arg",
    "warnings": "main.go:8:20: fmt.Printf format %d reads arg #2, but call has 1 arg",
    "exit": 0,
@@ -592,6 +593,7 @@
   "format_string": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.go:9:13: non-constant format string in call to fmt.Printf",
    "warnings": "main.go:9:13: non-constant format string in call to fmt.Printf",
    "exit": 0,
@@ -717,6 +719,7 @@
   "unreachable_code": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.go:8:2: unreachable code",
    "warnings": "main.go:8:2: unreachable code",
    "exit": 0,

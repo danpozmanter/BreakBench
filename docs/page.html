@@ -119,7 +119,7 @@ td.chipcell > .chip { display: flex; width: 100%; box-sizing: border-box; height
 .gcell { display: block; width: 96px; min-height: 30px; border: 0; border-radius: 4px; color: var(--cell-fg); font: 500 11.5px/1.2 var(--font-body); cursor: pointer; padding: 4px; text-align: center; }
 .gcell.o-TRAPPED { color: #1b1606; }
 .wtag { display: block; margin-top: 3px; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; border-top: 1px solid currentColor; padding-top: 2px; opacity: .9; }
-.warned-swatch { background: transparent; border: 2px solid var(--fg); width: 8px; height: 8px; }
+.swatch.o-WARNED, .swatch.o-RUN_WARNED, .warned-swatch { background: transparent; border: 2px solid var(--fg); width: 8px; height: 8px; }
 pre.warn { color: var(--fg); }
 .detail { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 20px; align-items: start; }
 .plist { display: grid; gap: 2px; max-height: 760px; overflow-y: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); padding: 6px; }
@@ -164,7 +164,8 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     <h2 id="score-h">How outcomes are scored</h2>
     <div class="legend" id="legend"></div>
     <div class="scoring" id="scoring"></div>
-    <p class="muted">A warning that names the bug adds 0.25, but never makes a full point. Ignoring a result the language marks must-use counts as a refusal.</p>
+    <p class="muted">A bug refused before the program runs earns a full point, and a build warning that names it earns half: either can keep the bug out of production. A bug the program only shows while running, by stopping with a clear error or by warning and going on, earns a quarter: a test may catch it, but otherwise it reaches production. A wrong answer earns nothing. A warning and a stop never add up; the higher counts. The same holds for every test, compiled or dynamic, logic or memory.</p>
+    <p class="muted">Ignoring a result the language marks must-use counts as a refusal.</p>
     <p class="muted">A compile error counts as a refusal only if the same program with the bug removed compiles.</p>
     <p class="muted">N/A means the language cannot write the program at all, for example without a mutex or shared-memory threads. Those tests score 0, the same as a failure. A language that simply lacks the bug, like Python with no unsigned integers, scores Ran Correctly.</p>
   </section>
@@ -194,11 +195,13 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
 <script>
 (function () {
   const D = window.BREAKBENCH;
-  const OUT = ["REJECTED", "CORRECT", "TRAPPED", "SILENT", "CORRUPT", "CRASH", "HANG", "LEAK", "ICE", "INEXPRESSIBLE", "ERROR"];
-  const NAME = { REJECTED: "Refused Correctly", CORRECT: "Ran Correctly", TRAPPED: "Runtime Stop, Clear Error", SILENT: "Wrong Answer", CORRUPT: "Memory Corruption", CRASH: "Crash", HANG: "Hang", LEAK: "Leak", ICE: "Compiler Crash", INEXPRESSIBLE: "N/A", ERROR: "Benchmark Error", MISSING: "Missing" };
+  const OUT = ["REJECTED", "CORRECT", "WARNED", "RUN_WARNED", "TRAPPED", "SILENT", "CORRUPT", "CRASH", "HANG", "LEAK", "ICE", "INEXPRESSIBLE", "ERROR"];
+  const NAME = { REJECTED: "Refused Correctly", CORRECT: "Ran Correctly", WARNED: "Warned Before Running", RUN_WARNED: "Warned While Running", TRAPPED: "Runtime Stop, Clear Error", SILENT: "Wrong Answer", CORRUPT: "Memory Corruption", CRASH: "Crash", HANG: "Hang", LEAK: "Leak", ICE: "Compiler Crash", INEXPRESSIBLE: "N/A", ERROR: "Benchmark Error", MISSING: "Missing" };
   const DESC = {
     REJECTED: "The compiler or checker refused the buggy program",
     CORRECT: "The program ran and printed the right answer",
+    WARNED: "The build warned about the bug by name; scored instead of the run's outcome when higher",
+    RUN_WARNED: "The running program warned about the bug by name and went on; scored instead of the outcome when higher",
     TRAPPED: "The program stopped at run time with a clear error",
     SILENT: "The program finished and printed a wrong answer",
     CORRUPT: "The program read or wrote memory it does not own",
@@ -271,9 +274,17 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
   const legend = document.getElementById("legend");
   present.forEach((o) => legend.append(el("span", {}, swatch(o), el("strong", { text: NAME[o] }), DESC[o])));
   const scoring = document.getElementById("scoring");
+  // Kinds that score alike share one card.
+  const groups = new Map();
   Object.entries(D.kinds).forEach(([k, table]) => {
-    const n = probs.filter((p) => p.kind === k).length;
-    const box = el("div", {}, el("strong", { text: KIND[k] + " (" + n + ")" }));
+    const key = JSON.stringify(OUT.map((o) => table[o] ?? 0));
+    if (!groups.has(key)) groups.set(key, { kinds: [], table });
+    groups.get(key).kinds.push(k);
+  });
+  groups.forEach(({ kinds, table }) => {
+    const n = probs.filter((p) => kinds.includes(p.kind)).length;
+    const label = kinds.length > 1 ? "Every test with a bug" : KIND[kinds[0]];
+    const box = el("div", {}, el("strong", { text: label + " (" + n + ")" }));
     const list = el("dl", { class: "pts" });
     OUT.filter((o) => o in table).forEach((o) => list.append(el("dt", {}, swatch(o), NAME[o]), el("dd", { text: String(table[o]) })));
     box.append(list);
@@ -296,9 +307,9 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
         const r = L.results[p.id] || { o: "MISSING" };
         const designed = (p.by_design || []).includes(L.id);
         const b = el("button", { type: "button", class: "gcell o-" + r.o + (designed ? " by-design" : ""),
-          title: L.name + " · " + p.title + ": " + (DESC[r.o] || r.o) + (r.w ? " (the compiler warned)" : "") + (designed ? " (by design)" : ""),
+          title: L.name + " · " + p.title + ": " + (DESC[r.o] || r.o) + (r.w ? " (the build warned)" : r.rw ? " (the running program warned)" : "") + (designed ? " (by design)" : ""),
           text: SHORT[r.o] || r.o });
-        if (r.w && r.o !== "REJECTED" && r.o !== "CORRECT") b.append(el("span", { class: "wtag", text: "Warned" }));
+        if ((r.w || r.rw) && r.o !== "REJECTED" && r.o !== "CORRECT") b.append(el("span", { class: "wtag", text: r.w ? "Warned" : "Warned while running" }));
         b.addEventListener("click", () => openProblem(p.id, L.id, true));
         tr.append(el("td", {}, b));
       });
@@ -375,7 +386,10 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
         if (!p || (opt.drop && opt.drop.has(pid))) return;
         if (r.o === "INEXPRESSIBLE" && opt.naSkip) return;
         let base = r.o === "INEXPRESSIBLE" ? 0 : (opt.kinds ? opt.kinds(p.kind, r.o) : null) ?? (kinds[p.kind][r.o] ?? 0);
-        if (r.w && base < 1 && opt.bonus !== 0) base = Math.min(base + 0.25, 0.99);
+        if (opt.warnings !== false) {
+          if (r.w) base = Math.max(base, kinds[p.kind].WARNED ?? 0);
+          if (r.rw) base = Math.max(base, kinds[p.kind].RUN_WARNED ?? 0);
+        }
         const wt = opt.weight ? opt.weight(p) : 1;
         tot += base * wt; w += wt;
       });
@@ -388,8 +402,8 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     }).map((p) => p.id));
     const schemes = [
       ["As published", {}],
-      ["A runtime stop scores like a refusal", { kinds: (k, o) => (k === "static" && o === "TRAPPED" ? 1 : null) }],
-      ["No warning bonus", { bonus: 0 }],
+      ["A runtime stop scores like a refusal", { kinds: (k, o) => (k !== "valid" && o === "TRAPPED" ? 1 : null) }],
+      ["No credit for warnings", { warnings: false }],
       ["Each category weighted equally", { weight: (p) => 1 / perCat[p.category] }],
       ["Without the tests nearly every language passes", { drop: uniform }],
       ["N/A left out of the average", { naSkip: true }],

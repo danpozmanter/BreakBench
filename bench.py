@@ -53,15 +53,18 @@ def run_language(run, lang_id, lang, only):
     return subprocess.run(cmd, cwd=ROOT).returncode
 
 
-def score_of(problem, rec, kinds, bonus):
-    """A relevant warning lifts an imperfect outcome by `bonus`, never to a full point.
-    A test the language cannot express (N/A) scores 0."""
+def score_of(problem, rec, kinds):
+    """The highest of the outcome's points and the points for a warning that names the bug,
+    printed by the build or by the running program; they never add up. N/A scores 0."""
     if rec["outcome"] == "INEXPRESSIBLE":
         return 0.0
-    score = kinds[problem["kind"]].get(rec["outcome"], 0.0)
-    if rec.get("warned") and score < 1:
-        score = min(score + bonus, 0.99 if score + bonus >= 1 else score + bonus)
-    return round(score, 2)
+    table = kinds[problem["kind"]]
+    score = table.get(rec["outcome"], 0.0)
+    if rec.get("warned"):
+        score = max(score, table.get("WARNED", 0.0))
+    if rec.get("run_warned"):
+        score = max(score, table.get("RUN_WARNED", 0.0))
+    return score
 
 
 def percent(scores):
@@ -91,7 +94,7 @@ def aggregate(run):
         by_category = {c: [] for c in CATEGORIES}
         for problem in spec["problems"]:
             rec = raw["results"].get(problem["id"], {"outcome": "MISSING"})
-            score = score_of(problem, rec, kinds, spec.get("warned_bonus", 0.25))
+            score = score_of(problem, rec, kinds)
             by_category[problem["category"]].append(score)
             per_problem[problem["id"]] = {**rec, "score": score}
         outcomes = [r["outcome"] for r in per_problem.values()]
@@ -172,7 +175,8 @@ def site_payload(out):
                 "out": (rec.get("stdout") or "")[:160],
                 "ev": evidence[:600],
                 "rss": rec.get("rss_mb"),
-                "w": (rec.get("warnings") or "")[:400],
+                "w": (rec.get("warnings") or "")[:400] if rec.get("warned") else "",
+                "rw": bool(rec.get("run_warned")),
             }
         langs.append({k: row[k] for k in ("id", "name", "version", "rank", "score", "caught", "safe",
                                            "scored", *CATEGORIES)} | {"results": results})

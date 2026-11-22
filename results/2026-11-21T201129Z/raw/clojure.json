@@ -902,13 +902,14 @@
   "bitwise_on_bool": {
    "outcome": "TRAPPED",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "Reflection warning, main.clj:5:18 - call to static method and on clojure.lang.Numbers can't be resolved (argument types: boolean, boolean).",
    "warnings": "Reflection warning, main.clj:5:18 - call to static method and on clojure.lang.Numbers can't be resolved (argument types: boolean, boolean).",
    "exit": 1,
-   "rss_mb": 112.6,
-   "secs": 0.34,
+   "rss_mb": 107.3,
+   "secs": 0.3,
    "stdout": "",
-   "stderr": "Execution error (StringIndexOutOfBoundsException) at jdk.internal.util.Preconditions$1/apply (Preconditions.java:55).\nIndex 0 out of bounds for length 0\n\nFull report at:\n/tmp/clojure-9705116121220178878.edn"
+   "stderr": "Execution error (StringIndexOutOfBoundsException) at jdk.internal.util.Preconditions$1/apply (Preconditions.java:55).\nIndex 0 out of bounds for length 0\n\nFull report at:\n/tmp/clojure-11180375559879150073.edn"
   },
   "readonly_field": {
    "outcome": "TRAPPED",

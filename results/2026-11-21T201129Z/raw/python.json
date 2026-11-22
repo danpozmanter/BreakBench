@@ -355,10 +355,11 @@
   "return_in_finally": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": true,
    "all_warnings": "main.py:14: SyntaxWarning: 'return' in a 'finally' block\n/tmp/breakbench/return_in_finally/main/main.py:14: SyntaxWarning: 'return' in a 'finally' block",
    "warnings": "main.py:14: SyntaxWarning: 'return' in a 'finally' block\n/tmp/breakbench/return_in_finally/main/main.py:14: SyntaxWarning: 'return' in a 'finally' block",
    "exit": 0,
-   "rss_mb": 17.7,
+   "rss_mb": 18.4,
    "secs": 0.01,
    "stdout": "saved",
    "stderr": "/tmp/breakbench/return_in_finally/main/main.py:14: SyntaxWarning: 'return' in a 'finally' block\n  return  # BREAK!"
@@ -383,12 +384,13 @@
   },
   "unawaited_task": {
    "outcome": "SILENT",
-   "warned": true,
+   "warned": false,
+   "run_warned": true,
    "all_warnings": "/tmp/breakbench/unawaited_task/main/main.py:11: RuntimeWarning: coroutine 'save' was never awaited\nRuntimeWarning: Enable tracemalloc to get the object allocation traceback",
    "warnings": "/tmp/breakbench/unawaited_task/main/main.py:11: RuntimeWarning: coroutine 'save' was never awaited",
    "exit": 0,
-   "rss_mb": 29.2,
-   "secs": 0.15,
+   "rss_mb": 28.8,
+   "secs": 0.19,
    "stdout": "0",
    "stderr": "/tmp/breakbench/unawaited_task/main/main.py:11: RuntimeWarning: coroutine 'save' was never awaited\nCoroutine created at (most recent call last)\n  File \"/tmp/breakbench/unawaited_task/main/main.py\", line 15, in <module>\n    asyncio.run(main())\n  File \"/usr/local/lib/python3.15/asyncio/runners.py\", line 205, in run\n    return runner.run(main)\n  File \"/usr/local/lib/python3.15/asyncio/runners.py\", line 128, in run\n    return self._loop.run_until_complete(task)\n  File \"/usr/local/lib/python3.15/asyncio/base_events.py\", line 711, in run_until_complete\n    self.run_forever()\n  File \"/usr/local/lib/python3.15/asyncio/base_events.py\", line 682, in run_forever\n    self._run_once()\n  File \"/usr/local/lib/python3.15/asyncio/base_events.py\", line 2065, in _run_once\n    handle._run()\n  File \"/usr/local/lib/python3.15/asyncio/events.py\", line 94, in _run\n    self._context.run(self._callback, *self._args)\n  File \"/tmp/breakbench/unawaited_task/main/main.py\", line 11, in main\n    save(store)  # CONTROL! await save(store)\n  save(store)  # CONTROL! await save(store)\nRuntimeWarning: Enable tracemalloc to get the object allocation traceback"
   },

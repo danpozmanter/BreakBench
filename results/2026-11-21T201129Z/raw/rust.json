@@ -295,10 +295,11 @@
   "unawaited_task": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "warning: unused variable: `task` --> main.rs:9:9 |         ^^^^ help: if this is intentional, prefix it with an underscore: `_task`\n= note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\nwarning: 1 warning emitted",
    "warnings": "warning: unused variable: `task` --> main.rs:9:9 |         ^^^^ help: if this is intentional, prefix it with an underscore: `_task`\n= note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default",
    "exit": 0,
-   "rss_mb": 14.8,
+   "rss_mb": 13.7,
    "secs": 0.0,
    "stdout": "0",
    "stderr": ""
@@ -332,10 +333,11 @@
   "shadowed_assignment": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "warning: variable does not need to be mutable --> main.rs:3:9 |         help: remove this `mut`\n= note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default\nwarning: 1 warning emitted",
    "warnings": "warning: variable does not need to be mutable --> main.rs:3:9 |         help: remove this `mut`",
    "exit": 0,
-   "rss_mb": 14.8,
+   "rss_mb": 13.7,
    "secs": 0.0,
    "stdout": "pending",
    "stderr": "status: done"
@@ -375,10 +377,11 @@
   "dead_store": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "warning: unused variable: `total` --> main.rs:3:9 |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_total`\n= note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\nwarning: 1 warning emitted",
    "warnings": "warning: unused variable: `total` --> main.rs:3:9 |         ^^^^^ help: if this is intentional, prefix it with an underscore: `_total`\n= note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default",
    "exit": 0,
-   "rss_mb": 14.8,
+   "rss_mb": 13.7,
    "secs": 0.0,
    "stdout": "40",
    "stderr": ""
@@ -599,10 +602,11 @@
   "unreachable_code": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "warning: unreachable statement --> main.rs:4:5 |     ------ any code following this expression is unreachable\n= note: `#[warn(unreachable_code)]` (part of `#[warn(unused)]`) on by default\nwarning: 1 warning emitted",
    "warnings": "warning: unreachable statement --> main.rs:4:5 |     ------ any code following this expression is unreachable\n= note: `#[warn(unreachable_code)]` (part of `#[warn(unused)]`) on by default",
    "exit": 0,
-   "rss_mb": 14.8,
+   "rss_mb": 13.7,
    "secs": 0.0,
    "stdout": "ok",
    "stderr": ""
@@ -627,10 +631,11 @@
   "dominated_case": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "warning: unreachable pattern --> main.rs:9:9 |         - matches any value\n= note: `#[warn(unreachable_patterns)]` (part of `#[warn(unused)]`) on by default\nwarning: 1 warning emitted",
    "warnings": "warning: unreachable pattern --> main.rs:9:9 |         - matches any value\n= note: `#[warn(unreachable_patterns)]` (part of `#[warn(unused)]`) on by default",
    "exit": 0,
-   "rss_mb": 14.8,
+   "rss_mb": 13.7,
    "secs": 0.0,
    "stdout": "other",
    "stderr": ""

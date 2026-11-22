@@ -77,11 +77,12 @@
   "non_exhaustive_match": {
    "outcome": "TRAPPED",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "/tmp/breakbench/non_exhaustive_match/main/Program.fs(7,11): warning FS0025: Incomplete pattern matches on this expression. For example, the value 'Blue' may indicate a case not covered by the pattern(s). [/tmp/breakbench/non_exhaustive_match/main/bb.fsproj] bb -> /tmp/breakbench/non_exhaustive_match/main/out/bb.dll\n/tmp/breakbench/non_exhaustive_match/main/Program.fs(7,11): warning FS0025: Incomplete pattern matches on this expression. For example, the value 'Blue' may indicate a case not covered by the pattern(s). [/tmp/breakbench/non_exhaustive_match/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
    "warnings": "/tmp/breakbench/non_exhaustive_match/main/Program.fs(7,11): warning FS0025: Incomplete pattern matches on this expression. For example, the value 'Blue' may indicate a case not covered by the pattern(s). [/tmp/breakbench/non_exhaustive_match/main/bb.fsproj] bb -> /tmp/breakbench/non_exhaustive_match/main/out/bb.dll\n/tmp/breakbench/non_exhaustive_match/main/Program.fs(7,11): warning FS0025: Incomplete pattern matches on this expression. For example, the value 'Blue' may indicate a case not covered by the pattern(s). [/tmp/breakbench/non_exhaustive_match/main/bb.fsproj]",
    "exit": 134,
    "rss_mb": 36.8,
-   "secs": 0.16,
+   "secs": 0.17,
    "stdout": "",
    "stderr": "Unhandled exception. Microsoft.FSharp.Core.MatchFailureException: The match cases were incomplete\n   at Program.name(Color c) in /tmp/breakbench/non_exhaustive_match/main/Program.fs:line 9\n   at Program.main(String[] argv) in /tmp/breakbench/non_exhaustive_match/main/Program.fs:line 14\nAborted (core dumped)"
   },
@@ -375,11 +376,12 @@
   "format_arg_mismatch": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "/tmp/breakbench/format_arg_mismatch/main/Program.fs(6,5): warning FS0193: This expression is a function value, i.e. is missing arguments. Its type is 'a -> unit. [/tmp/breakbench/format_arg_mismatch/main/bb.fsproj] bb -> /tmp/breakbench/format_arg_mismatch/main/out/bb.dll\n/tmp/breakbench/format_arg_mismatch/main/Program.fs(6,5): warning FS0193: This expression is a function value, i.e. is missing arguments. Its type is 'a -> unit. [/tmp/breakbench/format_arg_mismatch/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
    "warnings": "/tmp/breakbench/format_arg_mismatch/main/Program.fs(6,5): warning FS0193: This expression is a function value, i.e. is missing arguments. Its type is 'a -> unit. [/tmp/breakbench/format_arg_mismatch/main/bb.fsproj] bb -> /tmp/breakbench/format_arg_mismatch/main/out/bb.dll\n/tmp/breakbench/format_arg_mismatch/main/Program.fs(6,5): warning FS0193: This expression is a function value, i.e. is missing arguments. Its type is 'a -> unit. [/tmp/breakbench/format_arg_mismatch/main/bb.fsproj]",
    "exit": 0,
-   "rss_mb": 30.9,
-   "secs": 0.03,
+   "rss_mb": 30.1,
+   "secs": 0.02,
    "stdout": "",
    "stderr": ""
   },
@@ -637,11 +639,12 @@
   "wrong_variant_access": {
    "outcome": "TRAPPED",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "/tmp/breakbench/wrong_variant_access/main/Program.fs(8,9): warning FS0025: Incomplete pattern matches on this expression. For example, the value 'IntValue (_)' may indicate a case not covered by the pattern(s). [/tmp/breakbench/wrong_variant_access/main/bb.fsproj] bb -> /tmp/breakbench/wrong_variant_access/main/out/bb.dll\n/tmp/breakbench/wrong_variant_access/main/Program.fs(8,9): warning FS0025: Incomplete pattern matches on this expression. For example, the value 'IntValue (_)' may indicate a case not covered by the pattern(s). [/tmp/breakbench/wrong_variant_access/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
    "warnings": "/tmp/breakbench/wrong_variant_access/main/Program.fs(8,9): warning FS0025: Incomplete pattern matches on this expression. For example, the value 'IntValue (_)' may indicate a case not covered by the pattern(s). [/tmp/breakbench/wrong_variant_access/main/bb.fsproj] bb -> /tmp/breakbench/wrong_variant_access/main/out/bb.dll\n/tmp/breakbench/wrong_variant_access/main/Program.fs(8,9): warning FS0025: Incomplete pattern matches on this expression. For example, the value 'IntValue (_)' may indicate a case not covered by the pattern(s). [/tmp/breakbench/wrong_variant_access/main/bb.fsproj]",
    "exit": 134,
-   "rss_mb": 35.6,
-   "secs": 0.16,
+   "rss_mb": 35.0,
+   "secs": 0.15,
    "stdout": "",
    "stderr": "Unhandled exception. Microsoft.FSharp.Core.MatchFailureException: The match cases were incomplete\n   at Program.main(String[] argv) in /tmp/breakbench/wrong_variant_access/main/Program.fs:line 10\nAborted (core dumped)"
   },
@@ -791,10 +794,11 @@
   "dominated_case": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "/tmp/breakbench/dominated_case/main/Program.fs(8,7): warning FS0026: This rule will never be matched [/tmp/breakbench/dominated_case/main/bb.fsproj] bb -> /tmp/breakbench/dominated_case/main/out/bb.dll\n/tmp/breakbench/dominated_case/main/Program.fs(8,7): warning FS0026: This rule will never be matched [/tmp/breakbench/dominated_case/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
    "warnings": "/tmp/breakbench/dominated_case/main/Program.fs(8,7): warning FS0026: This rule will never be matched [/tmp/breakbench/dominated_case/main/bb.fsproj] bb -> /tmp/breakbench/dominated_case/main/out/bb.dll\n/tmp/breakbench/dominated_case/main/Program.fs(8,7): warning FS0026: This rule will never be matched [/tmp/breakbench/dominated_case/main/bb.fsproj]",
    "exit": 0,
-   "rss_mb": 25.5,
+   "rss_mb": 25.9,
    "secs": 0.02,
    "stdout": "other",
    "stderr": ""
@@ -831,11 +835,12 @@
   "hash_matches_equality": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "/tmp/breakbench/hash_matches_equality/main/Program.fs(2,6): warning FS0346: The struct, record or union type 'Point' has an explicit implementation of 'Object.Equals'. Consider implementing a matching override for 'Object.GetHashCode()' [/tmp/breakbench/hash_matches_equality/main/bb.fsproj] bb -> /tmp/breakbench/hash_matches_equality/main/out/bb.dll\n/tmp/breakbench/hash_matches_equality/main/Program.fs(2,6): warning FS0346: The struct, record or union type 'Point' has an explicit implementation of 'Object.Equals'. Consider implementing a matching override for 'Object.GetHashCode()' [/tmp/breakbench/hash_matches_equality/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
    "warnings": "/tmp/breakbench/hash_matches_equality/main/Program.fs(2,6): warning FS0346: The struct, record or union type 'Point' has an explicit implementation of 'Object.Equals'. Consider implementing a matching override for 'Object.GetHashCode()' [/tmp/breakbench/hash_matches_equality/main/bb.fsproj] bb -> /tmp/breakbench/hash_matches_equality/main/out/bb.dll\n/tmp/breakbench/hash_matches_equality/main/Program.fs(2,6): warning FS0346: The struct, record or union type 'Point' has an explicit implementation of 'Object.Equals'. Consider implementing a matching override for 'Object.GetHashCode()' [/tmp/breakbench/hash_matches_equality/main/bb.fsproj]",
    "exit": 0,
-   "rss_mb": 31.1,
-   "secs": 0.03,
+   "rss_mb": 30.9,
+   "secs": 0.02,
    "stdout": "2",
    "stderr": ""
   },

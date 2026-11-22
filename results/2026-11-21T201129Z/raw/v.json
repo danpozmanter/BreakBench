@@ -327,6 +327,7 @@
   "unawaited_task": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.v:17:2: warning: unused variable: `task`",
    "warnings": "main.v:17:2: warning: unused variable: `task`",
    "exit": 0,
@@ -419,10 +420,11 @@
   "dead_store": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.v:5:2: warning: unused variable: `total`",
    "warnings": "main.v:5:2: warning: unused variable: `total`",
    "exit": 0,
-   "rss_mb": 14.8,
+   "rss_mb": 15.0,
    "secs": 0.0,
    "stdout": "40",
    "stderr": ""

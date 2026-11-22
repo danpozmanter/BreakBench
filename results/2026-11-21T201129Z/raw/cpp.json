@@ -61,10 +61,11 @@
   "signed_unsigned_compare": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.cpp:8:11: warning: comparison of integers of different signs: 'long' and 'size_type' (aka 'unsigned long') [-Wsign-compare]\n1 warning generated.",
    "warnings": "main.cpp:8:11: warning: comparison of integers of different signs: 'long' and 'size_type' (aka 'unsigned long') [-Wsign-compare]",
    "exit": 0,
-   "rss_mb": 14.3,
+   "rss_mb": 14.1,
    "secs": 0.0,
    "stdout": "not less",
    "stderr": ""
@@ -80,10 +81,11 @@
   "non_exhaustive_match": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.cpp:8:5: warning: 'switch' missing 'default' label [-Wswitch-default]\nmain.cpp:8:13: warning: enumeration value 'Blue' not handled in switch [-Wswitch]\n2 warnings generated.",
    "warnings": "main.cpp:8:13: warning: enumeration value 'Blue' not handled in switch [-Wswitch]",
    "exit": 0,
-   "rss_mb": 14.3,
+   "rss_mb": 14.1,
    "secs": 0.0,
    "stdout": "",
    "stderr": ""
@@ -91,12 +93,13 @@
   "uninitialized_variable": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.cpp:7:9: warning: variable 'x' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]\nmain.cpp:6:10: note: initialize the variable 'x' to silence this warning |           = 0\n1 warning generated.",
    "warnings": "main.cpp:7:9: warning: variable 'x' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]",
    "exit": 0,
-   "rss_mb": 14.3,
+   "rss_mb": 14.1,
    "secs": 0.0,
-   "stdout": "-1159148976",
+   "stdout": "-471670304",
    "stderr": ""
   },
   "missing_argument": {
@@ -110,10 +113,11 @@
   "assign_in_condition": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.cpp:6:11: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]\nmain.cpp:6:11: note: place parentheses around the assignment to silence this warning |         (    )\n1 warning generated.",
    "warnings": "main.cpp:6:11: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]",
    "exit": 0,
-   "rss_mb": 14.3,
+   "rss_mb": 14.1,
    "secs": 0.0,
    "stdout": "one",
    "stderr": ""
@@ -121,10 +125,11 @@
   "switch_fallthrough": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.cpp:10:5: warning: unannotated fall-through between switch labels [-Wimplicit-fallthrough]\nmain.cpp:10:5: note: insert '[[fallthrough]];' to silence this warning |     [[fallthrough]];\n1 warning generated.",
    "warnings": "main.cpp:10:5: warning: unannotated fall-through between switch labels [-Wimplicit-fallthrough]\nmain.cpp:10:5: note: insert '[[fallthrough]];' to silence this warning |     [[fallthrough]];",
    "exit": 0,
-   "rss_mb": 14.3,
+   "rss_mb": 14.1,
    "secs": 0.0,
    "stdout": "two",
    "stderr": ""
@@ -163,10 +168,11 @@
   "mutate_while_iterating": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.cpp:7:18: warning: local variable 'xs' is later invalidated [-Wlifetime-safety-invalidation]\n1 warning generated.",
    "warnings": "main.cpp:7:18: warning: local variable 'xs' is later invalidated [-Wlifetime-safety-invalidation]",
    "exit": 0,
-   "rss_mb": 14.3,
+   "rss_mb": 14.1,
    "secs": 0.0,
    "stdout": "1,2,3",
    "stderr": ""
@@ -257,10 +263,11 @@
   "bitwise_precedence": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.cpp:6:19: warning: & has lower precedence than ==; == will be evaluated first [-Wparentheses]\nmain.cpp:6:19: note: place parentheses around the '==' expression to silence this warning |                     (     )\n1 warning generated.",
    "warnings": "main.cpp:6:19: warning: & has lower precedence than ==; == will be evaluated first [-Wparentheses]\nmain.cpp:6:19: note: place parentheses around the '==' expression to silence this warning |                     (     )",
    "exit": 0,
-   "rss_mb": 14.3,
+   "rss_mb": 14.1,
    "secs": 0.0,
    "stdout": "odd",
    "stderr": ""
@@ -268,10 +275,11 @@
   "dangling_else": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.cpp:10:5: warning: add explicit braces to avoid dangling else [-Wdangling-else]\n1 warning generated.",
    "warnings": "main.cpp:10:5: warning: add explicit braces to avoid dangling else [-Wdangling-else]",
    "exit": 0,
-   "rss_mb": 14.3,
+   "rss_mb": 14.1,
    "secs": 0.0,
    "stdout": "unset",
    "stderr": ""
@@ -301,10 +309,11 @@
   "float_equality": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.cpp:9:21: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]\n1 warning generated.",
    "warnings": "main.cpp:9:21: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]",
    "exit": 0,
-   "rss_mb": 14.3,
+   "rss_mb": 14.1,
    "secs": 0.0,
    "stdout": "not equal",
    "stderr": ""
@@ -398,10 +407,11 @@
   "unsigned_subtraction": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.cpp:9:17: warning: result of comparison of unsigned expression < 0 is always false [-Wtautological-unsigned-zero-compare]\n1 warning generated.",
    "warnings": "main.cpp:9:17: warning: result of comparison of unsigned expression < 0 is always false [-Wtautological-unsigned-zero-compare]",
    "exit": 0,
-   "rss_mb": 14.3,
+   "rss_mb": 14.1,
    "secs": 0.0,
    "stdout": "18446744073709551614",
    "stderr": ""
@@ -422,10 +432,11 @@
   "shadowed_assignment": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.cpp:7:21: warning: declaration shadows a local variable [-Wshadow]\n1 warning generated.",
    "warnings": "main.cpp:7:21: warning: declaration shadows a local variable [-Wshadow]",
    "exit": 0,
-   "rss_mb": 14.3,
+   "rss_mb": 14.1,
    "secs": 0.0,
    "stdout": "pending",
    "stderr": "status: done"
@@ -475,10 +486,11 @@
   "dead_store": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.cpp:7:10: warning: unused variable 'total' [-Wunused-variable]\n1 warning generated.",
    "warnings": "main.cpp:7:10: warning: unused variable 'total' [-Wunused-variable]",
    "exit": 0,
-   "rss_mb": 14.3,
+   "rss_mb": 14.1,
    "secs": 0.0,
    "stdout": "40",
    "stderr": ""
@@ -524,13 +536,14 @@
   "use_after_free": {
    "outcome": "TRAPPED",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.cpp:8:14: warning: local variable 'a' is later invalidated [-Wlifetime-safety-invalidation]\n1 warning generated.",
    "warnings": "main.cpp:8:14: warning: local variable 'a' is later invalidated [-Wlifetime-safety-invalidation]",
    "exit": 1,
-   "rss_mb": 14.3,
+   "rss_mb": 14.1,
    "secs": 0.02,
    "stdout": "",
-   "stderr": "=================================================================\n==1465==ERROR: AddressSanitizer: heap-use-after-free on address 0x78020d1e0040 at pc 0x59359ef6cbd2 bp 0x7fffc3ec5790 sp 0x7fffc3ec5788\nREAD of size 8 at 0x78020d1e0040 thread T0\n    #0 0x59359ef6cbd1 in main /tmp/breakbench/use_after_free/main/main.cpp:11:21\n    #1 0x7bd20df2a600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #2 0x7bd20df2a717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #3 0x59359ee7b034 in _start (/tmp/breakbench/use_after_free/main/main+0x6f034)\n\n0x78020d1e0040 is located 0 bytes inside of 32-byte region [0x78020d1e0040,0x7\n...\na fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x78020d1e0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==1465==ABORTING"
+   "stderr": "=================================================================\n==321==ERROR: AddressSanitizer: heap-use-after-free on address 0x6c7b77fe0040 at pc 0x639d3e472bd2 bp 0x7ffe70dae250 sp 0x7ffe70dae248\nREAD of size 8 at 0x6c7b77fe0040 thread T0\n    #0 0x639d3e472bd1 in main /tmp/breakbench/use_after_free/main/main.cpp:11:21\n    #1 0x704b78c9b600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #2 0x704b78c9b717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #3 0x639d3e381034 in _start (/tmp/breakbench/use_after_free/main/main+0x6f034)\n\n0x6c7b77fe0040 is located 0 bytes inside of 32-byte region [0x6c7b77fe0040,0x6c\n...\nfa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x6c7b77fe0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==321==ABORTING"
   },
   "double_free": {
    "outcome": "TRAPPED",
@@ -644,13 +657,14 @@
   "format_string": {
    "outcome": "CRASH",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.cpp:4:17: warning: format string is not a string literal (potentially insecure) [-Wformat-security]\n1 warning generated.",
    "warnings": "main.cpp:4:17: warning: format string is not a string literal (potentially insecure) [-Wformat-security]",
    "exit": 1,
-   "rss_mb": 14.5,
+   "rss_mb": 14.1,
    "secs": 0.02,
    "stdout": "",
-   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==1900==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000001 (pc 0x764e49caf8f2 bp 0x7fff613735d0 sp 0x7fff613730b0 T0)\n==1900==The signal is caused by a WRITE memory access.\n==1900==HINT: address points to the zero page.\n    #0 0x764e49caf8f2  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x6f8f2) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #1 0x764e49cb0767  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x70767) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #2 0x574a4ad45f5f in printf /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/../sanitizer_common/sanitizer_common_interceptors.inc:1851:1\n    #3 0x574a4ae0bb86\n...\n27f8d0a68e29d750303f0c6)\n    #6 0x574a4ad1a174 in _start (/tmp/breakbench/format_string/main/main+0x6d174)\n\n==1900==Register values:\nrax = 0x000000000000000b  rbx = 0x00007fff61373610  rcx = 0x0000000000000000  rdx = 0x000000000000000b  \nrdi = 0x0000000000000000  rsi = 0x0000764e49e14360  rbp = 0x00007fff613735d0  rsp = 0x00007fff613730b0  \n r8 = 0x0000000000000000   r9 = 0x0000000000000000  r10 = 0x00000000ffffffff  r11 = 0x0000000000000000  \nr12 = 0x0000000000000000  r13 = 0x0000000000000000  r14 = 0x0000000000000001  r15 = 0x00007fff61374ed9  \nAddressSanitizer can not provide additional info.\nSUMMARY: AddressSanitizer: SEGV (/usr/lib/x86_64-linux-gnu/libc.so.6+0x6f8f2) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6) \n==1900==ABORTING"
+   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==346==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000001 (pc 0x7ded802fd8f2 bp 0x7ffc932d85d0 sp 0x7ffc932d80b0 T0)\n==346==The signal is caused by a WRITE memory access.\n==346==HINT: address points to the zero page.\n    #0 0x7ded802fd8f2  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x6f8f2) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #1 0x7ded802fe767  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x70767) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #2 0x63e75ba20f5f in printf /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/../sanitizer_common/sanitizer_common_interceptors.inc:1851:1\n    #3 0x63e75bae6b86 in\n...\n0a27f8d0a68e29d750303f0c6)\n    #6 0x63e75b9f5174 in _start (/tmp/breakbench/format_string/main/main+0x6d174)\n\n==346==Register values:\nrax = 0x000000000000000b  rbx = 0x00007ffc932d8610  rcx = 0x0000000000000000  rdx = 0x000000000000000b  \nrdi = 0x0000000000000000  rsi = 0x00007ded80462360  rbp = 0x00007ffc932d85d0  rsp = 0x00007ffc932d80b0  \n r8 = 0x0000000000000000   r9 = 0x0000000000000000  r10 = 0x00000000ffffffff  r11 = 0x0000000000000000  \nr12 = 0x0000000000000000  r13 = 0x0000000000000000  r14 = 0x0000000000000001  r15 = 0x00007ffc932d9ed9  \nAddressSanitizer can not provide additional info.\nSUMMARY: AddressSanitizer: SEGV (/usr/lib/x86_64-linux-gnu/libc.so.6+0x6f8f2) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6) \n==346==ABORTING"
   },
   "deep_structure_release": {
    "outcome": "TRAPPED",
@@ -682,10 +696,11 @@
   "complete_init": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.cpp:6:14: warning: designated initializers are incompatible with C++ standards before C++20 [-Wpre-c++20-compat-pedantic]\nmain.cpp:6:27: warning: missing field 'retries' initializer [-Wmissing-designated-field-initializers]\n2 warnings generated.",
    "warnings": "main.cpp:6:27: warning: missing field 'retries' initializer [-Wmissing-designated-field-initializers]",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.1,
    "secs": 0.0,
    "stdout": "0",
    "stderr": ""
@@ -731,10 +746,11 @@
   "no_implicit_conversion": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.cpp:9:10: warning: implicit conversion loses integer precision: 'std::int64_t' (aka 'long') to 'std::int32_t' (aka 'int') [-Wshorten-64-to-32]\n1 warning generated.",
    "warnings": "main.cpp:9:10: warning: implicit conversion loses integer precision: 'std::int64_t' (aka 'long') to 'std::int32_t' (aka 'int') [-Wshorten-64-to-32]",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.1,
    "secs": 0.0,
    "stdout": "-1294967296",
    "stderr": ""
@@ -746,10 +762,11 @@
   "lossy_int_to_float": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.cpp:9:10: warning: implicit conversion from 'std::int64_t' (aka 'long') to 'double' may lose precision [-Wimplicit-int-float-conversion]\n1 warning generated.",
    "warnings": "main.cpp:9:10: warning: implicit conversion from 'std::int64_t' (aka 'long') to 'double' may lose precision [-Wimplicit-int-float-conversion]",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.1,
    "secs": 0.0,
    "stdout": "9007199254740992",
    "stderr": ""
@@ -780,10 +797,11 @@
   "unreachable_code": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.cpp:6:5: warning: code will never be executed [-Wunreachable-code]\n1 warning generated.",
    "warnings": "main.cpp:6:5: warning: code will never be executed [-Wunreachable-code]",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.1,
    "secs": 0.0,
    "stdout": "ok",
    "stderr": ""
@@ -835,10 +853,11 @@
   "comparison_statement": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.cpp:5:11: warning: equality comparison result unused [-Wunused-comparison]\n1 warning generated.",
    "warnings": "main.cpp:5:11: warning: equality comparison result unused [-Wunused-comparison]",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.1,
    "secs": 0.0,
    "stdout": "0",
    "stderr": ""

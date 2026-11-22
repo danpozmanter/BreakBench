@@ -576,12 +576,13 @@
   },
   "stack_overflow": {
    "outcome": "TRAPPED",
-   "warned": true,
+   "warned": false,
+   "run_warned": true,
    "all_warnings": "Warning: detected a stack overflow; program state may be corrupted, so further execution might be unreliable.",
    "warnings": "Warning: detected a stack overflow; program state may be corrupted, so further execution might be unreliable.",
    "exit": 1,
-   "rss_mb": 286.1,
-   "secs": 0.92,
+   "rss_mb": 281.8,
+   "secs": 0.97,
    "stdout": "",
    "stderr": "Warning: detected a stack overflow; program state may be corrupted, so further execution might be unreliable.\nERROR: LoadError: StackOverflowError:\nStacktrace:\n \u250c    [1] walk(n::Int64)\n \u2502      @ Main /tmp/breakbench/stack_overflow/main/main.jl:3\n \u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500 repeated 79984 times\nin expression starting at /tmp/breakbench/stack_overflow/main/main.jl:6"
   },

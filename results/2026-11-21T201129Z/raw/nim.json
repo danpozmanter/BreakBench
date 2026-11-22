@@ -319,10 +319,11 @@
   "return_line_break": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "/tmp/breakbench/return_line_break/main/main.nim(3, 5) Warning: unreachable code after 'return' statement or '{.noReturn.}' proc [UnreachableCode]",
    "warnings": "/tmp/breakbench/return_line_break/main/main.nim(3, 5) Warning: unreachable code after 'return' statement or '{.noReturn.}' proc [UnreachableCode]",
    "exit": 0,
-   "rss_mb": 14.2,
+   "rss_mb": 14.3,
    "secs": 0.0,
    "stdout": "0",
    "stderr": ""
@@ -684,10 +685,11 @@
   "unreachable_code": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "/tmp/breakbench/unreachable_code/main/main.nim(4, 3) Warning: unreachable code after 'return' statement or '{.noReturn.}' proc [UnreachableCode]",
    "warnings": "/tmp/breakbench/unreachable_code/main/main.nim(4, 3) Warning: unreachable code after 'return' statement or '{.noReturn.}' proc [UnreachableCode]",
    "exit": 0,
-   "rss_mb": 14.4,
+   "rss_mb": 14.3,
    "secs": 0.0,
    "stdout": "ok",
    "stderr": ""

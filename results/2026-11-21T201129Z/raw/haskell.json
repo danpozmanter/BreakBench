@@ -73,10 +73,11 @@
   "missing_return": {
    "outcome": "TRAPPED",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.hs:4:1: warning: [GHC-62161] [-Wincomplete-patterns] Pattern match(es) are non-exhaustive In an equation for \u2018grade\u2019: Patterns of type \u2018Int\u2019 not matched: _\nmain.hs:11:26: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
    "warnings": "main.hs:4:1: warning: [GHC-62161] [-Wincomplete-patterns] Pattern match(es) are non-exhaustive In an equation for \u2018grade\u2019: Patterns of type \u2018Int\u2019 not matched: _",
    "exit": 1,
-   "rss_mb": 11.8,
+   "rss_mb": 11.3,
    "secs": 0.0,
    "stdout": "",
    "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Control.Exception.Base.PatternMatchFail:\n\nmain.hs:(4,1)-(6,23): Non-exhaustive patterns in function grade\n\n\nHasCallStack backtrace:\n  collectExceptionAnnotation, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:170:37 in ghc-internal:GHC.Internal.Exception\n  toExceptionWithBacktrace, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:90:42 in ghc-internal:GHC.Internal.Exception\n  throw, called at libraries/ghc-internal/src/GHC/Internal/Control/Exception/Base.hs:434:30 in ghc-internal:GHC.Internal.Control.Exception.Base"
@@ -84,10 +85,11 @@
   "non_exhaustive_match": {
    "outcome": "TRAPPED",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.hs:6:10: warning: [GHC-62161] [-Wincomplete-patterns] Pattern match(es) are non-exhaustive In a case alternative: Patterns of type \u2018Color\u2019 not matched: Blue\nmain.hs:13:47: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
    "warnings": "main.hs:6:10: warning: [GHC-62161] [-Wincomplete-patterns] Pattern match(es) are non-exhaustive In a case alternative: Patterns of type \u2018Color\u2019 not matched: Blue",
    "exit": 1,
-   "rss_mb": 11.8,
+   "rss_mb": 11.3,
    "secs": 0.0,
    "stdout": "",
    "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Control.Exception.Base.PatternMatchFail:\n\nmain.hs:(6,10)-(8,18): Non-exhaustive patterns in case\n\n\nHasCallStack backtrace:\n  collectExceptionAnnotation, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:170:37 in ghc-internal:GHC.Internal.Exception\n  toExceptionWithBacktrace, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:90:42 in ghc-internal:GHC.Internal.Exception\n  throw, called at libraries/ghc-internal/src/GHC/Internal/Control/Exception/Base.hs:434:30 in ghc-internal:GHC.Internal.Control.Exception.Base"
@@ -393,10 +395,11 @@
   "shadowed_assignment": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.hs:10:9: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):\nmain.hs:11:9: warning: [GHC-63397] [-Wname-shadowing] This binding for \u2018status\u2019 shadows the existing binding bound at main.hs:9:3",
    "warnings": "main.hs:11:9: warning: [GHC-63397] [-Wname-shadowing] This binding for \u2018status\u2019 shadows the existing binding bound at main.hs:9:3",
    "exit": 0,
-   "rss_mb": 11.8,
+   "rss_mb": 11.3,
    "secs": 0.0,
    "stdout": "pending",
    "stderr": "status: done"
@@ -441,10 +444,11 @@
   "dead_store": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.hs:6:21: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):\nmain.hs:7:7: warning: [GHC-40910] [-Wunused-local-binds] Defined but not used: \u2018total\u2019",
    "warnings": "main.hs:7:7: warning: [GHC-40910] [-Wunused-local-binds] Defined but not used: \u2018total\u2019",
    "exit": 0,
-   "rss_mb": 11.8,
+   "rss_mb": 11.3,
    "secs": 0.0,
    "stdout": "40",
    "stderr": ""
@@ -695,10 +699,11 @@
   "literal_range": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.hs:4:15: warning: [GHC-97441] [-Woverflowed-literals] Literal 300 is out of the Word8 range 0..255",
    "warnings": "main.hs:4:15: warning: [GHC-97441] [-Woverflowed-literals] Literal 300 is out of the Word8 range 0..255",
    "exit": 0,
-   "rss_mb": 11.8,
+   "rss_mb": 11.3,
    "secs": 0.0,
    "stdout": "44",
    "stderr": ""
@@ -777,10 +782,11 @@
   "dominated_case": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.hs:6:3: warning: [GHC-53633] [-Woverlapping-patterns] Pattern match is redundant In a case alternative: Circle -> ...",
    "warnings": "main.hs:6:3: warning: [GHC-53633] [-Woverlapping-patterns] Pattern match is redundant In a case alternative: Circle -> ...",
    "exit": 0,
-   "rss_mb": 11.8,
+   "rss_mb": 11.3,
    "secs": 0.0,
    "stdout": "other",
    "stderr": ""

@@ -59,10 +59,11 @@
   "signed_unsigned_compare": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:9:11: warning: comparison of integers of different signs: 'long' and 'size_t' (aka 'unsigned long') [-Wsign-compare]\n1 warning generated.",
    "warnings": "main.c:9:11: warning: comparison of integers of different signs: 'long' and 'size_t' (aka 'unsigned long') [-Wsign-compare]",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "not less",
    "stderr": ""
@@ -78,10 +79,11 @@
   "non_exhaustive_match": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:8:5: warning: 'switch' missing 'default' label [-Wswitch-default]\nmain.c:8:13: warning: enumeration value 'BLUE' not handled in switch [-Wswitch]\nmain.c:17:32: warning: cast from function call of type 'int' to non-matching type 'enum Color' [-Wbad-function-cast]\n3 warnings generated.",
    "warnings": "main.c:8:13: warning: enumeration value 'BLUE' not handled in switch [-Wswitch]",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "(null)",
    "stderr": ""
@@ -89,12 +91,13 @@
   "uninitialized_variable": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:8:9: warning: variable 'x' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]\nmain.c:7:10: note: initialize the variable 'x' to silence this warning |           = 0\n1 warning generated.",
    "warnings": "main.c:8:9: warning: variable 'x' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.0,
-   "stdout": "2094923825",
+   "stdout": "-1426194383",
    "stderr": ""
   },
   "missing_argument": {
@@ -108,10 +111,11 @@
   "assign_in_condition": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:7:11: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]\nmain.c:7:11: note: place parentheses around the assignment to silence this warning |         (    )\n1 warning generated.",
    "warnings": "main.c:7:11: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "one",
    "stderr": ""
@@ -119,10 +123,11 @@
   "switch_fallthrough": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:11:5: warning: unannotated fall-through between switch labels [-Wimplicit-fallthrough]\nmain.c:11:5: note: insert '[[fallthrough]];' to silence this warning |     [[fallthrough]];\n1 warning generated.",
    "warnings": "main.c:11:5: warning: unannotated fall-through between switch labels [-Wimplicit-fallthrough]\nmain.c:11:5: note: insert '[[fallthrough]];' to silence this warning |     [[fallthrough]];",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "two",
    "stderr": ""
@@ -255,10 +260,11 @@
   "bitwise_precedence": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:7:18: warning: & has lower precedence than ==; == will be evaluated first [-Wparentheses]\nmain.c:7:18: note: place parentheses around the '==' expression to silence this warning |                    (     )\n1 warning generated.",
    "warnings": "main.c:7:18: warning: & has lower precedence than ==; == will be evaluated first [-Wparentheses]\nmain.c:7:18: note: place parentheses around the '==' expression to silence this warning |                    (     )",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "odd",
    "stderr": ""
@@ -266,10 +272,11 @@
   "dangling_else": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:11:5: warning: add explicit braces to avoid dangling else [-Wdangling-else]\n1 warning generated.",
    "warnings": "main.c:11:5: warning: add explicit braces to avoid dangling else [-Wdangling-else]",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "unset",
    "stderr": ""
@@ -299,10 +306,11 @@
   "float_equality": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:9:12: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]\n1 warning generated.",
    "warnings": "main.c:9:12: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "not equal",
    "stderr": ""
@@ -392,21 +400,23 @@
   "format_arg_mismatch": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:6:20: warning: more '%' conversions than data arguments [-Wformat-insufficient-args]\nmain.c:5:9: warning: unused variable 'total' [-Wunused-variable]\n2 warnings generated.",
    "warnings": "main.c:6:20: warning: more '%' conversions than data arguments [-Wformat-insufficient-args]",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.0,
-   "stdout": "3 of -75423944",
+   "stdout": "3 of 770640408",
    "stderr": ""
   },
   "unsigned_subtraction": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:9:17: warning: result of comparison of unsigned expression < 0 is always false [-Wtautological-unsigned-zero-compare]\n1 warning generated.",
    "warnings": "main.c:9:17: warning: result of comparison of unsigned expression < 0 is always false [-Wtautological-unsigned-zero-compare]",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "18446744073709551614",
    "stderr": ""
@@ -432,10 +442,11 @@
   "shadowed_assignment": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:8:21: warning: declaration shadows a local variable [-Wshadow]\n1 warning generated.",
    "warnings": "main.c:8:21: warning: declaration shadows a local variable [-Wshadow]",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "pending",
    "stderr": "status: done"
@@ -484,10 +495,11 @@
   "dead_store": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:7:10: warning: unused variable 'total' [-Wunused-variable]\n1 warning generated.",
    "warnings": "main.c:7:10: warning: unused variable 'total' [-Wunused-variable]",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "40",
    "stderr": ""
@@ -551,13 +563,14 @@
   "dangling_stack_ref": {
    "outcome": "TRAPPED",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:5:13: warning: address of stack memory associated with local variable 'local' returned [-Wreturn-stack-address]\n1 warning generated.",
    "warnings": "main.c:5:13: warning: address of stack memory associated with local variable 'local' returned [-Wreturn-stack-address]",
    "exit": 1,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.02,
    "stdout": "",
-   "stderr": "=================================================================\n==1513==ERROR: AddressSanitizer: stack-use-after-return on address 0x7ab8beaf0020 at pc 0x5eb0e9853d86 bp 0x7ffd72c9aed0 sp 0x7ffd72c9aec8\nREAD of size 4 at 0x7ab8beaf0020 thread T0\n    #0 0x5eb0e9853d85 in main /tmp/breakbench/dangling_stack_ref/main/main.c:16:20\n    #1 0x7eb8c0cb9600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #2 0x7eb8c0cb9717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #3 0x5eb0e9763814 in _start (/tmp/breakbench/dangling_stack_ref/main/main+0x6c814)\n\nAddress 0x7ab8beaf0020 is located in stack of thread T0 at offset 32 \n...\n0 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n  0x7ab8beaf0280: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==1513==ABORTING"
+   "stderr": "=================================================================\n==321==ERROR: AddressSanitizer: stack-use-after-return on address 0x742441ef0020 at pc 0x61d0d2ca8d86 bp 0x7ffd1d38a840 sp 0x7ffd1d38a838\nREAD of size 4 at 0x742441ef0020 thread T0\n    #0 0x61d0d2ca8d85 in main /tmp/breakbench/dangling_stack_ref/main/main.c:16:20\n    #1 0x78244411c600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #2 0x78244411c717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #3 0x61d0d2bb8814 in _start (/tmp/breakbench/dangling_stack_ref/main/main+0x6c814)\n\nAddress 0x742441ef0020 is located in stack of thread T0 at offset 32 i\n...\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n  0x742441ef0280: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==321==ABORTING"
   },
   "container_realloc_dangling": {
    "outcome": "TRAPPED",
@@ -660,13 +673,14 @@
   "format_string": {
    "outcome": "CRASH",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:5:12: warning: format string is not a string literal (potentially insecure) [-Wformat-security]\n1 warning generated.",
    "warnings": "main.c:5:12: warning: format string is not a string literal (potentially insecure) [-Wformat-security]",
    "exit": 1,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.02,
    "stdout": "",
-   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==1899==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000001 (pc 0x7032874518f2 bp 0x7ffde8bc4890 sp 0x7ffde8bc4370 T0)\n==1899==The signal is caused by a WRITE memory access.\n==1899==HINT: address points to the zero page.\n    #0 0x7032874518f2  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x6f8f2) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #1 0x703287452767  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x70767) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #2 0x5efe09f374df in printf /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/../sanitizer_common/sanitizer_common_interceptors.inc:1851:1\n    #3 0x5efe09ffbc9d\n...\n27f8d0a68e29d750303f0c6)\n    #6 0x5efe09f0b6f4 in _start (/tmp/breakbench/format_string/main/main+0x6c6f4)\n\n==1899==Register values:\nrax = 0x0000000000000006  rbx = 0x00007ffde8bc48d0  rcx = 0x0000000000000000  rdx = 0x0000000000000006  \nrdi = 0x0000000000000000  rsi = 0x00007032875b6360  rbp = 0x00007ffde8bc4890  rsp = 0x00007ffde8bc4370  \n r8 = 0x0000000000000000   r9 = 0x0000000000000000  r10 = 0x00000000ffffffff  r11 = 0x0000000000000000  \nr12 = 0x0000000000000000  r13 = 0x0000000000000000  r14 = 0x0000000000000001  r15 = 0x00007ffde8bc4ed9  \nAddressSanitizer can not provide additional info.\nSUMMARY: AddressSanitizer: SEGV (/usr/lib/x86_64-linux-gnu/libc.so.6+0x6f8f2) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6) \n==1899==ABORTING"
+   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==346==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000001 (pc 0x715aa47dd8f2 bp 0x7ffd727ba3f0 sp 0x7ffd727b9ed0 T0)\n==346==The signal is caused by a WRITE memory access.\n==346==HINT: address points to the zero page.\n    #0 0x715aa47dd8f2  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x6f8f2) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #1 0x715aa47de767  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x70767) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #2 0x5ab7b4c064df in printf /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/../sanitizer_common/sanitizer_common_interceptors.inc:1851:1\n    #3 0x5ab7b4ccac9d in\n...\n0a27f8d0a68e29d750303f0c6)\n    #6 0x5ab7b4bda6f4 in _start (/tmp/breakbench/format_string/main/main+0x6c6f4)\n\n==346==Register values:\nrax = 0x000000000000000b  rbx = 0x00007ffd727ba430  rcx = 0x0000000000000000  rdx = 0x000000000000000b  \nrdi = 0x0000000000000000  rsi = 0x0000715aa4942360  rbp = 0x00007ffd727ba3f0  rsp = 0x00007ffd727b9ed0  \n r8 = 0x0000000000000000   r9 = 0x0000000000000000  r10 = 0x00000000ffffffff  r11 = 0x0000000000000000  \nr12 = 0x0000000000000000  r13 = 0x0000000000000000  r14 = 0x0000000000000001  r15 = 0x00007ffd727bbed9  \nAddressSanitizer can not provide additional info.\nSUMMARY: AddressSanitizer: SEGV (/usr/lib/x86_64-linux-gnu/libc.so.6+0x6f8f2) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6) \n==346==ABORTING"
   },
   "deep_structure_release": {
    "outcome": "CORRECT",
@@ -713,10 +727,11 @@
   "strong_enum": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:6:5: warning: 'switch' missing 'default' label [-Wswitch-default]\nmain.c:15:25: warning: integer constant not in range of enumerated type 'enum Color' [-Wassign-enum]\nmain.c:15:25: warning: implicit conversion from 'int' to enumeration type 'enum Color' is invalid in C++ [-Wimplicit-int-enum-cast]\n3 warnings generated.",
    "warnings": "main.c:15:25: warning: integer constant not in range of enumerated type 'enum Color' [-Wassign-enum]\nmain.c:15:25: warning: implicit conversion from 'int' to enumeration type 'enum Color' is invalid in C++ [-Wimplicit-int-enum-cast]",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "",
    "stderr": ""
@@ -754,10 +769,11 @@
   "no_implicit_conversion": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:10:10: warning: implicit conversion loses integer precision: 'int64_t' (aka 'long') to 'int32_t' (aka 'int') [-Wshorten-64-to-32]\n1 warning generated.",
    "warnings": "main.c:10:10: warning: implicit conversion loses integer precision: 'int64_t' (aka 'long') to 'int32_t' (aka 'int') [-Wshorten-64-to-32]",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "-1294967296",
    "stderr": ""
@@ -769,10 +785,11 @@
   "lossy_int_to_float": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:10:10: warning: implicit conversion from 'int64_t' (aka 'long') to 'double' may lose precision [-Wimplicit-int-float-conversion]\n1 warning generated.",
    "warnings": "main.c:10:10: warning: implicit conversion from 'int64_t' (aka 'long') to 'double' may lose precision [-Wimplicit-int-float-conversion]",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "9007199254740992",
    "stderr": ""
@@ -780,10 +797,11 @@
   "const_index_bounds": {
    "outcome": "TRAPPED",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:5:20: warning: array index 5 is past the end of the array (that has type 'int[3]') [-Warray-bounds]\n1 warning generated.",
    "warnings": "main.c:5:20: warning: array index 5 is past the end of the array (that has type 'int[3]') [-Warray-bounds]",
    "exit": 1,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "",
    "stderr": "main.c:5:20: runtime error: index 5 out of bounds for type 'int[3]'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.c:5:20"
@@ -791,10 +809,11 @@
   "const_overflow": {
    "outcome": "TRAPPED",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:5:67: warning: overflow in expression; result is -8'985'944'073'709'551'616 with type 'long' [-Winteger-overflow]\n1 warning generated.",
    "warnings": "main.c:5:67: warning: overflow in expression; result is -8'985'944'073'709'551'616 with type 'long' [-Winteger-overflow]",
    "exit": 1,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "",
    "stderr": "main.c:5:67: runtime error: signed integer overflow: 31536000000000000 * 300 cannot be represented in type 'long'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.c:5:67"
@@ -813,10 +832,11 @@
   "unreachable_code": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:6:5: warning: code will never be executed [-Wunreachable-code]\n1 warning generated.",
    "warnings": "main.c:6:5: warning: code will never be executed [-Wunreachable-code]",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "ok",
    "stderr": ""
@@ -858,10 +878,11 @@
   "comparison_statement": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:5:11: warning: equality comparison result unused [-Wunused-comparison]\n1 warning generated.",
    "warnings": "main.c:5:11: warning: equality comparison result unused [-Wunused-comparison]",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "0",
    "stderr": ""
@@ -905,10 +926,11 @@
   "increment_in_expression": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.c:5:10: warning: multiple unsequenced modifications to 'i' [-Wunsequenced]\n1 warning generated.",
    "warnings": "main.c:5:10: warning: multiple unsequenced modifications to 'i' [-Wunsequenced]",
    "exit": 0,
-   "rss_mb": 14.5,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "0",
    "stderr": ""

@@ -96,10 +96,11 @@
   "switch_fallthrough": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "Main.java:8: warning: [fallthrough] possible fall-through into case\n1 warning",
    "warnings": "Main.java:8: warning: [fallthrough] possible fall-through into case",
    "exit": 0,
-   "rss_mb": 37.8,
+   "rss_mb": 38.0,
    "secs": 0.01,
    "stdout": "two",
    "stderr": ""
@@ -303,10 +304,11 @@
   "return_in_finally": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "Main.java:16: warning: [finally] finally clause cannot complete normally\n1 warning",
    "warnings": "Main.java:16: warning: [finally] finally clause cannot complete normally",
    "exit": 0,
-   "rss_mb": 38.2,
+   "rss_mb": 37.8,
    "secs": 0.01,
    "stdout": "saved",
    "stderr": ""
@@ -768,10 +770,11 @@
   "hash_matches_equality": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "Main.java:5: warning: [overrides] Class Point overrides equals, but neither it nor any superclass overrides hashCode method\n1 warning",
    "warnings": "Main.java:5: warning: [overrides] Class Point overrides equals, but neither it nor any superclass overrides hashCode method",
    "exit": 0,
-   "rss_mb": 37.9,
+   "rss_mb": 38.1,
    "secs": 0.01,
    "stdout": "2",
    "stderr": ""

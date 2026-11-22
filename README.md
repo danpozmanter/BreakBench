@@ -58,17 +58,28 @@ correctly or stopped with a clear error).
 
 ### Scoring
 
-| Kind | Scores 1 | Partial credit |
-|---|---|---|
-| static (visible before running) | refused or correct | stopped at run time: 0.5 |
-| dynamic (depends on input) | refused, correct or stopped | |
-| memory | as dynamic | wrong but memory-safe: 0.5 |
-| leak | memory stays bounded | |
-| valid (a correct program) | runs to completion | |
+| Outcome | Points |
+|---|---|
+| REJECTED: refused before running | 1 |
+| CORRECT: the bug cannot happen | 1 |
+| Warned before running: the build warned about the bug by name | 0.5 |
+| TRAPPED: stopped at run time with a clear error | 0.25 |
+| Warned while running: the program warned about the bug by name and went on | 0.25 |
+| SILENT, CORRUPT, CRASH, HANG, LEAK, ICE, N/A | 0 |
 
-- **Warnings** add 0.25, never a full point, when the toolchain's own compiler or checker flags the
-  bug in words the test's `warn` pattern matches. File paths, quoted strings, echoed source and
-  color codes are stripped first, so a program's own text earns nothing.
+The rubric rewards stopping a bug before it reaches production. A refusal stops it for certain and
+a build warning may, so they earn 1 and 0.5. A bug the program only shows while running, by
+stopping or by warning, reaches production unless a test happens to run that path, so it earns
+0.25. A test scores the highest row that applies; a warning and a stop never add up. The same
+table holds for every test, whether the language is compiled or dynamic and whether the bug is a
+logic or a memory error. The one exception is `deep_structure_release`, a correct program that
+must run to the end: refusing, stopping or warning about it scores 0.
+
+- **Warnings** count when the toolchain's own compiler or checker, or the running program, names
+  the bug in words the test's `warn` pattern matches. File paths, quoted strings, echoed source
+  and color codes are stripped first, so a program's own text earns nothing. For a dynamic
+  language, warnings from its check step (`ruby -c`, `py_compile`, `php -l`) count as build
+  warnings; warnings it prints only when the program loads or runs count as run-time warnings.
 - **Must-use**: ignoring a result the language marks must-use (`#[must_use]`, `[[nodiscard]]`,
   and the unused-result warnings of Swift, F# and Mojo) counts as a refusal.
 - **Controls**: a compile error counts as a refusal only if the same program without the bug
@@ -80,11 +91,10 @@ correctly or stopped with a clear error).
 - **Score**: the mean over all tests, as a percentage.
 
 **Robustness.** The site also scores the results five other ways: a run-time stop counts as a
-refusal, no warning bonus, each category weighed equally, near-universal passes removed, and
-N/A left out of the average. Under every scheme Rust and Gossamer take the top two places and
-JavaScript stays last; Swift is third under all but one, where Haskell is. Weighting each category
-equally moves languages most, up to 15 places (Ruby), because it gives each of the 4 null-safety
-tests the weight of about 20 correctness tests.
+refusal, no credit for warnings, each category weighed equally, near-universal passes removed, and
+N/A left out of the average. Under every scheme Rust, Swift and Gossamer take the top three
+places and JavaScript stays last. The largest move is 12 places: Julia when a run-time stop
+counts as a refusal, and V when each category weighs equally.
 
 ### Build mode
 

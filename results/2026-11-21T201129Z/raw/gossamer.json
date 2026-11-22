@@ -39,10 +39,11 @@
   "narrowing_cast": {
    "outcome": "TRAPPED",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "warning[GL0062]: this `as` panics when the `i64` value does not fit `u8` --> /tmp/breakbench/narrowing_cast/main/main.gos:5:13 = note: lint: lossy_cast\nlint: 1 warning(s), 0 error(s)",
    "warnings": "warning[GL0062]: this `as` panics when the `i64` value does not fit `u8` --> /tmp/breakbench/narrowing_cast/main/main.gos:5:13 = note: lint: lossy_cast",
    "exit": 101,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "",
    "stderr": "error[GX0005]: panic: cast overflow: 300 does not fit u8\n  call stack (outermost first):\n    at main (main.gos:5:13)"
@@ -256,10 +257,11 @@
   "float_equality": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "warning[GL0025]: equality against a nonzero float literal is almost never what you want --> main.gos:7:16 = note: lint: float_eq_zero\nlint: 1 warning(s), 0 error(s)",
    "warnings": "warning[GL0025]: equality against a nonzero float literal is almost never what you want --> main.gos:7:16 = note: lint: float_eq_zero",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "not equal",
    "stderr": ""
@@ -297,10 +299,11 @@
   "negative_remainder": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "warning[GL0064]: `n % 2 == 1` is false for every negative `n`: `%` keeps the sign of the value it divides, so the remainder of a negative `n` is never positive --> /tmp/breakbench/negative_remainder/main/main.gos:4:5 = note: lint: signed_remainder\nlint: 1 warning(s), 0 error(s)",
    "warnings": "warning[GL0064]: `n % 2 == 1` is false for every negative `n`: `%` keeps the sign of the value it divides, so the remainder of a negative `n` is never positive --> /tmp/breakbench/negative_remainder/main/main.gos:4:5 = note: lint: signed_remainder",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "even",
    "stderr": ""
@@ -348,10 +351,11 @@
   "unawaited_task": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "warning[GL0065]: `task` is never joined: nothing waits for its task, so the program goes on, and can finish, before the task's work is done --> main.gos:11:9 = note: lint: unjoined_task\nlint: 1 warning(s), 0 error(s)",
    "warnings": "warning[GL0065]: `task` is never joined: nothing waits for its task, so the program goes on, and can finish, before the task's work is done --> main.gos:11:9 = note: lint: unjoined_task",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.05,
    "stdout": "0",
    "stderr": ""
@@ -393,10 +397,11 @@
   "shadowed_assignment": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "warning[GL0003]: `status` is declared `mut` but never reassigned --> main.gos:4:9 = note: lint: unused_mut_variable\nwarning[GL0008]: `status` declares a new binding in this block, hiding the mutable `status` outside it, which keeps its value --> main.gos:6:13 = note: lint: shadowed_binding\nlint: 2 warning(s), 0 error(s)",
    "warnings": "warning[GL0003]: `status` is declared `mut` but never reassigned --> main.gos:4:9 = note: lint: unused_mut_variable\nwarning[GL0008]: `status` declares a new binding in this block, hiding the mutable `status` outside it, which keeps its value --> main.gos:6:13 = note: lint: shadowed_binding",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "pending",
    "stderr": "status: done"
@@ -444,10 +449,11 @@
   "dead_store": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "warning[GL0001]: unused variable `total` --> main.gos:5:9 = note: lint: unused_variable\nlint: 1 warning(s), 0 error(s)",
    "warnings": "warning[GL0001]: unused variable `total` --> main.gos:5:9 = note: lint: unused_variable",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "40",
    "stderr": ""
@@ -557,11 +563,12 @@
   "reference_cycle_leak": {
    "outcome": "LEAK",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "warning[GL0063]: this closure is stored in `o`, which it captures: the two hold each other, and the cycle is never freed --> /tmp/breakbench/reference_cycle_leak/main/main.gos:22:9 = note: lint: closure_self_cycle\nlint: 1 warning(s), 0 error(s)",
    "warnings": "warning[GL0063]: this closure is stored in `o`, which it captures: the two hold each other, and the cycle is never freed --> /tmp/breakbench/reference_cycle_leak/main/main.gos:22:9 = note: lint: closure_self_cycle",
    "exit": 137,
-   "rss_mb": 3058.6,
-   "secs": 14.81,
+   "rss_mb": 3058.7,
+   "secs": 1.78,
    "stdout": "",
    "stderr": "Killed"
   },
@@ -774,10 +781,11 @@
   "comparison_statement": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "warning[GL0003]: `count` is declared `mut` but never reassigned --> main.gos:2:9 = note: lint: unused_mut_variable\nwarning[GL0056]: this expression's value is not used --> main.gos:3:5 = note: lint: no_effect_statement\nlint: 2 warning(s), 0 error(s)",
    "warnings": "warning[GL0003]: `count` is declared `mut` but never reassigned --> main.gos:2:9 = note: lint: unused_mut_variable\nwarning[GL0056]: this expression's value is not used --> main.gos:3:5 = note: lint: no_effect_statement",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.0,
    "stdout": "0",
    "stderr": ""

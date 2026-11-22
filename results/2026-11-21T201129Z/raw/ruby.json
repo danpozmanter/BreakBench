@@ -122,11 +122,12 @@
   "assign_in_condition": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": true,
    "all_warnings": "main.rb:2: warning: found '= literal' in conditional, should be ==",
    "warnings": "main.rb:2: warning: found '= literal' in conditional, should be ==",
    "exit": 0,
-   "rss_mb": 14.6,
-   "secs": 0.02,
+   "rss_mb": 14.7,
+   "secs": 0.04,
    "stdout": "one",
    "stderr": "main.rb:2: warning: found '= literal' in conditional, should be =="
   },
@@ -285,12 +286,13 @@
   },
   "chained_comparison": {
    "outcome": "TRAPPED",
-   "warned": true,
+   "warned": false,
+   "run_warned": true,
    "all_warnings": "main.rb:2: warning: comparison '<' after comparison",
    "warnings": "main.rb:2: warning: comparison '<' after comparison",
    "exit": 1,
-   "rss_mb": 21.6,
-   "secs": 0.04,
+   "rss_mb": 21.5,
+   "secs": 0.05,
    "stdout": "",
    "stderr": "main.rb:2: warning: comparison '<' after comparison\nmain.rb:2:in '<main>': undefined method '<' for true (NoMethodError)\n\ninside = 1 < x < 3\n               ^"
   },
@@ -372,11 +374,12 @@
   },
   "return_line_break": {
    "outcome": "SILENT",
-   "warned": true,
+   "warned": false,
+   "run_warned": true,
    "all_warnings": "main.rb:3: warning: statement not reached",
    "warnings": "main.rb:3: warning: statement not reached",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.02,
    "stdout": "",
    "stderr": "main.rb:3: warning: statement not reached"
@@ -392,11 +395,12 @@
   },
   "unawaited_task": {
    "outcome": "SILENT",
-   "warned": true,
+   "warned": false,
+   "run_warned": true,
    "all_warnings": "main.rb:3: warning: assigned but unused variable - task",
    "warnings": "main.rb:3: warning: assigned but unused variable - task",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.02,
    "stdout": "0",
    "stderr": "main.rb:3: warning: assigned but unused variable - task"
@@ -495,11 +499,12 @@
   },
   "dead_store": {
    "outcome": "SILENT",
-   "warned": true,
+   "warned": false,
+   "run_warned": true,
    "all_warnings": "main.rb:2: warning: assigned but unused variable - total",
    "warnings": "main.rb:2: warning: assigned but unused variable - total",
    "exit": 0,
-   "rss_mb": 14.6,
+   "rss_mb": 14.7,
    "secs": 0.02,
    "stdout": "40",
    "stderr": "main.rb:2: warning: assigned but unused variable - total"
@@ -875,6 +880,7 @@
   "duplicate_key": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": true,
    "all_warnings": "main.rb:1: warning: key \"a\" is duplicated and overwritten on line 1",
    "warnings": "main.rb:1: warning: key \"a\" is duplicated and overwritten on line 1",
    "exit": 0,

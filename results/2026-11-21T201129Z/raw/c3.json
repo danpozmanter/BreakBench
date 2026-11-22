@@ -689,10 +689,11 @@
   "unreachable_code": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "/tmp/breakbench/unreachable_code/main/main.c3:7:2: warning: This code will never execute.",
    "warnings": "/tmp/breakbench/unreachable_code/main/main.c3:7:2: warning: This code will never execute.",
    "exit": 0,
-   "rss_mb": 13.7,
+   "rss_mb": 14.4,
    "secs": 0.0,
    "stdout": "ok",
    "stderr": ""

@@ -405,6 +405,7 @@
   "dead_store": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.swift:3:9: warning: initialization of immutable value 'total' was never used; consider replacing with assignment to '_' or removing it [#NoUsage]\n|         `- warning: initialization of immutable value 'total' was never used; consider replacing with assignment to '_' or removing it [#NoUsage]",
    "warnings": "main.swift:3:9: warning: initialization of immutable value 'total' was never used; consider replacing with assignment to '_' or removing it [#NoUsage]\n|         `- warning: initialization of immutable value 'total' was never used; consider replacing with assignment to '_' or removing it [#NoUsage]",
    "exit": 0,
@@ -657,11 +658,12 @@
   "unreachable_code": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.swift:4:5: warning: code after 'return' will never be executed\n|     `- warning: code after 'return' will never be executed",
    "warnings": "main.swift:4:5: warning: code after 'return' will never be executed\n|     `- warning: code after 'return' will never be executed",
    "exit": 0,
-   "rss_mb": 16.1,
-   "secs": 0.01,
+   "rss_mb": 15.9,
+   "secs": 0.0,
    "stdout": "ok",
    "stderr": ""
   },
@@ -690,24 +692,26 @@
   "dominated_case": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.swift:8:10: warning: case is already handled by previous patterns; consider removing it\n|          `- warning: case is already handled by previous patterns; consider removing it",
    "warnings": "main.swift:8:10: warning: case is already handled by previous patterns; consider removing it\n|          `- warning: case is already handled by previous patterns; consider removing it",
    "exit": 0,
-   "rss_mb": 16.0,
-   "secs": 0.01,
+   "rss_mb": 15.9,
+   "secs": 0.0,
    "stdout": "other",
    "stderr": ""
   },
   "duplicate_key": {
    "outcome": "TRAPPED",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "main.swift:1:10: warning: dictionary literal of type '[String : Int]' has duplicate entries for string literal key 'a' |          |       `- note: duplicate key declared here\n|          |- warning: dictionary literal of type '[String : Int]' has duplicate entries for string literal key 'a' |          `- note: duplicate key declared here",
    "warnings": "main.swift:1:10: warning: dictionary literal of type '[String : Int]' has duplicate entries for string literal key 'a' |          |       `- note: duplicate key declared here\n|          |- warning: dictionary literal of type '[String : Int]' has duplicate entries for string literal key 'a' |          `- note: duplicate key declared here",
    "exit": 132,
    "rss_mb": 18.2,
-   "secs": 0.19,
+   "secs": 0.12,
    "stdout": "",
-   "stderr": "Swift/Dictionary.swift:880: Fatal error: Dictionary literal contains duplicate keys\n\n*** Signal 4: Backtracing from 0x701985acb1ef... done ***\n\n*** Program crashed: Illegal instruction at 0x0000701985acb1ef ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0              0x0000701985acb1ef closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 623 in libswiftCore.so\n1 [ra]         0x0000701985c622cc _assertionFailure(_:_:file:line:flags:) + 283 in libswiftCore.so\n2 [ra]         0x0000701985c110b3 specialized Dictionary.init(dictionaryLiteral:) + 514 in libswiftCore.so\n3 [ra] [thunk] 0x0000701985ca6fdf Dictionary.init(dictionaryLiteral:) + 14 in libswiftCore.so\n4 [ra]         0x00005ce4a505a5a6 main +\n...\n70 00 00 03 00 00 00 00 00 00 00  X\u00b7\u00f4\u00b7\u00b7p\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\nr14 0x0000000000000001  1\nr15 0x000000000000000b  11\nrip 0x0000701985acb1ef  0f 0b 48 83 ec 08 48 8d 05 24 78 49 00 48 8d 3d  \u00b7\u00b7H\u00b7\u00ec\u00b7H\u00b7\u00b7$xI\u00b7H\u00b7=\n\nrflags 0x0000000000010202  \n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (19 omitted):\n\n0x00005ce4a5059000\u20130x00005ce4a505a661 20b40837746f485738ef3757dc29351f50a545ae main            /tmp/breakbench/duplicate_key/main/main\n0x000070198417a000\u20130x0000701984339819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6       /usr/lib/x86_64-linux-gnu/libc.so.6\n0x0000701985958000\u20130x0000701985f31b70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.02s\n\nIllegal instruction (core dumped)"
+   "stderr": "Swift/Dictionary.swift:880: Fatal error: Dictionary literal contains duplicate keys\n\n*** Signal 4: Backtracing from 0x72a20e0011ef... done ***\n\n*** Program crashed: Illegal instruction at 0x000072a20e0011ef ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0              0x000072a20e0011ef closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 623 in libswiftCore.so\n1 [ra]         0x000072a20e1982cc _assertionFailure(_:_:file:line:flags:) + 283 in libswiftCore.so\n2 [ra]         0x000072a20e1470b3 specialized Dictionary.init(dictionaryLiteral:) + 514 in libswiftCore.so\n3 [ra] [thunk] 0x000072a20e1dcfdf Dictionary.init(dictionaryLiteral:) + 14 in libswiftCore.so\n4 [ra]         0x00005a04e32935a6 main +\n...\n 00 00 03 00 00 00 00 00 00 00  XdG\u00b7\u00a2r\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\nr14 0x0000000000000001  1\nr15 0x000000000000000b  11\nrip 0x000072a20e0011ef  0f 0b 48 83 ec 08 48 8d 05 24 78 49 00 48 8d 3d  \u00b7\u00b7H\u00b7\u00ec\u00b7H\u00b7\u00b7$xI\u00b7H\u00b7=\n\nrflags 0x0000000000010206  PF\n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (19 omitted):\n\n0x00005a04e3292000\u20130x00005a04e3293661 7fa127ba8df073f10d137c77109e92b1cf7f26e9 main            /tmp/breakbench/duplicate_key/main/main\n0x000072a20c6b0000\u20130x000072a20c86f819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6       /usr/lib/x86_64-linux-gnu/libc.so.6\n0x000072a20de8e000\u20130x000072a20e467b70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.02s\n\nIllegal instruction (core dumped)"
   },
   "char_arithmetic": {
    "outcome": "REJECTED",

@@ -226,11 +226,12 @@
   "dangling_else": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "warning - main.dart:8:5 - Dead code. Try removing the code, or fixing the code before it so that it can be reached. - dead_code\ninfo - main.dart:6:5 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures\ninfo - main.dart:6:12 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures\ninfo - main.dart:8:5 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures",
    "warnings": "info - main.dart:6:5 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures\ninfo - main.dart:6:12 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures\ninfo - main.dart:8:5 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures",
    "exit": 0,
-   "rss_mb": 53.1,
-   "secs": 0.04,
+   "rss_mb": 52.6,
+   "secs": 0.07,
    "stdout": "unset",
    "stderr": ""
   },
@@ -308,10 +309,11 @@
   "return_in_finally": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "info - main.dart:14:5 - Use of 'return' in a 'finally' clause. Try restructuring the code. - control_flow_in_finally",
    "warnings": "info - main.dart:14:5 - Use of 'return' in a 'finally' clause. Try restructuring the code. - control_flow_in_finally",
    "exit": 0,
-   "rss_mb": 52.7,
+   "rss_mb": 53.3,
    "secs": 0.04,
    "stdout": "saved",
    "stderr": ""
@@ -413,10 +415,11 @@
   "unrelated_type_lookup": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "info - main.dart:4:22 - The argument type 'String' isn't related to 'int'. Try changing the argument or element type to match. - collection_methods_unrelated_type",
    "warnings": "info - main.dart:4:22 - The argument type 'String' isn't related to 'int'. Try changing the argument or element type to match. - collection_methods_unrelated_type",
    "exit": 0,
-   "rss_mb": 53.2,
+   "rss_mb": 53.6,
    "secs": 0.04,
    "stdout": "missing",
    "stderr": ""
@@ -434,10 +437,11 @@
   "dead_store": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "warning - main.dart:3:9 - The value of the local variable 'total' isn't used. Try removing the variable or using it. - unused_local_variable",
    "warnings": "warning - main.dart:3:9 - The value of the local variable 'total' isn't used. Try removing the variable or using it. - unused_local_variable",
    "exit": 0,
-   "rss_mb": 54.0,
+   "rss_mb": 52.2,
    "secs": 0.04,
    "stdout": "40",
    "stderr": ""
@@ -633,10 +637,11 @@
   "override_check": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "warning - main.dart:7:10 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member",
    "warnings": "warning - main.dart:7:10 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member",
    "exit": 0,
-   "rss_mb": 53.4,
+   "rss_mb": 52.9,
    "secs": 0.04,
    "stdout": "shape",
    "stderr": ""
@@ -721,10 +726,11 @@
    "outcome": "SILENT",
    "runs": 10,
    "warned": true,
+   "run_warned": false,
    "all_warnings": "info - main.dart:7:41 - Statements in a for should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures\ninfo - main.dart:10:41 - Statements in a for should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures",
    "warnings": "info - main.dart:7:41 - Statements in a for should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures\ninfo - main.dart:10:41 - Statements in a for should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures",
    "exit": 0,
-   "rss_mb": 55.4,
+   "rss_mb": 54.6,
    "secs": 0.04,
    "stdout": "0",
    "stderr": ""
@@ -732,11 +738,12 @@
   "unreachable_code": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "warning - main.dart:4:3 - Dead code. Try removing the code, or fixing the code before it so that it can be reached. - dead_code",
    "warnings": "warning - main.dart:4:3 - Dead code. Try removing the code, or fixing the code before it so that it can be reached. - dead_code",
    "exit": 0,
-   "rss_mb": 53.5,
-   "secs": 0.04,
+   "rss_mb": 53.3,
+   "secs": 0.03,
    "stdout": "ok",
    "stderr": ""
   },
@@ -765,21 +772,23 @@
   "dominated_case": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "warning - main.dart:5:7 - Dead code. Try removing the code, or fixing the code before it so that it can be reached. - dead_code\nwarning - main.dart:5:20 - This case is covered by the previous cases. Try removing the case clause, or restructuring the preceding patterns. - unreachable_switch_case",
    "warnings": "warning - main.dart:5:20 - This case is covered by the previous cases. Try removing the case clause, or restructuring the preceding patterns. - unreachable_switch_case",
    "exit": 0,
-   "rss_mb": 52.5,
-   "secs": 0.04,
+   "rss_mb": 53.3,
+   "secs": 0.03,
    "stdout": "other",
    "stderr": ""
   },
   "duplicate_key": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "warning - main.dart:2:18 - Two keys in a map literal shouldn't be equal. Change or remove the duplicate key. - equal_keys_in_map",
    "warnings": "warning - main.dart:2:18 - Two keys in a map literal shouldn't be equal. Change or remove the duplicate key. - equal_keys_in_map",
    "exit": 0,
-   "rss_mb": 53.1,
+   "rss_mb": 52.1,
    "secs": 0.04,
    "stdout": "1",
    "stderr": ""
@@ -809,10 +818,11 @@
   "hash_matches_equality": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "info - main.dart:8:17 - Missing a corresponding override of 'hashCode'. Try overriding 'hashCode' or removing '=='. - hash_and_equals",
    "warnings": "info - main.dart:8:17 - Missing a corresponding override of 'hashCode'. Try overriding 'hashCode' or removing '=='. - hash_and_equals",
    "exit": 0,
-   "rss_mb": 53.7,
+   "rss_mb": 53.6,
    "secs": 0.04,
    "stdout": "2",
    "stderr": ""

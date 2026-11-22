@@ -394,6 +394,7 @@
   "dead_store": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "/tmp/breakbench/dead_store/main/main.mojo:6:23: warning: assignment to 'total' was never used; assign to '_' instead?",
    "warnings": "/tmp/breakbench/dead_store/main/main.mojo:6:23: warning: assignment to 'total' was never used; assign to '_' instead?",
    "exit": 0,
@@ -657,6 +658,7 @@
   "unreachable_code": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "/tmp/breakbench/unreachable_code/main/main.mojo:4:11: warning: unreachable code after return statement",
    "warnings": "/tmp/breakbench/unreachable_code/main/main.mojo:4:11: warning: unreachable code after return statement",
    "exit": 0,
@@ -690,11 +692,12 @@
   "dominated_case": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "/tmp/breakbench/dominated_case/main/main.mojo:5:14: warning: case is unreachable; previous cases cover every value of the match subject",
    "warnings": "/tmp/breakbench/dominated_case/main/main.mojo:5:14: warning: case is unreachable; previous cases cover every value of the match subject",
    "exit": 0,
    "rss_mb": 14.3,
-   "secs": 0.02,
+   "secs": 0.01,
    "stdout": "other",
    "stderr": ""
   },

@@ -5,11 +5,12 @@
   "null_deref": {
    "outcome": "TRAPPED",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "/tmp/breakbench/null_deref/main/Program.cs(4,19): warning CS8602: Dereference of a possibly null reference. [/tmp/breakbench/null_deref/main/bb.csproj]\n/tmp/breakbench/null_deref/main/Program.cs(3,18): warning CA1305: The behavior of 'long.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'long.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/null_deref/main/bb.csproj]\n/tmp/breakbench/null_deref/main/Program.cs(6,8): warning CA1852: Type 'User' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/null_deref/main/bb.csproj] bb -> /tmp/breakbench/null_deref/main/out/bb.dll\n/tmp/breakbench/null_deref/main/Program.cs(6,8): warning CA1852: Type 'User' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/null_deref/main/bb.csproj]\n3 Warning(s) 0 Error(s)",
    "warnings": "/tmp/breakbench/null_deref/main/Program.cs(4,19): warning CS8602: Dereference of a possibly null reference. [/tmp/breakbench/null_deref/main/bb.csproj]",
    "exit": 134,
-   "rss_mb": 32.9,
-   "secs": 0.19,
+   "rss_mb": 33.2,
+   "secs": 0.18,
    "stdout": "",
    "stderr": "Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/null_deref/main/Program.cs:line 4\nAborted (core dumped)"
   },
@@ -84,11 +85,12 @@
   "non_exhaustive_match": {
    "outcome": "TRAPPED",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "/tmp/breakbench/non_exhaustive_match/main/Program.cs(1,34): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'Color.Blue' is not covered. [/tmp/breakbench/non_exhaustive_match/main/bb.csproj]\n/tmp/breakbench/non_exhaustive_match/main/Program.cs(7,31): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/non_exhaustive_match/main/bb.csproj]\n/tmp/breakbench/non_exhaustive_match/main/Progra\n...\nring? value)'. Retrieve the following string(s) from a resource table instead: \"green, red\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/non_exhaustive_match/main/bb.csproj] bb -> /tmp/breakbench/non_exhaustive_match/main/out/bb.dll\n/tmp/breakbench/non_exhaustive_match/main/Program.cs(7,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"green, red\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/non_exhaustive_match/main/bb.csproj]\n3 Warning(s) 0 Error(s)",
    "warnings": "/tmp/breakbench/non_exhaustive_match/main/Program.cs(1,34): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'Color.Blue' is not covered. [/tmp/breakbench/non_exhaustive_match/main/bb.csproj]",
    "exit": 134,
-   "rss_mb": 33.4,
-   "secs": 0.15,
+   "rss_mb": 33.3,
+   "secs": 0.14,
    "stdout": "",
    "stderr": "Unhandled exception. System.Runtime.CompilerServices.SwitchExpressionException: Non-exhaustive switch expression failed to match its input.\nUnmatched value was Blue.\n   at <PrivateImplementationDetails>.ThrowSwitchExpressionException(Object unmatchedValue)\n   at Program.<<Main>$>g__Name|0_0(Color c) in /tmp/breakbench/non_exhaustive_match/main/Program.cs:line 1\n   at Program.<Main>$(String[] args) in /tmp/breakbench/non_exhaustive_match/main/Program.cs:line 7\nAborted (core dumped)"
   },
@@ -365,10 +367,11 @@
   "unawaited_task": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "/tmp/breakbench/unawaited_task/main/Program.cs(9,1): warning CS4014: Because this call is not awaited, execution of the current method continues before the call is completed. Consider applying the 'await' operator to the result of the call. [/tmp/breakbench/unawaited_task/main/bb.csproj]\n/tmp/breakbench/unawaited_task/main/Program.cs(5,11): warning CA2007: Consider calling ConfigureAwait on the awaited task (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2007) [/tmp/breakbench/unawaited_task/main/bb.csproj] bb -> /tmp/breakbench/unawaited_task/main/out/bb.dll\n/tmp/breakbench/unawaited_task/main/Program.cs(5,11): warning CA2007: Consider calling ConfigureAwait on the awaited task (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2007) [/tmp/breakbench/unawaited_task/main/bb.csproj]\n2 Warning(s) 0 Error(s)",
    "warnings": "/tmp/breakbench/unawaited_task/main/Program.cs(9,1): warning CS4014: Because this call is not awaited, execution of the current method continues before the call is completed. Consider applying the 'await' operator to the result of the call. [/tmp/breakbench/unawaited_task/main/bb.csproj]\n/tmp/breakbench/unawaited_task/main/Program.cs(5,11): warning CA2007: Consider calling ConfigureAwait on the aw\n...\namentals/code-analysis/quality-rules/ca2007) [/tmp/breakbench/unawaited_task/main/bb.csproj] bb -> /tmp/breakbench/unawaited_task/main/out/bb.dll\n/tmp/breakbench/unawaited_task/main/Program.cs(5,11): warning CA2007: Consider calling ConfigureAwait on the awaited task (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2007) [/tmp/breakbench/unawaited_task/main/bb.csproj]",
    "exit": 0,
-   "rss_mb": 26.9,
+   "rss_mb": 26.4,
    "secs": 0.01,
    "stdout": "0",
    "stderr": ""
@@ -376,10 +379,11 @@
   "format_arg_mismatch": {
    "outcome": "TRAPPED",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "/tmp/breakbench/format_arg_mismatch/main/Program.cs(2,5): warning CS0219: The variable 'total' is assigned but its value is never used [/tmp/breakbench/format_arg_mismatch/main/bb.csproj]\n/tmp/breakbench/format_arg_mismatch/main/Program.cs(3,19): warning CA2241: Provide correct arguments to formatting methods (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2241) [/tmp/breakbench/format_arg_mismatch/main/bb.csproj]\n/tmp/breakbench/format_arg_mismatch/main/Program.cs(3,19): warning CA1305: The behavior of 'string.Format(string, object)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'string.Format(IFormatProvider, string, params object[])'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/format_arg_mismatch/main/bb.csproj] bb -> /tmp/breakbench/format_arg_mismatch/main/out/bb.dll\n/tmp/breakbench/format_arg_mismatch/main/Program.cs(3,19): warning CA1305: The behavior of 'string.Format(string, object)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'string.Format(IFormatProvider, string, params object[])'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/format_arg_mismatch/main/bb.csproj]\n3 Warning(s) 0 Error(s)",
    "warnings": "/tmp/breakbench/format_arg_mismatch/main/Program.cs(3,19): warning CA2241: Provide correct arguments to formatting methods (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2241) [/tmp/breakbench/format_arg_mismatch/main/bb.csproj]\n/tmp/breakbench/format_arg_mismatch/main/Program.cs(3,19): warning CA1305: The behavior of 'string.Format(string, object)' could vary based\n...\n.cs(3,19): warning CA1305: The behavior of 'string.Format(string, object)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'string.Format(IFormatProvider, string, params object[])'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/format_arg_mismatch/main/bb.csproj]",
    "exit": 134,
-   "rss_mb": 33.9,
+   "rss_mb": 33.4,
    "secs": 0.15,
    "stdout": "",
    "stderr": "Unhandled exception. System.FormatException: Index (zero based) must be greater than or equal to zero and less than the size of the argument list.\n   at System.Text.ValueStringBuilder.AppendFormatHelper(IFormatProvider provider, String format, ReadOnlySpan`1 args)\n   at System.String.FormatHelper(IFormatProvider provider, String format, ReadOnlySpan`1 args)\n   at System.String.Format(String format, Object arg0)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/format_arg_mismatch/main/Program.cs:line 3\nAborted (core dumped)"
@@ -622,11 +626,12 @@
   "fd_leak": {
    "outcome": "LEAK",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "/tmp/breakbench/fd_leak/main/Program.cs(1,9): warning CA1305: The behavior of 'int.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'int.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/fd_leak/main/bb.csproj]\n/tmp/breakbench/fd_leak/main/Program.cs(5,13): warning CA2000: Call System.IDisposable.Dispose on object created by 'new FileStream(\"/tmp/bb_fd.txt\", FileMode.Open, FileAccess.Read)' before all references to it are out of scope (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2000) [/tmp/breakbench/fd_leak/main/bb.csproj]\n/tmp/\n...\ning as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"done\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/fd_leak/main/bb.csproj] bb -> /tmp/breakbench/fd_leak/main/out/bb.dll\n/tmp/breakbench/fd_leak/main/Program.cs(8,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"done\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/fd_leak/main/bb.csproj]\n3 Warning(s) 0 Error(s)",
    "warnings": "/tmp/breakbench/fd_leak/main/Program.cs(5,13): warning CA2000: Call System.IDisposable.Dispose on object created by 'new FileStream(\"/tmp/bb_fd.txt\", FileMode.Open, FileAccess.Read)' before all references to it are out of scope (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2000) [/tmp/breakbench/fd_leak/main/bb.csproj]",
    "exit": 134,
-   "rss_mb": 32.4,
-   "secs": 0.23,
+   "rss_mb": 33.0,
+   "secs": 0.18,
    "stdout": "",
    "stderr": "Unhandled exception. System.IO.IOException: Too many open files : '/tmp/bb_fd.txt'\n   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)\n   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)\n   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access)\n   at Program.<Main>$(String[] args)\nAborted (core dumped)"
   },
@@ -764,11 +769,12 @@
   "unreachable_code": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "/tmp/breakbench/unreachable_code/main/Program.cs(7,5): warning CS0162: Unreachable code detected [/tmp/breakbench/unreachable_code/main/bb.csproj] bb -> /tmp/breakbench/unreachable_code/main/out/bb.dll\n/tmp/breakbench/unreachable_code/main/Program.cs(7,5): warning CS0162: Unreachable code detected [/tmp/breakbench/unreachable_code/main/bb.csproj]\n1 Warning(s) 0 Error(s)",
    "warnings": "/tmp/breakbench/unreachable_code/main/Program.cs(7,5): warning CS0162: Unreachable code detected [/tmp/breakbench/unreachable_code/main/bb.csproj] bb -> /tmp/breakbench/unreachable_code/main/out/bb.dll\n/tmp/breakbench/unreachable_code/main/Program.cs(7,5): warning CS0162: Unreachable code detected [/tmp/breakbench/unreachable_code/main/bb.csproj]",
    "exit": 0,
-   "rss_mb": 22.3,
-   "secs": 0.02,
+   "rss_mb": 22.4,
+   "secs": 0.01,
    "stdout": "ok",
    "stderr": ""
   },
@@ -837,10 +843,11 @@
   "hash_matches_equality": {
    "outcome": "SILENT",
    "warned": true,
+   "run_warned": false,
    "all_warnings": "/tmp/breakbench/hash_matches_equality/main/Program.cs(4,7): warning CS0659: 'Point' overrides Object.Equals(object o) but does not override Object.GetHashCode() [/tmp/breakbench/hash_matches_equality/main/bb.csproj]\n/tmp/breakbench/hash_matches_equality/main/Program.cs(4,7): warning CA1852: Type 'Point' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/hash_matches_equality/main/bb.csproj] bb -> /tmp/breakbench/hash_matches_equality/main/out/bb.dll\n/tmp/breakbench/hash_matches_equality/main/Program.cs(4,7): warning CA1852: Type 'Point' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/hash_matches_equality/main/bb.csproj]\n2 Warning(s) 0 Error(s)",
    "warnings": "/tmp/breakbench/hash_matches_equality/main/Program.cs(4,7): warning CS0659: 'Point' overrides Object.Equals(object o) but does not override Object.GetHashCode() [/tmp/breakbench/hash_matches_equality/main/bb.csproj]",
    "exit": 0,
-   "rss_mb": 25.9,
+   "rss_mb": 25.6,
    "secs": 0.01,
    "stdout": "2",
    "stderr": ""

@@ -376,8 +376,12 @@ def main():
         _, record["outcome"], status, maxrss_mb, out, err, secs = worst
         if runs > 1:
             record["runs"] = runs
-        hits = build_warnings + relevant_warnings(problem, lang, source, err)
-        record["warned"] = bool(hits)
+        run_warnings = relevant_warnings(problem, lang, source, err)
+        hits = build_warnings + run_warnings
+        # Only a warning the build prints can stop the bug before it ships; one the running
+        # program prints is seen where the bug already runs.
+        record["warned"] = bool(build_warnings)
+        record["run_warned"] = bool(run_warnings)
         # Every warning the toolchain printed, matched or not, so the warn patterns can be audited.
         extra = re.compile(lang["warn_line"]) if lang.get("warn_line") else None
         every = warning_lines(compile_out, source, extra) + warning_lines(err, source, extra)
