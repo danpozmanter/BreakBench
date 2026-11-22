@@ -899,6 +899,46 @@
    "secs": 0.04,
    "stdout": "",
    "stderr": "Unhandled exception:\nFileSystemException: writeFrom failed, path = '/dev/full' (OS Error: No space left on device, errno = 28)\n#0      _RandomAccessFile.writeFromSync (dart:io/file_impl.dart:999:7)\n#1      _File.writeAsBytesSync (dart:io/file_impl.dart:746:14)\n#2      _File.writeAsStringSync (dart:io/file_impl.dart:772:5)\n#3      main (file:///tmp/breakbench/lost_write_error/main/main.dart:4:21)\n#4      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:313:19)\n#5      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 52.6,
+   "secs": 0.07,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "rss_mb": 51.8,
+   "secs": 0.14,
+   "stdout": "",
+   "stderr": "Unhandled exception:\nBad state: No element\n#0      ListBase.reduce (dart:collection/list.dart:187:22)\n#1      main (file:///tmp/breakbench/empty_max/main/main.dart:5:12)\n#2      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)\n#3      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "orphaned_receive": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "rss_mb": 54.3,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Unhandled exception:\nFormatException: Invalid radix-10 number (at character 1)\nx\n^\n\n#0      int._handleFormatError (dart:core-patch/integers_patch.dart:150:5)\n#1      int._parseRadix (dart:core-patch/integers_patch.dart:179:14)\n#2      int._parse (dart:core-patch/integers_patch.dart:121:12)\n#3      int.parse (dart:core-patch/integers_patch.dart:81:12)\n#4      main.<anonymous closure> (file:///tmp/breakbench/orphaned_receive/main/main.dart:5:31)\n#5      new Future.<anonymous closure> (dart:async/future.dart:260:40)\n#6      Timer._createTimer.<anonymous closure> (dart:async-patch/timer_patch.dart:18:15)\n#7      _Timer._runTimers (dart:isolate-patch/timer_impl.dart:423:19)\n#8      _Timer._handleMessage (dart:isolate-patch/timer_impl.dart:454:5)\n#9      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "blocking_in_async": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 54.6,
+   "secs": 1.04,
+   "stdout": "serial",
+   "stderr": ""
   }
  }
 }

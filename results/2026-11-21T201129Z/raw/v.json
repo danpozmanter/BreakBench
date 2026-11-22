@@ -815,6 +815,34 @@
    "secs": 0.0,
    "stdout": "saved",
    "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "REJECTED",
+   "message": "main.v:6:15: error: `?int` cannot be used as `int literal`, unwrap the option first\n    4 |     line := os.args[1]\n    5 |     pos := line.index(':')\n    6 |     println(line[pos + 1..]) // CONTROL! println(line[(pos or { -1 }) + 1..])\n      |                  ~~~\n    7 | }\nmain.v:6:15: error: cannot use Option or Result as index (type `string`)\n    4 |     line := os.args[1]\n    5 |     pos := line.index(':')\n    6 |     println(line[pos + 1..]) // CONTROL! println(line[(pos or { -1 }) + 1..])\n      |                  ~~~~~~~\n    7 | }"
+  },
+  "empty_max": {
+   "outcome": "REJECTED",
+   "message": "main.v:6:14: error: arrays.max() returns `!int`, so it should have either an `or {}` block, or `!` at the end\n    4 | fn main() {\n    5 |     xs := os.args[1..].map(it.int())\n    6 |     m := arrays.max(xs) // CONTROL! m := arrays.max(xs) or { -1 }\n      |                 ~~~~~~~\n    7 |     println(m + 1)\n    8 | }"
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "rss_mb": 14.5,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
   }
  }
 }

@@ -273,6 +273,10 @@ def classify(problem, kinds, status, timed_out, maxrss_mb, stdout, stderr, thres
         return "SILENT"
     if unsafe and text and re.search(unsafe, text.splitlines()[-1]):
         return "CORRUPT"
+    # A program that printed its answer did not stop at the bug, whatever happened after.
+    answer = problem.get("answer")
+    if answer and re.search(answer, text, re.MULTILINE):
+        return "SILENT"
     if not killed and TRAP_RE.search(stderr) and not SANITIZER_FAULT_RE.search(stderr):
         return "TRAPPED"
     if (

@@ -1,0 +1,7 @@
+use std::env
+
+fn main() {
+    let line = env::args()[0]
+    let pos = line.find(":")
+    println(line.substring(pos + 1, line.byte_len())) // CONTROL! println(match pos { Some(p) => line.substring(p + 1, line.byte_len()), None => "" })
+}

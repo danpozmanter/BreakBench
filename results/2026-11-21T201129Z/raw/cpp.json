@@ -957,6 +957,46 @@
    "secs": 0.0,
    "stdout": "saved",
    "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.4,
+   "secs": 0.0,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 134,
+   "rss_mb": 14.6,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/ranges_algo.h:2960: range_value_t<_Range> std::ranges::__max_fn::operator()(_Range &&, _Comp, _Proj) const [_Range = std::vector<long> &, _Proj = std::identity, _Comp = std::ranges::less]: Assertion '__first != __last' failed.\nAborted"
+  },
+  "orphaned_receive": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 134,
+   "rss_mb": 14.4,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "terminate called after throwing an instance of 'std::invalid_argument'\n  what():  stol\nAborted"
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.4,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
   }
  }
 }

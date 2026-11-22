@@ -722,6 +722,34 @@
    "secs": 0.0,
    "stdout": "saved",
    "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "REJECTED",
+   "message": "error[E0369]: cannot add `{integer}` to `std::option::Option<usize>`\n --> main.rs:4:30\n  |\n4 |     println!(\"{}\", &line[pos + 1..]); // CONTROL! println!(\"{}\", pos.map_or(\"\", |p| &line[p + 1..]));\n  |                          --- ^ - {integer}\n  |                          |\n  |                          std::option::Option<usize>\n  |\nnote: `std::option::Option<usize>` does not implement `std::ops::Add<{integer}>`\n --> /rustc/0ef1bc386059596dada8fb65b50425aab2ea637a/library/core/src/option.rs:598:0\n  |\n  = note: `std::option::Option<usize>` is defined in another crate\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0369`."
+  },
+  "empty_max": {
+   "outcome": "REJECTED",
+   "message": "error[E0369]: cannot add `{integer}` to `std::option::Option<&i64>`\n --> main.rs:4:22\n  |\n4 |     println!(\"{}\", m + 1); // CONTROL! println!(\"{}\", m.map_or(0, |v| v + 1));\n  |                    - ^ - {integer}\n  |                    |\n  |                    std::option::Option<&i64>\n  |\nnote: `std::option::Option<&i64>` does not implement `std::ops::Add<{integer}>`\n --> /rustc/0ef1bc386059596dada8fb65b50425aab2ea637a/library/core/src/option.rs:598:0\n  |\n  = note: `std::option::Option<&i64>` is defined in another crate\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0369`."
+  },
+  "orphaned_receive": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 101,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "thread '<unnamed>' (148) panicked at main.rs:7:34:\ncalled `Result::unwrap()` on an `Err` value: ParseIntError { kind: InvalidDigit }\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' (147) panicked at main.rs:10:30:\ncalled `Result::unwrap()` on an `Err` value: RecvError"
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
   }
  }
 }

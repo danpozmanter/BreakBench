@@ -845,6 +845,46 @@
    "secs": 0.01,
    "stdout": "",
    "stderr": "std.exception.ErrnoException@std/stdio.d(711): Could not close file `/dev/full' (No space left on device)\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/exception.d:522 @safe noreturn std.exception.bailOut!(std.exception.ErrnoException).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x629948d65851]\n??:? @safe bool std.exception.enforce!(std.exception.ErrnoException).enforce!(bool).enforce(bool, lazy const(char)[], immutable(char)[], ulong) [0x629948e3e57d]\n??:? @trusted void std.stdio.File.detach() [0x629948e729c1]\nmain.d:6 _Dmain [0x629948d645db]"
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 13.9,
+   "secs": 0.0,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.5,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "core.exception.AssertError@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/algorithm/searching.d(1451): r is an empty range\n----------------\n??:? _d_assert_msg [0x5a442ab9cde3]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/algorithm/searching.d:1451 pure nothrow @nogc @safe long std.algorithm.searching.extremum!(std.algorithm.searching.__lambda_L3919_C30, \"a > b\", long[]).extremum(long[]) [0x5a442a9778a5]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/algorithm/searching.d:3922 pure nothrow @nogc @safe long std.algorithm.searching.maxElement!(std.algorithm.searching.__lambda_L3919_C30, long[]).maxElement(long[]) [0x5a442a96fd8c]\nmain.d:6 _Dmain [0x5a442a96f537]"
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "rss_mb": 13.9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 13.9,
+   "secs": 0.51,
+   "stdout": "concurrent",
+   "stderr": ""
   }
  }
 }

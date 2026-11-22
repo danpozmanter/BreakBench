@@ -734,6 +734,40 @@
    "secs": 0.06,
    "stdout": "",
    "stderr": "error: WriteFailed\n/opt/zig/lib/std/Io/File.zig:611:5: 0x11f15fa in writeStreaming (std.zig)\n    return (try io.operate(.{ .file_write_streaming = .{\n    ^\n/opt/zig/lib/std/Io/File/Writer.zig:128:9: 0x11f0d70 in drainStreaming (std.zig)\n        return error.WriteFailed;\n        ^\n/opt/zig/lib/std/Io/File/Writer.zig:93:42: 0x11f07d2 in drain (std.zig)\n        .streaming, .streaming_simple => return drainStreaming(w, data, splat),\n                                         ^\n/opt/zig/lib/std/Io/Writer.zig:394:28: 0x103a883 in defaultFlush (std.zig)\n    while (w.end != 0) _ = try drainFn(w, &.{\"\"}, 1);\n                           ^\n/opt/zig/lib/std/Io/Writer.zig:388:5: 0x1132c53 in flush (std.zig)\n    return w.vtable.flush(w);\n    ^\n/tmp/breakbench/lost_write_error/main/main.zig:15:5: 0x11e378d in main (main.zig)\n    try fw.interface.flush();\n    ^"
+  },
+  "not_found_sentinel": {
+   "outcome": "REJECTED",
+   "message": "main.zig:12:39: error: invalid operands to binary expression: 'optional' and 'comptime_int'\n    try out.print(\"{s}\\n\", .{line[pos + 1 ..]}); // CONTROL! try out.print(\"{s}\\n\", .{if (pos) |p| line[p + 1 ..] else \"\"});\n                                  ~~~~^~~\nreferenced by:\n    callMain [inlined]: /opt/zig/lib/std/start.zig:827:30\n    callMainWithArgs [inlined]: /opt/zig/lib/std/start.zig:729:20\n    posixCallMainAndExit: /opt/zig/lib/std/start.zig:681:38\n    2 reference(s) hidden; use '-freference-trace=5' to see all references"
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 134,
+   "rss_mb": 14.1,
+   "secs": 0.24,
+   "stdout": "",
+   "stderr": "thread 37 panic: reached unreachable code\n/opt/zig/lib/std/debug.zig:442:14: 0x1029ea9 in assert (std.zig)\n    if (!ok) unreachable; // assertion failure\n             ^\n/opt/zig/lib/std/mem.zig:3806:11: 0x11f01e1 in max__func_792 (std.zig)\n    assert(slice.len > 0);\n          ^\n/tmp/breakbench/empty_max/main/main.zig:12:41: 0x11e36b8 in main (main.zig)\n    try out.print(\"{d}\\n\", .{std.mem.max(i64, xs.items) + 1});\n                                        ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e43e8 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "rss_mb": 14.0,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.6,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
   }
  }
 }

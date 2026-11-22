@@ -833,6 +833,34 @@
    "secs": 0.0,
    "stdout": "saved",
    "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "REJECTED",
+   "message": "4: {\n 5:     String line = args[1];\n 6:     sz? pos = line.index_of_char(':');\n 7:     io::printn(line[pos + 1..]); // CONTROL! io::printn(line[(pos ?? -1) + 1..]);\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/tmp/breakbench/not_found_sentinel/main/main.c3:7:2: error: The result of this call is optional due to its argument(s). This optional result may not be implicitly discarded. Please assign it to a variable, ignore it with '(void)', rethrow with '!' or panic with '!!'."
+  },
+  "empty_max": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no standard call for the maximum of a slice; math::max takes its values as separate arguments"
+  },
+  "orphaned_receive": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "rss_mb": 32.8,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "ERROR: 'Unexpected fault 'string::MALFORMED_INTEGER' was unwrapped!'\n  in main.worker (/tmp/breakbench/orphaned_receive/main/main.c3:10) [./main] [inline]\n  in std.thread.os.callback (/opt/c3/lib/std/threads/os/thread_posix.c3:207) [./main] [inline]\n  in asan_thread_start(void*) (/home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_interceptors.cpp:306) [./main] [inline]\n  in pthread_condattr_setpshared (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in __clone (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]"
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 13.8,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
   }
  }
 }

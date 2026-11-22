@@ -939,6 +939,51 @@
    "secs": 0.17,
    "stdout": "",
    "stderr": "Unhandled exception. System.IO.IOException: No space left on device : '/dev/full'\n   at System.IO.RandomAccess.WriteAtOffset(SafeFileHandle handle, ReadOnlySpan`1 buffer, Int64& fileOffset)\n   at System.IO.Strategies.BufferedFileStreamStrategy.Flush(Boolean flushToDisk)\n   at System.IO.StreamWriter.Flush(Boolean flushStream, Boolean flushEncoder)\n   at System.IO.StreamWriter.Dispose(Boolean disposing)\n   at System.IO.TextWriter.Dispose()\n   at Program.<Main>$(String[] args) in /tmp/breakbench/lost_write_error/main/Program.cs:line 4\n   at Program.<Main>$(String[] args) in /tmp/breakbench/lost_write_error/main/Program.cs:line 1\nAborted (core dumped)"
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/not_found_sentinel/main/Program.cs(2,11): warning CA1307: 'string.IndexOf(char)' has a method overload that takes a 'StringComparison' parameter. Replace this call in '<top-level-statements-entry-point>' with a call to 'string.IndexOf(char, System.StringComparison)' for clarity of intent. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1307) [/tmp/breakbench/not_found_sentinel/main/bb.csproj]\n/tmp/breakbench/not_found_sentinel/main/Program.cs(3,1): warning CA1846: Prefer 'AsSpan' over 'Substring' when span-based overloads are available (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1846) [/tmp/breakbench/not_found_sentinel/main/bb.csproj] bb -> /tmp/breakbench/not_found_sentinel/main/out/bb.dll\n/tmp/breakbench/not_found_sentinel/main/Program.cs(3,1): warning CA1846: Prefer 'AsSpan' over 'Substring' when span-based overloads are available (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1846) [/tmp/breakbench/not_found_sentinel/main/bb.csproj]\n2 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 22.2,
+   "secs": 0.01,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 34.9,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.InvalidOperationException: Sequence contains no elements.\n   at System.MemoryExtensions.MinMaxInteger[T,TMinMax](ReadOnlySpan`1 span)\n   at System.MemoryExtensions.MinMaxInteger[TOuter,TInner,TMinMax](ReadOnlySpan`1 span)\n   at System.MemoryExtensions.Max[T](ReadOnlySpan`1 span)\n   at System.MemoryExtensions.Max[T](ReadOnlySpan`1 span, IComparer`1 comparer)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/empty_max/main/Program.cs:line 2\nAborted (core dumped)"
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/orphaned_receive/main/Program.cs(4,43): warning CA1305: The behavior of 'long.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'long.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/orphaned_receive/main/bb.csproj]\n/tmp/breakbench/orphaned_receive/main/Program.cs(5,25): warning CA2007: Consider calling ConfigureAwait on the awaited task (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2007) [/tmp/breakbench/orphaned_receive/main/bb.csproj] bb -> /tmp/breakbench/orphaned_receive/main/out/bb.dll\n/tmp/breakbench/orphaned_receive/main/Program.cs(5,25): warning CA2007: Consider calling ConfigureAwait on the awaited task (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2007) [/tmp/breakbench/orphaned_receive/main/bb.csproj]\n2 Warning(s) 0 Error(s)",
+   "exit": -9,
+   "rss_mb": 14.5,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "blocking_in_async": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/blocking_in_async/main/Program.cs(5,5): warning CA1849: 'Thread.Sleep(int)' synchronously blocks. Use await instead. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1849) [/tmp/breakbench/blocking_in_async/main/bb.csproj]\n/tmp/breakbench/blocking_in_async/main/Program.cs(9,7): warning CA2007: Consider calling ConfigureAwait on the awaited task (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2007) [/tmp/breakbench/blocking_in_async/main/bb.csproj]\n/tmp/breakbench/blocking_in_async/main/Program.cs(10,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"concurrent, serial\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/blocking_in_async/main/bb.csproj] bb -> /tmp/breakbench/blocking_in_async/main/out/bb.dll\n/tmp/breakbench/blocking_in_async/main/Program.cs(10,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"concurrent, serial\". (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1303) [/tmp/breakbench/blocking_in_async/main/bb.csproj]\n3 Warning(s) 0 Error(s)",
+   "warnings": "/tmp/breakbench/blocking_in_async/main/Program.cs(5,5): warning CA1849: 'Thread.Sleep(int)' synchronously blocks. Use await instead. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1849) [/tmp/breakbench/blocking_in_async/main/bb.csproj]",
+   "exit": 0,
+   "rss_mb": 22.1,
+   "secs": 1.01,
+   "stdout": "serial",
+   "stderr": ""
   }
  }
 }

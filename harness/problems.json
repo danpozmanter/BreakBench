@@ -1078,6 +1078,31 @@
       "warn": "optional|debug description|\\bnil\\b|\\bnull\\b|nullable|possibly|interpolat"
     },
     {
+      "id": "not_found_sentinel",
+      "category": "null",
+      "kind": "static",
+      "args": [
+        "user"
+      ],
+      "expect": null,
+      "title": "A search that found nothing, used as a position",
+      "scenario": "line is user, read from the command line, with no colon in it. The program finds the position of : with the language's standard search call and prints the text after it, from that position plus 1, without checking that a colon was found.",
+      "best": "A refusal to use the search result as a position before checking it was found: the call answers an optional. A clear error at run time is next best. Printing user or ser treats \"not found\" (-1, false or nil) as a real position.",
+      "warn": "optional|\\bnil\\b|\\bnull\\b|not found|unwrap|possibly"
+    },
+    {
+      "id": "empty_max",
+      "category": "null",
+      "kind": "dynamic",
+      "args": [],
+      "expect": null,
+      "title": "The maximum of an empty list",
+      "scenario": "readings are the numbers given on the command line: none. The program takes their maximum with the language's standard call for the maximum of a list and prints it plus 1.",
+      "best": "A refusal to use the maximum as a number before checking the list had one: the call answers an optional. A clear error at run time is next best. Printing -Infinity, 1 or any other number treats an empty list as having a maximum.",
+      "warn": "optional|empty|\\bnil\\b|\\bnull\\b|possibly",
+      "answer": "^-?(\\d+(\\.\\d+)?|Infinity)$"
+    },
+    {
       "id": "readonly_param",
       "category": "correctness",
       "kind": "static",
@@ -1177,6 +1202,28 @@
       "best": "2000000, or a refusal to let two threads change count without synchronization. A smaller number means lost updates.",
       "warn": "\\brace\\b|data race|race condition|not thread|sendable|concurren|\\bcaptured\\b",
       "runs": 50
+    },
+    {
+      "id": "orphaned_receive",
+      "category": "concurrency",
+      "kind": "dynamic",
+      "args": [],
+      "expect": null,
+      "title": "Waiting for an answer from a worker that failed",
+      "scenario": "A worker parses x as an integer and sends the result back through the language's standard channel or queue. Parsing fails the language's usual way (an exception, a panic or an error) before anything is sent. The main thread waits for the answer with the channel's ordinary receive, with no timeout, and prints it.",
+      "best": "A clear error: the receive reports that nothing can arrive, or the worker's failure stops the program. Waiting forever is a hang in production.",
+      "warn": "deadlock|disconnect|closed|never|no live threads|blocked indefinitely"
+    },
+    {
+      "id": "blocking_in_async",
+      "category": "concurrency",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^concurrent$",
+      "title": "A blocking sleep inside asynchronous code",
+      "scenario": "Two jobs each wait 500 ms with the language's ordinary blocking sleep. The program runs both with the language's asynchronous call (async/await where the language and its standard library can run it, otherwise a thread, task or goroutine), waits for both, and prints concurrent if they finished within 800 ms, otherwise serial.",
+      "best": "concurrent, or a refusal of a blocking call inside asynchronous code. serial means one job's sleep stalled the other, as a blocking call stalls every request on an event loop.",
+      "warn": "block|noasync|asynchronous context|lacks .?await|took \\d|slow callback|executing .* took"
     },
     {
       "id": "unreachable_code",

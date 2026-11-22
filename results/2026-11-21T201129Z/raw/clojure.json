@@ -960,6 +960,46 @@
    "secs": 0.29,
    "stdout": "",
    "stderr": "Execution error (IOException) at java.io.FileOutputStream/writeBytes (FileOutputStream.java:-2).\nNo space left on device\n\nFull report at:\n/tmp/clojure-11877629572924590173.edn"
+  },
+  "not_found_sentinel": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 108.1,
+   "secs": 0.3,
+   "stdout": "",
+   "stderr": "Execution error (NullPointerException) at main/-main (main.clj:8).\nCannot invoke \"Object.getClass()\" because \"x\" is null\n\nFull report at:\n/tmp/clojure-16415254920411409681.edn"
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 108.7,
+   "secs": 0.76,
+   "stdout": "",
+   "stderr": "Execution error (ArityException) at main/-main (main.clj:5).\nWrong number of args (0) passed to: clojure.core/max\n\nFull report at:\n/tmp/clojure-1610056849300260242.edn"
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "rss_mb": 11.9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 96.9,
+   "secs": 0.73,
+   "stdout": "concurrent",
+   "stderr": ""
   }
  }
 }

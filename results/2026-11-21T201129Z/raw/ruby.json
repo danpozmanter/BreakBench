@@ -1006,6 +1006,46 @@
    "secs": 0.02,
    "stdout": "",
    "stderr": "main.rb:1:in 'IO#close': No space left on device @ fptr_finalize_flush - /dev/full (Errno::ENOSPC)\n\tfrom main.rb:1:in 'IO.open'\n\tfrom main.rb:1:in '<main>'"
+  },
+  "not_found_sentinel": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 21.0,
+   "secs": 0.06,
+   "stdout": "",
+   "stderr": "main.rb:3:in '<main>': undefined method '+' for nil (NoMethodError)\n\nputs line[pos + 1..]\n              ^"
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 21.6,
+   "secs": 0.14,
+   "stdout": "",
+   "stderr": "main.rb:2:in '<main>': undefined method '+' for nil (NoMethodError)\n\nputs xs.max + 1\n            ^"
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "rss_mb": 14.2,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": "#<Thread:0x0000733c106ab070 main.rb:2 run> terminated with exception (report_on_exception is true):\nmain.rb:2:in 'Kernel#Integer': invalid value for Integer(): \"x\" (ArgumentError)\n\nThread.new { answer << Integer(\"x\") }\n                               ^^^\n\tfrom main.rb:2:in 'block in <main>'"
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.2,
+   "secs": 0.53,
+   "stdout": "concurrent",
+   "stderr": ""
   }
  }
 }

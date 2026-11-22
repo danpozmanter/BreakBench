@@ -983,6 +983,48 @@
    "secs": 0.03,
    "stdout": "",
    "stderr": "OSError: [Errno 28] No space left on device\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/tmp/breakbench/lost_write_error/main/main.py\", line 1, in <module>\n    with open(\"/dev/full\", \"w\") as f:\n         ~~~~^^^^^^^^^^^^^^^^^^\nOSError: [Errno 28] No space left on device"
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 18.1,
+   "secs": 0.01,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 18.3,
+   "secs": 0.09,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/empty_max/main/main.py\", line 4, in <module>\n    print(max(xs) + 1)\n          ~~~^^^^\nValueError: max() iterable argument is empty"
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "rss_mb": 18.1,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": "Exception in thread Thread-1 (<lambda>):\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.15/threading.py\", line 1219, in _bootstrap_inner\n    self._context.run(self.run)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^\n  File \"/usr/local/lib/python3.15/threading.py\", line 1161, in run\n    self._target(*self._args, **self._kwargs)\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/breakbench/orphaned_receive/main/main.py\", line 5, in <lambda>\n    threading.Thread(target=lambda: answer.put(int(\"x\"))).start()\n                                               ~~~^^^^^\nValueError: invalid literal for int() with base 10: 'x'"
+  },
+  "blocking_in_async": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": true,
+   "all_warnings": "Executing <Task finished name='Task-2' coro=<job() done, defined at /tmp/breakbench/blocking_in_async/main/main.py:5> result=None created at /usr/local/lib/python3.15/asyncio/tasks.py:755> took 0.500 seconds\nExecuting <Task finished name='Task-3' coro=<job() done, defined at /tmp/breakbench/blocking_in_async/main/main.py:5> result=None created at /usr/local/lib/python3.15/asyncio/tasks.py:755> took 0.500 seconds",
+   "warnings": "Executing <Task finished name='Task-2' coro=<job() done, defined at /tmp/breakbench/blocking_in_async/main/main.py:5> result=None created at /usr/local/lib/python3.15/asyncio/tasks.py:755> took 0.500 seconds\nExecuting <Task finished name='Task-3' coro=<job() done, defined at /tmp/breakbench/blocking_in_async/main/main.py:5> result=None created at /usr/local/lib/python3.15/asyncio/tasks.py:755> took 0.500 seconds",
+   "exit": 0,
+   "rss_mb": 27.5,
+   "secs": 1.17,
+   "stdout": "serial",
+   "stderr": "Executing <Task finished name='Task-2' coro=<job() done, defined at /tmp/breakbench/blocking_in_async/main/main.py:5> result=None created at /usr/local/lib/python3.15/asyncio/tasks.py:755> took 0.500 seconds\nExecuting <Task finished name='Task-3' coro=<job() done, defined at /tmp/breakbench/blocking_in_async/main/main.py:5> result=None created at /usr/local/lib/python3.15/asyncio/tasks.py:755> took 0.500 seconds"
   }
  }
 }

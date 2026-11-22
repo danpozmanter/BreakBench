@@ -807,6 +807,34 @@
    "secs": 0.29,
    "stdout": "At: Mojo/stdlib/std/io/file_descriptor.mojo:81:24: Assert Error: expected amount of bytes not written",
    "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x00007f84d80cad1e\n1  libKGENCompilerRTShared.so 0x00007f84d80c7e46\n2  libKGENCompilerRTShared.so 0x00007f84d80cb8e0\n3  libc.so.6                  0x00007f84d7dd5cb0\n4  main                       0x0000562d6f2daf15\n5  main                       0x0000562d6f2d8785\n6  main                       0x0000562d6f2d6782\n7  main                       0x0000562d6f2d85c0\n8  main                       0x0000562d6f2b9588\n9  main                       0x0000562d6f2da483\n10 main                       0x0000562d6f2b98d6\n11 libc.so.6                  0x00007f84d7dba601\n12 libc.so.6                  0x00007f84d7dba718 __libc_start_main + 136\n13 main                       0x0000562d6f2b91d5\nIllegal instruction (core dumped)"
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.01,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no standard call for the maximum of a list; max takes its values as separate arguments"
+  },
+  "orphaned_receive": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no channel or queue between threads in the standard library; parallelize only runs a function per index"
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.4,
+   "secs": 0.52,
+   "stdout": "concurrent",
+   "stderr": ""
   }
  }
 }

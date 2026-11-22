@@ -864,6 +864,46 @@
    "secs": 0.0,
    "stdout": "saved",
    "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.1,
+   "secs": 0.0,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "rss_mb": 14.6,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "panic: slices.Max: empty list\n\ngoroutine 1 [running]:\nslices.Max[...](...)\n\t/usr/local/go/src/slices/sort.go:97\nmain.main()\n\t/tmp/breakbench/empty_max/main/main.go:16 +0x205"
+  },
+  "orphaned_receive": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "rss_mb": 14.1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "fatal error: all goroutines are asleep - deadlock!\n\ngoroutine 1 [chan receive]:\nmain.main()\n\t/tmp/breakbench/orphaned_receive/main/main.go:17 +0x8e"
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.1,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
   }
  }
 }

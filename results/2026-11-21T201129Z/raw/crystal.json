@@ -866,6 +866,41 @@
    "secs": 0.01,
    "stdout": "",
    "stderr": "Unhandled exception: write (/dev/full): No space left on device (IO::Error)\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/event_loop/polling.cr:221:9 in 'write'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/file_descriptor.cr:44:5 in 'system_write'\n  from /opt/crystal-1.22.3-1/share/crystal/src/io/file_descriptor.cr:357:33 in 'unbuffered_write'\n  from /opt/crystal-1.22.3-1/share/crystal/src/io/buffered.cr:250:5 in 'flush'\n  from /opt/crystal-1.22.3-1/share/crystal/src/io/buffered.cr:258:5 in 'close'\n  from /opt/crystal-1.22.3-1/share/crystal/src/file.cr:550:7 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "not_found_sentinel": {
+   "outcome": "REJECTED",
+   "message": "Showing last frame. Use --error-trace for full trace.\n\nIn main.cr:3:15\n\n 3 | puts line[pos + 1..] # CONTROL! puts pos ? line[pos + 1..] : \"\"\n                   ^\nError: undefined method '+' for Nil (compile-time type is (Int32 | Nil))"
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.6,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Unhandled exception: Empty enumerable (Enumerable::EmptyError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/enumerable.cr:1139:5 in 'max'\n  from main.cr:2:6 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "rss_mb": 14.4,
+   "secs": 20.04,
+   "stdout": "",
+   "stderr": "Unhandled exception in spawn: Invalid Int32: \"x\" (ArgumentError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/string.cr:454:83 in 'to_i32'\n  from /opt/crystal-1.22.3-1/share/crystal/src/string.cr:365:5 in 'to_i'\n  from main.cr:2:21 in '->'\n  from /opt/crystal-1.22.3-1/share/crystal/src/fiber.cr:165:11 in 'run'\n  from /opt/crystal-1.22.3-1/share/crystal/src/fiber.cr:100:3 in '->'"
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "Warning: Deprecated Time.monotonic. Use `Time.instant` instead.\nA total of 2 warnings were found.",
+   "exit": 0,
+   "rss_mb": 14.4,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
   }
  }
 }

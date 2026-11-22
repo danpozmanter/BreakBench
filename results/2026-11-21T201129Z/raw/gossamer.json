@@ -877,6 +877,36 @@
    "secs": 0.0,
    "stdout": "",
    "stderr": "io: File::write: No space left on device (os error 28)"
+  },
+  "not_found_sentinel": {
+   "outcome": "REJECTED",
+   "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GT0003]: cannot apply `+` to `Option<i64>`\n  --> main.gos:6:28\n     6 |     println(line.substring(pos + 1, line.byte_len())) // CONTROL! println(match pos { Some(p) => line.substring(p + 1, line.byte_len()), None => \"\" })\n       |                            ^^^^^^^\n  = note: user types support `+` through an `impl Add<i64>`, dispatched on the left operand\n  = help: implement `impl Add<i64> for Option<i64> { fn add(..) -> .. }`\n\nerror: 1 front-end error(s); refusing to build"
+  },
+  "empty_max": {
+   "outcome": "REJECTED",
+   "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GT0003]: cannot apply `+` to `Option<i64>`\n  --> main.gos:6:16\n     6 |     println(f\"{m + 1}\") // CONTROL! println(f\"{m.unwrap_or(-1) + 1}\")\n       |                ^^^^^\n  = note: user types support `+` through an `impl Add<i64>`, dispatched on the left operand\n  = help: implement `impl Add<i64> for Option<i64> { fn add(..) -> .. }`\n\nerror: 1 front-end error(s); refusing to build"
+  },
+  "orphaned_receive": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "exit": 101,
+   "rss_mb": 14.2,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "error[GX0005]: panic: all goroutines are asleep - deadlock! (receive can never complete)"
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "exit": 0,
+   "rss_mb": 14.2,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
   }
  }
 }

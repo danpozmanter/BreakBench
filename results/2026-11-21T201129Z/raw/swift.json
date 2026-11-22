@@ -799,6 +799,28 @@
    "secs": 0.12,
    "stdout": "",
    "stderr": "Swift/ErrorType.swift:254: Fatal error: Error raised at top level: Error Domain=NSCocoaErrorDomain Code=640 \"There isn\u2019t enough space.\"UserInfo={NSUnderlyingError=Error Domain=NSPOSIXErrorDomain Code=28 \"No space left on device\", NSURL=file:///dev/full, NSFilePath=/dev/full}\n\n*** Signal 4: Backtracing from 0x7cf835a47fbf... done ***\n\n*** Program crashed: Illegal instruction at 0x00007cf835a47fbf ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0               0x00007cf835a47fbf _assertionFailure(_:_:file:line:flags:) + 303 in libswiftCore.so\n1 [ra]          0x00007cf835aa78fe swift_errorInMain + 765 in libswiftCore.so\n2 [ra] [system] 0x00005a293e22d67d main + 380 in main at //<compiler-generated>\n3 [ra]          0\n...\n 29 5a 00 00  \u00ed\u00b7\u00b7\u00b7\u00b7\u00b7\u00b70P\u00b7xp)Z\u00b7\u00b7\nr14 0x30000000000000ed  3458764513820541165\nr15 0x0000000000000000  0\nrip 0x00007cf835a47fbf  0f 0b 48 83 ec 08 48 8d 05 94 16 30 00 48 8d 3d  \u00b7\u00b7H\u00b7\u00ec\u00b7H\u00b7\u00b7\u00b7\u00b70\u00b7H\u00b7=\n\nrflags 0x0000000000010202  \n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (19 omitted):\n\n0x00005a293e22c000\u20130x00005a293e22d68d 0fc9023a14efe7be394c368cacaabdbb772c3bab main            /tmp/breakbench/lost_write_error/main/main\n0x00007cf833f60000\u20130x00007cf83411f819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6       /usr/lib/x86_64-linux-gnu/libc.so.6\n0x00007cf83573e000\u20130x00007cf835d17b70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.01s\n\nIllegal instruction (core dumped)"
+  },
+  "not_found_sentinel": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:3:30: error: value of optional type 'String.Index?' must be unwrapped to a value of type 'String.Index'\n1 | let line = CommandLine.arguments[1]\n2 | let pos = line.firstIndex(of: \":\")\n3 | print(line[line.index(after: pos)...]) // CONTROL! print(pos.map { line[line.index(after: $0)...] } ?? \"\")\n  |                              |- error: value of optional type 'String.Index?' must be unwrapped to a value of type 'String.Index'\n  |                              |- note: coalesce using '??' to provide a default when the optional value contains 'nil'\n  |                              `- note: force-unwrap using '!' to abort execution if the optional value contains 'nil'\n4 |"
+  },
+  "empty_max": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:3:7: error: value of optional type 'Int?' must be unwrapped to a value of type 'Int'\n1 | let xs = CommandLine.arguments.dropFirst().map { Int($0)! }\n2 | let m = xs.max()\n3 | print(m + 1) // CONTROL! print((m ?? -1) + 1)\n  |       |- error: value of optional type 'Int?' must be unwrapped to a value of type 'Int'\n  |       |- note: coalesce using '??' to provide a default when the optional value contains 'nil'\n  |       `- note: force-unwrap using '!' to abort execution if the optional value contains 'nil'\n4 |"
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "rss_mb": 14.3,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "blocking_in_async": {
+   "outcome": "REJECTED",
+   "message": "main.swift:4:12: error: class method 'sleep' is unavailable from asynchronous contexts\n 2 | \n 3 | func job() async {\n 4 |     Thread.sleep(forTimeInterval: 0.5) // CONTROL! try? await Task.sleep(for: .milliseconds(500))\n   |            `- error: class method 'sleep' is unavailable from asynchronous contexts\n 5 | }\n 6 |"
   }
  }
 }

@@ -1,0 +1,10 @@
+use std::sync::channel
+
+fn main() {
+    let tx, rx = channel()
+    spawn(|| {
+        let n = "x".to_i64().unwrap()
+        tx.send(n)
+    })
+    println(f"{rx.recv().unwrap()}")
+}

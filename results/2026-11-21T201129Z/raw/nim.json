@@ -817,6 +817,46 @@
    "secs": 0.0,
    "stdout": "saved",
    "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 13.9,
+   "secs": 0.0,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "/tmp/breakbench/empty_max/main/main.nim(4) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/system/fatal.nim(62) sysFatal\nError: unhandled exception: index out of bounds, the container is empty [IndexDefect]"
+  },
+  "orphaned_receive": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/orphaned_receive/main/main.nim(6) worker\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/strutils.nim(1163) parseInt\nError: unhandled exception: invalid integer: x [ValueError]"
+  },
+  "blocking_in_async": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.1,
+   "secs": 1.0,
+   "stdout": "serial",
+   "stderr": ""
   }
  }
 }

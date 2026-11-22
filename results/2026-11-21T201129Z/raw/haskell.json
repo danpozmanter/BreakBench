@@ -891,6 +891,40 @@
    "secs": 0.0,
    "stdout": "",
    "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.IOException:\n\n/dev/full: withFile: resource exhausted (No space left on device)\n\nHasCallStack backtrace:\n  ioError, called at libraries/ghc-internal/src/GHC/Internal/IO/Handle/Internals.hs:887:17 in ghc-internal:GHC.Internal.IO.Handle.Internals"
+  },
+  "not_found_sentinel": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:9:19: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Int\u2019 with actual type \u2018Maybe Int\u2019\n    \u2022 In the first argument of \u2018(+)\u2019, namely \u2018pos\u2019\n      In the first argument of \u2018drop\u2019, namely \u2018(pos + 1)\u2019\n      In the first argument of \u2018putStrLn\u2019, namely \u2018(drop (pos + 1) line)\u2019\n  |\n9 |   putStrLn (drop (pos + 1) line) -- CONTROL! putStrLn (maybe \"\" (\\p -> drop (p + 1) line) pos)\n  |                   ^^^"
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 11.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.maximum: empty list\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1969:3 in ghc-internal:GHC.Internal.List\n  errorEmptyList, called at libraries/ghc-internal/src/GHC/Internal/List.hs:815:28 in ghc-internal:GHC.Internal.List\n  maximum, called at libraries/ghc-internal/src/GHC/Internal/Data/Foldable.hs:703:15 in ghc-internal:GHC.Internal.Data.Foldable"
+  },
+  "orphaned_receive": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 11.8,
+   "secs": 0.32,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.read: no parse\nmain: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.BlockedIndefinitelyOnMVar:\n\nthread blocked indefinitely in an MVar operation"
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 11.8,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
   }
  }
 }

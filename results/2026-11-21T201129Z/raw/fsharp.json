@@ -912,6 +912,50 @@
    "secs": 0.23,
    "stdout": "",
    "stderr": "Unhandled exception. System.IO.IOException: No space left on device : '/dev/full'\n   at System.IO.RandomAccess.WriteAtOffset(SafeFileHandle handle, ReadOnlySpan`1 buffer, Int64& fileOffset)\n   at System.IO.Strategies.BufferedFileStreamStrategy.Flush(Boolean flushToDisk)\n   at System.IO.StreamWriter.Flush(Boolean flushStream, Boolean flushEncoder)\n   at System.IO.StreamWriter.Dispose(Boolean disposing)\n   at System.IO.TextWriter.Dispose()\n   at Program.main(String[] _arg1) in /tmp/breakbench/lost_write_error/main/Program.fs:line 7\n   at Program.main(String[] _arg1) in /tmp/breakbench/lost_write_error/main/Program.fs:line 6\nAborted (core dumped)"
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 25.7,
+   "secs": 0.02,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "rss_mb": 39.6,
+   "secs": 0.33,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.ArgumentException: The input array was empty. (Parameter 'array')\n   at Microsoft.FSharp.Collections.ArrayModule.Max[T](T[] array) in /__w/1/s/src/fsharp/src/FSharp.Core/array.fs:line 1717\n   at Program.main(String[] argv) in /tmp/breakbench/empty_max/main/Program.fs:line 4\nAborted (core dumped)"
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": -9,
+   "rss_mb": 14.5,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "blocking_in_async": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 25.9,
+   "secs": 1.02,
+   "stdout": "serial",
+   "stderr": ""
   }
  }
 }

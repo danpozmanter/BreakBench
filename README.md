@@ -6,12 +6,9 @@ BreakBench measures what 30 programming languages do about common bugs. It is in
 [LangArena](https://github.com/kostya/LangArena), which measures speed and efficiency on correct
 programs, and covers LangArena's 27 languages plus OCaml, Haskell and Clojure.
 
-The question behind every test: can you trust the program to run without error in production, does
-the language help you find errors fast, and does it keep you from the big ones, like the
-billion-dollar null? Each test is an ordinary program with one classic bug in it. Does the compiler
-catch it, does the program stop with a clear error, or does it quietly print the wrong answer?
+"How much does a language help the programmer avoid production bugs?"
 
-A language scores the mean over all 110 tests, as a percentage. The size of a language's standard
+A language scores the mean over all 114 tests, as a percentage. The size of a language's standard
 library plays no part.
 
 Each language runs its latest release, built from LangArena's Dockerfiles or the language's own
@@ -27,16 +24,16 @@ images.
 
 ## Tests
 
-110 tests in four categories. Each has a CWE or CERT entry or appears in a language's pitfall list,
+114 tests in four categories. Each has a CWE or CERT entry or appears in a language's pitfall list,
 reads the same in every language, and covers a mistake no other test covers.
 `harness/problems.json` describes each one.
 
 | Category | Tests | The bug |
 |---|---|---|
 | Correctness | 80 | The program computes the wrong answer or loses data: overflow, a missing match case, arguments in the wrong order, a misspelled name, a comparison where an assignment was meant, command injection, a write error lost at close, ... |
-| Null safety | 5 | The program uses a value that may be missing as if it were there, or prints it |
+| Null safety | 7 | The program uses a value that may be missing as if it were there: a lookup that found nothing, a search that returned -1, the maximum of an empty list, a missing name printed as text |
 | Memory safety | 17 | The program reads or writes memory it does not own, or never frees it: use after free, out-of-bounds reads and writes, leaks, ... |
-| Concurrency | 8 | Threads or tasks interfere: a data race, a deadlock, a failure lost between threads, ... |
+| Concurrency | 10 | Threads or tasks interfere: a data race, a deadlock, a failure lost between threads, a wait for a worker that died, a blocking call that stalls asynchronous code, ... |
 
 The site breaks each language's score down by category, and reports two more shares: tests caught
 before running (refused by the compiler or checker) and tests with no silent failure (refused, run
@@ -202,6 +199,14 @@ results in `raw/` and the ranking in `results.json`. Partial runs update the new
 - V reads the line after a bare `return` as the value to return, so in a function that returns
   nothing, any statement after `return` fails to build. That refuses `unreachable_code`, though not
   through a check for unreachable code.
+- Nim's `max` of an empty sequence reads past the end and answers a garbage number; the
+  `IndexDefect` surfaces only after the program has printed it. A test may name an `answer`
+  pattern: a run that prints a matching result did not stop at the bug, so `empty_max` scores
+  Nim's run as a wrong answer, not a stop.
+- `blocking_in_async` uses async/await only where the language and its standard library can run
+  it (Rust's standard library has no executor, so Rust uses threads), otherwise threads, tasks or
+  goroutines. A language without a blocking sleep in its asynchronous model (JavaScript) cannot
+  stall it this way and runs correctly.
 - `by_design` in `problems.json` marks a failure that the language's own documentation names,
   along with its fix. The site outlines those cells, and they still score as measured. Only
   `reference_cycle_leak` qualifies: Rust (`Weak<T>`), Swift (`weak`), C++ (`std::weak_ptr`) and

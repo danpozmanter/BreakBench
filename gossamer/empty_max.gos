@@ -1,0 +1,7 @@
+use std::env
+
+fn main() {
+    let xs = env::args().map(|a| a.to_i64().unwrap())
+    let m = xs.iter().max()
+    println(f"{m + 1}") // CONTROL! println(f"{m.unwrap_or(-1) + 1}")
+}
