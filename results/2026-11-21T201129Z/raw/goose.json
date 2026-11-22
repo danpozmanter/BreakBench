@@ -493,8 +493,15 @@
    "stderr": ""
   },
   "concurrent_map_write": {
-   "outcome": "INEXPRESSIBLE",
-   "message": "no threads that share memory"
+   "outcome": "CORRECT",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 32.1,
+   "secs": 0.08,
+   "stdout": "800000",
+   "stderr": ""
   },
   "reference_cycle_leak": {
    "outcome": "CORRECT",
@@ -645,8 +652,15 @@
    "stderr": "goose runtime error: integer overflow (debug): 31536000000000000 * 300 at i64 (main.goose:1)"
   },
   "racy_counter": {
-   "outcome": "INEXPRESSIBLE",
-   "message": "threads never share memory"
+   "outcome": "CORRECT",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "2000000",
+   "stderr": ""
   },
   "unreachable_code": {
    "outcome": "SILENT",
@@ -716,7 +730,7 @@
   },
   "hash_matches_equality": {
    "outcome": "INEXPRESSIBLE",
-   "message": "a dictionary's hash function is written separately from equality"
+   "message": "struct keys always compare field by field; there is no custom equality for a hash to disagree with"
   },
   "array_literal_length": {
    "outcome": "REJECTED",
@@ -732,8 +746,14 @@
    "stderr": ""
   },
   "enum_from_int": {
-   "outcome": "INEXPRESSIBLE",
-   "message": "no conversion from an integer to an enum"
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.5,
+   "secs": 0.0,
+   "stdout": "before\ninvalid",
+   "stderr": ""
   },
   "increment_in_expression": {
    "outcome": "REJECTED",

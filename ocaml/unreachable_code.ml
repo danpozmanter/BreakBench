@@ -1,7 +1,6 @@
-let check n = if n > 100 then print_endline "big" else print_endline "ok"
+(* OCaml has no return statement: a function runs to its last expression, so nothing can cut it short. *)
+let check () =
+  print_endline "ok";
+  print_endline "checked"
 
-let check_twice () = return (); print_endline "checked" (* BREAK! *)
-
-let () = check_twice () (* BREAK! *)
-
-let () = check 1
+let () = check ()

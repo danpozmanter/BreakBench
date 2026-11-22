@@ -1,1 +1,1 @@
-// CANNOT-EXPRESS: a dictionary's hash function is written separately from equality
+// CANNOT-EXPRESS: struct keys always compare field by field; there is no custom equality for a hash to disagree with

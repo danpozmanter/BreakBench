@@ -1000,8 +1000,15 @@
    "stderr": "main.c:8:16: runtime error: applying non-zero offset 1 to null pointer\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.c:8:16"
   },
   "empty_max": {
-   "outcome": "INEXPRESSIBLE",
-   "message": "no standard call for the maximum of an array"
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.c:6:11: warning: implicit conversion when initializing 'long *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\n1 warning generated.",
+   "exit": 1,
+   "rss_mb": 14.3,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==33==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6cc91a9e0010 at pc 0x6425979671a8 bp 0x7ffc1bc7b480 sp 0x7ffc1bc7b478\nREAD of size 8 at 0x6cc91a9e0010 thread T0\n    #0 0x6425979671a7 in main /tmp/breakbench/empty_max/main/main.c:9:14\n    #1 0x70a91b5fe600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #2 0x70a91b5fe717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #3 0x642597876994 in _start (/tmp/breakbench/empty_max/main/main+0x6c994)\n\n0x6cc91a9e0011 is located 0 bytes after 1-byte region [0x6cc91a9e0010,0x6cc91a9e0011)\nalloca\n...\n fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x6cc91a9e0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==33==ABORTING"
   },
   "orphaned_receive": {
    "outcome": "HANG",

@@ -82,9 +82,14 @@ must run to the end: refusing, stopping or warning about it scores 0.
 - **Controls**: a compile error counts as a refusal only if the same program without the bug
   compiles. That version, the control, drops each `BREAK!` line and uses each `CONTROL! <code>`
   line in its place.
-- **N/A**: a test the language cannot write (a mutex in JavaScript, regex in Zig) scores 0, the
-  same as a failure. A language that can write it but lacks the bug scores
-  CORRECT. Each N/A program says why in a `CANNOT-EXPRESS:` line.
+- **N/A**: a test scores N/A only when the language cannot attempt the scenario at all, because it
+  lacks the construct the mistake is made with (a mutex in JavaScript, regex in Zig, contracts in
+  Rust). N/A scores 0, the same as a failure, and each N/A program says why in a
+  `CANNOT-EXPRESS:` line. Where the language can attempt the task, the program does it the way the
+  language allows and the measured outcome counts: a design that makes the mistake impossible runs
+  correctly (OCaml has no early return; JavaScript workers cannot share a counter, so they send
+  their counts back), and a missing library call is replaced with what the language has (a loop
+  for the maximum of a list in C).
 - **Score**: the mean over all tests, as a percentage.
 
 ### Build mode

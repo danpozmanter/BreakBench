@@ -66,6 +66,8 @@ th button:focus-visible, .cell:focus-visible, .plist button:focus-visible, selec
 tr:last-child td { border-bottom: 0; }
 .rank { width: 2.5em; color: var(--muted); }
 .lang { font-weight: 600; white-space: nowrap; }
+td.lang a { color: var(--fg); text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
+td.lang a:hover, td.lang a:focus-visible { color: var(--accent); text-decoration-color: currentColor; }
 .ver { display: block; font-weight: 400; color: var(--muted); font-size: 12px; max-width: 26ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .score { white-space: nowrap; }
 .bar { display: inline-block; vertical-align: middle; height: 8px; border-radius: 4px; background: var(--line); width: 120px; margin-right: 8px; position: relative; overflow: hidden; }
@@ -191,7 +193,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     <p class="muted">A bug refused before the program runs earns a full point, and a build warning that names it earns half: either can keep the bug out of production. A bug the program only shows while running, by stopping with a clear error or by warning and going on, earns a quarter: a test may catch it, but otherwise it reaches production. A wrong answer earns nothing. A warning and a stop never add up; the higher counts. The same holds for every test, compiled or dynamic, logic or memory.</p>
     <p class="muted">Ignoring a result the language marks must-use counts as a refusal.</p>
     <p class="muted">A compile error counts as a refusal only if the same program with the bug removed compiles.</p>
-    <p class="muted">N/A means the language cannot write the program at all, for example without a mutex or shared-memory threads. Those tests score 0, the same as a failure. A language that simply lacks the bug, like Python with no unsigned integers, scores Ran Correctly.</p>
+    <p class="muted">N/A means the language cannot attempt the test at all, because it lacks the construct the mistake is made with, such as a mutex or contracts. Those tests score 0, the same as a failure. Where a language can attempt the task, its program does it the way the language allows: a design that makes the mistake impossible runs correctly, like OCaml with no early return, and a missing library call is replaced with what the language has.</p>
   </section>
 
   <section aria-labelledby="grid-h" id="tests">
@@ -238,6 +240,9 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     valid: "Correct program that must run",
   };
   const CAT = D.categories;
+  // Each result links to the program that produced it.
+  const REPO = "https://github.com/danpozmanter/BreakBench/blob/main/";
+  const srcLink = (L, p) => el("a", { href: REPO + L.dir + "/" + p.id + "." + L.ext, target: "_blank", rel: "noopener", title: "Source of this program" }, L.name);
   const el = (tag, attrs, ...kids) => {
     const e = document.createElement(tag);
     for (const [k, v] of Object.entries(attrs || {})) {
@@ -366,7 +371,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     const facts = el("dl", { class: "facts" },
       el("dt", { text: "Scenario" }), el("dd", { text: p.scenario }),
       el("dt", { text: "Best outcome" }), el("dd", { text: p.best }),
-      el("dt", { text: "Program" }), el("dd", {}, el("code", { text: "<language>/" + p.id + ".*" })),
+      el("dt", { text: "Program" }), el("dd", {}, el("code", { text: "<language>/" + p.id + ".*" }), " (select a language to open its source)"),
       el("dt", { text: "Arguments" }), el("dd", {}, el("code", { text: p.args.length ? p.args.join(" ") : "none" })));
     box.append(facts);
     (p.by_design || []).forEach((id) => {
@@ -381,7 +386,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
       const r = L.results[p.id] || { o: "MISSING", s: 0 };
       const rss = r.rss != null && p.kind === "leak" ? " · " + r.rss + " MB peak" : "";
       tb.append(el("tr", { class: L.id === langId ? "hl" : "", id: "row-" + L.id },
-        el("td", { class: "lang", text: L.name }),
+        el("td", { class: "lang" }, srcLink(L, p)),
         el("td", { class: "chipcell" }, chip(r.o)),
         el("td", { class: "mono", text: r.s == null ? "N/A" : String(r.s) }),
         el("td", {}, el("pre", { class: "out", text: (r.out || "") + rss })),
@@ -426,7 +431,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
       const r = L.results[p.id] || { o: "MISSING", s: 0 };
       const rss = r.rss != null && p.kind === "leak" ? " · " + r.rss + " MB peak" : "";
       tb.append(el("tr", {},
-        el("td", { class: "lang", text: L.name }),
+        el("td", { class: "lang" }, srcLink(L, p)),
         el("td", { class: "chipcell" }, chip(r.o)),
         el("td", { class: "mono", text: r.s == null ? "N/A" : String(r.s) }),
         el("td", {}, el("pre", { class: "out", text: (r.out || "") + rss })),

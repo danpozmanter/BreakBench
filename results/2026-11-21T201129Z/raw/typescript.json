@@ -499,8 +499,15 @@
    "stderr": ""
   },
   "concurrent_map_write": {
-   "outcome": "INEXPRESSIBLE",
-   "message": "no threads that share memory"
+   "outcome": "CORRECT",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 159.5,
+   "secs": 0.1,
+   "stdout": "800000",
+   "stderr": ""
   },
   "reference_cycle_leak": {
    "outcome": "CORRECT",
@@ -656,8 +663,15 @@
    "stderr": ""
   },
   "racy_counter": {
-   "outcome": "INEXPRESSIBLE",
-   "message": "workers cannot capture a local variable; they share memory only through SharedArrayBuffer"
+   "outcome": "CORRECT",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 60.4,
+   "secs": 0.03,
+   "stdout": "2000000",
+   "stderr": ""
   },
   "unreachable_code": {
    "outcome": "REJECTED",

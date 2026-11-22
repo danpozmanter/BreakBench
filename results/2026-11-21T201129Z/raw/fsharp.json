@@ -767,8 +767,15 @@
    "stderr": ""
   },
   "unreachable_code": {
-   "outcome": "REJECTED",
-   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/unreachable_code/main/bb.fsproj (in 142 ms).\n/tmp/breakbench/unreachable_code/main/Program.fs(6,5): error FS0748: This construct may only be used within computation expressions. To return a value from an ordinary function simply write the expression without 'return'. [/tmp/breakbench/unreachable_code/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/unreachable_code/main/Program.fs(6,5): error FS0748: This construct may only be used within computation expressions. To return a value from an ordinary function simply write the expression without 'return'. [/tmp/breakbench/unreachable_code/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.98"
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 25.6,
+   "secs": 0.02,
+   "stdout": "ok\nchecked",
+   "stderr": ""
   },
   "nan_key": {
    "outcome": "CORRECT",
@@ -868,8 +875,15 @@
    "stderr": ""
   },
   "enum_from_int": {
-   "outcome": "INEXPRESSIBLE",
-   "message": "no standard conversion from an integer to a union case"
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "rss_mb": 30.7,
+   "secs": 0.03,
+   "stdout": "before\n7",
+   "stderr": ""
   },
   "increment_in_expression": {
    "outcome": "REJECTED",

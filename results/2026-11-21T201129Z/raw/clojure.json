@@ -807,8 +807,14 @@
    "stderr": ""
   },
   "unreachable_code": {
-   "outcome": "INEXPRESSIBLE",
-   "message": "no return statement; a function's value is its last expression"
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 99.2,
+   "secs": 0.25,
+   "stdout": "ok\nchecked",
+   "stderr": ""
   },
   "nan_key": {
    "outcome": "SILENT",

@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-22 04:59 UTC",
+ "generated": "2026-11-22 05:12 UTC",
  "kinds": {
   "static": {
    "REJECTED": 1,
@@ -1442,15 +1442,17 @@
   {
    "id": "gossamer",
    "name": "Gossamer",
+   "dir": "gossamer",
+   "ext": "gos",
    "version": "gos 0.84.0",
-   "score": 78.3,
-   "correctness": 82.2,
+   "score": 79.2,
+   "correctness": 83.4,
    "null": 64.3,
    "memory": 79.4,
    "concurrency": 55.0,
    "caught": 43.0,
-   "safe": 88.6,
-   "scored": 112,
+   "safe": 89.5,
+   "scored": 113,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -2424,9 +2426,16 @@
      "score": 0
     },
     "enum_from_int": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no standard conversion from an integer to an enum; a TryFrom impl must be written by hand",
-     "score": 0.0
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "all_warnings": "lint: 0 warning(s), 0 error(s)",
+     "exit": 0,
+     "rss_mb": 14.6,
+     "secs": 0.0,
+     "stdout": "before\ninvalid",
+     "stderr": "",
+     "score": 1
     },
     "increment_in_expression": {
      "outcome": "REJECTED",
@@ -2478,15 +2487,17 @@
   {
    "id": "rust",
    "name": "Rust",
+   "dir": "rust",
+   "ext": "rs",
    "version": "rustc 1.100.0 (0ef1bc386 2026-11-09)",
-   "score": 75.9,
-   "correctness": 79.7,
+   "score": 76.8,
+   "correctness": 80.9,
    "null": 78.6,
    "memory": 70.6,
    "concurrency": 52.5,
    "caught": 51.8,
-   "safe": 85.1,
-   "scored": 112,
+   "safe": 86.0,
+   "scored": 113,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -3305,9 +3316,15 @@
      "score": 1
     },
     "enum_from_int": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no standard conversion from an integer to an enum; a match must be written by hand",
-     "score": 0.0
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "rss_mb": 14.2,
+     "secs": 0.0,
+     "stdout": "before\ninvalid",
+     "stderr": "",
+     "score": 1
     },
     "increment_in_expression": {
      "outcome": "REJECTED",
@@ -3357,6 +3374,8 @@
   {
    "id": "swift",
    "name": "Swift",
+   "dir": "swift",
+   "ext": "swift",
    "version": "Swift version 6.4.2 (swift-6.4.2-RELEASE)",
    "score": 73.7,
    "correctness": 78.8,
@@ -4307,6 +4326,8 @@
   {
    "id": "zig",
    "name": "Zig",
+   "dir": "zig",
+   "ext": "zig",
    "version": "0.17.1",
    "score": 65.1,
    "correctness": 71.2,
@@ -4315,7 +4336,7 @@
    "concurrency": 32.5,
    "caught": 43.0,
    "safe": 78.9,
-   "scored": 109,
+   "scored": 110,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -5132,9 +5153,15 @@
      "score": 1
     },
     "hash_matches_equality": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "a hash map takes its hash and equality as separate functions",
-     "score": 0.0
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "rss_mb": 14.7,
+     "secs": 0.0,
+     "stdout": "2",
+     "stderr": "",
+     "score": 0
     },
     "array_literal_length": {
      "outcome": "REJECTED",
@@ -5204,6 +5231,8 @@
   {
    "id": "haskell",
    "name": "Haskell",
+   "dir": "haskell",
+   "ext": "hs",
    "version": "The Glorious Glasgow Haskell Compilation System, version 9.14.1",
    "score": 63.8,
    "correctness": 65.6,
@@ -6258,15 +6287,17 @@
   {
    "id": "fsharp",
    "name": "F#",
+   "dir": "fsharp",
+   "ext": "fs",
    "version": "11.0.100",
    "score": 63.4,
    "correctness": 67.5,
    "null": 39.3,
    "memory": 70.6,
    "concurrency": 35.0,
-   "caught": 28.9,
+   "caught": 28.1,
    "safe": 78.1,
-   "scored": 112,
+   "scored": 113,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -7183,8 +7214,15 @@
      "score": 0
     },
     "unreachable_code": {
-     "outcome": "REJECTED",
-     "message": "Determining projects to restore...\n  Restored /tmp/breakbench/unreachable_code/main/bb.fsproj (in 142 ms).\n/tmp/breakbench/unreachable_code/main/Program.fs(6,5): error FS0748: This construct may only be used within computation expressions. To return a value from an ordinary function simply write the expression without 'return'. [/tmp/breakbench/unreachable_code/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/unreachable_code/main/Program.fs(6,5): error FS0748: This construct may only be used within computation expressions. To return a value from an ordinary function simply write the expression without 'return'. [/tmp/breakbench/unreachable_code/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.98",
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "all_warnings": "0 Warning(s) 0 Error(s)",
+     "exit": 0,
+     "rss_mb": 25.6,
+     "secs": 0.02,
+     "stdout": "ok\nchecked",
+     "stderr": "",
      "score": 1
     },
     "nan_key": {
@@ -7296,9 +7334,16 @@
      "score": 0
     },
     "enum_from_int": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no standard conversion from an integer to a union case",
-     "score": 0.0
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "all_warnings": "0 Warning(s) 0 Error(s)",
+     "exit": 0,
+     "rss_mb": 30.7,
+     "secs": 0.03,
+     "stdout": "before\n7",
+     "stderr": "",
+     "score": 0
     },
     "increment_in_expression": {
      "outcome": "REJECTED",
@@ -7341,8 +7386,996 @@
    "rank": 6
   },
   {
+   "id": "ocaml",
+   "name": "OCaml",
+   "dir": "ocaml",
+   "ext": "ml",
+   "version": "The OCaml toplevel, version 5.5.2",
+   "score": 63.2,
+   "correctness": 66.6,
+   "null": 57.1,
+   "memory": 77.9,
+   "concurrency": 15.0,
+   "caught": 30.7,
+   "safe": 76.3,
+   "scored": 112,
+   "results": {
+    "null_deref": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 7, characters 27-28:\n7 |   print_int (String.length u.name); (* BREAK! *)\n                               ^\nError: This expression has type user option which is not a record type.",
+     "score": 1
+    },
+    "int_overflow": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "-9223372036854775808",
+     "stderr": "",
+     "score": 0
+    },
+    "div_by_zero": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 2,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "Fatal error: exception Division_by_zero",
+     "score": 0.25
+    },
+    "shift_overflow": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "1",
+     "stderr": "",
+     "score": 0
+    },
+    "narrowing_cast": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 2,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "Fatal error: exception Invalid_argument(\"Char.chr\")",
+     "score": 0.25
+    },
+    "float_to_int_overflow": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "-9223372036854775808",
+     "stderr": "",
+     "score": 0
+    },
+    "signed_unsigned_compare": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "less",
+     "stderr": "",
+     "score": 1
+    },
+    "type_confusion": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 5, characters 17-20:\n5 |   print_int (add raw 3); (* BREAK! *)\n                     ^^^\nError: The value raw has type string but an expression was expected of type\n         int",
+     "score": 1
+    },
+    "missing_return": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 3, characters 26-32:\n3 |   else if score < 50 then \"fail\"\n                              ^^^^^^\nError: This constant has type string but an expression was expected of type\n         unit\n       because it is in the result of a conditional with no else branch",
+     "score": 1
+    },
+    "non_exhaustive_match": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", lines 4-6, characters 2-20:\n4 | ..match c with\n5 |   | Red -> \"red\"\n6 |   | Green -> \"green\"\nError (warning 8 [partial-match]): this pattern-matching is not exhaustive.\n  Here is an example of a case that is not matched: Blue",
+     "score": 1
+    },
+    "uninitialized_variable": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 3, characters 18-20:\n3 |   let x : int ref in (* BREAK! *)\n                      ^^\nError: Syntax error",
+     "score": 1
+    },
+    "missing_argument": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 4, characters 12-20:\n4 |   print_int (area 3); (* BREAK! *)\n                ^^^^^^^^\nError: This expression has type int -> int\n       but an expression was expected of type int\nHint: This function application is partial, maybe some arguments are missing.",
+     "score": 1
+    },
+    "misspelled_field": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 5, characters 6-12:\n5 |   cfg.colour <- \"red\"; (* BREAK! *)\n          ^^^^^^\nError: This expression has type config\n       There is no field colour within type config\nHint:       Did you mean color?",
+     "score": 1
+    },
+    "assign_in_condition": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "not one",
+     "stderr": "",
+     "score": 1
+    },
+    "switch_fallthrough": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "one",
+     "stderr": "",
+     "score": 1
+    },
+    "zero_is_falsy": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 3, characters 19-22:\n3 |   let present = if qty then true else false in (* BREAK! *)\n                       ^^^\nError: The value qty has type int option\n       but an expression was expected of type bool\n       because it is in the condition of an if-statement",
+     "score": 1
+    },
+    "string_equality": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "equal",
+     "stderr": "",
+     "score": 1
+    },
+    "parse_invalid_number": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 2,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "Fatal error: exception Failure(\"int_of_string\")",
+     "score": 0.25
+    },
+    "covariant_array_write": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 10, characters 16-38:\n10 |   let animals = (dogs :> animal array) in (* BREAK! *)\n                     ^^^^^^^^^^^^^^^^^^^^^^\nError: Type dog array is not a subtype of animal array\n       The second object type has no method fetch",
+     "score": 1
+    },
+    "mutate_while_iterating": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "1,3",
+     "stderr": "",
+     "score": 1
+    },
+    "self_deadlock": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 2,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "Fatal error: exception Sys_error(\"Mutex.lock: Resource deadlock avoided\")",
+     "score": 0.25
+    },
+    "loop_closure_capture": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "0,1,2",
+     "stderr": "",
+     "score": 1
+    },
+    "snapshot_aliasing": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "0",
+     "stderr": "",
+     "score": 0
+    },
+    "ignored_error_result": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 2,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "Fatal error: exception Sys_error(\"/nonexistent/dir/out.txt: No such file or directory\")",
+     "score": 0.25
+    },
+    "sort_with_nan": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "ordered",
+     "stderr": "",
+     "score": 1
+    },
+    "integer_average": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 3, characters 20-31:\n3 |   let avg : float = sum / count in (* BREAK! *)\n                        ^^^^^^^^^^^\nError: This expression has type int but an expression was expected of type\n         float",
+     "score": 1
+    },
+    "leading_zero_literal": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "1234",
+     "stderr": "",
+     "score": 1
+    },
+    "shared_default_argument": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "1",
+     "stderr": "",
+     "score": 1
+    },
+    "reused_iterator": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "12 3",
+     "stderr": "",
+     "score": 1
+    },
+    "bitwise_precedence": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "even",
+     "stderr": "",
+     "score": 1
+    },
+    "dangling_else": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "unset",
+     "stderr": "",
+     "score": 0
+    },
+    "chained_comparison": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 3, characters 23-24:\n3 |   let inside = 1 < x < 3 in (* BREAK! *)\n                           ^\nError: The constant 3 has type int but an expression was expected of type\n         bool",
+     "score": 1
+    },
+    "lost_update_on_copy": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "150",
+     "stderr": "",
+     "score": 1
+    },
+    "command_injection": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "hi\ninjected",
+     "stderr": "",
+     "score": 0
+    },
+    "float_equality": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "not equal",
+     "stderr": "",
+     "score": 0
+    },
+    "lock_order_deadlock": {
+     "outcome": "HANG",
+     "warned": false,
+     "exit": -9,
+     "rss_mb": 14.0,
+     "secs": 20.0,
+     "stdout": "",
+     "stderr": "",
+     "score": 0
+    },
+    "path_join_escape": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "inside",
+     "stderr": "",
+     "score": 1
+    },
+    "regex_backtracking": {
+     "outcome": "HANG",
+     "warned": false,
+     "exit": -9,
+     "rss_mb": 14.0,
+     "secs": 20.0,
+     "stdout": "",
+     "stderr": "",
+     "score": 0
+    },
+    "negative_remainder": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "even",
+     "stderr": "",
+     "score": 0
+    },
+    "missing_comma_concat": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 4, characters 4-9:\n4 |     \"bob\" (* BREAK! *)\n        ^^^^^\nError: This expression has type string\n       This is not a function; it cannot be applied.",
+     "score": 1
+    },
+    "return_in_finally": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "failed",
+     "stderr": "",
+     "score": 1
+    },
+    "return_line_break": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "5",
+     "stderr": "",
+     "score": 1
+    },
+    "worker_failure_lost": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 2,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "Fatal error: exception Failure(\"int_of_string\")",
+     "score": 0.25
+    },
+    "unawaited_task": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "0",
+     "stderr": "",
+     "score": 0
+    },
+    "format_arg_mismatch": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 3, characters 2-38:\n3 |   Printf.printf \"%d of %d\\n\" completed; (* BREAK! *)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nError: This expression has type int -> unit\n       but an expression was expected of type unit\n       because it is in the left-hand side of a sequence\nHint: This function application is partial, maybe some arguments are missing.",
+     "score": 1
+    },
+    "unsigned_subtraction": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "short",
+     "stderr": "",
+     "score": 1
+    },
+    "missing_key_default": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 2,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "Fatal error: exception Not_found",
+     "score": 0.25
+    },
+    "mutable_hash_key": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "found",
+     "stderr": "",
+     "score": 1
+    },
+    "shadowed_assignment": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "pending",
+     "stderr": "status: done",
+     "score": 0
+    },
+    "discarded_pure_result": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 3, characters 2-29:\n3 |   String.uppercase_ascii name; (* BREAK! *)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nError: This expression has type string but an expression was expected of type\n         unit\n       because it is in the left-hand side of a sequence",
+     "score": 1
+    },
+    "negative_index_wraps": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 2,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "Fatal error: exception Invalid_argument(\"index out of bounds\")",
+     "score": 0.25
+    },
+    "default_numeric_sort": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "1 9 10",
+     "stderr": "",
+     "score": 1
+    },
+    "unrelated_type_lookup": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 4, characters 32-35:\n4 |   print_endline (if List.mem id ids then \"found\" else \"missing\") (* CONTROL! print_endline (if List.mem (int_of_string id) ids then \"found\" else \"missing\") *)\n                                    ^^^\nError: The value ids has type int list but an expression was expected of type\n         string list\n       Type int is not compatible with type string",
+     "score": 1
+    },
+    "use_after_close": {
+     "outcome": "TRAPPED",
+     "runs": 50,
+     "warned": false,
+     "run_warned": false,
+     "exit": 2,
+     "rss_mb": 14.8,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "Fatal error: exception Sys_error(\"Bad file descriptor\")",
+     "score": 0.25
+    },
+    "dead_store": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 3, characters 6-11:\n3 |   let total = price + 2 in\n          ^^^^^\nError (warning 26 [unused-var]): unused variable total.",
+     "score": 1
+    },
+    "panic_under_lock": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "unbalanced",
+     "stderr": "worker failed: crash mid-update",
+     "score": 0
+    },
+    "split_character": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "a�",
+     "stderr": "",
+     "score": 0
+    },
+    "oob_write": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 2,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "Fatal error: exception Invalid_argument(\"index out of bounds\")",
+     "score": 0.25
+    },
+    "oob_read": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 2,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "Fatal error: exception Invalid_argument(\"index out of bounds\")",
+     "score": 0.25
+    },
+    "use_after_free": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "1234",
+     "stderr": "",
+     "score": 1
+    },
+    "double_free": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "1",
+     "stderr": "",
+     "score": 1
+    },
+    "dangling_stack_ref": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "4242",
+     "stderr": "",
+     "score": 1
+    },
+    "container_realloc_dangling": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "7",
+     "stderr": "",
+     "score": 1
+    },
+    "uninit_heap_read": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "000000000000000000000000",
+     "stderr": "",
+     "score": 1
+    },
+    "stack_overflow": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 2,
+     "rss_mb": 1027.4,
+     "secs": 0.6,
+     "stdout": "",
+     "stderr": "Fatal error: exception Stack overflow",
+     "score": 0.25
+    },
+    "error_path_leak": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.16,
+     "stdout": "done",
+     "stderr": "",
+     "score": 1
+    },
+    "concurrent_map_write": {
+     "outcome": "SILENT",
+     "runs": 50,
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "rss_mb": 72.7,
+     "secs": 0.1,
+     "stdout": "312711",
+     "stderr": "",
+     "score": 0
+    },
+    "reference_cycle_leak": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.09,
+     "stdout": "done",
+     "stderr": "",
+     "score": 1
+    },
+    "view_retention": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.39,
+     "stdout": "40000",
+     "stderr": "",
+     "score": 1
+    },
+    "huge_allocation": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 2,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "Fatal error: exception Out of memory",
+     "score": 0.25
+    },
+    "fd_leak": {
+     "outcome": "LEAK",
+     "warned": false,
+     "exit": 2,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "Fatal error: exception Sys_error(\"/tmp/bb_fd.txt: Too many open files\")",
+     "score": 0
+    },
+    "wrong_variant_access": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", lines 5-8, characters 2-18:\n5 | ..let (Text s) = v in (* BREAK! *)\n6 |   (* CONTROL! let s = match v with Text s -> s | Int_value _ -> \"\" in *)\n7 |   print_int (String.length s);\n8 |   print_newline ()\nError (warning 8 [partial-match]): this pattern-matching is not exhaustive.\n  Here is an example of a case that is not matched: Int_value _",
+     "score": 1
+    },
+    "format_string": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 2, characters 16-28:\n2 |   Printf.printf Sys.argv.(1) (* BREAK! *)\n                    ^^^^^^^^^^^^\nError: This expression has type string but an expression was expected of type\n         ('a, out_channel, unit) format =\n           ('a, out_channel, unit, unit, unit, unit) format6",
+     "score": 1
+    },
+    "deep_structure_release": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 42.3,
+     "secs": 0.04,
+     "stdout": "done",
+     "stderr": "",
+     "score": 1
+    },
+    "abandoned_worker_leak": {
+     "outcome": "LEAK",
+     "warned": false,
+     "exit": 2,
+     "rss_mb": 429.6,
+     "secs": 0.35,
+     "stdout": "",
+     "stderr": "Fatal error: exception Sys_error(\"Thread.create: Resource temporarily unavailable\")",
+     "score": 0
+    },
+    "string_literal_write": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 3, characters 2-21:\n3 |   greeting.[0] <- 'j'; (* BREAK! *)\n      ^^^^^^^^^^^^^^^^^^^\nError: Syntax error: strings are immutable, there is no assignment syntax for\n       them.\nHint: Mutable sequences of bytes are available in the Bytes module.\nHint: Did you mean to use Bytes.set?",
+     "score": 1
+    },
+    "complete_init": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 5, characters 17-32:\n5 |   let _partial = { timeout = 5 } in (* BREAK! *)\n                     ^^^^^^^^^^^^^^^\nError: Some record fields are undefined: retries",
+     "score": 1
+    },
+    "newtype": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 9, characters 34-41:\n9 |   let wrong = add_m (Meters 2.0) (Seconds 3.0) in (* BREAK! *)\n                                      ^^^^^^^\nError: This variant expression is expected to have type meters\n       There is no constructor Seconds within type meters",
+     "score": 1
+    },
+    "strong_enum": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 8, characters 22-23:\n8 |   print_endline (name 7); (* BREAK! *)\n                          ^\nError: The constant 7 has type int but an expression was expected of type\n         color",
+     "score": 1
+    },
+    "override_check": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 10, characters 4-30:\n10 |     method! descibe = \"circle\" (* BREAK! *)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^\nError: The method descibe has no previous definition",
+     "score": 1
+    },
+    "forced_unwrap": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 2,
+     "rss_mb": 14.2,
+     "secs": 0.0,
+     "stdout": "before",
+     "stderr": "Fatal error: exception Invalid_argument(\"option is None\")",
+     "score": 0.25
+    },
+    "null_in_text": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 5, characters 29-33:\n5 |   print_endline (\"hello, \" ^ name) (* CONTROL! print_endline (\"hello, \" ^ Option.value name ~default:\"nobody\") *)\n                                 ^^^^\nError: The value name has type string option\n       but an expression was expected of type string",
+     "score": 1
+    },
+    "not_found_sentinel": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 2,
+     "rss_mb": 14.4,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "Fatal error: exception Not_found",
+     "score": 0.25
+    },
+    "empty_max": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 2,
+     "rss_mb": 13.6,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "Fatal error: exception Failure(\"hd\")",
+     "score": 0.25
+    },
+    "readonly_param": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 2, characters 2-4:\n2 |   xs.(0) <- 9; (* BREAK! *)\n      ^^\nError: The value xs has type int list but an expression was expected of type\n         'a array",
+     "score": 1
+    },
+    "exclusive_mutation": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.2,
+     "secs": 0.0,
+     "stdout": "130",
+     "stderr": "",
+     "score": 0
+    },
+    "literal_range": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 2,
+     "rss_mb": 14.2,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "Fatal error: exception Invalid_argument(\"Char.chr\")",
+     "score": 0.25
+    },
+    "no_implicit_conversion": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 4, characters 25-28:\n4 |   let (_wrong : int32) = big in (* BREAK! *)\n                             ^^^\nError: The value big has type int64 but an expression was expected of type\n         int32",
+     "score": 1
+    },
+    "generic_constraint": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.2,
+     "secs": 0.0,
+     "stdout": "1",
+     "stderr": "",
+     "score": 0
+    },
+    "lossy_int_to_float": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 6, characters 7-8:\n6 |   show n (* BREAK! *)\n           ^\nError: The value n has type int but an expression was expected of type float",
+     "score": 1
+    },
+    "const_index_bounds": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 2,
+     "rss_mb": 14.2,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "Fatal error: exception Invalid_argument(\"index out of bounds\")",
+     "score": 0.25
+    },
+    "const_overflow": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.2,
+     "secs": 0.0,
+     "stdout": "237427963145224192",
+     "stderr": "",
+     "score": 0
+    },
+    "racy_counter": {
+     "outcome": "SILENT",
+     "runs": 50,
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "rss_mb": 14.8,
+     "secs": 0.0,
+     "stdout": "1237261",
+     "stderr": "",
+     "score": 0
+    },
+    "orphaned_receive": {
+     "outcome": "HANG",
+     "warned": false,
+     "run_warned": false,
+     "exit": -9,
+     "rss_mb": 14.4,
+     "secs": 20.0,
+     "stdout": "",
+     "stderr": "Thread 1 killed on uncaught exception Failure(\"int_of_string\")",
+     "score": 0
+    },
+    "blocking_in_async": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "rss_mb": 14.4,
+     "secs": 0.5,
+     "stdout": "concurrent",
+     "stderr": "",
+     "score": 1
+    },
+    "unreachable_code": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "rss_mb": 13.6,
+     "secs": 0.0,
+     "stdout": "ok\nchecked",
+     "stderr": "",
+     "score": 1
+    },
+    "nan_key": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.2,
+     "secs": 0.0,
+     "stdout": "found",
+     "stderr": "",
+     "score": 1
+    },
+    "checked_interpolation": {
+     "outcome": "INEXPRESSIBLE",
+     "message": "no string interpolation",
+     "score": 0.0
+    },
+    "evaluation_order": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.2,
+     "secs": 0.0,
+     "stdout": "2 1",
+     "stderr": "",
+     "score": 0
+    },
+    "dominated_case": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 5, characters 34-40:\n5 | let bad = function _ -> \"other\" | Circle -> \"circle\" (* BREAK! *)\n                                      ^^^^^^\nError (warning 11 [redundant-case]): this match case is unused.",
+     "score": 1
+    },
+    "duplicate_key": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.2,
+     "secs": 0.0,
+     "stdout": "1",
+     "stderr": "",
+     "score": 0
+    },
+    "char_arithmetic": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 5, characters 13-14:\n5 |   print_int (c + 1) (* BREAK! *)\n                 ^\nError: The value c has type char but an expression was expected of type int",
+     "score": 1
+    },
+    "comparison_statement": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 4, characters 2-12:\n4 |   !count = 5; (* BREAK! *)\n      ^^^^^^^^^^\nError: This expression has type bool but an expression was expected of type\n         unit\n       because it is in the left-hand side of a sequence",
+     "score": 1
+    },
+    "structural_equality": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.2,
+     "secs": 0.0,
+     "stdout": "equal",
+     "stderr": "",
+     "score": 1
+    },
+    "hash_matches_equality": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.2,
+     "secs": 0.0,
+     "stdout": "2",
+     "stderr": "",
+     "score": 0
+    },
+    "array_literal_length": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 2,
+     "rss_mb": 14.2,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "Fatal error: exception Invalid_argument(\"index out of bounds\")",
+     "score": 0.25
+    },
+    "required_names": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 5, characters 2-6:\n5 |   move 3 4 (* BREAK! *)\n      ^^^^\nError (warning 6 [labels-omitted]): labels dx, dy were omitted in the\n  application of this function.",
+     "score": 1
+    },
+    "enum_from_int": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "rss_mb": 13.8,
+     "secs": 0.0,
+     "stdout": "before\ninvalid",
+     "stderr": "",
+     "score": 1
+    },
+    "increment_in_expression": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 4, characters 11-12:\n4 |   i := !i++; (* BREAK! *)\n               ^\nError: Syntax error",
+     "score": 1
+    },
+    "bitwise_on_bool": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 4, characters 5-26:\n4 |   if (String.length s > 0) land (s.[0] = 'a') then print_endline \"both\" (* BREAK! *)\n         ^^^^^^^^^^^^^^^^^^^^^\nError: This expression has type bool but an expression was expected of type\n         int",
+     "score": 1
+    },
+    "readonly_field": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 5, characters 2-13:\n5 |   c.port <- 1; (* BREAK! *)\n      ^^^^^^^^^^^\nError: The record field port is not mutable",
+     "score": 1
+    },
+    "bool_condition": {
+     "outcome": "REJECTED",
+     "message": "File \"main.ml\", line 3, characters 5-20:\n3 |   if compare \"x\" \"x\" then print_endline \"different\" (* BREAK! *)\n         ^^^^^^^^^^^^^^^\nError: This expression has type int but an expression was expected of type\n         bool\n       because it is in the condition of an if-statement",
+     "score": 1
+    },
+    "contracts": {
+     "outcome": "INEXPRESSIBLE",
+     "message": "no contracts; a precondition is a check written in the function body",
+     "score": 0.0
+    },
+    "lost_write_error": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 2,
+     "rss_mb": 14.3,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "Fatal error: exception Sys_error(\"No space left on device\")",
+     "score": 0.25
+    }
+   },
+   "rank": 7
+  },
+  {
    "id": "v",
    "name": "V",
+   "dir": "v",
+   "ext": "v",
    "version": "V 0.5.2 7647ce1",
    "score": 62.7,
    "correctness": 68.1,
@@ -8310,986 +9343,22 @@
      "score": 0
     }
    },
-   "rank": 7
-  },
-  {
-   "id": "ocaml",
-   "name": "OCaml",
-   "version": "The OCaml toplevel, version 5.5.2",
-   "score": 62.1,
-   "correctness": 65.3,
-   "null": 53.6,
-   "memory": 77.9,
-   "concurrency": 15.0,
-   "caught": 31.6,
-   "safe": 74.6,
-   "scored": 110,
-   "results": {
-    "null_deref": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 7, characters 27-28:\n7 |   print_int (String.length u.name); (* BREAK! *)\n                               ^\nError: This expression has type user option which is not a record type.",
-     "score": 1
-    },
-    "int_overflow": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "-9223372036854775808",
-     "stderr": "",
-     "score": 0
-    },
-    "div_by_zero": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 2,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "Fatal error: exception Division_by_zero",
-     "score": 0.25
-    },
-    "shift_overflow": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "1",
-     "stderr": "",
-     "score": 0
-    },
-    "narrowing_cast": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 2,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "Fatal error: exception Invalid_argument(\"Char.chr\")",
-     "score": 0.25
-    },
-    "float_to_int_overflow": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "-9223372036854775808",
-     "stderr": "",
-     "score": 0
-    },
-    "signed_unsigned_compare": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "less",
-     "stderr": "",
-     "score": 1
-    },
-    "type_confusion": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 5, characters 17-20:\n5 |   print_int (add raw 3); (* BREAK! *)\n                     ^^^\nError: The value raw has type string but an expression was expected of type\n         int",
-     "score": 1
-    },
-    "missing_return": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 3, characters 26-32:\n3 |   else if score < 50 then \"fail\"\n                              ^^^^^^\nError: This constant has type string but an expression was expected of type\n         unit\n       because it is in the result of a conditional with no else branch",
-     "score": 1
-    },
-    "non_exhaustive_match": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", lines 4-6, characters 2-20:\n4 | ..match c with\n5 |   | Red -> \"red\"\n6 |   | Green -> \"green\"\nError (warning 8 [partial-match]): this pattern-matching is not exhaustive.\n  Here is an example of a case that is not matched: Blue",
-     "score": 1
-    },
-    "uninitialized_variable": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 3, characters 18-20:\n3 |   let x : int ref in (* BREAK! *)\n                      ^^\nError: Syntax error",
-     "score": 1
-    },
-    "missing_argument": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 4, characters 12-20:\n4 |   print_int (area 3); (* BREAK! *)\n                ^^^^^^^^\nError: This expression has type int -> int\n       but an expression was expected of type int\nHint: This function application is partial, maybe some arguments are missing.",
-     "score": 1
-    },
-    "misspelled_field": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 5, characters 6-12:\n5 |   cfg.colour <- \"red\"; (* BREAK! *)\n          ^^^^^^\nError: This expression has type config\n       There is no field colour within type config\nHint:       Did you mean color?",
-     "score": 1
-    },
-    "assign_in_condition": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "not one",
-     "stderr": "",
-     "score": 1
-    },
-    "switch_fallthrough": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "one",
-     "stderr": "",
-     "score": 1
-    },
-    "zero_is_falsy": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 3, characters 19-22:\n3 |   let present = if qty then true else false in (* BREAK! *)\n                       ^^^\nError: The value qty has type int option\n       but an expression was expected of type bool\n       because it is in the condition of an if-statement",
-     "score": 1
-    },
-    "string_equality": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "equal",
-     "stderr": "",
-     "score": 1
-    },
-    "parse_invalid_number": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 2,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "Fatal error: exception Failure(\"int_of_string\")",
-     "score": 0.25
-    },
-    "covariant_array_write": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 10, characters 16-38:\n10 |   let animals = (dogs :> animal array) in (* BREAK! *)\n                     ^^^^^^^^^^^^^^^^^^^^^^\nError: Type dog array is not a subtype of animal array\n       The second object type has no method fetch",
-     "score": 1
-    },
-    "mutate_while_iterating": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "1,3",
-     "stderr": "",
-     "score": 1
-    },
-    "self_deadlock": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 2,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "Fatal error: exception Sys_error(\"Mutex.lock: Resource deadlock avoided\")",
-     "score": 0.25
-    },
-    "loop_closure_capture": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "0,1,2",
-     "stderr": "",
-     "score": 1
-    },
-    "snapshot_aliasing": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "0",
-     "stderr": "",
-     "score": 0
-    },
-    "ignored_error_result": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 2,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "Fatal error: exception Sys_error(\"/nonexistent/dir/out.txt: No such file or directory\")",
-     "score": 0.25
-    },
-    "sort_with_nan": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "ordered",
-     "stderr": "",
-     "score": 1
-    },
-    "integer_average": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 3, characters 20-31:\n3 |   let avg : float = sum / count in (* BREAK! *)\n                        ^^^^^^^^^^^\nError: This expression has type int but an expression was expected of type\n         float",
-     "score": 1
-    },
-    "leading_zero_literal": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "1234",
-     "stderr": "",
-     "score": 1
-    },
-    "shared_default_argument": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "1",
-     "stderr": "",
-     "score": 1
-    },
-    "reused_iterator": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "12 3",
-     "stderr": "",
-     "score": 1
-    },
-    "bitwise_precedence": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "even",
-     "stderr": "",
-     "score": 1
-    },
-    "dangling_else": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "unset",
-     "stderr": "",
-     "score": 0
-    },
-    "chained_comparison": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 3, characters 23-24:\n3 |   let inside = 1 < x < 3 in (* BREAK! *)\n                           ^\nError: The constant 3 has type int but an expression was expected of type\n         bool",
-     "score": 1
-    },
-    "lost_update_on_copy": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "150",
-     "stderr": "",
-     "score": 1
-    },
-    "command_injection": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "hi\ninjected",
-     "stderr": "",
-     "score": 0
-    },
-    "float_equality": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "not equal",
-     "stderr": "",
-     "score": 0
-    },
-    "lock_order_deadlock": {
-     "outcome": "HANG",
-     "warned": false,
-     "exit": -9,
-     "rss_mb": 14.0,
-     "secs": 20.0,
-     "stdout": "",
-     "stderr": "",
-     "score": 0
-    },
-    "path_join_escape": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "inside",
-     "stderr": "",
-     "score": 1
-    },
-    "regex_backtracking": {
-     "outcome": "HANG",
-     "warned": false,
-     "exit": -9,
-     "rss_mb": 14.0,
-     "secs": 20.0,
-     "stdout": "",
-     "stderr": "",
-     "score": 0
-    },
-    "negative_remainder": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "even",
-     "stderr": "",
-     "score": 0
-    },
-    "missing_comma_concat": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 4, characters 4-9:\n4 |     \"bob\" (* BREAK! *)\n        ^^^^^\nError: This expression has type string\n       This is not a function; it cannot be applied.",
-     "score": 1
-    },
-    "return_in_finally": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "failed",
-     "stderr": "",
-     "score": 1
-    },
-    "return_line_break": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "5",
-     "stderr": "",
-     "score": 1
-    },
-    "worker_failure_lost": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 2,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "Fatal error: exception Failure(\"int_of_string\")",
-     "score": 0.25
-    },
-    "unawaited_task": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "0",
-     "stderr": "",
-     "score": 0
-    },
-    "format_arg_mismatch": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 3, characters 2-38:\n3 |   Printf.printf \"%d of %d\\n\" completed; (* BREAK! *)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nError: This expression has type int -> unit\n       but an expression was expected of type unit\n       because it is in the left-hand side of a sequence\nHint: This function application is partial, maybe some arguments are missing.",
-     "score": 1
-    },
-    "unsigned_subtraction": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "short",
-     "stderr": "",
-     "score": 1
-    },
-    "missing_key_default": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 2,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "Fatal error: exception Not_found",
-     "score": 0.25
-    },
-    "mutable_hash_key": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "found",
-     "stderr": "",
-     "score": 1
-    },
-    "shadowed_assignment": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "pending",
-     "stderr": "status: done",
-     "score": 0
-    },
-    "discarded_pure_result": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 3, characters 2-29:\n3 |   String.uppercase_ascii name; (* BREAK! *)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nError: This expression has type string but an expression was expected of type\n         unit\n       because it is in the left-hand side of a sequence",
-     "score": 1
-    },
-    "negative_index_wraps": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 2,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "Fatal error: exception Invalid_argument(\"index out of bounds\")",
-     "score": 0.25
-    },
-    "default_numeric_sort": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "1 9 10",
-     "stderr": "",
-     "score": 1
-    },
-    "unrelated_type_lookup": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 4, characters 32-35:\n4 |   print_endline (if List.mem id ids then \"found\" else \"missing\") (* CONTROL! print_endline (if List.mem (int_of_string id) ids then \"found\" else \"missing\") *)\n                                    ^^^\nError: The value ids has type int list but an expression was expected of type\n         string list\n       Type int is not compatible with type string",
-     "score": 1
-    },
-    "use_after_close": {
-     "outcome": "TRAPPED",
-     "runs": 50,
-     "warned": false,
-     "run_warned": false,
-     "exit": 2,
-     "rss_mb": 14.8,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "Fatal error: exception Sys_error(\"Bad file descriptor\")",
-     "score": 0.25
-    },
-    "dead_store": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 3, characters 6-11:\n3 |   let total = price + 2 in\n          ^^^^^\nError (warning 26 [unused-var]): unused variable total.",
-     "score": 1
-    },
-    "panic_under_lock": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "unbalanced",
-     "stderr": "worker failed: crash mid-update",
-     "score": 0
-    },
-    "split_character": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "a�",
-     "stderr": "",
-     "score": 0
-    },
-    "oob_write": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 2,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "Fatal error: exception Invalid_argument(\"index out of bounds\")",
-     "score": 0.25
-    },
-    "oob_read": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 2,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "Fatal error: exception Invalid_argument(\"index out of bounds\")",
-     "score": 0.25
-    },
-    "use_after_free": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "1234",
-     "stderr": "",
-     "score": 1
-    },
-    "double_free": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "1",
-     "stderr": "",
-     "score": 1
-    },
-    "dangling_stack_ref": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "4242",
-     "stderr": "",
-     "score": 1
-    },
-    "container_realloc_dangling": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "7",
-     "stderr": "",
-     "score": 1
-    },
-    "uninit_heap_read": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "000000000000000000000000",
-     "stderr": "",
-     "score": 1
-    },
-    "stack_overflow": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 2,
-     "rss_mb": 1027.4,
-     "secs": 0.6,
-     "stdout": "",
-     "stderr": "Fatal error: exception Stack overflow",
-     "score": 0.25
-    },
-    "error_path_leak": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.16,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1
-    },
-    "concurrent_map_write": {
-     "outcome": "SILENT",
-     "runs": 50,
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "rss_mb": 72.7,
-     "secs": 0.1,
-     "stdout": "312711",
-     "stderr": "",
-     "score": 0
-    },
-    "reference_cycle_leak": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.09,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1
-    },
-    "view_retention": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.39,
-     "stdout": "40000",
-     "stderr": "",
-     "score": 1
-    },
-    "huge_allocation": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 2,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "Fatal error: exception Out of memory",
-     "score": 0.25
-    },
-    "fd_leak": {
-     "outcome": "LEAK",
-     "warned": false,
-     "exit": 2,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "Fatal error: exception Sys_error(\"/tmp/bb_fd.txt: Too many open files\")",
-     "score": 0
-    },
-    "wrong_variant_access": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", lines 5-8, characters 2-18:\n5 | ..let (Text s) = v in (* BREAK! *)\n6 |   (* CONTROL! let s = match v with Text s -> s | Int_value _ -> \"\" in *)\n7 |   print_int (String.length s);\n8 |   print_newline ()\nError (warning 8 [partial-match]): this pattern-matching is not exhaustive.\n  Here is an example of a case that is not matched: Int_value _",
-     "score": 1
-    },
-    "format_string": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 2, characters 16-28:\n2 |   Printf.printf Sys.argv.(1) (* BREAK! *)\n                    ^^^^^^^^^^^^\nError: This expression has type string but an expression was expected of type\n         ('a, out_channel, unit) format =\n           ('a, out_channel, unit, unit, unit, unit) format6",
-     "score": 1
-    },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 42.3,
-     "secs": 0.04,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1
-    },
-    "abandoned_worker_leak": {
-     "outcome": "LEAK",
-     "warned": false,
-     "exit": 2,
-     "rss_mb": 429.6,
-     "secs": 0.35,
-     "stdout": "",
-     "stderr": "Fatal error: exception Sys_error(\"Thread.create: Resource temporarily unavailable\")",
-     "score": 0
-    },
-    "string_literal_write": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 3, characters 2-21:\n3 |   greeting.[0] <- 'j'; (* BREAK! *)\n      ^^^^^^^^^^^^^^^^^^^\nError: Syntax error: strings are immutable, there is no assignment syntax for\n       them.\nHint: Mutable sequences of bytes are available in the Bytes module.\nHint: Did you mean to use Bytes.set?",
-     "score": 1
-    },
-    "complete_init": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 5, characters 17-32:\n5 |   let _partial = { timeout = 5 } in (* BREAK! *)\n                     ^^^^^^^^^^^^^^^\nError: Some record fields are undefined: retries",
-     "score": 1
-    },
-    "newtype": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 9, characters 34-41:\n9 |   let wrong = add_m (Meters 2.0) (Seconds 3.0) in (* BREAK! *)\n                                      ^^^^^^^\nError: This variant expression is expected to have type meters\n       There is no constructor Seconds within type meters",
-     "score": 1
-    },
-    "strong_enum": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 8, characters 22-23:\n8 |   print_endline (name 7); (* BREAK! *)\n                          ^\nError: The constant 7 has type int but an expression was expected of type\n         color",
-     "score": 1
-    },
-    "override_check": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 10, characters 4-30:\n10 |     method! descibe = \"circle\" (* BREAK! *)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^\nError: The method descibe has no previous definition",
-     "score": 1
-    },
-    "forced_unwrap": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 2,
-     "rss_mb": 14.2,
-     "secs": 0.0,
-     "stdout": "before",
-     "stderr": "Fatal error: exception Invalid_argument(\"option is None\")",
-     "score": 0.25
-    },
-    "null_in_text": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 5, characters 29-33:\n5 |   print_endline (\"hello, \" ^ name) (* CONTROL! print_endline (\"hello, \" ^ Option.value name ~default:\"nobody\") *)\n                                 ^^^^\nError: The value name has type string option\n       but an expression was expected of type string",
-     "score": 1
-    },
-    "not_found_sentinel": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 2,
-     "rss_mb": 14.4,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "Fatal error: exception Not_found",
-     "score": 0.25
-    },
-    "empty_max": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no standard call for the maximum of a list",
-     "score": 0.0
-    },
-    "readonly_param": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 2, characters 2-4:\n2 |   xs.(0) <- 9; (* BREAK! *)\n      ^^\nError: The value xs has type int list but an expression was expected of type\n         'a array",
-     "score": 1
-    },
-    "exclusive_mutation": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.2,
-     "secs": 0.0,
-     "stdout": "130",
-     "stderr": "",
-     "score": 0
-    },
-    "literal_range": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 2,
-     "rss_mb": 14.2,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "Fatal error: exception Invalid_argument(\"Char.chr\")",
-     "score": 0.25
-    },
-    "no_implicit_conversion": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 4, characters 25-28:\n4 |   let (_wrong : int32) = big in (* BREAK! *)\n                             ^^^\nError: The value big has type int64 but an expression was expected of type\n         int32",
-     "score": 1
-    },
-    "generic_constraint": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.2,
-     "secs": 0.0,
-     "stdout": "1",
-     "stderr": "",
-     "score": 0
-    },
-    "lossy_int_to_float": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 6, characters 7-8:\n6 |   show n (* BREAK! *)\n           ^\nError: The value n has type int but an expression was expected of type float",
-     "score": 1
-    },
-    "const_index_bounds": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 2,
-     "rss_mb": 14.2,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "Fatal error: exception Invalid_argument(\"index out of bounds\")",
-     "score": 0.25
-    },
-    "const_overflow": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.2,
-     "secs": 0.0,
-     "stdout": "237427963145224192",
-     "stderr": "",
-     "score": 0
-    },
-    "racy_counter": {
-     "outcome": "SILENT",
-     "runs": 50,
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "rss_mb": 14.8,
-     "secs": 0.0,
-     "stdout": "1237261",
-     "stderr": "",
-     "score": 0
-    },
-    "orphaned_receive": {
-     "outcome": "HANG",
-     "warned": false,
-     "run_warned": false,
-     "exit": -9,
-     "rss_mb": 14.4,
-     "secs": 20.0,
-     "stdout": "",
-     "stderr": "Thread 1 killed on uncaught exception Failure(\"int_of_string\")",
-     "score": 0
-    },
-    "blocking_in_async": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "rss_mb": 14.4,
-     "secs": 0.5,
-     "stdout": "concurrent",
-     "stderr": "",
-     "score": 1
-    },
-    "unreachable_code": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 3, characters 21-27:\n3 | let check_twice () = return (); print_endline \"checked\" (* BREAK! *)\n                         ^^^^^^\nError: Unbound value return",
-     "score": 1
-    },
-    "nan_key": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.2,
-     "secs": 0.0,
-     "stdout": "found",
-     "stderr": "",
-     "score": 1
-    },
-    "checked_interpolation": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no string interpolation",
-     "score": 0.0
-    },
-    "evaluation_order": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.2,
-     "secs": 0.0,
-     "stdout": "2 1",
-     "stderr": "",
-     "score": 0
-    },
-    "dominated_case": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 5, characters 34-40:\n5 | let bad = function _ -> \"other\" | Circle -> \"circle\" (* BREAK! *)\n                                      ^^^^^^\nError (warning 11 [redundant-case]): this match case is unused.",
-     "score": 1
-    },
-    "duplicate_key": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.2,
-     "secs": 0.0,
-     "stdout": "1",
-     "stderr": "",
-     "score": 0
-    },
-    "char_arithmetic": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 5, characters 13-14:\n5 |   print_int (c + 1) (* BREAK! *)\n                 ^\nError: The value c has type char but an expression was expected of type int",
-     "score": 1
-    },
-    "comparison_statement": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 4, characters 2-12:\n4 |   !count = 5; (* BREAK! *)\n      ^^^^^^^^^^\nError: This expression has type bool but an expression was expected of type\n         unit\n       because it is in the left-hand side of a sequence",
-     "score": 1
-    },
-    "structural_equality": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.2,
-     "secs": 0.0,
-     "stdout": "equal",
-     "stderr": "",
-     "score": 1
-    },
-    "hash_matches_equality": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.2,
-     "secs": 0.0,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
-    "array_literal_length": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 2,
-     "rss_mb": 14.2,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "Fatal error: exception Invalid_argument(\"index out of bounds\")",
-     "score": 0.25
-    },
-    "required_names": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 5, characters 2-6:\n5 |   move 3 4 (* BREAK! *)\n      ^^^^\nError (warning 6 [labels-omitted]): labels dx, dy were omitted in the\n  application of this function.",
-     "score": 1
-    },
-    "enum_from_int": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no conversion from an integer to a variant",
-     "score": 0.0
-    },
-    "increment_in_expression": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 4, characters 11-12:\n4 |   i := !i++; (* BREAK! *)\n               ^\nError: Syntax error",
-     "score": 1
-    },
-    "bitwise_on_bool": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 4, characters 5-26:\n4 |   if (String.length s > 0) land (s.[0] = 'a') then print_endline \"both\" (* BREAK! *)\n         ^^^^^^^^^^^^^^^^^^^^^\nError: This expression has type bool but an expression was expected of type\n         int",
-     "score": 1
-    },
-    "readonly_field": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 5, characters 2-13:\n5 |   c.port <- 1; (* BREAK! *)\n      ^^^^^^^^^^^\nError: The record field port is not mutable",
-     "score": 1
-    },
-    "bool_condition": {
-     "outcome": "REJECTED",
-     "message": "File \"main.ml\", line 3, characters 5-20:\n3 |   if compare \"x\" \"x\" then print_endline \"different\" (* BREAK! *)\n         ^^^^^^^^^^^^^^^\nError: This expression has type int but an expression was expected of type\n         bool\n       because it is in the condition of an if-statement",
-     "score": 1
-    },
-    "contracts": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no contracts; a precondition is a check written in the function body",
-     "score": 0.0
-    },
-    "lost_write_error": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 2,
-     "rss_mb": 14.3,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "Fatal error: exception Sys_error(\"No space left on device\")",
-     "score": 0.25
-    }
-   },
    "rank": 8
   },
   {
    "id": "mojo",
    "name": "Mojo",
+   "dir": "mojo",
+   "ext": "mojo",
    "version": "Mojo 1.2.0 (2016d0cd)",
-   "score": 60.7,
+   "score": 61.0,
    "correctness": 60.9,
-   "null": 35.7,
+   "null": 39.3,
    "memory": 76.5,
    "concurrency": 50.0,
    "caught": 31.6,
-   "safe": 66.7,
-   "scored": 107,
+   "safe": 67.5,
+   "scored": 108,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -9998,9 +10067,15 @@
      "score": 0
     },
     "empty_max": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no standard call for the maximum of a list; max takes its values as separate arguments",
-     "score": 0.0
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 132,
+     "rss_mb": 14.5,
+     "secs": 0.26,
+     "stdout": "At: /tmp/breakbench/empty_max/main/main.mojo:9:15: Assert Error: index 0 is out of bounds, valid range is 0 to -1",
+     "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x000076c2e7eb2d1e\n1  libKGENCompilerRTShared.so 0x000076c2e7eafe46\n2  libKGENCompilerRTShared.so 0x000076c2e7eb38e0\n3  libc.so.6                  0x000076c2e7bbdcb0\n4  main                       0x00005c81ebc00e95\n5  main                       0x00005c81ebc009d6\n6  main                       0x00005c81ebbead8e\n7  main                       0x00005c81ebc000a3\n8  main                       0x00005c81ebbebf7e\n9  libc.so.6                  0x000076c2e7ba2601\n10 libc.so.6                  0x000076c2e7ba2718 __libc_start_main + 136\n11 main                       0x00005c81ebbe9175\nIllegal instruction (core dumped)",
+     "score": 0.25
     },
     "readonly_param": {
      "outcome": "REJECTED",
@@ -10245,6 +10320,8 @@
   {
    "id": "nim",
    "name": "Nim",
+   "dir": "nim",
+   "ext": "nim",
    "version": "Nim Compiler Version 2.4.2 [Linux: amd64]",
    "score": 58.6,
    "correctness": 61.6,
@@ -11229,8 +11306,980 @@
    "rank": 10
   },
   {
+   "id": "goose",
+   "name": "Goose",
+   "dir": "goose",
+   "ext": "goose",
+   "version": "goose 9412b80f",
+   "score": 58.3,
+   "correctness": 60.6,
+   "null": 50.0,
+   "memory": 66.2,
+   "concurrency": 32.5,
+   "caught": 26.3,
+   "safe": 67.5,
+   "scored": 104,
+   "results": {
+    "null_deref": {
+     "outcome": "REJECTED",
+     "message": "main.goose:16: error: optional value must be narrowed (if/guard/assert) before use\n    print(u.name.len); // BREAK!\n          ^~~~~~\n  in fn main() instantiated from main.goose:11",
+     "score": 1
+    },
+    "int_overflow": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 1,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "goose runtime error: integer overflow (debug): 9223372036854775807 + 1 at i64 (main.goose:6)",
+     "score": 0.25
+    },
+    "div_by_zero": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 1,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "goose runtime error: division by zero (main.goose:6)",
+     "score": 0.25
+    },
+    "shift_overflow": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "1",
+     "stderr": "",
+     "score": 0
+    },
+    "narrowing_cast": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 1,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "goose runtime error: as conversion out of range (debug): 300 as u8 (main.goose:6)",
+     "score": 0.25
+    },
+    "float_to_int_overflow": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 1,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "goose runtime error: as conversion out of range (debug): 1e+20 as i64 (main.goose:6)",
+     "score": 0.25
+    },
+    "signed_unsigned_compare": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "less",
+     "stderr": "",
+     "score": 1
+    },
+    "type_confusion": {
+     "outcome": "REJECTED",
+     "message": "main.goose:8: error: no matching overload for call to add\n  candidate add at main.goose:4: argument 1: cannot pass u8[:] as i64\n    print(add(raw, 3)); // BREAK!\n          ^~~~~~~~~~~\n  in fn main() instantiated from main.goose:6",
+     "score": 1
+    },
+    "missing_return": {
+     "outcome": "REJECTED",
+     "message": "main.goose:6: error: function grade must return value(s)\n    if score < 50 { return \"fail\"; }\n    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  in fn grade(i64) instantiated from main.goose:12\n  in fn main() instantiated from main.goose:10",
+     "score": 1
+    },
+    "non_exhaustive_match": {
+     "outcome": "REJECTED",
+     "message": "main.goose:7: error: match does not cover variant Color.Blue\n    match c {\n    ^\n  in fn name(Color) instantiated from main.goose:17\n  in fn main() instantiated from main.goose:14",
+     "score": 1
+    },
+    "uninitialized_variable": {
+     "outcome": "REJECTED",
+     "message": "main.goose:8: error: variable x may be used before it is assigned\n    print(x); // BREAK!\n          ^\n  in fn main() instantiated from main.goose:4",
+     "score": 1
+    },
+    "missing_argument": {
+     "outcome": "REJECTED",
+     "message": "main.goose:4: error: no matching overload for call to area\n  candidate area at main.goose:1: too few arguments: 1 given, 2 needed\n    print(area(3)); // BREAK!\n          ^~~~~~~\n  in fn main() instantiated from main.goose:3",
+     "score": 1
+    },
+    "misspelled_field": {
+     "outcome": "REJECTED",
+     "message": "main.goose:5: error: struct Config has no field colour\n    cfg.colour = \"red\"; // BREAK!\n    ^~~~~~~~~~\n  in fn main() instantiated from main.goose:3",
+     "score": 1
+    },
+    "assign_in_condition": {
+     "outcome": "REJECTED",
+     "message": "main.goose:7: error: expected '{' in if body, found '='\n    if x = 1 { label = \"one\"; } // BREAK!\n         ^",
+     "score": 1
+    },
+    "switch_fallthrough": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "one",
+     "stderr": "",
+     "score": 1
+    },
+    "zero_is_falsy": {
+     "outcome": "REJECTED",
+     "message": "main.goose:7: error: condition must be bool or an optional, got i64\n    if qty { present = true; } // BREAK!\n       ^~~\n  in fn main() instantiated from main.goose:4",
+     "score": 1
+    },
+    "string_equality": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "equal",
+     "stderr": "",
+     "score": 1
+    },
+    "parse_invalid_number": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "1",
+     "stderr": "",
+     "score": 0
+    },
+    "covariant_array_write": {
+     "outcome": "REJECTED",
+     "message": "main.goose:11: error: dogs is not fixed-size and is not copied implicitly (§4.1): pass copy(dogs) for a copy, or bind it by reference\n    let animals: Animal[>..] = dogs; // BREAK!\n                               ^~~~\n  in fn main() instantiated from main.goose:8",
+     "score": 1
+    },
+    "mutate_while_iterating": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "1,2,3",
+     "stderr": "",
+     "score": 0
+    },
+    "self_deadlock": {
+     "outcome": "INEXPRESSIBLE",
+     "message": "no mutex in the language or its standard library",
+     "score": 0.0
+    },
+    "loop_closure_capture": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "0,1,2",
+     "stderr": "",
+     "score": 1
+    },
+    "snapshot_aliasing": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "0",
+     "stderr": "",
+     "score": 0
+    },
+    "ignored_error_result": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "saved",
+     "stderr": "",
+     "score": 0
+    },
+    "sort_with_nan": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "unordered",
+     "stderr": "",
+     "score": 0
+    },
+    "integer_average": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "3.0",
+     "stderr": "",
+     "score": 0
+    },
+    "leading_zero_literal": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "1234",
+     "stderr": "",
+     "score": 1
+    },
+    "shared_default_argument": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "1",
+     "stderr": "",
+     "score": 1
+    },
+    "reused_iterator": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "12 3",
+     "stderr": "",
+     "score": 1
+    },
+    "bitwise_precedence": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "even",
+     "stderr": "",
+     "score": 1
+    },
+    "dangling_else": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "not a",
+     "stderr": "",
+     "score": 1
+    },
+    "chained_comparison": {
+     "outcome": "REJECTED",
+     "message": "main.goose:6: error: ordering comparison requires numeric operands, got bool and i64\n    let inside = 1 < x < 3; // BREAK!\n                 ^~~~~~~~~\n  in fn main() instantiated from main.goose:4",
+     "score": 1
+    },
+    "lost_update_on_copy": {
+     "outcome": "REJECTED",
+     "message": "main.goose:7: error: cannot write acct: a by-value binding is a copy of the element; bind it by reference (&acct) to write the element (§6.5)\n        acct.balance += 50; // BREAK!\n        ^~~~~~~~~~~~~~~~~~~\n  in fn main() instantiated from main.goose:3",
+     "score": 1
+    },
+    "command_injection": {
+     "outcome": "INEXPRESSIBLE",
+     "message": "no subprocess API in the standard library",
+     "score": 0.0
+    },
+    "float_equality": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "not equal",
+     "stderr": "",
+     "score": 0
+    },
+    "lock_order_deadlock": {
+     "outcome": "INEXPRESSIBLE",
+     "message": "no mutex in the language or its standard library",
+     "score": 0.0
+    },
+    "path_join_escape": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "inside",
+     "stderr": "",
+     "score": 1
+    },
+    "regex_backtracking": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "no match",
+     "stderr": "",
+     "score": 1
+    },
+    "negative_remainder": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "odd",
+     "stderr": "",
+     "score": 1
+    },
+    "missing_comma_concat": {
+     "outcome": "REJECTED",
+     "message": "main.goose:5: error: expected ']' in array literal, found 'string literal'\n        \"carol\",\n        ^~~~~~~",
+     "score": 1
+    },
+    "return_in_finally": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "failed",
+     "stderr": "",
+     "score": 1
+    },
+    "return_line_break": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "5",
+     "stderr": "",
+     "score": 1
+    },
+    "worker_failure_lost": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 1,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "goose runtime error: bad number: x (main.goose:13)",
+     "score": 0.25
+    },
+    "unawaited_task": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "0",
+     "stderr": "",
+     "score": 0
+    },
+    "format_arg_mismatch": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "3 of 5",
+     "stderr": "",
+     "score": 1
+    },
+    "unsigned_subtraction": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "short",
+     "stderr": "",
+     "score": 1
+    },
+    "missing_key_default": {
+     "outcome": "REJECTED",
+     "message": "main.goose:10: error: operator + cannot be applied to i64? and i64\n    print(stock.get(name) + 5); // CONTROL! print(stock.contains(name));\n          ^~~~~~~~~~~~~~~~~~~\n  in fn main() instantiated from main.goose:5",
+     "score": 1
+    },
+    "mutable_hash_key": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "found",
+     "stderr": "",
+     "score": 1
+    },
+    "shadowed_assignment": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "pending",
+     "stderr": "done",
+     "score": 0
+    },
+    "discarded_pure_result": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "ADA",
+     "stderr": "",
+     "score": 1
+    },
+    "negative_index_wraps": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 1,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "goose runtime error: index -1 out of bounds (length 3) (main.goose:7)",
+     "score": 0.25
+    },
+    "default_numeric_sort": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "1 9 10",
+     "stderr": "",
+     "score": 1
+    },
+    "unrelated_type_lookup": {
+     "outcome": "REJECTED",
+     "message": "main.goose:7: error: no matching overload for call to contains\n  candidate contains at /opt/goose/stdlib/std.goose:397: argument 2: cannot pass u8[:] as T\n    print(if contains(ids, id) { \"found\" } else { \"missing\" }); // CONTROL! let n, ok = parse_int(id); print(if contains(ids, n) { \"found\" } else { \"missing\" });\n             ^~~~~~~~~~~~~~~~~\n  in fn main() instantiated from main.goose:4",
+     "score": 1
+    },
+    "use_after_close": {
+     "outcome": "INEXPRESSIBLE",
+     "message": "no file handles in the standard library; files are read and written whole",
+     "score": 0.0
+    },
+    "dead_store": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "40",
+     "stderr": "",
+     "score": 0
+    },
+    "panic_under_lock": {
+     "outcome": "INEXPRESSIBLE",
+     "message": "no mutex in the language or its standard library",
+     "score": 0.0
+    },
+    "split_character": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "a�",
+     "stderr": "",
+     "score": 0
+    },
+    "oob_write": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 1,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "goose runtime error: index 4 out of bounds (length 4) (main.goose:9)",
+     "score": 0.25
+    },
+    "oob_read": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 1,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "goose runtime error: index 4 out of bounds (length 4) (main.goose:9)",
+     "score": 0.25
+    },
+    "use_after_free": {
+     "outcome": "CORRUPT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "6666",
+     "stderr": "",
+     "score": 0
+    },
+    "double_free": {
+     "outcome": "CORRUPT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "2",
+     "stderr": "",
+     "score": 0
+    },
+    "dangling_stack_ref": {
+     "outcome": "REJECTED",
+     "message": "main.goose:5: error: returning a reference rooted in local, which dies with this function (§9.2)\n    return local; // BREAK!\n    ^~~~~~~~~~~~\n  in fn make() instantiated from main.goose:15\n  in fn main() instantiated from main.goose:14",
+     "score": 1
+    },
+    "container_realloc_dangling": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "7",
+     "stderr": "",
+     "score": 1
+    },
+    "uninit_heap_read": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "all_warnings": "main.goose:13: warning: redundant `as u64`: a u8 converts to u64 implicitly here",
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "000000000000000000000000",
+     "stderr": "",
+     "score": 1
+    },
+    "stack_overflow": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 1,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "goose runtime error: native call stack overflow",
+     "score": 0.25
+    },
+    "error_path_leak": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.04,
+     "stdout": "done",
+     "stderr": "",
+     "score": 1
+    },
+    "concurrent_map_write": {
+     "outcome": "CORRECT",
+     "runs": 50,
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "rss_mb": 32.1,
+     "secs": 0.08,
+     "stdout": "800000",
+     "stderr": "",
+     "score": 1
+    },
+    "reference_cycle_leak": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "done",
+     "stderr": "",
+     "score": 1
+    },
+    "view_retention": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 1.05,
+     "stdout": "40000",
+     "stderr": "",
+     "score": 1
+    },
+    "huge_allocation": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 1,
+     "rss_mb": 2049.1,
+     "secs": 0.38,
+     "stdout": "",
+     "stderr": "goose runtime error: data stack overflow: a value on main's data stacks grew past the 2 GB reserved for it; --stack-reserve or -DGS_STACK_RESERVE raises the reservation, up to 256 TB",
+     "score": 0.25
+    },
+    "fd_leak": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.01,
+     "stdout": "done",
+     "stderr": "",
+     "score": 1
+    },
+    "wrong_variant_access": {
+     "outcome": "REJECTED",
+     "message": "main.goose:8: error: no matching overload for call to text_len\n  candidate text_len at main.goose:3: argument 1: cannot pass Value as Value.Text\n    print(text_len(w)); // BREAK!\n          ^~~~~~~~~~~\n  in fn main() instantiated from main.goose:5",
+     "score": 1
+    },
+    "format_string": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "%s%s%n{}{0}",
+     "stderr": "",
+     "score": 1
+    },
+    "deep_structure_release": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 17.1,
+     "secs": 0.01,
+     "stdout": "done",
+     "stderr": "",
+     "score": 1
+    },
+    "abandoned_worker_leak": {
+     "outcome": "LEAK",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 1375.1,
+     "secs": 1.92,
+     "stdout": "done",
+     "stderr": "",
+     "score": 0
+    },
+    "string_literal_write": {
+     "outcome": "REJECTED",
+     "message": "main.goose:5: error: cannot assign through this path (const, or a read-only instantiation, §9.5)\n    greeting[0] = 'j'; // CONTROL! greeting = \"jello\";\n    ^~~~~~~~~~~~~~~~~~\n  in fn main() instantiated from main.goose:3",
+     "score": 1
+    },
+    "complete_init": {
+     "outcome": "REJECTED",
+     "message": "main.goose:5: error: missing initializer for field retries of Config (it has no default)\n    let partial = Config { timeout: 5 }; // BREAK!\n                  ^~~~~~~~~~~~~~~~~~~~~\n  in fn main() instantiated from main.goose:3",
+     "score": 1
+    },
+    "newtype": {
+     "outcome": "REJECTED",
+     "message": "main.goose:8: error: no matching overload for call to add\n  candidate add at main.goose:4: argument 2: cannot pass Seconds as Meters\n    let wrong = add(Meters { v: 2.0 }, Seconds { v: 3.0 }); // BREAK!\n                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  in fn main() instantiated from main.goose:6",
+     "score": 1
+    },
+    "strong_enum": {
+     "outcome": "REJECTED",
+     "message": "main.goose:13: error: no matching overload for call to name\n  candidate name at main.goose:3: argument 1: cannot pass i64 as Color\n    print(name(7)); // BREAK!\n          ^~~~~~~\n  in fn main() instantiated from main.goose:11",
+     "score": 1
+    },
+    "override_check": {
+     "outcome": "INEXPRESSIBLE",
+     "message": "no traits, interfaces or inheritance",
+     "score": 0.0
+    },
+    "forced_unwrap": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 1,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "before",
+     "stderr": "goose runtime error: assert failed (main.goose:13)",
+     "score": 0.25
+    },
+    "null_in_text": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "rss_mb": 14.5,
+     "secs": 0.0,
+     "stdout": "hello, null\ntrue",
+     "stderr": "",
+     "score": 0
+    },
+    "not_found_sentinel": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "rss_mb": 14.3,
+     "secs": 0.0,
+     "stdout": "user",
+     "stderr": "",
+     "score": 0
+    },
+    "empty_max": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "rss_mb": 14.4,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "goose runtime error: assert failed (main.goose:10)",
+     "score": 0.25
+    },
+    "readonly_param": {
+     "outcome": "REJECTED",
+     "message": "main.goose:2: error: cannot assign through this path (const, or a read-only instantiation, §9.5)\n    xs[0] = 9; // BREAK!\n    ^~~~~~~~~~\n  in fn count(const i64[:]) instantiated from main.goose:8\n  in fn main() instantiated from main.goose:6",
+     "score": 1
+    },
+    "exclusive_mutation": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "130",
+     "stderr": "",
+     "score": 0
+    },
+    "literal_range": {
+     "outcome": "REJECTED",
+     "message": "main.goose:3: error: constant 300 does not fit u8\n    let too_big: u8 = 300; // BREAK!\n                      ^~~\n  in fn main() instantiated from main.goose:1",
+     "score": 1
+    },
+    "no_implicit_conversion": {
+     "outcome": "REJECTED",
+     "message": "main.goose:4: error: expected a value of type i32, got i64 (narrowing and sign changes require an explicit `as`)\n    let wrong: i32 = big; // BREAK!\n                     ^~~\n  in fn main() instantiated from main.goose:1",
+     "score": 1
+    },
+    "generic_constraint": {
+     "outcome": "REJECTED",
+     "message": "main.goose:9: error: ordering comparison requires numeric operands, got Point and Point\n    sort(ps); // BREAK!\n    ^\n  while checking this standard library expression\n  in fn sort_insertion<F = {block at /opt/goose/stdlib/std.goose:783:28}>(Point[:]) instantiated from /opt/goose/stdlib/std.goose:783\n  in fn sort<F = {block at /opt/goose/stdlib/std.goose:779:33}>(Point[:]) instantiated from /opt/goose/stdlib/std.goose:779\n  in fn sort(Point[:]) instantiated from main.goose:9\n  in fn main() instantiated from main.goose:5",
+     "score": 1
+    },
+    "lossy_int_to_float": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "9007199254740992",
+     "stderr": "",
+     "score": 0
+    },
+    "const_index_bounds": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 1,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "goose runtime error: index 5 out of bounds (length 3) (main.goose:3)",
+     "score": 0.25
+    },
+    "const_overflow": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "exit": 1,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "",
+     "stderr": "goose runtime error: integer overflow (debug): 31536000000000000 * 300 at i64 (main.goose:1)",
+     "score": 0.25
+    },
+    "racy_counter": {
+     "outcome": "CORRECT",
+     "runs": 50,
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "rss_mb": 14.5,
+     "secs": 0.0,
+     "stdout": "2000000",
+     "stderr": "",
+     "score": 1
+    },
+    "orphaned_receive": {
+     "outcome": "HANG",
+     "warned": false,
+     "run_warned": false,
+     "exit": -9,
+     "rss_mb": 14.3,
+     "secs": 20.0,
+     "stdout": "",
+     "stderr": "",
+     "score": 0
+    },
+    "blocking_in_async": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "rss_mb": 14.5,
+     "secs": 0.5,
+     "stdout": "concurrent",
+     "stderr": "",
+     "score": 1
+    },
+    "unreachable_code": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "ok",
+     "stderr": "",
+     "score": 0
+    },
+    "nan_key": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "missing",
+     "stderr": "",
+     "score": 0
+    },
+    "checked_interpolation": {
+     "outcome": "INEXPRESSIBLE",
+     "message": "no string interpolation",
+     "score": 0.0
+    },
+    "evaluation_order": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "1 2",
+     "stderr": "",
+     "score": 1
+    },
+    "dominated_case": {
+     "outcome": "REJECTED",
+     "message": "main.goose:7: error: _ must be the last match arm\nfn bad(s: Shape) -> const u8[:] { return match s { _ => \"other\", Circle => \"circle\" }; } // BREAK!\n                                                                           ^~~~~~~~\n  in fn bad(Shape) instantiated from main.goose:10\n  in fn main() instantiated from main.goose:9",
+     "score": 1
+    },
+    "duplicate_key": {
+     "outcome": "INEXPRESSIBLE",
+     "message": "no map literal",
+     "score": 0.0
+    },
+    "char_arithmetic": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "98",
+     "stderr": "",
+     "score": 0
+    },
+    "comparison_statement": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "0",
+     "stderr": "",
+     "score": 0
+    },
+    "structural_equality": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "equal",
+     "stderr": "",
+     "score": 1
+    },
+    "hash_matches_equality": {
+     "outcome": "INEXPRESSIBLE",
+     "message": "struct keys always compare field by field; there is no custom equality for a hash to disagree with",
+     "score": 0.0
+    },
+    "array_literal_length": {
+     "outcome": "REJECTED",
+     "message": "main.goose:4: error: 3 element(s) do not fill i64[4]\n    let short: i64[4] = [10, 20, 30]; // BREAK!\n                        ^~~~~~~~~~~~\n  in fn main() instantiated from main.goose:1",
+     "score": 1
+    },
+    "required_names": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "4 3",
+     "stderr": "",
+     "score": 0
+    },
+    "enum_from_int": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "rss_mb": 14.5,
+     "secs": 0.0,
+     "stdout": "before\ninvalid",
+     "stderr": "",
+     "score": 1
+    },
+    "increment_in_expression": {
+     "outcome": "REJECTED",
+     "message": "main.goose:4: error: expected ';' in assignment statement, found '++'\n    i = i++; // BREAK!\n         ^~",
+     "score": 1
+    },
+    "bitwise_on_bool": {
+     "outcome": "REJECTED",
+     "message": "main.goose:4: error: bitwise operator requires integer operands, got bool and bool\n    if (s.len > 0) & (s[0] == 'a') { print(\"both\"); } // BREAK!\n        ^~~~~~~~~~~~~~~~~~~~~~~~~~\n  in fn main() instantiated from main.goose:1",
+     "score": 1
+    },
+    "readonly_field": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 14.0,
+     "secs": 0.0,
+     "stdout": "1",
+     "stderr": "",
+     "score": 0
+    },
+    "bool_condition": {
+     "outcome": "REJECTED",
+     "message": "main.goose:5: error: condition must be bool or an optional, got i64\n    if compare(\"x\", \"x\") { print(\"different\"); } // BREAK!\n       ^~~~~~~~~~~~~~~~~\n  in fn main() instantiated from main.goose:3",
+     "score": 1
+    },
+    "contracts": {
+     "outcome": "INEXPRESSIBLE",
+     "message": "no contracts; a precondition is a check written in the function body",
+     "score": 0.0
+    },
+    "lost_write_error": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "rss_mb": 14.5,
+     "secs": 0.0,
+     "stdout": "saved",
+     "stderr": "",
+     "score": 0
+    }
+   },
+   "rank": 11
+  },
+  {
    "id": "crystal",
    "name": "Crystal",
+   "dir": "crystal",
+   "ext": "cr",
    "version": "Crystal 1.22.3 [3462c0774] (2026-11-13)",
    "score": 57.9,
    "correctness": 60.3,
@@ -12256,11 +13305,13 @@
      "score": 0.25
     }
    },
-   "rank": 11
+   "rank": 12
   },
   {
    "id": "csharp",
    "name": "C#",
+   "dir": "csharp",
+   "ext": "cs",
    "version": "11.0.100",
    "score": 57.7,
    "correctness": 60.3,
@@ -13369,11 +14420,13 @@
      "score": 0.25
     }
    },
-   "rank": 12
+   "rank": 13
   },
   {
    "id": "kotlin",
    "name": "Kotlin",
+   "dir": "kotlin",
+   "ext": "kt",
    "version": "info: kotlinc-jvm 2.4.21 (JRE 27.0.1.1+4)",
    "score": 57.7,
    "correctness": 59.4,
@@ -14374,142 +15427,149 @@
      "score": 0.25
     }
    },
-   "rank": 13
+   "rank": 14
   },
   {
-   "id": "goose",
-   "name": "Goose",
-   "version": "goose 9412b80f",
-   "score": 55.7,
-   "correctness": 59.4,
-   "null": 50.0,
-   "memory": 66.2,
-   "concurrency": 12.5,
-   "caught": 26.3,
-   "safe": 64.9,
-   "scored": 101,
+   "id": "typescript",
+   "name": "TypeScript",
+   "dir": "typescript",
+   "ext": "ts",
+   "version": "tsc Version 7.0.2 / node v26.13.1",
+   "score": 55.9,
+   "correctness": 54.7,
+   "null": 28.6,
+   "memory": 79.4,
+   "concurrency": 45.0,
+   "caught": 29.8,
+   "safe": 60.5,
+   "scored": 110,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
-     "message": "main.goose:16: error: optional value must be narrowed (if/guard/assert) before use\n    print(u.name.len); // BREAK!\n          ^~~~~~\n  in fn main() instantiated from main.goose:11",
+     "message": "main.ts(10,13): error TS18047: 'u' is possibly 'null'.",
      "score": 1
     },
     "int_overflow": {
-     "outcome": "TRAPPED",
+     "outcome": "SILENT",
      "warned": false,
-     "exit": 1,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "goose runtime error: integer overflow (debug): 9223372036854775807 + 1 at i64 (main.goose:6)",
-     "score": 0.25
+     "exit": 0,
+     "rss_mb": 41.0,
+     "secs": 0.02,
+     "stdout": "9223372036854776000",
+     "stderr": "",
+     "score": 0
     },
     "div_by_zero": {
-     "outcome": "TRAPPED",
+     "outcome": "SILENT",
      "warned": false,
-     "exit": 1,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "goose runtime error: division by zero (main.goose:6)",
-     "score": 0.25
+     "exit": 0,
+     "rss_mb": 41.4,
+     "secs": 0.02,
+     "stdout": "Infinity",
+     "stderr": "",
+     "score": 0
     },
     "shift_overflow": {
      "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 41.6,
+     "secs": 0.02,
      "stdout": "1",
      "stderr": "",
      "score": 0
     },
     "narrowing_cast": {
-     "outcome": "TRAPPED",
+     "outcome": "SILENT",
      "warned": false,
-     "exit": 1,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "goose runtime error: as conversion out of range (debug): 300 as u8 (main.goose:6)",
-     "score": 0.25
+     "exit": 0,
+     "rss_mb": 41.2,
+     "secs": 0.02,
+     "stdout": "44",
+     "stderr": "",
+     "score": 0
     },
     "float_to_int_overflow": {
-     "outcome": "TRAPPED",
+     "outcome": "CORRECT",
      "warned": false,
-     "exit": 1,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "goose runtime error: as conversion out of range (debug): 1e+20 as i64 (main.goose:6)",
-     "score": 0.25
+     "exit": 0,
+     "rss_mb": 41.5,
+     "secs": 0.02,
+     "stdout": "100000000000000000000",
+     "stderr": "",
+     "score": 1
     },
     "signed_unsigned_compare": {
      "outcome": "CORRECT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 43.9,
+     "secs": 0.02,
      "stdout": "less",
      "stderr": "",
      "score": 1
     },
     "type_confusion": {
      "outcome": "REJECTED",
-     "message": "main.goose:8: error: no matching overload for call to add\n  candidate add at main.goose:4: argument 1: cannot pass u8[:] as i64\n    print(add(raw, 3)); // BREAK!\n          ^~~~~~~~~~~\n  in fn main() instantiated from main.goose:6",
+     "message": "main.ts(6,17): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'number'.\n  Type 'undefined' is not assignable to type 'number'.",
      "score": 1
     },
     "missing_return": {
      "outcome": "REJECTED",
-     "message": "main.goose:6: error: function grade must return value(s)\n    if score < 50 { return \"fail\"; }\n    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  in fn grade(i64) instantiated from main.goose:12\n  in fn main() instantiated from main.goose:10",
+     "message": "main.ts(1,32): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.",
      "score": 1
     },
     "non_exhaustive_match": {
      "outcome": "REJECTED",
-     "message": "main.goose:7: error: match does not cover variant Color.Blue\n    match c {\n    ^\n  in fn name(Color) instantiated from main.goose:17\n  in fn main() instantiated from main.goose:14",
+     "message": "main.ts(7,26): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.",
      "score": 1
     },
     "uninitialized_variable": {
      "outcome": "REJECTED",
-     "message": "main.goose:8: error: variable x may be used before it is assigned\n    print(x); // BREAK!\n          ^\n  in fn main() instantiated from main.goose:4",
+     "message": "main.ts(4,13): error TS2454: Variable 'x' is used before being assigned.",
      "score": 1
     },
     "missing_argument": {
      "outcome": "REJECTED",
-     "message": "main.goose:4: error: no matching overload for call to area\n  candidate area at main.goose:1: too few arguments: 1 given, 2 needed\n    print(area(3)); // BREAK!\n          ^~~~~~~\n  in fn main() instantiated from main.goose:3",
+     "message": "main.ts(5,13): error TS2554: Expected 2 arguments, but got 1.",
      "score": 1
     },
     "misspelled_field": {
      "outcome": "REJECTED",
-     "message": "main.goose:5: error: struct Config has no field colour\n    cfg.colour = \"red\"; // BREAK!\n    ^~~~~~~~~~\n  in fn main() instantiated from main.goose:3",
+     "message": "main.ts(6,5): error TS2551: Property 'colour' does not exist on type 'Config'. Did you mean 'color'?",
      "score": 1
     },
     "assign_in_condition": {
-     "outcome": "REJECTED",
-     "message": "main.goose:7: error: expected '{' in if body, found '='\n    if x = 1 { label = \"one\"; } // BREAK!\n         ^",
-     "score": 1
-    },
-    "switch_fallthrough": {
-     "outcome": "CORRECT",
+     "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 41.1,
+     "secs": 0.02,
      "stdout": "one",
-     "stderr": "",
+     "stderr": "x is 1",
+     "score": 0
+    },
+    "switch_fallthrough": {
+     "outcome": "REJECTED",
+     "message": "main.ts(4,3): error TS7029: Fallthrough case in switch.",
      "score": 1
     },
     "zero_is_falsy": {
-     "outcome": "REJECTED",
-     "message": "main.goose:7: error: condition must be bool or an optional, got i64\n    if qty { present = true; } // BREAK!\n       ^~~\n  in fn main() instantiated from main.goose:4",
-     "score": 1
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 41.5,
+     "secs": 0.01,
+     "stdout": "missing",
+     "stderr": "",
+     "score": 0
     },
     "string_equality": {
      "outcome": "CORRECT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 41.1,
+     "secs": 0.02,
      "stdout": "equal",
      "stderr": "",
      "score": 1
@@ -14518,23 +15578,28 @@
      "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "1",
+     "rss_mb": 40.9,
+     "secs": 0.01,
+     "stdout": "13",
      "stderr": "",
      "score": 0
     },
     "covariant_array_write": {
-     "outcome": "REJECTED",
-     "message": "main.goose:11: error: dogs is not fixed-size and is not copied implicitly (§4.1): pass copy(dogs) for a copy, or bind it by reference\n    let animals: Animal[>..] = dogs; // BREAK!\n                               ^~~~\n  in fn main() instantiated from main.goose:8",
-     "score": 1
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 41.2,
+     "secs": 0.01,
+     "stdout": "meow",
+     "stderr": "",
+     "score": 0
     },
     "mutate_while_iterating": {
      "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 43.7,
+     "secs": 0.02,
      "stdout": "1,2,3",
      "stderr": "",
      "score": 0
@@ -14548,8 +15613,8 @@
      "outcome": "CORRECT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 41.4,
+     "secs": 0.01,
      "stdout": "0,1,2",
      "stderr": "",
      "score": 1
@@ -14558,113 +15623,113 @@
      "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 41.6,
+     "secs": 0.02,
      "stdout": "0",
      "stderr": "",
      "score": 0
     },
     "ignored_error_result": {
-     "outcome": "SILENT",
+     "outcome": "TRAPPED",
      "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "saved",
-     "stderr": "",
-     "score": 0
+     "exit": 1,
+     "rss_mb": 42.2,
+     "secs": 0.02,
+     "stdout": "",
+     "stderr": "node:fs:3028\n    return binding.writeFileUtf8(\n                   ^\n\nError: ENOENT: no such file or directory, open '/nonexistent/dir/out.txt'\n    at Object.writeFileSync (node:fs:3028:20)\n    at save (/tmp/breakbench/ignored_error_result/main/out/main.js:38:8)\n    at Object.<anonymous> (/tmp/breakbench/ignored_error_result/main/out/main.js:40:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  errno: -2,\n  code: 'ENOENT',\n  syscall: 'open',\n  path: '/nonexistent/dir/out.txt'\n}\n\nNode.js v26.13.1",
+     "score": 0.25
     },
     "sort_with_nan": {
      "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 41.5,
+     "secs": 0.02,
      "stdout": "unordered",
      "stderr": "",
      "score": 0
     },
     "integer_average": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "3.0",
-     "stderr": "",
-     "score": 0
-    },
-    "leading_zero_literal": {
      "outcome": "CORRECT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "1234",
+     "rss_mb": 41.6,
+     "secs": 0.01,
+     "stdout": "3.5",
      "stderr": "",
+     "score": 1
+    },
+    "leading_zero_literal": {
+     "outcome": "REJECTED",
+     "message": "main.ts(1,13): error TS1121: Octal literals are not allowed. Use the syntax '0o1234'.",
      "score": 1
     },
     "shared_default_argument": {
      "outcome": "CORRECT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 44.1,
+     "secs": 0.01,
      "stdout": "1",
      "stderr": "",
      "score": 1
     },
     "reused_iterator": {
-     "outcome": "CORRECT",
+     "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "12 3",
+     "rss_mb": 41.5,
+     "secs": 0.02,
+     "stdout": "12 0",
      "stderr": "",
-     "score": 1
+     "score": 0
     },
     "bitwise_precedence": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "even",
-     "stderr": "",
+     "outcome": "REJECTED",
+     "message": "main.ts(2,18): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.\nmain.ts(2,18): error TS2367: This comparison appears to be unintentional because the types '1' and '0' have no overlap.",
      "score": 1
     },
     "dangling_else": {
-     "outcome": "CORRECT",
+     "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "not a",
+     "rss_mb": 41.2,
+     "secs": 0.01,
+     "stdout": "unset",
      "stderr": "",
-     "score": 1
+     "score": 0
     },
     "chained_comparison": {
      "outcome": "REJECTED",
-     "message": "main.goose:6: error: ordering comparison requires numeric operands, got bool and i64\n    let inside = 1 < x < 3; // BREAK!\n                 ^~~~~~~~~\n  in fn main() instantiated from main.goose:4",
+     "message": "main.ts(2,16): error TS2365: Operator '<' cannot be applied to types 'boolean' and 'number'.",
      "score": 1
     },
     "lost_update_on_copy": {
-     "outcome": "REJECTED",
-     "message": "main.goose:7: error: cannot write acct: a by-value binding is a copy of the element; bind it by reference (&acct) to write the element (§6.5)\n        acct.balance += 50; // BREAK!\n        ^~~~~~~~~~~~~~~~~~~\n  in fn main() instantiated from main.goose:3",
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 41.3,
+     "secs": 0.01,
+     "stdout": "150",
+     "stderr": "",
      "score": 1
     },
     "command_injection": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no subprocess API in the standard library",
-     "score": 0.0
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 42.8,
+     "secs": 0.02,
+     "stdout": "injected",
+     "stderr": "",
+     "score": 0
     },
     "float_equality": {
      "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 41.5,
+     "secs": 0.01,
      "stdout": "not equal",
      "stderr": "",
      "score": 0
@@ -14678,108 +15743,103 @@
      "outcome": "CORRECT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 41.0,
+     "secs": 0.01,
      "stdout": "inside",
      "stderr": "",
      "score": 1
     },
     "regex_backtracking": {
-     "outcome": "CORRECT",
+     "outcome": "HANG",
      "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "no match",
+     "exit": -9,
+     "rss_mb": 14.2,
+     "secs": 20.0,
+     "stdout": "",
      "stderr": "",
-     "score": 1
+     "score": 0
     },
     "negative_remainder": {
-     "outcome": "CORRECT",
+     "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "odd",
+     "rss_mb": 41.3,
+     "secs": 0.02,
+     "stdout": "even",
      "stderr": "",
-     "score": 1
+     "score": 0
     },
     "missing_comma_concat": {
      "outcome": "REJECTED",
-     "message": "main.goose:5: error: expected ']' in array literal, found 'string literal'\n        \"carol\",\n        ^~~~~~~",
+     "message": "main.ts(4,3): error TS1005: ',' expected.",
      "score": 1
     },
     "return_in_finally": {
-     "outcome": "CORRECT",
+     "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "failed",
+     "rss_mb": 41.7,
+     "secs": 0.01,
+     "stdout": "saved",
      "stderr": "",
-     "score": 1
+     "score": 0
     },
     "return_line_break": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "5",
-     "stderr": "",
+     "outcome": "REJECTED",
+     "message": "main.ts(2,3): error TS2322: Type 'undefined' is not assignable to type 'number'.\nmain.ts(3,5): error TS7027: Unreachable code detected.",
      "score": 1
     },
     "worker_failure_lost": {
      "outcome": "TRAPPED",
      "warned": false,
      "exit": 1,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 41.2,
+     "secs": 0.01,
      "stdout": "",
-     "stderr": "goose runtime error: bad number: x (main.goose:13)",
+     "stderr": "/tmp/breakbench/worker_failure_lost/main/out/main.js:8\n            throw new Error(`bad number: ${item}`);\n                  ^\n\nError: bad number: x\n    at sum (/tmp/breakbench/worker_failure_lost/main/out/main.js:8:19)\n    at main (/tmp/breakbench/worker_failure_lost/main/out/main.js:14:20)\n    at Object.<anonymous> (/tmp/breakbench/worker_failure_lost/main/out/main.js:18:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1",
      "score": 0.25
     },
     "unawaited_task": {
      "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 40.8,
+     "secs": 0.06,
      "stdout": "0",
      "stderr": "",
      "score": 0
     },
     "format_arg_mismatch": {
-     "outcome": "CORRECT",
+     "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "3 of 5",
+     "rss_mb": 41.2,
+     "secs": 0.02,
+     "stdout": "3 of %d",
      "stderr": "",
-     "score": 1
+     "score": 0
     },
     "unsigned_subtraction": {
      "outcome": "CORRECT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 41.5,
+     "secs": 0.01,
      "stdout": "short",
      "stderr": "",
      "score": 1
     },
     "missing_key_default": {
      "outcome": "REJECTED",
-     "message": "main.goose:10: error: operator + cannot be applied to i64? and i64\n    print(stock.get(name) + 5); // CONTROL! print(stock.contains(name));\n          ^~~~~~~~~~~~~~~~~~~\n  in fn main() instantiated from main.goose:5",
+     "message": "main.ts(3,13): error TS2532: Object is possibly 'undefined'.",
      "score": 1
     },
     "mutable_hash_key": {
      "outcome": "CORRECT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 41.3,
+     "secs": 0.01,
      "stdout": "found",
      "stderr": "",
      "score": 1
@@ -14788,61 +15848,58 @@
      "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 41.4,
+     "secs": 0.01,
      "stdout": "pending",
-     "stderr": "done",
+     "stderr": "status: done",
      "score": 0
     },
     "discarded_pure_result": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "ADA",
-     "stderr": "",
-     "score": 1
-    },
-    "negative_index_wraps": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 1,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "goose runtime error: index -1 out of bounds (length 3) (main.goose:7)",
-     "score": 0.25
-    },
-    "default_numeric_sort": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "1 9 10",
-     "stderr": "",
-     "score": 1
-    },
-    "unrelated_type_lookup": {
-     "outcome": "REJECTED",
-     "message": "main.goose:7: error: no matching overload for call to contains\n  candidate contains at /opt/goose/stdlib/std.goose:397: argument 2: cannot pass u8[:] as T\n    print(if contains(ids, id) { \"found\" } else { \"missing\" }); // CONTROL! let n, ok = parse_int(id); print(if contains(ids, n) { \"found\" } else { \"missing\" });\n             ^~~~~~~~~~~~~~~~~\n  in fn main() instantiated from main.goose:4",
-     "score": 1
-    },
-    "use_after_close": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no file handles in the standard library; files are read and written whole",
-     "score": 0.0
-    },
-    "dead_store": {
      "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "40",
+     "rss_mb": 41.5,
+     "secs": 0.01,
+     "stdout": "ada",
      "stderr": "",
      "score": 0
+    },
+    "negative_index_wraps": {
+     "outcome": "REJECTED",
+     "message": "main.ts(3,13): error TS2532: Object is possibly 'undefined'.\nmain.ts(3,27): error TS2532: Object is possibly 'undefined'.",
+     "score": 1
+    },
+    "default_numeric_sort": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 41.6,
+     "secs": 0.01,
+     "stdout": "1 10 9",
+     "stderr": "",
+     "score": 0
+    },
+    "unrelated_type_lookup": {
+     "outcome": "REJECTED",
+     "message": "main.ts(3,26): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.",
+     "score": 1
+    },
+    "use_after_close": {
+     "outcome": "TRAPPED",
+     "runs": 50,
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "rss_mb": 41.7,
+     "secs": 0.02,
+     "stdout": "",
+     "stderr": "node:internal/fs/utils:437\n    throw err;\n    ^\n\nError: EBADF: bad file descriptor, write\n    at Object.writeSync (node:fs:1237:3)\n    at Object.<anonymous> (/tmp/breakbench/use_after_close/main/out/main.js:40:4)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  errno: -9,\n  syscall: 'write',\n  code: 'EBADF'\n}\n\nNode.js v26.13.1",
+     "score": 0.25
+    },
+    "dead_store": {
+     "outcome": "REJECTED",
+     "message": "main.ts(2,7): error TS6133: 'total' is declared but its value is never read.",
+     "score": 1
     },
     "panic_under_lock": {
      "outcome": "INEXPRESSIBLE",
@@ -14853,63 +15910,68 @@
      "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 41.3,
+     "secs": 0.01,
      "stdout": "a�",
      "stderr": "",
      "score": 0
     },
     "oob_write": {
-     "outcome": "TRAPPED",
+     "outcome": "CORRECT",
      "warned": false,
-     "exit": 1,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "goose runtime error: index 4 out of bounds (length 4) (main.goose:9)",
-     "score": 0.25
+     "exit": 0,
+     "rss_mb": 41.6,
+     "secs": 0.01,
+     "stdout": "7",
+     "stderr": "",
+     "score": 1
     },
     "oob_read": {
-     "outcome": "TRAPPED",
+     "outcome": "SILENT",
      "warned": false,
-     "exit": 1,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "goose runtime error: index 4 out of bounds (length 4) (main.goose:9)",
-     "score": 0.25
+     "exit": 0,
+     "rss_mb": 41.2,
+     "secs": 0.01,
+     "stdout": "undefined",
+     "stderr": "",
+     "score": 0
     },
     "use_after_free": {
-     "outcome": "CORRUPT",
+     "outcome": "CORRECT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "6666",
+     "rss_mb": 41.5,
+     "secs": 0.01,
+     "stdout": "1234",
      "stderr": "",
-     "score": 0
+     "score": 1
     },
     "double_free": {
-     "outcome": "CORRUPT",
+     "outcome": "CORRECT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "2",
+     "rss_mb": 41.7,
+     "secs": 0.01,
+     "stdout": "1",
      "stderr": "",
-     "score": 0
+     "score": 1
     },
     "dangling_stack_ref": {
-     "outcome": "REJECTED",
-     "message": "main.goose:5: error: returning a reference rooted in local, which dies with this function (§9.2)\n    return local; // BREAK!\n    ^~~~~~~~~~~~\n  in fn make() instantiated from main.goose:15\n  in fn main() instantiated from main.goose:14",
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 41.5,
+     "secs": 0.01,
+     "stdout": "4242",
+     "stderr": "",
      "score": 1
     },
     "container_realloc_dangling": {
      "outcome": "CORRECT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 43.9,
+     "secs": 0.01,
      "stdout": "7",
      "stderr": "",
      "score": 1
@@ -14917,10 +15979,9 @@
     "uninit_heap_read": {
      "outcome": "CORRECT",
      "warned": false,
-     "all_warnings": "main.goose:13: warning: redundant `as u64`: a u8 converts to u64 implicitly here",
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 41.5,
+     "secs": 0.01,
      "stdout": "000000000000000000000000",
      "stderr": "",
      "score": 1
@@ -14929,78 +15990,85 @@
      "outcome": "TRAPPED",
      "warned": false,
      "exit": 1,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 42.1,
+     "secs": 0.01,
      "stdout": "",
-     "stderr": "goose runtime error: native call stack overflow",
+     "stderr": "/tmp/breakbench/stack_overflow/main/out/main.js:4\n    if (n === 0)\n    ^\n\nRangeError: Maximum call stack size exceeded\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:4:5)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n\nNode.js v26.13.1",
      "score": 0.25
     },
     "error_path_leak": {
      "outcome": "CORRECT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.04,
+     "rss_mb": 143.1,
+     "secs": 2.76,
      "stdout": "done",
      "stderr": "",
      "score": 1
     },
     "concurrent_map_write": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no threads that share memory",
-     "score": 0.0
+     "outcome": "CORRECT",
+     "runs": 50,
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "rss_mb": 159.5,
+     "secs": 0.1,
+     "stdout": "800000",
+     "stderr": "",
+     "score": 1
     },
     "reference_cycle_leak": {
      "outcome": "CORRECT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 82.9,
+     "secs": 1.21,
      "stdout": "done",
      "stderr": "",
      "score": 1
     },
     "view_retention": {
-     "outcome": "CORRECT",
+     "outcome": "LEAK",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 1.05,
+     "rss_mb": 1436.7,
+     "secs": 0.54,
      "stdout": "40000",
      "stderr": "",
-     "score": 1
+     "score": 0
     },
     "huge_allocation": {
      "outcome": "TRAPPED",
      "warned": false,
      "exit": 1,
-     "rss_mb": 2049.1,
-     "secs": 0.38,
+     "rss_mb": 42.3,
+     "secs": 0.02,
      "stdout": "",
-     "stderr": "goose runtime error: data stack overflow: a value on main's data stacks grew past the 2 GB reserved for it; --stack-reserve or -DGS_STACK_RESERVE raises the reservation, up to 256 TB",
+     "stderr": "/tmp/breakbench/huge_allocation/main/out/main.js:4\nconst buf = new Uint8Array(n);\n            ^\n\nRangeError: Array buffer allocation failed\n    at new ArrayBuffer (<anonymous>)\n    at new Uint8Array (<anonymous>)\n    at Object.<anonymous> (/tmp/breakbench/huge_allocation/main/out/main.js:4:13)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1",
      "score": 0.25
     },
     "fd_leak": {
-     "outcome": "CORRECT",
+     "outcome": "LEAK",
      "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.01,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1
+     "exit": 1,
+     "rss_mb": 45.9,
+     "secs": 0.05,
+     "stdout": "",
+     "stderr": "node:fs:782\n  return binding.open(\n                 ^\n\nError: EMFILE: too many open files, open '/tmp/bb_fd.txt'\n    at Object.openSync (node:fs:782:18)\n    at Object.<anonymous> (/tmp/breakbench/fd_leak/main/out/main.js:40:19)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  errno: -24,\n  code: 'EMFILE',\n  syscall: 'open',\n  path: '/tmp/bb_fd.txt'\n}\n\nNode.js v26.13.1",
+     "score": 0
     },
     "wrong_variant_access": {
      "outcome": "REJECTED",
-     "message": "main.goose:8: error: no matching overload for call to text_len\n  candidate text_len at main.goose:3: argument 1: cannot pass Value as Value.Text\n    print(text_len(w)); // BREAK!\n          ^~~~~~~~~~~\n  in fn main() instantiated from main.goose:5",
+     "message": "main.ts(4,15): error TS2339: Property 'text' does not exist on type 'Value'.\n  Property 'text' does not exist on type '{ kind: \"int\"; value: number; }'.",
      "score": 1
     },
     "format_string": {
      "outcome": "CORRECT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 42.3,
+     "secs": 0.02,
      "stdout": "%s%s%n{}{0}",
      "stderr": "",
      "score": 1
@@ -15009,65 +16077,65 @@
      "outcome": "CORRECT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 17.1,
-     "secs": 0.01,
+     "rss_mb": 104.2,
+     "secs": 0.04,
      "stdout": "done",
      "stderr": "",
      "score": 1
     },
     "abandoned_worker_leak": {
-     "outcome": "LEAK",
+     "outcome": "CORRECT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 1375.1,
-     "secs": 1.92,
+     "rss_mb": 63.9,
+     "secs": 0.2,
      "stdout": "done",
      "stderr": "",
-     "score": 0
+     "score": 1
     },
     "string_literal_write": {
      "outcome": "REJECTED",
-     "message": "main.goose:5: error: cannot assign through this path (const, or a read-only instantiation, §9.5)\n    greeting[0] = 'j'; // CONTROL! greeting = \"jello\";\n    ^~~~~~~~~~~~~~~~~~\n  in fn main() instantiated from main.goose:3",
+     "message": "main.ts(2,1): error TS2542: Index signature in type 'String' only permits reading.",
      "score": 1
     },
     "complete_init": {
      "outcome": "REJECTED",
-     "message": "main.goose:5: error: missing initializer for field retries of Config (it has no default)\n    let partial = Config { timeout: 5 }; // BREAK!\n                  ^~~~~~~~~~~~~~~~~~~~~\n  in fn main() instantiated from main.goose:3",
+     "message": "main.ts(4,7): error TS2741: Property 'retries' is missing in type '{ timeout: number; }' but required in type 'Config'.\nmain.ts(4,7): error TS6133: 'partial' is declared but its value is never read.",
      "score": 1
     },
     "newtype": {
      "outcome": "REJECTED",
-     "message": "main.goose:8: error: no matching overload for call to add\n  candidate add at main.goose:4: argument 2: cannot pass Seconds as Meters\n    let wrong = add(Meters { v: 2.0 }, Seconds { v: 3.0 }); // BREAK!\n                ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  in fn main() instantiated from main.goose:6",
+     "message": "main.ts(6,76): error TS2345: Argument of type 'Seconds' is not assignable to parameter of type 'Meters'.\n  Type 'Seconds' is not assignable to type '{ readonly unit: \"m\"; }'.\n    Types of property 'unit' are incompatible.\n      Type '\"s\"' is not assignable to type '\"m\"'.",
      "score": 1
     },
     "strong_enum": {
      "outcome": "REJECTED",
-     "message": "main.goose:13: error: no matching overload for call to name\n  candidate name at main.goose:3: argument 1: cannot pass i64 as Color\n    print(name(7)); // BREAK!\n          ^~~~~~~\n  in fn main() instantiated from main.goose:11",
+     "message": "main.ts(19,18): error TS2345: Argument of type '7' is not assignable to parameter of type 'Color'.",
      "score": 1
     },
     "override_check": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no traits, interfaces or inheritance",
-     "score": 0.0
+     "outcome": "REJECTED",
+     "message": "main.ts(11,12): error TS4117: This member cannot have an 'override' modifier because it is not declared in the base class 'Shape'. Did you mean 'describe'?",
+     "score": 1
     },
     "forced_unwrap": {
-     "outcome": "TRAPPED",
+     "outcome": "SILENT",
      "warned": false,
-     "exit": 1,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "before",
-     "stderr": "goose runtime error: assert failed (main.goose:13)",
-     "score": 0.25
+     "exit": 0,
+     "rss_mb": 41.4,
+     "secs": 0.01,
+     "stdout": "before\nNaN",
+     "stderr": "",
+     "score": 0
     },
     "null_in_text": {
      "outcome": "SILENT",
      "warned": false,
      "run_warned": false,
      "exit": 0,
-     "rss_mb": 14.5,
-     "secs": 0.0,
-     "stdout": "hello, null\ntrue",
+     "rss_mb": 40.8,
+     "secs": 0.01,
+     "stdout": "hello, null",
      "stderr": "",
      "score": 0
     },
@@ -15076,162 +16144,169 @@
      "warned": false,
      "run_warned": false,
      "exit": 0,
-     "rss_mb": 14.3,
-     "secs": 0.0,
+     "rss_mb": 41.1,
+     "secs": 0.01,
      "stdout": "user",
      "stderr": "",
      "score": 0
     },
     "empty_max": {
-     "outcome": "TRAPPED",
+     "outcome": "SILENT",
      "warned": false,
      "run_warned": false,
-     "exit": 1,
-     "rss_mb": 14.4,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "goose runtime error: assert failed (main.goose:10)",
-     "score": 0.25
+     "exit": 0,
+     "rss_mb": 41.4,
+     "secs": 0.03,
+     "stdout": "-Infinity",
+     "stderr": "",
+     "score": 0
     },
     "readonly_param": {
      "outcome": "REJECTED",
-     "message": "main.goose:2: error: cannot assign through this path (const, or a read-only instantiation, §9.5)\n    xs[0] = 9; // BREAK!\n    ^~~~~~~~~~\n  in fn count(const i64[:]) instantiated from main.goose:8\n  in fn main() instantiated from main.goose:6",
+     "message": "main.ts(2,3): error TS2542: Index signature in type 'readonly number[]' only permits reading.",
      "score": 1
     },
     "exclusive_mutation": {
      "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 41.6,
+     "secs": 0.01,
      "stdout": "130",
      "stderr": "",
      "score": 0
     },
     "literal_range": {
-     "outcome": "REJECTED",
-     "message": "main.goose:3: error: constant 300 does not fit u8\n    let too_big: u8 = 300; // BREAK!\n                      ^~~\n  in fn main() instantiated from main.goose:1",
-     "score": 1
-    },
-    "no_implicit_conversion": {
-     "outcome": "REJECTED",
-     "message": "main.goose:4: error: expected a value of type i32, got i64 (narrowing and sign changes require an explicit `as`)\n    let wrong: i32 = big; // BREAK!\n                     ^~~\n  in fn main() instantiated from main.goose:1",
-     "score": 1
-    },
-    "generic_constraint": {
-     "outcome": "REJECTED",
-     "message": "main.goose:9: error: ordering comparison requires numeric operands, got Point and Point\n    sort(ps); // BREAK!\n    ^\n  while checking this standard library expression\n  in fn sort_insertion<F = {block at /opt/goose/stdlib/std.goose:783:28}>(Point[:]) instantiated from /opt/goose/stdlib/std.goose:783\n  in fn sort<F = {block at /opt/goose/stdlib/std.goose:779:33}>(Point[:]) instantiated from /opt/goose/stdlib/std.goose:779\n  in fn sort(Point[:]) instantiated from main.goose:9\n  in fn main() instantiated from main.goose:5",
-     "score": 1
-    },
-    "lossy_int_to_float": {
      "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "9007199254740992",
+     "rss_mb": 41.8,
+     "secs": 0.01,
+     "stdout": "44",
      "stderr": "",
      "score": 0
+    },
+    "no_implicit_conversion": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 44.4,
+     "secs": 0.01,
+     "stdout": "3000000000",
+     "stderr": "",
+     "score": 1
+    },
+    "generic_constraint": {
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 41.8,
+     "secs": 0.01,
+     "stdout": "3",
+     "stderr": "",
+     "score": 0
+    },
+    "lossy_int_to_float": {
+     "outcome": "REJECTED",
+     "message": "main.ts(7,6): error TS2345: Argument of type 'bigint' is not assignable to parameter of type 'number'.",
+     "score": 1
     },
     "const_index_bounds": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 1,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "goose runtime error: index 5 out of bounds (length 3) (main.goose:3)",
-     "score": 0.25
+     "outcome": "REJECTED",
+     "message": "main.ts(3,19): error TS2493: Tuple type 'readonly [number, number, number]' of length '3' has no element at index '5'.",
+     "score": 1
     },
     "const_overflow": {
-     "outcome": "TRAPPED",
+     "outcome": "CORRECT",
      "warned": false,
-     "exit": 1,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "goose runtime error: integer overflow (debug): 31536000000000000 * 300 at i64 (main.goose:1)",
-     "score": 0.25
+     "exit": 0,
+     "rss_mb": 41.5,
+     "secs": 0.01,
+     "stdout": "9460800000000000000",
+     "stderr": "",
+     "score": 1
     },
     "racy_counter": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "threads never share memory",
-     "score": 0.0
-    },
-    "orphaned_receive": {
-     "outcome": "HANG",
+     "outcome": "CORRECT",
+     "runs": 50,
      "warned": false,
      "run_warned": false,
-     "exit": -9,
-     "rss_mb": 14.3,
-     "secs": 20.0,
-     "stdout": "",
+     "exit": 0,
+     "rss_mb": 60.4,
+     "secs": 0.03,
+     "stdout": "2000000",
      "stderr": "",
-     "score": 0
+     "score": 1
+    },
+    "orphaned_receive": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "rss_mb": 41.4,
+     "secs": 0.02,
+     "stdout": "",
+     "stderr": "/tmp/breakbench/orphaned_receive/main/out/main.js:9\n            throw new Error(\"not a number: x\");\n                  ^\n\nError: not a number: x\n    at /tmp/breakbench/orphaned_receive/main/out/main.js:9:19\n    at main (/tmp/breakbench/orphaned_receive/main/out/main.js:11:7)\n    at Object.<anonymous> (/tmp/breakbench/orphaned_receive/main/out/main.js:14:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1",
+     "score": 0.25
     },
     "blocking_in_async": {
      "outcome": "CORRECT",
      "warned": false,
      "run_warned": false,
      "exit": 0,
-     "rss_mb": 14.5,
-     "secs": 0.5,
+     "rss_mb": 42.0,
+     "secs": 0.52,
      "stdout": "concurrent",
      "stderr": "",
      "score": 1
     },
     "unreachable_code": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "ok",
-     "stderr": "",
-     "score": 0
+     "outcome": "REJECTED",
+     "message": "main.ts(8,3): error TS7027: Unreachable code detected.",
+     "score": 1
     },
     "nan_key": {
-     "outcome": "SILENT",
+     "outcome": "CORRECT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "missing",
+     "rss_mb": 41.2,
+     "secs": 0.01,
+     "stdout": "found",
      "stderr": "",
-     "score": 0
+     "score": 1
     },
     "checked_interpolation": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no string interpolation",
-     "score": 0.0
+     "outcome": "REJECTED",
+     "message": "main.ts(3,22): error TS2304: Cannot find name 'nmae'.",
+     "score": 1
     },
     "evaluation_order": {
      "outcome": "CORRECT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 41.5,
+     "secs": 0.01,
      "stdout": "1 2",
      "stderr": "",
      "score": 1
     },
     "dominated_case": {
      "outcome": "REJECTED",
-     "message": "main.goose:7: error: _ must be the last match arm\nfn bad(s: Shape) -> const u8[:] { return match s { _ => \"other\", Circle => \"circle\" }; } // BREAK!\n                                                                           ^~~~~~~~\n  in fn bad(Shape) instantiated from main.goose:10\n  in fn main() instantiated from main.goose:9",
+     "message": "main.ts(6,7): error TS2358: The left-hand side of an 'instanceof' expression must be of type 'any', an object type or a type parameter.",
      "score": 1
     },
     "duplicate_key": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no map literal",
-     "score": 0.0
+     "outcome": "REJECTED",
+     "message": "main.ts(3,33): error TS1117: An object literal cannot have multiple properties with the same name.",
+     "score": 1
     },
     "char_arithmetic": {
      "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "98",
+     "rss_mb": 41.1,
+     "secs": 0.01,
+     "stdout": "a1",
      "stderr": "",
      "score": 0
     },
@@ -15239,71 +16314,81 @@
      "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
+     "rss_mb": 41.6,
+     "secs": 0.01,
      "stdout": "0",
      "stderr": "",
      "score": 0
     },
     "structural_equality": {
-     "outcome": "CORRECT",
+     "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "equal",
+     "rss_mb": 41.3,
+     "secs": 0.01,
+     "stdout": "different",
      "stderr": "",
-     "score": 1
+     "score": 0
     },
     "hash_matches_equality": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "a dictionary's hash function is written separately from equality",
-     "score": 0.0
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 41.5,
+     "secs": 0.01,
+     "stdout": "2",
+     "stderr": "",
+     "score": 0
     },
     "array_literal_length": {
      "outcome": "REJECTED",
-     "message": "main.goose:4: error: 3 element(s) do not fill i64[4]\n    let short: i64[4] = [10, 20, 30]; // BREAK!\n                        ^~~~~~~~~~~~\n  in fn main() instantiated from main.goose:1",
+     "message": "main.ts(3,7): error TS2322: Type '[number, number, number]' is not assignable to type 'readonly [number, number, number, number]'.\n  Source has 3 element(s) but target requires 4.",
      "score": 1
     },
     "required_names": {
+     "outcome": "REJECTED",
+     "message": "main.ts(6,9): error TS2554: Expected 1 arguments, but got 2.",
+     "score": 1
+    },
+    "enum_from_int": {
      "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "4 3",
+     "rss_mb": 41.8,
+     "secs": 0.01,
+     "stdout": "before\n7",
      "stderr": "",
      "score": 0
     },
-    "enum_from_int": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no conversion from an integer to an enum",
-     "score": 0.0
-    },
     "increment_in_expression": {
-     "outcome": "REJECTED",
-     "message": "main.goose:4: error: expected ';' in assignment statement, found '++'\n    i = i++; // BREAK!\n         ^~",
-     "score": 1
+     "outcome": "SILENT",
+     "warned": false,
+     "exit": 0,
+     "rss_mb": 44.4,
+     "secs": 0.01,
+     "stdout": "0",
+     "stderr": "",
+     "score": 0
     },
     "bitwise_on_bool": {
      "outcome": "REJECTED",
-     "message": "main.goose:4: error: bitwise operator requires integer operands, got bool and bool\n    if (s.len > 0) & (s[0] == 'a') { print(\"both\"); } // BREAK!\n        ^~~~~~~~~~~~~~~~~~~~~~~~~~\n  in fn main() instantiated from main.goose:1",
+     "message": "main.ts(3,20): error TS2447: The '&' operator is not allowed for boolean types. Consider using '&&' instead.",
      "score": 1
     },
     "readonly_field": {
+     "outcome": "REJECTED",
+     "message": "main.ts(6,3): error TS2540: Cannot assign to 'port' because it is a read-only property.",
+     "score": 1
+    },
+    "bool_condition": {
      "outcome": "SILENT",
      "warned": false,
      "exit": 0,
-     "rss_mb": 14.0,
-     "secs": 0.0,
-     "stdout": "1",
+     "rss_mb": 44.5,
+     "secs": 0.03,
+     "stdout": "different",
      "stderr": "",
      "score": 0
-    },
-    "bool_condition": {
-     "outcome": "REJECTED",
-     "message": "main.goose:5: error: condition must be bool or an optional, got i64\n    if compare(\"x\", \"x\") { print(\"different\"); } // BREAK!\n       ^~~~~~~~~~~~~~~~~\n  in fn main() instantiated from main.goose:3",
-     "score": 1
     },
     "contracts": {
      "outcome": "INEXPRESSIBLE",
@@ -15311,22 +16396,24 @@
      "score": 0.0
     },
     "lost_write_error": {
-     "outcome": "SILENT",
+     "outcome": "TRAPPED",
      "warned": false,
      "run_warned": false,
-     "exit": 0,
-     "rss_mb": 14.5,
-     "secs": 0.0,
-     "stdout": "saved",
-     "stderr": "",
-     "score": 0
+     "exit": 1,
+     "rss_mb": 41.8,
+     "secs": 0.02,
+     "stdout": "",
+     "stderr": "node:fs:3028\n    return binding.writeFileUtf8(\n                   ^\n\nError: ENOSPC: no space left on device, write\n    at writeFileSync (node:fs:3028:20)\n    at Object.<anonymous> (/tmp/breakbench/lost_write_error/main/out/main.js:4:29)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  errno: -28,\n  code: 'ENOSPC',\n  syscall: 'write'\n}\n\nNode.js v26.13.1",
+     "score": 0.25
     }
    },
-   "rank": 14
+   "rank": 15
   },
   {
    "id": "scala",
    "name": "Scala",
+   "dir": "scala",
+   "ext": "scala",
    "version": "Scala compiler version 3.10.1 -- Copyright 2002-2026, LAMP/EPFL",
    "score": 55.7,
    "correctness": 55.9,
@@ -16402,11 +17489,13 @@
      "score": 0.25
     }
    },
-   "rank": 15
+   "rank": 16
   },
   {
    "id": "dart",
    "name": "Dart",
+   "dir": "dart",
+   "ext": "dart",
    "version": "Dart SDK version: 3.14.1 (stable) (Tue Nov 17 00:01:24 2026 -0800) on \"linux_x64\"",
    "score": 55.5,
    "correctness": 57.2,
@@ -16415,7 +17504,7 @@
    "concurrency": 15.0,
    "caught": 18.4,
    "safe": 66.7,
-   "scored": 109,
+   "scored": 110,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -17025,9 +18114,16 @@
      "score": 1
     },
     "concurrent_map_write": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no threads that share memory",
-     "score": 0.0
+     "outcome": "SILENT",
+     "runs": 50,
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "rss_mb": 91.6,
+     "secs": 0.1,
+     "stdout": "0",
+     "stderr": "",
+     "score": 0
     },
     "reference_cycle_leak": {
      "outcome": "CORRECT",
@@ -17470,975 +18566,13 @@
      "score": 0.25
     }
    },
-   "rank": 16
-  },
-  {
-   "id": "typescript",
-   "name": "TypeScript",
-   "version": "tsc Version 7.0.2 / node v26.13.1",
-   "score": 54.2,
-   "correctness": 54.7,
-   "null": 28.6,
-   "memory": 79.4,
-   "concurrency": 25.0,
-   "caught": 29.8,
-   "safe": 58.8,
-   "scored": 108,
-   "results": {
-    "null_deref": {
-     "outcome": "REJECTED",
-     "message": "main.ts(10,13): error TS18047: 'u' is possibly 'null'.",
-     "score": 1
-    },
-    "int_overflow": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.0,
-     "secs": 0.02,
-     "stdout": "9223372036854776000",
-     "stderr": "",
-     "score": 0
-    },
-    "div_by_zero": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.4,
-     "secs": 0.02,
-     "stdout": "Infinity",
-     "stderr": "",
-     "score": 0
-    },
-    "shift_overflow": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.6,
-     "secs": 0.02,
-     "stdout": "1",
-     "stderr": "",
-     "score": 0
-    },
-    "narrowing_cast": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.2,
-     "secs": 0.02,
-     "stdout": "44",
-     "stderr": "",
-     "score": 0
-    },
-    "float_to_int_overflow": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.5,
-     "secs": 0.02,
-     "stdout": "100000000000000000000",
-     "stderr": "",
-     "score": 1
-    },
-    "signed_unsigned_compare": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 43.9,
-     "secs": 0.02,
-     "stdout": "less",
-     "stderr": "",
-     "score": 1
-    },
-    "type_confusion": {
-     "outcome": "REJECTED",
-     "message": "main.ts(6,17): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'number'.\n  Type 'undefined' is not assignable to type 'number'.",
-     "score": 1
-    },
-    "missing_return": {
-     "outcome": "REJECTED",
-     "message": "main.ts(1,32): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.",
-     "score": 1
-    },
-    "non_exhaustive_match": {
-     "outcome": "REJECTED",
-     "message": "main.ts(7,26): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.",
-     "score": 1
-    },
-    "uninitialized_variable": {
-     "outcome": "REJECTED",
-     "message": "main.ts(4,13): error TS2454: Variable 'x' is used before being assigned.",
-     "score": 1
-    },
-    "missing_argument": {
-     "outcome": "REJECTED",
-     "message": "main.ts(5,13): error TS2554: Expected 2 arguments, but got 1.",
-     "score": 1
-    },
-    "misspelled_field": {
-     "outcome": "REJECTED",
-     "message": "main.ts(6,5): error TS2551: Property 'colour' does not exist on type 'Config'. Did you mean 'color'?",
-     "score": 1
-    },
-    "assign_in_condition": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.1,
-     "secs": 0.02,
-     "stdout": "one",
-     "stderr": "x is 1",
-     "score": 0
-    },
-    "switch_fallthrough": {
-     "outcome": "REJECTED",
-     "message": "main.ts(4,3): error TS7029: Fallthrough case in switch.",
-     "score": 1
-    },
-    "zero_is_falsy": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.5,
-     "secs": 0.01,
-     "stdout": "missing",
-     "stderr": "",
-     "score": 0
-    },
-    "string_equality": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.1,
-     "secs": 0.02,
-     "stdout": "equal",
-     "stderr": "",
-     "score": 1
-    },
-    "parse_invalid_number": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 40.9,
-     "secs": 0.01,
-     "stdout": "13",
-     "stderr": "",
-     "score": 0
-    },
-    "covariant_array_write": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.2,
-     "secs": 0.01,
-     "stdout": "meow",
-     "stderr": "",
-     "score": 0
-    },
-    "mutate_while_iterating": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 43.7,
-     "secs": 0.02,
-     "stdout": "1,2,3",
-     "stderr": "",
-     "score": 0
-    },
-    "self_deadlock": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no mutex in the language or its standard library",
-     "score": 0.0
-    },
-    "loop_closure_capture": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.4,
-     "secs": 0.01,
-     "stdout": "0,1,2",
-     "stderr": "",
-     "score": 1
-    },
-    "snapshot_aliasing": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.6,
-     "secs": 0.02,
-     "stdout": "0",
-     "stderr": "",
-     "score": 0
-    },
-    "ignored_error_result": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 1,
-     "rss_mb": 42.2,
-     "secs": 0.02,
-     "stdout": "",
-     "stderr": "node:fs:3028\n    return binding.writeFileUtf8(\n                   ^\n\nError: ENOENT: no such file or directory, open '/nonexistent/dir/out.txt'\n    at Object.writeFileSync (node:fs:3028:20)\n    at save (/tmp/breakbench/ignored_error_result/main/out/main.js:38:8)\n    at Object.<anonymous> (/tmp/breakbench/ignored_error_result/main/out/main.js:40:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  errno: -2,\n  code: 'ENOENT',\n  syscall: 'open',\n  path: '/nonexistent/dir/out.txt'\n}\n\nNode.js v26.13.1",
-     "score": 0.25
-    },
-    "sort_with_nan": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.5,
-     "secs": 0.02,
-     "stdout": "unordered",
-     "stderr": "",
-     "score": 0
-    },
-    "integer_average": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.6,
-     "secs": 0.01,
-     "stdout": "3.5",
-     "stderr": "",
-     "score": 1
-    },
-    "leading_zero_literal": {
-     "outcome": "REJECTED",
-     "message": "main.ts(1,13): error TS1121: Octal literals are not allowed. Use the syntax '0o1234'.",
-     "score": 1
-    },
-    "shared_default_argument": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 44.1,
-     "secs": 0.01,
-     "stdout": "1",
-     "stderr": "",
-     "score": 1
-    },
-    "reused_iterator": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.5,
-     "secs": 0.02,
-     "stdout": "12 0",
-     "stderr": "",
-     "score": 0
-    },
-    "bitwise_precedence": {
-     "outcome": "REJECTED",
-     "message": "main.ts(2,18): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.\nmain.ts(2,18): error TS2367: This comparison appears to be unintentional because the types '1' and '0' have no overlap.",
-     "score": 1
-    },
-    "dangling_else": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.2,
-     "secs": 0.01,
-     "stdout": "unset",
-     "stderr": "",
-     "score": 0
-    },
-    "chained_comparison": {
-     "outcome": "REJECTED",
-     "message": "main.ts(2,16): error TS2365: Operator '<' cannot be applied to types 'boolean' and 'number'.",
-     "score": 1
-    },
-    "lost_update_on_copy": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.3,
-     "secs": 0.01,
-     "stdout": "150",
-     "stderr": "",
-     "score": 1
-    },
-    "command_injection": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 42.8,
-     "secs": 0.02,
-     "stdout": "injected",
-     "stderr": "",
-     "score": 0
-    },
-    "float_equality": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.5,
-     "secs": 0.01,
-     "stdout": "not equal",
-     "stderr": "",
-     "score": 0
-    },
-    "lock_order_deadlock": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no mutex in the language or its standard library",
-     "score": 0.0
-    },
-    "path_join_escape": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.0,
-     "secs": 0.01,
-     "stdout": "inside",
-     "stderr": "",
-     "score": 1
-    },
-    "regex_backtracking": {
-     "outcome": "HANG",
-     "warned": false,
-     "exit": -9,
-     "rss_mb": 14.2,
-     "secs": 20.0,
-     "stdout": "",
-     "stderr": "",
-     "score": 0
-    },
-    "negative_remainder": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.3,
-     "secs": 0.02,
-     "stdout": "even",
-     "stderr": "",
-     "score": 0
-    },
-    "missing_comma_concat": {
-     "outcome": "REJECTED",
-     "message": "main.ts(4,3): error TS1005: ',' expected.",
-     "score": 1
-    },
-    "return_in_finally": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.7,
-     "secs": 0.01,
-     "stdout": "saved",
-     "stderr": "",
-     "score": 0
-    },
-    "return_line_break": {
-     "outcome": "REJECTED",
-     "message": "main.ts(2,3): error TS2322: Type 'undefined' is not assignable to type 'number'.\nmain.ts(3,5): error TS7027: Unreachable code detected.",
-     "score": 1
-    },
-    "worker_failure_lost": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 1,
-     "rss_mb": 41.2,
-     "secs": 0.01,
-     "stdout": "",
-     "stderr": "/tmp/breakbench/worker_failure_lost/main/out/main.js:8\n            throw new Error(`bad number: ${item}`);\n                  ^\n\nError: bad number: x\n    at sum (/tmp/breakbench/worker_failure_lost/main/out/main.js:8:19)\n    at main (/tmp/breakbench/worker_failure_lost/main/out/main.js:14:20)\n    at Object.<anonymous> (/tmp/breakbench/worker_failure_lost/main/out/main.js:18:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1",
-     "score": 0.25
-    },
-    "unawaited_task": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 40.8,
-     "secs": 0.06,
-     "stdout": "0",
-     "stderr": "",
-     "score": 0
-    },
-    "format_arg_mismatch": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.2,
-     "secs": 0.02,
-     "stdout": "3 of %d",
-     "stderr": "",
-     "score": 0
-    },
-    "unsigned_subtraction": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.5,
-     "secs": 0.01,
-     "stdout": "short",
-     "stderr": "",
-     "score": 1
-    },
-    "missing_key_default": {
-     "outcome": "REJECTED",
-     "message": "main.ts(3,13): error TS2532: Object is possibly 'undefined'.",
-     "score": 1
-    },
-    "mutable_hash_key": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.3,
-     "secs": 0.01,
-     "stdout": "found",
-     "stderr": "",
-     "score": 1
-    },
-    "shadowed_assignment": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.4,
-     "secs": 0.01,
-     "stdout": "pending",
-     "stderr": "status: done",
-     "score": 0
-    },
-    "discarded_pure_result": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.5,
-     "secs": 0.01,
-     "stdout": "ada",
-     "stderr": "",
-     "score": 0
-    },
-    "negative_index_wraps": {
-     "outcome": "REJECTED",
-     "message": "main.ts(3,13): error TS2532: Object is possibly 'undefined'.\nmain.ts(3,27): error TS2532: Object is possibly 'undefined'.",
-     "score": 1
-    },
-    "default_numeric_sort": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.6,
-     "secs": 0.01,
-     "stdout": "1 10 9",
-     "stderr": "",
-     "score": 0
-    },
-    "unrelated_type_lookup": {
-     "outcome": "REJECTED",
-     "message": "main.ts(3,26): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.",
-     "score": 1
-    },
-    "use_after_close": {
-     "outcome": "TRAPPED",
-     "runs": 50,
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "rss_mb": 41.7,
-     "secs": 0.02,
-     "stdout": "",
-     "stderr": "node:internal/fs/utils:437\n    throw err;\n    ^\n\nError: EBADF: bad file descriptor, write\n    at Object.writeSync (node:fs:1237:3)\n    at Object.<anonymous> (/tmp/breakbench/use_after_close/main/out/main.js:40:4)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  errno: -9,\n  syscall: 'write',\n  code: 'EBADF'\n}\n\nNode.js v26.13.1",
-     "score": 0.25
-    },
-    "dead_store": {
-     "outcome": "REJECTED",
-     "message": "main.ts(2,7): error TS6133: 'total' is declared but its value is never read.",
-     "score": 1
-    },
-    "panic_under_lock": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no mutex in the language or its standard library",
-     "score": 0.0
-    },
-    "split_character": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.3,
-     "secs": 0.01,
-     "stdout": "a�",
-     "stderr": "",
-     "score": 0
-    },
-    "oob_write": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.6,
-     "secs": 0.01,
-     "stdout": "7",
-     "stderr": "",
-     "score": 1
-    },
-    "oob_read": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.2,
-     "secs": 0.01,
-     "stdout": "undefined",
-     "stderr": "",
-     "score": 0
-    },
-    "use_after_free": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.5,
-     "secs": 0.01,
-     "stdout": "1234",
-     "stderr": "",
-     "score": 1
-    },
-    "double_free": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.7,
-     "secs": 0.01,
-     "stdout": "1",
-     "stderr": "",
-     "score": 1
-    },
-    "dangling_stack_ref": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.5,
-     "secs": 0.01,
-     "stdout": "4242",
-     "stderr": "",
-     "score": 1
-    },
-    "container_realloc_dangling": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 43.9,
-     "secs": 0.01,
-     "stdout": "7",
-     "stderr": "",
-     "score": 1
-    },
-    "uninit_heap_read": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.5,
-     "secs": 0.01,
-     "stdout": "000000000000000000000000",
-     "stderr": "",
-     "score": 1
-    },
-    "stack_overflow": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 1,
-     "rss_mb": 42.1,
-     "secs": 0.01,
-     "stdout": "",
-     "stderr": "/tmp/breakbench/stack_overflow/main/out/main.js:4\n    if (n === 0)\n    ^\n\nRangeError: Maximum call stack size exceeded\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:4:5)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n\nNode.js v26.13.1",
-     "score": 0.25
-    },
-    "error_path_leak": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 143.1,
-     "secs": 2.76,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1
-    },
-    "concurrent_map_write": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no threads that share memory",
-     "score": 0.0
-    },
-    "reference_cycle_leak": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 82.9,
-     "secs": 1.21,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1
-    },
-    "view_retention": {
-     "outcome": "LEAK",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 1436.7,
-     "secs": 0.54,
-     "stdout": "40000",
-     "stderr": "",
-     "score": 0
-    },
-    "huge_allocation": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "exit": 1,
-     "rss_mb": 42.3,
-     "secs": 0.02,
-     "stdout": "",
-     "stderr": "/tmp/breakbench/huge_allocation/main/out/main.js:4\nconst buf = new Uint8Array(n);\n            ^\n\nRangeError: Array buffer allocation failed\n    at new ArrayBuffer (<anonymous>)\n    at new Uint8Array (<anonymous>)\n    at Object.<anonymous> (/tmp/breakbench/huge_allocation/main/out/main.js:4:13)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1",
-     "score": 0.25
-    },
-    "fd_leak": {
-     "outcome": "LEAK",
-     "warned": false,
-     "exit": 1,
-     "rss_mb": 45.9,
-     "secs": 0.05,
-     "stdout": "",
-     "stderr": "node:fs:782\n  return binding.open(\n                 ^\n\nError: EMFILE: too many open files, open '/tmp/bb_fd.txt'\n    at Object.openSync (node:fs:782:18)\n    at Object.<anonymous> (/tmp/breakbench/fd_leak/main/out/main.js:40:19)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  errno: -24,\n  code: 'EMFILE',\n  syscall: 'open',\n  path: '/tmp/bb_fd.txt'\n}\n\nNode.js v26.13.1",
-     "score": 0
-    },
-    "wrong_variant_access": {
-     "outcome": "REJECTED",
-     "message": "main.ts(4,15): error TS2339: Property 'text' does not exist on type 'Value'.\n  Property 'text' does not exist on type '{ kind: \"int\"; value: number; }'.",
-     "score": 1
-    },
-    "format_string": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 42.3,
-     "secs": 0.02,
-     "stdout": "%s%s%n{}{0}",
-     "stderr": "",
-     "score": 1
-    },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 104.2,
-     "secs": 0.04,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1
-    },
-    "abandoned_worker_leak": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 63.9,
-     "secs": 0.2,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1
-    },
-    "string_literal_write": {
-     "outcome": "REJECTED",
-     "message": "main.ts(2,1): error TS2542: Index signature in type 'String' only permits reading.",
-     "score": 1
-    },
-    "complete_init": {
-     "outcome": "REJECTED",
-     "message": "main.ts(4,7): error TS2741: Property 'retries' is missing in type '{ timeout: number; }' but required in type 'Config'.\nmain.ts(4,7): error TS6133: 'partial' is declared but its value is never read.",
-     "score": 1
-    },
-    "newtype": {
-     "outcome": "REJECTED",
-     "message": "main.ts(6,76): error TS2345: Argument of type 'Seconds' is not assignable to parameter of type 'Meters'.\n  Type 'Seconds' is not assignable to type '{ readonly unit: \"m\"; }'.\n    Types of property 'unit' are incompatible.\n      Type '\"s\"' is not assignable to type '\"m\"'.",
-     "score": 1
-    },
-    "strong_enum": {
-     "outcome": "REJECTED",
-     "message": "main.ts(19,18): error TS2345: Argument of type '7' is not assignable to parameter of type 'Color'.",
-     "score": 1
-    },
-    "override_check": {
-     "outcome": "REJECTED",
-     "message": "main.ts(11,12): error TS4117: This member cannot have an 'override' modifier because it is not declared in the base class 'Shape'. Did you mean 'describe'?",
-     "score": 1
-    },
-    "forced_unwrap": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.4,
-     "secs": 0.01,
-     "stdout": "before\nNaN",
-     "stderr": "",
-     "score": 0
-    },
-    "null_in_text": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "rss_mb": 40.8,
-     "secs": 0.01,
-     "stdout": "hello, null",
-     "stderr": "",
-     "score": 0
-    },
-    "not_found_sentinel": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "rss_mb": 41.1,
-     "secs": 0.01,
-     "stdout": "user",
-     "stderr": "",
-     "score": 0
-    },
-    "empty_max": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "rss_mb": 41.4,
-     "secs": 0.03,
-     "stdout": "-Infinity",
-     "stderr": "",
-     "score": 0
-    },
-    "readonly_param": {
-     "outcome": "REJECTED",
-     "message": "main.ts(2,3): error TS2542: Index signature in type 'readonly number[]' only permits reading.",
-     "score": 1
-    },
-    "exclusive_mutation": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.6,
-     "secs": 0.01,
-     "stdout": "130",
-     "stderr": "",
-     "score": 0
-    },
-    "literal_range": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.8,
-     "secs": 0.01,
-     "stdout": "44",
-     "stderr": "",
-     "score": 0
-    },
-    "no_implicit_conversion": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 44.4,
-     "secs": 0.01,
-     "stdout": "3000000000",
-     "stderr": "",
-     "score": 1
-    },
-    "generic_constraint": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.8,
-     "secs": 0.01,
-     "stdout": "3",
-     "stderr": "",
-     "score": 0
-    },
-    "lossy_int_to_float": {
-     "outcome": "REJECTED",
-     "message": "main.ts(7,6): error TS2345: Argument of type 'bigint' is not assignable to parameter of type 'number'.",
-     "score": 1
-    },
-    "const_index_bounds": {
-     "outcome": "REJECTED",
-     "message": "main.ts(3,19): error TS2493: Tuple type 'readonly [number, number, number]' of length '3' has no element at index '5'.",
-     "score": 1
-    },
-    "const_overflow": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.5,
-     "secs": 0.01,
-     "stdout": "9460800000000000000",
-     "stderr": "",
-     "score": 1
-    },
-    "racy_counter": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "workers cannot capture a local variable; they share memory only through SharedArrayBuffer",
-     "score": 0.0
-    },
-    "orphaned_receive": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "rss_mb": 41.4,
-     "secs": 0.02,
-     "stdout": "",
-     "stderr": "/tmp/breakbench/orphaned_receive/main/out/main.js:9\n            throw new Error(\"not a number: x\");\n                  ^\n\nError: not a number: x\n    at /tmp/breakbench/orphaned_receive/main/out/main.js:9:19\n    at main (/tmp/breakbench/orphaned_receive/main/out/main.js:11:7)\n    at Object.<anonymous> (/tmp/breakbench/orphaned_receive/main/out/main.js:14:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1",
-     "score": 0.25
-    },
-    "blocking_in_async": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "rss_mb": 42.0,
-     "secs": 0.52,
-     "stdout": "concurrent",
-     "stderr": "",
-     "score": 1
-    },
-    "unreachable_code": {
-     "outcome": "REJECTED",
-     "message": "main.ts(8,3): error TS7027: Unreachable code detected.",
-     "score": 1
-    },
-    "nan_key": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.2,
-     "secs": 0.01,
-     "stdout": "found",
-     "stderr": "",
-     "score": 1
-    },
-    "checked_interpolation": {
-     "outcome": "REJECTED",
-     "message": "main.ts(3,22): error TS2304: Cannot find name 'nmae'.",
-     "score": 1
-    },
-    "evaluation_order": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.5,
-     "secs": 0.01,
-     "stdout": "1 2",
-     "stderr": "",
-     "score": 1
-    },
-    "dominated_case": {
-     "outcome": "REJECTED",
-     "message": "main.ts(6,7): error TS2358: The left-hand side of an 'instanceof' expression must be of type 'any', an object type or a type parameter.",
-     "score": 1
-    },
-    "duplicate_key": {
-     "outcome": "REJECTED",
-     "message": "main.ts(3,33): error TS1117: An object literal cannot have multiple properties with the same name.",
-     "score": 1
-    },
-    "char_arithmetic": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.1,
-     "secs": 0.01,
-     "stdout": "a1",
-     "stderr": "",
-     "score": 0
-    },
-    "comparison_statement": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.6,
-     "secs": 0.01,
-     "stdout": "0",
-     "stderr": "",
-     "score": 0
-    },
-    "structural_equality": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.3,
-     "secs": 0.01,
-     "stdout": "different",
-     "stderr": "",
-     "score": 0
-    },
-    "hash_matches_equality": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.5,
-     "secs": 0.01,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
-    "array_literal_length": {
-     "outcome": "REJECTED",
-     "message": "main.ts(3,7): error TS2322: Type '[number, number, number]' is not assignable to type 'readonly [number, number, number, number]'.\n  Source has 3 element(s) but target requires 4.",
-     "score": 1
-    },
-    "required_names": {
-     "outcome": "REJECTED",
-     "message": "main.ts(6,9): error TS2554: Expected 1 arguments, but got 2.",
-     "score": 1
-    },
-    "enum_from_int": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 41.8,
-     "secs": 0.01,
-     "stdout": "before\n7",
-     "stderr": "",
-     "score": 0
-    },
-    "increment_in_expression": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 44.4,
-     "secs": 0.01,
-     "stdout": "0",
-     "stderr": "",
-     "score": 0
-    },
-    "bitwise_on_bool": {
-     "outcome": "REJECTED",
-     "message": "main.ts(3,20): error TS2447: The '&' operator is not allowed for boolean types. Consider using '&&' instead.",
-     "score": 1
-    },
-    "readonly_field": {
-     "outcome": "REJECTED",
-     "message": "main.ts(6,3): error TS2540: Cannot assign to 'port' because it is a read-only property.",
-     "score": 1
-    },
-    "bool_condition": {
-     "outcome": "SILENT",
-     "warned": false,
-     "exit": 0,
-     "rss_mb": 44.5,
-     "secs": 0.03,
-     "stdout": "different",
-     "stderr": "",
-     "score": 0
-    },
-    "contracts": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no contracts; a precondition is a check written in the function body",
-     "score": 0.0
-    },
-    "lost_write_error": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "rss_mb": 41.8,
-     "secs": 0.02,
-     "stdout": "",
-     "stderr": "node:fs:3028\n    return binding.writeFileUtf8(\n                   ^\n\nError: ENOSPC: no space left on device, write\n    at writeFileSync (node:fs:3028:20)\n    at Object.<anonymous> (/tmp/breakbench/lost_write_error/main/out/main.js:4:29)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  errno: -28,\n  code: 'ENOSPC',\n  syscall: 'write'\n}\n\nNode.js v26.13.1",
-     "score": 0.25
-    }
-   },
    "rank": 17
   },
   {
    "id": "odin",
    "name": "Odin",
+   "dir": "odin",
+   "ext": "odin",
    "version": "odin version dev-2026-11-nightly:9a69916",
    "score": 53.9,
    "correctness": 60.3,
@@ -19423,15 +19557,17 @@
   {
    "id": "clojure",
    "name": "Clojure",
+   "dir": "clojure",
+   "ext": "clj",
    "version": "Clojure 1.12.7",
-   "score": 52.9,
-   "correctness": 51.2,
+   "score": 53.7,
+   "correctness": 52.5,
    "null": 28.6,
    "memory": 64.7,
    "concurrency": 62.5,
    "caught": 5.3,
-   "safe": 77.2,
-   "scored": 111,
+   "safe": 78.1,
+   "scored": 112,
    "results": {
     "null_deref": {
      "outcome": "SILENT",
@@ -20383,9 +20519,15 @@
      "score": 1
     },
     "unreachable_code": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no return statement; a function's value is its last expression",
-     "score": 0.0
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "rss_mb": 99.2,
+     "secs": 0.25,
+     "stdout": "ok\nchecked",
+     "stderr": "",
+     "score": 1
     },
     "nan_key": {
      "outcome": "SILENT",
@@ -20552,15 +20694,17 @@
   {
    "id": "c3",
    "name": "C3",
+   "dir": "c3",
+   "ext": "c3",
    "version": "C3 Compiler Version:       0.8.6",
-   "score": 52.6,
+   "score": 52.9,
    "correctness": 57.5,
-   "null": 50.0,
+   "null": 53.6,
    "memory": 48.5,
    "concurrency": 22.5,
    "caught": 28.1,
-   "safe": 66.7,
-   "scored": 110,
+   "safe": 67.5,
+   "scored": 111,
    "results": {
     "null_deref": {
      "outcome": "CRASH",
@@ -21283,9 +21427,15 @@
      "score": 1
     },
     "empty_max": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no standard call for the maximum of a slice; math::max takes its values as separate arguments",
-     "score": 0.0
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 132,
+     "rss_mb": 32.8,
+     "secs": 0.16,
+     "stdout": "",
+     "stderr": "ERROR: 'Array index out of bounds (array had size 0, index was 0)'\n  in main.main (/tmp/breakbench/empty_max/main/main.c3:8) [./main] [inline]",
+     "score": 0.25
     },
     "readonly_param": {
      "outcome": "REJECTED",
@@ -21542,6 +21692,8 @@
   {
    "id": "golang",
    "name": "Go",
+   "dir": "golang",
+   "ext": "go",
    "version": "go version go1.27.4 linux/amd64",
    "score": 52.4,
    "correctness": 54.7,
@@ -22575,6 +22727,8 @@
   {
    "id": "java",
    "name": "Java",
+   "dir": "java",
+   "ext": "java",
    "version": "openjdk version \"27.0.1.1\" 2026-11-17",
    "score": 51.3,
    "correctness": 50.9,
@@ -23602,6 +23756,8 @@
   {
    "id": "cpp",
    "name": "C++",
+   "dir": "cpp",
+   "ext": "cpp",
    "version": "clang version 23.1.6 (https://github.com/llvm/llvm-project 5b10d2d74929eae78912771222c9855af97496f4)",
    "score": 48.7,
    "correctness": 52.5,
@@ -24728,6 +24884,8 @@
   {
    "id": "d",
    "name": "D",
+   "dir": "d",
+   "ext": "d",
    "version": "LDC - the LLVM D compiler (1.43.0):",
    "score": 48.7,
    "correctness": 50.0,
@@ -25742,6 +25900,8 @@
   {
    "id": "ruby",
    "name": "Ruby",
+   "dir": "ruby",
+   "ext": "rb",
    "version": "ruby 4.0.10 (2026-11-19 revision a704b7cd95) +PRISM [x86_64-linux]",
    "score": 47.1,
    "correctness": 43.1,
@@ -26917,15 +27077,17 @@
   {
    "id": "c",
    "name": "C",
+   "dir": "c",
+   "ext": "c",
    "version": "clang version 23.1.6 (https://github.com/llvm/llvm-project 5b10d2d74929eae78912771222c9855af97496f4)",
-   "score": 42.5,
+   "score": 42.8,
    "correctness": 47.5,
-   "null": 28.6,
+   "null": 32.1,
    "memory": 36.8,
    "concurrency": 22.5,
    "caught": 11.4,
-   "safe": 47.4,
-   "scored": 106,
+   "safe": 48.2,
+   "scored": 107,
    "results": {
     "null_deref": {
      "outcome": "TRAPPED",
@@ -27781,9 +27943,16 @@
      "score": 0.25
     },
     "empty_max": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no standard call for the maximum of an array",
-     "score": 0.0
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "all_warnings": "main.c:6:11: warning: implicit conversion when initializing 'long *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\n1 warning generated.",
+     "exit": 1,
+     "rss_mb": 14.3,
+     "secs": 0.02,
+     "stdout": "",
+     "stderr": "=================================================================\n==33==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x6cc91a9e0010 at pc 0x6425979671a8 bp 0x7ffc1bc7b480 sp 0x7ffc1bc7b478\nREAD of size 8 at 0x6cc91a9e0010 thread T0\n    #0 0x6425979671a7 in main /tmp/breakbench/empty_max/main/main.c:9:14\n    #1 0x70a91b5fe600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #2 0x70a91b5fe717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #3 0x642597876994 in _start (/tmp/breakbench/empty_max/main/main+0x6c994)\n\n0x6cc91a9e0011 is located 0 bytes after 1-byte region [0x6cc91a9e0010,0x6cc91a9e0011)\nalloca\n...\n fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x6cc91a9e0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==33==ABORTING",
+     "score": 0.25
     },
     "readonly_param": {
      "outcome": "REJECTED",
@@ -28068,6 +28237,8 @@
   {
    "id": "python",
    "name": "Python",
+   "dir": "python",
+   "ext": "py",
    "version": "Python 3.15.2",
    "score": 40.8,
    "correctness": 38.8,
@@ -29222,6 +29393,8 @@
   {
    "id": "julia",
    "name": "Julia",
+   "dir": "julia",
+   "ext": "jl",
    "version": "julia version 1.13.4",
    "score": 39.9,
    "correctness": 37.2,
@@ -30384,6 +30557,8 @@
   {
    "id": "php",
    "name": "PHP",
+   "dir": "php",
+   "ext": "php",
    "version": "PHP 8.5.4 (cli) (built: Oct 19 2026 14:35:18) (NTS)",
    "score": 38.6,
    "correctness": 40.3,
@@ -31399,7 +31574,7 @@
     },
     "hash_matches_equality": {
      "outcome": "INEXPRESSIBLE",
-     "message": "no static type checking, so nothing is refused before the program runs",
+     "message": "array keys are integers or strings, and objects key by identity; there is no custom equality for a hash to disagree with",
      "score": 0.0
     },
     "array_literal_length": {
@@ -31499,15 +31674,17 @@
   {
    "id": "javascript",
    "name": "JavaScript",
+   "dir": "javascript",
+   "ext": "js",
    "version": "node v26.13.1",
-   "score": 28.1,
+   "score": 29.8,
    "correctness": 22.8,
    "null": 3.6,
    "memory": 64.7,
-   "concurrency": 25.0,
+   "concurrency": 45.0,
    "caught": 1.8,
-   "safe": 36.0,
-   "scored": 107,
+   "safe": 37.7,
+   "scored": 109,
    "results": {
     "null_deref": {
      "outcome": "TRAPPED",
@@ -32147,9 +32324,16 @@
      "score": 1
     },
     "concurrent_map_write": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no threads that share memory",
-     "score": 0.0
+     "outcome": "CORRECT",
+     "runs": 50,
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "rss_mb": 158.9,
+     "secs": 0.11,
+     "stdout": "800000",
+     "stderr": "",
+     "score": 1
     },
     "reference_cycle_leak": {
      "outcome": "CORRECT",
@@ -32405,9 +32589,16 @@
      "score": 1
     },
     "racy_counter": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "workers cannot capture a local variable; they share memory only through SharedArrayBuffer",
-     "score": 0.0
+     "outcome": "CORRECT",
+     "runs": 50,
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "rss_mb": 61.0,
+     "secs": 0.03,
+     "stdout": "2000000",
+     "stderr": "",
+     "score": 1
     },
     "orphaned_receive": {
      "outcome": "TRAPPED",

@@ -839,8 +839,14 @@
    "message": "4: {\n 5:     String line = args[1];\n 6:     sz? pos = line.index_of_char(':');\n 7:     io::printn(line[pos + 1..]); // CONTROL! io::printn(line[(pos ?? -1) + 1..]);\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/tmp/breakbench/not_found_sentinel/main/main.c3:7:2: error: The result of this call is optional due to its argument(s). This optional result may not be implicitly discarded. Please assign it to a variable, ignore it with '(void)', rethrow with '!' or panic with '!!'."
   },
   "empty_max": {
-   "outcome": "INEXPRESSIBLE",
-   "message": "no standard call for the maximum of a slice; math::max takes its values as separate arguments"
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "rss_mb": 32.8,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "ERROR: 'Array index out of bounds (array had size 0, index was 0)'\n  in main.main (/tmp/breakbench/empty_max/main/main.c3:8) [./main] [inline]"
   },
   "orphaned_receive": {
    "outcome": "TRAPPED",

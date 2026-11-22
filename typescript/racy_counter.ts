@@ -1,1 +1,19 @@
-// CANNOT-EXPRESS: workers cannot capture a local variable; they share memory only through SharedArrayBuffer
+import { Worker, isMainThread, parentPort } from "node:worker_threads";
+
+// A worker cannot reach the main thread's count; each counts its own and sends the total back.
+if (isMainThread) {
+  let count = 0;
+  const run = () =>
+    new Promise<void>((resolve) => {
+      const w = new Worker(__filename);
+      w.on("message", (n: number) => {
+        count += n;
+        resolve();
+      });
+    });
+  Promise.all([run(), run()]).then(() => console.log(count));
+} else {
+  let mine = 0;
+  for (let i = 0; i < 1_000_000; i++) mine += 1;
+  parentPort!.postMessage(mine);
+}

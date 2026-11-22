@@ -826,8 +826,15 @@
    "stderr": ""
   },
   "enum_from_int": {
-   "outcome": "INEXPRESSIBLE",
-   "message": "no standard conversion from an integer to an enum; a TryFrom impl must be written by hand"
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "exit": 0,
+   "rss_mb": 14.6,
+   "secs": 0.0,
+   "stdout": "before\ninvalid",
+   "stderr": ""
   },
   "increment_in_expression": {
    "outcome": "REJECTED",

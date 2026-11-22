@@ -544,8 +544,15 @@
    "stderr": ""
   },
   "concurrent_map_write": {
-   "outcome": "INEXPRESSIBLE",
-   "message": "no threads that share memory"
+   "outcome": "SILENT",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 91.6,
+   "secs": 0.1,
+   "stdout": "0",
+   "stderr": ""
   },
   "reference_cycle_leak": {
    "outcome": "CORRECT",

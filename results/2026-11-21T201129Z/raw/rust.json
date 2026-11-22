@@ -680,8 +680,14 @@
    "message": "error: expected identifier, found `3`\n  --> main.rs:12:22\n   |\n12 |     move_by(Offset { 3, 4 }); // BREAK!\n   |             ------   ^ expected identifier\n   |             |\n   |             while parsing this struct\n\nerror: expected identifier, found `4`\n  --> main.rs:12:25\n   |\n12 |     move_by(Offset { 3, 4 }); // BREAK!\n   |             ------      ^ expected identifier\n   |             |\n   |             while parsing this struct\n\nerror: aborting due to 2 previous errors"
   },
   "enum_from_int": {
-   "outcome": "INEXPRESSIBLE",
-   "message": "no standard conversion from an integer to an enum; a match must be written by hand"
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.2,
+   "secs": 0.0,
+   "stdout": "before\ninvalid",
+   "stderr": ""
   },
   "increment_in_expression": {
    "outcome": "REJECTED",

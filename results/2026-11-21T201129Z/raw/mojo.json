@@ -819,8 +819,14 @@
    "stderr": ""
   },
   "empty_max": {
-   "outcome": "INEXPRESSIBLE",
-   "message": "no standard call for the maximum of a list; max takes its values as separate arguments"
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "rss_mb": 14.5,
+   "secs": 0.26,
+   "stdout": "At: /tmp/breakbench/empty_max/main/main.mojo:9:15: Assert Error: index 0 is out of bounds, valid range is 0 to -1",
+   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x000076c2e7eb2d1e\n1  libKGENCompilerRTShared.so 0x000076c2e7eafe46\n2  libKGENCompilerRTShared.so 0x000076c2e7eb38e0\n3  libc.so.6                  0x000076c2e7bbdcb0\n4  main                       0x00005c81ebc00e95\n5  main                       0x00005c81ebc009d6\n6  main                       0x00005c81ebbead8e\n7  main                       0x00005c81ebc000a3\n8  main                       0x00005c81ebbebf7e\n9  libc.so.6                  0x000076c2e7ba2601\n10 libc.so.6                  0x000076c2e7ba2718 __libc_start_main + 136\n11 main                       0x00005c81ebbe9175\nIllegal instruction (core dumped)"
   },
   "orphaned_receive": {
    "outcome": "INEXPRESSIBLE",

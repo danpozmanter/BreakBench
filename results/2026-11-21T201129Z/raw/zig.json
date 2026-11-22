@@ -675,8 +675,14 @@
    "message": "main.zig:14:36: error: operator == not allowed for type 'main.P'\n    try out.print(\"{s}\\n\", .{if (a == b) \"equal\" else \"different\"}); // CONTROL! try out.print(\"{s}\\n\", .{if (std.meta.eql(a, b)) \"equal\" else \"different\"});\n                                 ~~^~~~\nmain.zig:3:11: note: struct declared here\nconst P = struct { x: i64, y: i64 };\n          ^~~~~~~~~~~~~~~~~~~~~~~~~\nreferenced by:\n    callMain [inlined]: /opt/zig/lib/std/start.zig:827:30\n    callMainWithArgs [inlined]: /opt/zig/lib/std/start.zig:729:20\n    posixCallMainAndExit: /opt/zig/lib/std/start.zig:681:38\n    2 reference(s) hidden; use '-freference-trace=5' to see all references"
   },
   "hash_matches_equality": {
-   "outcome": "INEXPRESSIBLE",
-   "message": "a hash map takes its hash and equality as separate functions"
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.7,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
   },
   "array_literal_length": {
    "outcome": "REJECTED",

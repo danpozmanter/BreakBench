@@ -1,12 +1,9 @@
-let check n =
-    if n > 100 then printfn "big"
-    else printfn "ok"
-
-let checkTwice n = // BREAK!
-    return () // BREAK!
-    printfn "checked" // BREAK!
+// F# has no return statement: a function runs to its last expression, so nothing can cut it short.
+let check () =
+    printfn "ok"
+    printfn "checked"
 
 [<EntryPoint>]
 let main _ =
-    check 1
+    check ()
     0

@@ -689,8 +689,14 @@
    "stderr": ""
   },
   "unreachable_code": {
-   "outcome": "REJECTED",
-   "message": "File \"main.ml\", line 3, characters 21-27:\n3 | let check_twice () = return (); print_endline \"checked\" (* BREAK! *)\n                         ^^^^^^\nError: Unbound value return"
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 13.6,
+   "secs": 0.0,
+   "stdout": "ok\nchecked",
+   "stderr": ""
   },
   "nan_key": {
    "outcome": "CORRECT",
@@ -767,8 +773,14 @@
    "message": "File \"main.ml\", line 5, characters 2-6:\n5 |   move 3 4 (* BREAK! *)\n      ^^^^\nError (warning 6 [labels-omitted]): labels dx, dy were omitted in the\n  application of this function."
   },
   "enum_from_int": {
-   "outcome": "INEXPRESSIBLE",
-   "message": "no conversion from an integer to a variant"
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 13.8,
+   "secs": 0.0,
+   "stdout": "before\ninvalid",
+   "stderr": ""
   },
   "increment_in_expression": {
    "outcome": "REJECTED",
@@ -815,8 +827,14 @@
    "stderr": "Fatal error: exception Not_found"
   },
   "empty_max": {
-   "outcome": "INEXPRESSIBLE",
-   "message": "no standard call for the maximum of a list"
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "rss_mb": 13.6,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Failure(\"hd\")"
   },
   "orphaned_receive": {
    "outcome": "HANG",

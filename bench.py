@@ -102,6 +102,8 @@ def aggregate(run):
             {
                 "id": lang_id,
                 "name": lang["name"],
+                "dir": lang.get("dir", lang_id),
+                "ext": lang["ext"],
                 "version": raw.get("version", ""),
                 "score": percent([s for scores in by_category.values() for s in scores]),
                 **{c: percent(scores) for c, scores in by_category.items()},
@@ -178,7 +180,7 @@ def site_payload(out):
                 "w": (rec.get("warnings") or "")[:400] if rec.get("warned") else "",
                 "rw": bool(rec.get("run_warned")),
             }
-        langs.append({k: row[k] for k in ("id", "name", "version", "rank", "score", "caught", "safe",
+        langs.append({k: row[k] for k in ("id", "name", "dir", "ext", "version", "rank", "score", "caught", "safe",
                                            "scored", *CATEGORIES)} | {"results": results})
     return {**{k: out[k] for k in ("generated", "kinds", "categories", "leak_threshold_mb", "problems")},
             "languages": langs}
