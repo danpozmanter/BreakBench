@@ -42,7 +42,7 @@
   color-scheme: dark;
 }
 body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
-.wrap { max-width: 1240px; margin: 0 auto; padding-block: 28px 64px;
+.wrap { max-width: 1760px; margin: 0 auto; padding-block: 28px 64px;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
   display: grid; gap: 40px; }
 h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
@@ -102,8 +102,9 @@ td.chipcell > .chip { display: flex; width: 100%; box-sizing: border-box; height
 .scoring div { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 6px; font-size: 13px; }
   font-family: var(--font-mono); font-size: 10px; cursor: pointer; border: 0; padding: 0; }
 .by-design { box-shadow: inset 0 0 0 2px var(--fg); }
-.grids { display: grid; gap: 20px; }
-.grid-wrap { max-height: 80vh; overflow: auto; }
+/* The result grids are wider than the text column, so they use the whole window. */
+.grids { display: grid; gap: 20px; width: calc(100vw - 48px); margin-left: calc(50% - 50vw + 24px); }
+.grid-wrap { max-height: calc(100vh - 32px); overflow: auto; }
 .grid { border-collapse: separate; border-spacing: 0; width: max-content; }
 .grid th, .grid td { padding: 3px; border-bottom: 1px solid var(--line); }
 .grid thead th { position: sticky; top: 0; z-index: 2; background: var(--surface); }
@@ -138,6 +139,22 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
 #problem-select { display: none; font: inherit; padding: 8px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); width: 100%; }
 nav.top { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center; font-size: 14px; }
 nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent; }
+.picker { display: flex; flex-wrap: wrap; gap: 6px; }
+.picker button { font: inherit; font-size: 13px; padding: 4px 11px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--fg); cursor: pointer; }
+.picker button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.picker button:disabled { opacity: .4; cursor: not-allowed; }
+.picker button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.cmp-tools { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; font-size: 13px; color: var(--muted); }
+.cmp-tools button { font: inherit; background: none; border: 0; color: var(--accent); cursor: pointer; padding: 0; }
+.cmp-body { display: grid; gap: 20px; }
+.grid.cmp { width: 100%; table-layout: fixed; }
+.grid.cmp th.pname { width: 280px; min-width: 0; max-width: none; }
+.grid.cmp th.lname { width: auto; min-width: 0; }
+.cmp .gcell { width: 100%; }
+.cmp-summary td, .cmp-summary th { text-align: right; }
+.cmp-summary th:first-child, .cmp-summary td:first-child { text-align: left; }
+.cmp tr.cmp-detail > td { background: var(--bg); padding: 14px; }
+.cmp tr.cmp-detail .case { max-width: 100%; }
 @media (max-width: 760px) {
   .detail { grid-template-columns: 1fr; }
   .plist { display: none; }
@@ -149,15 +166,22 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
 <div class="wrap">
   <header>
     <h1>BreakBench</h1>
-    <p>What 30 programming languages do when a program has one classic bug. Can you trust the program to run without error in production, does the language help you find errors fast, and does it keep you from the big ones, like the billion-dollar null? A language can refuse to build the program, stop it with a clear error, or let it run on to a wrong answer, a crash, a hang or a leak.</p>
+    <p>How much does a language help the programmer avoid production bugs? Each test is a program with one common bug, run in 30 languages.</p>
     <div class="meta" id="meta"></div>
-    <nav class="top" aria-label="Sections"><a href="#overview">Overview</a><a href="#tests">Tests</a></nav>
+    <nav class="top" aria-label="Sections"><a href="#overview">Overview</a><a href="#compare">Compare</a><a href="#tests">Tests</a></nav>
   </header>
 
   <section aria-labelledby="rank-h" id="overview">
     <h2 id="rank-h">Overview</h2>
     <p class="muted">The score is the average over all tests, as a percentage. The four categories break it down. Caught before running is the share of tests the compiler refused; no silent failure is the share refused, run correctly or stopped with a clear error. Select a heading to sort.</p>
     <div class="scroll"><table id="ranking"></table></div>
+  </section>
+
+  <section aria-labelledby="cmp-h" id="compare">
+    <h2 id="cmp-h">Compare</h2>
+    <p class="muted">Pick up to five languages to see their results side by side. Select a test or a cell to see its detail for just those languages.</p>
+    <div class="picker" id="cmp-picker" role="group" aria-label="Languages to compare"></div>
+    <div class="cmp-body" id="cmp-body"></div>
   </section>
 
   <section aria-labelledby="score-h">
@@ -371,9 +395,122 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
   }
   openProblem(probs[0].id, null, null);
 
-  // The hash names a test (#p-...); #x-... is an older name for one. Anything else shows the overview.
+  // Compare: up to five languages side by side, with each test's detail for just those languages.
+  const CMP_MAX = 5;
+  const byRank = [...D.languages].sort((a, b) => a.rank - b.rank);
+  let chosen = [];
+  let onlyDiffer = false;
+  const picker = document.getElementById("cmp-picker");
+  const cmpBody = document.getElementById("cmp-body");
+  const pickButtons = byRank.map((L) => {
+    const b = el("button", { type: "button", "aria-pressed": "false", text: L.name });
+    b.addEventListener("click", () => {
+      chosen = chosen.includes(L.id) ? chosen.filter((x) => x !== L.id) : [...chosen, L.id].slice(0, CMP_MAX);
+      renderCompare(true);
+    });
+    picker.append(b);
+    return [L.id, b];
+  });
+
+  function cmpDetail(p, langs) {
+    const box = el("div", { class: "case" });
+    box.append(el("span", { class: "eyebrow", text: CAT[p.category] + " · " + KIND[p.kind] }), el("h3", { text: p.title }));
+    box.append(el("dl", { class: "facts" },
+      el("dt", { text: "Scenario" }), el("dd", { text: p.scenario }),
+      el("dt", { text: "Best outcome" }), el("dd", { text: p.best }),
+      el("dt", { text: "Arguments" }), el("dd", {}, el("code", { text: p.args.length ? p.args.join(" ") : "none" }))));
+    const t = el("table");
+    t.append(el("thead", {}, el("tr", {}, el("th", { text: "Language" }), el("th", { text: "Outcome" }), el("th", { text: "Score" }), el("th", { text: "Printed" }), el("th", { text: "Warning" }), el("th", { text: "Evidence" }))));
+    const tb = el("tbody");
+    langs.forEach((L) => {
+      const r = L.results[p.id] || { o: "MISSING", s: 0 };
+      const rss = r.rss != null && p.kind === "leak" ? " · " + r.rss + " MB peak" : "";
+      tb.append(el("tr", {},
+        el("td", { class: "lang", text: L.name }),
+        el("td", { class: "chipcell" }, chip(r.o)),
+        el("td", { class: "mono", text: r.s == null ? "N/A" : String(r.s) }),
+        el("td", {}, el("pre", { class: "out", text: (r.out || "") + rss })),
+        el("td", {}, el("pre", { class: "warn", text: r.w || (r.rw ? "The running program warned" : "") })),
+        el("td", {}, el("pre", { text: r.ev || "" }))));
+    });
+    t.append(tb);
+    box.append(el("div", { class: "scroll" }, t));
+    return box;
+  }
+
+  function renderCompare(record) {
+    pickButtons.forEach(([id, b]) => {
+      const on = chosen.includes(id);
+      b.setAttribute("aria-pressed", String(on));
+      b.disabled = !on && chosen.length >= CMP_MAX;
+    });
+    if (record) history.replaceState(null, "", chosen.length ? "#compare=" + chosen.join(",") : "#compare");
+    cmpBody.replaceChildren();
+    const langs = chosen.map((id) => D.languages.find((L) => L.id === id)).filter(Boolean);
+    if (!langs.length) {
+      cmpBody.append(el("p", { class: "muted", text: "No languages selected yet." }));
+      return;
+    }
+    const tools = el("div", { class: "cmp-tools" }, el("span", { text: langs.length + " of " + CMP_MAX + " selected" }));
+    const clear = el("button", { type: "button", text: "Clear" });
+    clear.addEventListener("click", () => { chosen = []; renderCompare(true); });
+    const differ = el("input", { type: "checkbox", id: "cmp-differ" });
+    differ.checked = onlyDiffer;
+    differ.addEventListener("change", () => { onlyDiffer = differ.checked; renderCompare(false); });
+    tools.append(clear, el("label", { for: "cmp-differ" }, differ, " Only tests where they differ"));
+    cmpBody.append(tools);
+
+    const rows = [["Score", "score"], ...Object.entries(CAT).map(([c, name]) => [name, c]),
+      ["Caught before running", "caught"], ["No silent failure", "safe"]];
+    const sum = el("table", { class: "cmp-summary" });
+    sum.append(el("thead", {}, el("tr", {}, el("th", { text: "" }), ...langs.map((L) => el("th", { text: L.name + " (#" + L.rank + ")" })))));
+    const sb = el("tbody");
+    rows.forEach(([label, k]) => sb.append(el("tr", {}, el("td", { text: label }), ...langs.map((L) => el("td", { class: k === "score" ? "" : "breakdown", text: pct(L[k]) })))));
+    sum.append(sb);
+    cmpBody.append(el("div", { class: "scroll" }, sum));
+
+    Object.keys(CAT).forEach((c) => {
+      const list = probs.filter((p) => p.category === c)
+        .filter((p) => !onlyDiffer || new Set(langs.map((L) => (L.results[p.id] || {}).s)).size > 1);
+      if (!list.length) return;
+      const t = el("table", { class: "grid cmp" });
+      t.append(el("thead", {}, el("tr", {}, el("th", { class: "pname", text: CAT[c] + " (" + list.length + ")" }), ...langs.map((L) => el("th", { class: "lname", text: L.name })))));
+      const body = el("tbody");
+      list.forEach((p) => {
+        const detail = el("tr", { class: "cmp-detail", hidden: "" });
+        const toggle = () => {
+          if (detail.hidden) { detail.replaceChildren(el("td", { colspan: String(langs.length + 1) }, cmpDetail(p, langs))); detail.hidden = false; }
+          else detail.hidden = true;
+        };
+        const title = el("button", { type: "button", class: "plink", text: p.title });
+        title.addEventListener("click", toggle);
+        const tr = el("tr", {}, el("th", { class: "pname", scope: "row" }, title));
+        langs.forEach((L) => {
+          const r = L.results[p.id] || { o: "MISSING" };
+          const b = el("button", { type: "button", class: "gcell o-" + r.o, title: L.name + " · " + p.title + ": " + (DESC[r.o] || r.o), text: NAME[r.o] || r.o });
+          if ((r.w || r.rw) && r.o !== "REJECTED" && r.o !== "CORRECT") b.append(el("span", { class: "wtag", text: r.w ? "Warned" : "Warned while running" }));
+          b.addEventListener("click", toggle);
+          tr.append(el("td", {}, b));
+        });
+        body.append(tr, detail);
+      });
+      const foot = el("tr", {}, el("th", { class: "pname", text: CAT[c] + " score" }), ...langs.map((L) => el("td", { class: "gscore", text: pct(L[c]) })));
+      t.append(body, el("tfoot", {}, foot));
+      cmpBody.append(el("div", { class: "scroll" }, t));
+    });
+  }
+  renderCompare(false);
+
+  // The hash names a test (#p-...), with #x-... an older name for one, or a comparison (#compare=a,b).
   function route() {
     const h = location.hash.slice(1);
+    if (h.startsWith("compare")) {
+      const ids = h.slice("compare=".length).split(",").filter((id) => D.languages.some((L) => L.id === id));
+      chosen = [...new Set(ids)].slice(0, CMP_MAX);
+      renderCompare(false);
+      document.getElementById("compare").scrollIntoView({ block: "start" });
+      return;
+    }
     const id = h.startsWith("p-") || h.startsWith("x-") ? h.slice(2).replace(/-/g, "_") : null;
     if (id && probs.some((p) => p.id === id)) openProblem(id, null, true);
   }
