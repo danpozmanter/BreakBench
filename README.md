@@ -90,12 +90,6 @@ must run to the end: refusing, stopping or warning about it scores 0.
   CORRECT. Each N/A program says why in a `CANNOT-EXPRESS:` line.
 - **Score**: the mean over all tests, as a percentage.
 
-**Robustness.** The site also scores the results five other ways: a run-time stop counts as a
-refusal, no credit for warnings, each category weighed equally, near-universal passes removed, and
-N/A left out of the average. Under every scheme Gossamer, Rust and Swift take the top three places
-and JavaScript stays last. The largest move is 13 places: Julia when a run-time stop counts as a
-refusal.
-
 ### Build mode
 
 Each language builds in the strictest stable mode its toolchain offers, at the language version a

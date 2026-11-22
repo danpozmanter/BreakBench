@@ -120,6 +120,7 @@ td.chipcell > .chip { display: flex; width: 100%; box-sizing: border-box; height
 .grid thead th.pname { z-index: 3; font-weight: 700; }
 .grid tfoot th, .grid tfoot td { position: sticky; bottom: 0; background: var(--surface); border-top: 2px solid var(--line); }
 .grid tfoot th.pname { z-index: 3; }
+.gcan { display: block; font-weight: 400; font-size: 11px; color: var(--muted); }
 .gscore { text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
 .plink { all: unset; cursor: pointer; }
 .plink:hover { text-decoration: underline; }
@@ -145,7 +146,6 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
 #problem-select { display: none; font: inherit; padding: 8px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); width: 100%; }
 nav.top { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center; font-size: 14px; }
 nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent; }
-.robust td, .robust th { font-size: 13px; }
 @media (max-width: 760px) {
   .detail { grid-template-columns: 1fr; }
   .plist { display: none; }
@@ -176,12 +176,6 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     <p class="muted">Ignoring a result the language marks must-use counts as a refusal.</p>
     <p class="muted">A compile error counts as a refusal only if the same program with the bug removed compiles.</p>
     <p class="muted">N/A means the language cannot write the program at all, for example without a mutex or shared-memory threads. Those tests score 0, the same as a failure. A language that simply lacks the bug, like Python with no unsigned integers, scores Ran Correctly.</p>
-  </section>
-
-  <section aria-labelledby="robust-h">
-    <h2 id="robust-h">Does the ranking hold up?</h2>
-    <p class="muted">The same results, scored five other ways.</p>
-    <div class="scroll"><table id="robust" class="robust"></table></div>
   </section>
 
   <section aria-labelledby="grid-h" id="tests">
@@ -262,7 +256,6 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
       b.addEventListener("click", () => { sortKey = k; renderRanking(); });
       head.append(el("th", { class: i ? "breakdown" : "" }, b));
     });
-    head.append(el("th", { class: "breakdown", title: "Tests this language can write; N/A tests score 0" }, "Writable"));
     t.append(el("thead", {}, head));
     const body = el("tbody");
     const rows = [...D.languages].sort((a, b) => b[sortKey] - a[sortKey] || a.rank - b.rank);
@@ -271,8 +264,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
         el("td", { class: "rank", text: String(L.rank) }),
         el("td", { class: "lang" }, L.name, el("span", { class: "ver", title: L.version, text: L.version })),
         el("td", {}, bar(L.score, "")),
-        ...cols.slice(1).map(([k]) => el("td", { class: "breakdown", text: pct(L[k]) })),
-        el("td", { class: "breakdown", text: L.scored + " of " + probs.length }));
+        ...cols.slice(1).map(([k]) => el("td", { class: "breakdown", text: pct(L[k]) })));
       body.append(tr);
     });
     t.append(body);
@@ -324,7 +316,11 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
       body.append(tr);
     });
     const foot = el("tr", {}, el("th", { class: "pname", text: CAT[c] + " score" }));
-    D.languages.forEach((L) => foot.append(el("td", { class: "gscore", text: pct(L[c]) })));
+    D.languages.forEach((L) => {
+      const can = list.filter((p) => L.results[p.id]?.o !== "INEXPRESSIBLE").length;
+      foot.append(el("td", { class: "gscore", title: "Tests in this category the language can write; N/A scores 0" },
+        pct(L[c]), el("span", { class: "gcan", text: can + " of " + list.length + " writable" })));
+    });
     t.append(el("thead", {}, head), body, el("tfoot", {}, foot));
     grids.append(el("div", { class: "scroll grid-wrap" }, t));
   });
@@ -382,57 +378,6 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     if (scroll) document.getElementById("cases").scrollIntoView({ behavior: "smooth", block: "start" });
   }
   openProblem(probs[0].id, null, null);
-
-  // The same outcomes rescored under other weightings.
-  (function () {
-    const kinds = D.kinds;
-    const byId = Object.fromEntries(probs.map((p) => [p.id, p]));
-    const scoreWith = (L, opt) => {
-      let tot = 0, w = 0;
-      Object.entries(L.results).forEach(([pid, r]) => {
-        const p = byId[pid];
-        if (!p || (opt.drop && opt.drop.has(pid))) return;
-        if (r.o === "INEXPRESSIBLE" && opt.naSkip) return;
-        let base = r.o === "INEXPRESSIBLE" ? 0 : (opt.kinds ? opt.kinds(p.kind, r.o) : null) ?? (kinds[p.kind][r.o] ?? 0);
-        if (opt.warnings !== false) {
-          if (r.w) base = Math.max(base, kinds[p.kind].WARNED ?? 0);
-          if (r.rw) base = Math.max(base, kinds[p.kind].RUN_WARNED ?? 0);
-        }
-        const wt = opt.weight ? opt.weight(p) : 1;
-        tot += base * wt; w += wt;
-      });
-      return 100 * tot / w;
-    };
-    const perCat = Object.fromEntries(Object.keys(CAT).map((c) => [c, probs.filter((p) => p.category === c).length]));
-    const uniform = new Set(probs.filter((p) => {
-      const ss = D.languages.map((L) => L.results[p.id]?.s).filter((v) => v != null);
-      return ss.length && ss.reduce((a, b) => a + b, 0) / ss.length >= 0.95;
-    }).map((p) => p.id));
-    const schemes = [
-      ["As published", {}],
-      ["A runtime stop scores like a refusal", { kinds: (k, o) => (k !== "valid" && o === "TRAPPED" ? 1 : null) }],
-      ["No credit for warnings", { warnings: false }],
-      ["Each category weighted equally", { weight: (p) => 1 / perCat[p.category] }],
-      ["Without the tests nearly every language passes", { drop: uniform }],
-      ["N/A left out of the average", { naSkip: true }],
-    ];
-    const base = [...D.languages].sort((a, b) => a.rank - b.rank);
-    const t = document.getElementById("robust");
-    t.append(el("thead", {}, el("tr", {}, el("th", { text: "Scoring" }), el("th", { text: "Top 3" }), el("th", { text: "Last" }), el("th", { text: "Largest move" }))));
-    const tb = el("tbody");
-    schemes.forEach(([label, opt]) => {
-      const ranked = [...D.languages].map((L) => [L, scoreWith(L, opt)]).sort((a, b) => b[1] - a[1]);
-      const pos = Object.fromEntries(ranked.map(([L], i) => [L.id, i + 1]));
-      let move = 0, who = "";
-      base.forEach((L) => { const d = Math.abs(pos[L.id] - L.rank); if (d > move) { move = d; who = L.name; } });
-      tb.append(el("tr", {},
-        el("td", { text: label }),
-        el("td", { text: ranked.slice(0, 3).map(([L]) => L.name).join(", ") }),
-        el("td", { text: ranked[ranked.length - 1][0].name }),
-        el("td", { class: "mono", text: move ? who + " " + move + (move === 1 ? " place" : " places") : "none" })));
-    });
-    t.append(tb);
-  })();
 
   // The hash names a test (#p-...); #x-... is an older name for one. Anything else shows the overview.
   function route() {
