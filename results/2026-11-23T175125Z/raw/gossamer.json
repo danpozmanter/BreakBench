@@ -1,10 +1,10 @@
 {
  "lang": "gossamer",
- "version": "gos 0.84.2",
+ "version": "gos 0.84.3",
  "results": {
   "null_deref": {
    "outcome": "REJECTED",
-   "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GT0006]: type `Option<User>` has no field `name`\n  --> main.gos:14:16\n    14 |     println(f\"{u.name.len()}\") // BREAK!\n       |                ^^^^^^\n  = help: `Option<User>` has no named struct fields exposed to the language; read it through the type's methods, for example `value.get(\"name\")` on a `json::Value`\n\nerror: 1 front-end error(s); refusing to build"
+   "message": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err`\n  --> main.gos:12:14\n    12 |     let id = env::args()[0].to_i64().unwrap()\n       |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  = note: lint: unwrap_used\n  = help: handle the missing value or error with `match`, `if let`, or `?`; use `.unwrap_or(..)` for a fallback, or `.expect(\"reason\")` for an intentional panic\n\nlint: 1 warning(s), 0 error(s)\n\n\n\nerror[GT0006]: type `Option<User>` has no field `name`\n  --> main.gos:14:16\n    14 |     println(f\"{u.name.len()}\") // BREAK!\n       |                ^^^^^^\n  = help: `Option<User>` has no named struct fields exposed to the language; read it through the type's methods, for example `value.get(\"name\")` on a `json::Value`\n\nerror: 1 front-end error(s); refusing to build"
   },
   "int_overflow": {
    "outcome": "TRAPPED",
@@ -13,9 +13,9 @@
    "release_stderr": "error[GX0005]: panic: attempt to add with overflow\n  call stack (outermost first):\n    at main",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:13 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 101,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "",
    "stderr": "error[GX0005]: panic: attempt to add with overflow\n  call stack (outermost first):\n    at main (main.gos:5:16)"
   },
@@ -26,7 +26,7 @@
    "release_stderr": "error[GX0005]: panic: divide by zero\n  call stack (outermost first):\n    at main",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:13 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 101,
    "secs": 0.0,
    "stdout": "",
@@ -39,7 +39,7 @@
    "release_stderr": "error[GX0005]: panic: attempt to shift left with overflow\n  call stack (outermost first):\n    at main",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:13 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 101,
    "secs": 0.0,
    "stdout": "",
@@ -52,8 +52,8 @@
    "release_stderr": "error[GX0005]: panic: cast overflow: 300 does not fit u8\n  call stack (outermost first):\n    at main",
    "warned": true,
    "run_warned": false,
-   "all_warnings": "warning[GL0062]: this `as` panics when the `i64` value does not fit `u8` --> /tmp/breakbench/narrowing_cast/main/main.gos:5:13 = note: lint: lossy_cast\nlint: 1 warning(s), 0 error(s)",
-   "warnings": "warning[GL0062]: this `as` panics when the `i64` value does not fit `u8` --> /tmp/breakbench/narrowing_cast/main/main.gos:5:13 = note: lint: lossy_cast",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:13 = note: lint: unwrap_used\nwarning[GL0062]: this `as` panics when the `i64` value does not fit `u8` --> /tmp/breakbench/narrowing_cast/main/main.gos:5:13 = note: lint: lossy_cast\nlint: 2 warning(s), 0 error(s)\nwarning[GL0062]: this `as` panics when the `i64` value does not fit `u8` --> main.gos:5:13 = note: lint: lossy_cast",
+   "warnings": "warning[GL0062]: this `as` panics when the `i64` value does not fit `u8` --> /tmp/breakbench/narrowing_cast/main/main.gos:5:13 = note: lint: lossy_cast\nwarning[GL0062]: this `as` panics when the `i64` value does not fit `u8` --> main.gos:5:13 = note: lint: lossy_cast",
    "exit": 101,
    "secs": 0.0,
    "stdout": "",
@@ -66,7 +66,7 @@
    "release_stderr": "error[GX0005]: panic: cast overflow: 1e20 does not fit i64\n  call stack (outermost first):\n    at main",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "warning[GL0062]: this `as` panics when the `f64` value is NaN or past the range of `i64` --> /tmp/breakbench/float_to_int_overflow/main/main.gos:5:13 = note: lint: lossy_cast\nlint: 1 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:13 = note: lint: unwrap_used\nwarning[GL0062]: this `as` panics when the `f64` value is NaN or past the range of `i64` --> /tmp/breakbench/float_to_int_overflow/main/main.gos:5:13 = note: lint: lossy_cast\nlint: 2 warning(s), 0 error(s)\nwarning[GL0062]: this `as` panics when the `f64` value is NaN or past the range of `i64` --> main.gos:5:13 = note: lint: lossy_cast",
    "exit": 101,
    "secs": 0.0,
    "stdout": "",
@@ -76,9 +76,9 @@
    "outcome": "CORRECT",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:5:13 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "less",
    "stderr": ""
   },
@@ -88,15 +88,15 @@
   },
   "missing_return": {
    "outcome": "REJECTED",
-   "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GT0001]: type mismatch: expected `String`, found `()`\n  --> main.gos:7:5\n     7 |     if score < 50 {\n       |     ^^^^^^^^^^^^^^^\n\nerror: 1 front-end error(s); refusing to build"
+   "message": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err`\n  --> main.gos:14:17\n    14 |     let score = env::args()[0].to_i64().unwrap()\n       |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  = note: lint: unwrap_used\n  = help: handle the missing value or error with `match`, `if let`, or `?`; use `.unwrap_or(..)` for a fallback, or `.expect(\"reason\")` for an intentional panic\n\nlint: 1 warning(s), 0 error(s)\n\n\n\nerror[GT0001]: type mismatch: expected `String`, found `()`\n  --> main.gos:7:5\n     7 |     if score < 50 {\n       |     ^^^^^^^^^^^^^^^\n\nerror: 1 front-end error(s); refusing to build"
   },
   "non_exhaustive_match": {
    "outcome": "REJECTED",
-   "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GM0001]: non-exhaustive patterns: `Blue` not covered\n  --> main.gos:10:5\n    10 |     match c {\n       |     ^^^^^^^^^\n\nerror: 1 front-end error(s); refusing to build"
+   "message": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err`\n  --> main.gos:18:13\n    18 |     let i = env::args()[0].to_i64().unwrap()\n       |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  = note: lint: unwrap_used\n  = help: handle the missing value or error with `match`, `if let`, or `?`; use `.unwrap_or(..)` for a fallback, or `.expect(\"reason\")` for an intentional panic\n\nlint: 1 warning(s), 0 error(s)\n\n\n\nerror[GM0001]: non-exhaustive patterns: `Blue` not covered\n  --> main.gos:10:5\n    10 |     match c {\n       |     ^^^^^^^^^\n\nerror: 1 front-end error(s); refusing to build"
   },
   "uninitialized_variable": {
    "outcome": "REJECTED",
-   "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GT0129]: `x` is read before it is assigned on every path\n  --> main.gos:9:16\n     9 |     println(f\"{x}\") // BREAK!\n       |                ^\n     error: a path reaches this read without assigning `x`\n  = help: give `x` a value where it is declared, or assign it on every path before this read\n\nerror: 1 front-end error(s); refusing to build"
+   "message": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err`\n  --> main.gos:4:13\n     4 |     let n = env::args()[0].to_i64().unwrap()\n       |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  = note: lint: unwrap_used\n  = help: handle the missing value or error with `match`, `if let`, or `?`; use `.unwrap_or(..)` for a fallback, or `.expect(\"reason\")` for an intentional panic\n\nlint: 1 warning(s), 0 error(s)\n\n\n\nerror[GT0129]: `x` is read before it is assigned on every path\n  --> main.gos:9:16\n     9 |     println(f\"{x}\") // BREAK!\n       |                ^\n     error: a path reaches this read without assigning `x`\n  = help: give `x` a value where it is declared, or assign it on every path before this read\n\nerror: 1 front-end error(s); refusing to build"
   },
   "missing_argument": {
    "outcome": "REJECTED",
@@ -114,7 +114,7 @@
    "outcome": "CORRECT",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:13 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 0,
    "secs": 0.0,
    "stdout": "one",
@@ -122,7 +122,7 @@
   },
   "zero_is_falsy": {
    "outcome": "REJECTED",
-   "message": "warning[GL0005]: needless `if` returning a bool literal\n  --> main.gos:5:19\n     5 |     let present = if qty { true } else { false } // BREAK!\n       |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  = note: lint: needless_bool\n  = help: replace with the condition itself\n\nlint: 1 warning(s), 0 error(s)\n\n\n\nerror[GT0001]: type mismatch: expected `bool`, found `Option<i64>`\n  --> main.gos:5:22\n     5 |     let present = if qty { true } else { false } // BREAK!\n       |                      ^^^\n\nerror: 1 front-end error(s); refusing to build"
+   "message": "warning[GL0005]: needless `if` returning a bool literal\n  --> main.gos:5:19\n     5 |     let present = if qty { true } else { false } // BREAK!\n       |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  = note: lint: needless_bool\n  = help: replace with the condition itself\n\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err`\n  --> main.gos:8:25\n     8 |         println(f\"have {qty.unwrap()}\")\n       |                         ^^^^^^^^^^^^\n  = note: lint: unwrap_used\n  = help: handle the missing value or error with `match`, `if let`, or `?`; use `.unwrap_or(..)` for a fallback, or `.expect(\"reason\")` for an intentional panic\n\nlint: 2 warning(s), 0 error(s)\n\n\n\nerror[GT0001]: type mismatch: expected `bool`, found `Option<i64>`\n  --> main.gos:5:22\n     5 |     let present = if qty { true } else { false } // BREAK!\n       |                      ^^^\n\nerror: 1 front-end error(s); refusing to build"
   },
   "string_equality": {
    "outcome": "CORRECT",
@@ -130,7 +130,7 @@
    "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.05,
    "stdout": "equal",
    "stderr": ""
   },
@@ -141,9 +141,9 @@
    "release_stderr": "error[GX0005]: panic: called `Option::unwrap()` on a `None` value\n  call stack (outermost first):\n    at main",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:13 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 101,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "",
    "stderr": "error[GX0005]: panic: called `Option::unwrap()` on a `None` value\n  call stack (outermost first):\n    at main (main.gos:4:13)"
   },
@@ -155,9 +155,9 @@
    "outcome": "CORRECT",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:5:23 = note: lint: unwrap_used\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:6:13 = note: lint: unwrap_used\nlint: 2 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "1,3",
    "stderr": ""
   },
@@ -190,7 +190,7 @@
    "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.02,
    "stdout": "2",
    "stderr": ""
   },
@@ -218,7 +218,7 @@
    "run_warned": false,
    "all_warnings": "warning[GL0040]: large integer literal `01234` is hard to scan without underscores --> main.gos:2:15 = note: lint: large_unreadable_literal\nlint: 1 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.02,
    "stdout": "1234",
    "stderr": ""
   },
@@ -228,7 +228,7 @@
    "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "1",
    "stderr": ""
   },
@@ -240,7 +240,7 @@
    "outcome": "CORRECT",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:13 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 0,
    "secs": 0.01,
    "stdout": "even",
@@ -250,15 +250,15 @@
    "outcome": "CORRECT",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:13 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.01,
+   "secs": 0.05,
    "stdout": "not a",
    "stderr": ""
   },
   "chained_comparison": {
    "outcome": "REJECTED",
-   "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GT0001]: type mismatch: expected `bool`, found `i64`\n  --> main.gos:5:18\n     5 |     let inside = 1 < x < 3 // BREAK!\n       |                  ^^^^^^^^^\n\nerror: 1 front-end error(s); refusing to build"
+   "message": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err`\n  --> main.gos:4:13\n     4 |     let x = env::args()[0].to_i64().unwrap()\n       |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  = note: lint: unwrap_used\n  = help: handle the missing value or error with `match`, `if let`, or `?`; use `.unwrap_or(..)` for a fallback, or `.expect(\"reason\")` for an intentional panic\n\nlint: 1 warning(s), 0 error(s)\n\n\n\nerror[GT0001]: type mismatch: expected `bool`, found `i64`\n  --> main.gos:5:18\n     5 |     let inside = 1 < x < 3 // BREAK!\n       |                  ^^^^^^^^^\n\nerror: 1 front-end error(s); refusing to build"
   },
   "lost_update_on_copy": {
    "outcome": "REJECTED",
@@ -270,7 +270,7 @@
    "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.07,
    "stdout": "safe",
    "stderr": ""
   },
@@ -278,10 +278,10 @@
    "outcome": "SILENT",
    "warned": true,
    "run_warned": false,
-   "all_warnings": "warning[GL0025]: equality against a nonzero float literal is almost never what you want --> main.gos:7:16 = note: lint: float_eq_zero\nlint: 1 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0025]: equality against a nonzero float literal is almost never what you want --> main.gos:7:16 = note: lint: float_eq_zero\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:13 = note: lint: unwrap_used\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:5:13 = note: lint: unwrap_used\nlint: 3 warning(s), 0 error(s)",
    "warnings": "warning[GL0025]: equality against a nonzero float literal is almost never what you want --> main.gos:7:16 = note: lint: float_eq_zero",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "not equal",
    "stderr": ""
   },
@@ -292,9 +292,9 @@
    "release_stderr": "error[GX0005]: panic: all goroutines are asleep - deadlock! (cohort join can never complete)\nerror[GX0005]: panic: all goroutines are asleep - deadlock! (cohort join can never complete)",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:25:5 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 101,
-   "secs": 0.01,
+   "secs": 0.08,
    "stdout": "",
    "stderr": "error[GX0005]: panic: all goroutines are asleep - deadlock! (cohort join can never complete)"
   },
@@ -312,22 +312,15 @@
    "outcome": "CORRECT",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:14 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "no match",
    "stderr": ""
   },
   "negative_remainder": {
-   "outcome": "SILENT",
-   "warned": true,
-   "run_warned": false,
-   "all_warnings": "warning[GL0064]: `n % 2 == 1` is false for every negative `n`: `%` keeps the sign of the value it divides, so the remainder of a negative `n` is never positive --> /tmp/breakbench/negative_remainder/main/main.gos:4:5 = note: lint: signed_remainder\nlint: 1 warning(s), 0 error(s)",
-   "warnings": "warning[GL0064]: `n % 2 == 1` is false for every negative `n`: `%` keeps the sign of the value it divides, so the remainder of a negative `n` is never positive --> /tmp/breakbench/negative_remainder/main/main.gos:4:5 = note: lint: signed_remainder",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "even",
-   "stderr": ""
+   "outcome": "REJECTED",
+   "message": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err`\n  --> main.gos:9:13\n     9 |     let n = env::args()[0].to_i64().unwrap()\n       |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  = note: lint: unwrap_used\n  = help: handle the missing value or error with `match`, `if let`, or `?`; use `.unwrap_or(..)` for a fallback, or `.expect(\"reason\")` for an intentional panic\n\nerror[GL0064]: `n % 2 == 1` is false for every negative `n`: `%` keeps the sign of the value it divides, so the remainder of a negative `n` is never positive\n  --> /tmp/breakbench/negative_remainder/main/main.gos:4:5\n     4 |     n % 2 == 1 // BREAK!\n       |     ^^^^^^^^^^\n  = note: lint: signed_remainder\n  = help: `n % 2 != 0` tests oddness for every sign; `n.rem_euclid(2) == 1` answers the remainder in `0..2`\n  = suggestion: compare a remainder that holds for every sign \u2192 `n % 2 != 0`\n\nlint: 1 warning(s), 1 error(s)\nerror: 1 lint error(s)\n\n\n\nerror[GL0064]: `n % 2 == 1` is false for every negative `n`: `%` keeps the sign of the value it divides, so the remainder of a negative `n` is never positive\n  --> main.gos:4:5\n     4 |     n % 2 == 1 // BREAK!\n       |     ^^^^^^^^^^\n  = note: lint: signed_remainder\n  = help: `n % 2 != 0` tests oddness for every sign; `n.rem_euclid(2) == 1` answers the remainder in `0..2`\n  = suggestion: compare a remainder that holds for every sign \u2192 `n % 2 != 0`\n\nerror: 1 front-end error(s); refusing to build"
   },
   "missing_comma_concat": {
    "outcome": "CORRECT",
@@ -335,7 +328,7 @@
    "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "3",
    "stderr": ""
   },
@@ -360,9 +353,9 @@
    "release_stderr": "error[GX0005]: panic: called `Result::unwrap()` on an `Err` value: called `Option::unwrap()` on a `None` value\n  call stack (outermost first):\n    at main",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:6:18 = note: lint: unwrap_used\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:21:5 = note: lint: unwrap_used\nlint: 2 warning(s), 0 error(s)",
    "exit": 101,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "",
    "stderr": "error[GX0005]: panic: called `Result::unwrap()` on an `Err` value: called `Option::unwrap()` on a `None` value\n  call stack (outermost first):\n    at main (main.gos:21:5)"
   },
@@ -400,7 +393,7 @@
    "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 101,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "",
    "stderr": "error[GX0005]: panic: key \"pear\" is not in the map\n  call stack (outermost first):\n    at main (main.gos:6:13)"
   },
@@ -410,20 +403,13 @@
    "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "found",
    "stderr": ""
   },
   "shadowed_assignment": {
-   "outcome": "SILENT",
-   "warned": true,
-   "run_warned": false,
-   "all_warnings": "warning[GL0003]: `status` is declared `mut` but never reassigned --> main.gos:4:9 = note: lint: unused_mut_variable\nwarning[GL0008]: `status` declares a new binding in this block, hiding the mutable `status` outside it, which keeps its value --> main.gos:6:13 = note: lint: shadowed_binding\nlint: 2 warning(s), 0 error(s)",
-   "warnings": "warning[GL0003]: `status` is declared `mut` but never reassigned --> main.gos:4:9 = note: lint: unused_mut_variable\nwarning[GL0008]: `status` declares a new binding in this block, hiding the mutable `status` outside it, which keeps its value --> main.gos:6:13 = note: lint: shadowed_binding",
-   "exit": 0,
-   "secs": 0.01,
-   "stdout": "pending",
-   "stderr": "status: done"
+   "outcome": "REJECTED",
+   "message": "warning[GL0003]: `status` is declared `mut` but never reassigned\n  --> main.gos:4:9\n     4 |     let mut status = \"pending\"\n       |         ^^^^^^^^^^\n  = note: lint: unused_mut_variable\n  = help: remove the `mut` keyword\n\nwarning[GL0008]: `status` declares a new binding in this block, hiding the mutable `status` outside it, which keeps its value\n  --> main.gos:6:13\n     6 |         let status = \"done\" // CONTROL! status = \"done\"\n       |             ^^^^^^\n  = note: lint: shadowed_binding\n  = help: assign the outer binding with `status = ..`, or give this one another name\n\nlint: 2 warning(s), 0 error(s)\n\n\n\nerror[GT0139]: this `let status` hides `let mut status`, which nothing ever assigns\n  --> main.gos:6:13\n     6 |         let status = \"done\" // CONTROL! status = \"done\"\n       |             ^^^^^^\n     error: declares a second `status`; the outer one keeps its value\n  ::> main.gos:4:9\n     4 |     let mut status = \"pending\"\n       |         ^^^^^^^^^^\n     note: declared `mut` here\n  = help: to change the outer `status`, assign it: `status = ..`; otherwise drop its `mut` and give this binding a name of its own\n\nerror: 1 front-end error(s); refusing to build"
   },
   "discarded_pure_result": {
    "outcome": "REJECTED",
@@ -437,9 +423,9 @@
    "release_stderr": "error[GX0005]: panic: array index out of bounds: the len is 3 but the index is -1\n  call stack (outermost first):\n    at main",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:5:13 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 101,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "",
    "stderr": "error[GX0005]: panic: array index out of bounds: the len is 3 but the index is -1\n  call stack (outermost first):\n    at main (main.gos:6:27)"
   },
@@ -467,7 +453,7 @@
    "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 1,
-   "secs": 0.0,
+   "secs": 0.02,
    "stdout": "",
    "stderr": "File::write: stale handle"
   },
@@ -475,10 +461,10 @@
    "outcome": "SILENT",
    "warned": true,
    "run_warned": false,
-   "all_warnings": "warning[GL0001]: unused variable `total` --> main.gos:5:9 = note: lint: unused_variable\nlint: 1 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0001]: unused variable `total` --> main.gos:5:9 = note: lint: unused_variable\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:17 = note: lint: unwrap_used\nlint: 2 warning(s), 0 error(s)",
    "warnings": "warning[GL0001]: unused variable `total` --> main.gos:5:9 = note: lint: unused_variable",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "40",
    "stderr": ""
   },
@@ -486,9 +472,9 @@
    "outcome": "SILENT",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0055]: the tail value of `post` is discarded; it declares no return type --> /tmp/breakbench/panic_under_lock/main/main.gos:8:5 = note: lint: undeclared_return_value\nlint: 1 warning(s), 0 error(s)\nwarning[GL0055]: the tail value of `post` is discarded; it declares no return type --> main.gos:8:5 = note: lint: undeclared_return_value",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "unbalanced",
    "stderr": "worker failed"
   },
@@ -496,9 +482,9 @@
    "outcome": "CORRECT",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:5:13 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.03,
    "stdout": "a\ud83d\udc4d",
    "stderr": ""
   },
@@ -509,9 +495,9 @@
    "release_stderr": "error[GX0005]: panic: array index out of bounds: the len is 4 but the index is 4\n  call stack (outermost first):\n    at main",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:10:15 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 101,
-   "secs": 0.01,
+   "secs": 0.0,
    "stdout": "",
    "stderr": "error[GX0005]: panic: array index out of bounds: the len is 4 but the index is 4\n  call stack (outermost first):\n    at main (main.gos:11:5)"
   },
@@ -522,9 +508,9 @@
    "release_stderr": "error[GX0005]: panic: array index out of bounds: the len is 4 but the index is 4\n  call stack (outermost first):\n    at main",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:10:15 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 101,
-   "secs": 0.0,
+   "secs": 0.03,
    "stdout": "",
    "stderr": "error[GX0005]: panic: array index out of bounds: the len is 4 but the index is 4\n  call stack (outermost first):\n    at main (main.gos:11:16)"
   },
@@ -532,9 +518,9 @@
    "outcome": "CORRECT",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "warning[GL0001]: unused variable `c` --> main.gos:9:9 = note: lint: unused_variable\nlint: 1 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0001]: unused variable `c` --> main.gos:9:9 = note: lint: unused_variable\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:10:16 = note: lint: unwrap_used\nlint: 2 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "1234",
    "stderr": ""
   },
@@ -562,7 +548,7 @@
    "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.01,
+   "secs": 0.02,
    "stdout": "000000000000000000000000",
    "stderr": ""
   },
@@ -573,15 +559,15 @@
    "release_stderr": "error[GX0008]: stack overflow - recursion exceeded the available stack",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "warning[GL0040]: large integer literal `1000000007` is hard to scan without underscores --> main.gos:7:30 = note: lint: large_unreadable_literal\nlint: 1 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0040]: large integer literal `1000000007` is hard to scan without underscores --> main.gos:7:30 = note: lint: large_unreadable_literal\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:11:13 = note: lint: unwrap_used\nlint: 2 warning(s), 0 error(s)",
    "exit": 101,
-   "secs": 0.01,
+   "secs": 0.02,
    "stdout": "",
    "stderr": "error[GX0008]: stack overflow - recursion exceeded the available stack"
   },
   "concurrent_map_write": {
    "outcome": "REJECTED",
-   "message": "warning[GL0040]: large integer literal `100000` is hard to scan without underscores\n  --> main.gos:6:25\n     6 |             for k in 0..100000 {\n       |                         ^^^^^^\n  = note: lint: large_unreadable_literal\n  = help: insert `_` as thousands separators, e.g. `100_000`\n\nwarning[GL0040]: large integer literal `100000` is hard to scan without underscores\n  --> main.gos:7:25\n     7 |                 map[t * 100000 + k] = k // BREAK!\n       |                         ^^^^^^\n  = note: lint: large_unreadable_literal\n  = help: insert `_` as thousands separators, e.g. `100_000`\n\nlint: 2 warning(s), 0 error(s)\n\n\n\nerror[GT0114]: this write changes the goroutine's own snapshot of `map`\n  --> main.gos:7:17\n     7 |                 map[t * 100000 + k] = k // BREAK!\n       |                 ^^^^^^^^^^^^^^^^^^^\n     error: a spawned closure takes a snapshot of `map` at the spawn\n  = help: return the value and read it with `join()`, send it on a channel, or share an integer through a `sync::Shared`\n\nerror: 1 front-end error(s); refusing to build"
+   "message": "warning[GL0040]: large integer literal `100000` is hard to scan without underscores\n  --> main.gos:6:25\n     6 |             for k in 0..100000 {\n       |                         ^^^^^^\n  = note: lint: large_unreadable_literal\n  = help: insert `_` as thousands separators, e.g. `100_000`\n\nwarning[GL0040]: large integer literal `100000` is hard to scan without underscores\n  --> main.gos:7:25\n     7 |                 map[t * 100000 + k] = k // BREAK!\n       |                         ^^^^^^\n  = note: lint: large_unreadable_literal\n  = help: insert `_` as thousands separators, e.g. `100_000`\n\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err`\n  --> main.gos:13:9\n    13 |         h.join().unwrap()\n       |         ^^^^^^^^^^^^^^^^^\n  = note: lint: unwrap_used\n  = help: handle the missing value or error with `match`, `if let`, or `?`; use `.unwrap_or(..)` for a fallback, or `.expect(\"reason\")` for an intentional panic\n\nlint: 3 warning(s), 0 error(s)\n\n\n\nerror[GT0114]: this write changes the goroutine's own snapshot of `map`\n  --> main.gos:7:17\n     7 |                 map[t * 100000 + k] = k // BREAK!\n       |                 ^^^^^^^^^^^^^^^^^^^\n     error: a spawned closure takes a snapshot of `map` at the spawn\n  = help: return the value and read it with `join()`, send it on a channel, or share an integer through a `sync::Shared`\n\nerror: 1 front-end error(s); refusing to build"
   },
   "huge_allocation": {
    "outcome": "TRAPPED",
@@ -590,9 +576,9 @@
    "release_stderr": "error[GX0005]: panic: out of memory: cannot allocate 10000000000000 bytes\n  call stack (outermost first):\n    at main",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:13 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 101,
-   "secs": 0.0,
+   "secs": 0.03,
    "stdout": "",
    "stderr": "error[GX0005]: panic: out of memory: cannot allocate 10000000000000 bytes\n  call stack (outermost first):\n    at main (main.gos:5:5)"
   },
@@ -600,9 +586,9 @@
    "outcome": "CORRECT",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:13 = note: lint: unwrap_used\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:5:5 = note: lint: unwrap_used\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:7:21 = note: lint: unwrap_used\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:8:20 = note: lint: unwrap_used\nlint: 4 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.01,
+   "secs": 0.05,
    "stdout": "done",
    "stderr": ""
   },
@@ -624,9 +610,9 @@
    "outcome": "CORRECT",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:17:13 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.03,
+   "secs": 0.12,
    "stdout": "done",
    "stderr": ""
   },
@@ -638,9 +624,9 @@
    "outcome": "CORRECT",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:13:13 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.31,
+   "secs": 0.29,
    "stdout": "done",
    "stderr": ""
   },
@@ -667,19 +653,20 @@
    "release_stderr": "error[GX0005]: panic: called `Option::unwrap()` on a `None` value\n  call stack (outermost first):\n    at main",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:7:16 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 101,
-   "secs": 0.03,
+   "secs": 0.01,
    "stdout": "before",
    "stderr": "error[GX0005]: panic: called `Option::unwrap()` on a `None` value\n  call stack (outermost first):\n    at main (main.gos:7:16)"
   },
   "null_in_text": {
    "outcome": "SILENT",
-   "warned": false,
+   "warned": true,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:8:14 = note: lint: unwrap_used\nwarning[GL0067]: an `Option<String>` is rendered with `{}` among other text; when it is `None`, the output contains `None` --> /tmp/breakbench/null_in_text/main/main.gos:10:23 = note: lint: option_rendered\nlint: 2 warning(s), 0 error(s)\nwarning[GL0067]: an `Option<String>` is rendered with `{}` among other text; when it is `None`, the output contains `None` --> main.gos:10:23 = note: lint: option_rendered",
+   "warnings": "warning[GL0067]: an `Option<String>` is rendered with `{}` among other text; when it is `None`, the output contains `None` --> /tmp/breakbench/null_in_text/main/main.gos:10:23 = note: lint: option_rendered\nwarning[GL0067]: an `Option<String>` is rendered with `{}` among other text; when it is `None`, the output contains `None` --> main.gos:10:23 = note: lint: option_rendered",
    "exit": 0,
-   "secs": 0.07,
+   "secs": 0.01,
    "stdout": "hello, None",
    "stderr": ""
   },
@@ -689,7 +676,7 @@
   },
   "empty_max": {
    "outcome": "REJECTED",
-   "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GT0003]: cannot apply `+` to `Option<i64>`\n  --> main.gos:6:16\n     6 |     println(f\"{m + 1}\") // CONTROL! println(f\"{m.unwrap_or(-1) + 1}\")\n       |                ^^^^^\n  = note: user types support `+` through an `impl Add<i64>`, dispatched on the left operand\n  = help: implement `impl Add<i64> for Option<i64> { fn add(..) -> .. }`\n\nerror: 1 front-end error(s); refusing to build"
+   "message": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err`\n  --> main.gos:4:34\n     4 |     let xs = env::args().map(|a| a.to_i64().unwrap())\n       |                                  ^^^^^^^^^^^^^^^^^^^\n  = note: lint: unwrap_used\n  = help: handle the missing value or error with `match`, `if let`, or `?`; use `.unwrap_or(..)` for a fallback, or `.expect(\"reason\")` for an intentional panic\n\nlint: 1 warning(s), 0 error(s)\n\n\n\nerror[GT0003]: cannot apply `+` to `Option<i64>`\n  --> main.gos:6:16\n     6 |     println(f\"{m + 1}\") // CONTROL! println(f\"{m.unwrap_or(-1) + 1}\")\n       |                ^^^^^\n  = note: user types support `+` through an `impl Add<i64>`, dispatched on the left operand\n  = help: implement `impl Add<i64> for Option<i64> { fn add(..) -> .. }`\n\nerror: 1 front-end error(s); refusing to build"
   },
   "readonly_param": {
    "outcome": "REJECTED",
@@ -705,7 +692,7 @@
   },
   "no_implicit_conversion": {
    "outcome": "REJECTED",
-   "message": "warning[GL0001]: unused variable `wrong`\n  --> main.gos:4:9\n     4 |     let wrong: i32 = big // BREAK!\n       |         ^^^^^\n  = note: lint: unused_variable\n  = help: prefix with `_` to silence: `_wrong`\n\nwarning[GL0062]: this `as` panics when the `i64` value does not fit `i32`\n  --> /tmp/breakbench/no_implicit_conversion/main/main.gos:3:17\n     3 |     let small = big as i32\n       |                 ^^^^^^^^^^\n  = note: lint: lossy_cast\n  = help: say what a value that does not fit becomes: `v.try_into()` answers `Err`, `v as% i32` keeps its low bits, `v.clamp(-2147483648, 2147483647) as i32` saturates\n\nlint: 2 warning(s), 0 error(s)\n\n\n\nerror[GT0001]: type mismatch: expected `i32`, found `i64`\n  --> main.gos:4:22\n     4 |     let wrong: i32 = big // BREAK!\n       |                      ^^^\n  = help: `<expr> as i32` keeps only the low bits of a `i64` outside `i32`'s range, so check the value fits before casting\n\nerror: 1 front-end error(s); refusing to build"
+   "message": "warning[GL0001]: unused variable `wrong`\n  --> main.gos:4:9\n     4 |     let wrong: i32 = big // BREAK!\n       |         ^^^^^\n  = note: lint: unused_variable\n  = help: prefix with `_` to silence: `_wrong`\n\nwarning[GL0062]: this `as` panics when the `i64` value does not fit `i32`\n  --> /tmp/breakbench/no_implicit_conversion/main/main.gos:3:17\n     3 |     let small = big as i32\n       |                 ^^^^^^^^^^\n  = note: lint: lossy_cast\n  = help: say what a value that does not fit becomes: `v.try_into()` answers `Err`, `v as% i32` keeps its low bits, `v.clamp(-2147483648, 2147483647) as i32` saturates\n\nlint: 2 warning(s), 0 error(s)\n\n\n\nwarning[GL0062]: this `as` panics when the `i64` value does not fit `i32`\n  --> main.gos:3:17\n     3 |     let small = big as i32\n       |                 ^^^^^^^^^^\n  = note: lint: lossy_cast\n  = help: say what a value that does not fit becomes: `v.try_into()` answers `Err`, `v as% i32` keeps its low bits, `v.clamp(-2147483648, 2147483647) as i32` saturates\n\nerror[GT0001]: type mismatch: expected `i32`, found `i64`\n  --> main.gos:4:22\n     4 |     let wrong: i32 = big // BREAK!\n       |                      ^^^\n  = help: `<expr> as i32` keeps only the low bits of a `i64` outside `i32`'s range, so check the value fits before casting\n\nerror: 1 front-end error(s); refusing to build"
   },
   "generic_constraint": {
    "outcome": "SILENT",
@@ -713,7 +700,7 @@
    "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "1",
    "stderr": ""
   },
@@ -729,9 +716,9 @@
    "outcome": "CORRECT",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:17 = note: lint: unwrap_used\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:5:22 = note: lint: unwrap_used\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:8:23 = note: lint: unwrap_used\nlint: 3 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.58,
+   "secs": 0.57,
    "stdout": "12288000000",
    "stderr": ""
   },
@@ -742,7 +729,7 @@
    "release_stderr": "error[GX0005]: panic: attempt to multiply with overflow\n  call stack (outermost first):\n    at main",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:17 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 101,
    "secs": 0.01,
    "stdout": "",
@@ -759,9 +746,9 @@
    "release_stderr": "error[GX0005]: panic: all goroutines are asleep - deadlock! (receive can never complete)",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:6:17 = note: lint: unwrap_used\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:9:16 = note: lint: unwrap_used\nlint: 2 warning(s), 0 error(s)",
    "exit": 101,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "",
    "stderr": "error[GX0005]: panic: all goroutines are asleep - deadlock! (receive can never complete)"
   },
@@ -769,9 +756,9 @@
    "outcome": "CORRECT",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:7:5 = note: lint: unwrap_used\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:8:5 = note: lint: unwrap_used\nlint: 2 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.5,
+   "secs": 0.52,
    "stdout": "concurrent",
    "stderr": ""
   },
@@ -789,7 +776,7 @@
    "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "1 2",
    "stderr": ""
   },
@@ -815,7 +802,7 @@
    "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "equal",
    "stderr": ""
   },
@@ -831,9 +818,9 @@
    "outcome": "CORRECT",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:20:13 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "before\ninvalid",
    "stderr": ""
   },
@@ -846,7 +833,7 @@
    "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 101,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "",
    "stderr": "error[GX0005]: panic: vec index out of bounds: the len is 0 but the index is 0\n  call stack (outermost first):\n    at main (main.gos:3:32)"
   },
@@ -867,7 +854,7 @@
    "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 1,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "",
    "stderr": "io: File::write: No space left on device (os error 28)"
   },
@@ -895,7 +882,7 @@
    "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "valid",
    "stderr": ""
   },
@@ -913,9 +900,9 @@
    "outcome": "CORRECT",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:7:34 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "1",
    "stderr": ""
   },
@@ -928,7 +915,7 @@
    "run_warned": false,
    "all_warnings": "lint: 0 warning(s), 0 error(s)",
    "exit": 101,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "",
    "stderr": "error[GX0005]: panic: all goroutines are asleep - deadlock! (send can never complete)\n  call stack (outermost first):\n    at main (main.gos:5:5)"
   },
