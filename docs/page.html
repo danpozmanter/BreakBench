@@ -164,7 +164,10 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
   .bar { width: 60px; }
   .facts { grid-template-columns: minmax(0, 1fr); gap: 2px; }
   .facts dd { margin-bottom: 8px; }
+  #case > .scroll { overflow: visible; }
   #case > .scroll table, .cmp-detail .scroll table { min-width: 900px; }
+  .cmp-grid-scroll { overflow: visible; }
+  .cmp-detail .case { min-width: 900px; max-width: none; }
 }
 @media (prefers-reduced-motion: no-preference) { .bar i { transition: width .4s ease; } }</style>
 
@@ -520,7 +523,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
       });
       const foot = el("tr", {}, el("th", { class: "pname", text: CAT[c] + " score" }), ...langs.map((L) => el("td", { class: "gscore", text: pct(L[c]) })));
       t.append(body, el("tfoot", {}, foot));
-      cmpBody.append(el("div", { class: "scroll" }, t));
+      cmpBody.append(el("div", { class: "scroll cmp-grid-scroll" }, t));
     });
   }
   renderCompare(false);

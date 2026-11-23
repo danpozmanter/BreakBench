@@ -2,5 +2,5 @@ struct User { name: Option<String> }
 
 fn main() {
     let decoded = User { name: None }
-    println(f"{}", decoded.name.unwrap().len())
+    println(f"{decoded.name.unwrap().len()}")
 }

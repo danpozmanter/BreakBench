@@ -1,0 +1,822 @@
+{
+ "lang": "odin",
+ "version": "odin version dev-2026-11-nightly:9a69916",
+ "results": {
+  "null_deref": {
+   "outcome": "CRASH",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==56==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000008 (pc 0x56ed998855eb bp 0x7ffe48343990 sp 0x7ffe48342fa0 T0)\n==56==The signal is caused by a READ memory access.\n==56==HINT: address points to the zero page.\n    #0 0x56ed998855eb in fmt::[fmt.odin]::_fmt_arg /opt/odin/core/fmt/fmt.odin:3838:16\n    #1 0x56ed9987f918 in fmt::[fmt.odin]::_fmt_value /opt/odin/core/fmt/fmt.odin:3524:3\n    #2 0x56ed9985d3af in fmt::wprintln /opt/odin/core/fmt/fmt.odin:582:3\n    #3 0x56ed998ccf66 in fmt::fprintln /opt/odin/core/fmt/fmt_os.odin:23:2\n    #4 0x56ed998cd139 in fmt::println /opt/odin/core/fmt/fmt_os.odin:62:86\n    #5 0x56ed99907f1b in main:\n...\nso.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #9 0x56ed9974e2d4 in _start (/tmp/breakbench/null_deref/main/main+0x9f2d4)\n\n==56==Register values:\nrax = 0x0000000000000008  rbx = 0x00007ffe48342fa0  rcx = 0xf8f180427c5584cc  rdx = 0x0000000000000008  \nrdi = 0x00007ae8aaff0530  rsi = 0x0000000000000000  rbp = 0x00007ffe48343990  rsp = 0x00007ffe48342fa0  \n r8 = 0x0000000000000076   r9 = 0x00007ffe48344100  r10 = 0x0000100049060710  r11 = 0x00000fffc9068715  \nr12 = 0x00007ffe483442c8  r13 = 0x0000000000000002  r14 = 0x00007ee8ad09d000  r15 = 0x000056ed99909300  \nAddressSanitizer can not provide additional info.\nSUMMARY: AddressSanitizer: SEGV /opt/odin/core/fmt/fmt.odin:3838:16 in fmt::[fmt.odin]::_fmt_arg\n==56==ABORTING"
+  },
+  "int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Illegal instruction"
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/type_confusion/main/main.odin(12:18) Error: Cannot assign value 'raw' of type 'string' to 'i64' in a procedure argument \n\tfmt.println(add(raw, 3)) // BREAK! \n\t                ^~^"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/missing_return/main/main.odin(11:1) Error: Missing return statement at the end of the procedure 'grade' \n\t} \n\t^"
+  },
+  "non_exhaustive_match": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/non_exhaustive_match/main/main.odin(14:2) Unhandled switch case: Blue\tSuggestion: Was '#partial switch' wanted?"
+  },
+  "uninitialized_variable": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "missing_argument": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/missing_argument/main/main.odin(10:14) Error: Parameter 'h' of type 'int' is missing in procedure call \n\tfmt.println(area(3)) // BREAK! \n\t            ^~~~~~^"
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/misspelled_field/main/main.odin(11:2) Error: 'cfg' of type 'Config' has no field 'colour' \n\tcfg.colour = \"red\" // BREAK! \n\t^~^ \n\tSuggestion: Did you mean? \n\t\tcolor"
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/assign_in_condition/main/main.odin(10:11) Syntax Error: Expected 'boolean expression', found a simple statement. \n\tif x = 1 do label = \"one\" // BREAK! \n\t         ^^"
+  },
+  "switch_fallthrough": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/zero_is_falsy/main/main.odin(11:5) Error: Non-boolean condition in 'if' statement \n\tif qty do present = true // BREAK! \n\t   ^~^"
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "13",
+   "stderr": ""
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/covariant_array_write/main/main.odin(15:29) Error: Cannot assign value 'dogs' of type '[dynamic]Dog' to '[dynamic]Animal' in a variable declaration \n\tanimals: [dynamic]Animal = dogs // BREAK! \n\t                           ^~~^"
+  },
+  "mutate_while_iterating": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1,2,3",
+   "stderr": ""
+  },
+  "self_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "sort_with_nan": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/integer_average/main/main.odin(9:13) Error: Cannot assign value 'sum / count' of type 'int' to 'f64' in a variable declaration \n\tavg: f64 = sum / count // BREAK! \n\t           ^~~~~~~~~~^"
+  },
+  "leading_zero_literal": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not a",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/chained_comparison/main/main.odin(9:12) Error: Cannot convert untyped value '1 < x' to 'untyped integer' from 'untyped bool' \n\tinside := 1 < x < 3 // BREAK! \n\t          ^~~~^"
+  },
+  "lost_update_on_copy": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/lost_update_on_copy/main/main.odin(12:3) Error: Cannot assign to 'acct.balance' \n\tacct.balance += 50 \n\t^~~~~~~~~~~^ \n\tfor acct in accounts { // CONTROL! for &acct in accounts { \n\t    ^~~^ \n\t   'acct' is immutable, declare it as '&acct' to make it mutable"
+  },
+  "command_injection": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "path_join_escape": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "inside",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "no match",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/missing_comma_concat/main/main.odin(8:8) Syntax Error: Expected a comma, got a newline \n\t\"bob\" // CONTROL! \"bob\", \n\t     ^"
+  },
+  "return_in_finally": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/return_line_break/main/main.odin(6:2) Error: Expected 1 return values, got 0 \n\treturn // CONTROL! return a + b \n\t^~~~~^ \n/tmp/breakbench/return_line_break/main/main.odin(7:3) Error: Expression is not used: 'a + b' \n\ta + b // BREAK! \n\t^~~~^ \n/tmp/breakbench/return_line_break/main/main.odin(8:1) Error: Missing return statement at the end of the procedure 'total' \n\t} \n\t^"
+  },
+  "worker_failure_lost": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "total 3",
+   "stderr": "bad number: x"
+  },
+  "unawaited_task": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/unawaited_task/main/main.odin(16:2) Error: 'task' declared but not used \n\ttask := thread.create_and_start(save) // CONTROL! task  ... \n\t^~~^"
+  },
+  "format_arg_mismatch": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3 of %!(MISSING ARGUMENT)",
+   "stderr": ""
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/shadowed_assignment/main/main.odin(9:3) Error: Declaration of 'status' shadows declaration at line 7 \n\tstatus := \"done\" // CONTROL! status = \"done\" \n\t^~~~~^"
+  },
+  "discarded_pure_result": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/negative_index_wraps/main/main.odin(10:37) Bounds check failed: -1 is out of range 0..<3\nIllegal instruction"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/unrelated_type_lookup/main/main.odin(11:2) Error: 'n' declared but not used \n\tn, ok := strconv.parse_int(id) \n\t^ \n/tmp/breakbench/unrelated_type_lookup/main/main.odin(16:45) Error: Cannot assign value 'id' of type 'string' to 'int' in a procedure argument \n\t... ns(ids, id) else \"missing\") // CONTROL! fmt.println(\"found\" if  ... \n\t            ^^"
+  },
+  "use_after_close": {
+   "outcome": "TRAPPED",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==2989==ERROR: AddressSanitizer: heap-use-after-free on address 0x78253c5e0050 at pc 0x6323d94f9a5d bp 0x7ffe87390230 sp 0x7ffe87390228\nREAD of size 8 at 0x78253c5e0050 thread T0\n    #0 0x6323d94f9a5c in os::write /opt/odin/core/os/file.odin:294:3\n    #1 0x6323d95516e6 in os::write_string /opt/odin/core/os/file_util.odin:12:2\n    #2 0x6323d95657bb in main::main /tmp/breakbench/use_after_close/main/main.odin:17:5\n    #3 0x6323d95772c9 in main /opt/odin/base/runtime/entry_unix.odin:71:4\n    #4 0x7b653d384600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #5 0x7b653d384717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/lib\n...\na fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x78253c5e0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==2989==ABORTING"
+  },
+  "dead_store": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/dead_store/main/main.odin(9:2) Error: 'total' declared but not used \n\ttotal := price + 2 \n\t^~~~^"
+  },
+  "panic_under_lock": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unbalanced",
+   "stderr": "crash mid-update"
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/oob_write/main/main.odin(15:8) Bounds check failed: 4 is out of range 0..<4\nIllegal instruction"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/oob_read/main/main.odin(15:20) Bounds check failed: 4 is out of range 0..<4\nIllegal instruction"
+  },
+  "use_after_free": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==3499==ERROR: AddressSanitizer: heap-use-after-free on address 0x7527401e0058 at pc 0x6126236f0d08 bp 0x7ffc1146bc10 sp 0x7ffc1146bc08\nREAD of size 8 at 0x7527401e0058 thread T0\n    #0 0x6126236f0d07 in fmt::[fmt.odin]::_fmt_arg /opt/odin/core/fmt/fmt.odin:3836:16\n    #1 0x6126236eb118 in fmt::[fmt.odin]::_fmt_value /opt/odin/core/fmt/fmt.odin:3524:3\n    #2 0x6126236c8baf in fmt::wprintln /opt/odin/core/fmt/fmt.odin:582:3\n    #3 0x6126236940b6 in fmt::fprintln /opt/odin/core/fmt/fmt_os.odin:23:2\n    #4 0x612623694289 in fmt::println /opt/odin/core/fmt/fmt_os.odin:62:86\n    #5 0x61262369fae7 in main::main /tmp/breakbench/use_after_free/main/main.odin:19:2\n    #6 0x61262365c3b\n...\na 00 00 00 00 00 07 fa fa 00 00 00 00 00 07\n  0x7527401e0280: fa fa 00 00 00 00 00 07 fa fa 00 00 00 00 00 07\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==3499==ABORTING"
+  },
+  "double_free": {
+   "outcome": "CRASH",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==3548==ERROR: AddressSanitizer: SEGV on unknown address 0xfffffffffffffff4 (pc 0x609637aec7e3 bp 0x000000000000 sp 0x7ffd17902c90 T0)\n==3548==The signal is caused by a WRITE memory access.\n    #0 0x609637aec7e3 in atomic_compare_exchange_strong<__sanitizer::atomic_uint8_t> /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/../sanitizer_common/sanitizer_atomic_clang.h:97:10\n    #1 0x609637aec7e3 in AtomicallySetQuarantineFlagIfAllocated /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_allocator.cpp:698:10\n    #2 0x609637aec7e3 in __asan::Allocator::Deallocate(void*, unsigned long, unsigned long, __sanitizer::Buf\n...\nd0a68e29d750303f0c6)\n    #13 0x609637ae9dc4 in _start (/tmp/breakbench/double_free/main/main+0x9edc4)\n\n==3548==Register values:\nrax = 0x0000000000000002  rbx = 0x00007ffd17902cd8  rcx = 0x0000000000000003  rdx = 0x0000000000000000  \nrdi = 0x0000000000000004  rsi = 0x0000000000000004  rbp = 0x0000000000000000  rsp = 0x00007ffd17902c90  \n r8 = 0x00007ffd17902cd8   r9 = 0x0000000000000001  r10 = 0x0000000000000000  r11 = 0x0000000000000004  \nr12 = 0x0000000000000000  r13 = 0x0000000000000001  r14 = 0x0000000000000004  r15 = 0xfffffffffffffff4  \nAddressSanitizer can not provide additional info.\nSUMMARY: AddressSanitizer: SEGV /opt/odin/base/runtime/heap_allocator_unix.odin:37:2 in runtime::[heap_allocator_unix.odin]::_heap_free\n==3548==ABORTING"
+  },
+  "dangling_stack_ref": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/dangling_stack_ref/main/main.odin(7:9) Error: It is unsafe to return '&local' from a procedure, as it refers to the stack memory of the local variable 'local' \n\treturn &local // BREAK! \n\t       ^ \n\tSuggestion: If this is intended, make it explicit with a conversion to 'rawptr' or 'uintptr', or a 'transmute'"
+  },
+  "container_realloc_dangling": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==3669==ERROR: AddressSanitizer: heap-use-after-free on address 0x7ac9849e0028 at pc 0x5dc51c420de0 bp 0x7ffe732cc870 sp 0x7ffe732cc868\nWRITE of size 8 at 0x7ac9849e0028 thread T0\n    #0 0x5dc51c420ddf in main::main /tmp/breakbench/container_realloc_dangling/main/main.odin:16:8\n    #1 0x5dc51c434bb9 in main /opt/odin/base/runtime/entry_unix.odin:71:4\n    #2 0x7e59857b0600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #3 0x7e59857b0717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #4 0x5dc51c2adea4 in _start (/tmp/breakbench/container_realloc_da\n...\na fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x7ac9849e0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==3669==ABORTING"
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==3766==ERROR: AddressSanitizer: stack-overflow on address 0x7fff86470ff8 (pc 0x60b385ddad2f bp 0x7fff86c6f370 sp 0x7fff86471000 T0)\n    #0 0x60b385ddad2f in main::walk /tmp/breakbench/stack_overflow/main/main.odin:9:2\n    #1 0x60b385ddad34 in main::walk /tmp/breakbench/stack_overflow/main/main.odin:9:2\n    #2 0x60b385ddad34 in main::walk /tmp/breakbench/stack_overflow/main/main.odin:9:2\n    #3 0x60b385ddad34 in main::walk /tmp/breakbench/stack_overflow/main/main.odin:9:2\n    #4 0x60b385ddad34 in main::walk /tmp/breakbench/stack_overflow/main/main.odin:9:2\n    #5 0x60b385ddad34 in main::walk /tmp/breakbench/stack_overflow/main/main.odin:9:2\n    #\n...\nn.odin:9:2\n    #240 0x60b385ddad34 in main::walk /tmp/breakbench/stack_overflow/main/main.odin:9:2\n    #241 0x60b385ddad34 in main::walk /tmp/breakbench/stack_overflow/main/main.odin:9:2\n    #242 0x60b385ddad34 in main::walk /tmp/breakbench/stack_overflow/main/main.odin:9:2\n    #243 0x60b385ddad34 in main::walk /tmp/breakbench/stack_overflow/main/main.odin:9:2\n    #244 0x60b385ddad34 in main::walk /tmp/breakbench/stack_overflow/main/main.odin:9:2\n    #245 0x60b385ddad34 in main::walk /tmp/breakbench/stack_overflow/main/main.odin:9:2\n    #246 0x60b385ddad34 in main::walk /tmp/breakbench/stack_overflow/main/main.odin:9:2\n\nSUMMARY: AddressSanitizer: stack-overflow /tmp/breakbench/stack_overflow/main/main.odin:9:2 in main::walk\n==3766==ABORTING"
+  },
+  "concurrent_map_write": {
+   "outcome": "TRAPPED",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==3815==ERROR: AddressSanitizer: attempting double-free on 0x7bad78c20040 in thread T5:\n    #0 0x5d6ebc8b4ff6 in free /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:51:3\n    #1 0x5d6ebc9408f8 in runtime::[heap_allocator_unix.odin]::_heap_free /opt/odin/base/runtime/heap_allocator_unix.odin:37:2\n    #2 0x5d6ebc9bb7a8 in runtime::heap_free /opt/odin/base/runtime/heap_allocator.odin:123:2\n    #3 0x5d6ebc9bbb20 in runtime::heap_allocator_proc.aligned_free-2190 /opt/odin/base/runtime/heap_allocator.odin:65:4\n    #4 0x5d6ebc9bb5f7 in runtime::heap_allocator_proc /opt/odin/base/runtime/heap_allocator.odin:91:3\n    #5 0x5d6ebc98caac in runtime:\n...\n317:3\n    #1 0x5d6ebc9a12de in thread::[thread_unix.odin]::_create /opt/odin/core/thread/thread_unix.odin:126:2\n    #2 0x5d6ebc9a1995 in thread::create /opt/odin/core/thread/thread.odin:119:2\n    #3 0x5d6ebc93a164 in main::main /tmp/breakbench/concurrent_map_write/main/main.odin:18:28\n    #4 0x5d6ebc939c59 in main /opt/odin/base/runtime/entry_unix.odin:71:4\n    #5 0x7e6d798b0717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #6 0x5d6ebc806d84 in _start (/tmp/breakbench/concurrent_map_write/main/main+0xa1d84)\n\nSUMMARY: AddressSanitizer: double-free /opt/odin/base/runtime/heap_allocator_unix.odin:37:2 in runtime::[heap_allocator_unix.odin]::_heap_free\n==3815==ABORTING"
+  },
+  "huge_allocation": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==4457==ERROR: AddressSanitizer: requested allocation size 0x9184e72a00f (0x9184e72b010 after adjustments for alignment, red zones etc.) exceeds maximum supported size of 0x10000000000 (thread T0)\n    #0 0x61e82d91f012 in calloc /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:116:3\n    #1 0x61e82d994d9a in runtime::[heap_allocator_unix.odin]::_heap_alloc /opt/odin/base/runtime/heap_allocator_unix.odin:24:3\n    #2 0x61e82da0e979 in main /opt/odin/base/runtime/entry_unix.odin:71:4\n    #3 0x7b57c47cf717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #4 0x61e82d8705f4 in _start (/tmp/breakbench/huge_allocation/main/main+0x9f5f4)\n\n==4457==HINT: if you don't care about these errors you may set allocator_may_return_null=1\nSUMMARY: AddressSanitizer: allocation-size-too-big /opt/odin/base/runtime/heap_allocator_unix.odin:24:3 in runtime::[heap_allocator_unix.odin]::_heap_alloc\n==4457==ABORTING"
+  },
+  "fd_leak": {
+   "outcome": "LEAK",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "open: too many open files: EMFILE"
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/wrong_variant_access/main/main.odin(12:7) type assertion: Invalid type assertion from Value to string, actual type: int\nIllegal instruction"
+  },
+  "format_string": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "%!(MISSING ARGUMENT)%!(MISSING ARGUMENT)%!(MISSING ARGUMENT)%!(MISSING ARGUMENT)%!(BAD ARGUMENT NUMBER)",
+   "stderr": ""
+  },
+  "deep_structure_release": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.17,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/string_literal_write/main/main.odin(7:2) Error: Cannot assign to 'greeting[0]' \n\tgreeting[0] = 'j' // CONTROL! greeting = \"jello\" \n\t^~~~~~~~~~^"
+  },
+  "complete_init": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "newtype": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/newtype/main/main.odin(10:16) Error: Mismatched types in binary expression 'Meters(2) + Seconds(3)' : 'Meters' vs 'Seconds' \n\t_ = Meters(2) + Seconds(3) // BREAK! \n\t              ^"
+  },
+  "strong_enum": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/strong_enum/main/main.odin(18:19) Error: Cannot convert untyped value '7' to 'Color' from 'untyped integer' \n\tfmt.println(name(7)) // BREAK! \n\t                 ^"
+  },
+  "override_check": {
+   "outcome": "SAFE_BY_DESIGN",
+   "message": "no methods or inheritance, so nothing marks a replacement method"
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "/tmp/breakbench/forced_unwrap/main/main.odin(12:14) type assertion: Invalid type assertion from Maybe($T=int) to int, actual type: nil\nIllegal instruction"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hello, nil",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "readonly_param": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/literal_range/main/main.odin(7:16) Error: Cannot convert numeric value '300' from '300' to 'u8' from 'untyped integer' \n\ttoo_big: u8 = 300 // BREAK! \n\t              ^~^ \n\tThe maximum value that can be represented by 'u8' is '255'"
+  },
+  "no_implicit_conversion": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/no_implicit_conversion/main/main.odin(8:15) Error: Cannot assign value 'big' of type 'i64' to 'i32' in a variable declaration \n\twrong: i32 = big // BREAK! \n\t             ^~^"
+  },
+  "generic_constraint": {
+   "outcome": "REJECTED",
+   "message": "/opt/odin/core/slice/sort.odin(37:35) Error: 'where' clause evaluated to false: \n\tORD(E) \n\tsort :: proc(data: $T/[]$E) where ORD(E) { \n\t                                  ^~~~~^ \n \n\tWith the following definitions: \n\t\tE :: Point; \n\t\tT :: []Point; \n/tmp/breakbench/generic_constraint/main/main.odin(12:2) at caller location \n\t                                  ^~~~~^ \n \n\tWith the following definitions: \n\t\tE :: Point; \n\t\tT :: []Point; \n\t/tmp/breakbench/generic_constraint/main/main.odin(12:2) instantiated as 'sort($T=[]Point, $E=Point)'"
+  },
+  "lossy_int_to_float": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/lossy_int_to_float/main/main.odin(10:7) Error: Cannot assign value 'n' of type 'i64' to 'f64' in a procedure argument \n\tshow(n) // BREAK! \n\t     ^"
+  },
+  "const_index_bounds": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/const_index_bounds/main/main.odin(8:20) Error: Index '5' is out of bounds range 0..<3, got 5 \n\tfmt.println(table[5]) // BREAK! \n\t                  ^"
+  },
+  "const_overflow": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/const_overflow/main/main.odin(6:9) Error: Numeric value '9460800000000000000' from 'i64(1_000_000_000) * 60 * 60 * 24 * 365 * 300' cannot be represented by 'i64' \n\tSPAN :: i64(1_000_000_000) * 60 * 60 * 24 * 365 * 300 // BREAK! \n\t        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^ \n\tThe maximum value that can be represented by 'i64' is '9223372036854775807'"
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "unreachable_code": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/unreachable_code/main/main.odin(11:2) Error: Statements after this 'return' are never executed \n\treturn \n\t^~~~~^"
+  },
+  "nan_key": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "missing",
+   "stderr": ""
+  },
+  "checked_interpolation": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no string interpolation"
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/dominated_case/main/main.odin(12:84) Error: Duplicate case '\"circle\"' \n\tprevious case at /tmp/breakbench/dominated_case/main/main.odin(12:52) \n\t... \"; case \"circle\": return \"again\"; case: return \"other\" } } // B ... \n\t            ^~~~~~~^"
+  },
+  "duplicate_key": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "char_arithmetic": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/char_arithmetic/main/main.odin(9:11) Error: Cannot assign value 'c + 1' of type 'rune' to 'int' in a variable declaration \n\tm: int = c + 1; fmt.println(m) // BREAK! \n\t         ^~~~^"
+  },
+  "comparison_statement": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/comparison_statement/main/main.odin(8:2) Error: Expression is not used: 'count == 5' \n\tcount == 5 // BREAK! \n\t^~~~~~~~~^ \n\tSuggestion: Did you mean to do an assignment? \n\t            'count = 5;'"
+  },
+  "structural_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "hash_matches_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/array_literal_length/main/main.odin(8:11) Error: Expected 4 values for this array literal, got 3 \n\tshort := [4]int{10, 20, 30}; fmt.println(short[0]) // BREAK! \n\t         ^~~~~~~~~~~~~~~~~^"
+  },
+  "required_names": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "4 3",
+   "stderr": ""
+  },
+  "enum_from_int": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "before\n7",
+   "stderr": ""
+  },
+  "increment_in_expression": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/increment_in_expression/main/main.odin(8:7) Syntax Error: Postfix '++' operator is not supported \n\ti = i++ // BREAK! \n\t     ^^"
+  },
+  "bitwise_on_bool": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/bitwise_on_bool/main/main.odin(7:41) Bounds check failed: 0 is out of range 0..<0\nIllegal instruction"
+  },
+  "readonly_field": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "bool_condition": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/bool_condition/main/main.odin(8:5) Error: Non-boolean condition in 'if' statement \n\tif strings.compare(\"x\", \"x\") { fmt.println(\"different\") }  ... \n\t   ^~~~~~~~~~~~~~~~~~~~~~~~^"
+  },
+  "contracts": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "write: ENOSPC"
+  },
+  "nullable_field": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/nullable_field/main/main.odin(9:21) type assertion: Invalid type assertion from Maybe($T=string) to string, actual type: nil\nIllegal instruction"
+  },
+  "check_then_act": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  }
+ }
+}

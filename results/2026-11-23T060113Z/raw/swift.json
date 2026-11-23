@@ -1,0 +1,791 @@
+{
+ "lang": "swift",
+ "version": "Swift version 6.4.2 (swift-6.4.2-RELEASE)",
+ "results": {
+  "null_deref": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:8:7: error: value of optional type 'User?' must be unwrapped to refer to member 'name' of wrapped base type 'User'\n 6 | \n 7 | let u = findUser(Int(CommandLine.arguments[1])!)\n 8 | print(u.name.count) // BREAK!\n   |       |- error: value of optional type 'User?' must be unwrapped to refer to member 'name' of wrapped base type 'User'\n   |       |- note: chain the optional using '?' to access member 'name' only for non-'nil' base values\n   |       `- note: force-unwrap using '!' to abort execution if the optional value contains 'nil'\n 9 | print(u as Any)\n10 |"
+  },
+  "int_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.09,
+   "stdout": "",
+   "stderr": "*** Signal 4: Backtracing from 0x56b3f2bd3686... done ***\n\n*** Swift runtime failure: arithmetic overflow ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0 [inlined] [system] 0x000056b3f2bd3686 Swift runtime failure: arithmetic overflow in main at //<compiler-generated>\n1                    0x000056b3f2bd3686 main + 406 in main at /tmp/breakbench/int_overflow/main/main.swift:2:9\n2 [ra]               0x00007e1e55634601 <unknown> in libc.so.6\n3 [ra]               0x00007e1e55634718 <unknown> in libc.so.6\n\n\nRegisters:\n\nrax 0x8000000000000001  9223372036854775809\nrdx 0x0000000000000000  0\nrcx 0x000056b404655110  0d 00 0f 00 0e 00 0f 00 0f 00 0f 00 10 00 0f 00  \u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\nrbx 0x000056b4046564f0  88 09 4f 57 1e 7\n...\nx00007e1e573c96b0  00 02 00 00 00 00 00 00 74 3e 41 57 1e 7e 00 00  \u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7t>AW\u00b7~\u00b7\u00b7\nr14 0x00007e1e57590000  e0 12 59 57 1e 7e 00 00 17 00 00 00 00 00 00 00  \u00e0\u00b7YW\u00b7~\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\nr15 0x000056b3f2bd5cc0  a0 31 bd f2 b3 56 00 00 01 00 00 00 00 00 00 00  \u00a01\u00bd\u00f2\u00b3V\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\nrip 0x000056b3f2bd3686  0f 0b f3 0f 1e fa 48 83 ec 08 48 83 c4 08 c3 00  \u00b7\u00b7\u00f3\u00b7\u00b7\u00faH\u00b7\u00ec\u00b7H\u00b7\u00c4\u00b7\u00c3\u00b7\n\nrflags 0x0000000000010202  \n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (20 omitted):\n\n0x000056b3f2bd2000\u20130x000056b3f2bd3695 fdcf1228c632fe1b97b0427ad3c1f1377ec6d7cc main      /tmp/breakbench/int_overflow/main/main\n0x00007e1e5560a000\u20130x00007e1e557c9819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6 /usr/lib/x86_64-linux-gnu/libc.so.6\n\nBacktrace took 0.00s\n\nIllegal instruction (core dumped)"
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.1,
+   "stdout": "",
+   "stderr": "Swift/IntegerTypes.swift:9030: Fatal error: Division by zero\n\n*** Signal 4: Backtracing from 0x74e2a18ad1ef... done ***\n\n*** Program crashed: Illegal instruction at 0x000074e2a18ad1ef ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0      0x000074e2a18ad1ef closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 623 in libswiftCore.so\n1 [ra] 0x000074e2a1a442cc _assertionFailure(_:_:file:line:flags:) + 283 in libswiftCore.so\n2 [ra] 0x000056e2c14e3650 main + 351 in main at /tmp/breakbench/div_by_zero/main/main.swift:2:11\n3 [ra] 0x000074e29ff86601 <unknown> in libc.so.6\n4 [ra] 0x000074e29ff86718 <unknown> in libc.so.6\n\n\nRegisters:\n\nrax 0x0000000000000001  1\nrdx 0x0000000000002346  9030\nrcx 0x000000056e\n...\n0 00 00 00 74 5e d6 a1 e2 74 00 00  \u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7t^\u00d6\u00a1\u00e2t\u00b7\u00b7\nr14 0x0000000000000001  1\nr15 0x000000000000000b  11\nrip 0x000074e2a18ad1ef  0f 0b 48 83 ec 08 48 8d 05 24 78 49 00 48 8d 3d  \u00b7\u00b7H\u00b7\u00ec\u00b7H\u00b7\u00b7$xI\u00b7H\u00b7=\n\nrflags 0x0000000000010202  \n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (19 omitted):\n\n0x000056e2c14e2000\u20130x000056e2c14e36f5 1c12f87edf7f195d5326d9623c36111c26cb9076 main            /tmp/breakbench/div_by_zero/main/main\n0x000074e29ff5c000\u20130x000074e2a011b819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6       /usr/lib/x86_64-linux-gnu/libc.so.6\n0x000074e2a173a000\u20130x000074e2a1d13b70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.01s\n\nIllegal instruction (core dumped)"
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.1,
+   "stdout": "",
+   "stderr": "Swift/Integers.swift:3426: Fatal error: Not enough bits to represent the passed value\n\n*** Signal 4: Backtracing from 0x774ee12c51ef... done ***\n\n*** Program crashed: Illegal instruction at 0x0000774ee12c51ef ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0      0x0000774ee12c51ef closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 623 in libswiftCore.so\n1 [ra] 0x0000774ee145c2cc _assertionFailure(_:_:file:line:flags:) + 283 in libswiftCore.so\n2 [ra] 0x000061804c2356a1 main + 432 in main at /tmp/breakbench/narrowing_cast/main/main.swift:2:9\n3 [ra] 0x0000774edf99e601 <unknown> in libc.so.6\n4 [ra] 0x0000774edf99e718 <unknown> in libc.so.6\n\n\nRegisters:\n\nrax 0x0000000000000003  3\nrdx 0x000000000000\n...\n0 00 00 74 de 77 e1 4e 77 00 00  \u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7t\u00dew\u00e1Nw\u00b7\u00b7\nr14 0x0000000000000001  1\nr15 0x000000000000000b  11\nrip 0x0000774ee12c51ef  0f 0b 48 83 ec 08 48 8d 05 24 78 49 00 48 8d 3d  \u00b7\u00b7H\u00b7\u00ec\u00b7H\u00b7\u00b7$xI\u00b7H\u00b7=\n\nrflags 0x0000000000010202  \n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (19 omitted):\n\n0x000061804c234000\u20130x000061804c235745 6fa664fc659a94ef8aeaffd7f4e04e9b39e870be main            /tmp/breakbench/narrowing_cast/main/main\n0x0000774edf974000\u20130x0000774edfb33819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6       /usr/lib/x86_64-linux-gnu/libc.so.6\n0x0000774ee1152000\u20130x0000774ee172bb70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.01s\n\nIllegal instruction (core dumped)"
+  },
+  "float_to_int_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.1,
+   "stdout": "",
+   "stderr": "Swift/IntegerTypes.swift:6896: Fatal error: Double value cannot be converted to Int64 because the result would be greater than Int64.max\n\n*** Signal 4: Backtracing from 0x7865e761d1ef... done ***\n\n*** Program crashed: Illegal instruction at 0x00007865e761d1ef ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0      0x00007865e761d1ef closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 623 in libswiftCore.so\n1 [ra] 0x00007865e77b42cc _assertionFailure(_:_:file:line:flags:) + 283 in libswiftCore.so\n2 [ra] 0x000060f093bd577e main + 653 in main at /tmp/breakbench/float_to_int_overflow/main/main.swift:2:9\n3 [ra] 0x00007865e5cf6601 <unknown> in libc.so.6\n4 [ra] 0x00007865e5cf6718 <unknown> in libc.so.6\n\n...\n\u00f8\u00ca\u00fe\u00b7\u00b7\u00b7\u00e4~\u00f8\u00ca\u00fe\u00b7\u00b7\u00b7\nr13 0x0000000000000002  2\nr14 0x0000000000000001  1\nr15 0x000000000000000b  11\nrip 0x00007865e761d1ef  0f 0b 48 83 ec 08 48 8d 05 24 78 49 00 48 8d 3d  \u00b7\u00b7H\u00b7\u00ec\u00b7H\u00b7\u00b7$xI\u00b7H\u00b7=\n\nrflags 0x0000000000010206  PF\n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (19 omitted):\n\n0x000060f093bd4000\u20130x000060f093bd5829 a8c59d3fb8eff92c5ca4af04ba3a9698154945f6 main            /tmp/breakbench/float_to_int_overflow/main/main\n0x00007865e5ccc000\u20130x00007865e5e8b819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6       /usr/lib/x86_64-linux-gnu/libc.so.6\n0x00007865e74aa000\u20130x00007865e7a83b70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.01s\n\nIllegal instruction (core dumped)"
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:4:11: error: cannot convert value of type 'String' to expected argument type 'Int'\n2 | \n3 | let raw = CommandLine.arguments[1]\n4 | print(add(raw, 3)) // BREAK!\n  |           `- error: cannot convert value of type 'String' to expected argument type 'Int'\n5 | print(raw, add(1, 2))\n6 |"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "main.swift:5:1: error: missing return in global function expected to return 'String'\n3 |     if score < 50 { return \"fail\" }\n4 |     // CONTROL! return \"borderline\"\n5 | }\n  | `- error: missing return in global function expected to return 'String'\n6 | \n7 | print(grade(Int(CommandLine.arguments[1])!))"
+  },
+  "non_exhaustive_match": {
+   "outcome": "REJECTED",
+   "message": "main.swift:4:5: error: switch must be exhaustive\n 2 | \n 3 | func name(_ c: Color) -> String {\n 4 |     switch c {\n   |     |- error: switch must be exhaustive\n   |     `- note: add missing case: '.blue'\n 5 |     case .red: return \"red\"\n 6 |     case .green: return \"green\""
+  },
+  "uninitialized_variable": {
+   "outcome": "REJECTED",
+   "message": "main.swift:6:7: error: variable 'x' used before being initialized\n1 | let n = Int(CommandLine.arguments[1])!\n2 | var x: Int\n  |     `- note: variable defined here\n3 | if n > 5 {\n4 |     x = 10\n5 | }\n6 | print(x) // BREAK!\n  |       `- error: variable 'x' used before being initialized\n7 | print(n)\n8 |"
+  },
+  "missing_argument": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:3:13: error: missing argument for parameter #2 in call\n1 | func area(_ w: Int, _ h: Int) -> Int { w * h }\n  |      `- note: 'area' declared here\n2 | \n3 | print(area(3)) // BREAK!\n  |             `- error: missing argument for parameter #2 in call\n4 | print(area(3, 4))\n5 |"
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:4:5: error: value of type 'Config' has no member 'colour'\n2 | \n3 | var cfg = Config()\n4 | cfg.colour = \"red\" // BREAK!\n  |     `- error: value of type 'Config' has no member 'colour'\n5 | cfg.color += \"\"\n6 | print(cfg.color)"
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:3:6: error: use of '=' in a boolean context, did you mean '=='?\n1 | var x = Int(CommandLine.arguments[1])!\n2 | var label = \"not one\"\n3 | if x = 1 { label = \"one\" } // BREAK!\n  |      `- error: use of '=' in a boolean context, did you mean '=='?\n4 | // CONTROL! if x == 1 { label = \"one\" }\n5 | x += 0"
+  },
+  "switch_fallthrough": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:3:4: error: optional type 'Int?' cannot be used as a boolean; test for '!= nil' instead\n 1 | let qty: Int? = Int(CommandLine.arguments[1])\n 2 | var present = false\n 3 | if qty { present = true } // BREAK!\n   |    `- error: optional type 'Int?' cannot be used as a boolean; test for '!= nil' instead\n 4 | // CONTROL! if qty != nil { present = true }\n 5 | if present {"
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.1,
+   "stdout": "",
+   "stderr": "main/main.swift:1: Fatal error: Unexpectedly found nil while unwrapping an Optional value\n\n*** Signal 4: Backtracing from 0x723189c741ef... done ***\n\n*** Program crashed: Illegal instruction at 0x0000723189c741ef ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0      0x0000723189c741ef closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 623 in libswiftCore.so\n1 [ra] 0x0000723189e0b2cc _assertionFailure(_:_:file:line:flags:) + 283 in libswiftCore.so\n2 [ra] 0x00005b4bbe68b5c3 main + 210 in main at /tmp/breakbench/parse_invalid_number/main/main.swift:1:38\n3 [ra] 0x000072318834d601 <unknown> in libc.so.6\n4 [ra] 0x000072318834d718 <unknown> in libc.so.6\n\n\nRegisters:\n\nrax 0x0000000000000003  3\nrdx 0x0\n...\n74 ce 12 8a 31 72 00 00  \u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7t\u00ce\u00b7\u00b71r\u00b7\u00b7\nr14 0x0000000000000001  1\nr15 0x000000000000000b  11\nrip 0x0000723189c741ef  0f 0b 48 83 ec 08 48 8d 05 24 78 49 00 48 8d 3d  \u00b7\u00b7H\u00b7\u00ec\u00b7H\u00b7\u00b7$xI\u00b7H\u00b7=\n\nrflags 0x0000000000010206  PF\n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (19 omitted):\n\n0x00005b4bbe68a000\u20130x00005b4bbe68b695 227b17e11e65f38888f738a6571e7f75646912fe main            /tmp/breakbench/parse_invalid_number/main/main\n0x0000723188323000\u20130x00007231884e2819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6       /usr/lib/x86_64-linux-gnu/libc.so.6\n0x0000723189b01000\u20130x000072318a0dab70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.01s\n\nIllegal instruction (core dumped)"
+  },
+  "covariant_array_write": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "woof",
+   "stderr": ""
+  },
+  "mutate_while_iterating": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1,3",
+   "stderr": ""
+  },
+  "self_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:7:1: error: call can throw but is not marked with 'try'\n 5 | }\n 6 | \n 7 | save(\"/nonexistent/dir/out.txt\") // BREAK!\n   | |- error: call can throw but is not marked with 'try'\n   | |- note: did you mean to use 'try'?\n   | |- note: did you mean to handle error as optional value?\n   | `- note: did you mean to disable error propagation?\n 8 | // CONTROL! try? save(\"/nonexistent/dir/out.txt\")\n 9 | print(\"saved\")"
+  },
+  "sort_with_nan": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:6:23: error: cannot convert value of type 'Int' to specified type 'Double'\n4 | let sum = values.reduce(0, +)\n5 | let count = values.count\n6 | let avg: Double = sum / count // BREAK!\n  |                       `- error: cannot convert value of type 'Int' to specified type 'Double'\n7 | // CONTROL! let avg: Double = Double(sum) / Double(count)\n8 | print(String(format: \"%.1f\", avg))"
+  },
+  "leading_zero_literal": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not a",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:2:16: error: adjacent operators are in non-associative precedence group 'ComparisonPrecedence'\n1 | let x = Int(CommandLine.arguments[1])!\n2 | let inside = 1 < x < 3 // BREAK!\n  |                `- error: adjacent operators are in non-associative precedence group 'ComparisonPrecedence'\n3 | // CONTROL! let inside = 1 < x && x < 3\n4 | print(inside ? \"inside\" : \"outside\")\n\nmain.swift:2:16: error: cannot convert value of type 'Bool' to expected argument type 'Int'\n1 | let x = Int(CommandLine.arguments[1])!\n2 | let inside = 1 < x < 3 // BREAK!\n  |                `- error: cannot convert value of type 'Bool' to expected argument type 'Int'\n3 | // CONTROL! let inside = 1 < x && x < 3\n4 | print(inside ? \"inside\" : \"outside\")"
+  },
+  "lost_update_on_copy": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:5:18: error: left side of mutating operator isn't mutable: 'acct' is a 'let' constant\n3 | var accounts = [Account(balance: 100)]\n4 | for acct in accounts {\n5 |     acct.balance += 50 // BREAK!\n  |                  `- error: left side of mutating operator isn't mutable: 'acct' is a 'let' constant\n6 | }\n7 | print(accounts[0].balance)"
+  },
+  "command_injection": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.swift:16:5: warning: 'defer' statement at end of scope always executes immediately; replace with 'do' statement to silence this warning\n|     `- warning: 'defer' statement at end of scope always executes immediately; replace with 'do' statement to silence this warning",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "path_join_escape": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "inside",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:3:10: error: expected ',' separator\n1 | let names = [\n2 |     \"alice\",\n3 |     \"bob\" // CONTROL! \"bob\",\n  |          `- error: expected ',' separator\n4 |     \"carol\",\n5 | ]"
+  },
+  "return_in_finally": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.13,
+   "stdout": "",
+   "stderr": "Swift/ErrorType.swift:254: Fatal error: Error raised at top level: main.BadNumber()\n\n*** Signal 4: Backtracing from 0x718db9233fbf... done ***\n\n*** Program crashed: Illegal instruction at 0x0000718db9233fbf ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 1 \"DispatchWorker\" crashed:\n\n0                  0x0000718db9233fbf _assertionFailure(_:_:file:line:flags:) + 303 in libswiftCore.so\n1 [ra]             0x0000718db92938fe swift_errorInMain + 765 in libswiftCore.so\n2 [ra] [system]    0x00006522d7417afa async_MainTY2_ + 41 in main at //<compiler-generated>\n3 [async] [thunk]  0x00006522d7417b70 thunk for @escaping @convention(thin) @async () -> () in main at //<compiler-generated>\n4 [async] [thunk]  0x00006522d7417c60 partial apply for\n...\n55733d41b main                    /tmp/breakbench/worker_failure_lost/main/main\n0x0000718db774c000\u20130x0000718db790b819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6               /usr/lib/x86_64-linux-gnu/libc.so.6\n0x0000718db8c22000\u20130x0000718db8c6a0d0 3874d40e3b354035874e842e883228a08cf5d450 libdispatch.so          /usr/share/swift/usr/lib/swift/linux/libdispatch.so\n0x0000718db8e60000\u20130x0000718db8ef4180 06e1ec642892a9d6659589ace139ff5a9b162c2d libswift_Concurrency.so /usr/share/swift/usr/lib/swift/linux/libswift_Concurrency.so\n0x0000718db8f2a000\u20130x0000718db9503b70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so         /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.02s\n\nIllegal instruction (core dumped)"
+  },
+  "unawaited_task": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:12:1: error: expression is 'async' but is not marked with 'await'\n10 | \n11 | let store = Store()\n12 | save(store) // CONTROL! await save(store)\n   | |- error: expression is 'async' but is not marked with 'await'\n   | `- note: call is 'async'\n13 | print(await store.count)\n14 |"
+  },
+  "format_arg_mismatch": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3 of 0",
+   "stderr": ""
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:3:12: error: value of optional type 'Int?' must be unwrapped to a value of type 'Int'\n1 | let stock = [\"apple\": 3, \"plum\": 4]\n2 | let name = CommandLine.arguments[1]\n3 | print(stock[name] + 5) // CONTROL! if let n = stock[name] { print(n + 5) } else { print(\"unknown\") }\n  |            |- error: value of optional type 'Int?' must be unwrapped to a value of type 'Int'\n  |            |- note: coalesce using '??' to provide a default when the optional value contains 'nil'\n  |            `- note: force-unwrap using '!' to abort execution if the optional value contains 'nil'\n4 |"
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pending",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "outcome": "REJECTED",
+   "message": "main.swift:2:6: warning: result of call to 'uppercased()' is unused [#NoUsage]\n|      `- warning: result of call to 'uppercased()' is unused [#NoUsage]",
+   "must_use": true
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.11,
+   "stdout": "",
+   "stderr": "Swift/ContiguousArrayBuffer.swift:695: Fatal error: Index out of range\n\n*** Signal 4: Backtracing from 0x7272feb0a1ef... done ***\n\n*** Program crashed: Illegal instruction at 0x00007272feb0a1ef ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0      0x00007272feb0a1ef closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 623 in libswiftCore.so\n1 [ra] 0x00007272feca12cc _assertionFailure(_:_:file:line:flags:) + 283 in libswiftCore.so\n2 [ra] 0x00007272ff0e0355 specialized Array.subscript.getter + 84 in libswiftSwiftOnoneSupport.so\n3 [ra] 0x0000643a2efad696 main + 389 in main at /tmp/breakbench/negative_index_wraps/main/main.swift:3:29\n4 [ra] 0x00007272fd1e3601 <unknown> in libc.so.6\n5 [ra] 0x00007272\n...\n  \n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (18 omitted):\n\n0x0000643a2efac000\u20130x0000643a2efad771 10a0fef27681526047d64415eeba3aa233970306 main                         /tmp/breakbench/negative_index_wraps/main/main\n0x00007272fd1b9000\u20130x00007272fd378819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6                    /usr/lib/x86_64-linux-gnu/libc.so.6\n0x00007272fe997000\u20130x00007272fef70b70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so              /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n0x00007272ff0b5000\u20130x00007272ff0f4540 85f9cbbfda04f75d9d670b1584a694452da8ccae libswiftSwiftOnoneSupport.so /usr/share/swift/usr/lib/swift/linux/libswiftSwiftOnoneSupport.so\n\nBacktrace took 0.01s\n\nIllegal instruction (core dumped)"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:3:11: error: instance method 'contains' requires the types 'Int' and 'String.Element' (aka 'Character') be equivalent\n1 | let ids = [10, 20, 30]\n2 | let id = CommandLine.arguments[1]\n3 | print(ids.contains(id) ? \"found\" : \"missing\") // CONTROL! print(ids.contains(Int(id)!) ? \"found\" : \"missing\")\n  |           `- error: instance method 'contains' requires the types 'Int' and 'String.Element' (aka 'Character') be equivalent\n4 | \n\n_StringProcessing.Collection.contains:3:15: note: where 'Self.Element' = 'Int', 'C.Element' = 'String.Element' (aka 'Character')\n1 | protocol Collection {\n2 | @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)\n3 |   public func contains<C>(_ other: C) -> Bool where C : Collection, Self.Element == C.Element}\n  |               `- note: where 'Self.Element' = 'Int', 'C.Element' = 'String.Element' (aka 'Character')\n4 |"
+  },
+  "use_after_close": {
+   "outcome": "TRAPPED",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.swift:4:21: warning: result of call to 'createFile(atPath:contents:attributes:)' is unused [#NoUsage]\n|                     `- warning: result of call to 'createFile(atPath:contents:attributes:)' is unused [#NoUsage]",
+   "exit": 132,
+   "secs": 0.1,
+   "stdout": "",
+   "stderr": "Swift/ErrorType.swift:254: Fatal error: Error raised at top level: Error Domain=NSCocoaErrorDomain Code=512 \"(null)\"\n\n*** Signal 4: Backtracing from 0x74fbbb25afbf... done ***\n\n*** Program crashed: Illegal instruction at 0x000074fbbb25afbf ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0               0x000074fbbb25afbf _assertionFailure(_:_:file:line:flags:) + 303 in libswiftCore.so\n1 [ra]          0x000074fbbb2ba8fe swift_errorInMain + 765 in libswiftCore.so\n2 [ra] [system] 0x00006287b4c5f181 main + 912 in main at //<compiler-generated>\n3 [ra]          0x000074fbb979d601 <unknown> in libc.so.6\n4 [ra]          0x000074fbb979d718 <unknown> in libc.so.6\n\n\nRegisters:\n\nrax 0x0000000200000003  8589934595\nrdx 0x00000\n...\n 87 62 00 00  L\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00f0P3\u00b7\u00e4\u00b7b\u00b7\u00b7\nr14 0xf00000000000004c  17293822569102704716\nr15 0x0000000000000000  0\nrip 0x000074fbbb25afbf  0f 0b 48 83 ec 08 48 8d 05 94 16 30 00 48 8d 3d  \u00b7\u00b7H\u00b7\u00ec\u00b7H\u00b7\u00b7\u00b7\u00b70\u00b7H\u00b7=\n\nrflags 0x0000000000010202  \n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (19 omitted):\n\n0x00006287b4c5c000\u20130x00006287b4c5f23d e2020aff1e8654a42e2c956119bc3d065dd1df4d main            /tmp/breakbench/use_after_close/main/main\n0x000074fbb9773000\u20130x000074fbb9932819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6       /usr/lib/x86_64-linux-gnu/libc.so.6\n0x000074fbbaf51000\u20130x000074fbbb52ab70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.01s\n\nIllegal instruction (core dumped)"
+  },
+  "dead_store": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.swift:3:9: warning: initialization of immutable value 'total' was never used; consider replacing with assignment to '_' or removing it [#NoUsage]\n|         `- warning: initialization of immutable value 'total' was never used; consider replacing with assignment to '_' or removing it [#NoUsage]",
+   "warnings": "main.swift:3:9: warning: initialization of immutable value 'total' was never used; consider replacing with assignment to '_' or removing it [#NoUsage]\n|         `- warning: initialization of immutable value 'total' was never used; consider replacing with assignment to '_' or removing it [#NoUsage]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unbalanced",
+   "stderr": "worker failed"
+  },
+  "split_character": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a\ud83d\udc4d",
+   "stderr": ""
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.1,
+   "stdout": "",
+   "stderr": "Swift/ContiguousArrayBuffer.swift:708: Fatal error: Index out of range\n\n*** Signal 4: Backtracing from 0x7843401041ef... done ***\n\n*** Program crashed: Illegal instruction at 0x00007843401041ef ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0      0x00007843401041ef closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 623 in libswiftCore.so\n1 [ra] 0x000078434029b2cc _assertionFailure(_:_:file:line:flags:) + 283 in libswiftCore.so\n2 [ra] 0x00007843406e1ce7 specialized Array.subscript.modify + 150 in libswiftSwiftOnoneSupport.so\n3 [ra] 0x00005b7660d92a8f main + 398 in main at /tmp/breakbench/oob_write/main/main.swift:8:12\n4 [ra] 0x000078433e7dd601 <unknown> in libc.so.6\n5 [ra] 0x000078433e7dd718 <\n...\n000010206  PF\n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (18 omitted):\n\n0x00005b7660d91000\u20130x00005b7660d92c19 b74ce0bcd0476e04ec2063626e402fb50977a511 main                         /tmp/breakbench/oob_write/main/main\n0x000078433e7b3000\u20130x000078433e972819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6                    /usr/lib/x86_64-linux-gnu/libc.so.6\n0x000078433ff91000\u20130x000078434056ab70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so              /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n0x00007843406af000\u20130x00007843406ee540 85f9cbbfda04f75d9d670b1584a694452da8ccae libswiftSwiftOnoneSupport.so /usr/share/swift/usr/lib/swift/linux/libswiftSwiftOnoneSupport.so\n\nBacktrace took 0.01s\n\nIllegal instruction (core dumped)"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.1,
+   "stdout": "",
+   "stderr": "Swift/ContiguousArrayBuffer.swift:695: Fatal error: Index out of range\n\n*** Signal 4: Backtracing from 0x7f09ee5321ef... done ***\n\n*** Program crashed: Illegal instruction at 0x00007f09ee5321ef ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0      0x00007f09ee5321ef closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 623 in libswiftCore.so\n1 [ra] 0x00007f09ee6c92cc _assertionFailure(_:_:file:line:flags:) + 283 in libswiftCore.so\n2 [ra] 0x00007f09eeb08355 specialized Array.subscript.getter + 84 in libswiftSwiftOnoneSupport.so\n3 [ra] 0x00005c67bc46ba56 main + 373 in main at /tmp/breakbench/oob_read/main/main.swift:8:12\n4 [ra] 0x00007f09ecc0b601 <unknown> in libc.so.6\n5 [ra] 0x00007f09ecc0b718 <un\n...\n000000010202  \n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (18 omitted):\n\n0x00005c67bc46a000\u20130x00005c67bc46bb69 3a10bddbe3491fbd4b28476bb67e21666e789b38 main                         /tmp/breakbench/oob_read/main/main\n0x00007f09ecbe1000\u20130x00007f09ecda0819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6                    /usr/lib/x86_64-linux-gnu/libc.so.6\n0x00007f09ee3bf000\u20130x00007f09ee998b70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so              /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n0x00007f09eeadd000\u20130x00007f09eeb1c540 85f9cbbfda04f75d9d670b1584a694452da8ccae libswiftSwiftOnoneSupport.so /usr/share/swift/usr/lib/swift/linux/libswiftSwiftOnoneSupport.so\n\nBacktrace took 0.01s\n\nIllegal instruction (core dumped)"
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "CRASH",
+   "warned": false,
+   "run_warned": false,
+   "exit": 139,
+   "secs": 0.17,
+   "stdout": "",
+   "stderr": "*** Signal 11: Backtracing from 0x613bfb6d4478... done ***\n\n*** Program crashed: Bad pointer dereference at 0x00007fff0648dff0 ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n     0      0x0000613bfb6d4478 walk(_:) + 8 in main at /tmp/breakbench/stack_overflow/main/main.swift:1\n     1 [ra] 0x0000613bfb6d44bf walk(_:) + 78 in main at /tmp/breakbench/stack_overflow/main/main.swift:3:13\n     2 [ra] 0x0000613bfb6d44bf walk(_:) + 78 in main at /tmp/breakbench/stack_overflow/main/main.swift:3:13\n     3 [ra] 0x0000613bfb6d44bf walk(_:) + 78 in main at /tmp/breakbench/stack_overflow/main/main.swift:3:13\n     4 [ra] 0x0000613bfb6d44bf walk(_:) + 78 in main at /tmp/breakbench/stack_overflow/main/main.swift:3:13\n     5 [ra]\n...\n000074000173d6b0  00 02 00 00 00 00 00 00 74 7e 78 01 00 74 00 00  \u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7t~x\u00b7\u00b7t\u00b7\u00b7\nr14 0x0000740001904000  e0 52 90 01 00 74 00 00 17 00 00 00 00 00 00 00  \u00e0R\u00b7\u00b7\u00b7t\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\nr15 0x0000613bfb6d6cc0  b0 41 6d fb 3b 61 00 00 01 00 00 00 00 00 00 00  \u00b0Am\u00fb;a\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\nrip 0x0000613bfb6d4478  48 89 7d f0 48 8d 7d f8 31 f6 ba 08 00 00 00 e8  H\u00b7}\u00f0H\u00b7}\u00f81\u00f6\u00ba\u00b7\u00b7\u00b7\u00b7\u00e8\n\nrflags 0x0000000000010202  \n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (20 omitted):\n\n0x0000613bfb6d3000\u20130x0000613bfb6d4741 6845c4e83bffebe22a7fcfd70fb78f16d10d48b8 main      /tmp/breakbench/stack_overflow/main/main\n0x000073ffff97e000\u20130x000073ffffb3d819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6 /usr/lib/x86_64-linux-gnu/libc.so.6\n\nBacktrace took 0.06s\n\nSegmentation fault (core dumped)"
+  },
+  "concurrent_map_write": {
+   "outcome": "REJECTED",
+   "message": "main.swift:8:13: error: mutation of captured var 'map' in concurrently-executing code [#SendableClosureCaptures]\n 6 |     DispatchQueue.concurrentPerform(iterations: 8) { t in\n 7 |         for k in 0..<100_000 {\n 8 |             map[t * 100_000 + k] = k // CONTROL! map.withLock { $0[t * 100_000 + k] = k }\n   |             `- error: mutation of captured var 'map' in concurrently-executing code [#SendableClosureCaptures]\n 9 |         }\n10 |     }\n\n[#SendableClosureCaptures]: <https://docs.swift.org/compiler/documentation/diagnostics/sendable-closure-captures>"
+  },
+  "huge_allocation": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 134,
+   "secs": 0.11,
+   "stdout": "",
+   "stderr": "Fatal error: failed to allocate 10000000000032 bytes of memory with alignment 8\n\n*** Signal 6: Backtracing from 0x77f685b4716c... done ***\n\n*** Program crashed: Aborted at 0x000077f685b4716c ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n 0              0x000077f685b4716c <unknown> in libc.so.6\n 1 [ra]         0x000077f685ae6b7e <unknown> in libc.so.6\n 2 [ra]         0x000077f685ac98ec <unknown> in libc.so.6\n 3 [ra]         0x000077f6876f6e1c swift::fatalErrorv(unsigned int, char const*, __va_list_tag*) + 139 in libswiftCore.so\n 4 [ra]         0x000077f6876f6e9b swift::fatalError(unsigned int, char const*, ...) + 122 in libswiftCore.so\n 5 [ra]         0x000077f6876f6fee swift::swift_abortAllocationFailure(unsign\n...\n000000000246  ZF PF\n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (18 omitted):\n\n0x000063d48cc0e000\u20130x000063d48cc0f7e9 764d52ae6a198efdfaeba08b0542c6e72626f2b1 main                         /tmp/breakbench/huge_allocation/main/main\n0x000077f685aa1000\u20130x000077f685c60819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6                    /usr/lib/x86_64-linux-gnu/libc.so.6\n0x000077f68727f000\u20130x000077f687858b70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so              /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n0x000077f68799d000\u20130x000077f6879dc540 85f9cbbfda04f75d9d670b1584a694452da8ccae libswiftSwiftOnoneSupport.so /usr/share/swift/usr/lib/swift/linux/libswiftSwiftOnoneSupport.so\n\nBacktrace took 0.01s\n\nAborted (core dumped)"
+  },
+  "fd_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.swift:4:21: warning: result of call to 'createFile(atPath:contents:attributes:)' is unused [#NoUsage]\n|                     `- warning: result of call to 'createFile(atPath:contents:attributes:)' is unused [#NoUsage]",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "wrong_variant_access": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:7:10: error: consecutive statements on a line must be separated by ';'\n 5 | \n 6 | let v = Value.int(42)\n 7 | let Value.text(s) = v // BREAK!\n   |          `- error: consecutive statements on a line must be separated by ';'\n 8 | // CONTROL! guard case let .text(s) = v else { fatalError(\"not text\") }\n 9 | print(s.count)\n\nmain.swift:7:5: error: type annotation missing in pattern\n 5 | \n 6 | let v = Value.int(42)\n 7 | let Value.text(s) = v // BREAK!\n   |     `- error: type annotation missing in pattern\n 8 | // CONTROL! guard case let .text(s) = v else { fatalError(\"not text\") }\n 9 | print(s.count)\n\nmain.swift:7:16: error: cannot find 's' in scope\n 5 | \n 6 | let v = Value.int(42)\n 7 | let Value.text(s) = v // BREAK!\n   |                `- error: cannot find 's' in scope\n 8 | // CONTROL! guard case let .text(s) = v else { fatalError(\"not text\") }\n 9 | print(s.count)\n\nmain.swift:9:7: error: cannot find 's' in scope\n 7 | let Value.text(s) = v // BREAK!\n 8 | // CONTROL! guard case let .text(s) = v else { fatalError(\"not text\") }\n 9 | print(s.count)\n   |       `- error: cannot find 's' in scope\n10 |"
+  },
+  "format_string": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "(null)(null){}{0}",
+   "stderr": ""
+  },
+  "deep_structure_release": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:2:9: error: cannot assign through subscript: subscript is get-only\n1 | var greeting = \"hello\"\n2 | greeting[0] = \"j\" // CONTROL! greeting = \"j\" + greeting.dropFirst()\n  |         `- error: cannot assign through subscript: subscript is get-only\n3 | print(greeting)\n4 |"
+  },
+  "complete_init": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:7:32: error: missing argument for parameter 'retries' in call\n1 | struct Config {\n  |        `- note: 'init(timeout:retries:)' declared here\n2 |     let timeout: Int\n3 |     let retries: Int\n  :\n5 | \n6 | let c = Config(timeout: 5, retries: 3)\n7 | let partial = Config(timeout: 5) // BREAK!\n  |                                `- error: missing argument for parameter 'retries' in call\n8 | print(c.timeout, c.retries)\n9 |"
+  },
+  "newtype": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:6:28: error: cannot convert value of type 'Seconds' to expected argument type 'Meters'\n4 | \n5 | let total = Meters(v: 2) + Meters(v: 3)\n6 | let wrong = Meters(v: 2) + Seconds(v: 3) // BREAK!\n  |                            `- error: cannot convert value of type 'Seconds' to expected argument type 'Meters'\n7 | print(total.v)\n8 |"
+  },
+  "strong_enum": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:14:12: error: cannot convert value of type 'Int' to expected argument type 'Color'\n12 | \n13 | let c = Color.green\n14 | print(name(7)) // BREAK!\n   |            `- error: cannot convert value of type 'Int' to expected argument type 'Color'\n15 | print(name(c))\n16 |"
+  },
+  "override_check": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:7:19: error: method does not override any method from its superclass\n 5 | final class Circle: Shape {\n 6 |     override func describe() -> String { \"circle\" }\n 7 |     override func descibe() -> String { \"circle\" } // BREAK!\n   |                   `- error: method does not override any method from its superclass\n 8 | }\n 9 |"
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.1,
+   "stdout": "before",
+   "stderr": "main/main.swift:6: Fatal error: Unexpectedly found nil while unwrapping an Optional value\n\n*** Signal 4: Backtracing from 0x7f61d9add1ef... done ***\n\n*** Program crashed: Illegal instruction at 0x00007f61d9add1ef ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0      0x00007f61d9add1ef closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 623 in libswiftCore.so\n1 [ra] 0x00007f61d9c742cc _assertionFailure(_:_:file:line:flags:) + 283 in libswiftCore.so\n2 [ra] 0x00005c79c459bef3 main + 306 in main at /tmp/breakbench/forced_unwrap/main/main.swift:6:14\n3 [ra] 0x00007f61d81b6601 <unknown> in libc.so.6\n4 [ra] 0x00007f61d81b6718 <unknown> in libc.so.6\n\n\nRegisters:\n\nrax 0x0000000000000003  3\nrdx 0x00000000\n...\n 00 00 03 00 00 00 00 00 00 00  X\u00b7P\u00d9a\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\nr14 0x0000000000000001  1\nr15 0x000000000000000b  11\nrip 0x00007f61d9add1ef  0f 0b 48 83 ec 08 48 8d 05 24 78 49 00 48 8d 3d  \u00b7\u00b7H\u00b7\u00ec\u00b7H\u00b7\u00b7$xI\u00b7H\u00b7=\n\nrflags 0x0000000000010206  PF\n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (19 omitted):\n\n0x00005c79c4599000\u20130x00005c79c459bfa1 71829aa09b0895d38b4d65da42c5959396241a1c main            /tmp/breakbench/forced_unwrap/main/main\n0x00007f61d818c000\u20130x00007f61d834b819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6       /usr/lib/x86_64-linux-gnu/libc.so.6\n0x00007f61d996a000\u20130x00007f61d9f43b70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.01s\n\nIllegal instruction (core dumped)"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.swift:6:17: warning: string interpolation produces a debug description for an optional value; did you mean to make this explicit?\n|                 |- warning: string interpolation produces a debug description for an optional value; did you mean to make this explicit?\n|                 |- note: provide a default value to avoid this warning\n|                 `- note: use 'String(describing:)' to silence this warning",
+   "warnings": "main.swift:6:17: warning: string interpolation produces a debug description for an optional value; did you mean to make this explicit?\n|                 |- warning: string interpolation produces a debug description for an optional value; did you mean to make this explicit?",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hello, nil",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:3:30: error: value of optional type 'String.Index?' must be unwrapped to a value of type 'String.Index'\n1 | let line = CommandLine.arguments[1]\n2 | let pos = line.firstIndex(of: \":\")\n3 | print(line[line.index(after: pos)...]) // CONTROL! print(pos.map { line[line.index(after: $0)...] } ?? \"\")\n  |                              |- error: value of optional type 'String.Index?' must be unwrapped to a value of type 'String.Index'\n  |                              |- note: coalesce using '??' to provide a default when the optional value contains 'nil'\n  |                              `- note: force-unwrap using '!' to abort execution if the optional value contains 'nil'\n4 |"
+  },
+  "empty_max": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:3:7: error: value of optional type 'Int?' must be unwrapped to a value of type 'Int'\n1 | let xs = CommandLine.arguments.dropFirst().map { Int($0)! }\n2 | let m = xs.max()\n3 | print(m + 1) // CONTROL! print((m ?? -1) + 1)\n  |       |- error: value of optional type 'Int?' must be unwrapped to a value of type 'Int'\n  |       |- note: coalesce using '??' to provide a default when the optional value contains 'nil'\n  |       `- note: force-unwrap using '!' to abort execution if the optional value contains 'nil'\n4 |"
+  },
+  "readonly_param": {
+   "outcome": "REJECTED",
+   "message": "main.swift:2:7: error: cannot assign through subscript: 'xs' is a 'let' constant\n1 | func count(_ xs: [Int]) -> Int {\n2 |     xs[0] = 9 // BREAK!\n  |       `- error: cannot assign through subscript: 'xs' is a 'let' constant\n3 |     return xs.count\n4 | }"
+  },
+  "exclusive_mutation": {
+   "outcome": "REJECTED",
+   "message": "main.swift:10:18: error: inout arguments are not allowed to alias each other\n 8 |     var b = 0\n 9 |     transfer(&a, &b, 30)\n10 |     transfer(&a, &a, 10) // BREAK!\n   |              |   `- error: inout arguments are not allowed to alias each other\n   |              `- note: previous aliasing argument\n11 |     print(a, b)\n12 | }"
+  },
+  "literal_range": {
+   "outcome": "REJECTED",
+   "message": "main.swift:2:21: error: integer literal '300' overflows when stored into 'UInt8'\n1 | let ok: UInt8 = 100\n2 | let tooBig: UInt8 = 300 // BREAK!\n  |                     `- error: integer literal '300' overflows when stored into 'UInt8'\n3 | print(ok)\n4 |"
+  },
+  "no_implicit_conversion": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:3:20: error: cannot convert value of type 'Int64' to specified type 'Int32'\n1 | let big: Int64 = 42\n2 | let small = Int32(big)\n3 | let wrong: Int32 = big // BREAK!\n  |                    `- error: cannot convert value of type 'Int64' to specified type 'Int32'\n4 | print(small)\n5 |"
+  },
+  "generic_constraint": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:8:34: error: referencing instance method 'sort()' on 'MutableCollection' requires that 'Point' conform to 'Comparable'\n 6 | var xs = [3, 1, 2]\n 7 | xs.sort()\n 8 | var ps = [Point(x: 1, y: 2)]; ps.sort() // BREAK!\n   |                                  `- error: referencing instance method 'sort()' on 'MutableCollection' requires that 'Point' conform to 'Comparable'\n 9 | print(xs[0])\n10 | \n\nSwift.MutableCollection:1:11: note: where 'Self.Element' = 'Point'\n1 | extension MutableCollection where Self : RandomAccessCollection, Self.Element : Comparable {\n  |           `- note: where 'Self.Element' = 'Point'\n2 |     @inlinable public mutating func sort()\n3 | }"
+  },
+  "lossy_int_to_float": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:5:6: error: cannot convert value of type 'Int64' to expected argument type 'Double'\n3 | let n: Int64 = 7\n4 | show(Double(n))\n5 | show(n) // BREAK!\n  |      `- error: cannot convert value of type 'Int64' to expected argument type 'Double'\n6 |"
+  },
+  "const_index_bounds": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.1,
+   "stdout": "",
+   "stderr": "Swift/InlineArray.swift:492: Fatal error: Index out of bounds\n\n*** Signal 4: Backtracing from 0x7159ca2c21ef... done ***\n\n*** Program crashed: Illegal instruction at 0x00007159ca2c21ef ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0               0x00007159ca2c21ef closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 623 in libswiftCore.so\n1 [ra]          0x00007159ca4592cc _assertionFailure(_:_:file:line:flags:) + 283 in libswiftCore.so\n2 [ra] [system] 0x00005f4093f864e4 InlineArray<>._checkIndex(_:) + 131 in main at //<compiler-generated>\n3 [ra]          0x00005f4093f865e1 main + 112 in main at /tmp/breakbench/const_index_bounds/main/main.swift:2:12\n4 [ra]          0x00007159c899b601 <unknown\n...\n0 14 00 00 00 00 00 00 00  \u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\nr14 0x0000000000000001  1\nr15 0x000000000000000b  11\nrip 0x00007159ca2c21ef  0f 0b 48 83 ec 08 48 8d 05 24 78 49 00 48 8d 3d  \u00b7\u00b7H\u00b7\u00ec\u00b7H\u00b7\u00b7$xI\u00b7H\u00b7=\n\nrflags 0x0000000000010206  PF\n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (19 omitted):\n\n0x00005f4093f85000\u20130x00005f4093f86671 d9acc4169d00e97635b0ccb3fec84aafccbcabe1 main            /tmp/breakbench/const_index_bounds/main/main\n0x00007159c8971000\u20130x00007159c8b30819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6       /usr/lib/x86_64-linux-gnu/libc.so.6\n0x00007159ca14f000\u20130x00007159ca728b70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.01s\n\nIllegal instruction (core dumped)"
+  },
+  "const_overflow": {
+   "outcome": "REJECTED",
+   "message": "main.swift:2:54: error: arithmetic operation '31536000000000000 * 300' (on type 'Int64') results in an overflow\n1 | let day: Int64 = 1_000_000_000 * 60 * 60 * 24\n2 | let span: Int64 = 1_000_000_000 * 60 * 60 * 24 * 365 * 300 // BREAK!\n  |                                                      `- error: arithmetic operation '31536000000000000 * 300' (on type 'Int64') results in an overflow\n3 | print(day)\n4 |"
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "blocking_in_async": {
+   "outcome": "REJECTED",
+   "message": "main.swift:4:12: error: class method 'sleep' is unavailable from asynchronous contexts\n 2 | \n 3 | func job() async {\n 4 |     Thread.sleep(forTimeInterval: 0.5) // CONTROL! try? await Task.sleep(for: .milliseconds(500))\n   |            `- error: class method 'sleep' is unavailable from asynchronous contexts\n 5 | }\n 6 |"
+  },
+  "unreachable_code": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.swift:4:5: warning: code after 'return' will never be executed\n|     `- warning: code after 'return' will never be executed",
+   "warnings": "main.swift:4:5: warning: code after 'return' will never be executed\n|     `- warning: code after 'return' will never be executed",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ok",
+   "stderr": ""
+  },
+  "nan_key": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "missing",
+   "stderr": ""
+  },
+  "checked_interpolation": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:3:16: error: cannot find 'nmae' in scope\n1 | let name = \"Ada\"\n2 | print(\"hello \\(name)\")\n3 | print(\"hello \\(nmae)\") // BREAK!\n  |                `- error: cannot find 'nmae' in scope\n4 |"
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.swift:8:10: warning: case is already handled by previous patterns; consider removing it\n|          `- warning: case is already handled by previous patterns; consider removing it",
+   "warnings": "main.swift:8:10: warning: case is already handled by previous patterns; consider removing it\n|          `- warning: case is already handled by previous patterns; consider removing it",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "other",
+   "stderr": ""
+  },
+  "duplicate_key": {
+   "outcome": "TRAPPED",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.swift:1:10: warning: dictionary literal of type '[String : Int]' has duplicate entries for string literal key 'a' |          |       `- note: duplicate key declared here\n|          |- warning: dictionary literal of type '[String : Int]' has duplicate entries for string literal key 'a' |          `- note: duplicate key declared here",
+   "warnings": "main.swift:1:10: warning: dictionary literal of type '[String : Int]' has duplicate entries for string literal key 'a' |          |       `- note: duplicate key declared here\n|          |- warning: dictionary literal of type '[String : Int]' has duplicate entries for string literal key 'a' |          `- note: duplicate key declared here",
+   "exit": 132,
+   "secs": 0.1,
+   "stdout": "",
+   "stderr": "Swift/Dictionary.swift:880: Fatal error: Dictionary literal contains duplicate keys\n\n*** Signal 4: Backtracing from 0x7fb3e805b1ef... done ***\n\n*** Program crashed: Illegal instruction at 0x00007fb3e805b1ef ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0              0x00007fb3e805b1ef closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 623 in libswiftCore.so\n1 [ra]         0x00007fb3e81f22cc _assertionFailure(_:_:file:line:flags:) + 283 in libswiftCore.so\n2 [ra]         0x00007fb3e81a10b3 specialized Dictionary.init(dictionaryLiteral:) + 514 in libswiftCore.so\n3 [ra] [thunk] 0x00007fb3e8236fdf Dictionary.init(dictionaryLiteral:) + 14 in libswiftCore.so\n4 [ra]         0x00005937948de5a6 main +\n...\n7f 00 00 03 00 00 00 00 00 00 00  X\u00b7M\u00e8\u00b3\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\nr14 0x0000000000000001  1\nr15 0x000000000000000b  11\nrip 0x00007fb3e805b1ef  0f 0b 48 83 ec 08 48 8d 05 24 78 49 00 48 8d 3d  \u00b7\u00b7H\u00b7\u00ec\u00b7H\u00b7\u00b7$xI\u00b7H\u00b7=\n\nrflags 0x0000000000010202  \n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (19 omitted):\n\n0x00005937948dd000\u20130x00005937948de661 0903010157b9194f9aa60f6d14dd303014720ee1 main            /tmp/breakbench/duplicate_key/main/main\n0x00007fb3e670a000\u20130x00007fb3e68c9819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6       /usr/lib/x86_64-linux-gnu/libc.so.6\n0x00007fb3e7ee8000\u20130x00007fb3e84c1b70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.01s\n\nIllegal instruction (core dumped)"
+  },
+  "char_arithmetic": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:4:14: error: cannot convert value of type 'Character' to expected argument type 'Int'\n2 | let n = Int(c.asciiValue!) + 1\n3 | print(n)\n4 | let m: Int = c + 1 // BREAK!\n  |              `- error: cannot convert value of type 'Character' to expected argument type 'Int'\n5 |"
+  },
+  "comparison_statement": {
+   "outcome": "REJECTED",
+   "message": "main.swift:3:7: warning: result of operator '==' is unused [#NoUsage]\n|       `- warning: result of operator '==' is unused [#NoUsage]",
+   "must_use": true
+  },
+  "structural_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "hash_matches_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:3:34: error: expected '4' elements in inline array literal, but got '3'\n1 | let table: InlineArray<4, Int> = [10, 20, 30, 40]\n2 | print(table[3])\n3 | let short: InlineArray<4, Int> = [10, 20, 30] // BREAK!\n  |                                  `- error: expected '4' elements in inline array literal, but got '3'\n4 |"
+  },
+  "required_names": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:6:5: error: missing argument labels 'dx:dy:' in call\n4 | \n5 | move(dx: 3, dy: 4)\n6 | move(3, 4) // BREAK!\n  |     `- error: missing argument labels 'dx:dy:' in call\n7 |"
+  },
+  "enum_from_int": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "before\ninvalid",
+   "stderr": ""
+  },
+  "increment_in_expression": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:3:6: error: cannot find operator '++' in scope; did you mean '+= 1'?\n1 | var i = 0\n2 | i += 1\n3 | i = i++ // BREAK!\n  |      `- error: cannot find operator '++' in scope; did you mean '+= 1'?\n4 | print(i)\n5 |"
+  },
+  "bitwise_on_bool": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:3:17: error: binary operator '&' cannot be applied to two 'Bool' operands\n1 | let s = \"abc\"\n2 | if !s.isEmpty && s.first == \"a\" { print(\"yes\") }\n3 | if (!s.isEmpty) & (s.first == \"a\") { print(\"both\") } // BREAK!\n  |                 `- error: binary operator '&' cannot be applied to two 'Bool' operands\n4 | \n\nSwift.BinaryInteger:1:17: note: candidate requires that 'Bool' conform to 'BinaryInteger' (requirement specified as 'Self' : 'BinaryInteger')\n 1 | public protocol BinaryInteger : CustomStringConvertible, Hashable, Numeric, Strideable where Self.Magnitude : BinaryInteger, Self.Magnitude == Self.Magnitude.Magnitude {\n   |                 `- note: candidate requires that 'Bool' conform to 'BinaryInteger' (requirement specified as 'Self' : 'BinaryInteger')\n 2 |     static var isSigned: Bool { get }\n 3 |     init?<T>(exactly source: T) where T : BinaryFloatingPoint"
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:6:3: error: cannot assign to property: 'port' is a 'let' constant\n1 | struct Config {\n2 |     let port: Int\n  |     `- note: change 'let' to 'var' to make it mutable\n3 | }\n4 | \n5 | var c = Config(port: 8080)\n6 | c.port = 1 // BREAK!\n  |   `- error: cannot assign to property: 'port' is a 'let' constant\n7 | print(c.port)\n8 |"
+  },
+  "bool_condition": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:4:4: error: type 'Int' cannot be used as a boolean; test for '!= 0' instead\n2 | \n3 | if compare(\"x\", \"x\") == 0 { print(\"same\") }\n4 | if compare(\"x\", \"x\") { print(\"different\") } // BREAK!\n  |    `- error: type 'Int' cannot be used as a boolean; test for '!= 0' instead\n5 |"
+  },
+  "contracts": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.1,
+   "stdout": "",
+   "stderr": "Swift/ErrorType.swift:254: Fatal error: Error raised at top level: Error Domain=NSCocoaErrorDomain Code=640 \"There isn\u2019t enough space.\"UserInfo={NSFilePath=/dev/full, NSUnderlyingError=Error Domain=NSPOSIXErrorDomain Code=28 \"No space left on device\", NSURL=file:///dev/full}\n\n*** Signal 4: Backtracing from 0x74df30c26fbf... done ***\n\n*** Program crashed: Illegal instruction at 0x000074df30c26fbf ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0               0x000074df30c26fbf _assertionFailure(_:_:file:line:flags:) + 303 in libswiftCore.so\n1 [ra]          0x000074df30c868fe swift_errorInMain + 765 in libswiftCore.so\n2 [ra] [system] 0x00005c0f6e40e67d main + 380 in main at //<compiler-generated>\n3 [ra]          0\n...\n 0f 5c 00 00  \u00ed\u00b7\u00b7\u00b7\u00b7\u00b7\u00b70\u00b7\u00b7o\u00b7\u00b7\\\u00b7\u00b7\nr14 0x30000000000000ed  3458764513820541165\nr15 0x0000000000000000  0\nrip 0x000074df30c26fbf  0f 0b 48 83 ec 08 48 8d 05 94 16 30 00 48 8d 3d  \u00b7\u00b7H\u00b7\u00ec\u00b7H\u00b7\u00b7\u00b7\u00b70\u00b7H\u00b7=\n\nrflags 0x0000000000010202  \n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (19 omitted):\n\n0x00005c0f6e40d000\u20130x00005c0f6e40e68d 862572d270f491a160fd377f94a196bcd855dc65 main            /tmp/breakbench/lost_write_error/main/main\n0x000074df2f13f000\u20130x000074df2f2fe819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6       /usr/lib/x86_64-linux-gnu/libc.so.6\n0x000074df3091d000\u20130x000074df30ef6b70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.01s\n\nIllegal instruction (core dumped)"
+  },
+  "nullable_field": {
+   "outcome": "REJECTED",
+   "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:4:15: error: value of optional type 'String?' must be unwrapped to refer to member 'count' of wrapped base type 'String'\n2 | \n3 | let decoded = User(name: nil)\n4 | print(decoded.name.count) // BREAK!\n  |               |- error: value of optional type 'String?' must be unwrapped to refer to member 'count' of wrapped base type 'String'\n  |               |- note: chain the optional using '?' to access member 'count' only for non-'nil' base values\n  |               `- note: force-unwrap using '!' to abort execution if the optional value contains 'nil'\n5 | let _ = decoded.name?.count ?? 0 // CONTROL! let _ = decoded.name?.count ?? 0\n6 |"
+  },
+  "check_then_act": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  }
+ }
+}

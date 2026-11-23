@@ -211,7 +211,7 @@ services:
       dockerfile: docker/gossamer
       args:
         # https://github.com/gossamer-lang/gossamer/releases
-        version: "0.84.1"
+        version: "0.84.2"
     depends_on: [rust]
 
   goose:

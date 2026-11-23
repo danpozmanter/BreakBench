@@ -807,13 +807,24 @@
    "stderr": "io: File::write: No space left on device (os error 28)"
   },
   "nullable_field": {
-   "outcome": "ERROR",
-   "message": "error[GP0063]: interpolated string placeholder `{}` names no value\n  --> main.gos:5:15\n     5 |     println(f\"{}\", decoded.name.unwrap().len())\n       |               ^^\n  = help: an `f\"...\"` string fills each placeholder from the expression inside it, as in `f\"{total}\"` or `f\"{a + b:>8}\"`; to fill `{}` placeholders in order, call `format(\"...\", a, b)`\n\nlint: 0 warning(s), 1 error(s)\nerror: 1 lint error(s)\n\n\n\nerror[GP0063]: interpolated string placeholder `{}` names no value\n  --> main.gos:5:15\n     5 |     println(f\"{}\", decoded.name.unwrap().len())\n       |               ^^\n  = help: an `f\"...\"` string fills each placeholder from the expression inside it, as in `f\"{total}\"` or `f\"{a + b:>8}\"`; to fill `{}` placeholders in order, call `format(\"...\", a, b)`\n\nerror: 1 front-end error(s); refusing to build"
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "lint: 0 warning(s), 0 error(s)",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "error[GX0005]: panic: called `Option::unwrap()` on a `None` value\n  call stack (outermost first):\n    at main (main.gos:5:16)"
   },
   "check_then_act": {
-   "control_error": "warning[GL0016]: while condition is the literal `true`\n  --> main.gos:16:19\n    16 |             while true {\n       |                   ^^^^\n  = note: lint: bool_literal_in_condition\n  = help: drop the `while` or replace with a real predicate\n\nlint: 1 warning(s), 0 error(s)\n\n\n\nerror[GT0001]: type mismatch: expected `bool`, found `i64`\n  --> main.gos:14:48\n    14 |             let available = !claimed.get(); if available { claimed.update(|_| true) }\n       |                                                ^^^^^^^^^\n\nerror[GT0001]: type mismatch: expected `Fn(i64) -> i64`, found `fn(i64) -> bool`\n  --> main.gos:14:75\n    14 |             let available = !claimed.get(); if available { claimed.update(|_| true) }\n       |                        \n...\n-> main.gos:25:24\n    25 |     for h in handles { h.join() }\n       |                        ^^^^^^^^\n  = note: every `Result` value must be handled\n  = help: propagate the error with `?`, handle it with `match` / `if let`, or explicitly discard with `let _ = <expr>`\n\nerror[GT0077]: `sync::Shared` cannot guard a `bool`\n  --> main.gos:6:31\n     6 |     let claimed = Shared::new(false)\n       |                               ^^^^^\n  = note: the guarded slot is one word on every tier, and only an integer has the same reading in the bytecode VM and in compiled code\n  = help: keep one `Shared` per integer field; hand a goroutine any other value as a spawned closure's capture, or send it on a channel\n\nerror: 6 front-end error(s); refusing to build",
-   "outcome": "ERROR",
-   "message": "warning[GL0016]: while condition is the literal `true`\n  --> main.gos:17:19\n    17 |             while true {\n       |                   ^^^^\n  = note: lint: bool_literal_in_condition\n  = help: drop the `while` or replace with a real predicate\n\nlint: 1 warning(s), 0 error(s)\n\n\n\nerror[GT0001]: type mismatch: expected `bool`, found `i64`\n  --> main.gos:21:16\n    21 |             if available {\n       |                ^^^^^^^^^\n\nerror[GT0001]: type mismatch: expected `Fn(i64) -> i64`, found `fn(i64) -> bool`\n  --> main.gos:22:51\n    22 |                 state_lock.lock(); claimed.update(|_| true); winners.update(|n| n + 1); state_lock.unlock()\n       |                                                   ^^^^^^^^\n\nerror[GT0007]: unused `Result` v\n...\n-> main.gos:26:24\n    26 |     for h in handles { h.join() }\n       |                        ^^^^^^^^\n  = note: every `Result` value must be handled\n  = help: propagate the error with `?`, handle it with `match` / `if let`, or explicitly discard with `let _ = <expr>`\n\nerror[GT0077]: `sync::Shared` cannot guard a `bool`\n  --> main.gos:6:31\n     6 |     let claimed = Shared::new(false)\n       |                               ^^^^^\n  = note: the guarded slot is one word on every tier, and only an integer has the same reading in the bytecode VM and in compiled code\n  = help: keep one `Shared` per integer field; hand a goroutine any other value as a spawned closure's capture, or send it on a channel\n\nerror: 4 front-end error(s); refusing to build"
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "warning[GL0016]: while condition is the literal `true` --> main.gos:17:19 = note: lint: bool_literal_in_condition\nlint: 1 warning(s), 0 error(s)",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
   }
  }
 }
