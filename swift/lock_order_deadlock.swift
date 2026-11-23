@@ -1,18 +1,23 @@
+import Dispatch
 import Foundation
 
 let a = NSLock()
 let b = NSLock()
+let ready = DispatchGroup()
+ready.enter()
+ready.enter()
 
 func transfer(_ first: NSLock, _ second: NSLock) {
     first.lock()
     defer { first.unlock() }
-    Thread.sleep(forTimeInterval: 0.1)
+    ready.leave()
+    ready.wait()
     second.lock()
     defer { second.unlock() }
 }
 
-let group = DispatchGroup()
-DispatchQueue.global().async(group: group) { transfer(a, b) }
-DispatchQueue.global().async(group: group) { transfer(b, a) }
-group.wait()
+let done = DispatchGroup()
+DispatchQueue.global().async(group: done) { transfer(a, b) }
+DispatchQueue.global().async(group: done) { transfer(b, a) }
+done.wait()
 print("finished")

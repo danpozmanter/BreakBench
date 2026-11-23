@@ -1,10 +1,12 @@
 import Control.Concurrent
+import Control.Concurrent.Chan
 import Control.Monad (void)
 
-transfer :: MVar () -> MVar () -> MVar () -> IO ()
-transfer first second done = do
+transfer :: MVar () -> MVar () -> Chan () -> MVar () -> MVar () -> IO ()
+transfer first second ready gate done = do
   takeMVar first
-  threadDelay 100000
+  writeChan ready ()
+  takeMVar gate
   takeMVar second
   putMVar second ()
   putMVar first ()
@@ -16,8 +18,14 @@ main = do
   b <- newMVar ()
   d1 <- newEmptyMVar
   d2 <- newEmptyMVar
-  void (forkIO (transfer a b d1))
-  void (forkIO (transfer b a d2))
+  ready <- newChan
+  gate <- newEmptyMVar
+  void (forkIO (transfer a b ready gate d1))
+  void (forkIO (transfer b a ready gate d2))
+  readChan ready
+  readChan ready
+  putMVar gate ()
+  putMVar gate ()
   takeMVar d1
   takeMVar d2
   putStrLn "finished"

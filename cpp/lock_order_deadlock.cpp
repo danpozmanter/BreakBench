@@ -1,13 +1,14 @@
-#include <chrono>
+#include <barrier>
 #include <iostream>
 #include <mutex>
 #include <thread>
 
 static std::mutex a, b;
+static std::barrier both_locked(2);
 
 static void transfer(std::mutex &first, std::mutex &second) {
     std::lock_guard<std::mutex> g1(first);
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    both_locked.arrive_and_wait();
     std::lock_guard<std::mutex> g2(second);
 }
 

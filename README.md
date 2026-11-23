@@ -8,8 +8,8 @@ programs, and covers LangArena's 27 languages plus OCaml, Haskell and Clojure.
 
 "How much does a language help the programmer avoid production bugs?"
 
-A language scores the mean over all 114 tests, as a percentage. The size of a language's standard
-library plays no part.
+A language scores the mean over tests it can attempt, as a percentage. Tests marked N/A are excluded
+from that language's denominator. The size of a language's standard library plays no part.
 
 Each language runs its latest release, built from LangArena's Dockerfiles or the language's own
 images.
@@ -24,19 +24,19 @@ images.
 
 ## Tests
 
-114 tests in four categories. Each has a CWE or CERT entry or appears in a language's pitfall list,
+111 tests in four categories. Each has a CWE or CERT entry or appears in a language's pitfall list,
 reads the same in every language, and covers a mistake no other test covers.
 `harness/problems.json` describes each one.
 
 | Category | Tests | The bug |
 |---|---|---|
 | Correctness | 80 | The program computes the wrong answer or loses data: overflow, a missing match case, arguments in the wrong order, a misspelled name, a comparison where an assignment was meant, command injection, a write error lost at close, ... |
-| Null safety | 7 | The program uses a value that may be missing as if it were there: a lookup that found nothing, a search that returned -1, the maximum of an empty list, a missing name printed as text |
-| Memory safety | 17 | The program reads or writes memory it does not own, or never frees it: use after free, out-of-bounds reads and writes, leaks, ... |
-| Concurrency | 10 | Threads or tasks interfere: a data race, a deadlock, a failure lost between threads, a wait for a worker that died, a blocking call that stalls asynchronous code, ... |
+| Null safety | 8 | The program uses a value that may be missing as if it were there: a lookup that found nothing, a search that returned -1, the maximum of an empty list, a missing name printed as text, an explicitly null field |
+| Memory safety | 14 | The program reads or writes memory it does not own: use after free, out-of-bounds reads and writes, invalid variant access, ... |
+| Concurrency | 9 | Threads or tasks interfere: a deadlock, a check-then-act race, a failure lost between threads, a wait for a worker that died, a blocking call that stalls asynchronous code, ... |
 
 The site breaks each language's score down by category, and reports the share of tests caught
-before running (refused by the compiler or checker).
+before running (refused by the compiler or checker, or prevented by design).
 
 ### Outcomes
 
@@ -49,8 +49,10 @@ before running (refused by the compiler or checker).
 | CORRUPT | Read or wrote memory it does not own |
 | CRASH | Segfault, floating-point trap or allocator abort |
 | HANG | Never finished |
-| LEAK | Passed the memory limit, or the kernel killed it |
-| N/A | The language cannot write the program; scores 0 |
+| LEAK | The program reported file-descriptor exhaustion |
+| SAFE_BY_DESIGN | The language design prevents the error; scores 1 |
+| UNFIXABLE | The error is expressible but the fix is not; scores 0 |
+| N/A | The language cannot express the error; excluded from its mean |
 
 ### Scoring
 
@@ -58,10 +60,11 @@ before running (refused by the compiler or checker).
 |---|---|
 | REJECTED: refused before running | 1 |
 | CORRECT: the bug cannot happen | 1 |
+| SAFE_BY_DESIGN: the language cannot make the error | 1 |
 | Warned before running: the build warned about the bug by name | 0.5 |
 | TRAPPED: stopped at run time with a clear error | 0.25 |
 | Warned while running: the program warned about the bug by name and went on | 0.25 |
-| SILENT, CORRUPT, CRASH, HANG, LEAK, ICE, N/A | 0 |
+| SILENT, CORRUPT, CRASH, HANG, LEAK, ICE, UNFIXABLE | 0 |
 
 The rubric rewards stopping a bug before it reaches production. A refusal stops it for certain and
 a build warning may, so they earn 1 and 0.5. A bug the program only shows while running, by
@@ -81,15 +84,12 @@ must run to the end: refusing, stopping or warning about it scores 0.
 - **Controls**: a compile error counts as a refusal only if the same program without the bug
   compiles. That version, the control, drops each `BREAK!` line and uses each `CONTROL! <code>`
   line in its place.
-- **N/A**: a test scores N/A only when the language cannot attempt the scenario at all, because it
-  lacks the construct the mistake is made with (a mutex in JavaScript, regex in Zig, contracts in
-  Rust). N/A scores 0, the same as a failure, and each N/A program says why in a
-  `CANNOT-EXPRESS:` line. Where the language can attempt the task, the program does it the way the
-  language allows and the measured outcome counts: a design that makes the mistake impossible runs
-  correctly (OCaml has no early return; JavaScript workers cannot share a counter, so they send
-  their counts back), and a missing library call is replaced with what the language has (a loop
-  for the maximum of a list in C).
-- **Score**: the mean over all tests, as a percentage.
+- **N/A and design limits**: `CANNOT-EXPRESS:` cases are excluded from a language's score because
+  it cannot construct the error. `CANNOT-MAKE:` means the language or its standard model prevents
+  the error and earns 1. `CANNOT-FIX:` means the error is expressible but cannot be prevented, and
+  earns 0. Each marker includes its reason. A missing library call is replaced with what the language
+  has when the scenario remains expressible (a loop for the maximum of a list in C).
+- **Score**: the mean over counted tests, excluding N/A cases.
 
 ### Build mode
 
@@ -176,12 +176,13 @@ results in `raw/` and the ranking in `results.json`. Partial runs update the new
 ## Limits
 
 - Each container gets 3 GB of memory (swap included) and 4,096 processes. A run times out after
-  20 s (120 s for leak tests). A leak is peak memory over 1,024 MB. `fd_leak` runs with 512 file
-  descriptors.
-- Tests whose outcome can change from run to run (races, and `use_after_close`, which writes
-  through a freed C `FILE` in some languages) run up to fifty times and keep the worst outcome,
-  stopping early once a run scores 0. Fifty runs catch an outcome that happens one time in twenty
-  with about 92% probability.
+  20 s per run. `fd_leak` runs with 512 file descriptors and counts an explicit too-many-open-files
+  failure as a leak. RSS is recorded neither for scoring nor display. Leak cases that had no
+  reliable signal beyond RSS were removed.
+- Tests whose outcome can change from run to run (`use_after_close`, which writes through a freed C
+  `FILE` in some languages) run up to fifty times and keep the worst outcome, stopping early once
+  a run scores 0. The lock-order and check-then-act cases use rendezvous points to control their
+  schedules.
 - C-family programs keep stale pointers in data structures, so the optimizer cannot remove the
   access.
 - Zig's debug allocator never reuses a freed slot, so a stale pointer reads the old record. Odin and
@@ -211,10 +212,6 @@ results in `raw/` and the ranking in `results.json`. Partial runs update the new
   it (Rust's standard library has no executor, so Rust uses threads), otherwise threads, tasks or
   goroutines. A language without a blocking sleep in its asynchronous model (JavaScript) cannot
   stall it this way and runs correctly.
-- `by_design` in `problems.json` marks a failure that the language's own documentation names,
-  along with its fix. The site outlines those cells, and they still score as measured. Only
-  `reference_cycle_leak` qualifies: Rust (`Weak<T>`), Swift (`weak`), C++ (`std::weak_ptr`) and
-  Gossamer (`[weak o]`, warning GL0063).
 - Each program is written the way the language's documentation teaches first: `Option` where the
   standard library returns one, and the default length, list and integer types. A shared map uses
   the language's standard lock-free update where it has one (a Clojure atom, Haskell's

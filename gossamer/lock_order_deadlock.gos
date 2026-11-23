@@ -1,11 +1,11 @@
 use std::errors
-use std::sync::Mutex
-use std::time
+use std::sync::{Mutex, Shared}
 
-fn transfer(first: Mutex, second: Mutex) {
+fn transfer(first: Mutex, second: Mutex, gate: Mutex, arrivals: Shared<i64>) {
     first.lock()
     defer first.unlock()
-    time::sleep(100)
+    gate.lock(); arrivals.update(|n| n + 1); gate.unlock()
+    while arrivals.get() < 2 {}
     second.lock()
     defer second.unlock()
 }
@@ -13,9 +13,11 @@ fn transfer(first: Mutex, second: Mutex) {
 fn run() -> Result<(), errors::Error> {
     let a = Mutex::new()
     let b = Mutex::new()
+    let gate = Mutex::new()
+    let arrivals = Shared::new(0)
     cohort {
-        spawn(|| transfer(a, b))
-        spawn(|| transfer(b, a))
+        spawn(|| transfer(a, b, gate, arrivals))
+        spawn(|| transfer(b, a, gate, arrivals))
     }
 }
 

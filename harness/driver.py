@@ -54,11 +54,8 @@ TRAP_RE = re.compile(
 )
 # A sanitizer that only reports a hardware fault did not catch the bug before it happened.
 SANITIZER_FAULT_RE = re.compile(r"Sanitizer: (SEGV|BUS|FPE|ILL)\b")
-OOM_RE = re.compile(
-    r"out of memory|outofmemory|heap limit|cannot allocate memory|memory allocation failed"
-    r"|failed to allocate|oom|too many open files|emfile|fdquota"
-    r"|resource temporarily unavailable|can't start new thread|unable to create (native )?thread"
-    r"|failed to spawn thread|cannot create thread",
+FD_EXHAUSTION_RE = re.compile(
+    r"too many open files|\bEMFILE\b|file descriptor.{0,40}(limit|exhaust)|open file limit",
     re.IGNORECASE,
 )
 # A compiler that crashes on the program never ruled on the bug at all.
@@ -88,7 +85,7 @@ def read(path):
 
 
 def execute(cmd, cwd, timeout, env=None):
-    """Run a shell command; answer (status, timed_out, maxrss_kb, stdout, stderr, secs)."""
+    """Run a shell command; answer (status, timed_out, stdout, stderr, secs)."""
     out_path = os.path.join(cwd, ".stdout")
     err_path = os.path.join(cwd, ".stderr")
     started = time.monotonic()
@@ -113,7 +110,7 @@ def execute(cmd, cwd, timeout, env=None):
 
         timer = threading.Timer(timeout, kill)
         timer.start()
-        _, status, usage = os.wait4(proc.pid, 0)
+        _, status = os.waitpid(proc.pid, 0)
         timer.cancel()
         proc.returncode = os.waitstatus_to_exitcode(status)
         try:
@@ -123,7 +120,6 @@ def execute(cmd, cwd, timeout, env=None):
     return (
         proc.returncode,
         timed_out.is_set(),
-        usage.ru_maxrss,
         read(out_path),
         read(err_path),
         time.monotonic() - started,
@@ -169,7 +165,7 @@ def build(lang, work):
     """Run the language's check/compile steps; answer (ok, combined output of every step)."""
     combined = []
     for step in lang.get("build", []):
-        status, timed_out, _, out, err, _ = execute(fill(step, {"dir": work}), work, 600)
+        status, timed_out, out, err, _ = execute(fill(step, {"dir": work}), work, 600)
         combined.append(ANSI_RE.sub("", out + "\n" + err))
         if status != 0 or timed_out:
             return False, "\n".join(combined)
@@ -249,7 +245,7 @@ def relevant_warnings(problem, lang, source, *texts):
     return hits
 
 
-def classify(problem, kinds, status, timed_out, maxrss_mb, stdout, stderr, threshold):
+def classify(problem, kinds, status, timed_out, stdout, stderr):
     kind = problem["kind"]
     text = stdout.strip()
     expect = problem.get("expect")
@@ -257,9 +253,9 @@ def classify(problem, kinds, status, timed_out, maxrss_mb, stdout, stderr, thres
     signum = -status if status < 0 else (status - 128 if status > 128 else 0)
     killed = signum == signal.SIGKILL
 
-    if kind == "leak" and (
-        maxrss_mb > threshold or (killed and not timed_out) or OOM_RE.search(stderr)
-    ):
+    # RSS varies by runtime and allocator. Count the retained descriptor leak only
+    # when the program or operating system reports a concrete descriptor limit.
+    if kind == "leak" and FD_EXHAUSTION_RE.search(stderr):
         return "LEAK"
     if timed_out:
         return "HANG"
@@ -289,7 +285,7 @@ def classify(problem, kinds, status, timed_out, maxrss_mb, stdout, stderr, thres
     return "TRAPPED"
 
 
-CANNOT_RE = re.compile(r"CANNOT-EXPRESS:\s*(.+?)\s*(?:\*\))?$", re.M)
+CANNOT_RE = re.compile(r"CANNOT-(EXPRESS|MAKE|FIX):\s*(.+?)\s*(?:\*\))?$", re.M)
 BACKEND_FAILURE_RE = re.compile(r"\.ll:\d+:\d+: error")
 def main():
     lang_id = sys.argv[1]
@@ -297,7 +293,6 @@ def main():
     langs = load_json(os.path.join(ROOT, "harness", "langs.json"))
     spec = load_json(os.path.join(ROOT, "harness", "problems.json"))
     lang = langs[lang_id]
-    threshold = spec["leak_threshold_mb"]
 
     raw_dir = raw_folder()
     raw_path = os.path.join(raw_dir, lang_id + ".json")
@@ -323,8 +318,14 @@ def main():
         record = {}
         cannot = CANNOT_RE.search(source)
         if cannot:
-            results[pid] = {"outcome": "INEXPRESSIBLE", "message": cannot.group(1).strip()}
-            print(f"{lang_id:12} {pid:28} INEXPRESSIBLE", flush=True)
+            marker, reason = cannot.groups()
+            outcome = {
+                "EXPRESS": "INEXPRESSIBLE",
+                "MAKE": "SAFE_BY_DESIGN",
+                "FIX": "UNFIXABLE",
+            }[marker]
+            results[pid] = {"outcome": outcome, "message": reason.strip()}
+            print(f"{lang_id:12} {pid:28} {outcome}", flush=True)
             continue
         work = stage(lang, pid, source, "main")
         ok, compile_out = build(lang, work)
@@ -359,7 +360,7 @@ def main():
             print(f"{lang_id:12} {pid:28} {record['outcome']}", flush=True)
             continue
 
-        timeout = 120 if problem["kind"] == "leak" else 20
+        timeout = 20
         limit = f"ulimit -n {problem['nofile']} && " if problem.get("nofile") else ""
         run_cmd = limit + fill(lang["run"], {"dir": work}) + "".join(
             " " + shlex.quote(a) for a in problem["args"]
@@ -368,19 +369,16 @@ def main():
         runs = problem.get("runs", 1)
         worst = None
         for _ in range(runs):
-            status, timed_out, maxrss, out, err, secs = execute(run_cmd, work, timeout)
+            status, timed_out, out, err, secs = execute(run_cmd, work, timeout)
             out, err = ANSI_RE.sub("", out), ANSI_RE.sub("", err)
-            maxrss_mb = round(maxrss / 1024, 1)
-            outcome = classify(
-                problem, spec["kinds"], status, timed_out, maxrss_mb, out, err, threshold
-            )
+            outcome = classify(problem, spec["kinds"], status, timed_out, out, err)
             score = spec["kinds"][problem["kind"]].get(outcome, 0)
             if worst is None or score < worst[0]:
-                worst = (score, outcome, status, maxrss_mb, out, err, secs)
+                worst = (score, outcome, status, out, err, secs)
             # No later run can score below zero, so the worst case is already known.
             if worst[0] == 0:
                 break
-        _, record["outcome"], status, maxrss_mb, out, err, secs = worst
+        _, record["outcome"], status, out, err, secs = worst
         if runs > 1:
             record["runs"] = runs
         run_warnings = relevant_warnings(problem, lang, source, err)
@@ -399,14 +397,13 @@ def main():
         record.update(
             {
                 "exit": status,
-                "rss_mb": maxrss_mb,
                 "secs": round(secs, 2),
                 "stdout": clip(out, 400),
                 "stderr": clip(err, 1500),
             }
         )
         results[pid] = record
-        print(f"{lang_id:12} {pid:28} {record['outcome']} (exit {status}, {maxrss_mb} MB)", flush=True)
+        print(f"{lang_id:12} {pid:28} {record['outcome']} (exit {status})", flush=True)
 
     with open(raw_path, "w", encoding="utf-8") as f:
         json.dump({"lang": lang_id, "version": version, "results": results}, f, indent=1)

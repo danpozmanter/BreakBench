@@ -1,10 +1,20 @@
 var a: std.Io.Mutex = .init;
 var b: std.Io.Mutex = .init;
+var gate: std.Io.Mutex = .init;
+var arrivals: usize = 0;
+
+fn rendezvous(io: std.Io) void {
+    gate.lockUncancelable(io); arrivals += 1; gate.unlock(io);
+    while (true) {
+        gate.lockUncancelable(io); const open = arrivals == 2; gate.unlock(io);
+        if (open) break;
+    }
+}
 
 fn transfer(io: std.Io, first: *std.Io.Mutex, second: *std.Io.Mutex) void {
     first.lockUncancelable(io);
     defer first.unlock(io);
-    io.sleep(.fromMilliseconds(100), .awake) catch {};
+    rendezvous(io);
     second.lockUncancelable(io);
     defer second.unlock(io);
 }

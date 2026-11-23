@@ -1,13 +1,13 @@
 import threading
-import time
 
 a = threading.Lock()
 b = threading.Lock()
+ready = threading.Barrier(2)
 
 
 def transfer(first, second):
     with first:
-        time.sleep(0.1)
+        ready.wait()
         with second:
             pass
 

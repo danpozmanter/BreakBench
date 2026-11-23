@@ -1,9 +1,11 @@
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.CountDownLatch;
 public class Main {
-    static void transfer(ReentrantLock first, ReentrantLock second) {
+    static void transfer(ReentrantLock first, ReentrantLock second, CountDownLatch ready) {
         first.lock();
         try {
-            try { Thread.sleep(100); } catch (InterruptedException e) { }
+            ready.countDown();
+            try { ready.await(); } catch (InterruptedException e) { Thread.currentThread().interrupt(); return; }
             second.lock();
             second.unlock();
         } finally {
@@ -14,8 +16,9 @@ public class Main {
     public static void main(String[] args) throws Exception {
         ReentrantLock a = new ReentrantLock();
         ReentrantLock b = new ReentrantLock();
-        Thread t1 = new Thread(() -> transfer(a, b));
-        Thread t2 = new Thread(() -> transfer(b, a));
+        CountDownLatch ready = new CountDownLatch(2);
+        Thread t1 = new Thread(() -> transfer(a, b, ready));
+        Thread t2 = new Thread(() -> transfer(b, a, ready));
         t1.start();
         t2.start();
         t1.join();

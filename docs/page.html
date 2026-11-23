@@ -93,9 +93,9 @@ td.count.zero { color: var(--muted); font-weight: 400; opacity: .5; }
   color: var(--cell-fg); font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: 0.02em; }
 td.chipcell { width: 9.5em; min-width: 9.5em; }
 td.chipcell > .chip { display: flex; width: 100%; box-sizing: border-box; height: auto; min-height: 22px; padding: 3px 8px; text-align: center; line-height: 1.25; }
-.o-REJECTED { background: var(--o-rejected); } .o-CORRECT { background: var(--o-correct); }
+.o-REJECTED { background: var(--o-rejected); } .o-CORRECT, .o-SAFE_BY_DESIGN { background: var(--o-correct); }
 .o-TRAPPED { background: var(--o-trapped); color: #1b1606; } .o-SILENT { background: var(--o-silent); }
-.o-CORRUPT { background: var(--o-corrupt); } .o-CRASH { background: var(--o-crash); }
+.o-UNFIXABLE, .o-CORRUPT { background: var(--o-corrupt); } .o-CRASH { background: var(--o-crash); }
 .o-HANG { background: var(--o-hang); } .o-LEAK { background: var(--o-leak); }
 .o-ICE { background: var(--o-ice); }
 .o-INEXPRESSIBLE { background: var(--o-cant); }
@@ -162,6 +162,9 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
   .plist { display: none; }
   #problem-select { display: block; }
   .bar { width: 60px; }
+  .facts { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+  .facts dd { margin-bottom: 8px; }
+  #case > .scroll table, .cmp-detail .scroll table { min-width: 900px; }
 }
 @media (prefers-reduced-motion: no-preference) { .bar i { transition: width .4s ease; } }</style>
 
@@ -182,7 +185,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
 
   <section aria-labelledby="rank-h" id="overview">
     <h2 id="rank-h">Overview</h2>
-    <p class="muted">The score is the average over all tests, as a percentage. The four categories break it down. Caught before running is the share of tests the compiler refused. Select a heading to sort.</p>
+    <p class="muted">The score is the average over counted tests, as a percentage. N/A cases are excluded. The four categories break it down. Caught or prevented by design is the share refused or made impossible. Select a heading to sort.</p>
     <div class="scroll"><table id="ranking"></table></div>
   </section>
 
@@ -193,7 +196,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     <p class="muted">A bug refused before the program runs earns a full point, and a build warning that names it earns half: either can keep the bug out of production. A bug the program only shows while running, by stopping with a clear error or by warning and going on, earns a quarter: a test may catch it, but otherwise it reaches production. A wrong answer earns nothing. A warning and a stop never add up; the higher counts. The same holds for every test, compiled or dynamic, logic or memory.</p>
     <p class="muted">Ignoring a result the language marks must-use counts as a refusal.</p>
     <p class="muted">A compile error counts as a refusal only if the same program with the bug removed compiles.</p>
-    <p class="muted">N/A means the language cannot attempt the test at all, because it lacks the construct the mistake is made with, such as a mutex or contracts. Those tests score 0, the same as a failure. Where a language can attempt the task, its program does it the way the language allows: a design that makes the mistake impossible runs correctly, like OCaml with no early return, and a missing library call is replaced with what the language has.</p>
+    <p class="muted">N/A means the language cannot express the error, so that case is excluded from its mean. SAFE_BY_DESIGN means the language or its standard model prevents the error and earns 1 point. UNFIXABLE means the error can be made but the fix cannot be expressed, and earns 0. A missing library call is replaced with what the language has when the scenario remains expressible.</p>
   </section>
 
   <section aria-labelledby="grid-h" id="tests">
@@ -217,8 +220,8 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
   const D = window.BREAKBENCH;
   let chosen = [];
   const visibleLanguages = () => chosen.length ? D.languages.filter((L) => chosen.includes(L.id)) : D.languages;
-  const OUT = ["REJECTED", "CORRECT", "WARNED", "RUN_WARNED", "TRAPPED", "SILENT", "CORRUPT", "CRASH", "HANG", "LEAK", "ICE", "INEXPRESSIBLE", "ERROR"];
-  const NAME = { REJECTED: "Refused Correctly", CORRECT: "Ran Correctly", WARNED: "Warned Before Running", RUN_WARNED: "Warned While Running", TRAPPED: "Runtime Stop, Clear Error", SILENT: "Wrong Answer", CORRUPT: "Memory Corruption", CRASH: "Crash", HANG: "Hang", LEAK: "Leak", ICE: "Compiler Crash", INEXPRESSIBLE: "N/A", ERROR: "Benchmark Error", MISSING: "Missing" };
+  const OUT = ["REJECTED", "CORRECT", "SAFE_BY_DESIGN", "WARNED", "RUN_WARNED", "TRAPPED", "SILENT", "UNFIXABLE", "CORRUPT", "CRASH", "HANG", "LEAK", "ICE", "INEXPRESSIBLE", "ERROR"];
+  const NAME = { REJECTED: "Refused Correctly", CORRECT: "Ran Correctly", WARNED: "Warned Before Running", RUN_WARNED: "Warned While Running", TRAPPED: "Runtime Stop, Clear Error", SILENT: "Wrong Answer", CORRUPT: "Memory Corruption", CRASH: "Crash", HANG: "Hang", LEAK: "Leak", ICE: "Compiler Crash", INEXPRESSIBLE: "N/A, Not Counted", SAFE_BY_DESIGN: "Prevented by Design", UNFIXABLE: "Unfixable Error", ERROR: "Benchmark Error", MISSING: "Missing" };
   const DESC = {
     REJECTED: "The compiler or checker refused the buggy program",
     CORRECT: "The program ran and printed the right answer",
@@ -229,16 +232,18 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     CORRUPT: "The program read or wrote memory it does not own",
     CRASH: "Segmentation fault or allocator abort",
     HANG: "Never finished",
-    LEAK: "Memory grew past " + D.leak_threshold_mb + " MB",
+    LEAK: "The program or operating system reported resource exhaustion",
     ICE: "The compiler crashed on the program",
-    INEXPRESSIBLE: "The language cannot write this program, so it scores 0",
+    INEXPRESSIBLE: "The language cannot express this error, so the case is excluded from its mean",
+    SAFE_BY_DESIGN: "The language or its standard model prevents the error; it earns 1 point",
+    UNFIXABLE: "The error is expressible, but its fix is not; it earns 0 points",
     ERROR: "Benchmark error",
   };
   const KIND = {
     static: "Detectable before running",
     dynamic: "Depends on run-time input",
     memory: "Memory safety",
-    leak: "Memory leak",
+    leak: "Resource leak",
     valid: "Correct program that must run",
   };
   const CAT = D.categories;
@@ -280,7 +285,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     t.replaceChildren();
     const cols = [["score", "Score", "Mean over every test"],
       ...Object.entries(CAT).map(([c, name]) => [c, name, "Mean over the " + name.toLowerCase() + " tests"]),
-      ["caught", "Caught before running", "Share of tests the compiler or checker refused"]];
+      ["caught", "Caught or impossible by design", "Share refused or prevented by design"]];
     const head = el("tr", {}, el("th", { class: "rank", text: "#" }), el("th", { text: "Language" }));
     cols.forEach(([k, label, title], i) => {
       const b = el("button", { type: "button", "aria-pressed": String(sortKey === k), title, text: label + (sortKey === k ? " ↓" : "") });
@@ -351,8 +356,8 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     const foot = el("tr", {}, el("th", { class: "pname", text: CAT[c] + " score" }));
     visibleLanguages().forEach((L) => {
       const can = list.filter((p) => L.results[p.id]?.o !== "INEXPRESSIBLE").length;
-      foot.append(el("td", { class: "gscore", title: "Tests in this category the language can write; N/A scores 0" },
-        pct(L[c]), el("span", { class: "gcan", text: can + " of " + list.length + " writable" })));
+      foot.append(el("td", { class: "gscore", title: "Cases counted in this category; N/A cases are excluded" },
+        pct(L[c]), el("span", { class: "gcan", text: can + " of " + list.length + " counted" })));
     });
     t.append(el("thead", {}, head), body, el("tfoot", {}, foot));
     grids.append(el("div", { class: "scroll grid-wrap" }, t));
@@ -398,12 +403,11 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     const tb = el("tbody");
     visibleLanguages().sort((a, b) => (b.results[p.id]?.s ?? -1) - (a.results[p.id]?.s ?? -1) || a.rank - b.rank).forEach((L) => {
       const r = L.results[p.id] || { o: "MISSING", s: 0 };
-      const rss = r.rss != null && p.kind === "leak" ? " · " + r.rss + " MB peak" : "";
       tb.append(el("tr", { class: L.id === langId ? "hl" : "", id: "row-" + L.id },
         el("td", { class: "lang" }, srcLink(L, p)),
         el("td", { class: "chipcell" }, chip(r.o)),
         el("td", { class: "mono", text: r.s == null ? "N/A" : String(r.s) }),
-        el("td", {}, el("pre", { class: "out", text: (r.out || "") + rss })),
+        el("td", {}, el("pre", { class: "out", text: r.out || "" })),
         el("td", {}, el("pre", { class: "warn", text: r.w || "" })),
         el("td", {}, el("pre", { text: r.ev || "" }))));
     });
@@ -445,12 +449,11 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     const tb = el("tbody");
     langs.forEach((L) => {
       const r = L.results[p.id] || { o: "MISSING", s: 0 };
-      const rss = r.rss != null && p.kind === "leak" ? " · " + r.rss + " MB peak" : "";
       tb.append(el("tr", {},
         el("td", { class: "lang" }, srcLink(L, p)),
         el("td", { class: "chipcell" }, chip(r.o)),
         el("td", { class: "mono", text: r.s == null ? "N/A" : String(r.s) }),
-        el("td", {}, el("pre", { class: "out", text: (r.out || "") + rss })),
+        el("td", {}, el("pre", { class: "out", text: r.out || "" })),
         el("td", {}, el("pre", { class: "warn", text: r.w || (r.rw ? "The running program warned" : "") })),
         el("td", {}, el("pre", { text: r.ev || "" }))));
     });
@@ -482,7 +485,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     cmpBody.append(tools);
 
     const rows = [["Score", "score"], ...Object.entries(CAT).map(([c, name]) => [name, c]),
-      ["Caught before running", "caught"]];
+      ["Caught or impossible by design", "caught"]];
     const sum = el("table", { class: "cmp-summary" });
     sum.append(el("thead", {}, el("tr", {}, el("th", { text: "" }), ...langs.map((L) => el("th", { text: L.name + " (#" + L.rank + ")" })))));
     const sb = el("tbody");

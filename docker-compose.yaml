@@ -5,8 +5,7 @@ x-shared: &shared
     - .:/src
   working_dir: /src
   shm_size: '2gb'
-  # Leak problems are judged by peak RSS against this ceiling; a leaking
-  # program is OOM-killed here instead of exhausting the host.
+  # Keep pathological allocations inside the container.
   mem_limit: 3g
   memswap_limit: 3g
   pids_limit: 4096

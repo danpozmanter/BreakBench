@@ -3,11 +3,21 @@ import std::thread;
 
 Mutex a;
 Mutex b;
+Mutex gate;
+int arrivals;
+
+fn void rendezvous() {
+	gate.lock(); arrivals++; gate.unlock();
+	while (true) {
+		gate.lock(); bool open = arrivals == 2; gate.unlock();
+		if (open) break;
+	}
+}
 
 fn int forward(void* arg)
 {
 	a.lock();
-	thread::sleep_ms(100);
+	rendezvous();
 	b.lock();
 	b.unlock();
 	a.unlock();
@@ -17,7 +27,7 @@ fn int forward(void* arg)
 fn int backward(void* arg)
 {
 	b.lock();
-	thread::sleep_ms(100);
+	rendezvous();
 	a.lock();
 	a.unlock();
 	b.unlock();
@@ -28,6 +38,7 @@ fn int main(String[] args)
 {
 	a.init()!!;
 	b.init()!!;
+	gate.init()!!;
 	Thread t1;
 	Thread t2;
 	t1.create(&forward, null)!!;

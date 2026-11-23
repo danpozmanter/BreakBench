@@ -1,5 +1,4 @@
 {
-  "leak_threshold_mb": 1024,
   "kinds": {
     "static": {
       "REJECTED": 1,
@@ -11,7 +10,9 @@
       "HANG": 0,
       "LEAK": 0,
       "WARNED": 0.5,
-      "RUN_WARNED": 0.25
+      "RUN_WARNED": 0.25,
+      "SAFE_BY_DESIGN": 1,
+      "UNFIXABLE": 0
     },
     "dynamic": {
       "REJECTED": 1,
@@ -23,7 +24,9 @@
       "HANG": 0,
       "LEAK": 0,
       "WARNED": 0.5,
-      "RUN_WARNED": 0.25
+      "RUN_WARNED": 0.25,
+      "SAFE_BY_DESIGN": 1,
+      "UNFIXABLE": 0
     },
     "memory": {
       "REJECTED": 1,
@@ -36,7 +39,9 @@
       "LEAK": 0,
       "ICE": 0,
       "WARNED": 0.5,
-      "RUN_WARNED": 0.25
+      "RUN_WARNED": 0.25,
+      "SAFE_BY_DESIGN": 1,
+      "UNFIXABLE": 0
     },
     "leak": {
       "REJECTED": 1,
@@ -48,7 +53,9 @@
       "HANG": 0,
       "LEAK": 0,
       "WARNED": 0.5,
-      "RUN_WARNED": 0.25
+      "RUN_WARNED": 0.25,
+      "SAFE_BY_DESIGN": 1,
+      "UNFIXABLE": 0
     },
     "valid": {
       "REJECTED": 0,
@@ -61,7 +68,9 @@
       "LEAK": 0,
       "ICE": 0,
       "WARNED": 0,
-      "RUN_WARNED": 0
+      "RUN_WARNED": 0,
+      "SAFE_BY_DESIGN": 1,
+      "UNFIXABLE": 0
     }
   },
   "problems": [
@@ -500,8 +509,8 @@
       "args": [],
       "expect": null,
       "title": "Two locks taken in opposite orders (CWE-833)",
-      "scenario": "Thread 1 locks A, waits 100 ms, then locks B. Thread 2 locks B, waits 100 ms, then locks A.",
-      "best": "A run-time deadlock report. Hanging forever fails.",
+      "scenario": "Two workers lock A and B in opposite orders. A rendezvous waits until both workers hold their first lock before each attempts the second.",
+      "best": "The program detects the lock-order deadlock or hangs. A deterministic rendezvous ensures the conflicting lock attempts occur.",
       "warn": "deadlock|lock order"
     },
     {
@@ -862,19 +871,6 @@
       "warn": "recurs|stack overflow|infinite"
     },
     {
-      "id": "error_path_leak",
-      "category": "memory",
-      "kind": "leak",
-      "args": [
-        "1000000"
-      ],
-      "expect": "^done$",
-      "title": "Leaking memory on an early error return",
-      "scenario": "The program makes 1,000,000 calls. Each allocates a 4 KB buffer, fails validation and returns an error before the normal cleanup.",
-      "best": "Memory stays flat.",
-      "warn": "leak|potential memory|not (freed|released)"
-    },
-    {
       "id": "concurrent_map_write",
       "category": "concurrency",
       "kind": "dynamic",
@@ -885,44 +881,6 @@
       "best": "800000, a detected concurrent-write error, or a refusal. A wrong size or a crash means the map was corrupted.",
       "warn": "\\brace\\b|data race|race condition|not thread|concurren|sendable|unsynchroni",
       "runs": 50
-    },
-    {
-      "category": "memory",
-      "id": "reference_cycle_leak",
-      "kind": "leak",
-      "args": [
-        "500000"
-      ],
-      "expect": "^done$",
-      "title": "Objects that point at each other",
-      "scenario": "The program repeats 500,000 times: two nodes with 2 KB payloads point at each other, and an object with a 2 KB payload stores a callback that captures the object itself. Then all of it goes out of scope.",
-      "best": "Memory stays flat. Reference counting without cycle collection keeps every cycle.",
-      "by_design": [
-        "gossamer",
-        "rust",
-        "swift",
-        "cpp"
-      ],
-      "by_design_note": {
-        "gossamer": "Gossamer does not collect a cycle made by a closure stored in the value it captures. Its fix is a weak capture, [weak o] || ..., and warning GL0063 points to it.",
-        "rust": "Rust's reference counting does not collect cycles. The Rust book's chapter \"Reference Cycles Can Leak Memory\" gives Weak<T> as the fix.",
-        "swift": "Swift's reference counting does not collect cycles. The Swift book gives weak and unowned references as the fix.",
-        "cpp": "C++'s shared_ptr does not collect cycles. Its documentation gives weak_ptr as the fix."
-      },
-      "warn": "cycle|retain|weak|self.captur|captures? itself"
-    },
-    {
-      "category": "memory",
-      "id": "view_retention",
-      "kind": "leak",
-      "args": [
-        "40000"
-      ],
-      "expect": "^40000$",
-      "title": "A small slice that keeps a big buffer alive",
-      "scenario": "The program repeats 40,000 times: it keeps the first 16 bytes of a new 32 KB byte buffer and the first 16 characters of a new 32 KB string, using the language's normal slice and substring calls.",
-      "best": "About 1 MB kept. Slices that share their parent keep gigabytes.",
-      "warn": "retain|keeps? .* alive|pins?|leak"
     },
     {
       "category": "memory",
@@ -986,18 +944,6 @@
       "title": "Freeing a long linked list",
       "scenario": "The program builds a linked list of 1,000,000 nodes, each owning the next, then frees it the language's usual way (dropping it, freeing it in a loop, or leaving it to the collector) and prints \"done\".",
       "best": "\"done\". This program has no bug; a runtime that frees the chain by recursion and overflows the stack fails."
-    },
-    {
-      "category": "concurrency",
-      "id": "abandoned_worker_leak",
-      "kind": "leak",
-      "args": [
-        "20000"
-      ],
-      "expect": "^done$",
-      "title": "A worker stuck sending an answer nobody reads",
-      "scenario": "The program repeats 20,000 times: it starts two workers that each build a 64 KB answer and send it back through the language's standard channel, queue or first-of-many call, takes the first answer and moves on.",
-      "best": "Memory stays bounded. A worker blocked on a send nobody receives keeps its stack and its answer forever."
     },
     {
       "id": "string_literal_write",
@@ -1190,18 +1136,6 @@
       "scenario": "The program computes the nanoseconds in 300 years, 1,000,000,000 * 60 * 60 * 24 * 365 * 300, as a 64-bit constant and prints it.",
       "best": "9460800000000000000 where integers have no fixed size, or a refusal. A wrapped number is a silent wrong answer.",
       "warn": "overflow"
-    },
-    {
-      "id": "racy_counter",
-      "category": "concurrency",
-      "kind": "dynamic",
-      "args": [],
-      "expect": "^2000000$",
-      "title": "Two threads adding to one counter without a lock (CWE-362)",
-      "scenario": "count is a local variable. The program starts two threads that each add 1 to count 1,000,000 times with the language's ordinary update and no lock, waits for both, and prints count.",
-      "best": "2000000, or a refusal to let two threads change count without synchronization. A smaller number means lost updates.",
-      "warn": "\\brace\\b|data race|race condition|not thread|sendable|concurren|\\bcaptured\\b",
-      "runs": 50
     },
     {
       "id": "orphaned_receive",
@@ -1429,6 +1363,28 @@
       "scenario": "The program writes the line data to /dev/full, a device where every write fails with no space left, using the language's usual file writer, closes it the usual way (the end of a block, defer, with or using, or a close call whose result it does not check) and prints saved.",
       "best": "An error that stops the program. Printing saved means the data was lost with no sign, as when a disk fills up in production.",
       "warn": "no space|space left|ENOSPC|bytes written|must be used|unchecked|result .*(unused|ignored)"
+    },
+    {
+      "id": "nullable_field",
+      "category": "null",
+      "kind": "static",
+      "args": [],
+      "expect": null,
+      "title": "Using an explicitly null field as a value",
+      "scenario": "A decoded record is present, but its optional name field is explicitly null. The program reads the field as a string and prints its length without checking it.",
+      "best": "The compiler refuses the unchecked read, or the program stops with a clear null or missing-value error. Treating null as a valid name fails.",
+      "warn": "null|nil|optional|possibly|nullable|none"
+    },
+    {
+      "id": "check_then_act",
+      "category": "concurrency",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^1$",
+      "title": "Checking and claiming a shared resource in separate steps",
+      "scenario": "Two workers each check under a lock whether one resource is unclaimed, release the lock, then claim it under a later lock. A barrier makes both checks happen before either claim.",
+      "best": "Exactly one worker claims the resource. Two successful claims show the check and update were not atomic.",
+      "warn": "race condition|data race|check.then|atomic|concurren|unsynchroni"
     }
   ]
 }

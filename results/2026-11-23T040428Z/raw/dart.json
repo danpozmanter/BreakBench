@@ -1,0 +1,898 @@
+{
+ "lang": "dart",
+ "version": "Dart SDK version: 3.14.1 (stable) (Tue Nov 17 00:01:24 2026 -0800) on \"linux_x64\"",
+ "results": {
+  "null_deref": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:10:11 - The property 'name' can't be unconditionally accessed because the receiver can be 'null'. Try making the access conditional (using '?.') or adding a null check to the target ('!'). - unchecked_use_of_nullable_value\n\n1 issue found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:10:11: Error: Property 'name' cannot be accessed on 'User?' because it is potentially null.\n - 'User' is from 'main.dart'.\nTry accessing using ?. instead.\n  print(u.name.length); // BREAK!\n          ^^^^\nBad state: Generating kernel failed!"
+  },
+  "int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Unhandled exception:\nIntegerDivisionByZeroException\n#0      int.~/ (dart:core-patch/integers.dart:27:7)\n#1      main (file:///tmp/breakbench/div_by_zero/main/main.dart:3:13)\n#2      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)\n#3      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "9223372036854775807",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:5:13 - The argument type 'String' can't be assigned to the parameter type 'int'.  - argument_type_not_assignable\n\n1 issue found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:5:13: Error: The argument type 'String' can't be assigned to the parameter type 'int'.\n  print(add(raw, 3)); // BREAK!\n            ^\nBad state: Generating kernel failed!"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:1:8 - The body might complete normally, causing 'null' to be returned, but the return type, 'String', is a potentially non-nullable type. Try adding either a return or a throw statement at the end. - body_might_complete_normally\n\n1 issue found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:1:8: Error: A non-null value must be returned since the return type 'String' doesn't allow null.\nString grade(int score) {\n       ^\nBad state: Generating kernel failed!"
+  },
+  "non_exhaustive_match": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:3:25 - The type 'Color' isn't exhaustively matched by the switch cases since it doesn't match the pattern 'Color.blue'. Try adding a wildcard pattern or cases that match 'Color.blue'. - non_exhaustive_switch_expression\n\n1 issue found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:3:33: Error: The type 'Color' is not exhaustively matched by the switch cases since it doesn't match 'Color.blue'.\n - 'Color' is from 'main.dart'.\nTry adding a wildcard pattern or cases that match 'Color.blue'.\nString name(Color c) => switch (c) {\n                                ^\nBad state: Generating kernel failed!"
+  },
+  "uninitialized_variable": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:5:9 - The non-nullable local variable 'x' must be assigned before it can be used. Try giving it an initializer expression, or ensure that it's assigned on every execution path. - not_assigned_potentially_non_nullable_local_variable\n\n1 issue found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:5:9: Error: Non-nullable variable 'x' must be assigned before it can be used.\n  print(x); // BREAK!\n        ^\nBad state: Generating kernel failed!"
+  },
+  "missing_argument": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:4:15 - 2 positional arguments expected by 'area', but 1 found. Try adding the missing arguments. - not_enough_positional_arguments\n\n1 issue found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:4:13: Error: Too few positional arguments: 2 required, 1 given.\n  print(area(3)); // BREAK!\n            ^\nmain.dart:1:5: Context: Found this candidate, but the arguments don't match.\nint area(int w, int h) => w * h;\n    ^^^^\nBad state: Generating kernel failed!"
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:7:7 - The setter 'colour' isn't defined for the type 'Config'. Try importing the library that defines 'colour', correcting the name to the name of an existing setter, or defining a setter or field named 'colour'. - undefined_setter\n\n1 issue found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:7:7: Error: The setter 'colour' isn't defined for the type 'Config'.\n - 'Config' is from 'main.dart'.\nTry correcting the name to the name of an existing setter, or defining a setter or field named 'colour'.\n  cfg.colour = \"red\"; // BREAK!\n      ^^^^^^\nBad state: Generating kernel failed!"
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:4:7 - Conditions must have a static type of 'bool'. Try changing the condition. - non_bool_condition\nwarning - main.dart:2:7 - The value of the local variable 'x' isn't used. Try removing the variable or using it. - unused_local_variable\n\n2 issues found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:4:7: Error: A value of type 'int' can't be assigned to a variable of type 'bool'.\n  if (x = 1) label = \"one\"; // BREAK!\n      ^\nBad state: Generating kernel failed!"
+  },
+  "switch_fallthrough": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:4:7 - Conditions must have a static type of 'bool'. Try changing the condition. - non_bool_condition\n\n1 issue found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:4:7: Error: A value of type 'int?' can't be assigned to a variable of type 'bool'.\n  if (qty) present = true; // BREAK!\n      ^\nBad state: Generating kernel failed!"
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "info - main.dart:2:13 - Use interpolation to compose strings and values. Try using string interpolation to build the composite string. - prefer_interpolation_to_compose_strings",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Unhandled exception:\nFormatException: Invalid radix-10 number (at character 1)\n12abc\n^\n\n#0      int._handleFormatError (dart:core-patch/integers_patch.dart:150:5)\n#1      int._parseRadix (dart:core-patch/integers_patch.dart:179:14)\n#2      int._parse (dart:core-patch/integers_patch.dart:121:12)\n#3      int.parse (dart:core-patch/integers_patch.dart:81:12)\n#4      main (file:///tmp/breakbench/parse_invalid_number/main/main.dart:2:17)\n#5      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)\n#6      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "covariant_array_write": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Unhandled exception:\ntype 'Cat' is not a subtype of type 'Dog' of 'value'\n#0      List.[]= (dart:core-patch/growable_array.dart:275:34)\n#1      main (file:///tmp/breakbench/covariant_array_write/main/main.dart:18:10)\n#2      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:313:19)\n#3      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "mutate_while_iterating": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Unhandled exception:\nConcurrent modification during iteration: Instance(length:3) of '_GrowableList'.\n#0      ListIterator.moveNext (dart:_internal/iterable.dart:366:7)\n#1      main (file:///tmp/breakbench/mutate_while_iterating/main/main.dart:3:19)\n#2      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:313:19)\n#3      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "self_deadlock": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no mutex in the language or its standard library"
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Unhandled exception:\nPathNotFoundException: Cannot open file, path = '/nonexistent/dir/out.txt' (OS Error: No such file or directory, errno = 2)\n#0      _File.throwIfError (dart:io/file_impl.dart:779:7)\n#1      _File.openSync (dart:io/file_impl.dart:572:5)\n#2      _File.writeAsBytesSync (dart:io/file_impl.dart:744:31)\n#3      _File.writeAsStringSync (dart:io/file_impl.dart:772:5)\n#4      save (file:///tmp/breakbench/ignored_error_result/main/main.dart:4:14)\n#5      main (file:///tmp/breakbench/ignored_error_result/main/main.dart:8:3)\n#6      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:313:19)\n#7      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "sort_with_nan": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "ordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "3.5",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Unhandled exception:\nUnsupported operation: Cannot add to an unmodifiable list\n#0      UnmodifiableListMixin.add (dart:_internal/list.dart:112:5)\n#1      addItem (file:///tmp/breakbench/shared_default_argument/main/main.dart:2:8)\n#2      main (file:///tmp/breakbench/shared_default_argument/main/main.dart:7:3)\n#3      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:313:19)\n#4      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "warning - main.dart:8:5 - Dead code. Try removing the code, or fixing the code before it so that it can be reached. - dead_code\ninfo - main.dart:6:5 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures\ninfo - main.dart:6:12 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures\ninfo - main.dart:8:5 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures",
+   "warnings": "info - main.dart:6:5 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures\ninfo - main.dart:6:12 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures\ninfo - main.dart:8:5 - Statements in an if should be enclosed in a block. Try wrapping the statement in a block. - curly_braces_in_flow_control_structures",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "unset",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:3:24 - A comparison expression can't be an operand of another comparison expression. Try putting parentheses around one of the comparisons. - equality_cannot_be_equality_operand\n  error - main.dart:3:24 - The operator '<' isn't defined for the type 'bool'. Try defining the operator '<'. - undefined_operator\n\n2 issues found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:3:24: Error: A comparison expression can't be an operand of another comparison expression.\nTry putting parentheses around one of the comparisons.\n  final inside = 1 < x < 3; // BREAK!\n                       ^\nmain.dart:3:24: Error: The operator '<' isn't defined for the type 'bool'.\nTry correcting the operator to an existing operator, or defining a '<' operator.\n  final inside = 1 < x < 3; // BREAK!\n                       ^\nBad state: Generating kernel failed!"
+  },
+  "lost_update_on_copy": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "150",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no mutex in the language or its standard library"
+  },
+  "path_join_escape": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "inside",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "odd",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "return_in_finally": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "info - main.dart:14:5 - Use of 'return' in a 'finally' clause. Try restructuring the code. - control_flow_in_finally",
+   "warnings": "info - main.dart:14:5 - Use of 'return' in a 'finally' clause. Try restructuring the code. - control_flow_in_finally",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Unhandled exception:\nFormatException: Invalid radix-10 number (at character 1)\nx\n^\n\n#0      int._handleFormatError (dart:core-patch/integers_patch.dart:150:5)\n#1      int._parseRadix (dart:core-patch/integers_patch.dart:179:14)\n#2      int._parse (dart:core-patch/integers_patch.dart:121:12)\n#3      int.parse (dart:core-patch/integers_patch.dart:81:12)\n#4      MappedListIterable.elementAt (dart:_internal/iterable.dart:443:31)\n#5      ListIterable.fold (dart:_internal/iterable.dart:206:30)\n#6      main.<anonymous closure> (file:///tmp/breakbench/worker_failure_lost/main/main.dart:4:61)\n#7      _RemoteRunner._run (dart:isolate:1116:47)\n#8      _RemoteRunner._remoteExecute (dart:isolate:1110:12)\n#9      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:316:17)\n#10     _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "3 of 5",
+   "stderr": ""
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:4:21 - The operator '+' can't be unconditionally invoked because the receiver can be 'null'. Try adding a null check to the target ('!'). - unchecked_use_of_nullable_value\n\n1 issue found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:4:21: Error: Operator '+' cannot be called on 'int?' because it is potentially null.\n  print(stock[name] + 5); // CONTROL! print(stock[name] == null ? \"unknown\" : stock[name]! + 5);\n                    ^\nBad state: Generating kernel failed!"
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "pending",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Unhandled exception:\nRangeError (length): Invalid value: Not in inclusive range 0..2: -1\n#0      List.[] (dart:core-patch/growable_array.dart)\n#1      main (file:///tmp/breakbench/negative_index_wraps/main/main.dart:4:31)\n#2      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)\n#3      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "info - main.dart:4:22 - The argument type 'String' isn't related to 'int'. Try changing the argument or element type to match. - collection_methods_unrelated_type",
+   "warnings": "info - main.dart:4:22 - The argument type 'String' isn't related to 'int'. Try changing the argument or element type to match. - collection_methods_unrelated_type",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "missing",
+   "stderr": ""
+  },
+  "use_after_close": {
+   "outcome": "TRAPPED",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Unhandled exception:\nFileSystemException: File closed, path = '/tmp/bb_close.txt'\n#0      _RandomAccessFile._checkAvailable (dart:io/file_impl.dart:1199:7)\n#1      _RandomAccessFile.writeFromSync (dart:io/file_impl.dart:983:5)\n#2      _RandomAccessFile.writeStringSync (dart:io/file_impl.dart:1014:5)\n#3      main (file:///tmp/breakbench/use_after_close/main/main.dart:7:5)\n#4      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:313:19)\n#5      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "dead_store": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "warning - main.dart:3:9 - The value of the local variable 'total' isn't used. Try removing the variable or using it. - unused_local_variable",
+   "warnings": "warning - main.dart:3:9 - The value of the local variable 'total' isn't used. Try removing the variable or using it. - unused_local_variable",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no mutex in the language or its standard library"
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Unhandled exception:\nRangeError (index): Invalid value: Not in inclusive range 0..3: 4\n#0      List._setIndexed (dart:core-patch/array.dart:193:48)\n#1      List.[]= (dart:core-patch/array.dart:188:5)\n#2      main (file:///tmp/breakbench/oob_write/main/main.dart:8:8)\n#3      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)\n#4      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Unhandled exception:\nRangeError (length): Invalid value: Not in inclusive range 0..3: 4\n#0      List.[] (dart:core-patch/growable_array.dart)\n#1      main (file:///tmp/breakbench/oob_read/main/main.dart:8:14)\n#2      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)\n#3      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "warning - main.dart:10:9 - The value of the local variable 'c' isn't used. Try removing the variable or using it. - unused_local_variable",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "warning - main.dart:7:8 - The value of the local variable 'a' isn't used. Try removing the variable or using it. - unused_local_variable\nwarning - main.dart:11:9 - The value of the local variable 'y' isn't used. Try removing the variable or using it. - unused_local_variable",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.06,
+   "stdout": "",
+   "stderr": "Unhandled exception:\nStack Overflow\n#0      walk (file:///tmp/breakbench/stack_overflow/main/main.dart:1:1)\n#1      walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#2      walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#3      walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#4      walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#5      walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#6      walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#7      walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#8      walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#9      walk (file:///tmp/breakbench/stack_overflow/main/m\n...\n//tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#18958  walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#18959  walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#18960  walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#18961  walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#18962  walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#18963  walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#18964  main (file:///tmp/breakbench/stack_overflow/main/main.dart:7:9)\n#18965  _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)\n#18966  _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "concurrent_map_write": {
+   "outcome": "SILENT",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "huge_allocation": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Exhausted heap space, trying to allocate 10000000000032 bytes.\nUnhandled exception:\nOut of Memory\n#0      new Uint8List (dart:typed_data-patch/typed_data_patch.dart:1226:3)\n#1      main (file:///tmp/breakbench/huge_allocation/main/main.dart:5:15)\n#2      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)\n#3      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "fd_leak": {
+   "outcome": "LEAK",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "Unhandled exception:\nFileSystemException: Cannot open file, path = '/tmp/bb_fd.txt' (OS Error: Too many open files, errno = 24)\n#0      _File.throwIfError (dart:io/file_impl.dart:779:7)\n#1      _File.openSync (dart:io/file_impl.dart:572:5)\n#2      main (file:///tmp/breakbench/fd_leak/main/main.dart:7:38)\n#3      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)\n#4      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Unhandled exception:\ntype 'IntValue' is not a subtype of type 'Text' in type cast\n#0      main (file:///tmp/breakbench/wrong_variant_access/main/main.dart:15:12)\n#1      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:313:19)\n#2      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "format_string": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "%s%s%n{}{0}",
+   "stderr": ""
+  },
+  "deep_structure_release": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.05,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:3:11 - The operator '[]=' isn't defined for the type 'String'. Try defining the operator '[]='. - undefined_operator\n\n1 issue found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:3:11: Error: The operator '[]=' isn't defined for the type 'String'.\nTry correcting the operator to an existing operator, or defining a '[]=' operator.\n  greeting[0] = \"j\"; // CONTROL! greeting = \"j\" + greeting.substring(1);\n          ^\nBad state: Generating kernel failed!"
+  },
+  "complete_init": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:10:19 - The named parameter 'retries' is required, but there's no corresponding argument. Try adding the required argument. - missing_required_argument\nwarning - main.dart:10:9 - The value of the local variable 'partial' isn't used. Try removing the variable or using it. - unused_local_variable\n\n2 issues found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:10:25: Error: Required named parameter 'retries' must be provided.\n  final partial = Config(timeout: 5); // BREAK!\n                        ^\nmain.dart:5:3: Context: Found this candidate, but the arguments don't match.\n  Config({required this.timeout, required this.retries});\n  ^^^^^^\nBad state: Generating kernel failed!"
+  },
+  "newtype": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:9:29 - The argument type 'Seconds' can't be assigned to the parameter type 'Meters'.  - argument_type_not_assignable\nwarning - main.dart:9:9 - The value of the local variable 'wrong' isn't used. Try removing the variable or using it. - unused_local_variable\n\n2 issues found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:9:29: Error: A value of type 'Seconds' can't be assigned to a variable of type 'Meters'.\n  final wrong = Meters(2) + Seconds(3); // BREAK!\n                            ^\nBad state: Generating kernel failed!"
+  },
+  "strong_enum": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:11:14 - The argument type 'int' can't be assigned to the parameter type 'Color'.  - argument_type_not_assignable\n\n1 issue found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:11:14: Error: The argument type 'int' can't be assigned to the parameter type 'Color'.\n - 'Color' is from 'main.dart'.\n  print(name(7)); // BREAK!\n             ^\nBad state: Generating kernel failed!"
+  },
+  "override_check": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "warning - main.dart:7:10 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member",
+   "warnings": "warning - main.dart:7:10 - The method doesn't override an inherited method. Try updating this class to match the superclass, or removing the override annotation. - override_on_non_overriding_member",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "shape",
+   "stderr": ""
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "before",
+   "stderr": "Unhandled exception:\nNull check operator used on a null value\n#0      main (file:///tmp/breakbench/forced_unwrap/main/main.dart:5:16)\n#1      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:313:19)\n#2      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "hello, null",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Unhandled exception:\nBad state: No element\n#0      ListBase.reduce (dart:collection/list.dart:187:22)\n#1      main (file:///tmp/breakbench/empty_max/main/main.dart:5:12)\n#2      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)\n#3      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "readonly_param": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "no_implicit_conversion": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "3000000000",
+   "stderr": ""
+  },
+  "generic_constraint": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Unhandled exception:\ntype 'Point' is not a subtype of type 'Comparable<dynamic>' in type cast\n#0      ListBase._compareAny (dart:collection/list.dart:325:33)\n#1      Sort._insertionSort (dart:_internal/sort.dart:77:36)\n#2      Sort._doSort (dart:_internal/sort.dart:62:7)\n#3      Sort.sort (dart:_internal/sort.dart:33:5)\n#4      ListBase.sort (dart:collection/list.dart:321:10)\n#5      main (file:///tmp/breakbench/generic_constraint/main/main.dart:8:42)\n#6      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:313:19)\n#7      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "lossy_int_to_float": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:6:8 - The argument type 'int' can't be assigned to the parameter type 'double'.  - argument_type_not_assignable\n\n1 issue found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:6:8: Error: The argument type 'int' can't be assigned to the parameter type 'double'.\n  show(n); // BREAK!\n       ^\nBad state: Generating kernel failed!"
+  },
+  "const_index_bounds": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Unhandled exception:\nRangeError (length): Invalid value: Not in inclusive range 0..2: 5\n#0      _Array.[] (dart:core-patch/array.dart)\n#1      main (file:///tmp/breakbench/const_index_bounds/main/main.dart:3:14)\n#2      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:313:19)\n#3      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "const_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "-8985944073709551616",
+   "stderr": ""
+  },
+  "orphaned_receive": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Unhandled exception:\nFormatException: Invalid radix-10 number (at character 1)\nx\n^\n\n#0      int._handleFormatError (dart:core-patch/integers_patch.dart:150:5)\n#1      int._parseRadix (dart:core-patch/integers_patch.dart:179:14)\n#2      int._parse (dart:core-patch/integers_patch.dart:121:12)\n#3      int.parse (dart:core-patch/integers_patch.dart:81:12)\n#4      main.<anonymous closure> (file:///tmp/breakbench/orphaned_receive/main/main.dart:5:31)\n#5      new Future.<anonymous closure> (dart:async/future.dart:260:40)\n#6      Timer._createTimer.<anonymous closure> (dart:async-patch/timer_patch.dart:18:15)\n#7      _Timer._runTimers (dart:isolate-patch/timer_impl.dart:423:19)\n#8      _Timer._handleMessage (dart:isolate-patch/timer_impl.dart:454:5)\n#9      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "blocking_in_async": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 1.04,
+   "stdout": "serial",
+   "stderr": ""
+  },
+  "unreachable_code": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "warning - main.dart:4:3 - Dead code. Try removing the code, or fixing the code before it so that it can be reached. - dead_code",
+   "warnings": "warning - main.dart:4:3 - Dead code. Try removing the code, or fixing the code before it so that it can be reached. - dead_code",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "ok",
+   "stderr": ""
+  },
+  "nan_key": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "missing",
+   "stderr": ""
+  },
+  "checked_interpolation": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:4:17 - Undefined name 'nmae'. Try correcting the name to one that is defined, or defining the name. - undefined_identifier\n\n1 issue found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:4:17: Error: Undefined name 'nmae'.\n  print('hello $nmae'); // BREAK!\n                ^^^^\nBad state: Generating kernel failed!"
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "warning - main.dart:5:7 - Dead code. Try removing the code, or fixing the code before it so that it can be reached. - dead_code\nwarning - main.dart:5:20 - This case is covered by the previous cases. Try removing the case clause, or restructuring the preceding patterns. - unreachable_switch_case",
+   "warnings": "warning - main.dart:5:20 - This case is covered by the previous cases. Try removing the case clause, or restructuring the preceding patterns. - unreachable_switch_case",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "other",
+   "stderr": ""
+  },
+  "duplicate_key": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "warning - main.dart:2:18 - Two keys in a map literal shouldn't be equal. Change or remove the duplicate key. - equal_keys_in_map",
+   "warnings": "warning - main.dart:2:18 - Two keys in a map literal shouldn't be equal. Change or remove the duplicate key. - equal_keys_in_map",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "char_arithmetic": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:3:13 - The argument type 'int' can't be assigned to the parameter type 'String'.  - argument_type_not_assignable\n\n1 issue found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:3:13: Error: A value of type 'int' can't be assigned to a variable of type 'String'.\n  print(c + 1); // CONTROL! print(String.fromCharCode(c.codeUnitAt(0) + 1));\n            ^\nBad state: Generating kernel failed!"
+  },
+  "comparison_statement": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "structural_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "hash_matches_equality": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "info - main.dart:8:17 - Missing a corresponding override of 'hashCode'. Try overriding 'hashCode' or removing '=='. - hash_and_equals",
+   "warnings": "info - main.dart:8:17 - Missing a corresponding override of 'hashCode'. Try overriding 'hashCode' or removing '=='. - hash_and_equals",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Unhandled exception:\nRangeError (length): Invalid value: Not in inclusive range 0..2: 3\n#0      _Array.[] (dart:core-patch/array.dart)\n#1      main (file:///tmp/breakbench/array_literal_length/main/main.dart:3:14)\n#2      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:313:19)\n#3      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "required_names": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:5:3 - The named parameter 'dx' is required, but there's no corresponding argument. Try adding the required argument. - missing_required_argument\n  error - main.dart:5:3 - The named parameter 'dy' is required, but there's no corresponding argument. Try adding the required argument. - missing_required_argument\n  error - main.dart:5:8 - Too many positional arguments: 0 expected, but 2 found. Try removing the extra positional arguments, or specifying the name for named arguments. - extra_positional_arguments_could_be_named\n\n3 issues found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:5:7: Error: Too many positional arguments: 0 allowed, but 2 found.\nTry removing the extra positional arguments.\n  move(3, 4); // BREAK!\n      ^\nmain.dart:1:6: Context: Found this candidate, but the arguments don't match.\nvoid move({required int dx, required int dy}) => print('$dx $dy');\n     ^^^^\nBad state: Generating kernel failed!"
+  },
+  "enum_from_int": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "before",
+   "stderr": "Unhandled exception:\nRangeError (length): Invalid value: Not in inclusive range 0..2: 7\n#0      _Array.[] (dart:core-patch/array.dart)\n#1      main (file:///tmp/breakbench/enum_from_int/main/main.dart:5:21)\n#2      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)\n#3      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "increment_in_expression": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "bitwise_on_bool": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Unhandled exception:\nRangeError (index): Invalid value: Valid value range is empty: 0\n#0      _StringBase.[] (dart:core-patch/string_patch.dart:288:41)\n#1      main (file:///tmp/breakbench/bitwise_on_bool/main/main.dart:3:28)\n#2      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:313:19)\n#3      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:8:5 - 'port' can't be used as a setter because it's final. Try finding a different setter, or making 'port' non-final. - assignment_to_final\n\n1 issue found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:8:5: Error: The setter 'port' isn't defined for the type 'Config'.\n - 'Config' is from 'main.dart'.\nTry correcting the name to the name of an existing setter, or defining a setter or field named 'port'.\n  c.port = 1; // BREAK!\n    ^^^^\nBad state: Generating kernel failed!"
+  },
+  "bool_condition": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:3:7 - Conditions must have a static type of 'bool'. Try changing the condition. - non_bool_condition\n\n1 issue found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:3:11: Error: A value of type 'int' can't be assigned to a variable of type 'bool'.\n  if ('x'.compareTo('x')) print('different'); // BREAK!\n          ^\nBad state: Generating kernel failed!"
+  },
+  "contracts": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no contracts; a precondition is a check written in the function body"
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 255,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Unhandled exception:\nFileSystemException: writeFrom failed, path = '/dev/full' (OS Error: No space left on device, errno = 28)\n#0      _RandomAccessFile.writeFromSync (dart:io/file_impl.dart:999:7)\n#1      _File.writeAsBytesSync (dart:io/file_impl.dart:746:14)\n#2      _File.writeAsStringSync (dart:io/file_impl.dart:772:5)\n#3      main (file:///tmp/breakbench/lost_write_error/main/main.dart:4:21)\n#4      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:313:19)\n#5      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "nullable_field": {
+   "outcome": "REJECTED",
+   "message": "Analyzing main.dart...\n\n  error - main.dart:8:22 - The property 'length' can't be unconditionally accessed because the receiver can be 'null'. Try making the access conditional (using '?.') or adding a null check to the target ('!'). - unchecked_use_of_nullable_value\n\n1 issue found.\n\n\nCompiling main.dart to kernel file main.dill.\n\nmain.dart:8:22: Error: Property 'length' cannot be accessed on 'String?' because it is potentially null.\nTry accessing using ?. instead.\n  print(decoded.name.length); // BREAK!\n                     ^^^^^^\nBad state: Generating kernel failed!"
+  },
+  "check_then_act": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "2",
+   "stderr": ""
+  }
+ }
+}

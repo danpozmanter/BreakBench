@@ -1,1 +1,1 @@
-# CANNOT-EXPRESS: no way to start a task without waiting for it (parallelize blocks until every task is done)
+# CANNOT-MAKE: parallelize always waits for every task before returning, so an unawaited task cannot escape

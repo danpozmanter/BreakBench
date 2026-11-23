@@ -1,10 +1,13 @@
 import java.util.concurrent.locks.ReentrantLock
+import java.util.concurrent.CountDownLatch
 object Main {
   def main(args: Array[String]): Unit = {
+    val ready = new CountDownLatch(2)
     def transfer(first: ReentrantLock, second: ReentrantLock): Unit =
       first.lock()
       try
-        Thread.sleep(100)
+        ready.countDown()
+        ready.await()
         second.lock()
         second.unlock()
       finally first.unlock()

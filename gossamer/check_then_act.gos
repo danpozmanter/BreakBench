@@ -1,0 +1,28 @@
+use std::sync::{Mutex, Shared}
+
+fn main() {
+    let state_lock = Mutex::new()
+    let gate_lock = Mutex::new()
+    let claimed = Shared::new(false)
+    let winners = Shared::new(0)
+    let arrivals = Shared::new(0)
+    let mut handles = #[]
+    for _ in 0..2 {
+        handles.push(spawn(|| {
+            state_lock.lock()
+            let available = !claimed.get() // BREAK!
+            state_lock.unlock()
+            // CONTROL! let available = !claimed.get(); if available { claimed.update(|_| true) }
+            gate_lock.lock(); arrivals.update(|n| n + 1); gate_lock.unlock()
+            while true {
+                gate_lock.lock(); let open = arrivals.get() == 2; gate_lock.unlock()
+                if open { break }
+            }
+            if available {
+                state_lock.lock(); claimed.update(|_| true); winners.update(|n| n + 1); state_lock.unlock()
+            }
+        }))
+    }
+    for h in handles { h.join() }
+    println(f"{winners.get()}")
+}

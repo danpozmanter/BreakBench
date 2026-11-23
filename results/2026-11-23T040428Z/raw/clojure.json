@@ -1,0 +1,969 @@
+{
+ "lang": "clojure",
+ "version": "Clojure 1.12.7",
+ "results": {
+  "null_deref": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.24,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "int_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.3,
+   "stdout": "",
+   "stderr": "Execution error (ArithmeticException) at java.lang.Math/addExact (Math.java:935).\nlong overflow\n\nFull report at:\n/tmp/clojure-129053543399094146.edn"
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.28,
+   "stdout": "",
+   "stderr": "Execution error (ArithmeticException) at main/-main (main.clj:4).\nDivide by zero\n\nFull report at:\n/tmp/clojure-11876855596946706011.edn"
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.28,
+   "stdout": "",
+   "stderr": "Execution error (IllegalArgumentException) at main/-main (main.clj:4).\nValue out of range for byte: 300\n\nFull report at:\n/tmp/clojure-15915012994858005467.edn"
+  },
+  "float_to_int_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.27,
+   "stdout": "",
+   "stderr": "Execution error (IllegalArgumentException) at main/-main (main.clj:5).\nValue out of range for long: 1.0E20\n\nFull report at:\n/tmp/clojure-4121749705795737220.edn"
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (ClassCastException) at main/add (main.clj:3).\nclass java.lang.String cannot be cast to class java.lang.Number (java.lang.String and java.lang.Number are in module java.base of loader 'bootstrap')\n\nFull report at:\n/tmp/clojure-12554955792660498865.edn"
+  },
+  "missing_return": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "nil",
+   "stderr": ""
+  },
+  "non_exhaustive_match": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.3,
+   "stdout": "",
+   "stderr": "Execution error (IllegalArgumentException) at main/color-name (main.clj:4).\nNo matching clause: :blue\n\nFull report at:\n/tmp/clojure-16447192248196489611.edn"
+  },
+  "uninitialized_variable": {
+   "outcome": "REJECTED",
+   "message": "true\n\nSyntax error macroexpanding clojure.core/let at (main.clj:4:3).\n[n (parse-long (first args)) x] - failed: even-number-of-forms? at: [:bindings] spec: :clojure.core.specs.alpha/bindings\n\nFull report at:\n/tmp/clojure-4379755352026110884.edn"
+  },
+  "missing_argument": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (ArityException) at main/-main (main.clj:6).\nWrong number of args (1) passed to: main/area\n\nFull report at:\n/tmp/clojure-4913466484790366620.edn"
+  },
+  "misspelled_field": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "blue",
+   "stderr": ""
+  },
+  "assign_in_condition": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "not one",
+   "stderr": ""
+  },
+  "switch_fallthrough": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "Performance warning, main.clj:4:12 - case has int tests, but tested expression is not primitive.",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "have 0",
+   "stderr": ""
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.23,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (NullPointerException) at main/-main (main.clj:4).\nCannot invoke \"Object.getClass()\" because \"x\" is null\n\nFull report at:\n/tmp/clojure-3419509563236546948.edn"
+  },
+  "covariant_array_write": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "woof",
+   "stderr": "meow"
+  },
+  "mutate_while_iterating": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "1,3",
+   "stderr": ""
+  },
+  "self_deadlock": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.31,
+   "stdout": "",
+   "stderr": "Execution error (FileNotFoundException) at java.io.FileOutputStream/open0 (FileOutputStream.java:-2).\n/nonexistent/dir/out.txt (No such file or directory)\n\nFull report at:\n/tmp/clojure-9447492715648890778.edn"
+  },
+  "sort_with_nan": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "unordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "3.5",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "668",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "not a",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "outside",
+   "stderr": ""
+  },
+  "lost_update_on_copy": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "150",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.23,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "Reflection warning, main.clj:9:5 - reference to field countDown can't be resolved.\nReflection warning, main.clj:10:5 - reference to field await can't be resolved.",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "path_join_escape": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.28,
+   "stdout": "",
+   "stderr": "Execution error (IllegalArgumentException) at main/-main (main.clj:6).\n/etc/passwd is not a relative path\n\nFull report at:\n/tmp/clojure-12555606651141848003.edn"
+  },
+  "regex_backtracking": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "no match",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "odd",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "return_in_finally": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.3,
+   "stdout": "",
+   "stderr": "Execution error (NullPointerException) at main/-main$fn (main.clj:4).\nCannot invoke \"Object.getClass()\" because \"x\" is null\n\nFull report at:\n/tmp/clojure-11079875727864131262.edn"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.29,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (MissingFormatArgumentException) at java.util.Formatter/format (Formatter.java:2760).\nFormat specifier '%d'\n\nFull report at:\n/tmp/clojure-12542408433815641878.edn"
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.27,
+   "stdout": "",
+   "stderr": "Execution error (NullPointerException) at main/-main (main.clj:5).\nCannot invoke \"Object.getClass()\" because \"x\" is null\n\nFull report at:\n/tmp/clojure-17525150531760941003.edn"
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "found",
+   "stderr": "[9 2]"
+  },
+  "shadowed_assignment": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "pending",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.27,
+   "stdout": "",
+   "stderr": "Execution error (IndexOutOfBoundsException) at main/-main (main.clj:6).\nnull\n\nFull report at:\n/tmp/clojure-15979449568827949434.edn"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "missing",
+   "stderr": ""
+  },
+  "use_after_close": {
+   "outcome": "TRAPPED",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (IOException) at java.io.BufferedWriter/ensureOpen (BufferedWriter.java:137).\nStream closed\n\nFull report at:\n/tmp/clojure-9354158546095831210.edn"
+  },
+  "dead_store": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "balanced",
+   "stderr": "worker failed: crash mid-update"
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "a?",
+   "stderr": ""
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "Reflection warning, main.clj:5:5 - call to static method aset on clojure.lang.RT can't be resolved (argument types: unknown, int, long).",
+   "exit": 1,
+   "secs": 0.31,
+   "stdout": "",
+   "stderr": "Execution error (ArrayIndexOutOfBoundsException) at jdk.internal.reflect.DirectMethodHandleAccessor/null (DirectMethodHandleAccessor.java:104).\nIndex 4 out of bounds for length 4\n\nFull report at:\n/tmp/clojure-5294149611223607956.edn"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.28,
+   "stdout": "",
+   "stderr": "Execution error (ArrayIndexOutOfBoundsException) at main/-main (main.clj:5).\nIndex 4 out of bounds for length 4\n\nFull report at:\n/tmp/clojure-11016458622284931430.edn"
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "1234",
+   "stderr": "16"
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "1",
+   "stderr": "2"
+  },
+  "dangling_stack_ref": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.45,
+   "stdout": "",
+   "stderr": "Execution error (StackOverflowError) at main/walk (main.clj:4).\nnull\n\nFull report at:\n/tmp/clojure-14848176682867513657.edn"
+  },
+  "concurrent_map_write": {
+   "outcome": "CORRECT",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.52,
+   "stdout": "800000",
+   "stderr": ""
+  },
+  "huge_allocation": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (OutOfMemoryError) at main/-main (main.clj:5).\nJava heap space\n\nFull report at:\n/tmp/clojure-1514296842461551283.edn"
+  },
+  "fd_leak": {
+   "outcome": "LEAK",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.3,
+   "stdout": "",
+   "stderr": "Execution error (FileNotFoundException) at java.io.FileInputStream/open0 (FileInputStream.java:-2).\n/tmp/bb_fd.txt (Too many open files)\n\nFull report at:\n/tmp/clojure-14101192161228211966.edn"
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (UnsupportedOperationException) at main/-main (main.clj:5).\ncount not supported on this type: Long\n\nFull report at:\n/tmp/clojure-1704176245894560212.edn"
+  },
+  "format_string": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.28,
+   "stdout": "",
+   "stderr": "Execution error (MissingFormatArgumentException) at java.util.Formatter/format (Formatter.java:2760).\nFormat specifier '%s'\n\nFull report at:\n/tmp/clojure-8036182447868450791.edn"
+  },
+  "deep_structure_release": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.41,
+   "stdout": "done",
+   "stderr": "999999"
+  },
+  "string_literal_write": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "Reflection warning, main.clj:5:5 - call to static method aset on clojure.lang.RT can't be resolved (argument types: java.lang.String, int, java.lang.Character).",
+   "exit": 1,
+   "secs": 0.3,
+   "stdout": "",
+   "stderr": "Execution error (IllegalArgumentException) at main/-main (main.clj:5).\nNo matching method aset found taking 3 args\n\nFull report at:\n/tmp/clojure-4062198454438913798.edn"
+  },
+  "complete_init": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (ArityException) at main/-main (main.clj:6).\nWrong number of args (1) passed to: main/fn--133/->Config--151\n\nFull report at:\n/tmp/clojure-18132241587246980493.edn"
+  },
+  "newtype": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "5.0",
+   "stderr": ""
+  },
+  "strong_enum": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (IllegalArgumentException) at main/color-name (main.clj:4).\nNo matching clause: 7\n\nFull report at:\n/tmp/clojure-11659322473682195141.edn"
+  },
+  "override_check": {
+   "outcome": "REJECTED",
+   "message": "true\n\nSyntax error (IllegalArgumentException) compiling deftype* at (main.clj:6:1).\nCan't define method not in interfaces: descibe\n\nFull report at:\n/tmp/clojure-5728552647095240501.edn"
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.28,
+   "stdout": "before",
+   "stderr": "Execution error (NullPointerException) at main/-main (main.clj:8).\nCannot invoke \"Object.getClass()\" because \"x\" is null\n\nFull report at:\n/tmp/clojure-3391324338581223048.edn"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "hello,",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (NullPointerException) at main/-main (main.clj:8).\nCannot invoke \"Object.getClass()\" because \"x\" is null\n\nFull report at:\n/tmp/clojure-11852389180007858831.edn"
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (ArityException) at main/-main (main.clj:5).\nWrong number of args (0) passed to: clojure.core/max\n\nFull report at:\n/tmp/clojure-6579302576568773976.edn"
+  },
+  "readonly_param": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.28,
+   "stdout": "",
+   "stderr": "Execution error (IllegalArgumentException) at main/-main (main.clj:4).\nValue out of range for byte: 300\n\nFull report at:\n/tmp/clojure-6942039959463947490.edn"
+  },
+  "no_implicit_conversion": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "3000000000",
+   "stderr": ""
+  },
+  "generic_constraint": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.3,
+   "stdout": "",
+   "stderr": "Execution error (ClassCastException) at java.util.TimSort/countRunAndMakeAscending (TimSort.java:355).\nclass main.Point cannot be cast to class java.lang.Comparable (main.Point is in unnamed module of loader 'app'; java.lang.Comparable is in module java.base of loader 'bootstrap')\n\nFull report at:\n/tmp/clojure-10050139570008208743.edn"
+  },
+  "lossy_int_to_float": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "9007199254740992",
+   "stderr": ""
+  },
+  "const_index_bounds": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (IndexOutOfBoundsException) at main/-main (main.clj:5).\nnull\n\nFull report at:\n/tmp/clojure-14775231001505211977.edn"
+  },
+  "const_overflow": {
+   "outcome": "REJECTED",
+   "message": "true\n\nExecution error (ArithmeticException) at java.lang.Math/multiplyExact (Math.java:1036).\nlong overflow\n\nFull report at:\n/tmp/clojure-4641847685642532257.edn"
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.72,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "unreachable_code": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "ok\nchecked",
+   "stderr": ""
+  },
+  "nan_key": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "missing",
+   "stderr": ""
+  },
+  "checked_interpolation": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no string interpolation"
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "REJECTED",
+   "message": "true\n\nSyntax error macroexpanding case at (main.clj:8:15).\nDuplicate case test constant: circle\n\nFull report at:\n/tmp/clojure-7658004291248631420.edn"
+  },
+  "duplicate_key": {
+   "outcome": "REJECTED",
+   "message": "true\n\nSyntax error (IllegalArgumentException) compiling at (main.clj:4:32).\nDuplicate key: a\n\nFull report at:\n/tmp/clojure-6441470629661410947.edn"
+  },
+  "char_arithmetic": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.28,
+   "stdout": "",
+   "stderr": "Execution error (ClassCastException) at main/-main (main.clj:4).\nclass java.lang.Character cannot be cast to class java.lang.Number (java.lang.Character and java.lang.Number are in module java.base of loader 'bootstrap')\n\nFull report at:\n/tmp/clojure-13031015729103151318.edn"
+  },
+  "comparison_statement": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "structural_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "hash_matches_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (IndexOutOfBoundsException) at main/-main (main.clj:5).\nnull\n\nFull report at:\n/tmp/clojure-6837670831080601925.edn"
+  },
+  "required_names": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.28,
+   "stdout": "",
+   "stderr": "Execution error (ArityException) at main/-main (main.clj:6).\nWrong number of args (2) passed to: main/move\n\nFull report at:\n/tmp/clojure-12180605962363930130.edn"
+  },
+  "enum_from_int": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no enum type"
+  },
+  "increment_in_expression": {
+   "outcome": "REJECTED",
+   "message": "true\n\nSyntax error compiling at (main.clj:5:14).\nUnable to resolve symbol: i++ in this context\n\nFull report at:\n/tmp/clojure-5721724799203525458.edn"
+  },
+  "bitwise_on_bool": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "Reflection warning, main.clj:5:18 - call to static method and on clojure.lang.Numbers can't be resolved (argument types: boolean, boolean).",
+   "exit": 1,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (StringIndexOutOfBoundsException) at jdk.internal.util.Preconditions$1/apply (Preconditions.java:55).\nIndex 0 out of bounds for length 0\n\nFull report at:\n/tmp/clojure-8666035764672292252.edn"
+  },
+  "readonly_field": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "Reflection warning, main.clj:7:11 - reference to field port can't be resolved.",
+   "exit": 1,
+   "secs": 0.29,
+   "stdout": "",
+   "stderr": "Execution error (IllegalAccessException) at jdk.internal.reflect.FieldAccessorImpl/throwFinalFieldIllegalAccessException (FieldAccessorImpl.java:132).\nCan not set final java.lang.Object field main.Config.port to java.lang.Long\n\nFull report at:\n/tmp/clojure-587551277121031691.edn"
+  },
+  "bool_condition": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "same",
+   "stderr": ""
+  },
+  "contracts": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.29,
+   "stdout": "before",
+   "stderr": "Execution error (AssertionError) at main/isqrt (main.clj:3).\nAssert failed: (>= x 0)\n\nFull report at:\n/tmp/clojure-10946503270162646319.edn"
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.28,
+   "stdout": "",
+   "stderr": "Execution error (IOException) at java.io.FileOutputStream/writeBytes (FileOutputStream.java:-2).\nNo space left on device\n\nFull report at:\n/tmp/clojure-18437441462396193613.edn"
+  },
+  "nullable_field": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.23,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "check_then_act": {
+   "control_error": "true\n\nReflection warning, main.clj:10:5 - reference to field countDown can't be resolved.\nReflection warning, main.clj:11:5 - reference to field await can't be resolved.\nSyntax error compiling at (main.clj:13:67).\nUnmatched delimiter: )\n\nFull report at:\n/tmp/clojure-15269903227827127182.edn",
+   "outcome": "ERROR",
+   "message": "true\n\nReflection warning, main.clj:11:5 - reference to field countDown can't be resolved.\nReflection warning, main.clj:12:5 - reference to field await can't be resolved.\nSyntax error compiling at (main.clj:14:67).\nUnmatched delimiter: )\n\nFull report at:\n/tmp/clojure-6634298111575283961.edn"
+  }
+ }
+}

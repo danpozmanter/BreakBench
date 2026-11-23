@@ -1,16 +1,17 @@
 open System.Threading
 
-let transfer (first: obj) (second: obj) =
+let transfer (first: obj) (second: obj) (ready: Barrier) =
     lock first (fun () ->
-        Thread.Sleep 100
+        ready.SignalAndWait() |> ignore
         lock second (fun () -> ()))
 
 [<EntryPoint>]
 let main argv =
     let a = obj ()
     let b = obj ()
-    let t1 = Thread(fun () -> transfer a b)
-    let t2 = Thread(fun () -> transfer b a)
+    let ready = Barrier(2)
+    let t1 = Thread(fun () -> transfer a b ready)
+    let t2 = Thread(fun () -> transfer b a ready)
     t1.Start()
     t2.Start()
     t1.Join()

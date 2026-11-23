@@ -2,10 +2,12 @@
 
 (def a (Object.))
 (def b (Object.))
+(def ready (java.util.concurrent.CountDownLatch. 2))
 
 (defn transfer [first-lock second-lock]
   (locking first-lock
-    (Thread/sleep 100)
+    (.countDown ready)
+    (.await ready)
     (locking second-lock
       :done)))
 

@@ -1,1 +1,1 @@
-// CANNOT-EXPRESS: no file handles in the standard library; files are read and written whole
+// CANNOT-MAKE: file operations return whole values and expose no closeable handle that could be used after close

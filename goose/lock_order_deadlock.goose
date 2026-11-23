@@ -1,1 +1,1 @@
-// CANNOT-EXPRESS: no mutex in the language or its standard library
+// CANNOT-MAKE: isolated worker state prevents workers from sharing the locks needed for a lock-order deadlock

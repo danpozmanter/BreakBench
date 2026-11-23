@@ -55,8 +55,12 @@ def run_language(run, lang_id, lang, only):
 
 def score_of(problem, rec, kinds):
     """The highest of the outcome's points and the points for a warning that names the bug,
-    printed by the build or by the running program; they never add up. N/A scores 0."""
+    printed by the build or by the running program; they never add up. Unexpressible tests are excluded."""
     if rec["outcome"] == "INEXPRESSIBLE":
+        return None
+    if rec["outcome"] == "SAFE_BY_DESIGN":
+        return 1.0
+    if rec["outcome"] == "UNFIXABLE":
         return 0.0
     table = kinds[problem["kind"]]
     score = table.get(rec["outcome"], 0.0)
@@ -68,7 +72,7 @@ def score_of(problem, rec, kinds):
 
 
 def percent(scores):
-    return round(100 * sum(scores) / len(scores), 1)
+    return round(100 * sum(scores) / len(scores), 1) if scores else 0.0
 
 
 CATEGORIES = {
@@ -77,7 +81,7 @@ CATEGORIES = {
     "memory": "Memory safety",
     "concurrency": "Concurrency",
 }
-SAFE = {"REJECTED", "CORRECT", "TRAPPED"}
+SAFE = {"REJECTED", "CORRECT", "TRAPPED", "SAFE_BY_DESIGN"}
 
 
 def aggregate(run):
@@ -95,9 +99,14 @@ def aggregate(run):
         for problem in spec["problems"]:
             rec = raw["results"].get(problem["id"], {"outcome": "MISSING"})
             score = score_of(problem, rec, kinds)
-            by_category[problem["category"]].append(score)
+            if score is not None:
+                by_category[problem["category"]].append(score)
             per_problem[problem["id"]] = {**rec, "score": score}
         outcomes = [r["outcome"] for r in per_problem.values()]
+        counted = [o for o in outcomes if o != "INEXPRESSIBLE"]
+        caught = sum(o in {"REJECTED", "SAFE_BY_DESIGN"} for o in counted)
+        safe = sum(o in SAFE for o in counted)
+        mean = [s for scores in by_category.values() for s in scores]
         rows.append(
             {
                 "id": lang_id,
@@ -105,11 +114,11 @@ def aggregate(run):
                 "dir": lang.get("dir", lang_id),
                 "ext": lang["ext"],
                 "version": raw.get("version", ""),
-                "score": percent([s for scores in by_category.values() for s in scores]),
+                "score": percent(mean),
                 **{c: percent(scores) for c, scores in by_category.items()},
-                "caught": round(100 * outcomes.count("REJECTED") / len(outcomes), 1),
-                "safe": round(100 * sum(o in SAFE for o in outcomes) / len(outcomes), 1),
-                "scored": sum(o != "INEXPRESSIBLE" for o in outcomes),
+                "caught": round(100 * caught / len(counted), 1) if counted else 0.0,
+                "safe": round(100 * safe / len(counted), 1) if counted else 0.0,
+                "scored": len(counted),
                 "results": per_problem,
             }
         )
@@ -120,7 +129,6 @@ def aggregate(run):
         "generated": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
         "kinds": kinds,
         "categories": CATEGORIES,
-        "leak_threshold_mb": spec["leak_threshold_mb"],
         "problems": spec["problems"],
         "languages": rows,
     }
@@ -144,17 +152,15 @@ def aggregate(run):
         print(f"{row['rank']:>2}. {row['name']:<12} score {row['score']:5.1f}%  {parts}")
 
 
-def describe_run(rec, threshold_mb):
+def describe_run(rec):
     """One factual line for a run that left no compiler or runtime message."""
     outcome, status = rec["outcome"], rec.get("exit")
     printed = (rec.get("stdout") or "").strip()
     shown = f'printed "{printed[:120]}"' if printed else "printed nothing"
-    peak = f'{rec["rss_mb"]} MB peak' if rec.get("rss_mb") is not None else "peak memory unknown"
     if outcome == "HANG":
         return f"The program did not finish and was killed after {rec.get('secs')} s."
     if outcome == "LEAK":
-        return (f"The program finished {shown} with {peak}, over the {threshold_mb} MB "
-                "limit for this test.")
+        return "The program or operating system reported resource exhaustion."
     if outcome == "CORRECT":
         return f"Built and ran cleanly (exit {status}), {shown}. The output is the expected answer."
     if outcome == "REJECTED":
@@ -170,19 +176,18 @@ def site_payload(out):
         results = {}
         for pid, rec in row["results"].items():
             evidence = (rec.get("message") or rec.get("stderr")
-                        or describe_run(rec, out["leak_threshold_mb"]))
+                        or describe_run(rec))
             results[pid] = {
                 "o": rec["outcome"],
                 "s": rec["score"],
                 "out": (rec.get("stdout") or "")[:160],
                 "ev": evidence[:600],
-                "rss": rec.get("rss_mb"),
                 "w": (rec.get("warnings") or "")[:400] if rec.get("warned") else "",
                 "rw": bool(rec.get("run_warned")),
             }
         langs.append({k: row[k] for k in ("id", "name", "dir", "ext", "version", "rank", "score", "caught", "safe",
                                            "scored", *CATEGORIES)} | {"results": results})
-    return {**{k: out[k] for k in ("generated", "kinds", "categories", "leak_threshold_mb", "problems")},
+    return {**{k: out[k] for k in ("generated", "kinds", "categories", "problems")},
             "languages": langs}
 
 

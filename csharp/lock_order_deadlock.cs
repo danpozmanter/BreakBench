@@ -1,11 +1,12 @@
 var a = new Lock();
 var b = new Lock();
+using var ready = new Barrier(2);
 
 void Transfer(Lock first, Lock second)
 {
     lock (first)
     {
-        Thread.Sleep(100);
+        ready.SignalAndWait();
         lock (second) { }
     }
 }

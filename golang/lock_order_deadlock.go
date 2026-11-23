@@ -3,14 +3,14 @@ package main
 import (
 	"fmt"
 	"sync"
-	"time"
 )
 
-func transfer(first, second *sync.Mutex, wg *sync.WaitGroup) {
+func transfer(first, second *sync.Mutex, wg *sync.WaitGroup, ready *sync.WaitGroup) {
 	defer wg.Done()
 	first.Lock()
 	defer first.Unlock()
-	time.Sleep(100 * time.Millisecond)
+	ready.Done()
+	ready.Wait()
 	second.Lock()
 	defer second.Unlock()
 }
@@ -18,9 +18,11 @@ func transfer(first, second *sync.Mutex, wg *sync.WaitGroup) {
 func main() {
 	var a, b sync.Mutex
 	var wg sync.WaitGroup
+	var ready sync.WaitGroup
 	wg.Add(2)
-	go transfer(&a, &b, &wg)
-	go transfer(&b, &a, &wg)
+	ready.Add(2)
+	go transfer(&a, &b, &wg, &ready)
+	go transfer(&b, &a, &wg, &ready)
 	wg.Wait()
 	fmt.Println("finished")
 }
