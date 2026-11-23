@@ -1,0 +1,16 @@
+use std::fs
+
+fn main() {
+    let _ = fs::create_dir_all("/tmp/bb_files")
+    fs::write("/tmp/bb_files/report.txt", "secret\n".bytes()).unwrap()
+
+    let name = "report.txt\0.png"
+    if !name.ends_with(".png") {
+        println("rejected")
+        return
+    }
+    match fs::read_to_string(f"/tmp/bb_files/{name}") {
+        Ok(text) => print(text),
+        Err(_) => println("rejected"),
+    }
+}

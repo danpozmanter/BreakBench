@@ -1,6 +1,8 @@
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InvalidClassException;
+import java.io.ObjectInputFilter;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serial;
@@ -31,9 +33,11 @@ public class Main {
         }
         byte[] attacker = bytes.toByteArray();
         try (ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(attacker))) {
+            // ObjectInputStream's documentation sends untrusted data through a serialization filter.
+            in.setObjectInputFilter(ObjectInputFilter.Config.createFilter("Main$Session;java.base/*;!*"));
             Session session = (Session) in.readObject();
             System.out.println(session.user());
-        } catch (ClassCastException | ClassNotFoundException e) {
+        } catch (ClassCastException | ClassNotFoundException | InvalidClassException e) {
             System.out.println("rejected");
         }
     }

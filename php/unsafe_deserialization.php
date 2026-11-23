@@ -18,12 +18,11 @@ final class Cleanup
     }
 }
 
+// unserialize()'s documentation sends untrusted input to json_decode().
 $attacker = serialize(new Cleanup());
 try {
-    $session = unserialize($attacker);
-    if (!$session instanceof Session) {
-        throw new UnexpectedValueException('not a session');
-    }
+    $data = json_decode($attacker, true, 512, JSON_THROW_ON_ERROR);
+    $session = new Session($data['user']);
     echo $session->user, "\n";
 } catch (Throwable) {
     echo "rejected\n";

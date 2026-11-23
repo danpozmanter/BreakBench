@@ -1,5 +1,7 @@
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
+import java.io.InvalidClassException
+import java.io.ObjectInputFilter
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 import java.io.Serializable
@@ -20,9 +22,15 @@ fun main() {
     ObjectOutputStream(bytes).use { it.writeObject(Cleanup()) }
     val attacker = bytes.toByteArray()
     try {
-        val session = ObjectInputStream(ByteArrayInputStream(attacker)).use { it.readObject() as Session }
+        // ObjectInputStream's documentation sends untrusted data through a serialization filter.
+        val session = ObjectInputStream(ByteArrayInputStream(attacker)).use {
+            it.setObjectInputFilter(ObjectInputFilter.Config.createFilter("Session;java.base/*;!*"))
+            it.readObject() as Session
+        }
         println(session.user)
     } catch (e: ClassCastException) {
+        println("rejected")
+    } catch (e: InvalidClassException) {
         println("rejected")
     }
 }

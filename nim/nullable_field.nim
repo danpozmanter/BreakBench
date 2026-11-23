@@ -4,4 +4,5 @@ type User = object
   name: Option[string]
 
 let decoded = User(name: none(string))
-echo decoded.name.get.len
+echo decoded.name.len # BREAK!
+# CONTROL! echo decoded.name.get.len

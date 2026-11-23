@@ -70,7 +70,7 @@ table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nu
 th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
 th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; white-space: nowrap; vertical-align: bottom; }
 th button { all: unset; cursor: pointer; }
-th button:focus-visible, .plist button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+th button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 tr:last-child td { border-bottom: 0; }
 .rank { width: 2.5em; color: var(--muted); }
 .lang { font-weight: 600; white-space: nowrap; }
@@ -90,6 +90,8 @@ tr.hl td { background: color-mix(in srgb, var(--accent) 9%, transparent); }
 .notes { margin: 0; padding-left: 20px; display: grid; gap: 8px; font-size: 14px; line-height: 1.5; max-width: 72em; }
 .notes code, .notes-table code { font-family: var(--font-mono); font-size: 12.5px; }
 .notes-table td:first-child { font-weight: 600; }
+.notes-table a { color: var(--accent); }
+.paths-table td:last-child { white-space: nowrap; }
 .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 13px; }
 .legend strong { margin-right: 4px; }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
@@ -135,12 +137,6 @@ td.chipcell > .chip { display: flex; width: 100%; box-sizing: border-box; height
 .wtag { display: block; margin-top: 3px; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; border-top: 1px solid currentColor; padding-top: 2px; opacity: .9; }
 .swatch.o-WARNED, .swatch.o-RUN_WARNED, .warned-swatch { background: transparent; border: 2px solid var(--fg); width: 8px; height: 8px; }
 pre.warn { color: var(--fg); }
-.detail { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 20px; align-items: start; }
-.plist { display: grid; gap: 2px; max-height: 760px; overflow-y: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); padding: 6px; }
-.plist h4 { margin: 8px 6px 4px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
-.plist button { all: unset; display: block; box-sizing: border-box; width: 100%; cursor: pointer; padding: 5px 8px; border-radius: 5px; font-size: 13px; line-height: 1.35; }
-.plist button[aria-current="true"] { background: color-mix(in srgb, var(--accent) 14%, transparent); font-weight: 600; }
-.plist select { display: none; }
 .case { display: grid; gap: 14px; min-width: 0; }
 .facts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 6px 16px; font-size: 14px; }
 .facts dt { color: var(--muted); }
@@ -148,9 +144,14 @@ pre.warn { color: var(--fg); }
 .note { border-left: 3px solid var(--o-silent); padding: 8px 12px; background: var(--surface); border-radius: 0 6px 6px 0; font-size: 14px; }
 pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5em; overflow: auto; color: var(--muted); }
 .out { color: var(--fg); }
-#problem-select { display: none; font: inherit; padding: 8px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--fg); width: 100%; }
-nav.top { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: center; font-size: 14px; }
-nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent; }
+.cmpbar { display: grid; gap: 10px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.cmpbar .cmp-tools > button:first-child { font-weight: 600; }
+.tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
+.tabs button { font: inherit; font-size: 15px; padding: 10px 14px; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; background: none; color: var(--muted); cursor: pointer; white-space: nowrap; }
+.tabs button[aria-selected="true"] { color: var(--fg); border-bottom-color: var(--accent); font-weight: 600; }
+.tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.grid tr.sel th.pname { box-shadow: inset 3px 0 0 var(--accent); }
+.case:not([hidden]) { border-top: 1px solid var(--line); padding-top: 18px; }
 .picker { display: flex; flex-wrap: wrap; gap: 6px; }
 .picker button { font: inherit; font-size: 13px; padding: 4px 11px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--fg); cursor: pointer; }
 .picker button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
@@ -158,34 +159,23 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
 .picker button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .cmp-tools { display: flex; flex-wrap: wrap; gap: 8px 20px; align-items: center; font-size: 13px; color: var(--muted); }
 .cmp-tools button { font: inherit; background: none; border: 0; color: var(--accent); cursor: pointer; padding: 0; }
-.cmp-body { display: grid; gap: 20px; }
-.grid.cmp { width: 100%; table-layout: fixed; }
-.grid.cmp th.pname { width: 280px; min-width: 0; max-width: none; }
-.grid.cmp th.lname { width: auto; min-width: 0; }
-.cmp .gcell { width: 100%; }
-.cmp-summary td, .cmp-summary th { text-align: right; }
-.cmp-summary th:first-child, .cmp-summary td:first-child { text-align: left; }
-.cmp tr.cmp-detail > td { background: var(--bg); padding: 14px; }
-.cmp tr.cmp-detail .case { max-width: 100%; }
 @media (max-width: 760px) {
   .notes-table thead { display: none; }
   .notes-table tr { display: grid; gap: 2px; padding: 10px 12px; border-bottom: 1px solid var(--line); }
   .notes-table td { border: 0; padding: 0; }
-  .detail { grid-template-columns: 1fr; }
-  .plist { display: none; }
-  #problem-select { display: block; }
+  .docs-table td:nth-child(n+3)::before { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-top: 4px; }
+  .docs-table td:nth-child(3)::before { content: "What the docs say"; }
+  .docs-table td:nth-child(4)::before { content: "Path used"; }
+  .docs-table td:nth-child(5)::before { content: "The first-taught call would fail"; }
+  .paths-table td:nth-child(n+3)::before { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-top: 4px; }
+  .paths-table td:nth-child(3)::before { content: "Path used"; }
+  .paths-table td:nth-child(4)::before { content: "Why that path"; }
+  .paths-table td:nth-child(5)::before { content: "Path that scores better"; }
+  .paths-table td:nth-child(6)::before { content: "Effect"; }
   .bar { width: 60px; }
   .facts { grid-template-columns: minmax(0, 1fr); gap: 2px; }
   .facts dd { margin-bottom: 8px; }
   .grid th.pname { width: 132px; min-width: 132px; max-width: 132px; font-size: 12.5px; }
-  .grid.cmp { table-layout: auto; width: max-content; min-width: 100%; }
-  .grid.cmp th.pname { width: 132px; }
-  .grid.cmp th.lname { min-width: 0; }
-  .cmp .gcell { width: 84px; }
-  /* The grid scrolls sideways; its detail row stays pinned to the visible width. */
-  .cmp-grid-scroll { container-type: inline-size; }
-  .cmp tr.cmp-detail > td { padding: 12px 0; }
-  .cmp tr.cmp-detail .case { position: sticky; left: 0; width: 100cqi; box-sizing: border-box; padding: 0 12px; }
   /* Each language's evidence becomes a card: name, outcome and score, then the output in full width. */
   .scroll:has(> table.evidence) { overflow: visible; border: 0; background: none; }
   table.evidence, table.evidence tbody { display: block; }
@@ -206,24 +196,38 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     <h1>BreakBench</h1>
     <p>How much does a language help the programmer avoid production bugs? Each test is a program with one common bug, run in 30 languages.</p>
     <div class="meta" id="meta"></div>
-    <nav class="top" aria-label="Sections"><a href="#overview">Overview</a><a href="#compare">Compare</a><a href="#tests">Tests</a><a href="#notes">Notes</a></nav>
   </header>
 
-  <section aria-labelledby="cmp-h" id="compare">
-    <h2 id="cmp-h">Compare languages</h2>
-    <p class="muted">Choose up to five languages. The selection filters the overview, tests, and test detail, and shows their results side by side.</p>
-    <div class="picker" id="cmp-picker" role="group" aria-label="Languages to compare"></div>
-    <div class="cmp-body" id="cmp-body"></div>
-  </section>
+  <div class="cmpbar">
+    <div class="cmp-tools">
+      <button type="button" id="cmp-toggle" aria-expanded="false" aria-controls="cmp-picker">Compare languages</button>
+      <span id="cmp-status"></span>
+      <button type="button" id="cmp-clear" hidden>Clear</button>
+      <label id="cmp-differ-wrap" hidden><input type="checkbox" id="cmp-differ"> Only tests where they differ</label>
+    </div>
+    <div class="picker" id="cmp-picker" role="group" aria-label="Languages to compare" hidden></div>
+  </div>
 
-  <section aria-labelledby="rank-h" id="overview">
-    <h2 id="rank-h">Overview</h2>
+  <div class="tabs" role="tablist" aria-label="Sections">
+    <button type="button" role="tab" id="tab-leaderboard" aria-controls="leaderboard" aria-selected="true">Leaderboard</button>
+    <button type="button" role="tab" id="tab-tests" aria-controls="tests" aria-selected="false" tabindex="-1">Tests</button>
+    <button type="button" role="tab" id="tab-scoring" aria-controls="scoring-panel" aria-selected="false" tabindex="-1">Scoring</button>
+    <button type="button" role="tab" id="tab-notes" aria-controls="notes" aria-selected="false" tabindex="-1">Notes</button>
+  </div>
+
+  <section role="tabpanel" id="leaderboard" aria-labelledby="tab-leaderboard">
     <p class="muted">The score is the average over counted tests, as a percentage. N/A cases are excluded. The categories break it down. Caught or prevented by design is the share refused or made impossible. Select a heading to sort.</p>
     <div class="scroll"><table id="ranking"></table></div>
   </section>
 
-  <section aria-labelledby="score-h">
-    <h2 id="score-h">How outcomes are scored</h2>
+  <section role="tabpanel" id="tests" aria-labelledby="tab-tests" hidden>
+    <div class="picker" id="cats" role="group" aria-label="Category"></div>
+    <p class="muted">Each row is a test and each column a language, in rank order. Select a test or a cell to see its evidence below the grid. An outlined cell is a failure the language accepts by design.</p>
+    <div id="grids" class="grids"></div>
+    <div class="case" id="case" hidden></div>
+  </section>
+
+  <section role="tabpanel" id="scoring-panel" aria-labelledby="tab-scoring" hidden>
     <div class="legend" id="legend"></div>
     <div class="scoring" id="scoring"></div>
     <p class="muted">A bug refused before the program runs earns a full point, and a build warning that names it earns half: either can keep the bug out of production. A bug the program only shows while running, by stopping with a clear error or by warning and going on, earns a quarter: a test may catch it, but otherwise it reaches production. A stop that only the debug build makes earns an eighth: the release build that ships runs on past the bug. A wrong answer earns nothing. A warning and a stop never add up; the higher counts. The same holds for every test, compiled or dynamic, logic or memory.</p>
@@ -232,22 +236,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     <p class="muted">N/A means the language cannot express the error, so that case is excluded from its mean. SAFE_BY_DESIGN means the language or its standard model prevents the error and earns 1 point. UNFIXABLE means the error can be made but the fix cannot be expressed, and earns 0. A missing library call is replaced with what the language has when the scenario remains expressible.</p>
   </section>
 
-  <section aria-labelledby="grid-h" id="tests">
-    <h2 id="grid-h">Tests</h2>
-    <p class="muted">Each row is a test and each column a language, in rank order. Select a cell to see the evidence. An outlined cell is a failure the language accepts by design.</p>
-    <div id="grids" class="grids"></div>
-  </section>
-
-  <section aria-labelledby="case-h" id="cases">
-    <h2 id="case-h">Test detail</h2>
-    <select id="problem-select" aria-label="Test"></select>
-    <div class="detail">
-      <nav class="plist" id="plist" aria-label="Tests"></nav>
-      <div class="case" id="case"></div>
-    </div>
-  </section>
-  <section aria-labelledby="notes-h" id="notes">
-    <h2 id="notes-h">Notes</h2>
+  <section role="tabpanel" id="notes" aria-labelledby="tab-notes" hidden>
     <h3>Python and mypy</h3>
     <p class="muted" id="mypy-note">Python runs twice: as written, and checked by mypy in strict mode. mypy is the Python project's own type checker and a common step in Python release workflows, much as TypeScript checks JavaScript. Without it, Python catches most bugs only while running.</p>
     <h3>Release builds</h3>
@@ -281,11 +270,52 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
       <tr><td>Haskell</td><td><code>-O1</code></td><td>Same checks.</td></tr>
       <tr><td>Clojure</td><td>same build</td><td>Same checks.</td></tr>
     </tbody></table></div>
+    <h3>Where the docs point elsewhere</h3>
+    <p class="muted">When the documentation for the call a program would use sends that situation to another call, the program follows it. These programs use the path the docs point to. Keeping to the first-taught call would fail each test, for the reason given. Where the docs are silent, the first-taught call stands.</p>
+    <div class="scroll"><table class="notes-table docs-table"><thead><tr><th>Language</th><th>Test</th><th>What the docs say</th><th>Path used</th><th>The first-taught call would fail</th></tr></thead><tbody>
+      <tr><td>Python, Python (mypy)</td><td><code>unsafe_deserialization</code></td><td><a href="https://docs.python.org/3/library/pickle.html" target="_blank" rel="noopener"><code>pickle</code>: “json may be more appropriate if you are processing untrusted data”</a></td><td><code>json.loads</code></td><td><code>pickle.loads</code> runs the attacker's restore hook</td></tr>
+      <tr><td>Ruby</td><td><code>unsafe_deserialization</code></td><td><a href="https://docs.ruby-lang.org/en/master/Marshal.html" target="_blank" rel="noopener"><code>Marshal</code>: “If you need to deserialize untrusted data, use JSON”</a></td><td><code>JSON.parse</code></td><td><code>Marshal.load</code> runs <code>marshal_load</code></td></tr>
+      <tr><td>PHP</td><td><code>unsafe_deserialization</code></td><td><a href="https://www.php.net/manual/en/function.unserialize.php" target="_blank" rel="noopener"><code>unserialize</code>: use JSON via <code>json_decode()</code></a></td><td><code>json_decode</code></td><td><code>unserialize</code> runs <code>__wakeup</code></td></tr>
+      <tr><td>Java, Kotlin, Scala</td><td><code>unsafe_deserialization</code></td><td><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/ObjectInputStream.html" target="_blank" rel="noopener"><code>ObjectInputStream</code>: validate untrusted data with serialization filters</a></td><td>An <code>ObjectInputFilter</code> that allows only <code>Session</code></td><td><code>readObject</code> runs the attacker's restore hook</td></tr>
+      <tr><td>Clojure</td><td><code>unsafe_deserialization</code></td><td><a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/read-string" target="_blank" rel="noopener"><code>read-string</code>: use <code>clojure.edn</code> for untrusted data</a></td><td><code>clojure.edn/read-string</code></td><td><code>read-string</code> evaluates <code>#=</code> forms</td></tr>
+      <tr><td>Python, Python (mypy)</td><td><code>command_injection</code></td><td><a href="https://docs.python.org/3/library/os.html#os.system" target="_blank" rel="noopener"><code>os.system</code>: the <code>subprocess</code> module is recommended</a></td><td><code>subprocess.run</code> with an argument list</td><td><code>os.system</code> hands the text to a shell, which runs the injected command</td></tr>
+      <tr><td>JavaScript, TypeScript</td><td><code>command_injection</code></td><td><a href="https://nodejs.org/api/child_process.html#child_processexeccommand-options-callback" target="_blank" rel="noopener"><code>exec</code>: “Never pass unsanitized user input to this function”</a></td><td><code>execFileSync</code> with an argument list</td><td><code>execSync</code> runs the injected command in a shell</td></tr>
+      <tr><td>Ruby</td><td><code>command_injection</code></td><td><a href="https://docs.ruby-lang.org/en/master/security/command_injection_rdoc.html" target="_blank" rel="noopener"><code>system</code>: not to be called with unsanitized commands</a></td><td><code>system</code> with separate arguments</td><td>One-string <code>system</code> runs the injected command in a shell</td></tr>
+      <tr><td>V</td><td><code>command_injection, short_read, child_exit_status</code></td><td><a href="https://modules.vlang.io/os.html" target="_blank" rel="noopener"><code>os.execute</code>: deprecated because command strings allow shell injection; use <code>os.exec</code></a></td><td><code>os.exec</code> with an argument list</td><td><code>os.execute</code> runs the injected command in a shell</td></tr>
+      <tr><td>OCaml</td><td><code>short_read</code></td><td><a href="https://ocaml.org/manual/latest/api/Stdlib.html#VALinput" target="_blank" rel="noopener"><code>input</code>: see <code>really_input</code> for reading exactly len characters</a></td><td><code>really_input</code></td><td><code>input</code> returns half the message</td></tr>
+      <tr><td>PHP</td><td><code>short_read</code></td><td><a href="https://www.php.net/manual/en/function.fread.php" target="_blank" rel="noopener"><code>fread</code>: on pipes reading stops after a packet; collect the data in chunks</a></td><td><code>stream_get_contents</code></td><td><code>fread</code> returns half the message</td></tr>
+      <tr><td>JavaScript, TypeScript</td><td><code>json_big_integer</code></td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse" target="_blank" rel="noopener"><code>JSON.parse</code>: numbers may lose precision; read <code>context.source</code></a></td><td>A reviver that reads <code>context.source</code> into a <code>BigInt</code></td><td><code>JSON.parse</code> rounds the id to 9007199254740992</td></tr>
+      <tr><td>C</td><td><code>parse_invalid_number</code></td><td><a href="https://man7.org/linux/man-pages/man3/atoi.3.html" target="_blank" rel="noopener"><code>atoi</code>: use <code>strtol</code> in new programs</a></td><td><code>strtol</code> with its end-pointer check</td><td><code>atoi</code> reads 12 and prints 13</td></tr>
+    </tbody></table></div>
+    <h3>Paths that cost points</h3>
+    <p class="muted">Each program takes the path the language's documentation teaches first, unless those docs point elsewhere, or the path the test asks for. Where the same standard library offers a safer call for the same job, the language would score better with it. The link is the documentation for the path used.</p>
+    <div class="scroll"><table class="notes-table paths-table"><thead><tr><th>Language</th><th>Test</th><th>Path used</th><th>Why that path</th><th>Path that scores better</th><th>Effect</th></tr></thead><tbody>
+      <tr><td>Python, Python (mypy)</td><td><code>child_exit_status</code></td><td><a href="https://docs.python.org/3/library/subprocess.html#subprocess.run" target="_blank" rel="noopener"><code>subprocess.run</code></a></td><td>Taught first; checking is off by default</td><td><code>check=True</code> raises on failure</td><td>0 → 0.25</td></tr>
+      <tr><td>Ruby</td><td><code>child_exit_status</code></td><td><a href="https://docs.ruby-lang.org/en/master/Kernel.html#method-i-system" target="_blank" rel="noopener"><code>system</code></a></td><td>Taught first; returns false on failure</td><td><code>system(..., exception: true)</code> raises</td><td>0 → 0.25</td></tr>
+      <tr><td>Scala</td><td><code>child_exit_status</code></td><td><a href="https://www.scala-lang.org/api/current/scala/sys/process/ProcessBuilder.html" target="_blank" rel="noopener"><code>!</code></a></td><td>Taught first; returns the exit code</td><td><code>!!</code> throws on a non-zero exit</td><td>0 → 0.25</td></tr>
+      <tr><td>Go</td><td><code>short_read</code></td><td><a href="https://pkg.go.dev/io#Reader" target="_blank" rel="noopener"><code>Reader.Read</code></a></td><td>The usual read call the test asks for</td><td><code>io.ReadFull</code></td><td>0 → 1</td></tr>
+      <tr><td>Java, Kotlin, Scala, Clojure</td><td><code>short_read</code></td><td><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/InputStream.html#read(byte%5B%5D)" target="_blank" rel="noopener"><code>InputStream.read(byte[])</code></a></td><td>The usual read call the test asks for</td><td><code>readNBytes</code></td><td>0 → 1</td></tr>
+      <tr><td>C#, F#</td><td><code>short_read</code></td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.read" target="_blank" rel="noopener"><code>Stream.Read</code></a></td><td>The usual read call the test asks for</td><td><code>Stream.ReadExactly</code></td><td>C# 0.5 → 1, F# 0 → 1</td></tr>
+      <tr><td>Crystal</td><td><code>short_read</code></td><td><a href="https://crystal-lang.org/api/IO.html" target="_blank" rel="noopener"><code>IO#read</code></a></td><td>The usual read call the test asks for</td><td><code>IO#read_fully</code></td><td>0 → 1</td></tr>
+      <tr><td>Go</td><td><code>json_big_integer</code></td><td><a href="https://pkg.go.dev/encoding/json#Unmarshal" target="_blank" rel="noopener"><code>json.Unmarshal</code> into <code>any</code></a></td><td>The general value type the test asks for</td><td><code>Decoder.UseNumber</code></td><td>0 → 1</td></tr>
+      <tr><td>OCaml</td><td><code>not_found_sentinel</code></td><td><a href="https://ocaml.org/manual/latest/api/String.html#VALindex" target="_blank" rel="noopener"><code>String.index</code></a></td><td>The standard search call, listed first</td><td><code>String.index_opt</code> returns an option</td><td>0.25 → 1</td></tr>
+      <tr><td>Python</td><td><code>not_found_sentinel</code></td><td><a href="https://docs.python.org/3/library/stdtypes.html#str.find" target="_blank" rel="noopener"><code>str.find</code></a></td><td>The standard search call; returns -1</td><td><code>str.index</code> raises</td><td>0 → 0.25</td></tr>
+      <tr><td>OCaml</td><td><code>missing_key_default</code></td><td><a href="https://ocaml.org/manual/latest/api/Hashtbl.html#VALfind" target="_blank" rel="noopener"><code>Hashtbl.find</code></a></td><td>The map's ordinary lookup the test asks for</td><td><code>Hashtbl.find_opt</code> returns an option</td><td>0.25 → 1</td></tr>
+      <tr><td>Rust, Gossamer, Haskell, Scala, F#</td><td><code>missing_key_default</code></td><td><a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html" target="_blank" rel="noopener">The index form (<code>map[key]</code>, <code>Map.!</code>, <code>map(key)</code>)</a></td><td>The test asks for the index form where one exists</td><td>A lookup that returns an option (<code>get</code>, <code>lookup</code>, <code>tryFind</code>)</td><td>0.25 → 1</td></tr>
+      <tr><td>Ruby</td><td><code>parse_invalid_number</code></td><td><a href="https://docs.ruby-lang.org/en/master/String.html#method-i-to_i" target="_blank" rel="noopener"><code>String#to_i</code></a></td><td>Taught first; reads the leading digits</td><td><code>Integer(s)</code> raises</td><td>0 → 0.25</td></tr>
+      <tr><td>V</td><td><code>parse_invalid_number</code></td><td><a href="https://docs.vlang.io/" target="_blank" rel="noopener"><code>.int()</code></a></td><td>Taught first; reads the leading digits</td><td><code>strconv.atoi</code> returns an error</td><td>0 → 0.25 or more</td></tr>
+      <tr><td>Rust</td><td><code>narrowing_cast</code></td><td><a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions" target="_blank" rel="noopener"><code>as</code></a></td><td>The standard conversion; truncates</td><td><code>u8::try_from</code> returns a <code>Result</code></td><td>0 → 1</td></tr>
+      <tr><td>F#</td><td><code>null_in_text</code></td><td><a href="https://learn.microsoft.com/en-us/dotnet/fsharp/language-reference/interpolated-strings" target="_blank" rel="noopener"><code>$"{name}"</code></a></td><td>Taught first; untyped</td><td>Typed <code>$"%s{name}"</code> refuses an option</td><td>0 → 1</td></tr>
+      <tr><td>Java, Kotlin, Scala</td><td><code>int_overflow</code></td><td><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Math.html#addExact(long,long)" target="_blank" rel="noopener"><code>+</code></a></td><td>The default operator; wraps</td><td><code>Math.addExact</code> throws</td><td>0 → 0.25</td></tr>
+      <tr><td>PHP, Haskell, OCaml, C, C++ and others</td><td><code>command_injection</code></td><td><a href="https://www.php.net/manual/en/function.shell-exec.php" target="_blank" rel="noopener"><code>shell_exec</code> and each language's one-string call</a></td><td>The test asks for the one-string call, and its docs give no warning</td><td>An argument list (<code>callProcess</code>, <code>Unix.create_process</code>, <code>proc_open</code> with an array)</td><td>0 → 1</td></tr>
+      <tr><td>Go, Java, C#, Zig, Odin and others</td><td><code>unflushed_writer</code></td><td><a href="https://pkg.go.dev/bufio#NewWriter" target="_blank" rel="noopener"><code>bufio.NewWriter</code> and each language's buffered writer</a></td><td>The test asks for the buffered writer where one is paired with files</td><td>Writing through the file itself, or a whole-file write</td><td>0 → 1</td></tr>
+      <tr><td>JavaScript and others</td><td><code>split_character</code></td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice" target="_blank" rel="noopener"><code>String.prototype.slice</code></a></td><td>The usual substring call the test asks for</td><td>Slicing code points (<code>Array.from(s)</code>)</td><td>0 → 1</td></tr>
+    </tbody></table></div>
     <h3>Other considerations</h3>
     <ul class="notes muted">
       <li>Each program is written the way the language's documentation teaches first, with only the language, its standard library and its project's own libraries and tools.</li>
       <li>Each container gets 3 GB of memory and a 20 s run limit. <code>reference_cycle</code> and <code>lazy_accumulator</code> pass 12 GB through it, so a program that keeps what it drops runs out of memory and counts as a leak.</li>
-      <li>Races use rendezvous points so the same schedule runs every time; <code>use_after_close</code>, <code>concurrent_map_write</code> and <code>hash_matches_equality</code> run several times and keep the worst outcome.</li>
+      <li>Races use rendezvous points so the same schedule runs every time; <code>use_after_close</code>, <code>concurrent_map_write</code> and <code>hash_matches_equality</code> run several times and keep the worst outcome; the release build of <code>concurrent_map_write</code> runs up to 500 times, since a race it stops most of the time can still crash.</li>
       <li>C-family programs keep stale pointers in data structures, and Rust's <code>huge_allocation</code> uses <code>std::hint::black_box</code>, so the optimizer cannot remove the access a real program would make.</li>
       <li><code>async_reentrancy</code> is N/A where the standard library has no asynchronous tasks, since its threaded form is <code>check_then_act</code>. Languages without an early return write <code>lock_skipped_on_return</code> with the unlock after the conditional, so they cannot skip it.</li>
       <li><code>unsafe_deserialization</code> counts as prevented by design where the standard decoders build only the type the program declares, and is N/A where the standard library has no decoder. <code>short_read</code> uses the language's usual process call, so a language whose usual call returns the whole output reads all of it. <code>unflushed_writer</code> is judged by what the file holds after the program exits.</li>
@@ -416,20 +446,68 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
   });
 
   const SHORT = NAME;
+  const CMP_MAX = 5;
+  const TABS = { leaderboard: "leaderboard", tests: "tests", scoring: "scoring-panel", notes: "notes" };
+  const catIds = Object.keys(CAT);
+  let tab = "leaderboard";
+  let cat = catIds[0];
+  let openId = null;
+  let onlyDiffer = false;
+
+  // The address keeps the tab, the category or open test, and the languages compared.
+  function writeHash() {
+    let h = tab === "tests" ? (openId ? slug(openId) : "tests/" + cat) : tab;
+    if (chosen.length) h += "&compare=" + chosen.join(",");
+    history.replaceState(null, "", "#" + h);
+  }
+
+  const tabButtons = Object.keys(TABS).map((name) => [name, document.getElementById("tab-" + name)]);
+  function showTab(name, record) {
+    tab = name;
+    tabButtons.forEach(([n, b]) => {
+      const on = n === name;
+      b.setAttribute("aria-selected", String(on));
+      b.tabIndex = on ? 0 : -1;
+      document.getElementById(TABS[n]).hidden = !on;
+    });
+    if (record) writeHash();
+  }
+  tabButtons.forEach(([name, b], i) => {
+    b.addEventListener("click", () => showTab(name, true));
+    b.addEventListener("keydown", (e) => {
+      const step = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (!step) return;
+      const [next, nb] = tabButtons[(i + step + tabButtons.length) % tabButtons.length];
+      showTab(next, true);
+      nb.focus();
+    });
+  });
+
+  // Category buttons pick the grid the Tests tab shows.
+  const cats = document.getElementById("cats");
+  const catButtons = catIds.map((c) => {
+    const b = el("button", { type: "button", "aria-pressed": "false", text: CAT[c] + " (" + probs.filter((p) => p.category === c).length + ")" });
+    b.addEventListener("click", () => { cat = c; openId = null; document.getElementById("case").hidden = true; renderGrid(); writeHash(); });
+    cats.append(b);
+    return [c, b];
+  });
+
   const grids = document.getElementById("grids");
-  function renderGrids() {
-  grids.replaceChildren();
-  Object.keys(CAT).forEach((c) => {
-    const list = probs.filter((p) => p.category === c);
+  function renderGrid() {
+    catButtons.forEach(([c, b]) => b.setAttribute("aria-pressed", String(c === cat)));
+    grids.replaceChildren();
+    const langs = visibleLanguages();
+    const list = probs.filter((p) => p.category === cat)
+      .filter((p) => !(onlyDiffer && chosen.length > 1) || new Set(langs.map((L) => (L.results[p.id] || {}).s)).size > 1);
     const t = el("table", { class: "grid" });
-    const head = el("tr", {}, el("th", { class: "pname", text: CAT[c] + " (" + list.length + ")" }));
-    visibleLanguages().forEach((L) => head.append(el("th", { class: "lname", text: L.name })));
+    const head = el("tr", {}, el("th", { class: "pname", text: CAT[cat] + " (" + list.length + ")" }));
+    langs.forEach((L) => head.append(el("th", { class: "lname", text: L.name })));
     const body = el("tbody");
     list.forEach((p) => {
-      const tr = el("tr", {}, el("th", { class: "pname", scope: "row" },
+      const tr = el("tr", { class: p.id === openId ? "sel" : "" }, el("th", { class: "pname", scope: "row" },
         el("button", { type: "button", class: "plink", text: p.title })));
       tr.querySelector(".plink").addEventListener("click", () => openProblem(p.id, null, true));
-      visibleLanguages().forEach((L) => {
+      langs.forEach((L) => {
         const r = L.results[p.id] || { o: "MISSING" };
         const designed = (p.by_design || []).includes(L.id);
         const b = el("button", { type: "button", class: "gcell o-" + r.o + (designed ? " by-design" : ""),
@@ -441,32 +519,16 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
       });
       body.append(tr);
     });
-    const foot = el("tr", {}, el("th", { class: "pname", text: CAT[c] + " score" }));
-    visibleLanguages().forEach((L) => {
-      const can = list.filter((p) => L.results[p.id]?.o !== "INEXPRESSIBLE").length;
+    const foot = el("tr", {}, el("th", { class: "pname", text: CAT[cat] + " score" }));
+    langs.forEach((L) => {
+      const all = probs.filter((p) => p.category === cat);
+      const can = all.filter((p) => L.results[p.id]?.o !== "INEXPRESSIBLE").length;
       foot.append(el("td", { class: "gscore", title: "Cases counted in this category; N/A cases are excluded" },
-        pct(L[c]), el("span", { class: "gcan", text: can + " of " + list.length + " counted" })));
+        pct(L[cat]), el("span", { class: "gcan", text: can + " of " + all.length + " counted" })));
     });
     t.append(el("thead", {}, head), body, el("tfoot", {}, foot));
     grids.append(el("div", { class: "scroll grid-wrap" }, t));
-  });
   }
-  renderGrids();
-
-  const plist = document.getElementById("plist");
-  const select = document.getElementById("problem-select");
-  Object.keys(CAT).forEach((c) => {
-    plist.append(el("h4", { text: CAT[c] }));
-    const group = el("optgroup", { label: CAT[c] });
-    probs.filter((p) => p.category === c).forEach((p) => {
-      const b = el("button", { type: "button", "data-id": p.id, text: p.title });
-      b.addEventListener("click", () => openProblem(p.id, null, false));
-      plist.append(b);
-      group.append(el("option", { value: p.id, text: p.title }));
-    });
-    select.append(group);
-  });
-  select.addEventListener("change", () => openProblem(select.value, null, false));
 
   // One row per language; on narrow screens each row reads as a card, labelled from data-label.
   function evidence(p, langs, langId) {
@@ -487,139 +549,106 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     return el("div", { class: "scroll" }, t);
   }
 
-  function openProblem(id, langId, scroll) {
-    const p = probs.find((x) => x.id === id) || probs[0];
-    plist.querySelectorAll("button").forEach((b) => b.setAttribute("aria-current", String(b.dataset.id === p.id)));
-    select.value = p.id;
+  let openLang = null;
+  function renderCase() {
     const box = document.getElementById("case");
+    const p = probs.find((x) => x.id === openId);
+    if (!p) { box.hidden = true; return; }
     box.replaceChildren();
     box.append(el("span", { class: "eyebrow", text: CAT[p.category] + " · " + KIND[p.kind] }), el("h3", { text: p.title }));
-    const facts = el("dl", { class: "facts" },
+    box.append(el("dl", { class: "facts" },
       el("dt", { text: "Scenario" }), el("dd", { text: p.scenario }),
       el("dt", { text: "Best outcome" }), el("dd", { text: p.best }),
       el("dt", { text: "Program" }), el("dd", {}, el("code", { text: "<language>/" + p.id + ".*" }), " (select a language to open its source)"),
-      el("dt", { text: "Arguments" }), el("dd", {}, el("code", { text: p.args.length ? p.args.join(" ") : "none" })));
-    box.append(facts);
+      el("dt", { text: "Arguments" }), el("dd", {}, el("code", { text: p.args.length ? p.args.join(" ") : "none" }))));
     (p.by_design || []).forEach((id) => {
       const name = (D.languages.find((l) => l.id === id) || { name: id }).name;
       const why = (p.by_design_note || {})[id] || "The language accepts this behavior on purpose.";
       box.append(el("p", { class: "note" }, el("strong", { text: name + ", by design. " }), why));
     });
     const ranked = visibleLanguages().sort((a, b) => (b.results[p.id]?.s ?? -1) - (a.results[p.id]?.s ?? -1) || a.rank - b.rank);
-    box.append(evidence(p, ranked, langId));
-    if (scroll !== null && location.hash !== "#" + slug(p.id)) history.replaceState(null, "", "#" + slug(p.id));
-    if (scroll) document.getElementById("cases").scrollIntoView({ behavior: "smooth", block: "start" });
+    box.append(evidence(p, ranked, openLang));
+    box.hidden = false;
   }
-  openProblem(probs[0].id, null, null);
 
-  // Compare: up to five languages side by side, with each test's detail for just those languages.
-  const CMP_MAX = 5;
-  const byRank = [...D.languages].sort((a, b) => a.rank - b.rank);
-  let onlyDiffer = false;
+  function openProblem(id, langId, scroll) {
+    const p = probs.find((x) => x.id === id);
+    if (!p) return;
+    openId = p.id;
+    openLang = langId;
+    cat = p.category;
+    showTab("tests", false);
+    renderGrid();
+    renderCase();
+    writeHash();
+    if (scroll) document.getElementById("case").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  // Compare: up to five languages; every tab shows only them while any are chosen.
   const picker = document.getElementById("cmp-picker");
-  const cmpBody = document.getElementById("cmp-body");
+  const toggleBtn = document.getElementById("cmp-toggle");
+  const status = document.getElementById("cmp-status");
+  const clearBtn = document.getElementById("cmp-clear");
+  const differWrap = document.getElementById("cmp-differ-wrap");
+  const differ = document.getElementById("cmp-differ");
+  const byRank = [...D.languages].sort((a, b) => a.rank - b.rank);
   const pickButtons = byRank.map((L) => {
     const b = el("button", { type: "button", "aria-pressed": "false", text: L.name });
-    b.addEventListener("click", () => {
-      setChosen(chosen.includes(L.id) ? chosen.filter((x) => x !== L.id) : [...chosen, L.id], true);
-    });
+    b.addEventListener("click", () => setChosen(chosen.includes(L.id) ? chosen.filter((x) => x !== L.id) : [...chosen, L.id], true));
     picker.append(b);
     return [L.id, b];
   });
+  toggleBtn.addEventListener("click", () => {
+    picker.hidden = !picker.hidden;
+    toggleBtn.setAttribute("aria-expanded", String(!picker.hidden));
+  });
+  clearBtn.addEventListener("click", () => setChosen([], true));
+  differ.addEventListener("change", () => { onlyDiffer = differ.checked; renderGrid(); });
 
-  function setChosen(ids, record) {
-    chosen = [...new Set(ids)].slice(0, CMP_MAX);
-    renderRanking();
-    renderGrids();
-    openProblem(select.value || probs[0].id, null, null);
-    renderCompare(record);
-  }
-
-  function cmpDetail(p, langs) {
-    const box = el("div", { class: "case" });
-    box.append(el("span", { class: "eyebrow", text: CAT[p.category] + " · " + KIND[p.kind] }), el("h3", { text: p.title }));
-    box.append(el("dl", { class: "facts" },
-      el("dt", { text: "Scenario" }), el("dd", { text: p.scenario }),
-      el("dt", { text: "Best outcome" }), el("dd", { text: p.best }),
-      el("dt", { text: "Arguments" }), el("dd", {}, el("code", { text: p.args.length ? p.args.join(" ") : "none" }))));
-    box.append(evidence(p, langs, null));
-    return box;
-  }
-
-  function renderCompare(record) {
+  function renderCmpBar() {
     pickButtons.forEach(([id, b]) => {
       const on = chosen.includes(id);
       b.setAttribute("aria-pressed", String(on));
       b.disabled = !on && chosen.length >= CMP_MAX;
     });
-    if (record) history.replaceState(null, "", chosen.length ? "#compare=" + chosen.join(",") : "#compare");
-    cmpBody.replaceChildren();
-    const langs = chosen.map((id) => D.languages.find((L) => L.id === id)).filter(Boolean);
-    if (!langs.length) {
-      cmpBody.append(el("p", { class: "muted", text: "No languages selected. All languages are shown in the page data." }));
-      return;
-    }
-    const tools = el("div", { class: "cmp-tools" }, el("span", { text: langs.length + " of " + CMP_MAX + " selected" }));
-    const clear = el("button", { type: "button", text: "Clear" });
-    clear.addEventListener("click", () => setChosen([], true));
-    const differ = el("input", { type: "checkbox", id: "cmp-differ" });
-    differ.checked = onlyDiffer;
-    differ.addEventListener("change", () => { onlyDiffer = differ.checked; renderCompare(false); });
-    tools.append(clear, el("label", { for: "cmp-differ" }, differ, " Only tests where they differ"));
-    cmpBody.append(tools);
-
-    const rows = [["Score", "score"], ...Object.entries(CAT).map(([c, name]) => [name, c]),
-      ["Caught or impossible by design", "caught"]];
-    const sum = el("table", { class: "cmp-summary" });
-    sum.append(el("thead", {}, el("tr", {}, el("th", { text: "" }), ...langs.map((L) => el("th", { text: L.name + " (#" + L.rank + ")" })))));
-    const sb = el("tbody");
-    rows.forEach(([label, k]) => sb.append(el("tr", {}, el("td", { text: label }), ...langs.map((L) => el("td", { class: k === "score" ? "" : "breakdown", text: pct(L[k]) })))));
-    sum.append(sb);
-    cmpBody.append(el("div", { class: "scroll" }, sum));
-
-    Object.keys(CAT).forEach((c) => {
-      const list = probs.filter((p) => p.category === c)
-        .filter((p) => !onlyDiffer || new Set(langs.map((L) => (L.results[p.id] || {}).s)).size > 1);
-      if (!list.length) return;
-      const t = el("table", { class: "grid cmp" });
-      t.append(el("thead", {}, el("tr", {}, el("th", { class: "pname", text: CAT[c] + " (" + list.length + ")" }), ...langs.map((L) => el("th", { class: "lname", text: L.name })))));
-      const body = el("tbody");
-      list.forEach((p) => {
-        const detail = el("tr", { class: "cmp-detail", hidden: "" });
-        const toggle = () => {
-          if (detail.hidden) { detail.replaceChildren(el("td", { colspan: String(langs.length + 1) }, cmpDetail(p, langs))); detail.hidden = false; }
-          else detail.hidden = true;
-        };
-        const title = el("button", { type: "button", class: "plink", text: p.title });
-        title.addEventListener("click", toggle);
-        const tr = el("tr", {}, el("th", { class: "pname", scope: "row" }, title));
-        langs.forEach((L) => {
-          const r = L.results[p.id] || { o: "MISSING" };
-          const b = el("button", { type: "button", class: "gcell o-" + r.o, title: L.name + " · " + p.title + ": " + (DESC[r.o] || r.o) + (r.rel ? " (only the debug build stopped)" : ""), text: NAME[r.o] || r.o });
-          b.append(...tags(r));
-          b.addEventListener("click", toggle);
-          tr.append(el("td", {}, b));
-        });
-        body.append(tr, detail);
-      });
-      const foot = el("tr", {}, el("th", { class: "pname", text: CAT[c] + " score" }), ...langs.map((L) => el("td", { class: "gscore", text: pct(L[c]) })));
-      t.append(body, el("tfoot", {}, foot));
-      cmpBody.append(el("div", { class: "scroll cmp-grid-scroll" }, t));
-    });
+    const names = chosen.map((id) => D.languages.find((L) => L.id === id).name);
+    status.textContent = names.length ? names.join(", ") + " (" + names.length + " of " + CMP_MAX + ")" : "All languages shown. Choose up to " + CMP_MAX + " to compare.";
+    clearBtn.hidden = !names.length;
+    differWrap.hidden = names.length < 2;
   }
-  renderCompare(false);
 
-  // The hash names a test (#p-...), with #x-... an older name for one, or a comparison (#compare=a,b).
+  function setChosen(ids, record) {
+    chosen = [...new Set(ids)].slice(0, CMP_MAX);
+    renderRanking();
+    renderGrid();
+    if (openId) renderCase();
+    renderCmpBar();
+    if (record) writeHash();
+  }
+
+  // The hash names a tab (#leaderboard, #tests/<category>, #scoring, #notes) or a test (#p-..., with
+  // #x-... an older name for one), and may carry &compare=a,b; a bare #compare=a,b is an older link.
   function route() {
-    const h = location.hash.slice(1);
-    if (h.startsWith("compare")) {
-      const ids = h.slice("compare=".length).split(",").filter((id) => D.languages.some((L) => L.id === id));
-      setChosen(ids, false);
-      document.getElementById("compare").scrollIntoView({ block: "start" });
+    const h = decodeURIComponent(location.hash.slice(1));
+    const [view, ...rest] = h.split("&");
+    const cmpPart = (view.startsWith("compare") ? view : rest.find((x) => x.startsWith("compare=")) || "");
+    const ids = cmpPart.slice("compare=".length).split(",").filter((id) => D.languages.some((L) => L.id === id));
+    chosen = ids.slice(0, CMP_MAX);
+    renderRanking();
+    renderCmpBar();
+    const pid = view.startsWith("p-") || view.startsWith("x-") ? view.slice(2).replace(/-/g, "_") : null;
+    if (pid && probs.some((p) => p.id === pid)) { openProblem(pid, null, false); return; }
+    if (view.startsWith("tests")) {
+      const c = view.split("/")[1];
+      if (c && CAT[c]) cat = c;
+      openId = null;
+      renderGrid();
+      document.getElementById("case").hidden = true;
+      showTab("tests", false);
       return;
     }
-    const id = h.startsWith("p-") || h.startsWith("x-") ? h.slice(2).replace(/-/g, "_") : null;
-    if (id && probs.some((p) => p.id === id)) openProblem(id, null, true);
+    renderGrid();
+    showTab(TABS[view] ? view : "leaderboard", false);
   }
   window.addEventListener("hashchange", route);
   route();

@@ -1,0 +1,6 @@
+use std::process
+
+fn main() {
+    process::run("sh", #["-c", "exit 3"]) // CONTROL! let _ = process::run("sh", #["-c", "exit 3"])
+    println("backed up")
+}

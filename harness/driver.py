@@ -179,7 +179,7 @@ def build(lang, work, steps=None):
     return True, "\n".join(combined)
 
 
-def run_worst(problem, spec, run_template, work):
+def run_worst(problem, spec, run_template, work, runs=None):
     """Run the built program; answer (score, outcome, status, stdout, stderr, secs) of its worst run."""
     limit = f"ulimit -n {problem['nofile']} && " if problem.get("nofile") else ""
     run_cmd = limit + fill(run_template, {"dir": work}) + "".join(
@@ -188,7 +188,7 @@ def run_worst(problem, spec, run_template, work):
     # A race shows only in some schedules, so the worst of several runs counts.
     worst = None
     output_file = problem.get("output_file")
-    for _ in range(problem.get("runs", 1)):
+    for _ in range(runs or problem.get("runs", 1)):
         if output_file and os.path.exists(output_file):
             os.remove(output_file)
         status, timed_out, out, err, secs = execute(run_cmd, work, 20)
@@ -409,7 +409,9 @@ def main():
             rwork = stage(lang, pid, source, "release")
             rok, rout = build(lang, rwork, lang["release"]["build"])
             if rok:
-                _, rel_outcome, _, rel_out, rel_err, _ = run_worst(problem, spec, lang["release"]["run"], rwork)
+                # A race the release build stops only most of the time needs more runs to show its worst case.
+                _, rel_outcome, _, rel_out, rel_err, _ = run_worst(
+                    problem, spec, lang["release"]["run"], rwork, problem.get("release_runs"))
                 record["release"] = rel_outcome
                 record["release_stdout"] = clip(rel_out, 400)
                 record["release_stderr"] = clip(rel_err, 600)

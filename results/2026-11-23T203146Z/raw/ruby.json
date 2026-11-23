@@ -1,0 +1,1148 @@
+{
+ "lang": "ruby",
+ "version": "ruby 4.0.10 (2026-11-19 revision a704b7cd95) +PRISM [x86_64-linux]",
+ "results": {
+  "null_deref": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "main.rb:8:in '<main>': undefined method 'name' for nil (NoMethodError)\n\nputs u.name.length\n      ^^^^^"
+  },
+  "int_overflow": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "main.rb:2:in 'Integer#/': divided by 0 (ZeroDivisionError)\n\tfrom main.rb:2:in '<main>'"
+  },
+  "shift_overflow": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "18446744073709551616",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "100000000000000000000",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "main.rb:2:in 'String#+': no implicit conversion of Integer into String (TypeError)\n\n  a + b\n      ^\n\tfrom main.rb:2:in 'Object#add'\n\tfrom main.rb:6:in '<main>'"
+  },
+  "missing_return": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "nil",
+   "stderr": ""
+  },
+  "non_exhaustive_match": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "nil",
+   "stderr": ""
+  },
+  "uninitialized_variable": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "nil",
+   "stderr": ""
+  },
+  "missing_argument": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "main.rb:1:in 'Object#area': wrong number of arguments (given 1, expected 2) (ArgumentError)\n\n    caller: main.rb:5\n    | puts area(3)\n           ^^^^\n    callee: main.rb:1\n    | def area(w, h)\n          ^^^^\n\tfrom main.rb:5:in '<main>'"
+  },
+  "misspelled_field": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "main.rb:10:in '<main>': undefined method 'colour=' for an instance of Config (NoMethodError)\n\ncfg.colour = \"red\"\n   ^^^^^^^^^\nDid you mean?  color="
+  },
+  "assign_in_condition": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": true,
+   "all_warnings": "main.rb:2: warning: found '= literal' in conditional, should be ==",
+   "warnings": "main.rb:2: warning: found '= literal' in conditional, should be ==",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "one",
+   "stderr": "main.rb:2: warning: found '= literal' in conditional, should be =="
+  },
+  "switch_fallthrough": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "have 0",
+   "stderr": ""
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "13",
+   "stderr": ""
+  },
+  "covariant_array_write": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "meow",
+   "stderr": ""
+  },
+  "mutate_while_iterating": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1,2,3",
+   "stderr": ""
+  },
+  "self_deadlock": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "main.rb:5:in 'Thread::Mutex#synchronize': deadlock; recursive locking (ThreadError)\n\tfrom main.rb:5:in 'Object#deposit'\n\tfrom main.rb:8:in 'block in <main>'\n\tfrom main.rb:8:in 'Thread::Mutex#synchronize'\n\tfrom main.rb:8:in '<main>'"
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "main.rb:2:in 'IO.write': No such file or directory @ rb_sysopen - /nonexistent/dir/out.txt (Errno::ENOENT)\n\tfrom main.rb:2:in 'Object#save'\n\tfrom main.rb:5:in '<main>'"
+  },
+  "sort_with_nan": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "main.rb:2:in 'Array#sort': comparison of Float with 3.0 failed (ArgumentError)\n\tfrom main.rb:2:in '<main>'"
+  },
+  "integer_average": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "3.0",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "668",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "not a",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": true,
+   "all_warnings": "main.rb:2: warning: comparison '<' after comparison",
+   "warnings": "main.rb:2: warning: comparison '<' after comparison",
+   "exit": 1,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "main.rb:2: warning: comparison '<' after comparison\nmain.rb:2:in '<main>': undefined method '<' for true (NoMethodError)\n\ninside = 1 < x < 3\n               ^"
+  },
+  "lost_update_on_copy": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "150",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "main.rb:34:in 'Thread#join': No live threads left. Deadlock? (fatal)\n3 threads, 3 sleeps current:0x0000623af95cee20 main thread:0x0000623af92d00b0\n* #<Thread:0x000072c6d8ad7f20 sleep_forever>\n   rb_thread_t:0x0000623af92d00b0 native:0x000072c6d8cbd800 int:0\n   main.rb:34:in 'Thread#join'\n   main.rb:34:in '<main>'\n* #<Thread:0x000072c6bd82a838 main.rb:32 sleep_forever>\n   rb_thread_t:0x0000623af95cee20 native:0x000072c6bd70e6c0 int:0\n    depended by: tb_thread_id:0x0000623af92d00b0\n   main.rb:28:in 'Thread::Mutex#synchronize'\n   main.rb:28:in 'block in Object#transfer'\n   main.rb:26:in 'Thread::Mutex#synchronize'\n   main.rb:26:in 'Object#transfer'\n   main.rb:32:in 'block in <main>'\n* #<Thread:0x000072c6bd82a720 main.rb:33 sleep_forever>\n   rb_thread_t:0x0000623af95ceab0 native:0x000072c6bd50c6c0 int:0 mutex:2 cond:1\n   main.rb:28:in 'Thread::Mutex#synchronize'\n   main.rb:28:in 'block in Object#transfer'\n   main.rb:26:in 'Thread::Mutex#synchronize'\n   main.rb:26:in 'Object#transfer'\n   main.rb:33:in 'block in <main>'\n\n\tfrom main.rb:34:in '<main>'"
+  },
+  "path_join_escape": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "inside",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "no match",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "odd",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "ruby: main.rb:4: syntax error found (SyntaxError)\n  2 |   \"alice\",\n  3 |   \"bob\" # CONTROL! \"bob\",\n> 4 |   \"carol\",\n    | ^ unexpected string literal; expected a `,` separator for the array elements\n  5 | ]\n  6 | puts names.size"
+  },
+  "return_in_finally": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": true,
+   "all_warnings": "main.rb:3: warning: statement not reached",
+   "warnings": "main.rb:3: warning: statement not reached",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "main.rb:3: warning: statement not reached"
+  },
+  "worker_failure_lost": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "#<Thread:0x00007198ee5eae68 main.rb:2 run> terminated with exception (report_on_exception is true):\nmain.rb:3:in 'Kernel#Integer': invalid value for Integer(): \"x\" (ArgumentError)\n\n  ARGV.each { |item| total += Integer(item) }\n                                      ^^^^\n\tfrom main.rb:3:in 'block (2 levels) in <main>'\n\tfrom main.rb:3:in 'Array#each'\n\tfrom main.rb:3:in 'block in <main>'\nmain.rb:3:in 'Kernel#Integer': invalid value for Integer(): \"x\" (ArgumentError)\n\n  ARGV.each { |item| total += Integer(item) }\n                                      ^^^^\n\tfrom main.rb:3:in 'block (2 levels) in <main>'\n\tfrom main.rb:3:in 'Array#each'\n\tfrom main.rb:3:in 'block in <main>'"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": true,
+   "all_warnings": "main.rb:3: warning: assigned but unused variable - task",
+   "warnings": "main.rb:3: warning: assigned but unused variable - task",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "0",
+   "stderr": "main.rb:3: warning: assigned but unused variable - task"
+  },
+  "format_arg_mismatch": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.rb:2: warning: assigned but unused variable - total",
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "main.rb:2: warning: assigned but unused variable - total\nmain.rb:3:in 'Kernel#format': too few arguments (ArgumentError)\n\nputs format(\"%d of %d\", done) # CONTROL! puts format(\"%d of %d\", done, total)\n            ^^^^^^^^^^^^^^^^\n\tfrom main.rb:3:in '<main>'"
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "main.rb:3:in '<main>': undefined method '+' for nil (NoMethodError)\n\nputs stock[name] + 5\n                 ^"
+  },
+  "mutable_hash_key": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "lost",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "done",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "-20",
+   "stderr": ""
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "missing",
+   "stderr": ""
+  },
+  "use_after_close": {
+   "outcome": "TRAPPED",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "main.rb:4:in 'IO#write': closed stream (IOError)\n\tfrom main.rb:4:in '<main>'"
+  },
+  "dead_store": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": true,
+   "all_warnings": "main.rb:2: warning: assigned but unused variable - total",
+   "warnings": "main.rb:2: warning: assigned but unused variable - total",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "40",
+   "stderr": "main.rb:2: warning: assigned but unused variable - total"
+  },
+  "panic_under_lock": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "unbalanced",
+   "stderr": "#<Thread:0x00007900ab4aad10 main.rb:4 run> terminated with exception (report_on_exception is true):\nmain.rb:7:in 'block (2 levels) in <main>': crash mid-update (RuntimeError)\n\tfrom main.rb:5:in 'Thread::Mutex#synchronize'\n\tfrom main.rb:5:in 'block in <main>'\nworker failed: crash mid-update"
+  },
+  "split_character": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "a\ud83d\udc4d",
+   "stderr": ""
+  },
+  "oob_write": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": ""
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.rb:5: warning: assigned but unused variable - c",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1234",
+   "stderr": "main.rb:5: warning: assigned but unused variable - c"
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.rb:2: warning: assigned but unused variable - a\nmain.rb:6: warning: assigned but unused variable - y",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1",
+   "stderr": "main.rb:2: warning: assigned but unused variable - a\nmain.rb:6: warning: assigned but unused variable - y"
+  },
+  "dangling_stack_ref": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "main.rb:4:in 'Object#walk': stack level too deep (SystemStackError)\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\t ... 10908 levels...\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:7:in '<main>'"
+  },
+  "concurrent_map_write": {
+   "outcome": "CORRECT",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.12,
+   "stdout": "800000",
+   "stderr": ""
+  },
+  "huge_allocation": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "main.rb: failed to allocate memory (NoMemoryError)"
+  },
+  "fd_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "main.rb:2:in '<main>': undefined method 'length' for an instance of Integer (NoMethodError)\n\nputs v.length\n      ^^^^^^^"
+  },
+  "format_string": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "main.rb:1:in 'Kernel#format': too few arguments (ArgumentError)\n\nputs format(ARGV[0])\n            ^^^^^^^\n\tfrom main.rb:1:in '<main>'"
+  },
+  "trojan_source": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "admin",
+   "stderr": ""
+  },
+  "unsafe_deserialization": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "null_byte_path": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "admin\nadmin",
+   "stderr": ""
+  },
+  "deep_structure_release": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.12,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": true,
+   "all_warnings": "main.rb:2: warning: literal string will be frozen in the future (run with --debug-frozen-string-literal for more information)",
+   "warnings": "main.rb:2: warning: literal string will be frozen in the future (run with --debug-frozen-string-literal for more information)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "jello",
+   "stderr": "main.rb:2: warning: literal string will be frozen in the future (run with --debug-frozen-string-literal for more information)"
+  },
+  "reference_cycle": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.71,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "complete_init": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "main.rb:3:in 'Data#initialize': missing keyword: :retries (ArgumentError)\n\n    caller: main.rb:3\n    | c = Config.new(timeout: 30) # CONTROL! c = Config.new(timeout: 30, retries: 3)\n                ^^^^\n\tfrom main.rb:3:in 'Config.new'\n\tfrom main.rb:3:in '<main>'"
+  },
+  "newtype": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "5.0",
+   "stderr": ""
+  },
+  "strong_enum": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": ""
+  },
+  "override_check": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "shape",
+   "stderr": ""
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "before",
+   "stderr": "main.rb:7:in '<main>': undefined method '+' for nil (NoMethodError)\n\nputs find(2) + 1\n             ^"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "hello,",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "main.rb:3:in '<main>': undefined method '+' for nil (NoMethodError)\n\nputs line[pos + 1..]\n              ^"
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "main.rb:2:in '<main>': undefined method '+' for nil (NoMethodError)\n\nputs xs.max + 1\n            ^"
+  },
+  "readonly_param": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "no_implicit_conversion": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "3000000000",
+   "stderr": ""
+  },
+  "generic_constraint": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "main.rb:3:in 'Array#sort': comparison of Point with Point failed (ArgumentError)\n\tfrom main.rb:3:in '<main>'"
+  },
+  "lossy_int_to_float": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "9007199254740993",
+   "stderr": ""
+  },
+  "const_index_bounds": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": ""
+  },
+  "lazy_accumulator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 1.01,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "main.rb:3:in 'String#*': bignum too big to convert into 'long' (RangeError)\n\tfrom main.rb:3:in '<main>'"
+  },
+  "const_overflow": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "9460800000000000000",
+   "stderr": ""
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": "#<Thread:0x000079a72110af80 main.rb:2 run> terminated with exception (report_on_exception is true):\nmain.rb:2:in 'Kernel#Integer': invalid value for Integer(): \"x\" (ArgumentError)\n\nThread.new { answer << Integer(\"x\") }\n                               ^^^\n\tfrom main.rb:2:in 'block in <main>'"
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.53,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "unreachable_code": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.rb:4: warning: statement not reached",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "ok",
+   "stderr": "main.rb:4: warning: statement not reached"
+  },
+  "checked_interpolation": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.rb:1: warning: assigned but unused variable - name",
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "main.rb:1: warning: assigned but unused variable - name\nmain.rb:2:in '<main>': undefined local variable or method 'nmae' for main (NameError)\n\nputs \"hello #{nmae}\"\n              ^^^^\nDid you mean?  name"
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "other",
+   "stderr": ""
+  },
+  "duplicate_key": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": true,
+   "all_warnings": "main.rb:1: warning: key \"a\" is duplicated and overwritten on line 1",
+   "warnings": "main.rb:1: warning: key \"a\" is duplicated and overwritten on line 1",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1",
+   "stderr": "main.rb:1: warning: key \"a\" is duplicated and overwritten on line 1"
+  },
+  "char_arithmetic": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "main.rb:2:in 'String#+': no implicit conversion of Integer into String (TypeError)\n\nputs c + 1\n         ^\n\tfrom main.rb:2:in '<main>'"
+  },
+  "json_big_integer": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "9007199254740993",
+   "stderr": ""
+  },
+  "comparison_statement": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.rb:2: warning: possibly useless use of == in void context",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "0",
+   "stderr": "main.rb:2: warning: possibly useless use of == in void context"
+  },
+  "structural_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "hash_matches_equality": {
+   "outcome": "SILENT",
+   "runs": 20,
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": ""
+  },
+  "enum_from_int": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no enum type"
+  },
+  "bitwise_on_bool": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "no",
+   "stderr": ""
+  },
+  "readonly_field": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "main.rb:4:in '<main>': undefined method 'port=' for an instance of Config (NoMethodError)\n\nc.port = 1\n ^^^^^^^"
+  },
+  "bool_condition": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "same",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "main.rb:1:in 'IO#close': No space left on device @ fptr_finalize_flush - /dev/full (Errno::ENOSPC)\n\tfrom main.rb:1:in 'IO.open'\n\tfrom main.rb:1:in '<main>'"
+  },
+  "short_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.23,
+   "stdout": "HELLO-WORLD-1234",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "close failed",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "total=42",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "backed up",
+   "stderr": ""
+  },
+  "nullable_field": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "main.rb:3:in '<main>': undefined method 'length' for nil (NoMethodError)\n\nputs decoded.name.length\n                 ^^^^^^^"
+  },
+  "stale_null_check": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "main.rb:11:in '<main>': undefined method 'name' for nil (NoMethodError)\n\n  puts session.user.name.length\n                   ^^^^^"
+  },
+  "empty_slot": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "main.rb:6:in '<main>': undefined method 'name' for nil (NoMethodError)\n\nputs users[0].name.length\n             ^^^^^"
+  },
+  "typed_nil": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "check_then_act": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "99",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "main.rb:8:in 'Thread#join': No live threads left. Deadlock? (fatal)\n2 threads, 2 sleeps current:0x00006474058ef100 main thread:0x00006474058290b0\n* #<Thread:0x000078a3a9837f50 sleep_forever>\n   rb_thread_t:0x00006474058290b0 native:0x000078a3a9a22800 int:0\n   main.rb:8:in 'Thread#join'\n   main.rb:8:in '<main>'\n* #<Thread:0x000078a38e59adf8 main.rb:4 sleep_forever>\n   rb_thread_t:0x00006474058ef100 native:0x000078a38e47e6c0 int:0\n    depended by: tb_thread_id:0x00006474058290b0\n   main.rb:5:in 'Thread::ConditionVariable#wait'\n   main.rb:5:in 'block (2 levels) in <main>'\n   main.rb:5:in 'Thread::Mutex#synchronize'\n   main.rb:5:in 'block in <main>'\n\n\tfrom main.rb:8:in '<main>'"
+  },
+  "async_reentrancy": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "Fibers have no scheduler in the standard library; the threaded form of this race is check_then_act"
+  },
+  "lock_skipped_on_return": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "main.rb:13:in 'Thread#join': No live threads left. Deadlock? (fatal)\n2 threads, 2 sleeps current:0x0000644d86518c70 main thread:0x0000644d8622a0b0\n* #<Thread:0x0000732614a17f40 sleep_forever>\n   rb_thread_t:0x0000644d8622a0b0 native:0x0000732614c04800 int:0\n   main.rb:13:in 'Thread#join'\n   main.rb:13:in '<main>'\n* #<Thread:0x00007325f977ae60 main.rb:12 sleep_forever>\n   rb_thread_t:0x0000644d86518c70 native:0x00007325f965e6c0 int:0\n    depended by: tb_thread_id:0x0000644d8622a0b0\n   main.rb:5:in 'Thread::Mutex#lock'\n   main.rb:5:in 'Object#withdraw'\n   main.rb:12:in 'block in <main>'\n\n\tfrom main.rb:13:in '<main>'"
+  }
+ }
+}

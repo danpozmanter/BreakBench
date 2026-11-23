@@ -293,13 +293,13 @@
     "ext": "scala",
     "file": "main.scala",
     "build": [
-      "mkdir -p out && scalac -Wall -cp /opt/scalaxml/scala-xml.jar -d out main.scala"
+      "mkdir -p out && scalac -Wall -deprecation -feature -unchecked -Wnonunit-statement -Wvalue-discard -Wsafe-init -Wimplausible-patterns -Wtostring-interpolated -Wshadow:all -Wunused:all -cp /opt/scalaxml/scala-xml.jar -d out main.scala"
     ],
     "run": "java -ea -cp out:/opt/scalaxml/scala-xml.jar:$(find /opt/scala/maven2 -name \"scala*-library*.jar\" | tr \"\\n\" \":\") Main",
     "version": "scalac -version 2>&1 | tail -1",
     "release": {
       "build": [
-        "mkdir -p out && scalac -Wall -cp /opt/scalaxml/scala-xml.jar -d out main.scala"
+        "mkdir -p out && scalac -Wall -deprecation -feature -unchecked -Wnonunit-statement -Wvalue-discard -Wsafe-init -Wimplausible-patterns -Wtostring-interpolated -Wshadow:all -Wunused:all -cp /opt/scalaxml/scala-xml.jar -d out main.scala"
       ],
       "run": "java -cp out:/opt/scalaxml/scala-xml.jar:$(find /opt/scala/maven2 -name \"scala*-library*.jar\" | tr \"\\n\" \":\") Main"
     }

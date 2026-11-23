@@ -1,3 +1,5 @@
+require "json"
+
 Session = Struct.new(:user)
 
 class Cleanup
@@ -10,9 +12,10 @@ class Cleanup
   end
 end
 
+# Marshal's documentation sends untrusted data to JSON.
 attacker = Marshal.dump(Cleanup.new)
 begin
-  session = Marshal.load(attacker)
+  session = Session.new(JSON.parse(attacker).fetch("user"))
   puts session.user
 rescue StandardError
   puts "rejected"

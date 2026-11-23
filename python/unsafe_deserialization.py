@@ -1,3 +1,4 @@
+import json
 import pickle
 from dataclasses import dataclass
 
@@ -15,9 +16,10 @@ class Cleanup:
         print("cleanup ran")
 
 
+# pickle's documentation sends untrusted data to a format such as JSON.
 attacker = pickle.dumps(Cleanup())
 try:
-    session = pickle.loads(attacker)
+    session = Session(**json.loads(attacker))
     print(session.user)
 except Exception:
     print("rejected")

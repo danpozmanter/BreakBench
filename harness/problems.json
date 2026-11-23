@@ -885,7 +885,8 @@
       "scenario": "8 threads each add 100,000 different keys to one shared map with no lock. The program prints the map's size.",
       "best": "800000, a detected concurrent-write error, or a refusal. A wrong size or a crash means the map was corrupted.",
       "warn": "\\brace\\b|data race|race condition|not thread|concurren|sendable|unsynchroni",
-      "runs": 50
+      "runs": 50,
+      "release_runs": 500
     },
     {
       "category": "memory",
@@ -957,9 +958,32 @@
       "expect": "^rejected$",
       "answer": "cleanup ran",
       "title": "Restoring an object from untrusted bytes (CWE-502)",
-      "scenario": "The program restores a session a client sent with the standard library's general object serialization, the one that saves and restores values of any type, and prints its user, or rejected if it is not a session. The attacker's bytes name the program's Cleanup type instead, whose restore hook prints cleanup ran. A language whose standard decoders build only the type the program declares cannot make this error.",
+      "scenario": "The program restores a session a client sent with the standard library's general object serialization, the one that saves and restores values of any type, and prints its user, or rejected if it is not a session. The attacker's bytes name the program's Cleanup type instead, whose restore hook prints cleanup ran. A language whose standard decoders build only the type the program declares cannot make this error. Where that serializer's documentation sends untrusted data elsewhere, the program follows it.",
       "best": "rejected: the decoder builds nothing the program did not ask for. cleanup ran shows attacker bytes chose the code that ran.",
       "warn": "untrusted|insecure|unsafe deserializ"
+    },
+    {
+      "id": "null_byte_path",
+      "category": "security",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^rejected$",
+      "answer": "secret",
+      "title": "A NUL byte that cuts a file name short (CWE-158)",
+      "scenario": "The program serves only .png files from /tmp/bb_files, where report.txt holds the line secret. The requested name, decoded from the client, is report.txt, a NUL byte, then .png. The program checks that the name ends in .png, opens /tmp/bb_files/ plus the name with the standard file call, and prints the file, or rejected if the open fails.",
+      "best": "rejected: the file call refuses a name with a NUL byte in it. secret shows the name was cut at the NUL and the check was bypassed.",
+      "warn": "null byte|nul byte|embedded nul|null character|nul character"
+    },
+    {
+      "id": "homoglyph_identifier",
+      "category": "security",
+      "kind": "static",
+      "args": [],
+      "expect": "^admin\nguest$",
+      "title": "Two names that look the same (CVE-2021-42694)",
+      "scenario": "is_admin(user) grants admin only to root. A second function whose name looks identical, but spells its a with the Cyrillic letter U+0430, always grants it. The program checks root with is_admin and guest with the look-alike, and prints admin or guest for each.",
+      "best": "admin then guest, a refusal of the look-alike name, or a warning that two names are confusable. admin twice shows the guest check called a function the reader cannot tell apart from the real one.",
+      "warn": "confusabl|homoglyph|look(s)? alike|mixed.script|non-?ascii|uncommon (unicode )?codepoint|cyrillic"
     },
     {
       "category": "memory",
@@ -1438,6 +1462,18 @@
       "scenario": "The program writes the line total=42 to /tmp/bb_report.txt the language's usual way to write a file line by line (through its standard buffered writer where it pairs one with files), never flushes or closes it, and exits normally. The test reads the file after the program ends.",
       "best": "total=42: the data reaches the file because the writer is unbuffered, is flushed when it goes out of scope or at exit, or the compiler refuses the unclosed writer. An empty file shows the buffered line was lost.",
       "warn": "flush|dispose|CA2000|not closed|unclosed|never closed|resource leak"
+    },
+    {
+      "id": "child_exit_status",
+      "category": "errors",
+      "kind": "dynamic",
+      "args": [],
+      "expect": null,
+      "answer": "backed up",
+      "title": "A failed command treated as a success",
+      "scenario": "A backup step, sh -c 'exit 3', fails. The program runs it with the language's usual call to run a command and wait for it, ignores how it exited, and prints backed up.",
+      "best": "A refusal to ignore the result, or a clear error from the call. backed up shows the failure went unseen.",
+      "warn": "unused|must be used|ignored|discard|exit (status|code)|non-?zero"
     },
     {
       "id": "nullable_field",

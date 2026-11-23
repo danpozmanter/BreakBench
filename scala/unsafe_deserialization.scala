@@ -1,4 +1,4 @@
-import java.io.{ByteArrayInputStream, ByteArrayOutputStream, ObjectInputStream, ObjectOutputStream}
+import java.io.{ByteArrayInputStream, ByteArrayOutputStream, InvalidClassException, ObjectInputFilter, ObjectInputStream, ObjectOutputStream}
 
 case class Session(user: String)
 
@@ -18,7 +18,9 @@ object Main {
     out.writeObject(Cleanup())
     out.close()
     val in = ObjectInputStream(ByteArrayInputStream(bytes.toByteArray))
+    // ObjectInputStream's documentation sends untrusted data through a serialization filter.
+    in.setObjectInputFilter(ObjectInputFilter.Config.createFilter("Session;java.base/*;!*"))
     try println(in.readObject().asInstanceOf[Session].user)
-    catch case _: ClassCastException => println("rejected")
+    catch case _: ClassCastException | _: InvalidClassException => println("rejected")
   }
 }

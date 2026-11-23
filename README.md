@@ -26,7 +26,7 @@ images.
 
 ## Tests
 
-123 tests in eight categories. Each has a CWE or CERT entry or appears in a language's pitfall list,
+126 tests in eight categories. Each has a CWE or CERT entry or appears in a language's pitfall list,
 reads the same in every language, and covers a mistake no other test covers.
 `harness/problems.json` describes each one.
 
@@ -35,8 +35,8 @@ reads the same in every language, and covers a mistake no other test covers.
 | Numbers | 17 | Arithmetic or a conversion gives the wrong value: overflow, a narrowing cast, a negative remainder, float equality, a large integer read from JSON, ... |
 | Types and APIs | 30 | A value or call is used the wrong way: text passed as a number, a missing match case, a misspelled field, a list changed while looping over it, a copy taken for a reference, ... |
 | Syntax traps | 21 | The code reads as one thing and does another: an assignment in a condition, a dangling else, a missing comma, a stray return, a variable declared where one was meant to be set, ... |
-| Error handling | 8 | A failure goes unseen: an ignored result, a return in a cleanup block, a cleanup failure that hides the original error, a read that returns part of a message, a buffered file never flushed, ... |
-| Security | 7 | Input from outside takes control: command injection, a path that escapes its folder, user text as a format string, an object restored from untrusted bytes, hidden text-direction characters in source, ... |
+| Error handling | 9 | A failure goes unseen: an ignored result, a return in a cleanup block, a cleanup failure that hides the original error, a read that returns part of a message, a buffered file never flushed, a failed command treated as a success, ... |
+| Security | 9 | Input from outside takes control: command injection, a path that escapes its folder, a NUL byte that cuts a file name short, user text as a format string, an object restored from untrusted bytes, hidden or look-alike characters in source, ... |
 | Null safety | 11 | The program uses a value that may be missing as if it were there: a lookup that found nothing, a search that returned -1, a missing name printed as text, a check a later call undoes, an empty pointer passed on as an error, ... |
 | Memory safety | 16 | The program reads or writes memory it does not own, or keeps memory it dropped: use after free, out-of-bounds writes, records that keep each other alive, a size that overflows before the allocation, a running total that keeps every message alive, ... |
 | Concurrency | 13 | Threads or tasks interfere: a deadlock, a check-then-act race, a balance checked before an await and spent after it, an early return that skips the unlock, a wake-up sent before anyone waits, ... |
@@ -127,7 +127,8 @@ instead of 0.25.
 | Mojo | `-O0 -D ASSERT=all` | default |
 | Gossamer | `gos lint`, `gos build` | `gos build --release` |
 | C#, F# | Debug, checked arithmetic; C# runs every .NET analyzer | Release, unchecked arithmetic |
-| Java, Kotlin, Scala | `-Xlint:all` or `-Wall`, `-ea` | without `-ea` |
+| Java, Kotlin | `-Xlint:all`, `-ea` | without `-ea` |
+| Scala | `-Wall -deprecation -feature -unchecked` and every other stable `-W` warning, `-ea` | without `-ea` |
 | Dart | `dart analyze` with `package:lints/recommended`, `--enable-asserts` | `dart compile exe` |
 | TypeScript | `--strict` and every extra check flag | same |
 | JavaScript | `"use strict"` | same |
@@ -195,8 +196,10 @@ results in `raw/` and the ranking in `results.json`. Partial runs update the new
   them runs out of memory; an out-of-memory kill or allocation failure there counts as a leak. RSS is recorded neither for scoring nor display.
 - Tests whose outcome can change from run to run run several times and keep the worst outcome,
   stopping early once a run scores 0: `use_after_close` (a write through a freed C `FILE`) and
-  `concurrent_map_write` (an unlocked race) up to fifty times, and `hash_matches_equality` (Swift
-  seeds its hash per run, so equal elements meet only sometimes) up to twenty. The lock-order and check-then-act cases use rendezvous points to control their
+  `concurrent_map_write` (an unlocked race) up to fifty times, `hash_matches_equality` (Swift seeds
+  its hash per run, so equal elements meet only sometimes) up to twenty, and the release build of
+  `concurrent_map_write` up to 500, since Zig's release build crashes on that race only now and
+  then. The lock-order and check-then-act cases use rendezvous points to control their
   schedules.
 - C-family programs keep stale pointers in data structures, so the optimizer cannot remove the
   access. Rust's `huge_allocation` passes its buffer to `std::hint::black_box` for the same
@@ -234,7 +237,11 @@ results in `raw/` and the ranking in `results.json`. Partial runs update the new
   type the program declares, and is N/A where the standard library has no decoder. `short_read`
   uses the language's usual process call, so a language whose usual call returns the whole output
   reads all of it. `unflushed_writer` is judged by what the file holds after the program exits.
-- Each program is written the way the language's documentation teaches first: `Option` where the
-  standard library returns one, and the default length, list and integer types. A shared map uses
-  the language's standard lock-free update where it has one (a Clojure atom, Haskell's
-  `atomicModifyIORef'`). A byte buffer is sliced with its platform's slice call.
+- Each program is written the way the language's documentation teaches first, unless the
+  documentation for the call it would use sends that situation to another call (`pickle` to JSON for
+  untrusted data, `os.system` to `subprocess`); then it follows the docs. Programs use `Option`
+  where the standard library returns one, and the default length, list and integer types. A shared
+  map uses the language's standard lock-free update where it has one (a Clojure atom, Haskell's
+  `atomicModifyIORef'`). A byte buffer is sliced with its platform's slice call. The site's Notes
+  tab lists each program the docs redirected, and where a safer call in the same standard library
+  would still score better, with links to the documentation.
