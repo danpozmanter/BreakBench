@@ -1,0 +1,6 @@
+use std::fs
+
+fn main() -> () {
+    let mut report = fs::create("/tmp/bb_report.txt").unwrap()
+    report.write("total=42\n").unwrap()
+}

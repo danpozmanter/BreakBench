@@ -1,0 +1,6 @@
+use std::process
+
+fn main() {
+    let result = process::run("sh", #["-c", "printf HELLO-WO; sleep 0.2; printf RLD-1234"]).unwrap()
+    println(result.stdout)
+}

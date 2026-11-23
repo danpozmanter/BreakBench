@@ -1,0 +1,24 @@
+use std::errors
+
+struct Report {}
+
+fn write(report: Report, text: String) -> Result<(), errors::Error> {
+    Err(errors::new("disk full"))
+}
+
+fn close(report: Report) -> Result<(), errors::Error> {
+    Err(errors::new("close failed"))
+}
+
+fn save() -> Result<(), errors::Error> {
+    let report = Report {}
+    defer close(report)
+    write(report, "totals")?
+    Ok(())
+}
+
+fn main() {
+    if let Err(error) = save() {
+        println(error.message())
+    }
+}

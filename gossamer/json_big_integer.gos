@@ -1,0 +1,6 @@
+use std::encoding::json
+
+fn main() {
+    let event = json::parse("""{"id": 9007199254740993}""").unwrap()
+    println(json::get(event, "id").unwrap())
+}

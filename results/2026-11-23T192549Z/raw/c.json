@@ -1,0 +1,1146 @@
+{
+ "lang": "c",
+ "version": "clang version 23.1.6 (https://github.com/llvm/llvm-project 5b10d2d74929eae78912771222c9855af97496f4)",
+ "results": {
+  "null_deref": {
+   "outcome": "TRAPPED",
+   "release": "SILENT",
+   "release_stdout": "5",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.c:14:31: runtime error: member access within null pointer of type 'User'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.c:14:31"
+  },
+  "int_overflow": {
+   "outcome": "TRAPPED",
+   "release": "SILENT",
+   "release_stdout": "-9223372036854775808",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.c:7:24: runtime error: signed integer overflow: 9223372036854775807 + 1 cannot be represented in type 'long long'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.c:7:24"
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "release": "CRASH",
+   "release_stdout": "",
+   "release_stderr": "Floating point exception (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.c:7:24: runtime error: division by zero\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.c:7:24"
+  },
+  "shift_overflow": {
+   "outcome": "TRAPPED",
+   "release": "SILENT",
+   "release_stdout": "1",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.c:8:26: runtime error: shift exponent 64 is too large for 64-bit type 'unsigned long long'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.c:8:26"
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "outcome": "TRAPPED",
+   "release": "SILENT",
+   "release_stdout": "-9223372036854775808",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.c:7:19: runtime error: 1e+20 is outside the range of representable values of type 'long long'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.c:7:19"
+  },
+  "signed_unsigned_compare": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:9:11: warning: comparison of integers of different signs: 'long' and 'size_t' (aka 'unsigned long') [-Wsign-compare]\n1 warning generated.",
+   "warnings": "main.c:9:11: warning: comparison of integers of different signs: 'long' and 'size_t' (aka 'unsigned long') [-Wsign-compare]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "main.c:7:25: error: incompatible pointer to integer conversion passing 'char *' to parameter of type 'long' [-Wint-conversion]\n    7 |     printf(\"%ld\\n\", add(argv[1], 3)); // BREAK!\n      |                         ^~~~~~~\nmain.c:3:22: note: passing argument to parameter 'a' here\n    3 | static long add(long a, long b) { return a + b; }\n      |                      ^\n1 error generated."
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "main.c:8:1: error: non-void function does not return a value in all control paths [-Werror,-Wreturn-type]\n    8 | }\n      | ^\n1 error generated."
+  },
+  "non_exhaustive_match": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:8:5: warning: 'switch' missing 'default' label [-Wswitch-default]\nmain.c:8:13: warning: enumeration value 'BLUE' not handled in switch [-Wswitch]\nmain.c:17:32: warning: cast from function call of type 'int' to non-matching type 'enum Color' [-Wbad-function-cast]\n3 warnings generated.",
+   "warnings": "main.c:8:13: warning: enumeration value 'BLUE' not handled in switch [-Wswitch]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "(null)",
+   "stderr": ""
+  },
+  "uninitialized_variable": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:8:9: warning: variable 'x' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]\nmain.c:7:10: note: initialize the variable 'x' to silence this warning |           = 0\n1 warning generated.",
+   "warnings": "main.c:8:9: warning: variable 'x' is used uninitialized whenever 'if' condition is false [-Wsometimes-uninitialized]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-981598159",
+   "stderr": ""
+  },
+  "missing_argument": {
+   "outcome": "REJECTED",
+   "message": "main.c:6:26: error: too few arguments to function call, expected 2, have 1\n    6 |     printf(\"%d\\n\", area(3)); // BREAK!\n      |                    ~~~~  ^\nmain.c:3:12: note: 'area' declared here\n    3 | static int area(int w, int h) { return w * h; }\n      |            ^    ~~~~~~~~~~~~\n1 error generated."
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "main.c:7:9: error: no member named 'colour' in 'struct Config'\n    7 |     cfg.colour = \"red\"; // BREAK!\n      |     ~~~ ^\n1 error generated."
+  },
+  "assign_in_condition": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:7:11: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]\nmain.c:7:11: note: place parentheses around the assignment to silence this warning |         (    )\n1 warning generated.",
+   "warnings": "main.c:7:11: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "switch_fallthrough": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:11:5: warning: unannotated fall-through between switch labels [-Wimplicit-fallthrough]\nmain.c:11:5: note: insert '[[fallthrough]];' to silence this warning |     [[fallthrough]];\n1 warning generated.",
+   "warnings": "main.c:11:5: warning: unannotated fall-through between switch labels [-Wimplicit-fallthrough]\nmain.c:11:5: note: insert '[[fallthrough]];' to silence this warning |     [[fallthrough]];",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "two",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "have 0",
+   "stderr": ""
+  },
+  "string_equality": {
+   "outcome": "REJECTED",
+   "message": "main.c:8:18: error: result of comparison against a string literal is unspecified (use an explicit string comparison function instead) [-Werror,-Wstring-compare]\n    8 |     int same = s == \"abc\"; // BREAK!\n      |                  ^  ~~~~~\n1 error generated."
+  },
+  "parse_invalid_number": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "13",
+   "stderr": ""
+  },
+  "covariant_array_write": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "meow",
+   "stderr": ""
+  },
+  "mutate_while_iterating": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1,2,3",
+   "stderr": ""
+  },
+  "self_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.c:5:12: warning: variable 'balance' set but not used [-Wunused-but-set-global]\n1 warning generated.",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.c:10:10: warning: implicit conversion when initializing 'int *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\n1 warning generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "sort_with_nan": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.c:11:34: warning: implicit conversion increases floating-point precision: 'float' to 'double' [-Wdouble-promotion]\nmain.c:11:23: warning: implicit conversion increases floating-point precision: 'float' to 'double' [-Wdouble-promotion]\nmain.c:14:19: warning: implicit conversion increases floating-point precision: 'float' to 'double' [-Wdouble-promotion]\n3 warnings generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3.0",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "668",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.c:10:21: warning: implicit conversion when assigning to 'struct cart *' from type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\n1 warning generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:7:18: warning: & has lower precedence than ==; == will be evaluated first [-Wparentheses]\nmain.c:7:18: note: place parentheses around the '==' expression to silence this warning |                    (     )\n1 warning generated.",
+   "warnings": "main.c:7:18: warning: & has lower precedence than ==; == will be evaluated first [-Wparentheses]\nmain.c:7:18: note: place parentheses around the '==' expression to silence this warning |                    (     )",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "odd",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:11:5: warning: add explicit braces to avoid dangling else [-Wdangling-else]\n1 warning generated.",
+   "warnings": "main.c:11:5: warning: add explicit braces to avoid dangling else [-Wdangling-else]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unset",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "main.c:7:24: error: chained comparison 'X < Y < Z' does not behave the same as a mathematical expression [-Wparentheses]\n    7 |     int inside = 1 < x < 3; // BREAK!\n      |                        ^\nmain.c:7:24: warning: result of comparison of constant 3 with boolean expression is always true [-Wtautological-constant-out-of-range-compare]\n    7 |     int inside = 1 < x < 3; // BREAK!\n      |                  ~~~~~ ^ ~\n1 warning and 1 error generated."
+  },
+  "lost_update_on_copy": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "150",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hi\ninjected",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:9:12: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]\n1 warning generated.",
+   "warnings": "main.c:9:12: warning: comparing floating point with == or != is unsafe [-Wfloat-equal]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "path_join_escape": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "inside",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "no match",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "return_in_finally": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.c:12:17: warning: implicit conversion when initializing 'struct job *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\n1 warning generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "total 3",
+   "stderr": ""
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:6:20: warning: more '%' conversions than data arguments [-Wformat-insufficient-args]\nmain.c:5:9: warning: unused variable 'total' [-Wunused-variable]\n2 warnings generated.",
+   "warnings": "main.c:6:20: warning: more '%' conversions than data arguments [-Wformat-insufficient-args]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3 of 1867096184",
+   "stderr": ""
+  },
+  "unsigned_subtraction": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:9:17: warning: result of comparison of unsigned expression < 0 is always false [-Wtautological-unsigned-zero-compare]\n1 warning generated.",
+   "warnings": "main.c:9:17: warning: result of comparison of unsigned expression < 0 is always false [-Wtautological-unsigned-zero-compare]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "18446744073709551614",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "TRAPPED",
+   "release": "SILENT",
+   "release_stdout": "9",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.c:22:35: runtime error: member access within null pointer of type 'struct item'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.c:22:35"
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:8:21: warning: declaration shadows a local variable [-Wshadow]\n1 warning generated.",
+   "warnings": "main.c:8:21: warning: declaration shadows a local variable [-Wshadow]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pending",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ADA",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "release": "SILENT",
+   "release_stdout": "-131063",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.c:8:34: runtime error: index -1 out of bounds for type 'int[3]'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.c:8:34"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "main.c:16:27: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'int' [-Wint-conversion]\n   16 |     puts(contains(ids, 3, id) ? \"found\" : \"missing\"); // CONTROL! puts(contains(ids, 3, atoi(id)) ? \"found\" : \"missing\");\n      |                           ^~\nmain.c:5:51: note: passing argument to parameter 'v' here\n    5 | static bool contains(const int *xs, size_t n, int v) {\n      |                                                   ^\n1 error generated."
+  },
+  "use_after_close": {
+   "outcome": "TRAPPED",
+   "runs": 50,
+   "release": "CRASH",
+   "release_stdout": "",
+   "release_stderr": "free(): invalid pointer\nAborted (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "write: Bad file descriptor"
+  },
+  "dead_store": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:7:10: warning: unused variable 'total' [-Wunused-variable]\n1 warning generated.",
+   "warnings": "main.c:7:10: warning: unused variable 'total' [-Wunused-variable]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unbalanced",
+   "stderr": "worker failed"
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "release": "CORRUPT",
+   "release_stdout": "99",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.c:10:5: runtime error: index 4 out of bounds for type 'int[4]'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.c:10:5"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "release": "CORRUPT",
+   "release_stdout": "42",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.c:10:20: runtime error: index 4 out of bounds for type 'int[4]'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.c:10:20"
+  },
+  "use_after_free": {
+   "outcome": "TRAPPED",
+   "release": "CORRUPT",
+   "release_stdout": "140736936935432",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.c:7:10: warning: implicit conversion when initializing 'Rec *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\nmain.c:11:10: warning: implicit conversion when initializing 'Rec *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\n2 warnings generated.",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==1853==ERROR: AddressSanitizer: heap-use-after-free on address 0x6ee553be0040 at pc 0x5be942861e7c bp 0x7ffe780aa890 sp 0x7ffe780aa888\nREAD of size 8 at 0x6ee553be0040 thread T0\n    #0 0x5be942861e7b in main /tmp/breakbench/use_after_free/main/main.c:13:24\n    #1 0x72b55491e600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #2 0x72b55491e717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #3 0x5be9427717d4 in _start (/tmp/breakbench/use_after_free/main/main+0x6c7d4)\n\n0x6ee553be0040 is located 0 bytes inside of 32-byte region [0x6ee553be0040,0x6ee\n...\na fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x6ee553be0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==1853==ABORTING"
+  },
+  "double_free": {
+   "outcome": "TRAPPED",
+   "release": "CRASH",
+   "release_stdout": "",
+   "release_stderr": "free(): double free detected in tcache 2\nAborted (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.c:9:10: warning: implicit conversion when initializing 'Rec *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\nmain.c:14:10: warning: implicit conversion when initializing 'Rec *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\nmain.c:15:10: warning: implicit conversion when initializing 'Rec *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\n3 warnings generated.",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==1902==ERROR: AddressSanitizer: attempting double-free on 0x78b14d3e0040 in thread T0:\n    #0 0x60366b2fdce6 in free /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:51:3\n    #1 0x60366b340059 in main /tmp/breakbench/double_free/main/main.c:13:5\n    #2 0x7c814e0fb600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #3 0x7c814e0fb717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #4 0x60366b24fa74 in _start (/tmp/breakbench/double_free/main/main+0x6ca74)\n\n0x78b14d3e0040 is located 0 bytes inside of 32-byte regi\n...\nin _start (/tmp/breakbench/double_free/main/main+0x6ca74)\n\npreviously allocated by thread T0 here:\n    #0 0x60366b2fe2b4 in malloc /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:109:3\n    #1 0x60366b33ff80 in main /tmp/breakbench/double_free/main/main.c:9:14\n    #2 0x7c814e0fb600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #3 0x7c814e0fb717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #4 0x60366b24fa74 in _start (/tmp/breakbench/double_free/main/main+0x6ca74)\n\nSUMMARY: AddressSanitizer: double-free /tmp/breakbench/double_free/main/main.c:13:5 in main\n==1902==ABORTING"
+  },
+  "dangling_stack_ref": {
+   "outcome": "TRAPPED",
+   "release": "CORRUPT",
+   "release_stdout": "-1379259112",
+   "release_stderr": "",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:5:13: warning: address of stack memory associated with local variable 'local' returned [-Wreturn-stack-address]\n1 warning generated.",
+   "warnings": "main.c:5:13: warning: address of stack memory associated with local variable 'local' returned [-Wreturn-stack-address]",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==1951==ERROR: AddressSanitizer: stack-use-after-return on address 0x76a2e60f0020 at pc 0x612a2df69d86 bp 0x7ffd91591d50 sp 0x7ffd91591d48\nREAD of size 4 at 0x76a2e60f0020 thread T0\n    #0 0x612a2df69d85 in main /tmp/breakbench/dangling_stack_ref/main/main.c:16:20\n    #1 0x7aa2e83bd600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #2 0x7aa2e83bd717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #3 0x612a2de79814 in _start (/tmp/breakbench/dangling_stack_ref/main/main+0x6c814)\n\nAddress 0x76a2e60f0020 is located in stack of thread T0 at offset 32 \n...\n0 00 00 00 00 00 00 00 00 00 00 00 00 00 00\n  0x76a2e60f0280: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==1951==ABORTING"
+  },
+  "container_realloc_dangling": {
+   "outcome": "TRAPPED",
+   "release": "CORRUPT",
+   "release_stdout": "99",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.c:10:11: warning: implicit conversion when initializing 'Item *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\nmain.c:11:11: warning: implicit conversion when initializing 'char *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\nmain.c:12:18: warning: cast from 'char *' to 'Item *' increases required alignment from 1 to 4 [-Wcast-align]\nmain.c:18:15: warning: implicit conversion when assigning to 'Item *' from type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\nmain.c:23:11: warning: implicit conversion when initializing 'Item *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\nmain.c:6:7: warning: no previous extern declaration for non-static variable 'handles' [-Wmissing-variable-declarations]\n6 warnings generated.",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==2000==ERROR: AddressSanitizer: heap-use-after-free on address 0x6ce1c63e0010 at pc 0x62d1bf6f1569 bp 0x7ffc27c4fd20 sp 0x7ffc27c4fd18\nWRITE of size 4 at 0x6ce1c63e0010 thread T0\n    #0 0x62d1bf6f1568 in main /tmp/breakbench/container_realloc_dangling/main/main.c:26:21\n    #1 0x70c1c6fcc600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #2 0x70c1c6fcc717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #3 0x62d1bf600b74 in _start (/tmp/breakbench/container_realloc_dangling/main/main+0x6cb74)\n\n0x6ce1c63e0010 is located 0 bytes inside of 4-byte regi\n...\na fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x6ce1c63e0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==2000==ABORTING"
+  },
+  "uninit_heap_read": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.c:13:20: warning: implicit conversion when initializing 'unsigned char *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\nmain.c:17:20: warning: implicit conversion when initializing 'unsigned char *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\nmain.c:4:16: warning: no previous extern declaration for non-static variable 'sessions' [-Wmissing-variable-declarations]\n3 warnings generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "bebebebebebebebebebebebe",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "TRAPPED",
+   "release": "CRASH",
+   "release_stdout": "",
+   "release_stderr": "Segmentation fault (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==2073==ERROR: AddressSanitizer: stack-overflow on address 0x7ffd99d94ff8 (pc 0x60e9a1c34e99 bp 0x7ffd99d95040 sp 0x7ffd99d95000 T0)\n    #0 0x60e9a1c34e99 in walk /tmp/breakbench/stack_overflow/main/main.c:6:13\n    #1 0x60e9a1c34e9d in walk /tmp/breakbench/stack_overflow/main/main.c:6:13\n    #2 0x60e9a1c34e9d in walk /tmp/breakbench/stack_overflow/main/main.c:6:13\n    #3 0x60e9a1c34e9d in walk /tmp/breakbench/stack_overflow/main/main.c:6:13\n    #4 0x60e9a1c34e9d in walk /tmp/breakbench/stack_overflow/main/main.c:6:13\n    #5 0x60e9a1c34e9d in walk /tmp/breakbench/stack_overflow/main/main.c:6:13\n    #6 0x60e9a1c34e9d in walk /tmp/breakbench/stack_o\n...\n239 0x60e9a1c34e9d in walk /tmp/breakbench/stack_overflow/main/main.c:6:13\n    #240 0x60e9a1c34e9d in walk /tmp/breakbench/stack_overflow/main/main.c:6:13\n    #241 0x60e9a1c34e9d in walk /tmp/breakbench/stack_overflow/main/main.c:6:13\n    #242 0x60e9a1c34e9d in walk /tmp/breakbench/stack_overflow/main/main.c:6:13\n    #243 0x60e9a1c34e9d in walk /tmp/breakbench/stack_overflow/main/main.c:6:13\n    #244 0x60e9a1c34e9d in walk /tmp/breakbench/stack_overflow/main/main.c:6:13\n    #245 0x60e9a1c34e9d in walk /tmp/breakbench/stack_overflow/main/main.c:6:13\n    #246 0x60e9a1c34e9d in walk /tmp/breakbench/stack_overflow/main/main.c:6:13\n\nSUMMARY: AddressSanitizer: stack-overflow /tmp/breakbench/stack_overflow/main/main.c:6:13 in walk\n==2073==ABORTING"
+  },
+  "concurrent_map_write": {
+   "outcome": "TRAPPED",
+   "runs": 20,
+   "release": "CRASH",
+   "release_stdout": "",
+   "release_stderr": "Segmentation fault (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.c:27:19: warning: implicit conversion when initializing 'long *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\nmain.c:27:53: warning: implicit conversion when initializing 'char *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\nmain.c:43:17: warning: implicit conversion when initializing 'long *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\nmain.c:43:43: warning: implicit conversion when initializing 'char *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\n4 warnings generated.",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==33==ERROR: AddressSanitizer: attempting double-free on 0x73d3049e0040 in thread T2:\n    #0 0x5b284faab5c6 in free /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:51:3\n    #1 0x5b284faeed60 in map_grow /tmp/breakbench/concurrent_map_write/main/main.c:31:5\n    #2 0x5b284faedebe in map_put /tmp/breakbench/concurrent_map_write/main/main.c:15:36\n    #3 0x5b284faedd36 in writer /tmp/breakbench/concurrent_map_write/main/main.c:38:43\n    #4 0x5b284faa8e66 in asan_thread_start(void*) /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_interceptors.cpp:306:28\n    #5 0x7713057f5db9  (/usr/lib/x86_64-linux-gnu/libc.so.6+0xa3db9) \n...\n_map_write/main/main+0x6d354)\n\nThread T1 created by T0 here:\n    #0 0x5b284fa8e631 in pthread_create /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_interceptors.cpp:317:3\n    #1 0x5b284faeda85 in main /tmp/breakbench/concurrent_map_write/main/main.c:45:40\n    #2 0x77130577c600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #3 0x77130577c717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #4 0x5b284f9fd354 in _start (/tmp/breakbench/concurrent_map_write/main/main+0x6d354)\n\nSUMMARY: AddressSanitizer: double-free /tmp/breakbench/concurrent_map_write/main/main.c:31:5 in map_grow\n==33==ABORTING"
+  },
+  "huge_allocation": {
+   "outcome": "TRAPPED",
+   "release": "SILENT",
+   "release_stdout": "10000000000000",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.c:7:20: warning: implicit conversion when initializing 'unsigned char *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\n1 warning generated.",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==2775==ERROR: AddressSanitizer: requested allocation size 0x9184e72a000 (0x9184e72b000 after adjustments for alignment, red zones etc.) exceeds maximum supported size of 0x10000000000 (thread T0)\n    #0 0x5fcafb2ec232 in calloc /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:116:3\n    #1 0x5fcafb32ddf3 in main /tmp/breakbench/huge_allocation/main/main.c:7:26\n    #2 0x7fd1c2409600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #3 0x7fd1c2409717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #4 0x5fcafb23d814 in _start (/tmp/breakbench/huge_allocation/main/main+0x6c814)\n\n==2775==HINT: if you don't care about these errors you may set allocator_may_return_null=1\nSUMMARY: AddressSanitizer: allocation-size-too-big /tmp/breakbench/huge_allocation/main/main.c:7:26 in main\n==2775==ABORTING"
+  },
+  "fd_leak": {
+   "outcome": "LEAK",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "open: Too many open files"
+  },
+  "wrong_variant_access": {
+   "outcome": "CRASH",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==2848==ERROR: AddressSanitizer: SEGV on unknown address 0x00000000002a (pc 0x7c2769559a5c bp 0x7ffc820baf30 sp 0x7ffc820ba6e8 T0)\n==2848==The signal is caused by a READ memory access.\n==2848==HINT: address points to the zero page.\n    #0 0x7c2769559a5c  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x1aaa5c) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #1 0x614161e2d753 in strlen /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/../sanitizer_common/sanitizer_common_interceptors.inc\n    #2 0x614161f03e5c in main /tmp/breakbench/wrong_variant_access/main/main.c:11:21\n    #3 0x7c27693d9600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a\n...\n8e29d750303f0c6)\n    #5 0x614161e13824 in _start (/tmp/breakbench/wrong_variant_access/main/main+0x6c824)\n\n==2848==Register values:\nrax = 0x000000000000002a  rbx = 0x0000000000000001  rcx = 0x0000000000000001  rdx = 0x0000000000000010  \nrdi = 0x000000000000002a  rsi = 0x0000614161deda60  rbp = 0x00007ffc820baf30  rsp = 0x00007ffc820ba6e8  \n r8 = 0x0000000000000000   r9 = 0x0000000000000000  r10 = 0xffffffffffffffff  r11 = 0x00000f04ece5e004  \nr12 = 0x00007ffc820bb118  r13 = 0x0000000000000001  r14 = 0x000000000000002a  r15 = 0x0000614161f05260  \nAddressSanitizer can not provide additional info.\nSUMMARY: AddressSanitizer: SEGV (/usr/lib/x86_64-linux-gnu/libc.so.6+0x1aaa5c) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6) \n==2848==ABORTING"
+  },
+  "format_string": {
+   "outcome": "CRASH",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:5:12: warning: format string is not a string literal (potentially insecure) [-Wformat-security]\n1 warning generated.",
+   "warnings": "main.c:5:12: warning: format string is not a string literal (potentially insecure) [-Wformat-security]",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==2873==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000001 (pc 0x72410496e8f2 bp 0x7ffc26f1cb90 sp 0x7ffc26f1c670 T0)\n==2873==The signal is caused by a WRITE memory access.\n==2873==HINT: address points to the zero page.\n    #0 0x72410496e8f2  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x6f8f2) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #1 0x72410496f767  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x70767) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #2 0x60113a92c4df in printf /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/../sanitizer_common/sanitizer_common_interceptors.inc:1851:1\n    #3 0x60113a9f0c9d\n...\n27f8d0a68e29d750303f0c6)\n    #6 0x60113a9006f4 in _start (/tmp/breakbench/format_string/main/main+0x6c6f4)\n\n==2873==Register values:\nrax = 0x0000000000000006  rbx = 0x00007ffc26f1cbd0  rcx = 0x0000000000000000  rdx = 0x0000000000000006  \nrdi = 0x0000000000000000  rsi = 0x0000724104ad3360  rbp = 0x00007ffc26f1cb90  rsp = 0x00007ffc26f1c670  \n r8 = 0x0000000000000000   r9 = 0x0000000000000000  r10 = 0x00000000ffffffff  r11 = 0x0000000000000000  \nr12 = 0x0000000000000000  r13 = 0x0000000000000000  r14 = 0x0000000000000001  r15 = 0x00007ffc26f1eed9  \nAddressSanitizer can not provide additional info.\nSUMMARY: AddressSanitizer: SEGV (/usr/lib/x86_64-linux-gnu/libc.so.6+0x6f8f2) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6) \n==2873==ABORTING"
+  },
+  "trojan_source": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "admin",
+   "stderr": ""
+  },
+  "unsafe_deserialization": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no serialization in the standard library"
+  },
+  "deep_structure_release": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.c:14:22: warning: implicit conversion when initializing 'struct node *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\n1 warning generated.",
+   "exit": 0,
+   "secs": 0.08,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "CRASH",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==2946==ERROR: AddressSanitizer: SEGV on unknown address 0x62e8e7e81980 (pc 0x62e8e7f97c41 bp 0x7fffce89cdc0 sp 0x7fffce89cda0 T0)\n==2946==The signal is caused by a WRITE memory access.\n    #0 0x62e8e7f97c41 in main /tmp/breakbench/string_literal_write/main/main.c:5:17\n    #1 0x7493fbbf7600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #2 0x7493fbbf7717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #3 0x62e8e7ea76e4 in _start (/tmp/breakbench/string_literal_write/main/main+0x6c6e4)\n\n==2946==Register values:\nrax = 0x000062e8e7e81980  rbx = 0x0000000000000000  rcx = 0x000062e8e7f99006  rdx = 0x00007fffce89cf08  \nrdi = 0x0000000000000001  rsi = 0x00007fffce89cef8  rbp = 0x00007fffce89cdc0  rsp = 0x00007fffce89cda0  \n r8 = 0xffffff0000000000   r9 = 0x0000000000000000  r10 = 0xafffff00000fffff  r11 = 0x4000000000000000  \nr12 = 0x00007fffce89cef8  r13 = 0x0000000000000001  r14 = 0x00007493fbfa3000  r15 = 0x000062e8e7f99000  \nAddressSanitizer can not provide additional info.\nSUMMARY: AddressSanitizer: SEGV /tmp/breakbench/string_literal_write/main/main.c:5:17 in main\n==2946==ABORTING"
+  },
+  "reference_cycle": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no automatic memory management; a record is freed only by an explicit free, so dropping a reference never frees anything"
+  },
+  "complete_init": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "newtype": {
+   "outcome": "REJECTED",
+   "message": "main.c:10:37: error: passing 'Seconds' to parameter of incompatible type 'Meters'\n   10 |     Meters wrong = add((Meters){2}, (Seconds){3}); // BREAK!\n      |                                     ^~~~~~~~~~~~\nmain.c:6:36: note: passing argument to parameter 'b' here\n    6 | static Meters add(Meters a, Meters b) { return (Meters){a.v + b.v}; }\n      |                                    ^\n1 error generated."
+  },
+  "strong_enum": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:6:5: warning: 'switch' missing 'default' label [-Wswitch-default]\nmain.c:15:25: warning: integer constant not in range of enumerated type 'enum Color' [-Wassign-enum]\nmain.c:15:25: warning: implicit conversion from 'int' to enumeration type 'enum Color' is invalid in C++ [-Wimplicit-int-enum-cast]\n3 warnings generated.",
+   "warnings": "main.c:15:25: warning: integer constant not in range of enumerated type 'enum Color' [-Wassign-enum]\nmain.c:15:25: warning: implicit conversion from 'int' to enumeration type 'enum Color' is invalid in C++ [-Wimplicit-int-enum-cast]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "override_check": {
+   "outcome": "SAFE_BY_DESIGN",
+   "message": "no methods or inheritance, so nothing marks a replacement method"
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "release": "SILENT",
+   "release_stdout": "before\n0",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "main.c:14:29: runtime error: member access within null pointer of type 'const struct User'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.c:14:29"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hello, (null)",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "TRAPPED",
+   "release": "CRASH",
+   "release_stdout": "",
+   "release_stderr": "Segmentation fault (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.c:7:25: warning: disabled expansion of recursive macro [-Wdisabled-macro-expansion]\nmain.c:7:25: warning: '_Generic' is incompatible with C standards before C11 [-Wpre-c11-compat]\n4 warnings generated.",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.c:8:16: runtime error: applying non-zero offset 1 to null pointer\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.c:8:16"
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "release": "SILENT",
+   "release_stdout": "1",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.c:6:11: warning: implicit conversion when initializing 'long *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\n1 warning generated.",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==3164==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x785df0fe0010 at pc 0x59307371c1a8 bp 0x7ffd10220170 sp 0x7ffd10220168\nREAD of size 8 at 0x785df0fe0010 thread T0\n    #0 0x59307371c1a7 in main /tmp/breakbench/empty_max/main/main.c:9:14\n    #1 0x7c3df1bf0600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #2 0x7c3df1bf0717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #3 0x59307362b994 in _start (/tmp/breakbench/empty_max/main/main+0x6c994)\n\n0x785df0fe0011 is located 0 bytes after 1-byte region [0x785df0fe0010,0x785df0fe0011)\nallo\n...\na fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x785df0fe0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==3164==ABORTING"
+  },
+  "readonly_param": {
+   "outcome": "REJECTED",
+   "message": "main.c:5:11: error: read-only variable is not assignable\n    5 |     xs[0] = 9; // BREAK!\n      |     ~~~~~ ^\n1 error generated."
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "REJECTED",
+   "message": "main.c:5:39: error: constexpr initializer evaluates to 300 which is not exactly representable in type 'const unsigned char'\n    5 |     constexpr unsigned char too_big = 300; // BREAK!\n      |                                       ^\nmain.c:5:39: warning: implicit conversion from 'int' to 'unsigned char' changes value from 300 to 44 [-Wconstant-conversion]\n    5 |     constexpr unsigned char too_big = 300; // BREAK!\n      |                             ~~~~~~~   ^~~\n1 warning and 1 error generated."
+  },
+  "no_implicit_conversion": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:10:10: warning: implicit conversion loses integer precision: 'int64_t' (aka 'long') to 'int32_t' (aka 'int') [-Wshorten-64-to-32]\n1 warning generated.",
+   "warnings": "main.c:10:10: warning: implicit conversion loses integer precision: 'int64_t' (aka 'long') to 'int32_t' (aka 'int') [-Wshorten-64-to-32]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-1294967296",
+   "stderr": ""
+  },
+  "generic_constraint": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "qsort takes any comparison function, so nothing ties sorting to an ordering"
+  },
+  "lossy_int_to_float": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:10:10: warning: implicit conversion from 'int64_t' (aka 'long') to 'double' may lose precision [-Wimplicit-int-float-conversion]\n1 warning generated.",
+   "warnings": "main.c:10:10: warning: implicit conversion from 'int64_t' (aka 'long') to 'double' may lose precision [-Wimplicit-int-float-conversion]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "9007199254740992",
+   "stderr": ""
+  },
+  "const_index_bounds": {
+   "outcome": "TRAPPED",
+   "release": "SILENT",
+   "release_stdout": "1257256536",
+   "release_stderr": "",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:5:20: warning: array index 5 is past the end of the array (that has type 'int[3]') [-Warray-bounds]\n1 warning generated.",
+   "warnings": "main.c:5:20: warning: array index 5 is past the end of the array (that has type 'int[3]') [-Warray-bounds]",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.c:5:20: runtime error: index 5 out of bounds for type 'int[3]'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.c:5:20"
+  },
+  "lazy_accumulator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.c:11:24: warning: implicit conversion when initializing 'unsigned char *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\n1 warning generated.",
+   "exit": 0,
+   "secs": 1.6,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "outcome": "TRAPPED",
+   "release": "CORRUPT",
+   "release_stdout": "stored",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.c:8:20: warning: implicit conversion when initializing 'unsigned char *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\n1 warning generated.",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==3407==ERROR: AddressSanitizer: heap-buffer-overflow on address 0x73b55e9e0018 at pc 0x5a4e40c11ebb bp 0x7fff37ad7320 sp 0x7fff37ad7318\nWRITE of size 1 at 0x73b55e9e0018 thread T0\n    #0 0x5a4e40c11eba in main /tmp/breakbench/size_overflow_alloc/main/main.c:10:16\n    #1 0x77955f774600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #2 0x77955f774717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #3 0x5a4e40b21814 in _start (/tmp/breakbench/size_overflow_alloc/main/main+0x6c814)\n\n0x73b55e9e0018 is located 0 bytes after 8-byte region [0x73b55e9e001\n...\na fa fa fa fa fa fa fa fa fa fa fa fa fa fa\n  0x73b55e9e0280: fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa fa\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==3407==ABORTING"
+  },
+  "const_overflow": {
+   "outcome": "TRAPPED",
+   "release": "SILENT",
+   "release_stdout": "-8985944073709551616",
+   "release_stderr": "",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:5:67: warning: overflow in expression; result is -8'985'944'073'709'551'616 with type 'long' [-Winteger-overflow]\n1 warning generated.",
+   "warnings": "main.c:5:67: warning: overflow in expression; result is -8'985'944'073'709'551'616 with type 'long' [-Winteger-overflow]",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.c:5:67: runtime error: signed integer overflow: 31536000000000000 * 300 cannot be represented in type 'long'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.c:5:67"
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "unreachable_code": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:6:5: warning: code will never be executed [-Wunreachable-code]\n1 warning generated.",
+   "warnings": "main.c:6:5: warning: code will never be executed [-Wunreachable-code]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ok",
+   "stderr": ""
+  },
+  "checked_interpolation": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no string interpolation"
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "REJECTED",
+   "message": "main.c:6:13: warning: enumeration value 'SQUARE' not explicitly handled in switch [-Wswitch-enum]\n    6 |     switch (s) {\n      |             ^\nmain.c:12:88: error: duplicate case value 'CIRCLE'\n   12 | static const char *bad(enum Shape s) { switch (s) { case CIRCLE: return \"circle\"; case CIRCLE: return \"again\"; default: return \"other\"; } } // BREAK!\n      |                                                                                        ^\nmain.c:12:58: note: previous case defined here\n   12 | static const char *bad(enum Shape s) { switch (s) { case CIRCLE: return \"circle\"; case CIRCLE: return \"again\"; default: return \"other\"; } } // BREAK!\n      |                                                          ^\n1 warning and 1 error generated."
+  },
+  "duplicate_key": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no map type"
+  },
+  "char_arithmetic": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "b",
+   "stderr": ""
+  },
+  "json_big_integer": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no JSON parser in the standard library"
+  },
+  "comparison_statement": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:5:11: warning: equality comparison result unused [-Wunused-comparison]\n1 warning generated.",
+   "warnings": "main.c:5:11: warning: equality comparison result unused [-Wunused-comparison]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "structural_equality": {
+   "outcome": "REJECTED",
+   "message": "main.c:8:12: error: invalid operands to binary expression ('struct P' and 'struct P')\n    8 |     puts(a == b ? \"equal\" : \"different\"); // CONTROL! puts(a.x == b.x && a.y == b.y ? \"equal\" : \"different\");\n      |          ~ ^  ~\n1 error generated."
+  },
+  "hash_matches_equality": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "nothing ties an equality function to a hash function"
+  },
+  "array_literal_length": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "enum_from_int": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.c:9:32: warning: cast from function call of type 'int' to non-matching type 'enum Color' [-Wbad-function-cast]\n1 warning generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "before\n7",
+   "stderr": ""
+  },
+  "bitwise_on_bool": {
+   "outcome": "CORRECT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.c:6:42: warning: operator '?:' has lower precedence than '&'; '&' will be evaluated first [-Wbitwise-conditional-parentheses]\nmain.c:6:42: note: place parentheses around the '&' expression to silence this warning |          (                              )\n1 warning generated.",
+   "warnings": "main.c:6:42: warning: operator '?:' has lower precedence than '&'; '&' will be evaluated first [-Wbitwise-conditional-parentheses]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "no",
+   "stderr": ""
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "main.c:7:12: error: cannot assign to non-static data member 'port' with const-qualified type 'const int'\n    7 |     c.port = 1; // BREAK!\n      |     ~~~~~~ ^\nmain.c:3:27: note: non-static data member 'port' declared const here\n    3 | struct Config { const int port; };\n      |                 ~~~~~~~~~~^~~~\n1 error generated."
+  },
+  "bool_condition": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.c:5:27: warning: code will never be executed [-Wunreachable-code]\n1 warning generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "different",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "short_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.2,
+   "stdout": "HELLO-WORLD-1234",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "disk full",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "total=42",
+   "stderr": ""
+  },
+  "nullable_field": {
+   "outcome": "TRAPPED",
+   "release": "CRASH",
+   "release_stdout": "",
+   "release_stderr": "Segmentation fault (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.c:8:28: runtime error: null pointer passed as argument 1, which is declared to never be null\n/usr/include/string.h:440:33: note: nonnull attribute specified here\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.c:8:28"
+  },
+  "stale_null_check": {
+   "outcome": "TRAPPED",
+   "release": "SILENT",
+   "release_stdout": "",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.c:14:46: runtime error: member access within null pointer of type 'User'\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.c:14:46"
+  },
+  "empty_slot": {
+   "outcome": "TRAPPED",
+   "release": "CRASH",
+   "release_stdout": "",
+   "release_stderr": "Segmentation fault (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main.c:10:28: runtime error: null pointer passed as argument 1, which is declared to never be null\n/usr/include/string.h:440:33: note: nonnull attribute specified here\nSUMMARY: UndefinedBehaviorSanitizer: undefined-behavior main.c:10:28"
+  },
+  "typed_nil": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "check_then_act": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.c:23:10: warning: implicit conversion when initializing 'int *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\n1 warning generated.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "99",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "async_reentrancy": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no asynchronous tasks in the language or its standard library; the threaded form of this race is check_then_act"
+  },
+  "lock_skipped_on_return": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  }
+ }
+}

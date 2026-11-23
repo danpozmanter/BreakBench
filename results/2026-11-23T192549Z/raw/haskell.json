@@ -1,0 +1,1067 @@
+{
+ "lang": "haskell",
+ "version": "The Glorious Glasgow Haskell Compilation System, version 9.14.1",
+ "results": {
+  "null_deref": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:12:23: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018User\u2019 with actual type \u2018Maybe User\u2019\n    \u2022 In the first argument of \u2018name\u2019, namely \u2018u\u2019\n      In the first argument of \u2018length\u2019, namely \u2018(name u)\u2019\n      In the first argument of \u2018print\u2019, namely \u2018(length (name u))\u2019\n   |\n12 |   print (length (name u)) -- BREAK!\n   |                       ^"
+  },
+  "int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:7:17: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.Type.ArithException:\n\ndivide by zero",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:6:17: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.Type.ArithException:\n\ndivide by zero"
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:8:17: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:7:17: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:7:17: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7766279631452241920",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:6:17: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:10:14: error: [GHC-83865]\n    \u2022 Couldn't match type \u2018[Char]\u2019 with \u2018Int\u2019\n      Expected: Int\n        Actual: String\n    \u2022 In the first argument of \u2018add\u2019, namely \u2018raw\u2019\n      In the first argument of \u2018print\u2019, namely \u2018(add raw 3)\u2019\n      In a stmt of a 'do' block: print (add raw 3)\n   |\n10 |   print (add raw 3) -- BREAK!\n   |              ^^^"
+  },
+  "missing_return": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Control.Exception.Base.PatternMatchFail:\n\nmain.hs:(4,1)-(6,23): Non-exhaustive patterns in function grade\n\n\nHasCallStack backtrace:\n  collectExceptionAnnotation, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:170:37 in ghc-internal:G\n...\nC.Internal.Exception\n  toExceptionWithBacktrace, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:90:42 in ghc-internal:GHC.Internal.Exception\n  throw, called at libraries/ghc-internal/src/GHC/Internal/Control/Exception/Base.hs:434:30 in ghc-internal:GHC.Internal.Control.Exception.Base",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.hs:4:1: warning: [GHC-62161] [-Wincomplete-patterns] Pattern match(es) are non-exhaustive In an equation for \u2018grade\u2019: Patterns of type \u2018Int\u2019 not matched: _\nmain.hs:11:26: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "warnings": "main.hs:4:1: warning: [GHC-62161] [-Wincomplete-patterns] Pattern match(es) are non-exhaustive In an equation for \u2018grade\u2019: Patterns of type \u2018Int\u2019 not matched: _",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Control.Exception.Base.PatternMatchFail:\n\nmain.hs:(4,1)-(6,23): Non-exhaustive patterns in function grade\n\n\nHasCallStack backtrace:\n  collectExceptionAnnotation, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:170:37 in ghc-internal:GHC.Internal.Exception\n  toExceptionWithBacktrace, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:90:42 in ghc-internal:GHC.Internal.Exception\n  throw, called at libraries/ghc-internal/src/GHC/Internal/Control/Exception/Base.hs:434:30 in ghc-internal:GHC.Internal.Control.Exception.Base"
+  },
+  "non_exhaustive_match": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Control.Exception.Base.PatternMatchFail:\n\nmain.hs:(6,10)-(8,18): Non-exhaustive patterns in case\n\n\nHasCallStack backtrace:\n  collectExceptionAnnotation, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:170:37 in ghc-internal:GHC.Internal.Exception\n  toExceptionWithBacktrace, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:90:42 in ghc-internal:GHC.Internal.Exception\n  throw, called at libraries/ghc-internal/src/GHC/Internal/Control/Exception/Base.hs:434:30 in ghc-internal:GHC.Internal.Control.Exception.Base",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.hs:6:10: warning: [GHC-62161] [-Wincomplete-patterns] Pattern match(es) are non-exhaustive In a case alternative: Patterns of type \u2018Color\u2019 not matched: Blue\nmain.hs:13:47: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "warnings": "main.hs:6:10: warning: [GHC-62161] [-Wincomplete-patterns] Pattern match(es) are non-exhaustive In a case alternative: Patterns of type \u2018Color\u2019 not matched: Blue",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Control.Exception.Base.PatternMatchFail:\n\nmain.hs:(6,10)-(8,18): Non-exhaustive patterns in case\n\n\nHasCallStack backtrace:\n  collectExceptionAnnotation, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:170:37 in ghc-internal:GHC.Internal.Exception\n  toExceptionWithBacktrace, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:90:42 in ghc-internal:GHC.Internal.Exception\n  throw, called at libraries/ghc-internal/src/GHC/Internal/Control/Exception/Base.hs:434:30 in ghc-internal:GHC.Internal.Control.Exception.Base"
+  },
+  "uninitialized_variable": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:7:7: error: [GHC-44432]\n    The type signature for \u2018x\u2019 lacks an accompanying binding\n  |\n7 |   let x :: Int -- BREAK!\n  |       ^"
+  },
+  "missing_argument": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:8:3: error: [GHC-39999]\n    \u2022 No instance for \u2018Show (Int -> Int)\u2019 arising from a use of \u2018print\u2019\n      (maybe you haven't applied a function to enough arguments?)\n    \u2022 In a stmt of a 'do' block: print (area 3)\n      In the expression:\n        do print (area 3)\n           print (area 3 4)\n      In an equation for \u2018main\u2019:\n          main\n            = do print (area 3)\n                 print (area 3 4)\n  |\n8 |   print (area 3) -- BREAK!\n  |   ^^^^^"
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:8:20: error: [GHC-22385]\n    Not in scope: record field \u2018colour\u2019\n    Suggested fix: Perhaps use record field of Config \u2018color\u2019 (line 3)\n  |\n8 |   let cfg' = cfg { colour = \"red\" } -- BREAK!\n  |                    ^^^^^^"
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:7:18: error: [GHC-58481]\n    parse error on input \u2018=\u2019\n    Suggested fix:\n      Perhaps you need a 'let' in a 'do' block?\n      e.g. 'let x = 5' instead of 'x = 5'\n  |\n7 |   putStrLn (if x = 1 then \"one\" else \"not one\") -- BREAK!\n  |                  ^"
+  },
+  "switch_fallthrough": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:6:17: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:8:20: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Bool\u2019 with actual type \u2018Maybe Int\u2019\n    \u2022 In the expression: qty\n      In the expression: if qty then True else False\n      In an equation for \u2018present\u2019: present = if qty then True else False\n  |\n8 |   let present = if qty then True else False -- BREAK!\n  |                    ^^^"
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:6:19: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.read: no parse",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:6:17: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.read: no parse"
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:13:17: error: [GHC-83865]\n    \u2022 Couldn't match type \u2018Dog\u2019 with \u2018Animal\u2019\n      Expected: [Animal]\n        Actual: [Dog]\n    \u2022 In the expression: dogs :: [Animal]\n      In an equation for \u2018animals\u2019: animals = dogs :: [Animal]\n      In a stmt of a 'do' block: let animals = dogs :: [Animal]\n   |\n13 |   let animals = dogs :: [Animal] -- BREAK!\n   |                 ^^^^"
+  },
+  "mutate_while_iterating": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1,3",
+   "stderr": ""
+  },
+  "self_deadlock": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.BlockedIndefinitelyOnMVar:\n\nthread blocked indefinitely in an MVar operation",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.32,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.BlockedIndefinitelyOnMVar:\n\nthread blocked indefinitely in an MVar operation"
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.IOException:\n\n/nonexistent/dir/out.txt: withFile: does not exist (No such file or directory)\n\nHasCallStack backtrace:\n  ioError, called at libraries/ghc-internal/src/GHC/Internal/Foreign/C/Error.hs:291:5 in ghc-internal:GHC.Internal.Foreign.C.Error",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.IOException:\n\n/nonexistent/dir/out.txt: withFile: does not exist (No such file or directory)\n\nHasCallStack backtrace:\n  ioError, called at libraries/ghc-internal/src/GHC/Internal/Foreign/C/Error.hs:291:5 in ghc-internal:GHC.Internal.Foreign.C.Error"
+  },
+  "sort_with_nan": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:7:13: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Double\u2019 with actual type \u2018Int\u2019\n    \u2022 In the first argument of \u2018(/)\u2019, namely \u2018total\u2019\n      In the expression: total / count :: Double\n      In an equation for \u2018avg\u2019: avg = total / count :: Double\n  |\n7 |   let avg = total / count :: Double -- BREAK!\n  |             ^^^^^\n\nmain.hs:7:21: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Double\u2019 with actual type \u2018Int\u2019\n    \u2022 In the second argument of \u2018(/)\u2019, namely \u2018count\u2019\n      In the expression: total / count :: Double\n      In an equation for \u2018avg\u2019: avg = total / count :: Double\n  |\n7 |   let avg = total / count :: Double -- BREAK!\n  |                     ^^^^^"
+  },
+  "leading_zero_literal": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:7:17: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:10:3: error: [GHC-58481]\n    parse error (possibly incorrect indentation or mismatched brackets)\n   |\n10 |   putStrLn r\n   |   ^"
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:7:16: error: [GHC-88747]\n    Precedence parsing error\n        cannot mix \u2018<\u2019 [infix 4] and \u2018<\u2019 [infix 4] in the same infix expression\n  |\n7 |   let inside = 1 < x < 3 -- BREAK!\n  |                ^^^^^^^^^"
+  },
+  "lost_update_on_copy": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:7:19: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "150",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:10:27: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "hi\ninjected",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.BlockedIndefinitelyOnMVar:\n\nthread blocked indefinitely in an MVar operation",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:2:1: warning: [GHC-66111] [-Wunused-imports] The import of \u2018Control.Concurrent.Chan\u2019 is redundant except perhaps to import instances from \u2018Control.Concurrent.Chan\u2019",
+   "exit": 1,
+   "secs": 0.32,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.BlockedIndefinitelyOnMVar:\n\nthread blocked indefinitely in an MVar operation"
+  },
+  "path_join_escape": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:8:39: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "escaped",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no regular expressions in base or the libraries that ship with GHC"
+  },
+  "negative_remainder": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:9:29: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "odd",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:5:11: error: [GHC-83865]\n    \u2022 Couldn't match expected type: String -> String\n                  with actual type: [Char]\n    \u2022 The function \u2018\"bob\"\u2019 is applied to one visible argument,\n        but its type \u2018String\u2019 has none\n      In the expression: \"bob\" \"carol\"\n      In the expression: [\"alice\", \"bob\" \"carol\"]\n  |\n5 |         , \"bob\" -- BREAK!\n  |           ^^^^^^^^^^^^^^^..."
+  },
+  "return_in_finally": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.read: no parse\nmain: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.BlockedIndefinitelyOnMVar:\n\nthread blocked indefinitely in an MVar operation",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.32,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.read: no parse\nmain: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.BlockedIndefinitelyOnMVar:\n\nthread blocked indefinitely in an MVar operation"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nprintf: argument list ended prematurely",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nprintf: argument list ended prematurely"
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:9:25: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nMap.!: given key is not an element in the map\n\nHasCallStack backtrace:\n  error, called at libraries/containers/containers/src/Data/Map/Internal.hs:629:17 in containers-0.8-9e90:Data.Map.Internal",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:8:20: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nMap.!: given key is not an element in the map\n\nHasCallStack backtrace:\n  error, called at libraries/containers/containers/src/Data/Map/Internal.hs:629:17 in containers-0.8-9e90:Data.Map.Internal"
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:8:18: warning: [GHC-63394] [-Wx-partial] In the use of \u2018tail\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": "[9,2]"
+  },
+  "shadowed_assignment": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.hs:10:9: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):\nmain.hs:11:9: warning: [GHC-63397] [-Wname-shadowing] This binding for \u2018status\u2019 shadows the existing binding bound at main.hs:9:3",
+   "warnings": "main.hs:11:9: warning: [GHC-63397] [-Wname-shadowing] This binding for \u2018status\u2019 shadows the existing binding bound at main.hs:9:3",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pending",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:6:3: error: [GHC-83865]\n    \u2022 Couldn't match type \u2018[]\u2019 with \u2018IO\u2019\n      Expected: IO Char\n        Actual: [Char]\n    \u2022 In a stmt of a 'do' block: map toUpper name\n      In the expression:\n        do let name = \"ada\"\n           map toUpper name\n           putStrLn name\n      In an equation for \u2018main\u2019:\n          main\n            = do let name = ...\n                 map toUpper name\n                 putStrLn name\n  |\n6 |   map toUpper name -- BREAK!\n  |   ^^^^^^^^^^^^^^^^"
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.!!: negative index\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1630:12 in ghc-internal:GHC.Internal.List\n  negIndex, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1634:17 in ghc-internal:GHC.Internal.List\n  !!, called at main.hs:8:35 in main:Main",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:7:17: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.!!: negative index\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1630:12 in ghc-internal:GHC.Internal.List\n  negIndex, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1634:17 in ghc-internal:GHC.Internal.List\n  !!, called at main.hs:8:35 in main:Main"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:8:25: error: [GHC-83865]\n    \u2022 Couldn't match type \u2018Int\u2019 with \u2018[Char]\u2019\n      Expected: [String]\n        Actual: [Int]\n    \u2022 In the second argument of \u2018elem\u2019, namely \u2018ids\u2019\n      In the expression: i `elem` ids\n      In the first argument of \u2018putStrLn\u2019, namely\n        \u2018(if i `elem` ids then \"found\" else \"missing\")\u2019\n  |\n8 |   putStrLn (if i `elem` ids then \"found\" else \"missing\") -- CONTROL! putStrLn (if read i `elem` ids then \"found\" else \"missing\")\n  |                         ^^^"
+  },
+  "use_after_close": {
+   "outcome": "TRAPPED",
+   "runs": 50,
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.IOException:\n\n/tmp/bb_close.txt: hPutStr: illegal operation (handle is closed)\n\nHasCallStack backtrace:\n  ioException, called at libraries/ghc-internal/src/GHC/Internal/IO/Handle/Internals.hs:347:20 in ghc-internal:GHC.Internal.IO.Handle.Internals",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.IOException:\n\n/tmp/bb_close.txt: hPutStr: illegal operation (handle is closed)\n\nHasCallStack backtrace:\n  ioException, called at libraries/ghc-internal/src/GHC/Internal/IO/Handle/Internals.hs:347:20 in ghc-internal:GHC.Internal.IO.Handle.Internals"
+  },
+  "dead_store": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.hs:6:21: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):\nmain.hs:7:7: warning: [GHC-40910] [-Wunused-local-binds] Defined but not used: \u2018total\u2019",
+   "warnings": "main.hs:7:7: warning: [GHC-40910] [-Wunused-local-binds] Defined but not used: \u2018total\u2019",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "balanced",
+   "stderr": "worker failed: user error (crash mid-update)"
+  },
+  "split_character": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:7:17: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a\ud83d\udc4d",
+   "stderr": ""
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nIx{Int}.index: Index (4) out of range ((0,3))",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:10:25: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nIx{Int}.index: Index (4) out of range ((0,3))"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nIx{Int}.index: Index (4) out of range ((0,3))",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:10:24: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nIx{Int}.index: Index (4) out of range ((0,3))"
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:10:27: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "CRASH",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:10:22: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 137,
+   "secs": 11.3,
+   "stdout": "",
+   "stderr": "Killed"
+  },
+  "concurrent_map_write": {
+   "outcome": "CORRECT",
+   "runs": 20,
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.35,
+   "stdout": "800000",
+   "stderr": ""
+  },
+  "huge_allocation": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Out of memory",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:7:17: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 251,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Out of memory"
+  },
+  "fd_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:8:17: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Control.Exception.Base.PatternMatchFail:\n\nmain.hs:9:7-16: Non-exhaustive patterns in Text s\n\n\nHasCallStack backtrace:\n  collectExceptionAnnotation, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:170:37 in ghc-internal:GHC.Internal.Exception\n  toExceptionWithBacktrace, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:90:42 in ghc-internal:GHC.Internal.Exception\n  throw, called at libraries/ghc-internal/src/GHC/Internal/Control/Exception/Base.hs:434:30 in ghc-internal:GHC.Internal.Control.Exception.Base",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:8:41: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):\nmain.hs:9:7: warning: [GHC-62161] [-Wincomplete-uni-patterns] Pattern match(es) are non-exhaustive In a pattern binding:",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Control.Exception.Base.PatternMatchFail:\n\nmain.hs:9:7-16: Non-exhaustive patterns in Text s\n\n\nHasCallStack backtrace:\n  collectExceptionAnnotation, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:170:37 in ghc-internal:GHC.Internal.Exception\n  toExceptionWithBacktrace, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:90:42 in ghc-internal:GHC.Internal.Exception\n  throw, called at libraries/ghc-internal/src/GHC/Internal/Control/Exception/Base.hs:434:30 in ghc-internal:GHC.Internal.Control.Exception.Base"
+  },
+  "format_string": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nprintf: argument list ended prematurely",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:7:11: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nprintf: argument list ended prematurely"
+  },
+  "trojan_source": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:4:26: error: [GHC-21231] lexical error at character '\\8238'\n  |\n4 |   putStrLn (if access /= \"user\u202e \u2066// admins only\u2069 \u2066\" then \"admin\" else \"user\") -- CONTROL! putStrLn (if access /= \"user\" then \"admin\" else \"user\")\n  |                          ^^^^^"
+  },
+  "unsafe_deserialization": {
+   "outcome": "SAFE_BY_DESIGN",
+   "message": "Data.Binary and Read decode only the type the program declares"
+  },
+  "deep_structure_release": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:17:17: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 0,
+   "secs": 0.16,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:6:14: error: [GHC-83865]\n    \u2022 Couldn't match type \u2018[]\u2019 with \u2018a0 i0\u2019\n      Expected: a0 i0 Char\n        Actual: String\n    \u2022 In the first argument of \u2018writeArray\u2019, namely \u2018greeting\u2019\n      In a stmt of a 'do' block: writeArray greeting 0 'j'\n      In the expression:\n        do let greeting = \"hello\"\n           writeArray greeting 0 'j'\n           putStrLn greeting\n  |\n6 |   writeArray greeting 0 'j' -- BREAK!\n  |              ^^^^^^^^"
+  },
+  "reference_cycle": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.34,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "complete_init": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Control.Exception.Base.RecConError:\n\nmain.hs:5:11-31: Missing field in record construction retries\n\n\nHasCallStack backtrace:\n  collectExceptionAnnotation, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:170:37 in ghc-internal:GHC.Internal.Exception\n  toExceptionWithBacktrace, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:90:42 in ghc-internal:GHC.Internal.Exception\n  throw, called at libraries/ghc-internal/src/GHC/Internal/Control/Exception/Base.hs:432:30 in ghc-internal:GHC.Internal.Control.Exception.Base",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:5:11: warning: [GHC-20125] [-Wmissing-fields] \u2022 Fields of \u2018Config\u2019 not initialised: retries :: Int",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Control.Exception.Base.RecConError:\n\nmain.hs:5:11-31: Missing field in record construction retries\n\n\nHasCallStack backtrace:\n  collectExceptionAnnotation, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:170:37 in ghc-internal:GHC.Internal.Exception\n  toExceptionWithBacktrace, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:90:42 in ghc-internal:GHC.Internal.Exception\n  throw, called at libraries/ghc-internal/src/GHC/Internal/Control/Exception/Base.hs:432:30 in ghc-internal:GHC.Internal.Control.Exception.Base"
+  },
+  "newtype": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:10:39: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Meters\u2019 with actual type \u2018Seconds\u2019\n    \u2022 In the second argument of \u2018addM\u2019, namely \u2018(Seconds 3)\u2019\n      In the expression: addM (Meters 2) (Seconds 3)\n      In a pattern binding: Meters wrong = addM (Meters 2) (Seconds 3)\n   |\n10 |   let Meters wrong = addM (Meters 2) (Seconds 3) -- BREAK!\n   |                                       ^^^^^^^^^"
+  },
+  "strong_enum": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:11:18: error: [GHC-39999]\n    \u2022 No instance for \u2018Num Color\u2019 arising from the literal \u20187\u2019\n    \u2022 In the first argument of \u2018name\u2019, namely \u20187\u2019\n      In the first argument of \u2018putStrLn\u2019, namely \u2018(name 7)\u2019\n      In a stmt of a 'do' block: putStrLn (name 7)\n   |\n11 |   putStrLn (name 7) -- BREAK!\n   |                  ^"
+  },
+  "override_check": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:9:3: error: [GHC-54721]\n    \u2018descibe\u2019 is not a (visible) method of class \u2018Shape\u2019\n  |\n9 |   descibe _ = \"circle\" -- BREAK!\n  |   ^^^^^^^"
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "before",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nMaybe.fromJust: Nothing\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/Data/Maybe.hs:150:21 in ghc-internal:GHC.Internal.Data.Maybe\n  fromJust, called at main.hs:11:10 in main:Main",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nMaybe.fromJust: Nothing\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/Data/Maybe.hs:150:21 in ghc-internal:GHC.Internal.Data.Maybe\n  fromJust, called at main.hs:11:10 in main:Main"
+  },
+  "null_in_text": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:11:26: error: [GHC-83865]\n    \u2022 Couldn't match expected type: [Char]\n                  with actual type: Maybe String\n    \u2022 In the second argument of \u2018(++)\u2019, namely \u2018name\u2019\n      In the first argument of \u2018putStrLn\u2019, namely \u2018(\"hello, \" ++ name)\u2019\n      In a stmt of a 'do' block: putStrLn (\"hello, \" ++ name)\n   |\n11 |   putStrLn (\"hello, \" ++ name) -- CONTROL! putStrLn (\"hello, \" ++ fromMaybe \"nobody\" name)\n   |                          ^^^^"
+  },
+  "not_found_sentinel": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:9:19: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Int\u2019 with actual type \u2018Maybe Int\u2019\n    \u2022 In the first argument of \u2018(+)\u2019, namely \u2018pos\u2019\n      In the first argument of \u2018drop\u2019, namely \u2018(pos + 1)\u2019\n      In the first argument of \u2018putStrLn\u2019, namely \u2018(drop (pos + 1) line)\u2019\n  |\n9 |   putStrLn (drop (pos + 1) line) -- CONTROL! putStrLn (maybe \"\" (\\p -> drop (p + 1) line) pos)\n  |                   ^^^"
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.maximum: empty list\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1969:3 in ghc-internal:GHC.Internal.List\n  errorEmptyList, called at libraries/ghc-internal/src/GHC/Internal/List.hs:815:28 in ghc-internal:GHC.Internal.List\n  maximum, called at libraries/ghc-internal/src/GHC/Internal/Data/Foldable.hs:703:15 in ghc-internal:GHC.Internal.Data.Foldable",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.maximum: empty list\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1969:3 in ghc-internal:GHC.Internal.List\n  errorEmptyList, called at libraries/ghc-internal/src/GHC/Internal/List.hs:815:28 in ghc-internal:GHC.Internal.List\n  maximum, called at libraries/ghc-internal/src/GHC/Internal/Data/Foldable.hs:703:15 in ghc-internal:GHC.Internal.Data.Foldable"
+  },
+  "readonly_param": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:5:14: error: [GHC-83865]\n    \u2022 Couldn't match type \u2018[]\u2019 with \u2018a0 i0\u2019\n      Expected: a0 i0 Int\n        Actual: [Int]\n    \u2022 In the first argument of \u2018writeArray\u2019, namely \u2018xs\u2019\n      In a stmt of a 'do' block: writeArray xs 0 9\n      In the expression:\n        do writeArray xs 0 9\n           return (length xs)\n  |\n5 |   writeArray xs 0 9 -- BREAK!\n  |              ^^"
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.hs:4:15: warning: [GHC-97441] [-Woverflowed-literals] Literal 300 is out of the Word8 range 0..255",
+   "warnings": "main.hs:4:15: warning: [GHC-97441] [-Woverflowed-literals] Literal 300 is out of the Word8 range 0..255",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "no_implicit_conversion": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:7:10: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Int32\u2019 with actual type \u2018Int64\u2019\n    \u2022 In the first argument of \u2018print\u2019, namely \u2018(big :: Int32)\u2019\n      In a stmt of a 'do' block: print (big :: Int32)\n      In the expression:\n        do let big = ...\n               small = ...\n           print (big :: Int32)\n           print small\n  |\n7 |   print (big :: Int32) -- BREAK!\n  |          ^^^"
+  },
+  "generic_constraint": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:8:18: error: [GHC-39999]\n    \u2022 No instance for \u2018Ord Point\u2019 arising from a use of \u2018sort\u2019\n    \u2022 In the first argument of \u2018length\u2019, namely \u2018(sort [Point 1 2])\u2019\n      In the first argument of \u2018print\u2019, namely\n        \u2018(length (sort [Point 1 2]))\u2019\n      In a stmt of a 'do' block: print (length (sort [Point 1 2]))\n  |\n8 |   print (length (sort [Point 1 2])) -- BREAK!\n  |                  ^^^^"
+  },
+  "lossy_int_to_float": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:8:9: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Double\u2019 with actual type \u2018Int\u2019\n    \u2022 In the first argument of \u2018showF\u2019, namely \u2018n\u2019\n      In a stmt of a 'do' block: showF n\n      In the expression:\n        do let n = ...\n           showF (fromIntegral n)\n           showF n\n  |\n8 |   showF n -- BREAK!\n  |         ^"
+  },
+  "const_index_bounds": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.!!: index too large\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1627:14 in ghc-internal:GHC.Internal.List\n  tooLarge, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1637:50 in ghc-internal:GHC.Internal.List\n  !!, called at main.hs:4:16 in main:Main",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.!!: index too large\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1627:14 in ghc-internal:GHC.Internal.List\n  tooLarge, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1637:50 in ghc-internal:GHC.Internal.List\n  !!, called at main.hs:4:16 in main:Main"
+  },
+  "lazy_accumulator": {
+   "outcome": "LEAK",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:10:21: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 137,
+   "secs": 0.89,
+   "stdout": "",
+   "stderr": "Killed"
+  },
+  "size_overflow_alloc": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nIx{Int}.index: Index (8) out of range ((0,7))",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:8:21: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nIx{Int}.index: Index (8) out of range ((0,7))"
+  },
+  "const_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-8985944073709551616",
+   "stderr": ""
+  },
+  "orphaned_receive": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.read: no parse\nmain: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.BlockedIndefinitelyOnMVar:\n\nthread blocked indefinitely in an MVar operation",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.32,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.read: no parse\nmain: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.BlockedIndefinitelyOnMVar:\n\nthread blocked indefinitely in an MVar operation"
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "unreachable_code": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ok\nchecked",
+   "stderr": ""
+  },
+  "checked_interpolation": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no string interpolation"
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.hs:6:3: warning: [GHC-53633] [-Woverlapping-patterns] Pattern match is redundant In a case alternative: Circle -> ...",
+   "warnings": "main.hs:6:3: warning: [GHC-53633] [-Woverlapping-patterns] Pattern match is redundant In a case alternative: Circle -> ...",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "other",
+   "stderr": ""
+  },
+  "duplicate_key": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "char_arithmetic": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:7:10: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Int\u2019 with actual type \u2018Char\u2019\n    \u2022 In the first argument of \u2018(+)\u2019, namely \u2018c\u2019\n      In the first argument of \u2018print\u2019, namely \u2018(c + 1 :: Int)\u2019\n      In a stmt of a 'do' block: print (c + 1 :: Int)\n  |\n7 |   print (c + 1 :: Int) -- BREAK!\n  |          ^"
+  },
+  "json_big_integer": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "9007199254740993",
+   "stderr": ""
+  },
+  "comparison_statement": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:4:3: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018IO a0\u2019 with actual type \u2018Bool\u2019\n    \u2022 In a stmt of a 'do' block: count == 5\n      In the expression:\n        do let count = ...\n           count == 5\n           print count\n      In an equation for \u2018main\u2019:\n          main\n            = do let count = ...\n                 count == 5\n                 print count\n  |\n4 |   count == 5 -- BREAK!\n  |   ^^^^^^^^^^"
+  },
+  "structural_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "hash_matches_equality": {
+   "outcome": "SILENT",
+   "runs": 20,
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:3:43: warning: [GHC-40910] [-Wunused-top-binds] Defined but not used: record field of Point \u2018label\u2019",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.!!: index too large\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1627:14 in ghc-internal:GHC.Internal.List\n  tooLarge, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1637:50 in ghc-internal:GHC.Internal.List\n  !!, called at main.hs:4:16 in main:Main",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.!!: index too large\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1627:14 in ghc-internal:GHC.Internal.List\n  tooLarge, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1637:50 in ghc-internal:GHC.Internal.List\n  !!, called at main.hs:4:16 in main:Main"
+  },
+  "enum_from_int": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "before",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nEnum.toEnum{Color}: tag (7) is outside of enumeration's range (0,2)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "main.hs:11:24: warning: [GHC-63394] [-Wx-partial] In the use of \u2018head\u2019 (imported from Prelude, but defined in GHC.Internal.List):",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nEnum.toEnum{Color}: tag (7) is outside of enumeration's range (0,2)"
+  },
+  "bitwise_on_bool": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:7:22: error: [GHC-88464]\n    Variable not in scope: (&) :: Bool -> Bool -> Bool\n  |\n7 |   when (not (null s) & (head s == 'a')) (putStrLn \"both\") -- BREAK!\n  |                      ^"
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:8:15: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018GHC.Internal.IORef.IORef a0\u2019\n                  with actual type \u2018Int\u2019\n    \u2022 In the first argument of \u2018writeIORef\u2019, namely \u2018(port c)\u2019\n      In a stmt of a 'do' block: writeIORef (port c) 1\n      In the expression:\n        do let c = ...\n           writeIORef (port c) 1\n           print (port c)\n  |\n8 |   writeIORef (port c) 1 -- BREAK!\n  |               ^^^^^^"
+  },
+  "bool_condition": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:9:9: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Bool\u2019 with actual type \u2018Int\u2019\n    \u2022 In the first argument of \u2018when\u2019, namely \u2018(compareText \"x\" \"x\")\u2019\n      In a stmt of a 'do' block:\n        when (compareText \"x\" \"x\") (putStrLn \"different\")\n      In the expression:\n        do when (compareText \"x\" \"x\" == 0) (putStrLn \"same\")\n           when (compareText \"x\" \"x\") (putStrLn \"different\")\n  |\n9 |   when (compareText \"x\" \"x\") (putStrLn \"different\") -- BREAK!\n  |         ^^^^^^^^^^^^^^^^^^^"
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.IOException:\n\n/dev/full: withFile: resource exhausted (No space left on device)\n\nHasCallStack backtrace:\n  ioError, called at libraries/ghc-internal/src/GHC/Internal/IO/Handle/Internals.hs:887:17 in ghc-internal:GHC.Internal.IO.Handle.Internals",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.IOException:\n\n/dev/full: withFile: resource exhausted (No space left on device)\n\nHasCallStack backtrace:\n  ioError, called at libraries/ghc-internal/src/GHC/Internal/IO/Handle/Internals.hs:887:17 in ghc-internal:GHC.Internal.IO.Handle.Internals"
+  },
+  "short_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.2,
+   "stdout": "HELLO-WORLD-1234",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "user error (close failed)",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "nullable_field": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0\n0",
+   "stderr": ""
+  },
+  "stale_null_check": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "empty_slot": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:11:23: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018User\u2019 with actual type \u2018Maybe User\u2019\n    \u2022 In the first argument of \u2018name\u2019, namely \u2018first\u2019\n      In the first argument of \u2018length\u2019, namely \u2018(name first)\u2019\n      In the first argument of \u2018print\u2019, namely \u2018(length (name first))\u2019\n   |\n11 |   print (length (name first)) -- BREAK!\n   |                       ^^^^^"
+  },
+  "typed_nil": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "check_then_act": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "main.hs:2:1: warning: [GHC-66111] [-Wunused-imports] The import of \u2018Control.Concurrent.Chan\u2019 is redundant except perhaps to import instances from \u2018Control.Concurrent.Chan\u2019\nmain.hs:29:3: warning: [GHC-81995] [-Wunused-do-bind] A do-notation statement discarded a result of type \u2018ThreadId\u2019 Suggested fix:\nSuppress this warning by saying \u2018_ <- forkIO (claim state ready release done)\u2019\nmain.hs:30:3: warning: [GHC-81995] [-Wunused-do-bind] A do-notation statement discarded a result of type \u2018ThreadId\u2019 Suggested fix:",
+   "warnings": "main.hs:2:1: warning: [GHC-66111] [-Wunused-imports] The import of \u2018Control.Concurrent.Chan\u2019 is redundant except perhaps to import instances from \u2018Control.Concurrent.Chan\u2019",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "async_reentrancy": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no asynchronous tasks among the packages GHC ships, only threads; the threaded form of this race is check_then_act"
+  },
+  "lock_skipped_on_return": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "70",
+   "stderr": ""
+  }
+ }
+}

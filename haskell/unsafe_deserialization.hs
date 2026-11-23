@@ -1,0 +1,1 @@
+-- CANNOT-MAKE: Data.Binary and Read decode only the type the program declares

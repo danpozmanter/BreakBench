@@ -926,7 +926,7 @@
       "warn": "union|variant|unsafe cast|incomplete (pattern|match)|refutable|not exhaustive|more specialized"
     },
     {
-      "category": "memory",
+      "category": "security",
       "id": "format_string",
       "kind": "memory",
       "args": [
@@ -937,6 +937,29 @@
       "scenario": "The program logs a message from the command line, %s%s%n{}{0}, by passing it as the format to the language's formatted print call. The message covers both printf-style and brace-style placeholders.",
       "best": "The message printed as is, a refusal (the format must be a literal), or a clean error. Reading missing arguments off the stack fails.",
       "warn": "format string|format.*(literal|security|nonliteral|non-constant)|printf"
+    },
+    {
+      "id": "trojan_source",
+      "category": "security",
+      "kind": "static",
+      "args": [],
+      "expect": "^user$",
+      "title": "Hidden text-direction characters in a string (CVE-2021-42574)",
+      "scenario": "access is user. The program grants admin when access != \"user\", but the literal it compares with also holds Unicode text-direction controls that make the rest of the line display as a comment, so the source reads as a comparison with \"user\". It prints admin or user.",
+      "best": "user, or a refusal of text-direction controls in the source. admin shows the comparison used text the reader cannot see.",
+      "warn": "bidi|bidirectional|text.direction|direction(al)? (control|override|formatting|codepoint)|U\\+202E|unicode.{0,30}(control|direction)"
+    },
+    {
+      "id": "unsafe_deserialization",
+      "category": "security",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^rejected$",
+      "answer": "cleanup ran",
+      "title": "Restoring an object from untrusted bytes (CWE-502)",
+      "scenario": "The program restores a session a client sent with the standard library's general object serialization, the one that saves and restores values of any type, and prints its user, or rejected if it is not a session. The attacker's bytes name the program's Cleanup type instead, whose restore hook prints cleanup ran. A language whose standard decoders build only the type the program declares cannot make this error.",
+      "best": "rejected: the decoder builds nothing the program did not ask for. cleanup ran shows attacker bytes chose the code that ran.",
+      "warn": "untrusted|insecure|unsafe deserializ"
     },
     {
       "category": "memory",
@@ -1272,6 +1295,17 @@
       "best": "b, or a refusal to add a number to a character without a conversion. Printing 98 or a1 is a silent wrong answer."
     },
     {
+      "id": "json_big_integer",
+      "category": "numbers",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^9007199254740993$",
+      "title": "A large integer read from JSON",
+      "scenario": "The program parses {\"id\": 9007199254740993} (2^53 + 1) with the standard library's JSON parser into its general value type, or with a typed decode where that is the only kind, and prints the id.",
+      "best": "9007199254740993: the parser keeps the integer exact. 9007199254740992 shows it silently became a 64-bit float.",
+      "warn": "precision|unsafe integer|loses|exceeds|MAX_SAFE_INTEGER"
+    },
+    {
       "id": "comparison_statement",
       "category": "syntax",
       "kind": "static",
@@ -1301,7 +1335,8 @@
       "title": "Equality without a matching hash (CWE-581)",
       "scenario": "Point defines equality on x and y only, without a matching hash. The program puts two Points that are equal by that definition in a hash set and prints its size.",
       "best": "1, or a refusal of a key type whose hash can disagree with its equality. 2 means the set holds two equal values.",
-      "warn": "hash|GetHashCode|hashCode|derived_hash"
+      "warn": "hash|GetHashCode|hashCode|derived_hash",
+      "runs": 20
     },
     {
       "id": "array_literal_length",
@@ -1369,6 +1404,40 @@
       "scenario": "The program writes the line data to /dev/full, a device where every write fails with no space left, using the language's usual file writer, closes it the usual way (the end of a block, defer, with or using, or a close call whose result it does not check) and prints saved.",
       "best": "An error that stops the program. Printing saved means the data was lost with no sign, as when a disk fills up in production.",
       "warn": "no space|space left|ENOSPC|bytes written|must be used|unchecked|result .*(unused|ignored)"
+    },
+    {
+      "id": "short_read",
+      "category": "errors",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^HELLO-WORLD-1234$",
+      "title": "A read that returns part of a message (CWE-252)",
+      "scenario": "The program starts sh -c 'printf HELLO-WO; sleep 0.2; printf RLD-1234' and reads 16 bytes of its output with the language's usual call that reads a stream into a buffer, ignoring the count of bytes the call reports, then prints the buffer. Where the usual process call returns the whole output, the program uses it.",
+      "best": "HELLO-WORLD-1234: the read waits for all 16 bytes, or a refusal to ignore the count. HELLO-WO shows the first read returned half and the program used the rest of the buffer as if it were filled.",
+      "warn": "unused_io_amount|read_exact|inexact read|CA2022|bytes (were )?read|has to be (used|discarded)"
+    },
+    {
+      "id": "masked_cleanup_error",
+      "category": "errors",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "disk full",
+      "title": "A cleanup failure that hides the original error",
+      "scenario": "save() writes a report through a resource whose write fails with disk full and whose close then fails with close failed. The resource is released the language's usual way (with, using, try-with-resources, use, defer, ensure, a destructor or a finally block). The caller catches save's error and prints its message.",
+      "best": "disk full, alone or with the close failure attached: the error that stopped the save survives. close failed alone shows the cleanup error replaced it.",
+      "warn": "suppress|mask|hides the|while handling"
+    },
+    {
+      "id": "unflushed_writer",
+      "category": "errors",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^total=42$",
+      "output_file": "/tmp/bb_report.txt",
+      "title": "A buffered file never flushed before exit",
+      "scenario": "The program writes the line total=42 to /tmp/bb_report.txt the language's usual way to write a file line by line (through its standard buffered writer where it pairs one with files), never flushes or closes it, and exits normally. The test reads the file after the program ends.",
+      "best": "total=42: the data reaches the file because the writer is unbuffered, is flushed when it goes out of scope or at exit, or the compiler refuses the unclosed writer. An empty file shows the buffered line was lost.",
+      "warn": "flush|dispose|CA2000|not closed|unclosed|never closed|resource leak"
     },
     {
       "id": "nullable_field",

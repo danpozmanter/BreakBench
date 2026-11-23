@@ -277,9 +277,10 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     <ul class="notes muted">
       <li>Each program is written the way the language's documentation teaches first, with only the language, its standard library and its project's own libraries and tools.</li>
       <li>Each container gets 3 GB of memory and a 20 s run limit. <code>reference_cycle</code> and <code>lazy_accumulator</code> pass 12 GB through it, so a program that keeps what it drops runs out of memory and counts as a leak.</li>
-      <li>Races use rendezvous points so the same schedule runs every time; <code>use_after_close</code> runs up to fifty times and keeps the worst outcome.</li>
+      <li>Races use rendezvous points so the same schedule runs every time; <code>use_after_close</code>, <code>concurrent_map_write</code> and <code>hash_matches_equality</code> run several times and keep the worst outcome.</li>
       <li>C-family programs keep stale pointers in data structures, and Rust's <code>huge_allocation</code> uses <code>std::hint::black_box</code>, so the optimizer cannot remove the access a real program would make.</li>
       <li><code>async_reentrancy</code> is N/A where the standard library has no asynchronous tasks, since its threaded form is <code>check_then_act</code>. Languages without an early return write <code>lock_skipped_on_return</code> with the unlock after the conditional, so they cannot skip it.</li>
+      <li><code>unsafe_deserialization</code> counts as prevented by design where the standard decoders build only the type the program declares, and is N/A where the standard library has no decoder. <code>short_read</code> uses the language's usual process call, so a language whose usual call returns the whole output reads all of it. <code>unflushed_writer</code> is judged by what the file holds after the program exits.</li>
       <li>A compile error counts as a refusal only when the program without the bug compiles. A compiler crash scores 0.</li>
       <li>The README lists every build command and the remaining language quirks.</li>
     </ul>

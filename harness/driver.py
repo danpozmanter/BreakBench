@@ -187,8 +187,14 @@ def run_worst(problem, spec, run_template, work):
     )
     # A race shows only in some schedules, so the worst of several runs counts.
     worst = None
+    output_file = problem.get("output_file")
     for _ in range(problem.get("runs", 1)):
+        if output_file and os.path.exists(output_file):
+            os.remove(output_file)
         status, timed_out, out, err, secs = execute(run_cmd, work, 20)
+        # A test about data reaching a file judges what the file holds once the program has exited.
+        if output_file:
+            out = read(output_file) if os.path.exists(output_file) else ""
         out, err = ANSI_RE.sub("", out), ANSI_RE.sub("", err)
         outcome = classify(problem, spec["kinds"], status, timed_out, out, err)
         score = spec["kinds"][problem["kind"]].get(outcome, 0)
