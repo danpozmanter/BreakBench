@@ -64,6 +64,8 @@ def score_of(problem, rec, kinds):
         return 0.0
     table = kinds[problem["kind"]]
     score = table.get(rec["outcome"], 0.0)
+    if debug_only(rec):
+        score = table.get("DEBUG_TRAPPED", score)
     if rec.get("warned"):
         score = max(score, table.get("WARNED", 0.0))
     if rec.get("run_warned"):
@@ -71,12 +73,21 @@ def score_of(problem, rec, kinds):
     return score
 
 
+def debug_only(rec):
+    """A run-time stop the debug build made and the release build does not."""
+    return rec["outcome"] == "TRAPPED" and rec.get("release", "TRAPPED") not in ("TRAPPED", "CORRECT")
+
+
 def percent(scores):
     return round(100 * sum(scores) / len(scores), 1) if scores else 0.0
 
 
 CATEGORIES = {
-    "correctness": "Correctness",
+    "numbers": "Numbers",
+    "types": "Types and APIs",
+    "syntax": "Syntax traps",
+    "errors": "Error handling",
+    "security": "Security",
     "null": "Null safety",
     "memory": "Memory safety",
     "concurrency": "Concurrency",
@@ -122,7 +133,7 @@ def aggregate(run):
                 "results": per_problem,
             }
         )
-    rows.sort(key=lambda r: (-r["score"], -r["correctness"], r["name"]))
+    rows.sort(key=lambda r: (-r["score"], -r["caught"], r["name"]))
     for rank, row in enumerate(rows, 1):
         row["rank"] = rank
     out = {
@@ -169,6 +180,16 @@ def describe_run(rec):
             "No compiler or runtime message flagged the bug.")
 
 
+RELEASE_WORDS = {
+    "SILENT": "it finished with a wrong answer",
+    "CORRUPT": "it read or wrote memory it does not own",
+    "CRASH": "it crashed",
+    "HANG": "it never finished",
+    "LEAK": "it ran out of resources",
+    "ERROR": "it did not build",
+}
+
+
 def site_payload(out):
     """The site needs the evidence, not every byte of it."""
     langs = []
@@ -177,8 +198,12 @@ def site_payload(out):
         for pid, rec in row["results"].items():
             evidence = (rec.get("message") or rec.get("stderr")
                         or describe_run(rec))
+            if debug_only(rec):
+                evidence = (f"The release build did not stop: {RELEASE_WORDS.get(rec['release'], rec['release'])}.\n\n"
+                            + evidence)
             results[pid] = {
                 "o": rec["outcome"],
+                "rel": rec["release"] if debug_only(rec) else "",
                 "s": rec["score"],
                 "out": (rec.get("stdout") or "")[:160],
                 "ev": evidence[:600],

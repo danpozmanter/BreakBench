@@ -4,7 +4,7 @@ lock = threading.Lock()
 balance = 0
 
 
-def deposit(amount):
+def deposit(amount: int) -> None:
     global balance
     with lock:
         balance += amount

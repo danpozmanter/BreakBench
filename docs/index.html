@@ -70,7 +70,7 @@ table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nu
 th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
 th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; white-space: nowrap; vertical-align: bottom; }
 th button { all: unset; cursor: pointer; }
-th button:focus-visible, .cell:focus-visible, .plist button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+th button:focus-visible, .plist button:focus-visible, select:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 tr:last-child td { border-bottom: 0; }
 .rank { width: 2.5em; color: var(--muted); }
 .lang { font-weight: 600; white-space: nowrap; }
@@ -87,6 +87,9 @@ th.breakdown { text-align: right; white-space: normal; max-width: 7.5em; vertica
 .bar { width: 80px; }
 .num { display: inline-block; min-width: 3.2em; text-align: right; font-weight: 600; }
 tr.hl td { background: color-mix(in srgb, var(--accent) 9%, transparent); }
+.notes { margin: 0; padding-left: 20px; display: grid; gap: 8px; font-size: 14px; line-height: 1.5; max-width: 72em; }
+.notes code, .notes-table code { font-family: var(--font-mono); font-size: 12.5px; }
+.notes-table td:first-child { font-weight: 600; }
 .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; font-size: 13px; }
 .legend strong { margin-right: 4px; }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
@@ -102,7 +105,7 @@ td.count.zero { color: var(--muted); font-weight: 400; opacity: .5; }
 td.chipcell { width: 9.5em; min-width: 9.5em; }
 td.chipcell > .chip { display: flex; width: 100%; box-sizing: border-box; height: auto; min-height: 22px; padding: 3px 8px; text-align: center; line-height: 1.25; }
 .o-REJECTED { background: var(--o-rejected); } .o-CORRECT, .o-SAFE_BY_DESIGN { background: var(--o-correct); }
-.o-TRAPPED { background: var(--o-trapped); color: #1b1606; } .o-SILENT { background: var(--o-silent); }
+.o-TRAPPED, .o-DEBUG_TRAPPED { background: var(--o-trapped); color: #1b1606; } .o-SILENT { background: var(--o-silent); }
 .o-UNFIXABLE, .o-CORRUPT { background: var(--o-corrupt); } .o-CRASH { background: var(--o-crash); }
 .o-HANG { background: var(--o-hang); } .o-LEAK { background: var(--o-leak); }
 .o-ICE { background: var(--o-ice); }
@@ -110,7 +113,6 @@ td.chipcell > .chip { display: flex; width: 100%; box-sizing: border-box; height
 .o-ERROR, .o-MISSING { background: var(--o-error); }
 .scoring { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
 .scoring div { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 6px; font-size: 13px; }
-  font-family: var(--font-mono); font-size: 10px; cursor: pointer; border: 0; padding: 0; }
 .by-design { box-shadow: inset 0 0 0 2px var(--fg); }
 /* The result grids are wider than the text column, so they use the whole window. */
 .grids { display: grid; gap: 20px; width: calc(100vw - 48px); margin-left: calc(50% - 50vw + 24px); }
@@ -166,16 +168,36 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
 .cmp tr.cmp-detail > td { background: var(--bg); padding: 14px; }
 .cmp tr.cmp-detail .case { max-width: 100%; }
 @media (max-width: 760px) {
+  .notes-table thead { display: none; }
+  .notes-table tr { display: grid; gap: 2px; padding: 10px 12px; border-bottom: 1px solid var(--line); }
+  .notes-table td { border: 0; padding: 0; }
   .detail { grid-template-columns: 1fr; }
   .plist { display: none; }
   #problem-select { display: block; }
   .bar { width: 60px; }
   .facts { grid-template-columns: minmax(0, 1fr); gap: 2px; }
   .facts dd { margin-bottom: 8px; }
-  #case > .scroll { overflow: visible; }
-  #case > .scroll table, .cmp-detail .scroll table { min-width: 900px; }
-  .cmp-grid-scroll { overflow: visible; }
-  .cmp-detail .case { min-width: 900px; max-width: none; }
+  .grid th.pname { width: 132px; min-width: 132px; max-width: 132px; font-size: 12.5px; }
+  .grid.cmp { table-layout: auto; width: max-content; min-width: 100%; }
+  .grid.cmp th.pname { width: 132px; }
+  .grid.cmp th.lname { min-width: 0; }
+  .cmp .gcell { width: 84px; }
+  /* The grid scrolls sideways; its detail row stays pinned to the visible width. */
+  .cmp-grid-scroll { container-type: inline-size; }
+  .cmp tr.cmp-detail > td { padding: 12px 0; }
+  .cmp tr.cmp-detail .case { position: sticky; left: 0; width: 100cqi; box-sizing: border-box; padding: 0 12px; }
+  /* Each language's evidence becomes a card: name, outcome and score, then the output in full width. */
+  .scroll:has(> table.evidence) { overflow: visible; border: 0; background: none; }
+  table.evidence, table.evidence tbody { display: block; }
+  table.evidence thead { display: none; }
+  table.evidence tr { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 6px 10px; align-items: center;
+    padding: 10px 12px; margin-bottom: 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+  table.evidence tr.hl { background: color-mix(in srgb, var(--accent) 9%, var(--surface)); }
+  table.evidence td { display: block; padding: 0; border: 0; background: none; }
+  table.evidence td.chipcell { width: auto; min-width: 0; }
+  table.evidence td.full { grid-column: 1 / -1; }
+  table.evidence td.full::before { content: attr(data-label); display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+  table.evidence td.full:has(pre:empty) { display: none; }
 }
 @media (prefers-reduced-motion: no-preference) { .bar i { transition: width .4s ease; } }</style>
 
@@ -184,7 +206,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     <h1>BreakBench</h1>
     <p>How much does a language help the programmer avoid production bugs? Each test is a program with one common bug, run in 30 languages.</p>
     <div class="meta" id="meta"></div>
-    <nav class="top" aria-label="Sections"><a href="#overview">Overview</a><a href="#compare">Compare</a><a href="#tests">Tests</a></nav>
+    <nav class="top" aria-label="Sections"><a href="#overview">Overview</a><a href="#compare">Compare</a><a href="#tests">Tests</a><a href="#notes">Notes</a></nav>
   </header>
 
   <section aria-labelledby="cmp-h" id="compare">
@@ -196,7 +218,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
 
   <section aria-labelledby="rank-h" id="overview">
     <h2 id="rank-h">Overview</h2>
-    <p class="muted">The score is the average over counted tests, as a percentage. N/A cases are excluded. The four categories break it down. Caught or prevented by design is the share refused or made impossible. Select a heading to sort.</p>
+    <p class="muted">The score is the average over counted tests, as a percentage. N/A cases are excluded. The categories break it down. Caught or prevented by design is the share refused or made impossible. Select a heading to sort.</p>
     <div class="scroll"><table id="ranking"></table></div>
   </section>
 
@@ -204,7 +226,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     <h2 id="score-h">How outcomes are scored</h2>
     <div class="legend" id="legend"></div>
     <div class="scoring" id="scoring"></div>
-    <p class="muted">A bug refused before the program runs earns a full point, and a build warning that names it earns half: either can keep the bug out of production. A bug the program only shows while running, by stopping with a clear error or by warning and going on, earns a quarter: a test may catch it, but otherwise it reaches production. A wrong answer earns nothing. A warning and a stop never add up; the higher counts. The same holds for every test, compiled or dynamic, logic or memory.</p>
+    <p class="muted">A bug refused before the program runs earns a full point, and a build warning that names it earns half: either can keep the bug out of production. A bug the program only shows while running, by stopping with a clear error or by warning and going on, earns a quarter: a test may catch it, but otherwise it reaches production. A stop that only the debug build makes earns an eighth: the release build that ships runs on past the bug. A wrong answer earns nothing. A warning and a stop never add up; the higher counts. The same holds for every test, compiled or dynamic, logic or memory.</p>
     <p class="muted">Ignoring a result the language marks must-use counts as a refusal.</p>
     <p class="muted">A compile error counts as a refusal only if the same program with the bug removed compiles.</p>
     <p class="muted">N/A means the language cannot express the error, so that case is excluded from its mean. SAFE_BY_DESIGN means the language or its standard model prevents the error and earns 1 point. UNFIXABLE means the error can be made but the fix cannot be expressed, and earns 0. A missing library call is replaced with what the language has when the scenario remains expressible.</p>
@@ -224,6 +246,52 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
       <div class="case" id="case"></div>
     </div>
   </section>
+  <section aria-labelledby="notes-h" id="notes">
+    <h2 id="notes-h">Notes</h2>
+    <h3>Python and mypy</h3>
+    <p class="muted" id="mypy-note">Python runs twice: as written, and checked by mypy in strict mode. mypy is the Python project's own type checker and a common step in Python release workflows, much as TypeScript checks JavaScript. Without it, Python catches most bugs only while running.</p>
+    <h3>Release builds</h3>
+    <p class="muted">Each language builds in its strictest development mode. A program that stops at run time there is built again the way the language ships and run again; if that build runs on past the bug, the stop scores 0.125 instead of 0.25.</p>
+    <div class="scroll"><table class="notes-table"><thead><tr><th>Language</th><th>Release build</th><th>What changes</th></tr></thead><tbody>
+      <tr><td>C</td><td><code>-O2 -D_FORTIFY_SOURCE=3</code>, stack protector</td><td>No sanitizers: an AddressSanitizer or UndefinedBehaviorSanitizer stop becomes a wrong answer, memory corruption or a crash.</td></tr>
+      <tr><td>C++</td><td>as C, plus <code>-D_GLIBCXX_ASSERTIONS</code></td><td>Library bounds checks stay; other sanitizer stops become wrong answers, corruption or crashes.</td></tr>
+      <tr><td>Rust</td><td><code>-O</code></td><td>Overflow and shift checks are off; bounds checks stay.</td></tr>
+      <tr><td>Zig</td><td><code>-O ReleaseSafe</code></td><td>Same safety checks.</td></tr>
+      <tr><td>Go</td><td>same build</td><td>Same checks.</td></tr>
+      <tr><td>Swift</td><td><code>-O</code></td><td>Same overflow and bounds checks.</td></tr>
+      <tr><td>Crystal</td><td><code>--release</code></td><td>Same overflow and bounds checks.</td></tr>
+      <tr><td>D</td><td><code>-O -release</code></td><td>Assertions are off, and bounds checks outside <code>@safe</code> code.</td></tr>
+      <tr><td>Nim</td><td><code>-d:release</code></td><td>Overflow and bounds checks stay; the stack overflow check is off.</td></tr>
+      <tr><td>V</td><td><code>-prod</code></td><td>Same bounds checks.</td></tr>
+      <tr><td>Odin</td><td><code>-o:speed</code></td><td>No AddressSanitizer; bounds checks stay.</td></tr>
+      <tr><td>C3</td><td><code>-O3</code></td><td>Safety checks are off.</td></tr>
+      <tr><td>Mojo</td><td>default build</td><td><code>ASSERT=all</code> is off.</td></tr>
+      <tr><td>Gossamer</td><td><code>gos build --release</code></td><td>Same checks; they hold in every profile.</td></tr>
+      <tr><td>Goose</td><td>without <code>--debug</code>, <code>cc -O2</code></td><td>Arithmetic is unchecked.</td></tr>
+      <tr><td>Java, Kotlin, Scala</td><td>run without <code>-ea</code></td><td>Assertions are off.</td></tr>
+      <tr><td>C#</td><td>Release, unchecked arithmetic</td><td>Overflow wraps silently.</td></tr>
+      <tr><td>F#</td><td>Release, without <code>--checked+</code></td><td>Overflow wraps silently.</td></tr>
+      <tr><td>Dart</td><td><code>dart compile exe</code></td><td>Assertions are off.</td></tr>
+      <tr><td>TypeScript, JavaScript</td><td>same build</td><td>Same behavior.</td></tr>
+      <tr><td>Python, Python (mypy)</td><td>same run</td><td>Same behavior; <code>-X dev</code> only adds warnings.</td></tr>
+      <tr><td>Ruby</td><td>same run</td><td>Same behavior; <code>-w</code> only adds warnings.</td></tr>
+      <tr><td>PHP</td><td><code>zend.assertions=-1</code></td><td>Assertions are off.</td></tr>
+      <tr><td>Julia</td><td>default bounds checking</td><td>Same checks; no program opts out with <code>@inbounds</code>.</td></tr>
+      <tr><td>OCaml</td><td>same build</td><td>Same checks.</td></tr>
+      <tr><td>Haskell</td><td><code>-O1</code></td><td>Same checks.</td></tr>
+      <tr><td>Clojure</td><td>same build</td><td>Same checks.</td></tr>
+    </tbody></table></div>
+    <h3>Other considerations</h3>
+    <ul class="notes muted">
+      <li>Each program is written the way the language's documentation teaches first, with only the language, its standard library and its project's own libraries and tools.</li>
+      <li>Each container gets 3 GB of memory and a 20 s run limit. <code>reference_cycle</code> and <code>lazy_accumulator</code> pass 12 GB through it, so a program that keeps what it drops runs out of memory and counts as a leak.</li>
+      <li>Races use rendezvous points so the same schedule runs every time; <code>use_after_close</code> runs up to fifty times and keeps the worst outcome.</li>
+      <li>C-family programs keep stale pointers in data structures, and Rust's <code>huge_allocation</code> uses <code>std::hint::black_box</code>, so the optimizer cannot remove the access a real program would make.</li>
+      <li><code>async_reentrancy</code> is N/A where the standard library has no asynchronous tasks, since its threaded form is <code>check_then_act</code>. Languages without an early return write <code>lock_skipped_on_return</code> with the unlock after the conditional, so they cannot skip it.</li>
+      <li>A compile error counts as a refusal only when the program without the bug compiles. A compiler crash scores 0.</li>
+      <li>The README lists every build command and the remaining language quirks.</li>
+    </ul>
+  </section>
 </div>
 <script src="data.js"></script>
 <script>
@@ -231,19 +299,20 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
   const D = window.BREAKBENCH;
   let chosen = [];
   const visibleLanguages = () => chosen.length ? D.languages.filter((L) => chosen.includes(L.id)) : D.languages;
-  const OUT = ["REJECTED", "CORRECT", "SAFE_BY_DESIGN", "WARNED", "RUN_WARNED", "TRAPPED", "SILENT", "UNFIXABLE", "CORRUPT", "CRASH", "HANG", "LEAK", "ICE", "INEXPRESSIBLE", "ERROR"];
-  const NAME = { REJECTED: "Refused Correctly", CORRECT: "Ran Correctly", WARNED: "Warned Before Running", RUN_WARNED: "Warned While Running", TRAPPED: "Runtime Stop, Clear Error", SILENT: "Wrong Answer", CORRUPT: "Memory Corruption", CRASH: "Crash", HANG: "Hang", LEAK: "Leak", ICE: "Compiler Crash", INEXPRESSIBLE: "N/A, Not Counted", SAFE_BY_DESIGN: "Prevented by Design", UNFIXABLE: "Unfixable Error", ERROR: "Benchmark Error", MISSING: "Missing" };
+  const OUT = ["REJECTED", "CORRECT", "SAFE_BY_DESIGN", "WARNED", "RUN_WARNED", "TRAPPED", "DEBUG_TRAPPED", "SILENT", "UNFIXABLE", "CORRUPT", "CRASH", "HANG", "LEAK", "ICE", "INEXPRESSIBLE", "ERROR"];
+  const NAME = { REJECTED: "Refused Correctly", CORRECT: "Ran Correctly", WARNED: "Warned Before Running", RUN_WARNED: "Warned While Running", TRAPPED: "Runtime Stop, Clear Error", DEBUG_TRAPPED: "Runtime Stop, Debug Build Only", SILENT: "Wrong Answer", CORRUPT: "Memory Corruption", CRASH: "Crash", HANG: "Hang", LEAK: "Leak", ICE: "Compiler Crash", INEXPRESSIBLE: "N/A, Not Counted", SAFE_BY_DESIGN: "Prevented by Design", UNFIXABLE: "Unfixable Error", ERROR: "Benchmark Error", MISSING: "Missing" };
   const DESC = {
     REJECTED: "The compiler or checker refused the buggy program",
     CORRECT: "The program ran and printed the right answer",
     WARNED: "The build warned about the bug by name; scored instead of the run's outcome when higher",
     RUN_WARNED: "The running program warned about the bug by name and went on; scored instead of the outcome when higher",
     TRAPPED: "The program stopped at run time with a clear error",
+    DEBUG_TRAPPED: "The debug build stopped with a clear error, but the release build ran on",
     SILENT: "The program finished and printed a wrong answer",
     CORRUPT: "The program read or wrote memory it does not own",
     CRASH: "Segmentation fault or allocator abort",
     HANG: "Never finished",
-    LEAK: "The program or operating system reported resource exhaustion",
+    LEAK: "The program ran out of file descriptors or memory it should have freed",
     ICE: "The compiler crashed on the program",
     INEXPRESSIBLE: "The language cannot express this error, so the case is excluded from its mean",
     SAFE_BY_DESIGN: "The language or its standard model prevents the error; it earns 1 point",
@@ -269,9 +338,14 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     for (const k of kids) if (k != null) e.append(k);
     return e;
   };
+  // A grid cell's notes: a warning the bug drew, and a stop that only the debug build made.
+  const tags = (r) => [
+    (r.w || r.rw) && r.o !== "REJECTED" && r.o !== "CORRECT" ? el("span", { class: "wtag", text: r.w ? "Warned" : "Warned while running" }) : null,
+    r.rel ? el("span", { class: "wtag", text: "Debug build only" }) : null,
+  ].filter(Boolean);
   const chip = (o) => el("span", { class: "chip o-" + o, title: DESC[o] || o, text: NAME[o] || o });
   const swatch = (o) => el("span", { class: "swatch o-" + o, "aria-hidden": "true" });
-  const present = OUT.filter((o) => D.languages.some((L) => Object.values(L.results).some((r) => r.o === o)));
+  const present = OUT.filter((o) => D.languages.some((L) => Object.values(L.results).some((r) => r.o === o || (o === "DEBUG_TRAPPED" && r.rel))));
   const slug = (id) => "p-" + id.replace(/_/g, "-");
   const probs = D.problems;
   const meta = document.getElementById("meta");
@@ -280,6 +354,8 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     .forEach(([k, v]) => meta.append(el("span", {}, k + " ", el("b", { text: String(v) }))));
 
   const pct = (v) => v.toFixed(1) + "%";
+  const py = D.languages.find((L) => L.id === "python"), pyMypy = D.languages.find((L) => L.id === "python_mypy");
+  if (py && pyMypy) document.getElementById("mypy-note").append(" Python scores " + pct(py.score) + " as written and " + pct(pyMypy.score) + " checked by mypy: leaving the checker out costs " + (pyMypy.score - py.score).toFixed(1) + " points.");
   function shortVersion(id, value) {
     const s = (value || "").trim();
     if (id === "gossamer") return "0.84.2";
@@ -356,9 +432,9 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
         const r = L.results[p.id] || { o: "MISSING" };
         const designed = (p.by_design || []).includes(L.id);
         const b = el("button", { type: "button", class: "gcell o-" + r.o + (designed ? " by-design" : ""),
-          title: L.name + " · " + p.title + ": " + (DESC[r.o] || r.o) + (r.w ? " (the build warned)" : r.rw ? " (the running program warned)" : "") + (designed ? " (by design)" : ""),
+          title: L.name + " · " + p.title + ": " + (DESC[r.o] || r.o) + (r.w ? " (the build warned)" : r.rw ? " (the running program warned)" : "") + (r.rel ? " (only the debug build stopped)" : "") + (designed ? " (by design)" : ""),
           text: SHORT[r.o] || r.o });
-        if ((r.w || r.rw) && r.o !== "REJECTED" && r.o !== "CORRECT") b.append(el("span", { class: "wtag", text: r.w ? "Warned" : "Warned while running" }));
+        b.append(...tags(r));
         b.addEventListener("click", () => openProblem(p.id, L.id, true));
         tr.append(el("td", {}, b));
       });
@@ -391,6 +467,25 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
   });
   select.addEventListener("change", () => openProblem(select.value, null, false));
 
+  // One row per language; on narrow screens each row reads as a card, labelled from data-label.
+  function evidence(p, langs, langId) {
+    const t = el("table", { class: "evidence" });
+    t.append(el("thead", {}, el("tr", {}, el("th", { text: "Language" }), el("th", { text: "Outcome" }), el("th", { text: "Score" }), el("th", { text: "Printed" }), el("th", { text: "Warning" }), el("th", { text: "Evidence" }))));
+    const tb = el("tbody");
+    langs.forEach((L) => {
+      const r = L.results[p.id] || { o: "MISSING", s: 0 };
+      tb.append(el("tr", { class: L.id === langId ? "hl" : "" },
+        el("td", { class: "lang" }, srcLink(L, p)),
+        el("td", { class: "chipcell" }, chip(r.o)),
+        el("td", { class: "mono", text: r.s == null ? "N/A" : String(r.s) }),
+        el("td", { class: "full", "data-label": "Printed" }, el("pre", { class: "out", text: r.out || "" })),
+        el("td", { class: "full", "data-label": "Warning" }, el("pre", { class: "warn", text: r.w || (r.rw ? "The running program warned" : "") })),
+        el("td", { class: "full", "data-label": "Evidence" }, el("pre", { text: r.ev || "" }))));
+    });
+    t.append(tb);
+    return el("div", { class: "scroll" }, t);
+  }
+
   function openProblem(id, langId, scroll) {
     const p = probs.find((x) => x.id === id) || probs[0];
     plist.querySelectorAll("button").forEach((b) => b.setAttribute("aria-current", String(b.dataset.id === p.id)));
@@ -409,21 +504,8 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
       const why = (p.by_design_note || {})[id] || "The language accepts this behavior on purpose.";
       box.append(el("p", { class: "note" }, el("strong", { text: name + ", by design. " }), why));
     });
-    const t = el("table");
-    t.append(el("thead", {}, el("tr", {}, el("th", { text: "Language" }), el("th", { text: "Outcome" }), el("th", { text: "Score" }), el("th", { text: "Printed" }), el("th", { text: "Compiler warning" }), el("th", { text: "Evidence" }))));
-    const tb = el("tbody");
-    visibleLanguages().sort((a, b) => (b.results[p.id]?.s ?? -1) - (a.results[p.id]?.s ?? -1) || a.rank - b.rank).forEach((L) => {
-      const r = L.results[p.id] || { o: "MISSING", s: 0 };
-      tb.append(el("tr", { class: L.id === langId ? "hl" : "", id: "row-" + L.id },
-        el("td", { class: "lang" }, srcLink(L, p)),
-        el("td", { class: "chipcell" }, chip(r.o)),
-        el("td", { class: "mono", text: r.s == null ? "N/A" : String(r.s) }),
-        el("td", {}, el("pre", { class: "out", text: r.out || "" })),
-        el("td", {}, el("pre", { class: "warn", text: r.w || "" })),
-        el("td", {}, el("pre", { text: r.ev || "" }))));
-    });
-    t.append(tb);
-    box.append(el("div", { class: "scroll" }, t));
+    const ranked = visibleLanguages().sort((a, b) => (b.results[p.id]?.s ?? -1) - (a.results[p.id]?.s ?? -1) || a.rank - b.rank);
+    box.append(evidence(p, ranked, langId));
     if (scroll !== null && location.hash !== "#" + slug(p.id)) history.replaceState(null, "", "#" + slug(p.id));
     if (scroll) document.getElementById("cases").scrollIntoView({ behavior: "smooth", block: "start" });
   }
@@ -438,15 +520,19 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
   const pickButtons = byRank.map((L) => {
     const b = el("button", { type: "button", "aria-pressed": "false", text: L.name });
     b.addEventListener("click", () => {
-      chosen = chosen.includes(L.id) ? chosen.filter((x) => x !== L.id) : [...chosen, L.id].slice(0, CMP_MAX);
-      renderRanking();
-      renderGrids();
-      openProblem(select.value || probs[0].id, null, null);
-      renderCompare(true);
+      setChosen(chosen.includes(L.id) ? chosen.filter((x) => x !== L.id) : [...chosen, L.id], true);
     });
     picker.append(b);
     return [L.id, b];
   });
+
+  function setChosen(ids, record) {
+    chosen = [...new Set(ids)].slice(0, CMP_MAX);
+    renderRanking();
+    renderGrids();
+    openProblem(select.value || probs[0].id, null, null);
+    renderCompare(record);
+  }
 
   function cmpDetail(p, langs) {
     const box = el("div", { class: "case" });
@@ -455,21 +541,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
       el("dt", { text: "Scenario" }), el("dd", { text: p.scenario }),
       el("dt", { text: "Best outcome" }), el("dd", { text: p.best }),
       el("dt", { text: "Arguments" }), el("dd", {}, el("code", { text: p.args.length ? p.args.join(" ") : "none" }))));
-    const t = el("table");
-    t.append(el("thead", {}, el("tr", {}, el("th", { text: "Language" }), el("th", { text: "Outcome" }), el("th", { text: "Score" }), el("th", { text: "Printed" }), el("th", { text: "Warning" }), el("th", { text: "Evidence" }))));
-    const tb = el("tbody");
-    langs.forEach((L) => {
-      const r = L.results[p.id] || { o: "MISSING", s: 0 };
-      tb.append(el("tr", {},
-        el("td", { class: "lang" }, srcLink(L, p)),
-        el("td", { class: "chipcell" }, chip(r.o)),
-        el("td", { class: "mono", text: r.s == null ? "N/A" : String(r.s) }),
-        el("td", {}, el("pre", { class: "out", text: r.out || "" })),
-        el("td", {}, el("pre", { class: "warn", text: r.w || (r.rw ? "The running program warned" : "") })),
-        el("td", {}, el("pre", { text: r.ev || "" }))));
-    });
-    t.append(tb);
-    box.append(el("div", { class: "scroll" }, t));
+    box.append(evidence(p, langs, null));
     return box;
   }
 
@@ -488,7 +560,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     }
     const tools = el("div", { class: "cmp-tools" }, el("span", { text: langs.length + " of " + CMP_MAX + " selected" }));
     const clear = el("button", { type: "button", text: "Clear" });
-    clear.addEventListener("click", () => { chosen = []; renderCompare(true); });
+    clear.addEventListener("click", () => setChosen([], true));
     const differ = el("input", { type: "checkbox", id: "cmp-differ" });
     differ.checked = onlyDiffer;
     differ.addEventListener("change", () => { onlyDiffer = differ.checked; renderCompare(false); });
@@ -522,8 +594,8 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
         const tr = el("tr", {}, el("th", { class: "pname", scope: "row" }, title));
         langs.forEach((L) => {
           const r = L.results[p.id] || { o: "MISSING" };
-          const b = el("button", { type: "button", class: "gcell o-" + r.o, title: L.name + " · " + p.title + ": " + (DESC[r.o] || r.o), text: NAME[r.o] || r.o });
-          if ((r.w || r.rw) && r.o !== "REJECTED" && r.o !== "CORRECT") b.append(el("span", { class: "wtag", text: r.w ? "Warned" : "Warned while running" }));
+          const b = el("button", { type: "button", class: "gcell o-" + r.o, title: L.name + " · " + p.title + ": " + (DESC[r.o] || r.o) + (r.rel ? " (only the debug build stopped)" : ""), text: NAME[r.o] || r.o });
+          b.append(...tags(r));
           b.addEventListener("click", toggle);
           tr.append(el("td", {}, b));
         });
@@ -541,8 +613,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     const h = location.hash.slice(1);
     if (h.startsWith("compare")) {
       const ids = h.slice("compare=".length).split(",").filter((id) => D.languages.some((L) => L.id === id));
-      chosen = [...new Set(ids)].slice(0, CMP_MAX);
-      renderCompare(false);
+      setChosen(ids, false);
       document.getElementById("compare").scrollIntoView({ block: "start" });
       return;
     }

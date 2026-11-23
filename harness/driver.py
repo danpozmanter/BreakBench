@@ -58,6 +58,13 @@ FD_EXHAUSTION_RE = re.compile(
     r"too many open files|\bEMFILE\b|file descriptor.{0,40}(limit|exhaust)|open file limit",
     re.IGNORECASE,
 )
+# An allocation refused under the test's data limit, worded by each runtime.
+MEMORY_EXHAUSTION_RE = re.compile(
+    r"memory allocation of \d+ bytes failed|bad_alloc|out of memory|OutOfMemory|MemoryError"
+    r"|could not allocate|cannot allocate|failed to allocate|allocation fail|heap exhausted"
+    r"|memory exhausted|Allowed memory size",
+    re.IGNORECASE,
+)
 # A compiler that crashes on the program never ruled on the bug at all.
 ICE_RE = re.compile(r"panicked at|internal compiler error|compiler crash|Segmentation fault|LLVM ERROR", re.IGNORECASE)
 ANSI_RE = re.compile(r"\x1b\[[0-9;?]*[A-Za-z]")
@@ -161,15 +168,36 @@ def stage(lang, problem_id, src_text, subdir):
     return work
 
 
-def build(lang, work):
+def build(lang, work, steps=None):
     """Run the language's check/compile steps; answer (ok, combined output of every step)."""
     combined = []
-    for step in lang.get("build", []):
+    for step in lang.get("build", []) if steps is None else steps:
         status, timed_out, out, err, _ = execute(fill(step, {"dir": work}), work, 600)
         combined.append(ANSI_RE.sub("", out + "\n" + err))
         if status != 0 or timed_out:
             return False, "\n".join(combined)
     return True, "\n".join(combined)
+
+
+def run_worst(problem, spec, run_template, work):
+    """Run the built program; answer (score, outcome, status, stdout, stderr, secs) of its worst run."""
+    limit = f"ulimit -n {problem['nofile']} && " if problem.get("nofile") else ""
+    run_cmd = limit + fill(run_template, {"dir": work}) + "".join(
+        " " + shlex.quote(a) for a in problem["args"]
+    )
+    # A race shows only in some schedules, so the worst of several runs counts.
+    worst = None
+    for _ in range(problem.get("runs", 1)):
+        status, timed_out, out, err, secs = execute(run_cmd, work, 20)
+        out, err = ANSI_RE.sub("", out), ANSI_RE.sub("", err)
+        outcome = classify(problem, spec["kinds"], status, timed_out, out, err)
+        score = spec["kinds"][problem["kind"]].get(outcome, 0)
+        if worst is None or score < worst[0]:
+            worst = (score, outcome, status, out, err, secs)
+        # No later run can score below zero, so the worst case is already known.
+        if worst[0] == 0:
+            break
+    return worst
 
 
 # A numbered gutter line echoes the program; a gutter line of only markers points into it.
@@ -256,6 +284,12 @@ def classify(problem, kinds, status, timed_out, stdout, stderr):
     # RSS varies by runtime and allocator. Count the retained descriptor leak only
     # when the program or operating system reports a concrete descriptor limit.
     if kind == "leak" and FD_EXHAUSTION_RE.search(stderr):
+        return "LEAK"
+    # The container's memory cap ends a program that keeps what it drops: the kernel kills it,
+    # or the runtime reports the refused allocation in its own words or aborts.
+    if kind == "leak" and problem.get("memory_leak") and status != 0 and not timed_out and (
+        MEMORY_EXHAUSTION_RE.search(stdout + stderr) or signum in (signal.SIGKILL, signal.SIGABRT)
+    ):
         return "LEAK"
     if timed_out:
         return "HANG"
@@ -360,27 +394,22 @@ def main():
             print(f"{lang_id:12} {pid:28} {record['outcome']}", flush=True)
             continue
 
-        timeout = 20
-        limit = f"ulimit -n {problem['nofile']} && " if problem.get("nofile") else ""
-        run_cmd = limit + fill(lang["run"], {"dir": work}) + "".join(
-            " " + shlex.quote(a) for a in problem["args"]
-        )
-        # A race shows only in some schedules, so the worst of several runs counts.
         runs = problem.get("runs", 1)
-        worst = None
-        for _ in range(runs):
-            status, timed_out, out, err, secs = execute(run_cmd, work, timeout)
-            out, err = ANSI_RE.sub("", out), ANSI_RE.sub("", err)
-            outcome = classify(problem, spec["kinds"], status, timed_out, out, err)
-            score = spec["kinds"][problem["kind"]].get(outcome, 0)
-            if worst is None or score < worst[0]:
-                worst = (score, outcome, status, out, err, secs)
-            # No later run can score below zero, so the worst case is already known.
-            if worst[0] == 0:
-                break
-        _, record["outcome"], status, out, err, secs = worst
+        _, record["outcome"], status, out, err, secs = run_worst(problem, spec, lang["run"], work)
         if runs > 1:
             record["runs"] = runs
+        # A stop that only the debug build makes is gone from the build that ships.
+        if record["outcome"] == "TRAPPED" and lang.get("release"):
+            rwork = stage(lang, pid, source, "release")
+            rok, rout = build(lang, rwork, lang["release"]["build"])
+            if rok:
+                _, rel_outcome, _, rel_out, rel_err, _ = run_worst(problem, spec, lang["release"]["run"], rwork)
+                record["release"] = rel_outcome
+                record["release_stdout"] = clip(rel_out, 400)
+                record["release_stderr"] = clip(rel_err, 600)
+            else:
+                record["release"] = "ERROR"
+                record["release_stderr"] = clip(rout, 600)
         run_warnings = relevant_warnings(problem, lang, source, err)
         hits = build_warnings + run_warnings
         # Only a warning the build prints can stop the bug before it ships; one the running

@@ -1,12 +1,12 @@
-def write_report():
+def write_report() -> None:
     raise OSError("disk full")
 
 
-def close_log():
+def close_log() -> None:
     pass
 
 
-def save_report():
+def save_report() -> None:
     try:
         write_report()
     finally:

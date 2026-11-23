@@ -1,4 +1,4 @@
-def save(path):
+def save(path: str) -> None:
     with open(path, "w") as f:
         f.write("data")
 

@@ -29,7 +29,7 @@ fn transfer(mut first sync.Mutex, mut second sync.Mutex, mut gate Gate) {
 fn main() {
 	mut a := sync.new_mutex()
 	mut b := sync.new_mutex()
-	mut gate := Gate{}
+	mut gate := &Gate{}
 	t1 := spawn transfer(mut a, mut b, mut gate)
 	t2 := spawn transfer(mut b, mut a, mut gate)
 	t1.wait()

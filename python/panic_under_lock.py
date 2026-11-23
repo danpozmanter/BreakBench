@@ -4,7 +4,7 @@ lock = threading.Lock()
 ledger = {"debits": 0, "credits": 0}
 
 
-def post():
+def post() -> None:
     with lock:
         ledger["debits"] += 50
         if ledger["debits"] > 0:

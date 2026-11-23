@@ -1,7 +1,7 @@
 (ns main)
 
 (def lock (Object.))
-(def checked (java.util.concurrent.CountDownLatch. 2))
+(def ^java.util.concurrent.CountDownLatch checked (java.util.concurrent.CountDownLatch. 2))
 (def claimed (atom false))
 (def winners (atom 0))
 
@@ -11,7 +11,7 @@
     (.countDown checked)
     (.await checked)
     (when available
-      (locking lock (reset! claimed true) (swap! winners inc))))))
+      (locking lock (reset! claimed true) (swap! winners inc)))))
 
 (defn -main [& _]
   (let [a (future (claim)) b (future (claim))]

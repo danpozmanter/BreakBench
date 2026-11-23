@@ -14,10 +14,9 @@ claim = -> do
   end
 end
 
-t1 = spawn { claim.call }
-t2 = spawn { claim.call }
+done = Channel(Nil).new(2)
+2.times { spawn { claim.call; done.send(nil) } }
 2.times { ready.receive }
 2.times { release.send(nil) }
-t1.join
-t2.join
+2.times { done.receive }
 puts winners

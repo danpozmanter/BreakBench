@@ -1,4 +1,4 @@
-def apply_update(weights):
+def apply_update(weights: list[int]) -> None:
     weights[1] = 5
     weights[3] = 0
 

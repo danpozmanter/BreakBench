@@ -1,0 +1,19 @@
+use std::sync::{Mutex, Shared}
+
+fn withdraw(lock: Mutex, balance: Shared<i64>, amount: i64) {
+    lock.lock()
+    if amount > balance.get() {
+        return
+    }
+    balance.update(|b| b - amount)
+    lock.unlock()
+}
+
+fn main() {
+    let lock = Mutex::new()
+    let balance = Shared::new(100)
+    withdraw(lock, balance, 500)
+    let worker = spawn(|| withdraw(lock, balance, 30))
+    let _ = worker.join()
+    println(f"{balance.get()}")
+}

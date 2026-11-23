@@ -1,0 +1,17 @@
+use std::errors
+
+struct ValidationError {
+    field: String
+}
+
+fn validate(name: String) -> Result<(), errors::Error> {
+    let problem = if name == "" { Some(ValidationError { field: "name" }) } else { None }
+    match problem {
+        Some(p) => Err(errors::new(f"invalid {p.field}")),
+        None => Ok(()),
+    }
+}
+
+fn main() {
+    println(if validate("ada").is_err() { "invalid" } else { "valid" })
+}

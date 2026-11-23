@@ -1,4 +1,4 @@
-def compare(a, b):
+def compare(a: str, b: str) -> int:
     return (a > b) - (a < b)
 
 

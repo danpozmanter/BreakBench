@@ -1,9 +1,9 @@
 import threading
 
-table = {}
+table: dict[int, int] = {}
 
 
-def writer(t):
+def writer(t: int) -> None:
     for k in range(100_000):
         table[t * 100_000 + k] = k
 

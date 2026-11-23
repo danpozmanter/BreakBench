@@ -1,4 +1,4 @@
-def add_item(item, cart=[]):
+def add_item(item: str, cart: list[str] = []) -> list[str]:
     cart.append(item)
     return cart
 

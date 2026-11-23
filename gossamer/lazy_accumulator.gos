@@ -1,0 +1,12 @@
+use std::{env, fs}
+
+fn main() {
+    let count = env::args()[0].to_i64().unwrap()
+    let mut source = fs::open("/dev/zero").unwrap()
+    let mut total = 0
+    for _ in 0..count {
+        let message = source.read(4096).unwrap()
+        total += message.len()
+    }
+    println(f"{total}")
+}

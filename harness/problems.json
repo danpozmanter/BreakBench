@@ -4,6 +4,7 @@
       "REJECTED": 1,
       "CORRECT": 1,
       "TRAPPED": 0.25,
+      "DEBUG_TRAPPED": 0.125,
       "SILENT": 0,
       "CORRUPT": 0,
       "CRASH": 0,
@@ -18,6 +19,7 @@
       "REJECTED": 1,
       "CORRECT": 1,
       "TRAPPED": 0.25,
+      "DEBUG_TRAPPED": 0.125,
       "SILENT": 0,
       "CORRUPT": 0,
       "CRASH": 0,
@@ -32,6 +34,7 @@
       "REJECTED": 1,
       "CORRECT": 1,
       "TRAPPED": 0.25,
+      "DEBUG_TRAPPED": 0.125,
       "SILENT": 0,
       "CORRUPT": 0,
       "CRASH": 0,
@@ -47,6 +50,7 @@
       "REJECTED": 1,
       "CORRECT": 1,
       "TRAPPED": 0.25,
+      "DEBUG_TRAPPED": 0.125,
       "SILENT": 0,
       "CORRUPT": 0,
       "CRASH": 0,
@@ -61,6 +65,7 @@
       "REJECTED": 0,
       "CORRECT": 1,
       "TRAPPED": 0,
+      "DEBUG_TRAPPED": 0.0,
       "SILENT": 0,
       "CORRUPT": 0,
       "CRASH": 0,
@@ -89,7 +94,7 @@
     },
     {
       "id": "int_overflow",
-      "category": "correctness",
+      "category": "numbers",
       "kind": "dynamic",
       "args": [
         "9223372036854775807"
@@ -102,7 +107,7 @@
     },
     {
       "id": "div_by_zero",
-      "category": "correctness",
+      "category": "numbers",
       "kind": "dynamic",
       "args": [
         "0"
@@ -115,7 +120,7 @@
     },
     {
       "id": "shift_overflow",
-      "category": "correctness",
+      "category": "numbers",
       "kind": "dynamic",
       "args": [
         "64"
@@ -128,7 +133,7 @@
     },
     {
       "id": "narrowing_cast",
-      "category": "correctness",
+      "category": "numbers",
       "kind": "dynamic",
       "args": [
         "300"
@@ -141,7 +146,7 @@
     },
     {
       "id": "float_to_int_overflow",
-      "category": "correctness",
+      "category": "numbers",
       "kind": "dynamic",
       "args": [
         "1e20"
@@ -154,7 +159,7 @@
     },
     {
       "id": "signed_unsigned_compare",
-      "category": "correctness",
+      "category": "numbers",
       "kind": "static",
       "args": [
         "-1"
@@ -167,7 +172,7 @@
     },
     {
       "id": "type_confusion",
-      "category": "correctness",
+      "category": "types",
       "kind": "static",
       "args": [
         "5"
@@ -180,7 +185,7 @@
     },
     {
       "id": "missing_return",
-      "category": "correctness",
+      "category": "types",
       "kind": "static",
       "args": [
         "50"
@@ -193,7 +198,7 @@
     },
     {
       "id": "non_exhaustive_match",
-      "category": "correctness",
+      "category": "types",
       "kind": "static",
       "args": [
         "2"
@@ -206,7 +211,7 @@
     },
     {
       "id": "uninitialized_variable",
-      "category": "correctness",
+      "category": "types",
       "kind": "static",
       "args": [
         "1"
@@ -219,7 +224,7 @@
     },
     {
       "id": "missing_argument",
-      "category": "correctness",
+      "category": "types",
       "kind": "static",
       "args": [],
       "expect": null,
@@ -230,7 +235,7 @@
     },
     {
       "id": "misspelled_field",
-      "category": "correctness",
+      "category": "types",
       "kind": "static",
       "args": [],
       "expect": null,
@@ -241,7 +246,7 @@
     },
     {
       "id": "assign_in_condition",
-      "category": "correctness",
+      "category": "syntax",
       "kind": "static",
       "args": [
         "5"
@@ -254,7 +259,7 @@
     },
     {
       "id": "switch_fallthrough",
-      "category": "correctness",
+      "category": "syntax",
       "kind": "static",
       "args": [
         "1"
@@ -280,7 +285,7 @@
     },
     {
       "id": "string_equality",
-      "category": "correctness",
+      "category": "syntax",
       "kind": "static",
       "args": [
         "c"
@@ -293,7 +298,7 @@
     },
     {
       "id": "parse_invalid_number",
-      "category": "correctness",
+      "category": "security",
       "kind": "dynamic",
       "args": [
         "12abc"
@@ -306,7 +311,7 @@
     },
     {
       "id": "covariant_array_write",
-      "category": "correctness",
+      "category": "types",
       "kind": "static",
       "args": [],
       "expect": "^woof$",
@@ -317,7 +322,7 @@
     },
     {
       "id": "mutate_while_iterating",
-      "category": "correctness",
+      "category": "types",
       "kind": "dynamic",
       "args": [],
       "expect": "^1,3$",
@@ -339,7 +344,7 @@
     },
     {
       "id": "loop_closure_capture",
-      "category": "correctness",
+      "category": "types",
       "kind": "static",
       "args": [],
       "expect": "^0,1,2$",
@@ -350,7 +355,7 @@
     },
     {
       "id": "snapshot_aliasing",
-      "category": "correctness",
+      "category": "types",
       "kind": "static",
       "args": [],
       "expect": "^2$",
@@ -367,7 +372,7 @@
       "title": "Ignoring a failed save",
       "scenario": "save(path) writes a file and reports failure the language's usual way. The program calls it with /nonexistent/dir/out.txt, ignores the result and prints \"saved\".",
       "best": "The compiler refuses to let the error go unhandled. Stopping with an exception earns half; printing \"saved\" fails.",
-      "category": "correctness",
+      "category": "errors",
       "warn": "unused .*(Result|result|return)|must be used|nodiscard|warn_unused|ignor(ed|ing) (the )?(error|result|return)|return value .*(ignored|unused)|unchecked error|errcheck|failed to open stream"
     },
     {
@@ -378,7 +383,7 @@
       "title": "Sorting numbers that include NaN",
       "scenario": "The program sorts [5, NaN, 3, 1, NaN, 4, 2] with the default sort and checks whether the real numbers came out in order.",
       "best": "\"ordered\", or the compiler refuses to sort floats without a total order. A scrambled result fails.",
-      "category": "correctness",
+      "category": "numbers",
       "warn": "compar.*\\bnan\\b|\\bnan\\b.*(compar|order|sort)|partial(ly)? order|total order|partialord|not totally ordered"
     },
     {
@@ -389,7 +394,7 @@
       "title": "Dividing integers into a float",
       "scenario": "sum = 7 and count = 2 are integers. The program sets a float avg = sum / count and prints it with one decimal.",
       "best": "3.5, or the compiler refuses the silent integer-to-float step. 3.0 fails.",
-      "category": "correctness",
+      "category": "numbers",
       "warn": "integer division|implicit conversion from '?int|int.* to .*(float|double)|division of integers"
     },
     {
@@ -400,7 +405,7 @@
       "title": "A number written with a leading zero",
       "scenario": "The program writes a zip code as the literal 01234 and prints it.",
       "best": "1234, or the compiler refuses the literal. Reading it as octal and printing 668 fails.",
-      "category": "correctness",
+      "category": "syntax",
       "warn": "octal|leading zero"
     },
     {
@@ -411,7 +416,7 @@
       "title": "A list as a default argument",
       "scenario": "add_item(item, cart = an empty list) adds the item to the cart and returns it. The program calls it twice without a cart and prints the second cart's length.",
       "best": "1: each call gets a fresh list. 2 means both calls share one list.",
-      "category": "correctness",
+      "category": "types",
       "warn": "mutable default|default argument"
     },
     {
@@ -422,11 +427,11 @@
       "title": "Using a lazy sequence twice",
       "scenario": "evens is a lazy filter of the numbers 1 to 6. The program sums evens, then counts evens, and prints both.",
       "best": "\"12 3\", or the compiler refuses the second use. \"12 0\" fails; an error earns half.",
-      "category": "correctness",
+      "category": "types",
       "warn": "consumed|already (been )?(used|consumed|operated)|reuse|iterat.*twice"
     },
     {
-      "category": "correctness",
+      "category": "syntax",
       "id": "bitwise_precedence",
       "kind": "static",
       "args": [
@@ -439,7 +444,7 @@
       "warn": "precedence|parenthes|bitwise"
     },
     {
-      "category": "correctness",
+      "category": "syntax",
       "id": "dangling_else",
       "kind": "static",
       "args": [
@@ -452,7 +457,7 @@
       "warn": "dangling|ambiguous .*else|misleading indent|else|should be enclosed in a block"
     },
     {
-      "category": "correctness",
+      "category": "syntax",
       "id": "chained_comparison",
       "kind": "static",
       "args": [
@@ -465,7 +470,7 @@
       "warn": "comparisons? like|chained comparison|compar.*(bool|always)|parenthes|after comparison"
     },
     {
-      "category": "correctness",
+      "category": "types",
       "id": "lost_update_on_copy",
       "kind": "static",
       "args": [],
@@ -476,7 +481,7 @@
       "warn": "copy|ineffectual|never (read|used)|value .*(not|never) used|loop variable"
     },
     {
-      "category": "correctness",
+      "category": "security",
       "id": "command_injection",
       "kind": "static",
       "args": [
@@ -489,7 +494,7 @@
       "warn": "shell|injection|system\\(|command line"
     },
     {
-      "category": "correctness",
+      "category": "numbers",
       "id": "float_equality",
       "kind": "static",
       "args": [
@@ -514,7 +519,7 @@
       "warn": "deadlock|lock order"
     },
     {
-      "category": "correctness",
+      "category": "security",
       "id": "path_join_escape",
       "kind": "static",
       "args": [
@@ -527,7 +532,7 @@
       "warn": "absolute|travers"
     },
     {
-      "category": "correctness",
+      "category": "security",
       "id": "regex_backtracking",
       "kind": "dynamic",
       "args": [
@@ -540,7 +545,7 @@
       "warn": "backtrack|catastroph|redos|nested quantifier"
     },
     {
-      "category": "correctness",
+      "category": "numbers",
       "id": "negative_remainder",
       "kind": "dynamic",
       "args": [
@@ -553,7 +558,7 @@
       "warn": "remainder|modulo|negative"
     },
     {
-      "category": "correctness",
+      "category": "syntax",
       "id": "missing_comma_concat",
       "kind": "static",
       "args": [],
@@ -564,7 +569,7 @@
       "warn": "concatenat|missing comma|implicit"
     },
     {
-      "category": "correctness",
+      "category": "errors",
       "id": "return_in_finally",
       "kind": "static",
       "args": [],
@@ -575,7 +580,7 @@
       "warn": "finally|ensure|cannot complete normally|discard|swallow"
     },
     {
-      "category": "correctness",
+      "category": "syntax",
       "id": "return_line_break",
       "kind": "static",
       "args": [],
@@ -613,7 +618,7 @@
       "warn": "await|join|unused|never used|must be used|never read|implicitly ignored"
     },
     {
-      "category": "correctness",
+      "category": "types",
       "id": "format_arg_mismatch",
       "kind": "static",
       "args": [],
@@ -625,7 +630,7 @@
     },
     {
       "id": "unsigned_subtraction",
-      "category": "correctness",
+      "category": "numbers",
       "kind": "dynamic",
       "args": [
         "abc"
@@ -651,7 +656,7 @@
     },
     {
       "id": "mutable_hash_key",
-      "category": "correctness",
+      "category": "types",
       "kind": "dynamic",
       "args": [],
       "expect": "^found$",
@@ -662,7 +667,7 @@
     },
     {
       "id": "shadowed_assignment",
-      "category": "correctness",
+      "category": "syntax",
       "kind": "static",
       "args": [
         "ok"
@@ -675,7 +680,7 @@
     },
     {
       "id": "discarded_pure_result",
-      "category": "correctness",
+      "category": "types",
       "kind": "static",
       "args": [],
       "expect": "^ADA$",
@@ -686,7 +691,7 @@
     },
     {
       "id": "negative_index_wraps",
-      "category": "correctness",
+      "category": "types",
       "kind": "dynamic",
       "args": [
         "0"
@@ -699,7 +704,7 @@
     },
     {
       "id": "default_numeric_sort",
-      "category": "correctness",
+      "category": "types",
       "kind": "static",
       "args": [],
       "expect": "^1 9 10$",
@@ -710,7 +715,7 @@
     },
     {
       "id": "unrelated_type_lookup",
-      "category": "correctness",
+      "category": "types",
       "kind": "static",
       "args": [
         "20"
@@ -723,7 +728,7 @@
     },
     {
       "id": "use_after_close",
-      "category": "correctness",
+      "category": "errors",
       "kind": "static",
       "args": [],
       "expect": null,
@@ -735,7 +740,7 @@
     },
     {
       "id": "dead_store",
-      "category": "correctness",
+      "category": "syntax",
       "kind": "static",
       "args": [
         "40"
@@ -758,7 +763,7 @@
     },
     {
       "id": "split_character",
-      "category": "correctness",
+      "category": "types",
       "kind": "dynamic",
       "args": [
         "2"
@@ -896,7 +901,7 @@
       "warn": "allocat.*(size|large|exceed)|size .*(overflow|too large)"
     },
     {
-      "category": "correctness",
+      "category": "errors",
       "id": "fd_leak",
       "kind": "leak",
       "args": [
@@ -957,8 +962,22 @@
       "warn": "const|read-?only|immutable|discards qualifiers|write-strings|cannot assign|not mutable|frozen|chilled"
     },
     {
+      "id": "reference_cycle",
+      "category": "memory",
+      "kind": "leak",
+      "args": [
+        "1500000"
+      ],
+      "expect": "^done$",
+      "memory_leak": true,
+      "title": "Two records that point at each other, then dropped",
+      "scenario": "Each pass of a loop makes a parent and a child, each holding 4 KB of data and a reference to the other: the language's default reference, or its standard shared pointer where references are not shared by default. The pass then drops both. The program makes 1,500,000 pairs in a container with 3 GB of memory and prints \"done\".",
+      "best": "\"done\": the runtime frees each pair once nothing outside points at it. Running out of memory shows each pair kept the other alive.",
+      "warn": "cycle|leak|weak|retain"
+    },
+    {
       "id": "complete_init",
-      "category": "correctness",
+      "category": "types",
       "kind": "static",
       "args": [],
       "expect": "^3$",
@@ -969,7 +988,7 @@
     },
     {
       "id": "newtype",
-      "category": "correctness",
+      "category": "types",
       "kind": "static",
       "args": [],
       "expect": null,
@@ -980,7 +999,7 @@
     },
     {
       "id": "strong_enum",
-      "category": "correctness",
+      "category": "types",
       "kind": "static",
       "args": [],
       "expect": null,
@@ -991,7 +1010,7 @@
     },
     {
       "id": "override_check",
-      "category": "correctness",
+      "category": "types",
       "kind": "static",
       "args": [],
       "expect": "^circle$",
@@ -1021,7 +1040,7 @@
       "title": "A missing value printed as text",
       "scenario": "find_name(id) returns a name only when id is 1, the same way find_user does in null_deref. The program calls it with 2 and prints a greeting with the name, using the language's string interpolation (or its usual formatting where it has none) without checking.",
       "best": "A refusal to put a value that may be missing into text without saying what missing means. Printing hello, null, hello, None, hello, nil or hello, followed by nothing is a silent wrong answer that reaches users.",
-      "warn": "optional|debug description|\\bnil\\b|\\bnull\\b|nullable|possibly|interpolat"
+      "warn": "optional|Option<|debug description|\\bnil\\b|\\bnull\\b|nullable|possibly|interpolat"
     },
     {
       "id": "not_found_sentinel",
@@ -1050,7 +1069,7 @@
     },
     {
       "id": "readonly_param",
-      "category": "correctness",
+      "category": "types",
       "kind": "static",
       "args": [],
       "expect": "^3$",
@@ -1060,7 +1079,7 @@
     },
     {
       "id": "exclusive_mutation",
-      "category": "correctness",
+      "category": "types",
       "kind": "static",
       "args": [],
       "expect": "^100$",
@@ -1070,7 +1089,7 @@
     },
     {
       "id": "literal_range",
-      "category": "correctness",
+      "category": "numbers",
       "kind": "static",
       "args": [],
       "expect": null,
@@ -1081,7 +1100,7 @@
     },
     {
       "id": "no_implicit_conversion",
-      "category": "correctness",
+      "category": "numbers",
       "kind": "static",
       "args": [
         "3000000000"
@@ -1094,7 +1113,7 @@
     },
     {
       "id": "generic_constraint",
-      "category": "correctness",
+      "category": "types",
       "kind": "static",
       "args": [],
       "expect": null,
@@ -1104,7 +1123,7 @@
     },
     {
       "id": "lossy_int_to_float",
-      "category": "correctness",
+      "category": "numbers",
       "kind": "static",
       "args": [
         "9007199254740993"
@@ -1127,8 +1146,36 @@
       "warn": "out of bounds|past the end|out of range|array index|array-bounds"
     },
     {
+      "id": "lazy_accumulator",
+      "category": "memory",
+      "kind": "leak",
+      "args": [
+        "3000000"
+      ],
+      "expect": "^12288000000$",
+      "memory_leak": true,
+      "title": "A running total that keeps every message alive",
+      "scenario": "The program reads 3,000,000 messages of 4 KB each from /dev/zero, 12 GB in all, in a container with 3 GB of memory. It adds each message's size to a running total kept in the language's standard mutable cell (a variable, or an IORef, ref or atom where values cannot change) with the cell's plain update, then drops the message. It prints the total.",
+      "best": "12288000000: each message is freed once its size is added. Running out of memory shows the total kept every message alive until it was printed.",
+      "warn": "space leak|thunk|lazy|strict"
+    },
+    {
+      "id": "size_overflow_alloc",
+      "category": "memory",
+      "kind": "memory",
+      "args": [
+        "2305843009213693953"
+      ],
+      "expect": null,
+      "title": "A size that overflows before the allocation (CWE-680)",
+      "scenario": "A header says 2305843009213693953 (2^61 + 1) records of 8 bytes follow; the program reads the count at run time. It computes the buffer size as count * 8 in the language's 64-bit integer or size type, allocates a byte buffer of that size, sets the first byte of the second record (byte 8) to 99, and prints stored.",
+      "best": "A clear error at the multiplication, the allocation or the write. Printing stored shows the size wrapped to 8 bytes and the write went past the buffer.",
+      "warn": "overflow|out of (bounds|range)|too large|exceeds",
+      "unsafe": "^stored$"
+    },
+    {
       "id": "const_overflow",
-      "category": "correctness",
+      "category": "numbers",
       "kind": "static",
       "args": [],
       "expect": "^9460800000000000000$",
@@ -1161,7 +1208,7 @@
     },
     {
       "id": "unreachable_code",
-      "category": "correctness",
+      "category": "syntax",
       "kind": "static",
       "args": [],
       "expect": "^ok\\nchecked$",
@@ -1171,18 +1218,8 @@
       "warn": "unreachable|never be executed|dead code|not reachable|will never"
     },
     {
-      "id": "nan_key",
-      "category": "correctness",
-      "kind": "static",
-      "args": [],
-      "expect": "^found$",
-      "title": "Looking up a NaN key",
-      "scenario": "The program stores a NaN, computed at run time, in a hash set of floats and looks up a second NaN computed the same way, printing found or missing.",
-      "best": "found, or a refusal to key a hash set by floats. missing is a silent wrong answer: the key is in the set but can never be found."
-    },
-    {
       "id": "checked_interpolation",
-      "category": "correctness",
+      "category": "syntax",
       "kind": "static",
       "args": [],
       "expect": null,
@@ -1193,7 +1230,7 @@
     },
     {
       "id": "evaluation_order",
-      "category": "correctness",
+      "category": "syntax",
       "kind": "static",
       "args": [],
       "expect": "^1 2$",
@@ -1204,7 +1241,7 @@
     },
     {
       "id": "dominated_case",
-      "category": "correctness",
+      "category": "syntax",
       "kind": "static",
       "args": [],
       "expect": "^circle$",
@@ -1215,7 +1252,7 @@
     },
     {
       "id": "duplicate_key",
-      "category": "correctness",
+      "category": "syntax",
       "kind": "static",
       "args": [],
       "expect": "^2$",
@@ -1226,7 +1263,7 @@
     },
     {
       "id": "char_arithmetic",
-      "category": "correctness",
+      "category": "numbers",
       "kind": "static",
       "args": [],
       "expect": "^b$",
@@ -1236,7 +1273,7 @@
     },
     {
       "id": "comparison_statement",
-      "category": "correctness",
+      "category": "syntax",
       "kind": "static",
       "args": [],
       "expect": "^5$",
@@ -1247,7 +1284,7 @@
     },
     {
       "id": "structural_equality",
-      "category": "correctness",
+      "category": "syntax",
       "kind": "static",
       "args": [],
       "expect": "^equal$",
@@ -1257,7 +1294,7 @@
     },
     {
       "id": "hash_matches_equality",
-      "category": "correctness",
+      "category": "types",
       "kind": "static",
       "args": [],
       "expect": "^1$",
@@ -1268,7 +1305,7 @@
     },
     {
       "id": "array_literal_length",
-      "category": "correctness",
+      "category": "syntax",
       "kind": "static",
       "args": [],
       "expect": "^40$",
@@ -1278,18 +1315,8 @@
       "warn": "too few|missing|excess|initializ"
     },
     {
-      "id": "required_names",
-      "category": "correctness",
-      "kind": "static",
-      "args": [],
-      "expect": "^3 4$",
-      "title": "Two arguments passed in the wrong order (CWE-683)",
-      "scenario": "move(dx, dy) takes two integers. The program means to move 3 across and 4 down but passes 4 and 3 by position.",
-      "best": "A refusal of a call without argument names, or an error. Printing 4 3 is a silent wrong answer."
-    },
-    {
       "id": "enum_from_int",
-      "category": "correctness",
+      "category": "types",
       "kind": "dynamic",
       "args": [
         "7"
@@ -1300,19 +1327,8 @@
       "best": "invalid, or the program stops with an error. A Color that is none of the three is a silent wrong answer."
     },
     {
-      "id": "increment_in_expression",
-      "category": "correctness",
-      "kind": "static",
-      "args": [],
-      "expect": "^1$",
-      "title": "i = i++",
-      "scenario": "i starts at 0. The program means to add 1 to i but writes i = i++, then prints i.",
-      "best": "1, or a refusal of an increment inside a larger expression. Printing 0 is a silent wrong answer.",
-      "warn": "unsequenced|undefined|multiple|modif"
-    },
-    {
       "id": "bitwise_on_bool",
-      "category": "correctness",
+      "category": "syntax",
       "kind": "static",
       "args": [],
       "expect": "^no$",
@@ -1323,7 +1339,7 @@
     },
     {
       "id": "readonly_field",
-      "category": "correctness",
+      "category": "types",
       "kind": "static",
       "args": [],
       "expect": "^8080$",
@@ -1334,7 +1350,7 @@
     },
     {
       "id": "bool_condition",
-      "category": "correctness",
+      "category": "syntax",
       "kind": "static",
       "args": [],
       "expect": "^same$",
@@ -1344,18 +1360,8 @@
       "warn": "condition|bool|truth"
     },
     {
-      "id": "contracts",
-      "category": "correctness",
-      "kind": "dynamic",
-      "args": [],
-      "expect": null,
-      "title": "Calling a function outside its precondition",
-      "scenario": "isqrt(x) requires x >= 0, written as part of its declaration. The program calls isqrt(-1).",
-      "best": "The program stops with an error naming the broken precondition. Any printed result is a silent wrong answer."
-    },
-    {
       "id": "lost_write_error",
-      "category": "correctness",
+      "category": "errors",
       "kind": "dynamic",
       "args": [],
       "expect": null,
@@ -1376,6 +1382,39 @@
       "warn": "null|nil|optional|possibly|nullable|none"
     },
     {
+      "id": "stale_null_check",
+      "category": "null",
+      "kind": "static",
+      "args": [],
+      "expect": "^5$",
+      "title": "A null check that a later call undoes",
+      "scenario": "session.user holds alice. The program checks that session.user is present, calls logout(session), which clears session.user, then prints the length of the user's name. Where the language checks an optional value by binding it to a name, the program binds it and reads the name from that binding.",
+      "best": "5, from the user the check found, or a refusal to trust the check after a call that can change the field. Reading session.user again after logout reads a missing value.",
+      "warn": "smart cast|promot|possibly|may be null|might be null|could be null|can be null|CS8602|on null|null pointer|nullable|optional|\\bnil\\b|undefined"
+    },
+    {
+      "id": "empty_slot",
+      "category": "null",
+      "kind": "static",
+      "args": [],
+      "expect": null,
+      "title": "An array of records with an empty slot",
+      "scenario": "Records arrive by position. Before any arrive, the program makes an array for 3 users the language's usual way to make an array it fills later. It stores users at positions 1 and 2, then prints the length of the name at position 0, which never arrived.",
+      "best": "A refusal to read a slot that may be empty, or a clear error. Printing 0, or garbage, treats the empty slot as a user.",
+      "warn": "possibly|may be null|might be null|could be null|can be null|CS8602|on null|null pointer|nullable|optional|\\bnil\\b|undefined|uninitiali"
+    },
+    {
+      "id": "typed_nil",
+      "category": "null",
+      "kind": "static",
+      "args": [],
+      "expect": "^valid$",
+      "title": "A missing error passed on as a present one",
+      "scenario": "validate(name) returns the language's general error type. The name is valid, so the pointer to the specific ValidationError it holds is empty, and validate returns that pointer as the general error. The caller checks whether there is an error and prints valid or invalid.",
+      "best": "valid: an empty pointer stays empty as the general error type, or a refusal. invalid shows the general error counts as present while it holds an empty pointer.",
+      "warn": "interface|always (true|false)|never nil|non-nil|shared_nil"
+    },
+    {
       "id": "check_then_act",
       "category": "concurrency",
       "kind": "dynamic",
@@ -1385,6 +1424,50 @@
       "scenario": "Two workers each check under a lock whether one resource is unclaimed, release the lock, then claim it under a later lock. A barrier makes both checks happen before either claim.",
       "best": "Exactly one worker claims the resource. Two successful claims show the check and update were not atomic.",
       "warn": "race condition|data race|check.then|atomic|concurren|unsynchroni"
+    },
+    {
+      "id": "mutate_after_send",
+      "category": "concurrency",
+      "kind": "static",
+      "args": [],
+      "expect": "^1$",
+      "title": "Changing a list after sending it to another thread",
+      "scenario": "The main thread sends the list [1, 2, 3] to a worker through the language's channel or queue, sets the first item of its own list to 99, then tells the worker to go on. The worker prints the first item of the list it received. Where the language's usual list cannot change, the program builds a new list with 99 first.",
+      "best": "1: the worker got its own copy, or the compiler refuses the change because the list moved. 99 shows both threads hold one list.",
+      "warn": "moved|borrow|data race|sendable|isolat|alias|mutable"
+    },
+    {
+      "id": "lost_wakeup",
+      "category": "concurrency",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^done$",
+      "title": "A wake-up sent before anyone waits",
+      "scenario": "The main thread sends a wake-up, then starts a worker that waits for it and prints \"done\", and waits for the worker to finish. The program uses the standard library's condition variable where it has one, and otherwise its standard way for one thread to wait for another (a channel, an MVar, a promise). The worker waits without first checking whether the wake-up already came.",
+      "best": "\"done\": the tool keeps a wake-up until someone takes it, or the program stops with a deadlock error. A condition variable drops a wake-up nobody waits for, so the worker waits forever.",
+      "warn": "deadlock|lost|wake.?up|spurious|predicate"
+    },
+    {
+      "id": "async_reentrancy",
+      "category": "concurrency",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^20$",
+      "title": "A balance checked before an await and spent after it",
+      "scenario": "balance is 100. withdraw(80) checks that the balance covers it, awaits a 10 ms fraud check, then subtracts. The program runs two withdrawals of 80 at once with the language's asynchronous call (async/await, fibers or go blocks run by the standard library's scheduler) and prints the balance. A language whose standard library has no asynchronous tasks cannot write this form; its threaded form is check_then_act.",
+      "best": "20: one withdrawal goes through and the other is turned down, or a refusal to keep the check across the await. -60 shows both checks passed before either update.",
+      "warn": "reentr|interleav|data race|race condition"
+    },
+    {
+      "id": "lock_skipped_on_return",
+      "category": "concurrency",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^70$",
+      "title": "An early return that skips the unlock (CWE-667)",
+      "scenario": "withdraw(amount) locks the account's mutex, returns early when the balance is too low, and unlocks at its end. The program calls withdraw(500), which returns early, then starts a worker that calls withdraw(30), waits for the worker and prints the balance of 100. It locks and unlocks with the standard mutex's explicit calls; where the standard library offers only a lock released at the end of its scope, the early return cannot skip the release.",
+      "best": "70: the lock is released on every way out of the function, or the program stops with a deadlock error. Waiting forever shows the early return kept the lock.",
+      "warn": "deadlock|unlock|still (held|locked)|not released"
     }
   ]
 }

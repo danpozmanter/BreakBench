@@ -17,4 +17,4 @@ def name(c: Color) -> str:
             return "blue"
 
 
-print(name(7))
+print(name(7))  # CONTROL! print(name(Color.BLUE))

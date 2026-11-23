@@ -1,13 +1,13 @@
 n = 0
 
 
-def next_value():
+def next_value() -> int:
     global n
     n += 1
     return n
 
 
-def pair(a, b):
+def pair(a: int, b: int) -> str:
     return f"{a} {b}"
 
 

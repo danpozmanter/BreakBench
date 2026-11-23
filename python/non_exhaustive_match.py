@@ -8,12 +8,14 @@ class Color(Enum):
     BLUE = 2
 
 
-def name(c):
+def name(c: Color) -> str:
     match c:
         case Color.RED:
             return "red"
         case Color.GREEN:
             return "green"
+        # CONTROL! case Color.BLUE:
+            # CONTROL! return "blue"
 
 
 print(name(Color(int(sys.argv[1]))))

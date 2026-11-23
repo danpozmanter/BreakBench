@@ -1,0 +1,14 @@
+import std/asyncdispatch
+
+var balance = 100
+
+proc withdraw(amount: int) {.async.} =
+  if balance >= amount:
+    await sleepAsync(10)
+    balance -= amount
+
+proc main() {.async.} =
+  await all(withdraw(80), withdraw(80))
+  echo balance
+
+waitFor main()

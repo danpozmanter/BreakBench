@@ -1,4 +1,4 @@
-def describe(s):
+def describe(s: str) -> str:
     match s:
         case "circle":
             return "circle"
@@ -6,7 +6,7 @@ def describe(s):
             return "other"
 
 
-def bad(s):  # BREAK!
+def bad(s: str) -> str:  # BREAK!
     match s:  # BREAK!
         case _:  # BREAK!
             return "other"  # BREAK!

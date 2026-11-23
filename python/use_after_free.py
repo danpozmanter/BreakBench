@@ -1,5 +1,5 @@
 class Rec:
-    def __init__(self, value):
+    def __init__(self, value: int) -> None:
         self.value = value
 
 

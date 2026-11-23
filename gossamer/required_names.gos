@@ -1,7 +1,0 @@
-fn move(dx: i64, dy: i64) {
-    println(f"{dx} {dy}")
-}
-
-fn main() {
-    move(4, 3)
-}

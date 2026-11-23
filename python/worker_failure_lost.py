@@ -4,7 +4,7 @@ import threading
 total = 0
 
 
-def add_all(items):
+def add_all(items: list[str]) -> None:
     global total
     for item in items:
         total += int(item)

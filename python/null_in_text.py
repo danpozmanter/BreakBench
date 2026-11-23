@@ -1,7 +1,7 @@
 import sys
 
 
-def find_name(user_id):
+def find_name(user_id: int) -> str | None:
     return "alice" if user_id == 1 else None
 
 

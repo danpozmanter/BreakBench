@@ -6,9 +6,9 @@ claimed = False
 winners = 0
 
 
-def claim():
+def claim() -> None:
     global claimed, winners
-    with lock:
+    with lock:  # BREAK!
         available = not claimed  # BREAK!
     # CONTROL! with lock: available = not claimed; claimed = claimed or available
     checked.wait()

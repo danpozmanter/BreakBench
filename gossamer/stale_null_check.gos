@@ -1,0 +1,19 @@
+struct User {
+    name: String
+}
+
+struct Session {
+    user: Option<User>
+}
+
+fn logout(session: &mut Session) {
+    session.user = None
+}
+
+fn main() {
+    let mut session = Session { user: Some(User { name: "alice" }) }
+    if let Some(user) = session.user {
+        logout(&mut session)
+        println(f"{user.name.len()}")
+    }
+}

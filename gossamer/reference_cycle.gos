@@ -1,0 +1,21 @@
+use std::env
+
+struct Node {
+    data: Vec<u8>
+    other: Option<Node>
+}
+
+fn node() -> Node {
+    Node { data: #[1; 4096], other: None }
+}
+
+fn main() {
+    let n = env::args()[0].to_i64().unwrap()
+    for _ in 0..n {
+        let mut parent = node()
+        let mut child = node()
+        parent.other = Some(child)
+        child.other = Some(parent)
+    }
+    println("done")
+}

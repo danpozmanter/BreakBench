@@ -263,6 +263,16 @@ services:
         # https://www.python.org/downloads/
         version: "3.15.2"
 
+  python_mypy:
+    <<: *shared
+    image: breakbench:python_mypy
+    build:
+      dockerfile: docker/python_mypy
+      args:
+        # https://pypi.org/project/mypy/
+        version: "2.4.1"
+    depends_on: [python]
+
   odin:
     <<: *shared
     image: breakbench:odin

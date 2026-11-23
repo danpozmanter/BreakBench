@@ -1,6 +1,6 @@
-def check():
+def check() -> None:
     print("ok")
-    return
+    return  # BREAK!
     print("checked")
 
 

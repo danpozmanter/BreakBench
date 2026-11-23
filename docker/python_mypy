@@ -1,0 +1,5 @@
+FROM breakbench:python
+
+ARG version
+
+RUN pip install --no-cache-dir --root-user-action=ignore mypy==$version

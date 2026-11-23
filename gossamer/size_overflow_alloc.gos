@@ -1,0 +1,9 @@
+use std::env
+
+fn main() {
+    let count = env::args()[0].to_i64().unwrap()
+    let size = count * 8
+    let mut records = #[0u8; size]
+    records[8] = 99
+    println("stored")
+}

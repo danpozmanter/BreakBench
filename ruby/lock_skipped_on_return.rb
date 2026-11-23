@@ -1,0 +1,14 @@
+LOCK = Mutex.new
+$balance = 100
+
+def withdraw(amount)
+  LOCK.lock
+  return if amount > $balance
+  $balance -= amount
+  LOCK.unlock
+end
+
+withdraw(500)
+worker = Thread.new { withdraw(30) }
+worker.join
+puts $balance

@@ -1,0 +1,16 @@
+use std::sync::channel
+
+fn main() {
+    let list_tx, list_rx = channel()
+    let go_tx, go_rx = channel()
+    let worker = spawn(|| {
+        let received: Vec<i64> = list_rx.recv().unwrap()
+        let _ = go_rx.recv()
+        println(f"{received[0]}")
+    })
+    let mut list = #[1, 2, 3]
+    list_tx.send(list)
+    list[0] = 99
+    go_tx.send(true)
+    let _ = worker.join()
+}

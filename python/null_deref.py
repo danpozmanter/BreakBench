@@ -7,9 +7,10 @@ class User:
     name: str
 
 
-def find_user(user_id):
+def find_user(user_id: int) -> User | None:
     return User("alice") if user_id == 1 else None
 
 
 u = find_user(int(sys.argv[1]))
-print(len(u.name))
+print(len(u.name))  # BREAK!
+print(u)

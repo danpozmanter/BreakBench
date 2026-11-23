@@ -3,5 +3,6 @@ type User = { Name: string option }
 [<EntryPoint>]
 let main _ =
     let decoded = { Name = None }
-    printfn "%d" decoded.Name.Value.Length
+    printfn "%d" decoded.Name.Length // BREAK!
+    // CONTROL! printfn "%d" decoded.Name.Value.Length
     0

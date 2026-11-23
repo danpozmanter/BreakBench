@@ -1,0 +1,11 @@
+struct User {
+    name: String
+}
+
+fn main() {
+    let mut users: Vec<Option<User>> = #[None; 3]
+    users[1] = Some(User { name: "bob" })
+    users[2] = Some(User { name: "carol" })
+    println(f"{users[0].name.len()}") // BREAK!
+    // CONTROL! println(f"{users[0].map(|u| u.name.len()).unwrap_or(0)}")
+}

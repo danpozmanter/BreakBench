@@ -8,7 +8,13 @@
       "clang -std=c23 -Weverything -Wno-declaration-after-statement -Wno-unsafe-buffer-usage -Wno-c++98-compat -Wno-pre-c23-compat -Wno-padded -Werror=return-type -Werror=address -O0 -g -fsanitize=address,undefined -fno-sanitize-recover=undefined -fno-omit-frame-pointer -pthread -o main main.c"
     ],
     "run": "ASAN_OPTIONS=${ASAN_OPTIONS:-detect_leaks=0} ./main",
-    "version": "clang --version | head -1"
+    "version": "clang --version | head -1",
+    "release": {
+      "build": [
+        "clang -std=c23 -O2 -D_FORTIFY_SOURCE=3 -fstack-protector-strong -fstack-clash-protection -pthread -o main main.c"
+      ],
+      "run": "./main"
+    }
   },
   "cpp": {
     "name": "C++",
@@ -19,7 +25,13 @@
       "clang++ -std=c++23 -Weverything -Wno-declaration-after-statement -Wno-unsafe-buffer-usage -Wno-c++98-compat -Wno-pre-c23-compat -Wno-padded -Werror=return-type -Werror=address -O0 -g -fsanitize=address,undefined -fno-sanitize-recover=undefined -fno-omit-frame-pointer -pthread -o main main.cpp -lstdc++exp"
     ],
     "run": "ASAN_OPTIONS=${ASAN_OPTIONS:-detect_leaks=0} ./main",
-    "version": "clang++ --version | head -1"
+    "version": "clang++ --version | head -1",
+    "release": {
+      "build": [
+        "clang++ -std=c++23 -O2 -D_FORTIFY_SOURCE=3 -D_GLIBCXX_ASSERTIONS -fstack-protector-strong -fstack-clash-protection -pthread -o main main.cpp -lstdc++exp"
+      ],
+      "run": "./main"
+    }
   },
   "rust": {
     "name": "Rust",
@@ -30,7 +42,13 @@
       "clippy-driver --edition 2024 -g --extern regex=/opt/rustdeps/libregex.rlib -L dependency=/opt/rustdeps/lib -o main main.rs"
     ],
     "run": "./main",
-    "version": "rustc --version"
+    "version": "rustc --version",
+    "release": {
+      "build": [
+        "rustc --edition 2024 -O --extern regex=/opt/rustdeps/libregex.rlib -L dependency=/opt/rustdeps/lib -o main main.rs"
+      ],
+      "run": "./main"
+    }
   },
   "zig": {
     "name": "Zig",
@@ -41,7 +59,13 @@
       "zig build-exe -O Debug -femit-bin=main main.zig"
     ],
     "run": "./main",
-    "version": "zig version"
+    "version": "zig version",
+    "release": {
+      "build": [
+        "zig build-exe -O ReleaseSafe -femit-bin=main main.zig"
+      ],
+      "run": "./main"
+    }
   },
   "golang": {
     "name": "Go",
@@ -65,7 +89,13 @@
       "swiftc -swift-version 6 -Onone -g -I /opt/swiftdeps/.build/debug -o main main.swift /opt/swiftdeps/.build/debug/libDeps.a -lstdc++"
     ],
     "run": "./main",
-    "version": "swiftc --version 2>&1 | head -1"
+    "version": "swiftc --version 2>&1 | head -1",
+    "release": {
+      "build": [
+        "swiftc -swift-version 6 -O -I /opt/swiftdeps/.build/debug -o main main.swift /opt/swiftdeps/.build/debug/libDeps.a -lstdc++"
+      ],
+      "run": "./main"
+    }
   },
   "crystal": {
     "name": "Crystal",
@@ -76,7 +106,13 @@
       "crystal build -o main main.cr"
     ],
     "run": "./main",
-    "version": "crystal --version | head -1"
+    "version": "crystal --version | head -1",
+    "release": {
+      "build": [
+        "crystal build --release -o main main.cr"
+      ],
+      "run": "./main"
+    }
   },
   "d": {
     "name": "D",
@@ -87,7 +123,13 @@
       "ldc2 -g -L--export-dynamic -wi -fsanitize=address -of=main main.d"
     ],
     "run": "ASAN_OPTIONS=${ASAN_OPTIONS:-detect_leaks=0} ./main",
-    "version": "ldc2 --version | head -1"
+    "version": "ldc2 --version | head -1",
+    "release": {
+      "build": [
+        "ldc2 -O -release -L--export-dynamic -of=main main.d"
+      ],
+      "run": "./main"
+    }
   },
   "nim": {
     "name": "Nim",
@@ -98,7 +140,13 @@
       "nim c --cc:clang --threads:on --hints:off --verbosity:0 -o:main main.nim"
     ],
     "run": "./main",
-    "version": "nim --version | head -1"
+    "version": "nim --version | head -1",
+    "release": {
+      "build": [
+        "nim c -d:release --cc:clang --threads:on --hints:off --verbosity:0 -o:main main.nim"
+      ],
+      "run": "./main"
+    }
   },
   "v": {
     "name": "V",
@@ -110,7 +158,13 @@
       "v -cc clang -o main main.v"
     ],
     "run": "./main",
-    "version": "v version"
+    "version": "v version",
+    "release": {
+      "build": [
+        "v -prod -cc clang -o main main.v"
+      ],
+      "run": "./main"
+    }
   },
   "odin": {
     "name": "Odin",
@@ -121,7 +175,13 @@
       "odin build main.odin -file -debug -vet -sanitize:address -out:main"
     ],
     "run": "ASAN_OPTIONS=${ASAN_OPTIONS:-detect_leaks=0} ./main",
-    "version": "odin version"
+    "version": "odin version",
+    "release": {
+      "build": [
+        "odin build main.odin -file -o:speed -out:main"
+      ],
+      "run": "./main"
+    }
   },
   "c3": {
     "name": "C3",
@@ -132,7 +192,13 @@
       "c3c compile -O0 --sanitize=address -o main main.c3"
     ],
     "run": "ASAN_OPTIONS=${ASAN_OPTIONS:-detect_leaks=0} ./main",
-    "version": "c3c --version | head -1"
+    "version": "c3c --version | head -1",
+    "release": {
+      "build": [
+        "c3c compile -O3 -o main main.c3"
+      ],
+      "run": "./main"
+    }
   },
   "mojo": {
     "name": "Mojo",
@@ -143,7 +209,13 @@
       "pixi run --manifest-path /opt/mojo-ws/pixi.toml mojo build -O0 -D ASSERT=all -o main main.mojo"
     ],
     "run": "./main",
-    "version": "pixi run --manifest-path /opt/mojo-ws/pixi.toml mojo --version 2>/dev/null"
+    "version": "pixi run --manifest-path /opt/mojo-ws/pixi.toml mojo --version 2>/dev/null",
+    "release": {
+      "build": [
+        "pixi run --manifest-path /opt/mojo-ws/pixi.toml mojo build -o main main.mojo"
+      ],
+      "run": "./main"
+    }
   },
   "gossamer": {
     "name": "Gossamer",
@@ -155,7 +227,13 @@
       "gos build main.gos"
     ],
     "run": "./target/debug/main",
-    "version": "gos --version"
+    "version": "gos --version",
+    "release": {
+      "build": [
+        "gos build --release main.gos"
+      ],
+      "run": "./target/release/main"
+    }
   },
   "goose": {
     "name": "Goose",
@@ -167,7 +245,13 @@
       "cc -g -O0 -w main.c -o main -lm -pthread"
     ],
     "run": "./main",
-    "version": "cd /opt/goose && echo goose $(git rev-parse --short HEAD)"
+    "version": "cd /opt/goose && echo goose $(git rev-parse --short HEAD)",
+    "release": {
+      "build": [
+        "goose --standalone -o main.c main.goose && cc -O2 -w main.c -o main -lm -pthread"
+      ],
+      "run": "./main"
+    }
   },
   "java": {
     "name": "Java",
@@ -178,7 +262,13 @@
       "javac -Xlint:all -d out Main.java"
     ],
     "run": "java -ea -cp out Main",
-    "version": "java -version 2>&1 | head -1"
+    "version": "java -version 2>&1 | head -1",
+    "release": {
+      "build": [
+        "javac -Xlint:all -d out Main.java"
+      ],
+      "run": "java -cp out Main"
+    }
   },
   "kotlin": {
     "name": "Kotlin",
@@ -189,7 +279,13 @@
       "kotlinc main.kt -cp $(ls /opt/kotlinx/*.jar | tr '\\n' ':') -include-runtime -d main.jar 2>&1 | grep -v '^warning' ; test -f main.jar"
     ],
     "run": "java -ea -cp main.jar:$(ls /opt/kotlinx/*.jar | tr '\\n' ':') MainKt",
-    "version": "kotlinc -version 2>&1 | tail -1"
+    "version": "kotlinc -version 2>&1 | tail -1",
+    "release": {
+      "build": [
+        "kotlinc main.kt -cp $(ls /opt/kotlinx/*.jar | tr '\\n' ':') -include-runtime -d main.jar 2>&1 | grep -v '^warning' ; test -f main.jar"
+      ],
+      "run": "java -cp main.jar:$(ls /opt/kotlinx/*.jar | tr '\\n' ':') MainKt"
+    }
   },
   "scala": {
     "name": "Scala",
@@ -200,7 +296,13 @@
       "mkdir -p out && scalac -Wall -cp /opt/scalaxml/scala-xml.jar -d out main.scala"
     ],
     "run": "java -ea -cp out:/opt/scalaxml/scala-xml.jar:$(find /opt/scala/maven2 -name \"scala*-library*.jar\" | tr \"\\n\" \":\") Main",
-    "version": "scalac -version 2>&1 | tail -1"
+    "version": "scalac -version 2>&1 | tail -1",
+    "release": {
+      "build": [
+        "mkdir -p out && scalac -Wall -cp /opt/scalaxml/scala-xml.jar -d out main.scala"
+      ],
+      "run": "java -cp out:/opt/scalaxml/scala-xml.jar:$(find /opt/scala/maven2 -name \"scala*-library*.jar\" | tr \"\\n\" \":\") Main"
+    }
   },
   "csharp": {
     "name": "C#",
@@ -214,7 +316,13 @@
       "dotnet build -c Debug -o out -nologo -v minimal -clp:NoSummary"
     ],
     "run": "dotnet out/bb.dll",
-    "version": "dotnet --version"
+    "version": "dotnet --version",
+    "release": {
+      "build": [
+        "dotnet build -c Release -p:CheckForOverflowUnderflow=false -o out -nologo -v minimal -clp:NoSummary"
+      ],
+      "run": "dotnet out/bb.dll"
+    }
   },
   "fsharp": {
     "name": "F#",
@@ -228,7 +336,13 @@
       "dotnet build -c Debug -o out -nologo -v minimal -clp:NoSummary"
     ],
     "run": "dotnet out/bb.dll",
-    "version": "dotnet --version"
+    "version": "dotnet --version",
+    "release": {
+      "build": [
+        "dotnet build -c Release -p:OtherFlags= -o out -nologo -v minimal -clp:NoSummary"
+      ],
+      "run": "dotnet out/bb.dll"
+    }
   },
   "dart": {
     "name": "Dart",
@@ -243,6 +357,12 @@
     "version": "dart --version 2>&1",
     "extra_files": {
       "analysis_options.yaml": "include: package:lints/recommended.yaml\n"
+    },
+    "release": {
+      "build": [
+        "dart compile exe -o main main.dart"
+      ],
+      "run": "./main"
     }
   },
   "typescript": {
@@ -279,6 +399,20 @@
     "version": "python3 --version",
     "warn_line": "^Executing <.*> took [\\d.]+ seconds"
   },
+  "python_mypy": {
+    "name": "Python (mypy)",
+    "service": "python_mypy",
+    "dir": "python",
+    "ext": "py",
+    "file": "main.py",
+    "build": [
+      "python3 -X dev -m py_compile main.py",
+      "mypy --strict --warn-unreachable --strict-equality-for-none --enable-error-code possibly-undefined --enable-error-code redundant-expr --enable-error-code truthy-bool --enable-error-code truthy-iterable --enable-error-code unused-awaitable --enable-error-code explicit-override --enable-error-code mutable-override --enable-error-code exhaustive-match --enable-error-code deprecated --cache-dir /dev/null --no-color-output main.py"
+    ],
+    "run": "python3 -X dev main.py",
+    "version": "echo mypy $(mypy --version | cut -d' ' -f2) / $(python3 --version)",
+    "warn_line": "^Executing <.*> took [\\d.]+ seconds"
+  },
   "ruby": {
     "name": "Ruby",
     "service": "ruby",
@@ -299,7 +433,13 @@
       "php -l main.php"
     ],
     "run": "php -d error_reporting=E_ALL -d display_errors=stderr -d zend.assertions=1 main.php",
-    "version": "php --version | head -1"
+    "version": "php --version | head -1",
+    "release": {
+      "build": [
+        "php -l main.php"
+      ],
+      "run": "php -d error_reporting=E_ALL -d display_errors=stderr -d zend.assertions=-1 main.php"
+    }
   },
   "julia": {
     "name": "Julia",
@@ -310,7 +450,13 @@
       "julia --startup-file=no -e 'src = read(\"main.jl\", String); ex = Meta.parseall(src); bad(e) = e isa Expr && (e.head in (:error, :incomplete) || any(bad, e.args)); bad(ex) && (show(ex); exit(1))'"
     ],
     "run": "julia --startup-file=no --check-bounds=yes -t 8 main.jl",
-    "version": "julia --version"
+    "version": "julia --version",
+    "release": {
+      "build": [
+        "julia --startup-file=no -e 'src = read(\"main.jl\", String); ex = Meta.parseall(src); bad(e) = e isa Expr && (e.head in (:error, :incomplete) || any(bad, e.args)); bad(ex) && (show(ex); exit(1))'"
+      ],
+      "run": "julia --startup-file=no -t 8 main.jl"
+    }
   },
   "ocaml": {
     "name": "OCaml",
@@ -336,7 +482,13 @@
       "ghc -Wall -O0 -threaded -package-db /opt/hsdb -o main main.hs"
     ],
     "run": "./main",
-    "version": "ghc --version"
+    "version": "ghc --version",
+    "release": {
+      "build": [
+        "ghc -O1 -threaded -package-db /opt/hsdb -o main main.hs"
+      ],
+      "run": "./main"
+    }
   },
   "clojure": {
     "name": "Clojure",

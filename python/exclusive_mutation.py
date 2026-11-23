@@ -1,9 +1,9 @@
 class Account:
-    def __init__(self, balance):
+    def __init__(self, balance: int) -> None:
         self.balance = balance
 
 
-def transfer(src, dst, amount):
+def transfer(src: Account, dst: Account, amount: int) -> None:
     new_from = src.balance - amount
     new_to = dst.balance + amount
     src.balance = new_from

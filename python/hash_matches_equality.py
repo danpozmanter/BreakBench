@@ -1,8 +1,14 @@
+from typing import override
+
+
 class Point:
-    def __init__(self, x, y, label):
+    def __init__(self, x: int, y: int, label: str) -> None:
         self.x, self.y, self.label = x, y, label
 
-    def __eq__(self, other):
+    @override
+    def __eq__(self, other: object) -> bool:
+        if not isinstance(other, Point):
+            return NotImplemented
         return self.x == other.x and self.y == other.y
 
 

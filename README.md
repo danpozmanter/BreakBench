@@ -4,7 +4,9 @@
 
 BreakBench measures what 30 programming languages do about common bugs. It is inspired by
 [LangArena](https://github.com/kostya/LangArena), which measures speed and efficiency on correct
-programs, and covers LangArena's 27 languages plus OCaml, Haskell and Clojure.
+programs, and covers LangArena's 27 languages plus OCaml, Haskell and Clojure. Python runs twice:
+as written, and checked by mypy, the way TypeScript checks JavaScript. mypy is the Python project's
+own type checker and a common step in Python release workflows.
 
 "How much does a language help the programmer avoid production bugs?"
 
@@ -24,16 +26,20 @@ images.
 
 ## Tests
 
-111 tests in four categories. Each has a CWE or CERT entry or appears in a language's pitfall list,
+117 tests in eight categories. Each has a CWE or CERT entry or appears in a language's pitfall list,
 reads the same in every language, and covers a mistake no other test covers.
 `harness/problems.json` describes each one.
 
 | Category | Tests | The bug |
 |---|---|---|
-| Correctness | 80 | The program computes the wrong answer or loses data: overflow, a missing match case, arguments in the wrong order, a misspelled name, a comparison where an assignment was meant, command injection, a write error lost at close, ... |
-| Null safety | 8 | The program uses a value that may be missing as if it were there: a lookup that found nothing, a search that returned -1, the maximum of an empty list, a missing name printed as text, an explicitly null field |
-| Memory safety | 14 | The program reads or writes memory it does not own: use after free, out-of-bounds reads and writes, invalid variant access, ... |
-| Concurrency | 9 | Threads or tasks interfere: a deadlock, a check-then-act race, a failure lost between threads, a wait for a worker that died, a blocking call that stalls asynchronous code, ... |
+| Numbers | 16 | Arithmetic or a conversion gives the wrong value: overflow, a narrowing cast, a negative remainder, float equality, an integer average, ... |
+| Types and APIs | 30 | A value or call is used the wrong way: text passed as a number, a missing match case, a misspelled field, a list changed while looping over it, a copy taken for a reference, ... |
+| Syntax traps | 21 | The code reads as one thing and does another: an assignment in a condition, a dangling else, a missing comma, a stray return, a variable declared where one was meant to be set, ... |
+| Error handling | 5 | A failure goes unseen: an ignored result, a return in a cleanup block, a write error lost at close, a write to a closed file, a file never closed |
+| Security | 4 | Input from outside takes control: command injection, a path that escapes its folder, a regex that backtracks forever, a number parsed from half a string |
+| Null safety | 11 | The program uses a value that may be missing as if it were there: a lookup that found nothing, a search that returned -1, a missing name printed as text, a check a later call undoes, an empty pointer passed on as an error, ... |
+| Memory safety | 17 | The program reads or writes memory it does not own, or keeps memory it dropped: use after free, out-of-bounds writes, records that keep each other alive, a size that overflows before the allocation, a running total that keeps every message alive, ... |
+| Concurrency | 13 | Threads or tasks interfere: a deadlock, a check-then-act race, a balance checked before an await and spent after it, an early return that skips the unlock, a wake-up sent before anyone waits, ... |
 
 The site breaks each language's score down by category, and reports the share of tests caught
 before running (refused by the compiler or checker, or prevented by design).
@@ -49,7 +55,7 @@ before running (refused by the compiler or checker, or prevented by design).
 | CORRUPT | Read or wrote memory it does not own |
 | CRASH | Segfault, floating-point trap or allocator abort |
 | HANG | Never finished |
-| LEAK | The program reported file-descriptor exhaustion |
+| LEAK | The program ran out of file descriptors or memory it should have freed |
 | SAFE_BY_DESIGN | The language design prevents the error; scores 1 |
 | UNFIXABLE | The error is expressible but the fix is not; scores 0 |
 | N/A | The language cannot express the error; excluded from its mean |
@@ -64,12 +70,14 @@ before running (refused by the compiler or checker, or prevented by design).
 | Warned before running: the build warned about the bug by name | 0.5 |
 | TRAPPED: stopped at run time with a clear error | 0.25 |
 | Warned while running: the program warned about the bug by name and went on | 0.25 |
+| Stopped at run time only in the debug build | 0.125 |
 | SILENT, CORRUPT, CRASH, HANG, LEAK, ICE, UNFIXABLE | 0 |
 
 The rubric rewards stopping a bug before it reaches production. A refusal stops it for certain and
 a build warning may, so they earn 1 and 0.5. A bug the program only shows while running, by
 stopping or by warning, reaches production unless a test happens to run that path, so it earns
-0.25. A test scores the highest row that applies; a warning and a stop never add up. The same
+0.25. A stop that only the debug build makes is gone from the release build that ships, so it
+earns 0.125. A test scores the highest row that applies; a warning and a stop never add up. The same
 table holds for every test, whether the language is compiled or dynamic and whether the bug is a
 logic or a memory error. The one exception is `deep_structure_release`, a correct program that
 must run to the end: refusing, stopping or warning about it scores 0.
@@ -91,38 +99,43 @@ must run to the end: refusing, stopping or warning about it scores 0.
   has when the scenario remains expressible (a loop for the maximum of a list in C).
 - **Score**: the mean over counted tests, excluding N/A cases.
 
-### Build mode
+### Build modes
 
 Each language builds in the strictest stable mode its toolchain offers, at the language version a
-new project gets. No experimental switches.
+new project gets: the debug build, linters and checkers a team runs while it develops. No
+experimental switches. A program that stops at run time in that build is built again the way the
+language ships, and run again. If the release build runs on past the bug, the stop scores 0.125
+instead of 0.25.
 
-| Language | Mode |
-|---|---|
-| C, C++ | `-O0 -g -fsanitize=address,undefined -fno-sanitize-recover=undefined`, LangArena's warnings |
-| D (LDC) | debug, `-fsanitize=address` |
-| Odin | `-debug -vet -sanitize:address` |
-| C3 | `-O0 --sanitize=address` |
-| Rust | debug (overflow checks), clippy |
-| Zig | `-O Debug` |
-| Go | `go vet`, `go build` |
-| Swift | `-swift-version 6 -Onone` |
-| V | `v vet`, debug build |
-| Nim, Crystal | debug build |
-| OCaml | dune dev profile (warnings are errors) |
-| Haskell | `ghc -Wall` |
-| Clojure | AOT compile, `*warn-on-reflection*` |
-| Goose | `goose --debug` |
-| Mojo | `-O0 -D ASSERT=all` |
-| Gossamer | `gos lint`, `gos build` |
-| C#, F# | Debug, checked arithmetic; C# runs every .NET analyzer |
-| Java, Kotlin, Scala | `-Xlint:all` or `-Wall`, `-ea` |
-| Dart | `dart analyze` with `package:lints/recommended`, `--enable-asserts` |
-| TypeScript | `--strict` and every extra check flag |
-| JavaScript | `"use strict"` |
-| PHP | `strict_types=1`, `E_ALL`, assertions on |
-| Julia | `--check-bounds=yes` |
-| Python | `-X dev` |
-| Ruby | `-w` |
+| Language | Development | Release |
+|---|---|---|
+| C, C++ | `-O0 -g -fsanitize=address,undefined -fno-sanitize-recover=undefined`, LangArena's warnings | `-O2 -D_FORTIFY_SOURCE=3 -fstack-protector-strong -fstack-clash-protection`; C++ adds `-D_GLIBCXX_ASSERTIONS` |
+| D (LDC) | debug, `-fsanitize=address` | `-O -release` |
+| Odin | `-debug -vet -sanitize:address` | `-o:speed` |
+| C3 | `-O0 --sanitize=address` | `-O3` |
+| Rust | debug (overflow checks), clippy | `-O` |
+| Zig | `-O Debug` | `-O ReleaseSafe` |
+| Go | `go vet`, `go build` | same |
+| Swift | `-swift-version 6 -Onone` | `-O` |
+| V | `v vet`, debug build | `-prod` |
+| Nim | debug build | `-d:release` |
+| Crystal | debug build | `--release` |
+| OCaml | dune dev profile (warnings are errors) | same |
+| Haskell | `ghc -Wall -O0` | `-O1` |
+| Clojure | AOT compile, `*warn-on-reflection*` | same |
+| Goose | `goose --debug` | without `--debug`, `cc -O2` |
+| Mojo | `-O0 -D ASSERT=all` | default |
+| Gossamer | `gos lint`, `gos build` | `gos build --release` |
+| C#, F# | Debug, checked arithmetic; C# runs every .NET analyzer | Release, unchecked arithmetic |
+| Java, Kotlin, Scala | `-Xlint:all` or `-Wall`, `-ea` | without `-ea` |
+| Dart | `dart analyze` with `package:lints/recommended`, `--enable-asserts` | `dart compile exe` |
+| TypeScript | `--strict` and every extra check flag | same |
+| JavaScript | `"use strict"` | same |
+| PHP | `strict_types=1`, `E_ALL`, assertions on | `zend.assertions=-1` |
+| Julia | `--check-bounds=yes` | default bounds checking |
+| Python | `-X dev` | same |
+| Python (mypy) | `mypy --strict`, `--warn-unreachable` and every optional error code, `-X dev` | same |
+| Ruby | `-w` | same |
 
 Where two modes conflict, the bench uses the one that catches more: AddressSanitizer over
 ThreadSanitizer, and Go's default runtime over `-race`, which turns off its deadlock detector.
@@ -133,9 +146,9 @@ ThreadSanitizer, and Go's default runtime over `-race`, which turns off its dead
 Tests may use:
 
 - the language and its standard library;
-- libraries the language's own project publishes, such as Rust's `regex`, Go's
-  `golang.org/x/text`, Kotlin's `kotlinx.serialization` and Haskell's `aeson` (each `docker/` file
-  lists them);
+- libraries and tools the language's own project publishes, such as Rust's `regex`, Go's
+  `golang.org/x/text`, Kotlin's `kotlinx.serialization`, Haskell's `aeson` and Python's mypy
+  (each `docker/` file lists them);
 - ISO C and POSIX.1 for C and C++;
 - the JVM or .NET class library for languages on those platforms;
 - every package GHC ships, for Haskell.
@@ -177,14 +190,16 @@ results in `raw/` and the ranking in `results.json`. Partial runs update the new
 
 - Each container gets 3 GB of memory (swap included) and 4,096 processes. A run times out after
   20 s per run. `fd_leak` runs with 512 file descriptors and counts an explicit too-many-open-files
-  failure as a leak. RSS is recorded neither for scoring nor display. Leak cases that had no
-  reliable signal beyond RSS were removed.
+  failure as a leak. `reference_cycle` drops 12 GB of pairs and `lazy_accumulator` reads
+  12 GB of messages, four times the cap, so a program that frees them finishes and one that keeps
+  them runs out of memory; an out-of-memory kill or allocation failure there counts as a leak. RSS is recorded neither for scoring nor display.
 - Tests whose outcome can change from run to run (`use_after_close`, which writes through a freed C
   `FILE` in some languages) run up to fifty times and keep the worst outcome, stopping early once
   a run scores 0. The lock-order and check-then-act cases use rendezvous points to control their
   schedules.
 - C-family programs keep stale pointers in data structures, so the optimizer cannot remove the
-  access.
+  access. Rust's `huge_allocation` passes its buffer to `std::hint::black_box` for the same
+  reason: a real program uses its buffer, so the release build may not drop the allocation.
 - Zig's debug allocator never reuses a freed slot, so a stale pointer reads the old record. Odin and
   C3 read the new one.
 - `v/loop_closure_capture.v` calls its closures in a loop, because V emits C that clang rejects for
@@ -193,12 +208,11 @@ results in `raw/` and the ranking in `results.json`. Partial runs update the new
 - A compiler crash records `ICE` and scores 0.
 - GHC's default stack limit is 80% of physical memory, so deep recursion in Haskell reaches the
   3 GB cap first and the kernel kills it, so `stack_overflow` crashes.
-- Nim checks `{.guard.}` only inside procedures, so `lock_owns_data` keeps its code in procedures.
 - A regex engine that gives up at a backtracking limit and reports no match counts as correct.
   PHP's `preg_match` returns `false`, which reads as no match.
-- In this build mode C's null dereference and C++'s `*` on an empty `std::optional` stop the
-  program: the first through UndefinedBehaviorSanitizer, the second through a libstdc++ assertion
-  that fires in this unoptimized build. Both are undefined behavior, so other builds may run on.
+- In the development build C's null dereference and C++'s `*` on an empty `std::optional` stop
+  the program: the first through UndefinedBehaviorSanitizer, the second through a libstdc++
+  assertion. Both are undefined behavior; where the release build runs on, the stop scores 0.125.
 - C and C++ leave the order of a call's arguments unspecified. Clang and GCC both run them left to
   right in this build, so `evaluation_order` prints `1 2` and scores as correct.
 - V reads the line after a bare `return` as the value to return, so in a function that returns
@@ -212,6 +226,9 @@ results in `raw/` and the ranking in `results.json`. Partial runs update the new
   it (Rust's standard library has no executor, so Rust uses threads), otherwise threads, tasks or
   goroutines. A language without a blocking sleep in its asynchronous model (JavaScript) cannot
   stall it this way and runs correctly.
+- `async_reentrancy` runs only where the standard library schedules asynchronous tasks; elsewhere it
+  is N/A, since its threaded form is `check_then_act`. OCaml, F#, Haskell and Clojure have no early
+  return, so `lock_skipped_on_return` unlocks after the conditional and cannot skip it.
 - Each program is written the way the language's documentation teaches first: `Option` where the
   standard library returns one, and the default length, list and integer types. A shared map uses
   the language's standard lock-free update where it has one (a Clojure atom, Haskell's

@@ -5,7 +5,7 @@ b = threading.Lock()
 ready = threading.Barrier(2)
 
 
-def transfer(first, second):
+def transfer(first: threading.Lock, second: threading.Lock) -> None:
     with first:
         ready.wait()
         with second:

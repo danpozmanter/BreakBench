@@ -1,4 +1,4 @@
-def total(a, b):
+def total(a: int, b: int) -> int:
     return  # CONTROL! return a + b
     a + b  # BREAK!
 

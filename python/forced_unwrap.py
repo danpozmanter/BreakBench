@@ -1,6 +1,8 @@
-def find(id):
-    return 36 if id == 1 else None
+def find(key: int) -> int | None:
+    return 36 if key == 1 else None
 
 
 print("before", flush=True)
-print(find(2) + 1)
+found = find(2)
+assert found is not None
+print(found + 1)
