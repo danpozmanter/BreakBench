@@ -181,17 +181,17 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     <nav class="top" aria-label="Sections"><a href="#overview">Overview</a><a href="#compare">Compare</a><a href="#tests">Tests</a></nav>
   </header>
 
-  <section aria-labelledby="rank-h" id="overview">
-    <h2 id="rank-h">Overview</h2>
-    <p class="muted">The score is the average over all tests, as a percentage. The four categories break it down. Caught before running is the share of tests the compiler refused; no silent failure is the share refused, run correctly or stopped with a clear error. Select a heading to sort.</p>
-    <div class="scroll"><table id="ranking"></table></div>
-  </section>
-
   <section aria-labelledby="cmp-h" id="compare">
-    <h2 id="cmp-h">Compare</h2>
-    <p class="muted">Pick up to five languages to see their results side by side. Select a test or a cell to see its detail for just those languages.</p>
+    <h2 id="cmp-h">Compare languages</h2>
+    <p class="muted">Choose up to five languages. The selection filters the overview, tests, and test detail, and shows their results side by side.</p>
     <div class="picker" id="cmp-picker" role="group" aria-label="Languages to compare"></div>
     <div class="cmp-body" id="cmp-body"></div>
+  </section>
+
+  <section aria-labelledby="rank-h" id="overview">
+    <h2 id="rank-h">Overview</h2>
+    <p class="muted">The score is the average over all tests, as a percentage. The four categories break it down. Caught before running is the share of tests the compiler refused. Select a heading to sort.</p>
+    <div class="scroll"><table id="ranking"></table></div>
   </section>
 
   <section aria-labelledby="score-h">
@@ -223,6 +223,8 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
 <script>
 (function () {
   const D = window.BREAKBENCH;
+  let chosen = [];
+  const visibleLanguages = () => chosen.length ? D.languages.filter((L) => chosen.includes(L.id)) : D.languages;
   const OUT = ["REJECTED", "CORRECT", "WARNED", "RUN_WARNED", "TRAPPED", "SILENT", "CORRUPT", "CRASH", "HANG", "LEAK", "ICE", "INEXPRESSIBLE", "ERROR"];
   const NAME = { REJECTED: "Refused Correctly", CORRECT: "Ran Correctly", WARNED: "Warned Before Running", RUN_WARNED: "Warned While Running", TRAPPED: "Runtime Stop, Clear Error", SILENT: "Wrong Answer", CORRUPT: "Memory Corruption", CRASH: "Crash", HANG: "Hang", LEAK: "Leak", ICE: "Compiler Crash", INEXPRESSIBLE: "N/A", ERROR: "Benchmark Error", MISSING: "Missing" };
   const DESC = {
@@ -270,6 +272,15 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     .forEach(([k, v]) => meta.append(el("span", {}, k + " ", el("b", { text: String(v) }))));
 
   const pct = (v) => v.toFixed(1) + "%";
+  function shortVersion(id, value) {
+    const s = (value || "").trim();
+    if (id === "gossamer") return "0.84.2";
+    if (id === "odin") return (s.match(/\b\d{4}-\d{2}-[a-z]+\b/i) || [s.replace(/^odin version\s*/, "")]).at(0);
+    if (id === "goose") return (s.match(/\b[0-9a-f]{40}\b/i) || s.match(/\b[0-9a-f]{7,40}\b/i) || [s]).at(0);
+    const versions = s.match(/\b\d+(?:\.\d+){1,3}\b/g);
+    if (versions) return versions[0];
+    return s.replace(/^(?:rustc|go version go|Python|PHP|GHC|The Glorious Glasgow Haskell Compilation System)\s*/i, "");
+  }
   let sortKey = "score";
   const bar = (v, cls) => el("span", { class: "score" }, el("span", { class: "bar " + cls }, (() => { const i = el("i"); i.style.width = v + "%"; return i; })()), el("span", { class: "num", text: pct(v) }));
   function renderRanking() {
@@ -277,8 +288,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     t.replaceChildren();
     const cols = [["score", "Score", "Mean over every test"],
       ...Object.entries(CAT).map(([c, name]) => [c, name, "Mean over the " + name.toLowerCase() + " tests"]),
-      ["caught", "Caught before running", "Share of tests the compiler or checker refused"],
-      ["safe", "No silent failure", "Share of tests refused, run correctly or stopped with a clear error"]];
+      ["caught", "Caught before running", "Share of tests the compiler or checker refused"]];
     const head = el("tr", {}, el("th", { class: "rank", text: "#" }), el("th", { text: "Language" }));
     cols.forEach(([k, label, title], i) => {
       const b = el("button", { type: "button", "aria-pressed": String(sortKey === k), title, text: label + (sortKey === k ? " ↓" : "") });
@@ -287,11 +297,11 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     });
     t.append(el("thead", {}, head));
     const body = el("tbody");
-    const rows = [...D.languages].sort((a, b) => b[sortKey] - a[sortKey] || a.rank - b.rank);
+    const rows = [...visibleLanguages()].sort((a, b) => b[sortKey] - a[sortKey] || a.rank - b.rank);
     rows.forEach((L) => {
       const tr = el("tr", { "data-lang": L.id },
         el("td", { class: "rank", text: String(L.rank) }),
-        el("td", { class: "lang" }, L.name, el("span", { class: "ver", title: L.version, text: L.version })),
+        el("td", { class: "lang" }, L.name, el("span", { class: "ver", title: shortVersion(L.id, L.version), text: shortVersion(L.id, L.version) })),
         el("td", {}, bar(L.score, "")),
         ...cols.slice(1).map(([k]) => el("td", { class: "breakdown", text: pct(L[k]) })));
       body.append(tr);
@@ -322,17 +332,19 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
 
   const SHORT = NAME;
   const grids = document.getElementById("grids");
+  function renderGrids() {
+  grids.replaceChildren();
   Object.keys(CAT).forEach((c) => {
     const list = probs.filter((p) => p.category === c);
     const t = el("table", { class: "grid" });
     const head = el("tr", {}, el("th", { class: "pname", text: CAT[c] + " (" + list.length + ")" }));
-    D.languages.forEach((L) => head.append(el("th", { class: "lname", text: L.name })));
+    visibleLanguages().forEach((L) => head.append(el("th", { class: "lname", text: L.name })));
     const body = el("tbody");
     list.forEach((p) => {
       const tr = el("tr", {}, el("th", { class: "pname", scope: "row" },
         el("button", { type: "button", class: "plink", text: p.title })));
       tr.querySelector(".plink").addEventListener("click", () => openProblem(p.id, null, true));
-      D.languages.forEach((L) => {
+      visibleLanguages().forEach((L) => {
         const r = L.results[p.id] || { o: "MISSING" };
         const designed = (p.by_design || []).includes(L.id);
         const b = el("button", { type: "button", class: "gcell o-" + r.o + (designed ? " by-design" : ""),
@@ -345,7 +357,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
       body.append(tr);
     });
     const foot = el("tr", {}, el("th", { class: "pname", text: CAT[c] + " score" }));
-    D.languages.forEach((L) => {
+    visibleLanguages().forEach((L) => {
       const can = list.filter((p) => L.results[p.id]?.o !== "INEXPRESSIBLE").length;
       foot.append(el("td", { class: "gscore", title: "Tests in this category the language can write; N/A scores 0" },
         pct(L[c]), el("span", { class: "gcan", text: can + " of " + list.length + " writable" })));
@@ -353,6 +365,8 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     t.append(el("thead", {}, head), body, el("tfoot", {}, foot));
     grids.append(el("div", { class: "scroll grid-wrap" }, t));
   });
+  }
+  renderGrids();
 
   const plist = document.getElementById("plist");
   const select = document.getElementById("problem-select");
@@ -390,7 +404,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     const t = el("table");
     t.append(el("thead", {}, el("tr", {}, el("th", { text: "Language" }), el("th", { text: "Outcome" }), el("th", { text: "Score" }), el("th", { text: "Printed" }), el("th", { text: "Compiler warning" }), el("th", { text: "Evidence" }))));
     const tb = el("tbody");
-    [...D.languages].sort((a, b) => (b.results[p.id]?.s ?? -1) - (a.results[p.id]?.s ?? -1) || a.rank - b.rank).forEach((L) => {
+    visibleLanguages().sort((a, b) => (b.results[p.id]?.s ?? -1) - (a.results[p.id]?.s ?? -1) || a.rank - b.rank).forEach((L) => {
       const r = L.results[p.id] || { o: "MISSING", s: 0 };
       const rss = r.rss != null && p.kind === "leak" ? " · " + r.rss + " MB peak" : "";
       tb.append(el("tr", { class: L.id === langId ? "hl" : "", id: "row-" + L.id },
@@ -411,7 +425,6 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
   // Compare: up to five languages side by side, with each test's detail for just those languages.
   const CMP_MAX = 5;
   const byRank = [...D.languages].sort((a, b) => a.rank - b.rank);
-  let chosen = [];
   let onlyDiffer = false;
   const picker = document.getElementById("cmp-picker");
   const cmpBody = document.getElementById("cmp-body");
@@ -419,6 +432,9 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     const b = el("button", { type: "button", "aria-pressed": "false", text: L.name });
     b.addEventListener("click", () => {
       chosen = chosen.includes(L.id) ? chosen.filter((x) => x !== L.id) : [...chosen, L.id].slice(0, CMP_MAX);
+      renderRanking();
+      renderGrids();
+      openProblem(select.value || probs[0].id, null, null);
       renderCompare(true);
     });
     picker.append(b);
@@ -461,7 +477,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     cmpBody.replaceChildren();
     const langs = chosen.map((id) => D.languages.find((L) => L.id === id)).filter(Boolean);
     if (!langs.length) {
-      cmpBody.append(el("p", { class: "muted", text: "No languages selected yet." }));
+      cmpBody.append(el("p", { class: "muted", text: "No languages selected. All languages are shown in the page data." }));
       return;
     }
     const tools = el("div", { class: "cmp-tools" }, el("span", { text: langs.length + " of " + CMP_MAX + " selected" }));
@@ -474,7 +490,7 @@ nav.top a { color: var(--muted); text-decoration: none; padding: 4px 0; border-b
     cmpBody.append(tools);
 
     const rows = [["Score", "score"], ...Object.entries(CAT).map(([c, name]) => [name, c]),
-      ["Caught before running", "caught"], ["No silent failure", "safe"]];
+      ["Caught before running", "caught"]];
     const sum = el("table", { class: "cmp-summary" });
     sum.append(el("thead", {}, el("tr", {}, el("th", { text: "" }), ...langs.map((L) => el("th", { text: L.name + " (#" + L.rank + ")" })))));
     const sb = el("tbody");

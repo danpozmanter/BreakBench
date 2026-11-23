@@ -35,9 +35,8 @@ reads the same in every language, and covers a mistake no other test covers.
 | Memory safety | 17 | The program reads or writes memory it does not own, or never frees it: use after free, out-of-bounds reads and writes, leaks, ... |
 | Concurrency | 10 | Threads or tasks interfere: a data race, a deadlock, a failure lost between threads, a wait for a worker that died, a blocking call that stalls asynchronous code, ... |
 
-The site breaks each language's score down by category, and reports two more shares: tests caught
-before running (refused by the compiler or checker) and tests with no silent failure (refused, run
-correctly or stopped with a clear error).
+The site breaks each language's score down by category, and reports the share of tests caught
+before running (refused by the compiler or checker).
 
 ### Outcomes
 

@@ -1,0 +1,963 @@
+{
+ "lang": "d",
+ "version": "LDC - the LLVM D compiler (1.43.0):",
+ "results": {
+  "null_deref": {
+   "outcome": "CRASH",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.6,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==18==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000010 (pc 0x5740f2be46b7 bp 0x7ffd78693790 sp 0x7ffd78693760 T0)\n==18==The signal is caused by a READ memory access.\n==18==Hint: address points to the zero page.\n    #0 0x5740f2be46b7  (/tmp/breakbench/null_deref/main/main+0x20d6b7) (BuildId: f465d419541b9627f27f22917ec0d3e0bae486f2)\n    #1 0x5740f2e24a3c  (/tmp/breakbench/null_deref/main/main+0x44da3c) (BuildId: f465d419541b9627f27f22917ec0d3e0bae486f2)\n    #2 0x5740f2e24861  (/tmp/breakbench/null_deref/main/main+0x44d861) (BuildId: f465d419541b9627f27f22917ec0d3e0bae486f2)\n    #3 0x5740f2e246cc  (/tmp/breakbench/null_deref/main/mai\n...\n2be4404  (/tmp/breakbench/null_deref/main/main+0x20d404) (BuildId: f465d419541b9627f27f22917ec0d3e0bae486f2)\n\n==18==Register values:\nrax = 0x0000000000000010  rbx = 0x00007ffd78693830  rcx = 0x00000f3ba2f96000  rdx = 0xf5f5f5f5f5f5f5f5  \nrdi = 0x0000000000000002  rsi = 0x00007ffd78693807  rbp = 0x00007ffd78693790  rsp = 0x00007ffd78693760  \n r8 = 0x0000000000000000   r9 = 0x00007fffffffff01  r10 = 0x00007fffffffff01  r11 = 0x0000000000000201  \nr12 = 0x0000000000000001  r13 = 0x0000000000000000  r14 = 0x00007ffd786938c8  r15 = 0x0000000000000002  \nAddressSanitizer can not provide additional info.\nSUMMARY: AddressSanitizer: SEGV (/tmp/breakbench/null_deref/main/main+0x20d6b7) (BuildId: f465d419541b9627f27f22917ec0d3e0bae486f2) \n==18==ABORTING"
+  },
+  "int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.6,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "outcome": "CRASH",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.6,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==36==ERROR: AddressSanitizer: FPE on unknown address 0x594a9036d52e (pc 0x594a9036d52e bp 0x7ffdb41fe230 sp 0x7ffdb41fe200 T0)\n    #0 0x594a9036d52e  (/tmp/breakbench/div_by_zero/main/main+0x20c52e) (BuildId: 7ab3b26de897241f954d2ff07217f84c3c396fb0)\n    #1 0x594a905ad8ac  (/tmp/breakbench/div_by_zero/main/main+0x44c8ac) (BuildId: 7ab3b26de897241f954d2ff07217f84c3c396fb0)\n    #2 0x594a905ad6d1  (/tmp/breakbench/div_by_zero/main/main+0x44c6d1) (BuildId: 7ab3b26de897241f954d2ff07217f84c3c396fb0)\n    #3 0x594a905ad53c  (/tmp/breakbench/div_by_zero/main/main+0x44c53c) (BuildId: 7ab3b26de897241f954d2ff07217f84c3c396fb0)\n    #4 0x594a9036d741  (/tmp/b\n...\n36d404  (/tmp/breakbench/div_by_zero/main/main+0x20c404) (BuildId: 7ab3b26de897241f954d2ff07217f84c3c396fb0)\n\n==36==Register values:\nrax = 0x0000000000000064  rbx = 0x00007ffdb41fe2d0  rcx = 0x00000e2943916000  rdx = 0x0000000000000000  \nrdi = 0x00000e28c391e004  rsi = 0x00007ffdb41fe2a7  rbp = 0x00007ffdb41fe230  rsp = 0x00007ffdb41fe200  \n r8 = 0x0000000000000000   r9 = 0x00007fffffffff01  r10 = 0x00007fffffffff01  r11 = 0x0000000000000201  \nr12 = 0x0000000000000001  r13 = 0x0000000000000000  r14 = 0x00007ffdb41fe368  r15 = 0x0000000000000002  \nAddressSanitizer can not provide additional info.\nSUMMARY: AddressSanitizer: FPE (/tmp/breakbench/div_by_zero/main/main+0x20c52e) (BuildId: 7ab3b26de897241f954d2ff07217f84c3c396fb0) \n==36==ABORTING"
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.6,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.6,
+   "secs": 0.0,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.6,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.6,
+   "secs": 0.0,
+   "stdout": "not less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "main.d(8): Error: function `add` is not callable using argument types `(string, int)`\n    writeln(add(raw, 3)); // BREAK!\n               ^\nmain.d(8):        cannot pass argument `raw` of type `string` to parameter `long a`\n    writeln(add(raw, 3)); // BREAK!\n                ^\nmain.d(3):        `main.add(long a, long b)` declared here\nlong add(long a, long b) { return a + b; }\n     ^"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "main.d(3): Error: function `main.grade` no `return exp;` or `assert(0);` at end of function\nstring grade(int score)\n       ^"
+  },
+  "non_exhaustive_match": {
+   "outcome": "REJECTED",
+   "message": "main.d(7): Error: `switch` statement without a `default`; use `final switch` or add `default: assert(0);` or add `default: break;`\n    switch (c)\n    ^"
+  },
+  "uninitialized_variable": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.6,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "missing_argument": {
+   "outcome": "REJECTED",
+   "message": "main.d(7): Error: function `area` is not callable using argument types `(int)`\n    writeln(area(3)); // BREAK!\n                ^\nmain.d(7):        too few arguments, expected 2, got 1\n    writeln(area(3)); // BREAK!\n                ^\nmain.d(3):        `main.area(int w, int h)` declared here\nint area(int w, int h) { return w * h; }\n    ^"
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "main.d(8): Error: no property `colour` for type `Config`\n    cfg.colour = \"red\"; // BREAK!\n       ^\nmain.d(3):        did you mean `color`?\nstruct Config { string color = \"blue\"; }\n                       ^"
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "main.d(7): Error: assignment cannot be used as a condition, perhaps `==` was meant?\n    if (x = 1) label = \"one\"; // BREAK!\n          ^"
+  },
+  "switch_fallthrough": {
+   "outcome": "REJECTED",
+   "message": "main.d(12): Error: switch case fallthrough - use 'goto case;' if intended\n        case 2:\n        ^"
+  },
+  "zero_is_falsy": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.6,
+   "secs": 0.0,
+   "stdout": "have 0",
+   "stderr": ""
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.6,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.6,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "std.conv.ConvException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d(2033): Unexpected 'a' when converting from type string to type int\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:2033 pure @safe int std.conv.toImpl!(int, immutable(char)[]).toImpl(immutable(char)[]) [0x5f2f8cae1858]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:214 pure @safe int std.conv.to!(int).to!(immutable(char)[]).to(immutable(char)[]) [0x5f2f8cae057c]\nmain.d:5 _Dmain [0x5f2f8cae0524]"
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "main.d(10): Error: cannot implicitly convert expression `dogs` of type `Dog[]` to `Animal[]`\n    Animal[] animals = dogs; // BREAK!\n                       ^"
+  },
+  "mutate_while_iterating": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.6,
+   "secs": 0.0,
+   "stdout": "1,2,3",
+   "stderr": ""
+  },
+  "self_deadlock": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.6,
+   "secs": 0.0,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.6,
+   "secs": 0.0,
+   "stdout": "3,3,3",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.6,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "std.file.FileException@std/file.d(840): /nonexistent/dir/out.txt: No such file or directory\n----------------\n??:? @trusted void std.file.writeImpl(scope const(char)[], scope const(char)*, scope const(void)[], bool) [0x5a5711df1def]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/file.d:745 @safe void std.file.write!(immutable(char)[]).write(immutable(char)[], const(void[])) [0x5a5711d15623]\nmain.d:3 void main.save(immutable(char)[]) [0x5a5711d154f8]\nmain.d:7 _Dmain [0x5a5711d156e4]"
+  },
+  "sort_with_nan": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "unordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "3.0",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "outcome": "REJECTED",
+   "message": "main.d(5): Error: octal literals `01234` are no longer supported, use `std.conv.octal!\"1234\"` instead\n    int zip = 01234; // BREAK!\n              ^"
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "REJECTED",
+   "message": "main.d(6): Error: `1 == 0` must be surrounded by parentheses when next to operator `&`\n    bool even = x & 1 == 0; // BREAK!\n                      ^"
+  },
+  "dangling_else": {
+   "outcome": "REJECTED",
+   "message": "main.d(10): Error: else is dangling, add { } after condition at main.d(8)\n    else // BREAK!\n    ^"
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "main.d(6): Error: semicolon needed to end declaration of `inside` instead of `<`\n    bool inside = 1 < x < 3; // BREAK!\n                        ^\nmain.d(6): Error: found `<` instead of statement\n    bool inside = 1 < x < 3; // BREAK!\n                        ^"
+  },
+  "lost_update_on_copy": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "injected",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "rss_mb": 14.8,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "path_join_escape": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "escaped",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "no match",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "main.d(8): Error: implicit string concatenation is error-prone and disallowed in D\n        \"carol\",\n        ^\nmain.d(8):        Use the explicit syntax instead (concatenating literals is `@nogc`): \"bob\" ~ \"carol\"\n        \"carol\",\n        ^"
+  },
+  "return_in_finally": {
+   "outcome": "REJECTED",
+   "message": "main.d(21): Error: `return` statements cannot be in `finally` bodies\n        return; // BREAK!\n        ^"
+  },
+  "return_line_break": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "std.conv.ConvException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d(2571): Unexpected 'x' when converting from type string to type long\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:2571 pure @safe long std.conv.parse!(long, immutable(char)[], 0).parse(scope ref immutable(char)[]) [0x63e7891b3629]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:2036 pure @safe long std.conv.toImpl!(long, immutable(char)[]).toImpl(immutable(char)[]) [0x63e7891b1997]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:214 pure @safe long std.conv.to!(long).to!(immutable(char)[]).to(immutable(char)[]) [0x63e7891b07ac]\nmain.d:10 [0x63e7891b0754]\n??:? thread_entryPoint [0x63e7893e6a60]\n<unknown dir>/<unknown file>:246 [0x63e78924e206]\n??:? [0x7d0bf9367db9]\n??:? __clone [0x7d0bf93fb393]"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.05,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "3 of",
+   "stderr": "std.format.FormatException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/format/write.d(544): Orphan format specifier: %d\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/exception.d:522 pure @safe noreturn std.exception.bailOut!(std.format.FormatException).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x5fcf9352265b]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/exception.d:442 pure @safe bool std.exception.enforce!(std.format.FormatException).enforce!(bool).enforce(bool, lazy const(char)[], immutable(char)[], ulong) [0x5fcf93515e96]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/format/write.d:544 @safe uint std.format.write.formattedWrite!(std.stdio.File.LockingTextWriter, char, int).formattedWrite(ref std.stdio.File.LockingTextWriter, scope const(char[]), int) [0x5fcf9351495d]\nmain.d:1774 @safe void std.stdio.File.writefln!(char, int).writefln(in char[], int) [0x5fcf935146fb]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/stdio.d:4492 @safe void std.stdio.writefln!(char, int).writefln(in char[], int) [0x5fcf935135f1]\nmain.d:7 _Dmain [0x5fcf93513501]"
+  },
+  "unsigned_subtraction": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "18446744073709551614",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "core.exception.RangeError@main.d(7): Range violation\n----------------\n??:? onRangeError [0x57c2b4669c68]\n??:? _d_arraybounds [0x57c2b4669ec7]\nmain.d:7 _Dmain [0x57c2b466a806]"
+  },
+  "mutable_hash_key": {
+   "outcome": "REJECTED",
+   "message": "main.d(7): Error: associative arrays can only be assigned values with immutable keys, not `int[]`\n    seen[key] = true; // CONTROL! seen[key.idup] = true;\n    ^"
+  },
+  "shadowed_assignment": {
+   "outcome": "REJECTED",
+   "message": "main.d(8): Error: variable `status` is shadowing variable `main.main.status`\n        string status = \"done\"; // CONTROL! status = \"done\";\n        ^\nmain.d(5):        declared here\n    string status = \"pending\";\n           ^"
+  },
+  "discarded_pure_result": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "core.exception.ArrayIndexError@main.d(7): index [18446744073709551615] is out of bounds for array of length 3\n----------------\n??:? onArrayIndexError [0x58d5e1075cfd]\n??:? _d_arraybounds_index [0x58d5e1075f5d]\nmain.d:7 _Dmain [0x58d5e1076724]"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "missing",
+   "stderr": ""
+  },
+  "use_after_close": {
+   "outcome": "TRAPPED",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "object.Exception@std/stdio.d(3176): Attempting to write to closed File\n----------------\n??:? pure @safe noreturn std.exception.bailOut!(Exception).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x5605bae94315]\n??:? pure @safe bool std.exception.enforce!().enforce!(bool).enforce(bool, lazy const(char)[], immutable(char)[], ulong) [0x5605bae9425d]\n??:? ref @trusted std.stdio.File.LockingTextWriter std.stdio.File.LockingTextWriter.__ctor(ref std.stdio.File) [0x5605baeca3af]\n??:? @safe std.stdio.File.LockingTextWriter std.stdio.File.lockingTextWriter() [0x5605baeca779]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/stdio.d:1667 @safe void std.stdio.File.write!(immutable(char)[]).write(immutable(char)[]) [0x5605badba784]\nmain.d:8 _Dmain [0x5605badba5ee]"
+  },
+  "dead_store": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "unbalanced",
+   "stderr": "worker failed: crash mid-update"
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "core.exception.ArrayIndexError@main.d(13): index [4] is out of bounds for array of length 4\n----------------\n??:? onArrayIndexError [0x5e878feebcfd]\n??:? _d_arraybounds_index [0x5e878feebf5d]\nmain.d:13 _Dmain [0x5e878feec6dc]"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "core.exception.ArrayIndexError@main.d(13): index [4] is out of bounds for array of length 4\n----------------\n??:? onArrayIndexError [0x5fee85d1acfd]\n??:? _d_arraybounds_index [0x5fee85d1af5d]\nmain.d:13 _Dmain [0x5fee85d1b6d1]"
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "outcome": "REJECTED",
+   "message": "main.d(6): Error: returning `& local` escapes a reference to local variable `local`\n    return &local; // BREAK!\n           ^"
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 18.2,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==2588==ERROR: AddressSanitizer: stack-overflow on address 0x7ffc9b5d8ff8 (pc 0x60fabb0984d8 bp 0x7ffc9b5d9000 sp 0x7ffc9b5d8ff0 T0)\n    #0 0x60fabb0984d8  (/tmp/breakbench/stack_overflow/main/main+0x20d4d8) (BuildId: 659088464138f625d1f5b1107b0dc067b581cb3b)\n    #1 0x60fabb0984f7  (/tmp/breakbench/stack_overflow/main/main+0x20d4f7) (BuildId: 659088464138f625d1f5b1107b0dc067b581cb3b)\n    #2 0x60fabb0984f7  (/tmp/breakbench/stack_overflow/main/main+0x20d4f7) (BuildId: 659088464138f625d1f5b1107b0dc067b581cb3b)\n    #3 0x60fabb0984f7  (/tmp/breakbench/stack_overflow/main/main+0x20d4f7) (BuildId: 659088464138f625d1f5b1107b0dc067b581cb3b)\n    #4 0x60fa\n...\nin/main+0x20d4f7) (BuildId: 659088464138f625d1f5b1107b0dc067b581cb3b)\n    #243 0x60fabb0984f7  (/tmp/breakbench/stack_overflow/main/main+0x20d4f7) (BuildId: 659088464138f625d1f5b1107b0dc067b581cb3b)\n    #244 0x60fabb0984f7  (/tmp/breakbench/stack_overflow/main/main+0x20d4f7) (BuildId: 659088464138f625d1f5b1107b0dc067b581cb3b)\n    #245 0x60fabb0984f7  (/tmp/breakbench/stack_overflow/main/main+0x20d4f7) (BuildId: 659088464138f625d1f5b1107b0dc067b581cb3b)\n    #246 0x60fabb0984f7  (/tmp/breakbench/stack_overflow/main/main+0x20d4f7) (BuildId: 659088464138f625d1f5b1107b0dc067b581cb3b)\n\nSUMMARY: AddressSanitizer: stack-overflow (/tmp/breakbench/stack_overflow/main/main+0x20d4d8) (BuildId: 659088464138f625d1f5b1107b0dc067b581cb3b) \n==2588==ABORTING"
+  },
+  "error_path_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 366.1,
+   "secs": 12.46,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "concurrent_map_write": {
+   "outcome": "HANG",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "rss_mb": 14.8,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "reference_cycle_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 15.6,
+   "secs": 0.55,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "view_retention": {
+   "outcome": "LEAK",
+   "warned": false,
+   "run_warned": false,
+   "exit": 137,
+   "rss_mb": 3055.0,
+   "secs": 0.85,
+   "stdout": "",
+   "stderr": "Killed"
+  },
+  "huge_allocation": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "core.exception.OutOfMemoryError@core/internal/gc/impl/conservative/gc.d(531): Memory allocation failed\n----------------\n??:? onOutOfMemoryError [0x606813765d66]\n??:? nothrow void* core.internal.gc.impl.conservative.gc.ConservativeGC.runLocked!(core.internal.gc.impl.conservative.gc.ConservativeGC.mallocNoSync(ulong, uint, ref ulong, const(TypeInfo)), core.internal.gc.impl.conservative.gc.mallocTime, core.internal.gc.impl.conservative.gc.numMallocs, immutable(ulong), uint, ulong, const(TypeInfo)).runLocked(ref immutable(ulong), ref uint, ref ulong, ref const(TypeInfo)) [0x6068139c7f49]\n??:? nothrow void* core.internal.gc.impl.conservative.gc.ConservativeGC.malloc(ulong, uint, const(TypeInfo)) [0x6068139c7d9c]\n??:? _d_newarrayU [0x6068139a841b]\n??:? _d_newarrayT [0x6068139a8462]\nmain.d:6 _Dmain [0x606813766540]"
+  },
+  "fd_leak": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 44.8,
+   "secs": 0.02,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "std.variant.VariantException@std/variant.d(1908): Variant: attempting to use incompatible types int and immutable(char)[]\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/variant.d:937 inout @property inout(immutable(char)[]) std.variant.VariantN!(32uL).VariantN.get!(immutable(char)[]).get() [0x5c99e6937b1d]\nmain.d:6 _Dmain [0x5c99e69375b1]"
+  },
+  "format_string": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "std.format.FormatException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/format/write.d(544): Orphan format specifier: %s\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/exception.d:522 pure @safe noreturn std.exception.bailOut!(std.format.FormatException).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x604cd894632b]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/exception.d:442 pure @safe bool std.exception.enforce!(std.format.FormatException).enforce!(bool).enforce(bool, lazy const(char)[], immutable(char)[], ulong) [0x604cd8939e36]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/format/write.d:544 @safe uint std.format.write.formattedWrite!(std.stdio.File.LockingTextWriter, char).formattedWrite(ref std.stdio.File.LockingTextWriter, scope const(char[])) [0x604cd8938978]\nmain.d:1774 @safe void std.stdio.File.writefln!(char).writefln(in char[]) [0x604cd893872f]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/stdio.d:4492 @safe void std.stdio.writefln!(char).writefln(in char[]) [0x604cd8937635]\nmain.d:5 _Dmain [0x604cd8937524]"
+  },
+  "deep_structure_release": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 43.7,
+   "secs": 0.04,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "abandoned_worker_leak": {
+   "outcome": "LEAK",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 2649.1,
+   "secs": 20.45,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "main.d(6): Error: cannot modify `immutable` expression `greeting[0]`\n    greeting[0] = 'j'; // CONTROL! greeting = \"j\" ~ greeting[1 .. $];\n            ^"
+  },
+  "complete_init": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "newtype": {
+   "outcome": "REJECTED",
+   "message": "main.d(14): Error: function `main.Meters.opBinary!\"+\".opBinary(Meters o) const` is not callable using argument types `(Seconds)`\n    auto wrong = Meters(2) + Seconds(3); // BREAK!\n                       ^\nmain.d(14):        cannot pass argument `Seconds(3.0)` of type `Seconds` to parameter `Meters o`\n    auto wrong = Meters(2) + Seconds(3); // BREAK!\n                                    ^\nmain.d(6):        `opBinary` defined here\n    Meters opBinary(string op : \"+\")(Meters o) const { return Meters(v + o.v); }\n           ^"
+  },
+  "strong_enum": {
+   "outcome": "REJECTED",
+   "message": "main.d(18): Error: function `name` is not callable using argument types `(int)`\n    writeln(name(7)); // BREAK!\n                ^\nmain.d(18):        cannot pass argument `7` of type `int` to parameter `Color c`\n    writeln(name(7)); // BREAK!\n                 ^\nmain.d(5):        `main.name(Color c)` declared here\nstring name(Color c)\n       ^"
+  },
+  "override_check": {
+   "outcome": "REJECTED",
+   "message": "main.d(11): Error: function `string main.Circle.descibe()` does not override any function\n    override string descibe() { return \"circle\"; } // BREAK!\n                    ^\nmain.d(5):        did you mean to override `string main.Shape.describe()`?\n    string describe() { return \"shape\"; }\n           ^"
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "before",
+   "stderr": "core.exception.AssertError@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/typecons.d(4128): Called `get' on null Nullable!int.\n----------------\n??:? _d_assert_msg [0x5df340cd0b33]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/typecons.d:4128 inout pure nothrow ref @property @nogc @safe inout(int) std.typecons.Nullable!(int).Nullable.get() [0x5df340aa8c6a]\nmain.d:9 _Dmain [0x5df340aa87e5]"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "hello,",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "core.exception.AssertError@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/algorithm/searching.d(1451): r is an empty range\n----------------\n??:? _d_assert_msg [0x593d45d6bde3]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/algorithm/searching.d:1451 pure nothrow @nogc @safe long std.algorithm.searching.extremum!(std.algorithm.searching.__lambda_L3919_C30, \"a > b\", long[]).extremum(long[]) [0x593d45b468a5]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/algorithm/searching.d:3922 pure nothrow @nogc @safe long std.algorithm.searching.maxElement!(std.algorithm.searching.__lambda_L3919_C30, long[]).maxElement(long[]) [0x593d45b3ed8c]\nmain.d:6 _Dmain [0x593d45b3e537]"
+  },
+  "readonly_param": {
+   "outcome": "REJECTED",
+   "message": "main.d(5): Error: cannot modify `const` expression `xs[0]`\n    xs[0] = 9; // BREAK!\n      ^"
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "REJECTED",
+   "message": "main.d(6): Error: cannot implicitly convert expression `300` of type `int` to `ubyte`\n    ubyte tooBig = 300; // BREAK!\n                   ^"
+  },
+  "no_implicit_conversion": {
+   "outcome": "REJECTED",
+   "message": "main.d(7): Error: cannot implicitly convert expression `big` of type `long` to `int`\n    int wrong = big; // BREAK!\n                ^"
+  },
+  "generic_constraint": {
+   "outcome": "REJECTED",
+   "message": "/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/functional.d-mixin-227(227): Error: no operator `<` for type `Point`\na < b\n  ^\nmain.d(4):        perhaps overload it with `int opCmp(Point other) const {}`\nstruct Point { int x; int y; }\n^\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/algorithm/sorting.d(1961): Error: template instance `std.functional.binaryFun!(\"a < b\", \"a\", \"b\").binaryFun!(Point, Point)` error instantiating\n    alias LessRet = typeof(lessFun(r.front, r.front));    // instantiate lessFun\n                                  ^\nmain.d(10):        instantiated from here: `sort!(\"a < b\", SwapStrategy.unstable, Point[])`\n    auto ps = [Point(1, 2)]; ps.sort(); // BREAK!\n                                    ^\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/algorithm/sorting.d(1963):        while evaluating `static assert` argument `\"The return type of the template argument 'less' when used with the binaryFun!less template\" ~ \" must be a bool. This is not the case, the returned type is '\" ~ LessRet.stringof ~ \"'\"`\n    static assert(is(LessRet == bool), \"The return type of the template\"\n    ^"
+  },
+  "lossy_int_to_float": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "9007199254740992",
+   "stderr": ""
+  },
+  "const_index_bounds": {
+   "outcome": "REJECTED",
+   "message": "main.d(7): Error: array index 5 is out of bounds `table[0 .. 3]`\n    writeln(table[5]); // BREAK!\n            ^\nmain.d(7): Error: template `writeln` is not callable using argument types `!()(int)`\n    writeln(table[5]); // BREAK!\n           ^\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/stdio.d(4260):        Candidate is: `writeln(T...)(T args)`\nvoid writeln(T...)(T args)\n     ^"
+  },
+  "const_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "-8985944073709551616",
+   "stderr": ""
+  },
+  "racy_counter": {
+   "outcome": "SILENT",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "1039457",
+   "stderr": ""
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "rss_mb": 14.8,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.51,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "unreachable_code": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "ok",
+   "stderr": ""
+  },
+  "nan_key": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "missing",
+   "stderr": ""
+  },
+  "checked_interpolation": {
+   "outcome": "REJECTED",
+   "message": "main.d-mixin-7(7): Error: undefined identifier `nmae`, did you mean variable `name`?\nnmae\n^"
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "REJECTED",
+   "message": "main.d(12): Error: duplicate `case \"circle\"` in `switch` statement\nstring bad(string s) { switch (s) { case \"circle\": return \"circle\"; case \"circle\": return \"again\"; default: return \"other\"; } } // BREAK!\n                                                                    ^"
+  },
+  "duplicate_key": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "char_arithmetic": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "98",
+   "stderr": ""
+  },
+  "comparison_statement": {
+   "outcome": "REJECTED",
+   "message": "main.d(7): Error: the result of the equality expression `count == 5` is discarded\n    count == 5; // BREAK!\n          ^"
+  },
+  "structural_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "hash_matches_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "REJECTED",
+   "message": "main.d(7): Error: mismatched array lengths, 4 and 3\n    int[4] shortTable = [10, 20, 30]; // BREAK!\n           ^"
+  },
+  "required_names": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "4 3",
+   "stderr": ""
+  },
+  "enum_from_int": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "before\ninvalid",
+   "stderr": ""
+  },
+  "increment_in_expression": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "bitwise_on_bool": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "core.exception.ArrayIndexError@main.d(6): index [0] is out of bounds for array of length 0\n----------------\n??:? onArrayIndexError [0x5dd89630ecfd]\n??:? _d_arraybounds_index [0x5dd89630ef5d]\nmain.d:6 _Dmain [0x5dd89630f570]"
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "main.d(8): Error: cannot modify `immutable` expression `c.port`\n    c.port = 1; // BREAK!\n    ^"
+  },
+  "bool_condition": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "rss_mb": 14.8,
+   "secs": 0.0,
+   "stdout": "different",
+   "stderr": ""
+  },
+  "contracts": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "before",
+   "stderr": "core.exception.AssertError@main.d(4): Assertion failure\n----------------\n??:? _d_assert [0x57523c67c242]\nmain.d:4 int main.isqrt(int) [0x57523c45452a]\nmain.d:16 _Dmain [0x57523c45455b]"
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "rss_mb": 14.8,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "std.exception.ErrnoException@std/stdio.d(711): Could not close file `/dev/full' (No space left on device)\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/exception.d:522 @safe noreturn std.exception.bailOut!(std.exception.ErrnoException).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x63e55b160851]\n??:? @safe bool std.exception.enforce!(std.exception.ErrnoException).enforce!(bool).enforce(bool, lazy const(char)[], immutable(char)[], ulong) [0x63e55b23957d]\n??:? @trusted void std.stdio.File.detach() [0x63e55b26d9c1]\nmain.d:6 _Dmain [0x63e55b15f5db]"
+  }
+ }
+}
