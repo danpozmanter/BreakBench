@@ -134,6 +134,7 @@ td.chipcell > .chip { display: flex; width: 100%; box-sizing: border-box; height
 .grid tfoot th, .grid tfoot td { position: sticky; bottom: 0; background: var(--surface); border-top: 2px solid var(--line); }
 .grid tfoot th.pname { z-index: 3; }
 .gcan { display: block; font-weight: 400; font-size: 11px; color: var(--muted); }
+#details td.breakdown { white-space: nowrap; font-variant-numeric: tabular-nums; }
 .gscore { text-align: center; font-weight: 700; font-variant-numeric: tabular-nums; }
 .utag { display: inline-block; margin-left: 6px; padding: 0 5px; border: 1px solid var(--line); border-radius: 4px; font-size: 10.5px; font-weight: 600; color: var(--muted); white-space: nowrap; }
 .refs a { color: var(--accent); }
@@ -217,6 +218,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
 
   <div class="tabs" role="tablist" aria-label="Sections">
     <button type="button" role="tab" id="tab-leaderboard" aria-controls="leaderboard" aria-selected="true">Leaderboard</button>
+    <button type="button" role="tab" id="tab-details" aria-controls="details-panel" aria-selected="false" tabindex="-1">Details</button>
     <button type="button" role="tab" id="tab-tests" aria-controls="tests" aria-selected="false" tabindex="-1">Tests</button>
     <button type="button" role="tab" id="tab-scoring" aria-controls="scoring-panel" aria-selected="false" tabindex="-1">Scoring</button>
     <button type="button" role="tab" id="tab-missing" aria-controls="missing" aria-selected="false" tabindex="-1">Missing features</button>
@@ -224,8 +226,13 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   </div>
 
   <section role="tabpanel" id="leaderboard" aria-labelledby="tab-leaderboard">
-    <p class="muted">The score is the mean over the tests a language can express, as a percentage; every test counts once. It measures the language itself: its compiler and runtime with their own checks switched on, without linters, sanitizers or third-party checkers. Python (mypy) is an unranked example of what such a checker adds. Each category shows the points a language earned over the tests it ran, so a category it could only partly run shows how few tests stand behind it. Caught before running counts the tests refused by the compiler or prevented by design. Missing features counts the tests the language cannot express; they are left out of its score, not counted against it. Select a heading to sort.</p>
+    <p class="muted">The score is the mean over the tests a language can attempt, as a percentage; every test counts once. It measures the language itself: its compiler and runtime with their own checks switched on, without linters, sanitizers or third-party checkers. Python (mypy) is an unranked example of what such a checker adds. Language gaps counts the tests a language cannot attempt because it lacks a feature they need; they are left out of its score, not counted against it, and the Missing features tab lists them. The Details tab breaks the score down by category. Select a heading to sort.</p>
     <div class="scroll"><table id="ranking"></table></div>
+  </section>
+
+  <section role="tabpanel" id="details-panel" aria-labelledby="tab-details" hidden>
+    <p class="muted">Each category reads correct / attempted / total: the points a language earned (a refusal or correct run is a full point, a run-time stop half or a quarter), the tests it could attempt, and the tests in the category. Where attempted is below total, the language lacks a feature some of those tests need. Caught before running counts the tests refused by the compiler or prevented by design, over the tests attempted. Select a heading to sort.</p>
+    <div class="scroll"><table id="details"></table></div>
   </section>
 
   <section role="tabpanel" id="tests" aria-labelledby="tab-tests" hidden>
@@ -497,47 +504,56 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     if (versions) return versions[0];
     return s.replace(/^(?:rustc|go version go|Python|PHP|GHC|The Glorious Glasgow Haskell Compilation System)\s*/i, "");
   }
-  let sortKey = "score";
   // The example row has no rank; it sorts after every ranked language that ties with it.
   const rankOf = (L) => L.rank ?? D.languages.length + 1;
   const bar = (v, cls) => el("span", { class: "score" }, el("span", { class: "bar " + cls }, (() => { const i = el("i"); i.style.width = v + "%"; return i; })()), el("span", { class: "num", text: pct(v) }));
-  // A category reads as points earned over tests run, so a language that skips tests shows it.
-  const catCell = (L, c) => { const [got, run] = L.categories[c]; return el("span", { title: run ? (got / run * 100).toFixed(1) + "% of the tests run" : "No tests run" }, num(got) + " / " + run); };
+  const catTotal = (c) => probs.filter((p) => p.category === c).length;
+  // A category reads as points earned over tests attempted over tests in the category, so a
+  // language that cannot attempt every test shows how few stand behind its result.
+  const catCell = (L, c) => {
+    const [got, run] = L.categories[c];
+    return el("span", { title: run ? (got / run * 100).toFixed(1) + "% of the tests attempted" : "No tests attempted" }, num(got) + " / " + run + " / " + catTotal(c));
+  };
   const ratio = (L, k) => k === "score" ? L.score : k === "missing" ? L.missing
     : k === "caught" ? L.caught / Math.max(L.scored, 1) : (L.categories[k][1] ? L.categories[k][0] / L.categories[k][1] : -1);
-  function renderRanking() {
-    const t = document.getElementById("ranking");
+  // The name links to the language's homepage; the line below it to its source repository, where public.
+  const langCell = (L) => el("td", { class: "lang" }, L.homepage ? el("a", { class: "home", href: L.homepage, target: "_blank", rel: "noopener", title: L.name + " homepage", text: L.name }) : L.name,
+    L.example ? el("span", { class: "extag", text: "Example with a third-party checker, not ranked" }) : null,
+    el("span", { class: "ver", title: shortVersion(L.id, L.version) }, shortVersion(L.id, L.version),
+      L.repository ? el("a", { class: "src", href: L.repository, target: "_blank", rel: "noopener", title: L.name + " source repository", text: "source" }) : null));
+  const sortKeys = { ranking: "score", details: "score" };
+  // One sortable table of languages: each column is [key, heading, description, cell].
+  function renderTable(id, cols) {
+    const t = document.getElementById(id);
     t.replaceChildren();
-    const cols = [["score", "Score", "Mean over the tests the language can express; every test counts once"],
-      ...Object.entries(CAT).map(([c, name]) => [c, name, "Points earned over the " + name.toLowerCase() + " tests run"]),
-      ["caught", "Caught before running", "Tests refused by the compiler or prevented by design, over tests run"],
-      ["missing", "Missing features", "Tests the language cannot express; left out of its score, not counted against it"]];
     const head = el("tr", {}, el("th", { class: "rank", text: "#" }), el("th", { text: "Language" }));
     cols.forEach(([k, label, title], i) => {
-      const b = el("button", { type: "button", "aria-pressed": String(sortKey === k), title, text: label + (sortKey === k ? " \u2193" : "") });
-      b.addEventListener("click", () => { sortKey = k; renderRanking(); });
+      const on = sortKeys[id] === k;
+      const b = el("button", { type: "button", "aria-pressed": String(on), title, text: label + (on ? " \u2193" : "") });
+      b.addEventListener("click", () => { sortKeys[id] = k; renderTable(id, cols); });
       head.append(el("th", { class: i ? "breakdown" : "" }, b));
     });
     t.append(el("thead", {}, head));
     const body = el("tbody");
-    const rows = [...visibleLanguages()].sort((a, b) => ratio(b, sortKey) - ratio(a, sortKey) || rankOf(a) - rankOf(b));
-    rows.forEach((L) => {
-      const tr = el("tr", { "data-lang": L.id, class: L.example ? "example" : "" },
-        el("td", { class: "rank", text: L.example ? "-" : String(L.rank) }),
-        // The name links to the language's homepage; the line below it to its source repository, where public.
-        el("td", { class: "lang" }, L.homepage ? el("a", { class: "home", href: L.homepage, target: "_blank", rel: "noopener", title: L.name + " homepage", text: L.name }) : L.name,
-          L.example ? el("span", { class: "extag", text: "Example with a third-party checker, not ranked" }) : null,
-          el("span", { class: "ver", title: shortVersion(L.id, L.version) }, shortVersion(L.id, L.version),
-            L.repository ? el("a", { class: "src", href: L.repository, target: "_blank", rel: "noopener", title: L.name + " source repository", text: "source" }) : null)),
-        el("td", {}, bar(L.score, "")),
-        ...Object.keys(CAT).map((c) => el("td", { class: "breakdown" }, catCell(L, c))),
-        el("td", { class: "breakdown", text: L.caught + " / " + L.scored }),
-        el("td", { class: "breakdown" }, L.missing
-          ? el("a", { href: "#missing/" + L.id, title: "What " + L.name + " is missing", text: String(L.missing) })
-          : "0"));
-      body.append(tr);
+    const key = sortKeys[id];
+    [...visibleLanguages()].sort((a, b) => ratio(b, key) - ratio(a, key) || rankOf(a) - rankOf(b)).forEach((L) => {
+      body.append(el("tr", { "data-lang": L.id, class: L.example ? "example" : "" },
+        el("td", { class: "rank", text: L.example ? "-" : String(L.rank) }), langCell(L),
+        ...cols.map(([k, , , cell], i) => el("td", { class: i ? "breakdown" : "" }, cell(L)))));
     });
     t.append(body);
+  }
+  const gapsCell = (L) => L.missing
+    ? el("a", { href: "#missing/" + L.id, title: "What " + L.name + " is missing", text: String(L.missing) })
+    : "0";
+  function renderRanking() {
+    renderTable("ranking", [
+      ["score", "Score", "Mean over the tests the language can attempt; every test counts once", (L) => bar(L.score, "")],
+      ["missing", "Language gaps", "Tests the language cannot attempt, for lack of a feature; left out of its score, not counted against it", gapsCell]]);
+    renderTable("details", [
+      ["score", "Score", "Mean over the tests the language can attempt", (L) => pct(L.score)],
+      ...Object.entries(CAT).map(([c, name]) => [c, name, "Points earned / tests attempted / tests in " + name.toLowerCase(), (L) => catCell(L, c)]),
+      ["caught", "Caught before running", "Tests refused by the compiler or prevented by design, over tests attempted", (L) => L.caught + " / " + L.scored]]);
   }
   renderRanking();
 
@@ -563,7 +579,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
 
   const SHORT = NAME;
   const CMP_MAX = 5;
-  const TABS = { leaderboard: "leaderboard", tests: "tests", scoring: "scoring-panel", missing: "missing", notes: "notes" };
+  const TABS = { leaderboard: "leaderboard", details: "details-panel", tests: "tests", scoring: "scoring-panel", missing: "missing", notes: "notes" };
   const catIds = Object.keys(CAT);
   let tab = "leaderboard";
   let cat = catIds[0];

@@ -13,10 +13,11 @@ This is a general signal, and not meant to be an absolute ranking of these langu
 A language's score is its mean over the tests it can express, as a percentage; every test counts
 once. Tests marked N/A need a feature the language lacks (a mutex, threads, a JSON parser); they are
 left out of that language's mean, not counted against it, and the leaderboard shows their count as
-Missing features. Each category shows the points a language
-earned over the tests it ran (for example 3.5 / 6), so a category a language could only partly
-run shows how few tests stand behind it. The Missing features tab lists, for each language, what it
-lacks and which test that rules out.
+Language gaps. The leaderboard rolls up the score and the gaps; the Details tab shows each category
+as correct / attempted / total (for example 3.5 / 6 / 12: points earned, tests the language could
+attempt, tests in the category), so a category a language could only partly attempt shows how few
+tests stand behind it. The Missing features tab lists, for each language, what it lacks and which
+test that rules out.
 
 Each language runs its latest release, built from LangArena's Dockerfiles or the language's own
 images.
@@ -41,7 +42,7 @@ leaderboard as one unranked example of how much a checker adds.
 
 ## Tests
 
-120 tests in eight categories. Each has a CWE or CERT entry, a CVE, or appears in a language's
+120 tests in twelve categories. Each has a CWE or CERT entry, a CVE, or appears in a language's
 pitfall list, and covers a mistake no other test covers; `harness/problems.json` gives each test's
 reference and failure mode, and the site's Notes tab maps the failure modes to their tests. Each test is one scenario: the same steps, inputs and
 expected answer in every language, written the way that language teaches first. The code follows the
@@ -52,8 +53,12 @@ rules the mistake out, and where its documentation sent a program to another cal
 | Category | Tests | The bug |
 |---|---|---|
 | Numbers | 17 | Arithmetic or a conversion gives the wrong value: overflow, a narrowing cast, a negative remainder, float equality, a large integer read from JSON, ... |
-| Types and APIs | 28 | A value or call is used the wrong way: text passed as a number, a missing match case, a misspelled field, a list changed while looping over it, a copy taken for a reference, ... |
-| Syntax traps | 21 | The code reads as one thing and does another: an assignment in a condition, a dangling else, a missing comma, a stray return, a variable declared where one was meant to be set, ... |
+| Types and API misuse | 14 | A value or call does not fit what it is used with: text passed as a number, a misspelled field, meters added to seconds, an integer passed as an enum, a string cut mid-character, ... |
+| Aliasing and mutation | 11 | Shared or copied state changes when it should not, or does not when it should: a list changed while looping over it, a snapshot that is an alias, a closure that captures the loop variable, a copy updated instead of the original, ... |
+| Incomplete code | 3 | A path that ends without a result, a match missing a case, a variable read before it is set |
+| Operators | 8 | An operator that means something other than it looks: an assignment in a condition, & next to ==, 1 < x < 3, == on built strings or records, ... |
+| Control flow | 6 | Code that runs in a different order or path than it reads: a dangling else, a case without break, a return with its value on the next line, an unreachable statement, ... |
+| Names and literals | 7 | A name or literal that silently means something else: a new variable instead of an assignment, a missing comma, a repeated map key, a leading-zero number, ... |
 | Error handling | 7 | A failure goes unseen: an ignored result, a return in a cleanup block, a cleanup failure that hides the original error, a read that returns part of a message, a buffered file never flushed, a failed command treated as a success, ... |
 | Security | 9 | Input from outside takes control: command injection, a path that escapes its folder, a NUL byte that cuts a file name short, user text as a format string, an object restored from untrusted bytes, hidden or look-alike characters in source, ... |
 | Null safety | 11 | The program uses a value that may be missing as if it were there: a lookup that found nothing, a search that returned -1, a missing name printed as text, a check a later call undoes, an empty pointer passed on as an error, ... |

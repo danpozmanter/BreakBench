@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-24 17:54 UTC",
+ "generated": "2026-11-24 18:20 UTC",
  "date": "2026-11-24",
  "kinds": {
   "static": {
@@ -73,8 +73,12 @@
  },
  "categories": {
   "numbers": "Numbers",
-  "types": "Types and APIs",
-  "syntax": "Syntax traps",
+  "api": "Types and API misuse",
+  "aliasing": "Aliasing and mutation",
+  "incomplete": "Incomplete code",
+  "operators": "Operators",
+  "control_flow": "Control flow",
+  "names": "Names and literals",
   "errors": "Error handling",
   "security": "Security",
   "null": "Null safety",
@@ -218,7 +222,7 @@
   },
   {
    "id": "type_confusion",
-   "category": "types",
+   "category": "api",
    "kind": "static",
    "args": [
     "5"
@@ -235,7 +239,7 @@
   },
   {
    "id": "missing_return",
-   "category": "types",
+   "category": "incomplete",
    "kind": "static",
    "args": [
     "50"
@@ -252,7 +256,7 @@
   },
   {
    "id": "non_exhaustive_match",
-   "category": "types",
+   "category": "incomplete",
    "kind": "static",
    "args": [
     "2"
@@ -269,7 +273,7 @@
   },
   {
    "id": "uninitialized_variable",
-   "category": "types",
+   "category": "incomplete",
    "kind": "static",
    "args": [
     "1"
@@ -286,7 +290,7 @@
   },
   {
    "id": "misspelled_field",
-   "category": "types",
+   "category": "api",
    "kind": "static",
    "args": [],
    "expect": null,
@@ -301,7 +305,7 @@
   },
   {
    "id": "assign_in_condition",
-   "category": "syntax",
+   "category": "operators",
    "kind": "static",
    "args": [
     "5"
@@ -317,7 +321,7 @@
   },
   {
    "id": "switch_fallthrough",
-   "category": "syntax",
+   "category": "control_flow",
    "kind": "static",
    "args": [
     "1"
@@ -349,7 +353,7 @@
   },
   {
    "id": "string_equality",
-   "category": "syntax",
+   "category": "operators",
    "kind": "static",
    "args": [
     "c"
@@ -382,7 +386,7 @@
   },
   {
    "id": "covariant_array_write",
-   "category": "types",
+   "category": "api",
    "kind": "static",
    "args": [],
    "expect": "^woof$",
@@ -396,7 +400,7 @@
   },
   {
    "id": "mutate_while_iterating",
-   "category": "types",
+   "category": "aliasing",
    "kind": "dynamic",
    "args": [],
    "expect": "^1,3$",
@@ -424,7 +428,7 @@
   },
   {
    "id": "loop_closure_capture",
-   "category": "types",
+   "category": "aliasing",
    "kind": "static",
    "args": [],
    "expect": "^0,1,2$",
@@ -438,7 +442,7 @@
   },
   {
    "id": "snapshot_aliasing",
-   "category": "types",
+   "category": "aliasing",
    "kind": "static",
    "args": [],
    "expect": "^2$",
@@ -501,7 +505,7 @@
    "title": "A number written with a leading zero",
    "scenario": "The program writes a zip code as the literal 01234 and prints it.",
    "best": "1234, or the compiler refuses the literal. Reading it as octal and printing 668 fails.",
-   "category": "syntax",
+   "category": "names",
    "mode": "Code that reads one way and runs another",
    "refs": [
     "CERT DCL18-C"
@@ -515,7 +519,7 @@
    "title": "A list as a default argument",
    "scenario": "add_item(item, cart = an empty list) adds the item to the cart and returns it. The program calls it twice without a cart and prints the second cart's length.",
    "best": "1: each call gets a fresh list. 2 means both calls share one list.",
-   "category": "types",
+   "category": "aliasing",
    "mode": "Unintended sharing or copying",
    "refs": [
     "Pitfall: mutable default argument (Python)"
@@ -529,14 +533,14 @@
    "title": "Using a lazy sequence twice",
    "scenario": "evens is a lazy filter of the numbers 1 to 6. The program sums evens, then counts evens, and prints both.",
    "best": "\"12 3\", or the compiler refuses the second use. \"12 0\" fails; an error earns half.",
-   "category": "types",
+   "category": "aliasing",
    "mode": "Unintended sharing or copying",
    "refs": [
     "Pitfall: an exhausted iterator or stream reused (Python generators, Java streams)"
    ]
   },
   {
-   "category": "syntax",
+   "category": "operators",
    "id": "bitwise_precedence",
    "kind": "static",
    "args": [
@@ -552,7 +556,7 @@
    ]
   },
   {
-   "category": "syntax",
+   "category": "control_flow",
    "id": "dangling_else",
    "kind": "static",
    "args": [
@@ -568,7 +572,7 @@
    ]
   },
   {
-   "category": "syntax",
+   "category": "operators",
    "id": "chained_comparison",
    "kind": "static",
    "args": [
@@ -584,7 +588,7 @@
    ]
   },
   {
-   "category": "types",
+   "category": "aliasing",
    "id": "lost_update_on_copy",
    "kind": "static",
    "args": [],
@@ -694,7 +698,7 @@
    ]
   },
   {
-   "category": "syntax",
+   "category": "names",
    "id": "missing_comma_concat",
    "kind": "static",
    "args": [],
@@ -722,7 +726,7 @@
    ]
   },
   {
-   "category": "syntax",
+   "category": "control_flow",
    "id": "return_line_break",
    "kind": "static",
    "args": [],
@@ -769,7 +773,7 @@
    ]
   },
   {
-   "category": "types",
+   "category": "api",
    "id": "format_arg_mismatch",
    "kind": "static",
    "args": [],
@@ -816,7 +820,7 @@
   },
   {
    "id": "mutable_hash_key",
-   "category": "types",
+   "category": "aliasing",
    "kind": "dynamic",
    "args": [],
    "expect": "^found$",
@@ -830,7 +834,7 @@
   },
   {
    "id": "shadowed_assignment",
-   "category": "syntax",
+   "category": "names",
    "kind": "static",
    "args": [
     "ok"
@@ -846,7 +850,7 @@
   },
   {
    "id": "discarded_pure_result",
-   "category": "types",
+   "category": "aliasing",
    "kind": "static",
    "args": [],
    "expect": "^ADA$",
@@ -860,7 +864,7 @@
   },
   {
    "id": "negative_index_wraps",
-   "category": "types",
+   "category": "api",
    "kind": "dynamic",
    "args": [
     "0"
@@ -877,7 +881,7 @@
   },
   {
    "id": "default_numeric_sort",
-   "category": "types",
+   "category": "api",
    "kind": "static",
    "args": [],
    "expect": "^1 9 10$",
@@ -891,7 +895,7 @@
   },
   {
    "id": "unrelated_type_lookup",
-   "category": "types",
+   "category": "api",
    "kind": "static",
    "args": [
     "20"
@@ -907,7 +911,7 @@
   },
   {
    "id": "dead_store",
-   "category": "syntax",
+   "category": "names",
    "kind": "static",
    "args": [
     "40"
@@ -937,7 +941,7 @@
   },
   {
    "id": "split_character",
-   "category": "types",
+   "category": "api",
    "kind": "dynamic",
    "args": [
     "2"
@@ -1217,7 +1221,7 @@
   },
   {
    "id": "complete_init",
-   "category": "types",
+   "category": "api",
    "kind": "static",
    "args": [],
    "expect": "^3$",
@@ -1231,7 +1235,7 @@
   },
   {
    "id": "newtype",
-   "category": "types",
+   "category": "api",
    "kind": "static",
    "args": [],
    "expect": null,
@@ -1246,7 +1250,7 @@
   },
   {
    "id": "strong_enum",
-   "category": "types",
+   "category": "api",
    "kind": "static",
    "args": [],
    "expect": null,
@@ -1261,7 +1265,7 @@
   },
   {
    "id": "override_check",
-   "category": "types",
+   "category": "api",
    "kind": "static",
    "args": [],
    "expect": "^circle$",
@@ -1340,7 +1344,7 @@
   },
   {
    "id": "readonly_param",
-   "category": "types",
+   "category": "aliasing",
    "kind": "static",
    "args": [],
    "expect": "^3$",
@@ -1354,7 +1358,7 @@
   },
   {
    "id": "exclusive_mutation",
-   "category": "types",
+   "category": "aliasing",
    "kind": "static",
    "args": [],
    "expect": "^100$",
@@ -1399,7 +1403,7 @@
   },
   {
    "id": "generic_constraint",
-   "category": "types",
+   "category": "api",
    "kind": "static",
    "args": [],
    "expect": null,
@@ -1523,7 +1527,7 @@
   },
   {
    "id": "unreachable_code",
-   "category": "syntax",
+   "category": "control_flow",
    "kind": "static",
    "args": [],
    "expect": "^ok\\nchecked$",
@@ -1537,7 +1541,7 @@
   },
   {
    "id": "checked_interpolation",
-   "category": "syntax",
+   "category": "names",
    "kind": "static",
    "args": [],
    "expect": null,
@@ -1552,7 +1556,7 @@
   },
   {
    "id": "evaluation_order",
-   "category": "syntax",
+   "category": "control_flow",
    "kind": "static",
    "args": [],
    "expect": "^1 2$",
@@ -1566,7 +1570,7 @@
   },
   {
    "id": "dominated_case",
-   "category": "syntax",
+   "category": "control_flow",
    "kind": "static",
    "args": [],
    "expect": "^circle$",
@@ -1580,7 +1584,7 @@
   },
   {
    "id": "duplicate_key",
-   "category": "syntax",
+   "category": "names",
    "kind": "static",
    "args": [],
    "expect": "^2$",
@@ -1622,7 +1626,7 @@
   },
   {
    "id": "comparison_statement",
-   "category": "syntax",
+   "category": "operators",
    "kind": "static",
    "args": [],
    "expect": "^5$",
@@ -1636,7 +1640,7 @@
   },
   {
    "id": "structural_equality",
-   "category": "syntax",
+   "category": "operators",
    "kind": "static",
    "args": [],
    "expect": "^equal$",
@@ -1650,7 +1654,7 @@
   },
   {
    "id": "array_literal_length",
-   "category": "syntax",
+   "category": "names",
    "kind": "static",
    "args": [],
    "expect": "^40$",
@@ -1664,7 +1668,7 @@
   },
   {
    "id": "enum_from_int",
-   "category": "types",
+   "category": "api",
    "kind": "dynamic",
    "args": [
     "7"
@@ -1680,7 +1684,7 @@
   },
   {
    "id": "bitwise_on_bool",
-   "category": "syntax",
+   "category": "operators",
    "kind": "static",
    "args": [],
    "expect": "^no$",
@@ -1694,7 +1698,7 @@
   },
   {
    "id": "readonly_field",
-   "category": "types",
+   "category": "aliasing",
    "kind": "static",
    "args": [],
    "expect": "^8080$",
@@ -1708,7 +1712,7 @@
   },
   {
    "id": "bool_condition",
-   "category": "syntax",
+   "category": "operators",
    "kind": "static",
    "args": [],
    "expect": "^same$",
@@ -1943,13 +1947,29 @@
      13.5,
      17
     ],
-    "types": [
-     25.5,
-     28
+    "api": [
+     12.5,
+     14
     ],
-    "syntax": [
-     19.5,
-     21
+    "aliasing": [
+     10,
+     11
+    ],
+    "incomplete": [
+     3,
+     3
+    ],
+    "operators": [
+     7.5,
+     8
+    ],
+    "control_flow": [
+     6,
+     6
+    ],
+    "names": [
+     6,
+     7
     ],
     "errors": [
      6.5,
@@ -3018,13 +3038,29 @@
      9.25,
      16
     ],
-    "types": [
-     26.0,
-     28
+    "api": [
+     13.0,
+     14
     ],
-    "syntax": [
-     15.5,
-     21
+    "aliasing": [
+     10,
+     11
+    ],
+    "incomplete": [
+     3,
+     3
+    ],
+    "operators": [
+     7.5,
+     8
+    ],
+    "control_flow": [
+     4,
+     6
+    ],
+    "names": [
+     4,
+     7
     ],
     "errors": [
      3,
@@ -4022,13 +4058,29 @@
      11.0,
      17
     ],
-    "types": [
-     25.5,
-     28
+    "api": [
+     12.5,
+     14
     ],
-    "syntax": [
-     16.5,
-     21
+    "aliasing": [
+     10,
+     11
+    ],
+    "incomplete": [
+     3,
+     3
+    ],
+    "operators": [
+     8,
+     8
+    ],
+    "control_flow": [
+     4,
+     6
+    ],
+    "names": [
+     4.5,
+     7
     ],
     "errors": [
      5.5,
@@ -5047,13 +5099,29 @@
      13.0,
      17
     ],
-    "types": [
-     20.0,
-     27
+    "api": [
+     11.0,
+     13
     ],
-    "syntax": [
-     18.5,
-     20
+    "aliasing": [
+     7,
+     11
+    ],
+    "incomplete": [
+     2,
+     3
+    ],
+    "operators": [
+     7.5,
+     8
+    ],
+    "control_flow": [
+     6,
+     6
+    ],
+    "names": [
+     5,
+     6
     ],
     "errors": [
      5.5,
@@ -6049,13 +6117,29 @@
      8.5,
      16
     ],
-    "types": [
-     23.5,
-     28
+    "api": [
+     11.5,
+     14
     ],
-    "syntax": [
-     15.5,
-     20
+    "aliasing": [
+     9,
+     11
+    ],
+    "incomplete": [
+     3,
+     3
+    ],
+    "operators": [
+     8,
+     8
+    ],
+    "control_flow": [
+     4,
+     6
+    ],
+    "names": [
+     3.5,
+     6
     ],
     "errors": [
      5.0,
@@ -7085,13 +7169,29 @@
      8.5,
      17
     ],
-    "types": [
-     24.0,
-     28
+    "api": [
+     12.0,
+     14
     ],
-    "syntax": [
-     15.5,
-     20
+    "aliasing": [
+     10,
+     11
+    ],
+    "incomplete": [
+     2.0,
+     3
+    ],
+    "operators": [
+     8,
+     8
+    ],
+    "control_flow": [
+     5,
+     6
+    ],
+    "names": [
+     2.5,
+     6
     ],
     "errors": [
      3.5,
@@ -8238,13 +8338,29 @@
      7.5,
      17
     ],
-    "types": [
-     21.5,
-     27
+    "api": [
+     11.5,
+     13
     ],
-    "syntax": [
-     15,
-     19
+    "aliasing": [
+     7,
+     11
+    ],
+    "incomplete": [
+     3,
+     3
+    ],
+    "operators": [
+     7,
+     8
+    ],
+    "control_flow": [
+     5,
+     6
+    ],
+    "names": [
+     3,
+     5
     ],
     "errors": [
      3,
@@ -9236,13 +9352,29 @@
      7.5,
      17
     ],
-    "types": [
-     21.5,
-     28
+    "api": [
+     11.5,
+     14
     ],
-    "syntax": [
-     19,
-     21
+    "aliasing": [
+     7,
+     11
+    ],
+    "incomplete": [
+     3,
+     3
+    ],
+    "operators": [
+     8,
+     8
+    ],
+    "control_flow": [
+     5,
+     6
+    ],
+    "names": [
+     6,
+     7
     ],
     "errors": [
      5,
@@ -10241,13 +10373,29 @@
      10.5,
      17
     ],
-    "types": [
-     22.0,
-     28
+    "api": [
+     11.5,
+     14
     ],
-    "syntax": [
-     16.5,
-     21
+    "aliasing": [
+     8,
+     11
+    ],
+    "incomplete": [
+     2.5,
+     3
+    ],
+    "operators": [
+     8,
+     8
+    ],
+    "control_flow": [
+     5,
+     6
+    ],
+    "names": [
+     3.5,
+     7
     ],
     "errors": [
      2.0,
@@ -11407,13 +11555,29 @@
      7,
      16
     ],
-    "types": [
-     22.5,
-     27
+    "api": [
+     11.5,
+     13
     ],
-    "syntax": [
-     12.5,
-     20
+    "aliasing": [
+     8,
+     11
+    ],
+    "incomplete": [
+     3,
+     3
+    ],
+    "operators": [
+     6.5,
+     8
+    ],
+    "control_flow": [
+     4,
+     6
+    ],
+    "names": [
+     2,
+     6
     ],
     "errors": [
      2.75,
@@ -12423,13 +12587,29 @@
      11.0,
      17
     ],
-    "types": [
-     19.0,
-     28
+    "api": [
+     10.5,
+     14
     ],
-    "syntax": [
-     16,
-     21
+    "aliasing": [
+     7.5,
+     11
+    ],
+    "incomplete": [
+     1,
+     3
+    ],
+    "operators": [
+     8,
+     8
+    ],
+    "control_flow": [
+     4,
+     6
+    ],
+    "names": [
+     4,
+     7
     ],
     "errors": [
      4.5,
@@ -13479,13 +13659,29 @@
      8,
      17
     ],
-    "types": [
-     17,
-     28
+    "api": [
+     8,
+     14
     ],
-    "syntax": [
-     15,
-     21
+    "aliasing": [
+     6,
+     11
+    ],
+    "incomplete": [
+     3,
+     3
+    ],
+    "operators": [
+     4,
+     8
+    ],
+    "control_flow": [
+     5,
+     6
+    ],
+    "names": [
+     6,
+     7
     ],
     "errors": [
      3.5,
@@ -14458,13 +14654,29 @@
      9.5,
      17
     ],
-    "types": [
-     22.5,
-     28
+    "api": [
+     11.5,
+     14
     ],
-    "syntax": [
-     13.5,
-     21
+    "aliasing": [
+     8,
+     11
+    ],
+    "incomplete": [
+     3,
+     3
+    ],
+    "operators": [
+     7,
+     8
+    ],
+    "control_flow": [
+     3,
+     6
+    ],
+    "names": [
+     3.5,
+     7
     ],
     "errors": [
      2.0,
@@ -15514,13 +15726,29 @@
      9.5,
      17
     ],
-    "types": [
-     18.0,
-     28
+    "api": [
+     9.0,
+     14
     ],
-    "syntax": [
-     12.0,
-     21
+    "aliasing": [
+     6.0,
+     11
+    ],
+    "incomplete": [
+     3,
+     3
+    ],
+    "operators": [
+     6.5,
+     8
+    ],
+    "control_flow": [
+     3,
+     6
+    ],
+    "names": [
+     2.5,
+     7
     ],
     "errors": [
      3.0,
@@ -16683,13 +16911,29 @@
      12.0,
      17
     ],
-    "types": [
-     17.5,
-     28
+    "api": [
+     10.5,
+     14
     ],
-    "syntax": [
-     14.5,
-     21
+    "aliasing": [
+     5,
+     11
+    ],
+    "incomplete": [
+     2,
+     3
+    ],
+    "operators": [
+     5.5,
+     8
+    ],
+    "control_flow": [
+     4,
+     6
+    ],
+    "names": [
+     5,
+     7
     ],
     "errors": [
      2.0,
@@ -17771,13 +18015,29 @@
      9.5,
      17
     ],
-    "types": [
-     16.0,
-     27
+    "api": [
+     6.0,
+     13
     ],
-    "syntax": [
-     15.0,
-     20
+    "aliasing": [
+     8.5,
+     11
+    ],
+    "incomplete": [
+     1.5,
+     3
+    ],
+    "operators": [
+     6.5,
+     8
+    ],
+    "control_flow": [
+     6,
+     6
+    ],
+    "names": [
+     2.5,
+     6
     ],
     "errors": [
      2.0,
@@ -18947,13 +19207,29 @@
      12.5,
      17
     ],
-    "types": [
-     17.0,
-     28
+    "api": [
+     11.5,
+     14
     ],
-    "syntax": [
-     15.0,
-     21
+    "aliasing": [
+     2.5,
+     11
+    ],
+    "incomplete": [
+     3,
+     3
+    ],
+    "operators": [
+     5.5,
+     8
+    ],
+    "control_flow": [
+     6,
+     6
+    ],
+    "names": [
+     3.5,
+     7
     ],
     "errors": [
      3.0,
@@ -20061,13 +20337,29 @@
      5.5,
      16
     ],
-    "types": [
-     21.0,
-     28
+    "api": [
+     10.5,
+     14
     ],
-    "syntax": [
-     14.0,
-     21
+    "aliasing": [
+     8,
+     11
+    ],
+    "incomplete": [
+     2.5,
+     3
+    ],
+    "operators": [
+     6.5,
+     8
+    ],
+    "control_flow": [
+     4,
+     6
+    ],
+    "names": [
+     3.5,
+     7
     ],
     "errors": [
      2.0,
@@ -21149,13 +21441,29 @@
      8.25,
      17
     ],
-    "types": [
-     19.0,
-     28
+    "api": [
+     10.0,
+     14
     ],
-    "syntax": [
-     16.5,
-     21
+    "aliasing": [
+     6.5,
+     11
+    ],
+    "incomplete": [
+     2.5,
+     3
+    ],
+    "operators": [
+     7.5,
+     8
+    ],
+    "control_flow": [
+     4,
+     6
+    ],
+    "names": [
+     5.0,
+     7
     ],
     "errors": [
      2.0,
@@ -22352,13 +22660,29 @@
      8.5,
      17
     ],
-    "types": [
-     15.5,
-     27
+    "api": [
+     8.5,
+     13
     ],
-    "syntax": [
-     18.5,
-     20
+    "aliasing": [
+     5,
+     11
+    ],
+    "incomplete": [
+     2,
+     3
+    ],
+    "operators": [
+     7.5,
+     8
+    ],
+    "control_flow": [
+     6,
+     6
+    ],
+    "names": [
+     5,
+     6
     ],
     "errors": [
      4.5,
@@ -23368,13 +23692,29 @@
      8.0,
      17
     ],
-    "types": [
-     17.5,
-     28
+    "api": [
+     10.0,
+     14
     ],
-    "syntax": [
-     13.5,
-     19
+    "aliasing": [
+     5.5,
+     11
+    ],
+    "incomplete": [
+     2,
+     3
+    ],
+    "operators": [
+     6.5,
+     8
+    ],
+    "control_flow": [
+     4,
+     6
+    ],
+    "names": [
+     3,
+     5
     ],
     "errors": [
      6,
@@ -24496,13 +24836,29 @@
      8.5,
      17
     ],
-    "types": [
-     12.5,
-     28
+    "api": [
+     7.5,
+     14
     ],
-    "syntax": [
-     16,
-     20
+    "aliasing": [
+     4,
+     11
+    ],
+    "incomplete": [
+     1,
+     3
+    ],
+    "operators": [
+     8,
+     8
+    ],
+    "control_flow": [
+     5,
+     6
+    ],
+    "names": [
+     3,
+     6
     ],
     "errors": [
      2,
@@ -25513,13 +25869,29 @@
      5.5,
      16
     ],
-    "types": [
-     18.0,
-     28
+    "api": [
+     10.0,
+     14
     ],
-    "syntax": [
-     12.5,
-     20
+    "aliasing": [
+     5.0,
+     11
+    ],
+    "incomplete": [
+     3,
+     3
+    ],
+    "operators": [
+     5.5,
+     8
+    ],
+    "control_flow": [
+     4,
+     6
+    ],
+    "names": [
+     3.0,
+     6
     ],
     "errors": [
      2.5,
@@ -26614,13 +26986,29 @@
      3,
      17
     ],
-    "types": [
-     16.75,
-     28
+    "api": [
+     9.75,
+     14
     ],
-    "syntax": [
-     16.5,
-     21
+    "aliasing": [
+     5,
+     11
+    ],
+    "incomplete": [
+     2,
+     3
+    ],
+    "operators": [
+     6.5,
+     8
+    ],
+    "control_flow": [
+     5,
+     6
+    ],
+    "names": [
+     5,
+     7
     ],
     "errors": [
      5.0,
@@ -27667,13 +28055,29 @@
      11.5,
      17
     ],
-    "types": [
-     9.0,
-     27
+    "api": [
+     4.5,
+     13
     ],
-    "syntax": [
-     11.0,
-     21
+    "aliasing": [
+     4.5,
+     11
+    ],
+    "incomplete": [
+     0,
+     3
+    ],
+    "operators": [
+     5.5,
+     8
+    ],
+    "control_flow": [
+     3,
+     6
+    ],
+    "names": [
+     2.5,
+     7
     ],
     "errors": [
      3.0,
@@ -28861,13 +29265,29 @@
      8.0,
      16
     ],
-    "types": [
-     11.5,
-     28
+    "api": [
+     7.0,
+     14
     ],
-    "syntax": [
-     12.5,
-     21
+    "aliasing": [
+     4.0,
+     11
+    ],
+    "incomplete": [
+     0.5,
+     3
+    ],
+    "operators": [
+     5.5,
+     8
+    ],
+    "control_flow": [
+     3,
+     6
+    ],
+    "names": [
+     4.0,
+     7
     ],
     "errors": [
      3.5,
@@ -30094,13 +30514,29 @@
      7.0,
      17
     ],
-    "types": [
-     16.0,
-     28
+    "api": [
+     7.0,
+     14
     ],
-    "syntax": [
-     8,
-     21
+    "aliasing": [
+     8.0,
+     11
+    ],
+    "incomplete": [
+     1.0,
+     3
+    ],
+    "operators": [
+     4,
+     8
+    ],
+    "control_flow": [
+     2,
+     6
+    ],
+    "names": [
+     2,
+     7
     ],
     "errors": [
      2,
@@ -31304,13 +31740,29 @@
      12.0,
      17
     ],
-    "types": [
-     7.0,
-     28
+    "api": [
+     4.5,
+     14
     ],
-    "syntax": [
-     12.5,
-     21
+    "aliasing": [
+     2.0,
+     11
+    ],
+    "incomplete": [
+     0.5,
+     3
+    ],
+    "operators": [
+     5.5,
+     8
+    ],
+    "control_flow": [
+     4,
+     6
+    ],
+    "names": [
+     3.0,
+     7
     ],
     "errors": [
      3.0,
@@ -32394,13 +32846,29 @@
      2,
      16
     ],
-    "types": [
-     18.5,
-     28
+    "api": [
+     10.25,
+     14
     ],
-    "syntax": [
-     6,
-     20
+    "aliasing": [
+     8,
+     11
+    ],
+    "incomplete": [
+     0.25,
+     3
+    ],
+    "operators": [
+     4,
+     8
+    ],
+    "control_flow": [
+     2,
+     6
+    ],
+    "names": [
+     0,
+     6
     ],
     "errors": [
      4,
@@ -33485,13 +33953,29 @@
      7,
      17
     ],
-    "types": [
-     4.5,
-     27
+    "api": [
+     0,
+     13
     ],
-    "syntax": [
-     5.5,
-     21
+    "aliasing": [
+     4.5,
+     11
+    ],
+    "incomplete": [
+     0,
+     3
+    ],
+    "operators": [
+     2,
+     8
+    ],
+    "control_flow": [
+     1,
+     6
+    ],
+    "names": [
+     2.5,
+     7
     ],
     "errors": [
      3.5,
@@ -34555,13 +35039,29 @@
      2,
      16
     ],
-    "types": [
-     13,
-     26
-    ],
-    "syntax": [
+    "api": [
      5,
-     19
+     12
+    ],
+    "aliasing": [
+     8,
+     11
+    ],
+    "incomplete": [
+     0,
+     3
+    ],
+    "operators": [
+     3,
+     8
+    ],
+    "control_flow": [
+     2,
+     6
+    ],
+    "names": [
+     0,
+     5
     ],
     "errors": [
      4,

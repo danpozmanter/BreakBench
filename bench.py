@@ -90,8 +90,12 @@ def points(value):
 
 CATEGORIES = {
     "numbers": "Numbers",
-    "types": "Types and APIs",
-    "syntax": "Syntax traps",
+    "api": "Types and API misuse",
+    "aliasing": "Aliasing and mutation",
+    "incomplete": "Incomplete code",
+    "operators": "Operators",
+    "control_flow": "Control flow",
+    "names": "Names and literals",
     "errors": "Error handling",
     "security": "Security",
     "null": "Null safety",
