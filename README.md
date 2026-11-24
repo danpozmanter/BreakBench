@@ -10,14 +10,10 @@ This is a general signal, and not meant to be an absolute ranking of these langu
 
 "How much does a language help the programmer avoid production bugs?" is the primary driver.
 
-A language's score is its mean over the tests it can express, as a percentage; every test counts
-once. Tests marked N/A need a feature the language lacks (a mutex, threads, a JSON parser); they are
-left out of that language's mean, not counted against it, and the leaderboard shows their count as
-Language gaps. The leaderboard rolls up the score and the gaps; the Details tab shows each category
-as correct / attempted / total (for example 3.5 / 6 / 12: points earned, tests the language could
-attempt, tests in the category), so a category a language could only partly attempt shows how few
-tests stand behind it. The Missing features tab lists, for each language, what it lacks and which
-test that rules out.
+Score: the mean over the tests a language can attempt, as a percentage; every test counts once.
+N/A tests need a feature the language lacks (a mutex, threads, a JSON parser) and are left out, not
+counted against it; the leaderboard shows them as Language gaps. The Details tab shows each category
+as correct / attempted / total.
 
 Each language runs its latest release, built from LangArena's Dockerfiles or the language's own
 images.
@@ -65,12 +61,9 @@ rules the mistake out, and where its documentation sent a program to another cal
 | Memory safety | 15 | The program reads or writes memory it does not own, or keeps memory it dropped: use after free, out-of-bounds writes, records that keep each other alive, a size that overflows before the allocation, a running total that keeps every message alive, ... |
 | Concurrency | 12 | Threads or tasks interfere: a deadlock, a check-then-act race, a balance checked before an await and spent after it, an early return that skips the unlock, a wake-up sent before anyone waits, ... |
 
-Every test gives the same result on every run: the full bench runs three times, and a test whose
-result changes between runs in any language is removed. The site's Notes tab names the removed
-tests. This leaves a gap: bugs that show only on some runs, such as unsynchronized writes to shared
-memory, are not measured.
-
-Tests every language scores 0 on stay in the bench, labelled "No language passes".
+Any test whose result changes between runs, in any language, is removed (the bench runs three
+times). Gap: bugs that show only on some runs are not measured. Tests every language fails stay,
+labelled "No language passes".
 
 ### Outcomes
 
@@ -100,32 +93,22 @@ Tests every language scores 0 on stay in the bench, labelled "No language passes
 | TRAPPED only in the debug build | 0.25 |
 | SILENT, CHANCE, CORRUPT, CRASH, HANG, LEAK, ICE, UNTIED, UNFIXABLE, ERROR | 0 |
 
-Two things count: when the bug is caught, and whether it does harm. A refusal catches it before the
-program runs, so it never reaches production: 1 point. A clear stop in the shipped build reaches
-production, but does no harm past stopping the program: 0.5. A stop only the debug build makes can
-be found in testing, but the shipped build runs on past the bug and does the harm: 0.25. A wrong
-answer, corruption or a crash does the harm unseen: 0. A stop counts only if it comes before the
-program prints its result; once a wrong value is out, the harm is done.
+Points reflect when the bug is caught and whether it does harm: a refusal never ships (1); a clear
+stop in the shipped build stops the program (0.5); a stop only in the debug build lets the shipped
+build run on (0.25); a wrong answer, corruption or crash does the harm unseen (0). A stop counts only
+before the result is printed.
 
-Each program marks its bug. The control, the same program without the bug, drops each `BREAK!` line
-and uses each `CONTROL! <code>` line in its place. A compile error counts as a refusal only if the
-control compiles and one of the compiler's errors points at the bug: a marked line, a line within
-three of one, the line that opens the function, match or block holding one, or the declaration of a
-type a marked line names. A run that does not
-give the right answer counts only if the control, built and run the same way, gives the expected
-answer; otherwise the result is ERROR, a broken program rather than a property of the language.
+Each program marks its bug: dropping each `BREAK!` line and using each `CONTROL!` line gives the
+program without the bug. A compile error is a refusal only if that program compiles and an error
+points at the bug (a marked line, a line within three, an enclosing construct, or a type a marked
+line names). A failed run counts only if that program gives the expected answer; otherwise ERROR.
 
-The release build is the release profile a new project gets from the language's standard build
-tool, with none of the switches the scored build adds; where the tool asks for a choice (Zig, C3) it
-takes the mode that keeps the language's safety checks, and C and C++ take CMake's Release profile.
+Release builds use the standard build tool's release profile with no extra switches; Zig and C3 take
+their safe release mode; C and C++ use CMake Release.
 
-Every test counts once. The categories group results; they do not weight them, since their sizes
-reflect only how many tests were written for each.
+Categories group results; they do not weight them. Warnings never score (no pattern reliably ties a
+warning to the bug); the site shows compiler output, unscored.
 
-Warnings do not score. Matching a warning to a bug needs a pattern per test, and no pattern tells a
-warning about the bug from one that only shares its words. Some languages warn far better than
-others; that strength does not show in the score, so each result on the site shows the compiler's
-output from a build that succeeded, marked as not scored.
 
 ## Notes
 

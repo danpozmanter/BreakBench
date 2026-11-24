@@ -234,12 +234,12 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   </div>
 
   <section role="tabpanel" id="leaderboard" aria-labelledby="tab-leaderboard">
-    <p class="muted">The score is the mean over the tests a language can attempt, as a percentage; every test counts once. It measures the language itself: its compiler and runtime with their own checks switched on, without linters, sanitizers or third-party checkers. Python (mypy) is an unranked example of what such a checker adds. Language gaps counts the tests a language cannot attempt because it lacks a feature they need; they are left out of its score, not counted against it, and the Missing features tab lists them. The Details tab breaks the score down by category. Select a heading to sort.</p>
+    <p class="muted">Score: mean over the tests a language can attempt; every test counts once. It covers the compiler and runtime with their own checks on; no linters, sanitizers or third-party checkers. Python (mypy) is an unranked example of a checker. Language gaps: tests a language cannot attempt for lack of a feature, left out of its score (see Missing features). Details breaks the score down by category.</p>
     <div class="scroll"><table id="ranking"></table></div>
   </section>
 
   <section role="tabpanel" id="details-panel" aria-labelledby="tab-details" hidden>
-    <p class="muted">Each category reads correct / attempted / total: the points a language earned (a refusal or correct run is a full point, a run-time stop half or a quarter), the tests it could attempt, and the tests in the category. Where attempted is below total, the language lacks a feature some of those tests need. Caught before running counts the tests refused by the compiler or prevented by design, over the tests attempted. Select a heading to sort.</p>
+    <p class="muted">Each cell reads correct / attempted / total. Correct is points: a refusal or correct run earns 1, a run-time stop 0.5 or 0.25. Attempted below total means a missing feature. Caught before running counts refusals and design-prevented tests.</p>
     <div class="scroll"><table id="details"></table></div>
   </section>
 
@@ -253,23 +253,23 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   <section role="tabpanel" id="scoring-panel" aria-labelledby="tab-scoring" hidden>
     <div class="legend" id="legend"></div>
     <div class="scoring" id="scoring"></div>
-    <p class="muted">Two things count: when the bug is caught, and whether it does harm. A refusal catches it before the program runs, so it never reaches production: a full point. A clear stop in the build that ships reaches production but does no harm past stopping the program: half a point. A stop that only the debug build makes can be found in testing, but the shipped build runs on past the bug and does the harm: a quarter. A wrong answer, corruption, a crash or a hang does the harm unseen: nothing. A stop counts only if it comes before the program prints its result. The same holds for every test, compiled or dynamic, logic or memory.</p>
-    <p class="muted">Every test counts once. Giving each category an equal share was tried and dropped: categories differ in size only because of how many tests were written for each, so an equal share made one error-handling test weigh three and a half times one types test, made the ranking noisier, and rewarded a language for skipping tests in a small category. The categories group the results; they do not weight them.</p>
+    <p class="muted">Points reflect when the bug is caught and whether it does harm. A refusal stops it before it ships: 1. A clear stop in the shipped build: 0.5. A stop only in the debug build: 0.25. A wrong answer, corruption, crash or hang: 0. A stop counts only if it comes before the result is printed.</p>
+    <p class="muted">Every test counts once. Equal weight per category was tried and dropped: it made one error-handling test worth 3.5 types tests, added noise, and rewarded skipping tests in small categories. Categories group results; they do not weight them.</p>
     <p class="muted">A right answer earns its point only where the language defines the behavior that gave it. Where the language leaves that behavior undefined or unspecified, the answer is right by chance and earns nothing: another compiler, allocator or input can change it.</p>
     <p class="muted">Warnings do not score; the Notes tab says why.</p>
     <p class="muted">A compile error counts as a refusal only if the same program with the bug removed compiles.</p>
-    <p class="muted">N/A means the language lacks a feature the test needs (a mutex, threads, a JSON parser), so it cannot express the error. The test is left out of its mean, not counted against it, and the leaderboard shows the count as Missing features. Prevented by design means the language has the feature and its design rules the error out; it earns 1 point. UNFIXABLE means the error can be made but the fix cannot be expressed, and earns 0. A missing library call is replaced with what the language has when the scenario remains expressible.</p>
+    <p class="muted">N/A: the language lacks a feature the test needs (a mutex, threads, a JSON parser). The test is left out of its score. Prevented by design: the language has the feature and its design rules the error out; 1 point. Unfixable: the error can be made but not fixed; 0.</p>
   </section>
 
   <section role="tabpanel" id="missing" aria-labelledby="tab-missing" hidden>
-    <p class="muted">What each language lacks that a test needs. A missing feature means the program cannot be written, so the test is left out of that language's score: it is not counted against it, and it earns nothing either. Compare languages to see only them.</p>
+    <p class="muted">What each language lacks, and which tests that rules out. Those tests are left out of its score: no penalty, no credit.</p>
     <div id="missing-list" class="missing-list"></div>
   </section>
 
   <section role="tabpanel" id="notes" aria-labelledby="tab-notes" hidden>
-    <p class="muted">Every note on how BreakBench builds, runs and scores lives here; the README points to this tab.</p>
+    <p class="muted">How BreakBench builds, runs and scores.</p>
     <h3>What the score measures</h3>
-    <p class="muted" id="mode-note">The score measures the language itself: its compiler or interpreter, its runtime, and the switches they offer that make the compiler refuse more programs or the program stop on more bugs (checked arithmetic, a debug build, assertions, strict type checking). Linters, sanitizers and third-party checkers are left out, even where the language's project ships them. They raise a language's score, and how much each language gets from them varies, so counting them would measure tooling as much as language design. Python with mypy runs as one unranked example of what a checker adds.</p>
+    <p class="muted" id="mode-note">The score measures the language itself: compiler or interpreter, runtime, and the switches that make either refuse more or stop more (checked arithmetic, debug builds, assertions, strict typing). Linters, sanitizers and third-party checkers are left out, even when the language project ships them, since that would measure tooling. Python with mypy is one unranked example.</p>
     <h3>Builds</h3>
     <div class="scroll"><table class="notes-table"><thead><tr><th>Language</th><th>Build</th></tr></thead><tbody>
       <tr><td>C</td><td>debug build, <code>clang -O0 -g</code></td></tr>
@@ -312,46 +312,46 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     <h3>Checking each result</h3>
     <p class="muted">Every program marks its bug: <code>BREAK!</code> on a line the fix removes, <code>CONTROL! code</code> on a line the fix puts in. Dropping the one and swapping in the other gives the program without the bug.</p>
     <ul class="notes muted">
-      <li>A compile error is a refusal only when the program without the bug compiles and one of the compiler's errors points at the bug: a marked line, a line within three of one, the line that opens a function, match or block holding one (a missing return or case is reported where its construct begins), or the declaration of a type a marked line names (a method meant to implement an interface may be reported where its type claims the interface). A refusal whose errors all point elsewhere scores 0 as Refused Elsewhere. The evidence shows the compiler's full message.</li>
-      <li>A run that does not give the right answer counts only when the program without the bug, built and run the same way, gives the expected answer. Otherwise the stop, wrong answer or hang may come from a broken program, and the result is a Benchmark Error, scored 0 and fixed before results are published. Every such result has been checked this way, with two exceptions where the language offers no way to write the program without the bug: V's file calls discard the error from a write that fails when flushed, and Mojo's file layer stops on a failed assertion instead of raising an error, so neither can handle <code>lost_write_error</code>. Tests whose bug has no answer of its own (a missing value, a failed parse) give the program without the bug its own expected answer, such as "missing" or "invalid".</li>
-      <li>A build step that runs the program (Clojure compiles a file by evaluating it) and stops with a run-time error is judged as a run, not a refusal.</li>
+      <li>A compile error is a refusal only if the program without the bug compiles and an error points at the bug: a marked line, a line within three of one, the opening line of an enclosing function, match or block, or the declaration of a type a marked line names. Otherwise: Refused Elsewhere, 0.</li>
+      <li>A run that fails the test counts only if the program without the bug, built and run the same way, gives the expected answer; otherwise it is a Benchmark Error. Every such result is checked, except V and Mojo on <code>lost_write_error</code>: neither can detect the failed write (V discards the error; Mojo aborts on an assertion). Tests with no answer of their own give the fixed program one, such as "missing".</li>
+      <li>A build step that runs the program (Clojure) and stops with a run-time error is judged as a run.</li>
     </ul>
     <h3>Failure modes</h3>
-    <p class="muted">Each test covers one mistake, listed with its CWE or CERT entry, a CVE, or the language pitfall list it comes from. Related tests share a failure mode but differ in how the mistake is made, and so in which check can catch it. <code>missing_argument</code> was removed: it scored the same as <code>type_confusion</code> in every language, since one check catches both.</p>
+    <p class="muted">Each test covers one mistake, with its CWE, CERT, CVE or pitfall source. Related tests share a failure mode but differ in which check can catch them. <code>missing_argument</code> was removed: it scored like <code>type_confusion</code> in every language.</p>
     <div class="scroll"><table class="notes-table" id="modes"></table></div>
     <h3>Tests no language passes</h3>
-    <p class="muted">Every language scores 0 on these. They stay in the bench, labelled, as hazards none of these languages guards against: they lower every score alike and leave the order unchanged.</p>
+    <p class="muted">Every language scores 0 on these. They stay, labelled, as hazards no language here guards against.</p>
     <ul class="notes muted" id="unsolved-list"></ul>
     <h3>Warnings do not score</h3>
-    <p class="muted">A warning counts only if it is about the bug, and telling that takes a pattern per test matched against each compiler's wording. Broad words such as "unused" or "argument" also match warnings about something else, and no pattern can be certain. So warnings earn nothing, whether the build prints them or the running program does, and a result the language marks must-use counts only when ignoring it is an error. Some languages warn far better than others: in the last run that counted warnings, C and C++ with <code>-Weverything</code>, Scala, C#, Rust and Dart warned about the most of these bugs, some through tools now left out, while the build went on. That strength does not show in the score, so each result shows the compiler's output from a build that succeeded, marked as not scored.</p>
+    <p class="muted">Telling whether a warning is about the bug takes a pattern per test, and no pattern is reliable, so warnings never score. Some languages warn far better than others (C and C++ with <code>-Weverything</code>, Scala, C#, Rust, Dart); each result shows the compiler's output, unscored.</p>
     <h3>Removed tests</h3>
-    <p class="muted">A score that changes from run to run cannot be trusted, so any test whose result changes between runs, in any language, is removed. The full bench runs three times with six languages at once, and every result, including the release build's and the check of the program without the bug, must match. In the latest check all 3,720 results matched across three full runs, and the two tests changed afterwards matched across five more runs of every language under heavier load. These five tests did not: each ran many times and kept its worst run, so its score depended on the run count, the schedule and the machine, and a run could pass or fail by luck. They were removed rather than repeated.</p>
+    <p class="muted">Any test whose result changes between runs, in any language, is removed. The bench runs three times; all 3,720 results matched, and the two tests changed afterwards matched over five more runs under load. Removed, with the languages that varied (20 runs of one build):</p>
     <ul class="notes muted">
-      <li><code>concurrent_map_write</code>: threads write one map without a lock. Measured over 20 runs of one build, 11 languages varied: C, C3, C++ and Odin between a clear stop and a crash; D between a hang, a wrong answer and a stop; Java between a hang and a wrong answer; Kotlin between a wrong answer and a hang; Julia between a stop and a wrong answer; OCaml between a stop and a hang; and in the release build F# (stop or wrong answer) and Mojo (crash or hang).</li>
-      <li><code>racy_counter</code>: threads increment a counter without a lock. C# lost increments in 19 of 20 runs and none in one.</li>
-      <li><code>use_after_close</code>: a write through a freed C <code>FILE</code>. C varied between a stop, a crash and a wrong answer, and Nim between a stop and a crash, depending on what the allocator had placed there.</li>
-      <li><code>hash_matches_equality</code>: equal elements whose hashes differ. Swift seeds its hash per run, so the equal elements met in the set in 5 of 20 runs.</li>
-      <li><code>fd_leak</code>: files opened in a loop and never closed. Haskell closes an unreachable handle from a finalizer that runs on its own thread, so it ran out of descriptors in 8 of 20 runs and finished in 12.</li>
+      <li><code>concurrent_map_write</code>: unlocked writes to one map. 11 varied: C, C3, C++, Odin (stop or crash); D (hang, wrong answer or stop); Java, Kotlin (hang or wrong answer); Julia (stop or wrong answer); OCaml (stop or hang); F# and Mojo release builds.</li>
+      <li><code>racy_counter</code>: unlocked increments. C# lost increments in 19 of 20 runs.</li>
+      <li><code>use_after_close</code>: a write through a freed <code>FILE</code>. C and Nim varied with the allocator's state.</li>
+      <li><code>hash_matches_equality</code>: equal elements with different hashes. Swift seeds its hash per run: right in 5 of 20.</li>
+      <li><code>fd_leak</code>: files never closed. Haskell closes handles from a finalizer thread: ran out in 8 of 20.</li>
     </ul>
-    <p class="muted">The races they covered stay tested by <code>check_then_act</code>, <code>lock_order_deadlock</code>, <code>lost_wakeup</code> and <code>async_reentrancy</code>, which fix their schedules with rendezvous points or awaits so the same interleaving runs every time. That leaves a gap: BreakBench does not measure bugs that show only on some runs, such as unsynchronized writes to shared memory or a hash seeded per run, and a language that catches those only some of the time gets no credit for it.</p>
+    <p class="muted">Races stay tested by <code>check_then_act</code>, <code>lock_order_deadlock</code>, <code>lost_wakeup</code> and <code>async_reentrancy</code>, which force one interleaving. Gap: bugs that show only on some runs (unsynchronized writes, per-run hash seeds) are not measured.</p>
     <h3>Right by chance</h3>
-    <p class="muted">A right answer earns its point only where the language defines the behavior that gave it. A program marks the line whose behavior its language leaves undefined or unspecified, and a right answer there scores as right by chance, 0 points: another compiler, allocator or input can change it.</p>
+    <p class="muted">A right answer counts only where the language defines the behavior. Where it is undefined or unspecified, the program marks the line and a right answer scores 0 as right by chance.</p>
     <ul class="notes muted">
       <li>C and C++ <code>evaluation_order</code>: both standards leave the order of a call's arguments unspecified; clang happens to run them left to right.</li>
       <li>V <code>evaluation_order</code>: V emits one C call holding both arguments, so C's unspecified order applies.</li>
       <li>C3 <code>container_realloc_dangling</code>: the write through a pointer into the list's old buffer is undefined; the allocator happened to grow the list in place or leave the old buffer unused.</li>
       <li>Zig, Odin, C3 and Mojo state no order for a call's arguments in their references. Their compilers run them left to right, and they keep the point until a reference says otherwise.</li>
     </ul>
-    <p class="muted">Every other right answer in C, C++, Zig, Odin, C3, D, Mojo, Nim, V and Goose rests on behavior the language defines: a collector or ownership keeps the memory alive, a new buffer starts zeroed, a send copies the value, or a reference follows its element when the list grows (Goose).</p>
+    <p class="muted">Every other right answer in C, C++, Zig, Odin, C3, D, Mojo, Nim, V and Goose rests on defined behavior.</p>
     <h3>N/A and prevented by design</h3>
-    <p class="muted">A test is N/A only when the language cannot attempt the scenario: it lacks the construct the mistake is made with (a mutex, threads, a map literal, inheritance, string interpolation). Where the language can attempt it, the program is written the way the language allows and the run is scored: a design that rules the mistake out runs correctly. A missing feature is never credited as prevention: the lock tests are N/A without a mutex, <code>override_check</code> without inheritance, the thread tests without threads.</p>
-    <p class="muted">A marker skips the build and the run, so markers are kept to the cases where no program can be written, and each is reviewed like a result. Rust's mutex guard, Zig's error sets and Mojo's <code>parallelize</code> once carried a design marker; they now run as programs and earn their point from the run. The one design marker left is <code>unsafe_deserialization</code>, where the standard decoders build only the type the program declares, so no program can restore an object the data names; a language with no standard decoder is N/A there. <code>async_reentrancy</code> is N/A where the standard library and the language project's own libraries have no asynchronous tasks, since its threaded form is <code>check_then_act</code>; Kotlin runs it, and <code>blocking_in_async</code> and <code>unawaited_task</code>, with kotlinx.coroutines.</p>
+    <p class="muted">N/A only when the language lacks the construct the mistake needs (a mutex, threads, a map literal, inheritance, interpolation). Otherwise the program is written the way the language allows and scored; a design that rules the mistake out runs correctly. A missing feature never counts as prevention.</p>
+    <p class="muted">The one design marker left is <code>unsafe_deserialization</code>: standard decoders build only the declared type. A language with no standard decoder is N/A there. <code>async_reentrancy</code> is N/A without standard async tasks; its threaded form is <code>check_then_act</code>. Kotlin uses kotlinx.coroutines.</p>
     <h3>One scenario per test</h3>
-    <p class="muted">Each test is one program with one input, chosen where the bug shows, written the way the language teaches first. A right answer shows the language handled this program; it does not prove the pattern safe for every input, every schedule or every way of writing it. Two rules narrow that gap: a right answer counts only where the language defines the behavior, and each program takes the path the language teaches first, so a result does not rest on an idiom picked to help or hurt a language. The paths that cost points are listed below. A different idiom or input can still change a result, and the tests carry no boundary-value or alternate-idiom variants.</p>
+    <p class="muted">Each test is one program and one input, written the way the language teaches first. A right answer shows the language handled this program, not every input or idiom. The paths that cost points are listed below.</p>
     <h3>A stop after the answer</h3>
-    <p class="muted">A stop counts only if it comes before the program prints its result. A test may name its answer pattern; a run that prints a matching result and stops afterwards let the wrong value out, so it scores as a wrong answer. <code>empty_max</code> uses this for Nim, whose <code>max</code> of an empty sequence answers 0, so the program prints 1 before its <code>IndexDefect</code> stops it. <code>unsafe_deserialization</code>, <code>null_byte_path</code> and <code>child_exit_status</code> use it the same way: the restore hook ran, the secret was read, or the backup was reported done, before any stop.</p>
+    <p class="muted">A stop after the result is printed scores as a wrong answer: the wrong value already got out. Examples: Nim <code>empty_max</code> prints 1 before its <code>IndexDefect</code>; <code>unsafe_deserialization</code>, <code>null_byte_path</code> and <code>child_exit_status</code> do harm before any stop.</p>
     <h3>Release builds</h3>
-    <p class="muted">A program that stops at run time in the scored build is built again the way the language ships, and run again. If that build runs on past the bug, the stop scores 0.25 instead of 0.5. The release build is the release profile a new project gets from the language's standard build tool, with none of the switches the scored build adds. Where the tool has no default and asks for a choice (Zig's <code>--release=fast|safe|small</code>, C3's optimization levels), the release build takes the mode that keeps the language's safety checks, since the tool leaves that choice to the programmer. C and C++ have no standard build tool; they take CMake's Release profile.</p>
+    <p class="muted">A run-time stop is rebuilt and rerun the way the language ships. If that build runs past the bug, the stop scores 0.25. The release build is a new project's release profile from the standard build tool, with no extra switches; where the tool makes you choose (Zig, C3), the mode that keeps safety checks; C and C++ use CMake Release.</p>
     <div class="scroll"><table class="notes-table"><thead><tr><th>Language</th><th>Release build</th><th>What changes</th></tr></thead><tbody>
       <tr><td>C</td><td><code>-O3 -DNDEBUG</code> (CMake Release)</td><td>Assertions are off.</td></tr>
       <tr><td>C++</td><td><code>-O3 -DNDEBUG</code> (CMake Release)</td><td>Assertions and the library's bounds checks are off.</td></tr>
@@ -381,9 +381,9 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
       <tr><td>Haskell</td><td><code>-O1</code></td><td>Same checks.</td></tr>
     </tbody></table></div>
     <h3>What counts as standard</h3>
-    <p class="muted">Programs may use the language and its standard library; libraries the language's own project publishes, such as Rust's <code>regex</code>, Go's <code>golang.org/x/text</code>, Kotlin's kotlinx.serialization and kotlinx.coroutines, and Haskell's <code>aeson</code> (each <code>docker/</code> file lists them); ISO C and POSIX.1 for C and C++; the JVM or .NET class library on those platforms; and every package GHC ships, for Haskell. GNU and BSD extensions, third-party packages and FFI do not count. Each language runs the version a new project gets, at its latest release.</p>
+    <p class="muted">Allowed: the language and its standard library; libraries the language project itself publishes (Rust <code>regex</code>, Go <code>golang.org/x/text</code>, kotlinx, Haskell <code>aeson</code>); ISO C and POSIX for C and C++; the JVM or .NET class library; every package GHC ships. Not allowed: GNU/BSD extensions, third-party packages, FFI. Each language runs its latest release.</p>
     <h3>Where the docs point elsewhere</h3>
-    <p class="muted">When the documentation for the call a program would use sends that situation to another call, the program follows it. These programs use the path the docs point to. Keeping to the first-taught call would fail each test, for the reason given. Where the docs are silent, the first-taught call stands.</p>
+    <p class="muted">Where a call's documentation sends the situation to another call, the program follows it. Where the docs are silent, the first-taught call stands.</p>
     <div class="scroll"><table class="notes-table docs-table"><thead><tr><th>Language</th><th>Test</th><th>What the docs say</th><th>Path used</th><th>The first-taught call would fail</th></tr></thead><tbody>
       <tr><td>Python</td><td><code>unsafe_deserialization</code></td><td><a href="https://docs.python.org/3/library/pickle.html" target="_blank" rel="noopener"><code>pickle</code>: “json may be more appropriate if you are processing untrusted data”</a></td><td><code>json.loads</code></td><td><code>pickle.loads</code> runs the attacker's restore hook</td></tr>
       <tr><td>Ruby</td><td><code>unsafe_deserialization</code></td><td><a href="https://docs.ruby-lang.org/en/master/Marshal.html" target="_blank" rel="noopener"><code>Marshal</code>: “If you need to deserialize untrusted data, use JSON”</a></td><td><code>JSON.parse</code></td><td><code>Marshal.load</code> runs <code>marshal_load</code></td></tr>
@@ -400,7 +400,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
       <tr><td>C</td><td><code>parse_invalid_number</code></td><td><a href="https://man7.org/linux/man-pages/man3/atoi.3.html" target="_blank" rel="noopener"><code>atoi</code>: use <code>strtol</code> in new programs</a></td><td><code>strtol</code> with its end-pointer check</td><td><code>atoi</code> reads 12 and prints 13</td></tr>
     </tbody></table></div>
     <h3>Paths that cost points</h3>
-    <p class="muted">Each program takes the path the language's documentation teaches first, unless those docs point elsewhere, or the path the test asks for. Where the same standard library offers a safer call for the same job, the language would score better with it. The link is the documentation for the path used.</p>
+    <p class="muted">Where the same standard library has a safer call for the same job, using it would score better:</p>
     <div class="scroll"><table class="notes-table paths-table"><thead><tr><th>Language</th><th>Test</th><th>Path used</th><th>Why that path</th><th>Path that scores better</th><th>Effect</th></tr></thead><tbody>
       <tr><td>Python</td><td><code>child_exit_status</code></td><td><a href="https://docs.python.org/3/library/subprocess.html#subprocess.run" target="_blank" rel="noopener"><code>subprocess.run</code></a></td><td>Taught first; checking is off by default</td><td><code>check=True</code> raises on failure</td><td>0 → 0.5</td></tr>
       <tr><td>Ruby</td><td><code>child_exit_status</code></td><td><a href="https://docs.ruby-lang.org/en/master/Kernel.html#method-i-system" target="_blank" rel="noopener"><code>system</code></a></td><td>Taught first; returns false on failure</td><td><code>system(..., exception: true)</code> raises</td><td>0 → 0.5</td></tr>
@@ -425,15 +425,15 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     </tbody></table></div>
     <h3>Other considerations</h3>
     <ul class="notes muted">
-      <li>Each program is written the way the language's documentation teaches first, unless the documentation for the call it would use sends that situation to another call; then it follows the docs (listed above). Programs use <code>Option</code> where the standard library returns one, and the default length, list and integer types. A shared map uses the language's standard lock-free update where it has one (a Clojure atom, Haskell's <code>atomicModifyIORef'</code>). A byte buffer is sliced with its platform's slice call.</li>
-      <li>Each container gets 3 GB of memory (swap included) and 4,096 processes, and each run 20 s; <code>reference_cycle</code>, which writes 4 GB, gets 60 s, since Mojo's debug build needs 14 s to run it correctly. <code>reference_cycle</code> drops 4 GB of pairs and <code>lazy_accumulator</code> reads 12 GB of messages, more than the cap, so a program that frees them finishes and one that keeps them runs out of memory.; an out-of-memory kill or allocation failure there counts as a leak. Memory use is recorded neither for scoring nor display.</li>
+      <li>Programs use <code>Option</code> where the standard library returns one, and the default list and integer types. A shared map uses the standard lock-free update where one exists (Clojure atom, Haskell <code>atomicModifyIORef'</code>).</li>
+      <li>Each container gets 3 GB of memory and 4,096 processes; each run gets 20 s (<code>reference_cycle</code>, which writes 4 GB, gets 60 s). <code>reference_cycle</code> and <code>lazy_accumulator</code> exceed the cap, so a program that keeps their data runs out of memory: a leak.</li>
       <li>C-family programs keep stale pointers in data structures, and Rust's <code>huge_allocation</code> passes its buffer to <code>std::hint::black_box</code>, so the optimizer cannot remove the access a real program would make.</li>
       <li>A compiler crash records ICE and scores 0.</li>
       <li>Without a sanitizer, C's null dereference and the C-family memory tests run into the hardware or the allocator: a crash, corrupted memory or a wrong answer. C++'s <code>*</code> on an empty <code>std::optional</code> stops through a libstdc++ assertion.</li>
       <li>GHC's default stack limit is 80% of physical memory, so deep recursion in Haskell reaches the 3 GB cap first and the kernel kills it: <code>stack_overflow</code> crashes.</li>
       <li>A regex engine that gives up at a backtracking limit and reports no match counts as correct. PHP's <code>preg_match</code> returns <code>false</code>, which reads as no match.</li>
-      <li>V reads the line after a bare <code>return</code> as the value to return, so in a function that returns nothing, any statement after <code>return</code> fails to build. That refuses <code>unreachable_code</code>, though not through a check for unreachable code. <code>v/loop_closure_capture.v</code> calls its closures in a loop, because V emits C that clang rejects for <code>fs.map(it())</code>.</li>
-      <li><code>blocking_in_async</code> uses async/await only where the language and the libraries counted as standard can run it (Rust's standard library has no executor, so Rust uses threads), otherwise threads, tasks or goroutines. A language without a blocking sleep in its asynchronous model (JavaScript) cannot stall it this way and runs correctly.</li>
+      <li>V treats the line after a bare <code>return</code> as its value, so it refuses <code>unreachable_code</code>, though not through a reachability check.</li>
+      <li><code>blocking_in_async</code> uses async/await where the standard libraries can run it, otherwise threads; JavaScript has no blocking sleep, so it runs correctly.</li>
       <li>OCaml, F#, Haskell and Clojure have no early return, so <code>lock_skipped_on_return</code> unlocks after the conditional and cannot skip it.</li>
       <li><code>short_read</code> uses the language's usual process call, so a language whose usual call returns the whole output reads all of it. <code>unflushed_writer</code> is judged by what the file holds after the program exits.</li>
       <li>PHP runs 8.5, the newest packaged release. Mojo includes MAX for <code>parallelize</code>.</li>
@@ -527,7 +527,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   // The name links to the language's homepage; the line below it to its source repository, where public.
   const langCell = (L) => el("td", { class: "lang" }, L.homepage ? el("a", { class: "home", href: L.homepage, target: "_blank", rel: "noopener", title: L.name + " homepage", text: L.name }) : L.name,
     L.example ? el("span", { class: "extag", text: "Example with a third-party checker, not ranked" }) : null,
-    el("span", { class: "ver", title: shortVersion(L.id, L.version) }, shortVersion(L.id, L.version),
+    el("span", { class: "ver", title: shortVersion(L.id, L.version) }, shortVersion(L.id, L.version), L.repository ? " " : null,
       L.repository ? el("a", { class: "src", href: L.repository, target: "_blank", rel: "noopener", title: L.name + " source repository", text: "source" }) : null));
   const sortKeys = { ranking: "score", details: "score" };
   // One sortable table of languages: each column is [key, heading, description, cell].
@@ -561,7 +561,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     renderTable("details", [
       ["score", "Score", "Mean over the tests the language can attempt", (L) => pct(L.score)],
       ...Object.entries(CAT).map(([c, name]) => [c, name, "Points earned / tests attempted / tests in " + name.toLowerCase(), (L) => catCell(L, c)]),
-      ["caught", "Caught before running", "Tests refused by the compiler or prevented by design, over tests attempted", (L) => L.caught + " / " + L.scored]]);
+      ["caught", "Caught before running", "Tests refused by the compiler or prevented by design / tests attempted / all tests", (L) => L.caught + " / " + L.scored + " / " + probs.length]]);
   }
   renderRanking();
 
@@ -586,7 +586,6 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   });
 
   const SHORT = NAME;
-  const CMP_MAX = 5;
   const TABS = { leaderboard: "leaderboard", details: "details-panel", tests: "tests", scoring: "scoring-panel", missing: "missing", notes: "notes" };
   const catIds = Object.keys(CAT);
   let tab = "leaderboard";
@@ -771,7 +770,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     if (scroll) document.getElementById("case").scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  // Compare: up to five languages; every tab shows only them while any are chosen.
+  // Compare: any number of languages; every tab shows only them while any are chosen.
   const picker = document.getElementById("cmp-picker");
   const toggleBtn = document.getElementById("cmp-toggle");
   const status = document.getElementById("cmp-status");
@@ -796,10 +795,9 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     pickButtons.forEach(([id, b]) => {
       const on = chosen.includes(id);
       b.setAttribute("aria-pressed", String(on));
-      b.disabled = !on && chosen.length >= CMP_MAX;
     });
     const names = chosen.map((id) => D.languages.find((L) => L.id === id).name);
-    status.textContent = names.length ? names.join(", ") + " (" + names.length + " of " + CMP_MAX + ")" : "All languages shown. Choose up to " + CMP_MAX + " to compare.";
+    status.textContent = names.length ? names.join(", ") + " (" + names.length + ")" : "All languages shown. Choose languages to compare.";
     clearBtn.hidden = !names.length;
     differWrap.hidden = names.length < 2;
   }
@@ -830,7 +828,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   }
 
   function setChosen(ids, record) {
-    chosen = [...new Set(ids)].slice(0, CMP_MAX);
+    chosen = [...new Set(ids)];
     renderRanking();
     renderMissing();
     renderGrid();
@@ -846,7 +844,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     const [view, ...rest] = h.split("&");
     const cmpPart = (view.startsWith("compare") ? view : rest.find((x) => x.startsWith("compare=")) || "");
     const ids = cmpPart.slice("compare=".length).split(",").filter((id) => D.languages.some((L) => L.id === id));
-    chosen = ids.slice(0, CMP_MAX);
+    chosen = [...new Set(ids)];
     renderRanking();
     renderMissing();
     renderCmpBar();
