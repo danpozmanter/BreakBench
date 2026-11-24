@@ -9,7 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
         List<Integer> weights = new ArrayList<>(List.of(3, 3, 3, 3));
-        List<Integer> before = weights;
+        List<Integer> before = weights; // CONTROL! List<Integer> before = new ArrayList<>(weights);
         applyUpdate(weights);
         int changes = 0;
         for (int i = 0; i < weights.size(); i++) {

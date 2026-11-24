@@ -18,5 +18,5 @@ func findUser(id int) *User {
 func main() {
 	id, _ := strconv.Atoi(os.Args[1])
 	u := findUser(id)
-	fmt.Println(len(u.Name))
+	fmt.Println(len(u.Name)) // CONTROL! if u == nil { fmt.Println("missing") } else { fmt.Println(len(u.Name)) }
 }

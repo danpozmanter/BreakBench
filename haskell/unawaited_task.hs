@@ -10,5 +10,6 @@ save store = do
 main :: IO ()
 main = do
   store <- newIORef 0
-  void (forkIO (save store))
+  void (forkIO (save store)) -- CONTROL! done <- newEmptyMVar; void (forkIO (save store >> putMVar done ()))
+  -- CONTROL! takeMVar done
   readIORef store >>= print

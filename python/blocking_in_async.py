@@ -3,7 +3,7 @@ import time
 
 
 async def job() -> None:
-    time.sleep(0.5)
+    time.sleep(0.5) # CONTROL! await asyncio.sleep(0.5)
 
 
 async def main() -> None:

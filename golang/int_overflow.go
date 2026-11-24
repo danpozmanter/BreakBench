@@ -8,5 +8,5 @@ import (
 
 func main() {
 	n, _ := strconv.ParseInt(os.Args[1], 10, 64)
-	fmt.Println(n + 1)
+	fmt.Println(n + 1) // CONTROL! fmt.Println(uint64(n) + 1)
 }

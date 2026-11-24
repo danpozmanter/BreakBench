@@ -7,7 +7,7 @@ let deposit amount =
   Mutex.unlock lock
 
 let () =
-  Mutex.lock lock;
+  Mutex.lock lock; (* BREAK! *)
   deposit 10;
-  Mutex.unlock lock;
+  Mutex.unlock lock; (* BREAK! *)
   print_endline "done"

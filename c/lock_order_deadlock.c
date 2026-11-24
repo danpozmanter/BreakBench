@@ -8,7 +8,7 @@ static pthread_barrier_t both_locked;
 static void *forward(void *arg) {
     (void)arg;
     pthread_mutex_lock(&a);
-    pthread_barrier_wait(&both_locked);
+    pthread_barrier_wait(&both_locked); // BREAK!
     pthread_mutex_lock(&b);
     pthread_mutex_unlock(&b);
     pthread_mutex_unlock(&a);
@@ -17,9 +17,9 @@ static void *forward(void *arg) {
 
 static void *backward(void *arg) {
     (void)arg;
-    pthread_mutex_lock(&b);
-    pthread_barrier_wait(&both_locked);
-    pthread_mutex_lock(&a);
+    pthread_mutex_lock(&b); // CONTROL! pthread_mutex_lock(&a);
+    pthread_barrier_wait(&both_locked); // BREAK!
+    pthread_mutex_lock(&a); // CONTROL! pthread_mutex_lock(&b);
     pthread_mutex_unlock(&a);
     pthread_mutex_unlock(&b);
     return NULL;

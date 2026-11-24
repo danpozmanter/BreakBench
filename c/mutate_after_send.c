@@ -1,3 +1,4 @@
+// CONTROL! #include <string.h>
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -25,7 +26,7 @@ int main(void) {
     list[0] = 1;
     list[1] = 2;
     list[2] = 3;
-    if (write(lists[1], &list, sizeof list) != sizeof list) return 1;
+    if (write(lists[1], &list, sizeof list) != sizeof list) return 1; // CONTROL! int *copy = malloc(3 * sizeof *copy); memcpy(copy, list, 3 * sizeof *copy); if (write(lists[1], &copy, sizeof copy) != sizeof copy) return 1;
     list[0] = 99;
     if (write(go_on[1], "g", 1) != 1) return 1;
     pthread_join(t, NULL);

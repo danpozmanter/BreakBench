@@ -7,5 +7,5 @@ fn main() {
         let n, ok = parse_int(a);
         if ok { xs.push(n); }
     }
-    print(max(xs) + 1);
+    print(max(xs) + 1); // CONTROL! if xs.len == 0 { print("no readings"); } else { print(max(xs) + 1); }
 }

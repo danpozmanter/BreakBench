@@ -16,8 +16,8 @@ pub fn main(init: std.process.Init) !void {
     const out = &stdout.interface;
     defer out.flush() catch {};
     _ = &args;
-    lock.lockUncancelable(init.io);
+    lock.lockUncancelable(init.io); // BREAK!
     deposit(init.io, 10);
-    lock.unlock(init.io);
+    lock.unlock(init.io); // BREAK!
     try out.print("done\n", .{});
 }

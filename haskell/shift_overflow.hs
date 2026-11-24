@@ -6,4 +6,4 @@ main :: IO ()
 main = do
   args <- getArgs
   let s = read (head args) :: Int
-  print (shiftL (1 :: Int64) s)
+  print (shiftL (1 :: Int64) s) -- CONTROL! print (shiftL (1 :: Integer) s)

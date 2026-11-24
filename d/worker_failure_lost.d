@@ -9,6 +9,6 @@ void main(string[] args)
         foreach (item; items)
             total += item.to!long;
     }).start();
-    worker.join();
+    worker.join(); // CONTROL! try { worker.join(); } catch (ConvException) { writeln("failed"); return; }
     writeln("total ", total);
 }

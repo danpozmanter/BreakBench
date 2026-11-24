@@ -8,7 +8,7 @@ pub fn main(init: std.process.Init) !void {
     defer out.flush() catch {};
     _ = &args;
     const n = try std.fmt.parseInt(i64, args[1], 10);
-    var x: i64 = undefined;
+    var x: i64 = undefined; // CONTROL! var x: i64 = 0;
     if (n > 5) x = 10;
     try out.print("{d}\n", .{x});
 }

@@ -20,7 +20,7 @@ fn rendezvous(mut gate Gate) {
 
 fn transfer(mut first sync.Mutex, mut second sync.Mutex, mut gate Gate) {
 	first.lock()
-	rendezvous(mut gate)
+	rendezvous(mut gate) // BREAK!
 	second.lock()
 	second.unlock()
 	first.unlock()
@@ -31,7 +31,7 @@ fn main() {
 	mut b := sync.new_mutex()
 	mut gate := &Gate{}
 	t1 := spawn transfer(mut a, mut b, mut gate)
-	t2 := spawn transfer(mut b, mut a, mut gate)
+	t2 := spawn transfer(mut b, mut a, mut gate) // CONTROL! t2 := spawn transfer(mut a, mut b, mut gate)
 	t1.wait()
 	t2.wait()
 	println('finished')

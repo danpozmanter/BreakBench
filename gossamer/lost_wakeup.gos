@@ -2,10 +2,11 @@ use std::sync::channel
 
 fn main() {
     let woken_tx, woken_rx = channel()
-    woken_tx.send(true)
+    woken_tx.send(true) // BREAK!
     let worker = spawn(|| {
         let _ = woken_rx.recv()
         println("done")
     })
+    // CONTROL! woken_tx.send(true)
     let _ = worker.join()
 }

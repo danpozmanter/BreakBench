@@ -25,6 +25,6 @@ pub fn main(init: std.process.Init) !void {
     var total: i64 = 0;
     while (evens.next()) |x| total += x;
     var count: usize = 0;
-    while (evens.next()) |_| count += 1;
+    while (evens.next()) |_| count += 1; // CONTROL! evens.i = 0; while (evens.next()) |_| count += 1;
     try out.print("{d} {d}\n", .{ total, count });
 }

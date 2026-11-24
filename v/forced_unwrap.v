@@ -7,5 +7,5 @@ fn find(id int) ?int {
 
 fn main() {
 	println('before')
-	println(find(2)? + 1)
+	println(find(2)? + 1) // CONTROL! if a := find(2) { println(a + 1) } else { println('missing') }
 }

@@ -13,7 +13,7 @@ pub fn main(init: std.process.Init) !void {
     const out = &stdout.interface;
     defer out.flush() catch {};
     _ = &args;
-    save(init.io, "/nonexistent/dir/out.txt"); // BREAK!
-    // CONTROL! save(init.io, "/nonexistent/dir/out.txt") catch {};
+    save(init.io, "/dev/null/out.txt"); // BREAK!
+    // CONTROL! save(init.io, "/dev/null/out.txt") catch {};
     try out.print("saved\n", .{});
 }

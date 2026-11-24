@@ -9,7 +9,7 @@ void post()
     scope (exit) lock.unlock();
     debits += 50;
     if (debits > 0)
-        throw new Exception("crash mid-update");
+        throw new Exception("crash mid-update"); // CONTROL! { debits -= 50; throw new Exception("crash mid-update"); }
     credits += 50;
 }
 

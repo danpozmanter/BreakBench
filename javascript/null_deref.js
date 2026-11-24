@@ -5,4 +5,4 @@ function findUser(id) {
 }
 
 const u = findUser(Number(process.argv[2]));
-console.log(u.name.length);
+console.log(u.name.length); // CONTROL! console.log(u === null ? "missing" : u.name.length);

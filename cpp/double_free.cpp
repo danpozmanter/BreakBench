@@ -13,7 +13,7 @@ Rec *registry[4];
 int main() {
     {
         Session a(0);
-        Session b = a;
+        Session b = a; // CONTROL! Session &b = a;
         registry[0] = b.rec;
     }
     Rec *x = new Rec{1, {}};

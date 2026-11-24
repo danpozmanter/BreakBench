@@ -7,7 +7,7 @@ public class Main {
     static void withdraw(int amount) {
         lock.lock();
         if (amount > balance) {
-            return;
+            return; // CONTROL! lock.unlock(); return;
         }
         balance -= amount;
         lock.unlock();

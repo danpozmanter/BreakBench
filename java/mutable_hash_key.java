@@ -8,7 +8,7 @@ public class Main {
         Set<List<Integer>> seen = new HashSet<>();
         List<Integer> key = new ArrayList<>(List.of(1, 2));
         seen.add(key);
-        key.set(0, 9);
+        key.set(0, 9); // BREAK!
         for (List<Integer> e : seen) {
             System.out.println(seen.contains(e) ? "found" : "lost");
         }

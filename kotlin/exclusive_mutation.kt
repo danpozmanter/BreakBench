@@ -1,6 +1,7 @@
 class Account(var balance: Int)
 
 fun transfer(from: Account, to: Account, amount: Int) {
+    // CONTROL! if (from === to) return
     val newFrom = from.balance - amount
     val newTo = to.balance + amount
     from.balance = newFrom

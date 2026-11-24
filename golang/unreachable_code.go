@@ -4,7 +4,7 @@ import "fmt"
 
 func check() {
 	fmt.Println("ok")
-	return
+	return // BREAK!
 	fmt.Println("checked")
 }
 

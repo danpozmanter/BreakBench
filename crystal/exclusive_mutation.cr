@@ -6,6 +6,7 @@ class Account
 end
 
 def transfer(from : Account, to : Account, amount : Int32)
+  # CONTROL! return if from.same?(to)
   new_from = from.balance - amount
   new_to = to.balance + amount
   from.balance = new_from

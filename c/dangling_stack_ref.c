@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 static int *make(void) {
-    int local = 4242;
+    int local = 4242; // CONTROL! static int local = 4242;
     return &local;
 }
 

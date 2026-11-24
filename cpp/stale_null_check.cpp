@@ -10,7 +10,7 @@ int main() {
     User alice{"alice"};
     Session session{&alice};
     if (session.user != nullptr) {
-        logout(session);
-        std::cout << session.user->name.size() << "\n";
+        logout(session); // CONTROL! std::cout << session.user->name.size() << "\n";
+        std::cout << session.user->name.size() << "\n"; // CONTROL! logout(session);
     }
 }

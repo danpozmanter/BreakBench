@@ -5,5 +5,5 @@ struct Config(Copyable, Movable):
 
 def main():
     var c = Config(8080)
-    c.port = 1
+    c.port = 1 # BREAK!
     print(c.port)

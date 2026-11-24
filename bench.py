@@ -9,12 +9,14 @@ Usage:
     uv run bench.py rust gossamer          # rerun languages in the newest folder
     uv run bench.py rust --only int_overflow,oob_write
     uv run bench.py --aggregate            # rebuild the newest folder's rankings and the site
+    uv run bench.py --jobs 6               # run six languages at once
 
 Each full run gets a folder named by its UTC start time, results/YYYY-MM-DDTHHMMSSZ, holding
 raw/ plus results.json. Partial runs update the newest folder in place.
 """
 
 import argparse
+import concurrent.futures
 import datetime
 import json
 import os
@@ -81,8 +83,9 @@ def debug_only(rec):
     return rec["outcome"] == "TRAPPED" and rec.get("release", "TRAPPED") not in ("TRAPPED", "CORRECT")
 
 
-def percent(scores):
-    return round(100 * sum(scores) / len(scores), 1) if scores else 0.0
+def points(value):
+    """Points as a person reads them: 11, 11.5, 11.25."""
+    return f"{value:g}"
 
 
 CATEGORIES = {
@@ -118,9 +121,6 @@ def aggregate(run):
             per_problem[problem["id"]] = {**rec, "score": score}
         outcomes = [r["outcome"] for r in per_problem.values()]
         counted = [o for o in outcomes if o != "INEXPRESSIBLE"]
-        caught = sum(o in {"REJECTED", "SAFE_BY_DESIGN"} for o in counted)
-        safe = sum(o in SAFE for o in counted)
-        mean = [s for scores in by_category.values() for s in scores]
         rows.append(
             {
                 "id": lang_id,
@@ -132,27 +132,35 @@ def aggregate(run):
                 "dir": lang.get("dir", lang_id),
                 "ext": lang["ext"],
                 "version": raw.get("version", ""),
-                "score": percent(mean),
-                **{c: percent(scores) for c, scores in by_category.items()},
-                "caught": round(100 * caught / len(counted), 1) if counted else 0.0,
-                "safe": round(100 * safe / len(counted), 1) if counted else 0.0,
+                "categories": {c: [sum(scores), len(scores)] for c, scores in by_category.items()},
+                "caught": sum(o in {"REJECTED", "SAFE_BY_DESIGN"} for o in counted),
+                "safe": sum(o in SAFE for o in counted),
                 "scored": len(counted),
                 "missing": len(outcomes) - len(counted),
                 "results": per_problem,
             }
         )
-    rows.sort(key=lambda r: (-r["score"], -r["caught"], r["name"]))
+    # Every test counts once; a test the language cannot express is left out of its mean.
+    for row in rows:
+        earned = [r["score"] for r in row["results"].values() if r["score"] is not None]
+        row["score"] = round(100 * sum(earned) / len(earned), 1) if earned else 0.0
+    rows.sort(key=lambda r: (-r["score"], -r["caught"] / max(r["scored"], 1), r["name"]))
     ranked = [row for row in rows if not row["example"]]
     for rank, row in enumerate(ranked, 1):
         row["rank"] = rank
     for row in rows:
         row.setdefault("rank", None)
+    # Tests where every ranked language scores nothing stay in the bench, labelled.
+    unsolved = [p["id"] for p in spec["problems"]
+                if not any(row["results"][p["id"]]["score"] for row in ranked)]
     out = {
         "generated": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
         "date": run_date(run),
         "kinds": kinds,
         "categories": CATEGORIES,
+        "modes": spec.get("modes", []),
         "problems": spec["problems"],
+        "unsolved": unsolved,
         "languages": rows,
     }
     with open(os.path.join(run, "results.json"), "w", encoding="utf-8") as f:
@@ -171,9 +179,12 @@ def aggregate(run):
         f.write(page)
         f.write("\n</body>\n</html>\n")
     for row in rows:
-        parts = "  ".join(f"{name.lower()} {row[c]:5.1f}%" for c, name in CATEGORIES.items())
+        parts = "  ".join(f"{name.lower()} {points(row['categories'][c][0])}/{row['categories'][c][1]}"
+                          for c, name in CATEGORIES.items())
         rank = f"{row['rank']:>2}." if row["rank"] else " -."
         print(f"{rank} {row['name']:<13} score {row['score']:5.1f}%  {parts}")
+    if unsolved:
+        print("no language passes: " + ", ".join(unsolved))
 
 
 def describe_run(rec):
@@ -191,6 +202,8 @@ def describe_run(rec):
         return f"Built and ran cleanly (exit {status}), {shown}. The answer is right only by chance."
     if outcome == "REJECTED":
         return "The compiler refused to build the program."
+    if outcome == "ERROR":
+        return rec.get("control_error") or "The benchmark could not judge this program."
     return (f"Built and ran to the end (exit {status}), {shown}. "
             "No compiler or runtime message flagged the bug.")
 
@@ -215,6 +228,11 @@ def site_payload(out):
                         or describe_run(rec))
             if rec["outcome"] == "CHANCE":
                 evidence = f"Printed the expected answer, but only by chance: {rec['message']}."
+            if rec["outcome"] == "ERROR":
+                evidence = describe_run(rec)
+            if rec["outcome"] == "UNTIED":
+                evidence = ("The compiler refused the program, but no error points at the bug's lines, "
+                            "so the refusal is not counted.\n\n" + evidence)
             if debug_only(rec):
                 evidence = (f"The release build did not stop: {RELEASE_WORDS.get(rec['release'], rec['release'])}.\n\n"
                             + evidence)
@@ -224,11 +242,65 @@ def site_payload(out):
                 "s": rec["score"],
                 "out": (rec.get("stdout") or "")[:160],
                 "ev": evidence[:600],
+                # The fixed program gave the expected answer ("verified"), or none exists ("none").
+                "c": rec.get("control", ""),
+                # Compiler output from a build that succeeded: warnings, shown and never scored.
+                "w": (rec.get("build_output") or "")[:600],
             }
-        langs.append({k: row[k] for k in ("id", "name", "example", "homepage", "repository", "dir", "ext", "version", "rank", "score", "caught", "safe",
-                                           "scored", "missing", *CATEGORIES)} | {"results": results})
-    return {**{k: out[k] for k in ("date", "kinds", "categories", "problems")},
+        langs.append({k: row[k] for k in ("id", "name", "example", "homepage", "repository", "dir", "ext", "version",
+                                           "rank", "score", "categories", "caught", "safe", "scored", "missing")}
+                     | {"results": results})
+    return {**{k: out[k] for k in ("date", "kinds", "categories", "modes", "problems", "unsolved")},
             "languages": langs}
+
+
+# A feature an N/A reason says the language lacks ("no mutex ..."), and code that shows a program
+# of the same language using it. A hit is a claim to check by hand, not a verdict.
+FEATURE_USE = {
+    r"mutex": r"\b\w*(Mutex|mutex|SpinLock|ReentrantLock)\w*\b|synchronized|MVar",
+    r"channel|queue": r"\b\w*([Cc]hannel|Chan\b|chan\b|[Qq]ueue|mailbox)\w*",
+    r"condition variable": r"\b\w*([Cc]ondition[Vv]ariable|[Cc]ondvar|Cond\b|pthread_cond)\w*",
+    r"regular expression": r"\b\w*(Regex|Regexp|regex|PCRE)\w*\b",
+    r"json": r"\b\w*(json|JSON|Json)\w*\b(?!\")",
+    r"enum": r"^\s*(pub\s+)?enum\b",
+    r"asynchronous task|async": r"\b(async|await)\b",
+    r"subprocess|process|pipe": r"\b\w*(Process|subprocess|popen|exec[lv]p?|Command|system)\w*\(",
+    r"thread": r"\b\w*(Thread|thread|parallelize|spawn)\w*\(",
+    r"serializ|decoder": r"\b\w*(Serializ|serializ|Decode|decode|Unmarshal|unmarshal)\w*\(",
+    r"map literal": r"^(?!.*\").*\{\s*\w+\s*[:=]>?\s*\w+\s*,",
+}
+NO_FEATURE = r"\bno (\w+[ ,]+){{0,4}}?({feature})"
+
+
+def audit():
+    """List each N/A whose missing feature appears in another program of the same language."""
+    spec = load("harness/problems.json")
+    langs = load("harness/langs.json")
+    cannot = re.compile(r"CANNOT-EXPRESS:\s*(.+)")
+    found = 0
+    for lang_id, lang in langs.items():
+        folder = os.path.join(ROOT, lang.get("dir", lang_id))
+        sources = {}
+        for problem in spec["problems"]:
+            path = os.path.join(folder, problem["id"] + "." + lang["ext"])
+            if os.path.exists(path):
+                with open(path, encoding="utf-8") as f:
+                    sources[problem["id"]] = f.read()
+        for pid, text in sources.items():
+            reason = cannot.search(text)
+            if not reason:
+                continue
+            for feature, use in FEATURE_USE.items():
+                if not re.search(NO_FEATURE.format(feature=feature), reason.group(1), re.I):
+                    continue
+                users = sorted(other for other, body in sources.items()
+                               if other != pid and not cannot.search(body)
+                               and re.search(use, body, re.M))
+                if users:
+                    found += 1
+                    print(f"{lang_id}/{pid}: says \"{reason.group(1).strip()}\"; "
+                          f"{feature} appears in {', '.join(users[:8])}")
+    print(f"{found} N/A claims to review")
 
 
 def main():
@@ -236,7 +308,12 @@ def main():
     parser.add_argument("languages", nargs="*")
     parser.add_argument("--only", default="")
     parser.add_argument("--aggregate", action="store_true")
+    parser.add_argument("--audit", action="store_true", help="list N/A claims to review")
+    parser.add_argument("--jobs", type=int, default=1, help="languages to run at once")
     args = parser.parse_args()
+    if args.audit:
+        audit()
+        return
     run = newest_run()
     if not args.aggregate:
         langs = load("harness/langs.json")
@@ -248,8 +325,8 @@ def main():
         full = not (args.languages or only)
         if full or run is None:
             run = new_run()
-        for lang_id in selected:
-            run_language(run, lang_id, langs[lang_id], only)
+        with concurrent.futures.ThreadPoolExecutor(max_workers=max(1, args.jobs)) as pool:
+            list(pool.map(lambda lang_id: run_language(run, lang_id, langs[lang_id], only), selected))
     if run is None:
         sys.exit("no results yet: run `uv run bench.py` first")
     aggregate(run)

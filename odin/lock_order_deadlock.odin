@@ -22,7 +22,7 @@ rendezvous :: proc() {
 transfer :: proc(p: Pair) {
 	sync.mutex_lock(p.first)
 	defer sync.mutex_unlock(p.first)
-	rendezvous()
+	rendezvous() // BREAK!
 	sync.mutex_lock(p.second)
 	defer sync.mutex_unlock(p.second)
 }
@@ -30,7 +30,7 @@ transfer :: proc(p: Pair) {
 main :: proc() {
 	a, b: sync.Mutex
 	t1 := thread.create_and_start_with_poly_data(Pair{&a, &b}, transfer)
-	t2 := thread.create_and_start_with_poly_data(Pair{&b, &a}, transfer)
+	t2 := thread.create_and_start_with_poly_data(Pair{&b, &a}, transfer) // CONTROL! t2 := thread.create_and_start_with_poly_data(Pair{&a, &b}, transfer)
 	thread.join(t1)
 	thread.join(t2)
 	fmt.println("finished")

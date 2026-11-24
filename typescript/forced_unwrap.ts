@@ -3,4 +3,4 @@ function find(id: number): number | undefined {
 }
 
 console.log("before");
-console.log(find(2)! + 1);
+console.log(find(2)! + 1); // CONTROL! const a = find(2); console.log(a === undefined ? "missing" : a + 1);

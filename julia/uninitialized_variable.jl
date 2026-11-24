@@ -1,5 +1,6 @@
 function main()
     n = parse(Int, ARGS[1])
+    # CONTROL! x = 0
     if n > 5
         x = 10
     end

@@ -8,7 +8,7 @@ save :: proc(path: string) -> os.Error {
 }
 
 main :: proc() {
-	save("/nonexistent/dir/out.txt") // BREAK!
-	// CONTROL! _ = save("/nonexistent/dir/out.txt")
-	fmt.println("saved")
+	save("/dev/null/out.txt") // CONTROL! if save("/dev/null/out.txt") != nil { fmt.println("failed") } else { fmt.println("saved") }
+	// CONTROL! _ = save("/dev/null/out.txt") // BREAK!
+	fmt.println("saved") // BREAK!
 }

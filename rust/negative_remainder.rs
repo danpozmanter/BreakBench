@@ -1,5 +1,5 @@
 fn is_odd(n: i64) -> bool {
-    n % 2 == 1
+    n % 2 == 1 // CONTROL! n % 2 != 0
 }
 
 fn main() {

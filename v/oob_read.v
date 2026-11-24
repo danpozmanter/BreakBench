@@ -11,5 +11,5 @@ fn main() {
 		secret: 42
 	}
 	idx := os.args[1].int()
-	println(f.buf[idx])
+	println(f.buf[idx]) // CONTROL! if idx >= 0 && idx < f.buf.len { println(f.buf[idx]) } else { println('out of range') }
 }

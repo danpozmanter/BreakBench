@@ -5,4 +5,4 @@ main :: IO ()
 main = do
   args <- getArgs
   let n = read (head args) :: Int64
-  print (n + 1)
+  print (n + 1) -- CONTROL! print (toInteger n + 1)

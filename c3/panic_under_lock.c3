@@ -10,7 +10,7 @@ fn int post(void* arg)
 	lock.lock();
 	defer lock.unlock();
 	debits += 50;
-	if (debits > 0) abort("crash mid-update");
+	if (debits > 0) abort("crash mid-update"); // CONTROL! if (debits > 0) { debits -= 50; return 1; }
 	credits += 50;
 	return 0;
 }

@@ -10,6 +10,6 @@ void main(string[] args)
 {
     Frame f;
     size_t idx = args[1].to!size_t;
-    f.buf[idx] = 99;
+    f.buf[idx] = 99; // CONTROL! if (idx < f.buf.length) f.buf[idx] = 99;
     writeln(f.guard);
 }

@@ -4,5 +4,5 @@ import Text.Printf (printf)
 main :: IO ()
 main = do
   args <- getArgs
-  printf (head args)
+  printf (head args) -- CONTROL! putStr (head args)
   putStrLn ""

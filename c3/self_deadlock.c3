@@ -14,9 +14,9 @@ fn void deposit(int amount)
 fn int main(String[] args)
 {
 	lock.init()!!;
-	lock.lock();
+	lock.lock(); // BREAK!
 	deposit(10);
-	lock.unlock();
+	lock.unlock(); // BREAK!
 	io::printn("done");
 	return 0;
 }

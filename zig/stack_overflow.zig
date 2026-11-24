@@ -13,5 +13,5 @@ pub fn main(init: std.process.Init) !void {
     defer out.flush() catch {};
     _ = &args;
     const n = try std.fmt.parseInt(i64, args[1], 10);
-    try out.print("{d}\n", .{walk(n)});
+    try out.print("{d}\n", .{walk(n)}); // CONTROL! var acc: i64 = 0; var i: i64 = 1; while (i <= n) : (i += 1) acc = @mod(acc * 31 + i, 1_000_000_007); try out.print("{d}\n", .{acc});
 }

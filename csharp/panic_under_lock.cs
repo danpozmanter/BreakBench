@@ -20,7 +20,7 @@ class Ledger
         lock (_lock)
         {
             _debits += 50;
-            if (_debits > 0) throw new InvalidOperationException("crash mid-update");
+            if (_debits > 0) throw new InvalidOperationException("crash mid-update"); // CONTROL! if (_debits > 0) { _debits -= 50; throw new InvalidOperationException("crash mid-update"); }
             _credits += 50;
         }
     }

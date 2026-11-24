@@ -2,7 +2,7 @@
 
 function check() {
   console.log("ok");
-  return;
+  return; // BREAK!
   console.log("checked");
 }
 

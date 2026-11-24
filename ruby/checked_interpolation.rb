@@ -1,2 +1,2 @@
 name = "Ada"
-puts "hello #{nmae}"
+puts "hello #{nmae}" # CONTROL! puts "hello #{name}"

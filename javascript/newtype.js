@@ -9,4 +9,4 @@ class Seconds {
   constructor(v) { this.v = v; }
 }
 
-console.log(new Meters(2).add(new Seconds(3)).v);
+console.log(new Meters(2).add(new Seconds(3)).v); // CONTROL! console.log(new Meters(2).v);

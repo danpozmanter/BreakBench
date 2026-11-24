@@ -9,5 +9,5 @@ final class Point
 }
 
 $ps = [new Point(3, 4), new Point(1, 2)];
-sort($ps);
+sort($ps); // CONTROL! usort($ps, fn($a, $b) => $a->x <=> $b->x);
 echo $ps[0]->x, "\n";

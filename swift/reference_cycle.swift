@@ -1,6 +1,6 @@
 final class Node {
     var data = [UInt8](repeating: 1, count: 4096)
-    var other: Node?
+    var other: Node? // CONTROL! weak var other: Node?
 }
 
 let n = Int(CommandLine.arguments[1])!

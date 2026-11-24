@@ -13,6 +13,6 @@ fn main() {
     users.push(User { id: 1, name: "alice" });
     let id, ok = parse_int(args()[1]);
     let name = find_name(users, id);
-    print("hello, ", name);
-    print(ok);
+    print("hello, ", name); // CONTROL! if name { print("hello, ", name); } else if ok { print("hello, nobody"); }
+    print(ok); // BREAK!
 }

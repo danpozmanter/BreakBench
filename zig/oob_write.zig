@@ -11,6 +11,6 @@ pub fn main(init: std.process.Init) !void {
     _ = &args;
     var f = Frame{ .buf = .{ 0, 0, 0, 0 }, .guard = 7 };
     const idx = try std.fmt.parseInt(usize, args[1], 10);
-    f.buf[idx] = 99;
+    f.buf[idx] = 99; // CONTROL! if (idx < f.buf.len) f.buf[idx] = 99;
     try out.print("{d}\n", .{f.guard});
 }

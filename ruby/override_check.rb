@@ -3,7 +3,7 @@ class Shape
 end
 
 class Circle < Shape
-  def descibe = "circle"
+  def descibe = "circle" # CONTROL! def describe = "circle"
 end
 
 puts Circle.new.describe

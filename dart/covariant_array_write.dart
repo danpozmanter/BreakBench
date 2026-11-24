@@ -15,6 +15,6 @@ class Cat extends Animal {
 void main() {
   final List<Dog> dogs = [Dog()];
   final List<Animal> animals = dogs;
-  animals[0] = Cat();
+  animals[0] = Cat(); // BREAK!
   print(dogs[0].sound());
 }

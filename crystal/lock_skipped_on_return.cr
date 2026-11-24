@@ -4,7 +4,7 @@ class Account
 
   def withdraw(amount)
     @lock.lock
-    return if amount > @balance
+    return if amount > @balance # CONTROL! if amount > @balance; @lock.unlock; return; end
     @balance -= amount
     @lock.unlock
   end

@@ -6,6 +6,7 @@
 int main(int argc, char** argv) {
     if (argc < 2) return 2;
     std::size_t count = std::stoull(argv[1]);
+    // CONTROL! if (count > (std::size_t{1} << 27)) { std::cout << "too large\n"; return 0; }
     std::size_t size = count * 8;
     std::vector<std::uint8_t> records(size);
     records[8] = 99;

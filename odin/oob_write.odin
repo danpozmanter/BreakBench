@@ -12,6 +12,6 @@ Frame :: struct {
 main :: proc() {
 	f := Frame{guard = 7}
 	idx, _ := strconv.parse_int(os.args[1])
-	f.buf[idx] = 99
+	f.buf[idx] = 99 // CONTROL! if idx >= 0 && idx < len(f.buf) do f.buf[idx] = 99
 	fmt.println(f.guard)
 }

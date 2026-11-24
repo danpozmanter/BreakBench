@@ -4,7 +4,7 @@ ledger = { debits: 0, credits: 0 }
 worker = Thread.new do
   LOCK.synchronize do
     ledger[:debits] += 50
-    raise "crash mid-update" if ledger[:debits] > 0
+    raise "crash mid-update" if ledger[:debits] > 0 # CONTROL! (ledger[:debits] -= 50; raise "crash mid-update") if ledger[:debits] > 0
     ledger[:credits] += 50
   end
 end

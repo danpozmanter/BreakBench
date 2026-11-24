@@ -14,9 +14,9 @@ function save() {
   const report = new Report();
   try {
     report.write("totals");
-  } finally {
-    report.close();
-  }
+  } finally { // CONTROL! } catch (error) { try { report.close(); } catch {} throw error; }
+    report.close(); // CONTROL! report.close();
+  } // BREAK!
 }
 
 try {

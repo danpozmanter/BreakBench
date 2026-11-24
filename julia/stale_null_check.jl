@@ -11,8 +11,8 @@ logout!(session::Session) = (session.user = nothing)
 function main()
     session = Session(User("alice"))
     if session.user !== nothing
-        logout!(session)
-        println(length(session.user.name))
+        logout!(session) # CONTROL! println(length(session.user.name))
+        println(length(session.user.name)) # CONTROL! logout!(session)
     end
 end
 

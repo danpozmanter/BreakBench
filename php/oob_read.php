@@ -8,4 +8,4 @@ final class Frame
 }
 
 $f = new Frame();
-echo $f->buf[(int)$argv[1]], "\n";
+echo $f->buf[(int)$argv[1]], "\n"; // CONTROL! $i = (int)$argv[1]; echo array_key_exists($i, $f->buf) ? $f->buf[$i] : "out of range", "\n";

@@ -12,7 +12,7 @@
     "version": "clang --version | head -1",
     "release": {
       "build": [
-        "clang -std=c23 -O2 -D_FORTIFY_SOURCE=3 -fstack-protector-strong -fstack-clash-protection -pthread -o main main.c"
+        "clang -std=c23 -O3 -DNDEBUG -pthread -o main main.c"
       ],
       "run": "./main"
     }
@@ -31,7 +31,7 @@
     "version": "clang++ --version | head -1",
     "release": {
       "build": [
-        "clang++ -std=c++23 -O2 -D_FORTIFY_SOURCE=3 -D_GLIBCXX_ASSERTIONS -fstack-protector-strong -fstack-clash-protection -pthread -o main main.cpp -lstdc++exp"
+        "clang++ -std=c++23 -O3 -DNDEBUG -pthread -o main main.cpp -lstdc++exp"
       ],
       "run": "./main"
     }
@@ -50,7 +50,7 @@
     "version": "rustc --version",
     "release": {
       "build": [
-        "rustc --edition 2024 -O --extern regex=/opt/rustdeps/libregex.rlib -L dependency=/opt/rustdeps/lib -o main main.rs"
+        "rustc --edition 2024 -C opt-level=3 --extern regex=/opt/rustdeps/libregex.rlib -L dependency=/opt/rustdeps/lib -o main main.rs"
       ],
       "run": "./main"
     }
@@ -63,7 +63,7 @@
     "ext": "zig",
     "file": "main.zig",
     "build": [
-      "zig build-exe -O Debug -femit-bin=main main.zig"
+      "zig build-exe -O Debug -freference-trace=64 -femit-bin=main main.zig"
     ],
     "run": "./main",
     "version": "zig version",
@@ -114,7 +114,7 @@
     "ext": "cr",
     "file": "main.cr",
     "build": [
-      "crystal build -o main main.cr"
+      "crystal build --error-trace -o main main.cr"
     ],
     "run": "./main",
     "version": "crystal --version | head -1",
@@ -215,7 +215,7 @@
     "version": "c3c --version | head -1",
     "release": {
       "build": [
-        "c3c compile -O3 -o main main.c3"
+        "c3c compile -O1 -o main main.c3"
       ],
       "run": "./main"
     }
@@ -519,7 +519,13 @@
       "dune build ./main.exe 2>&1"
     ],
     "run": "./_build/default/main.exe",
-    "version": "ocaml -version"
+    "version": "ocaml -version",
+    "release": {
+      "build": [
+        "dune build --profile release ./main.exe 2>&1"
+      ],
+      "run": "./_build/default/main.exe"
+    }
   },
   "haskell": {
     "name": "Haskell",
@@ -551,6 +557,7 @@
       "cp /opt/clj/deps.edn . && mkdir -p classes && clojure -M -e \"(compile (quote main))\""
     ],
     "run": "clojure -M -m main",
-    "version": "clojure -M -e '(println \"Clojure\" (clojure-version))'"
+    "version": "clojure -M -e '(println \"Clojure\" (clojure-version))'",
+    "build_trap": "^Execution error"
   }
 }

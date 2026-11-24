@@ -7,5 +7,5 @@ fn find_name(id: i64) -> Option<String> {
 fn main() {
     let id = env::args()[0].to_i64().unwrap()
     let name = find_name(id)
-    println(f"hello, {name}")
+    println(f"hello, {name}") // CONTROL! println(f"hello, {name.unwrap_or("nobody")}")
 }

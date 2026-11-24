@@ -15,5 +15,5 @@ def logout(mut session: Session):
 def main():
     var session = Session(User("alice"))
     if session.user:
-        logout(session)
-        print(session.user.value().name.byte_length())
+        logout(session) # CONTROL! print(session.user.value().name.byte_length())
+        print(session.user.value().name.byte_length()) # CONTROL! logout(session)

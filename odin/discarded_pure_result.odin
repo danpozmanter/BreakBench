@@ -5,6 +5,6 @@ import "core:strings"
 
 main :: proc() {
 	name := "ada"
-	strings.to_upper(name) // CONTROL! _ = strings.to_upper(name)
+	strings.to_upper(name) // CONTROL! name = strings.to_upper(name)
 	fmt.println(name)
 }

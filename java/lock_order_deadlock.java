@@ -4,8 +4,8 @@ public class Main {
     static void transfer(ReentrantLock first, ReentrantLock second, CountDownLatch ready) {
         first.lock();
         try {
-            ready.countDown();
-            try { ready.await(); } catch (InterruptedException e) { Thread.currentThread().interrupt(); return; }
+            ready.countDown(); // BREAK!
+            try { ready.await(); } catch (InterruptedException e) { Thread.currentThread().interrupt(); return; } // BREAK!
             second.lock();
             second.unlock();
         } finally {
@@ -18,7 +18,7 @@ public class Main {
         ReentrantLock b = new ReentrantLock();
         CountDownLatch ready = new CountDownLatch(2);
         Thread t1 = new Thread(() -> transfer(a, b, ready));
-        Thread t2 = new Thread(() -> transfer(b, a, ready));
+        Thread t2 = new Thread(() -> transfer(b, a, ready)); // CONTROL! Thread t2 = new Thread(() -> transfer(a, b, ready));
         t1.start();
         t2.start();
         t1.join();

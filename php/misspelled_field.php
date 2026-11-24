@@ -6,5 +6,5 @@ class Config
 }
 
 $cfg = new Config();
-$cfg->colour = "red";
+$cfg->colour = "red"; // CONTROL! $cfg->color = "red";
 echo $cfg->color, "\n";

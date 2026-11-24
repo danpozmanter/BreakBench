@@ -5,6 +5,6 @@ struct Point {
 
 fn main() {
     let mut ps = #[Point { x: 3, y: 4 }, Point { x: 1, y: 2 }]
-    ps.sort()
+    ps.sort() // CONTROL! ps.sort_by_key(|p| p.x)
     println(f"{ps[0].x}")
 }

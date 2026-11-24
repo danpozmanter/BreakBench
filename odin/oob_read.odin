@@ -12,5 +12,5 @@ Frame :: struct {
 main :: proc() {
 	f := Frame{buf = {1, 2, 3, 4}, secret = 42}
 	idx, _ := strconv.parse_int(os.args[1])
-	fmt.println(f.buf[idx])
+	fmt.println(f.buf[idx]) // CONTROL! if idx >= 0 && idx < len(f.buf) { fmt.println(f.buf[idx]) } else { fmt.println("out of range") }
 }

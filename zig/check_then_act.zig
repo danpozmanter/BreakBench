@@ -8,9 +8,9 @@ var arrivals: i32 = 0;
 fn claim(io: std.Io) void {
     var available: bool = false;
     state_lock.lockUncancelable(io);
-    available = !claimed; // BREAK!
+    available = !claimed;
+    // CONTROL! if (available) claimed = true;
     state_lock.unlock(io);
-    // CONTROL! available = !claimed; if (available) claimed = true;
     gate_lock.lockUncancelable(io); arrivals += 1; gate_lock.unlock(io);
     while (true) {
         gate_lock.lockUncancelable(io); const open = arrivals == 2; gate_lock.unlock(io);

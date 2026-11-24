@@ -10,8 +10,8 @@ int main(void) {
     User alice = {"alice"};
     Session session = {&alice};
     if (session.user != NULL) {
-        logout(&session);
-        printf("%zu\n", strlen(session.user->name));
+        logout(&session); // CONTROL! printf("%zu\n", strlen(session.user->name));
+        printf("%zu\n", strlen(session.user->name)); // CONTROL! logout(&session);
     }
     return 0;
 }

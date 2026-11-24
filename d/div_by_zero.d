@@ -3,5 +3,5 @@ import std.conv, std.stdio;
 void main(string[] args)
 {
     int d = args[1].to!int;
-    writeln(100 / d);
+    writeln(100 / d); // CONTROL! if (d == 0) writeln("cannot divide"); else writeln(100 / d);
 }

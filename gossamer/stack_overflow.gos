@@ -9,5 +9,5 @@ fn walk(n: i64) -> i64 {
 
 fn main() {
     let n = env::args()[0].to_i64().unwrap()
-    println(f"{walk(n)}")
+    println(f"{walk(n)}") // CONTROL! let mut acc = 0; for i in 1..=n { acc = (acc * 31 + i) % 1000000007 }; println(f"{acc}")
 }

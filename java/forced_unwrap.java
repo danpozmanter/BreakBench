@@ -7,6 +7,6 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("before");
-        System.out.println(find(2).get() + 1);
+        System.out.println(find(2).get() + 1); // CONTROL! System.out.println(find(2).map(a -> String.valueOf(a + 1)).orElse("missing"));
     }
 }

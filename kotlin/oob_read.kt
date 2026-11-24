@@ -6,5 +6,5 @@ class Frame {
 fun main(args: Array<String>) {
     val f = Frame()
     val idx = args[0].toInt()
-    println(f.buf[idx])
+    println(f.buf[idx]) // CONTROL! println(if (idx in f.buf.indices) f.buf[idx].toString() else "out of range")
 }

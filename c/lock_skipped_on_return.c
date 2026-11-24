@@ -7,7 +7,7 @@ static int balance = 100;
 static void withdraw(int amount) {
     pthread_mutex_lock(&lock);
     if (amount > balance) {
-        return;
+        return; // CONTROL! pthread_mutex_unlock(&lock); return;
     }
     balance -= amount;
     pthread_mutex_unlock(&lock);

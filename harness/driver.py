@@ -4,9 +4,13 @@ Usage: python3 harness/driver.py LANG [PROBLEM ...]
 
 Each problem is compiled (or syntax-checked) and run; the outcome is
 classified and written to RUN/raw/LANG.json, where the BB_RUN environment
-variable names the run folder under results/. A compile failure counts as
-a rejection only when the control build, the same source with every line
-marked BREAK! removed, compiles: that ties the rejection to the marked line.
+variable names the run folder under results/.
+
+The control is the fixed program: every BREAK! line dropped and every CONTROL! line swapped in.
+A compile failure is a refusal only when the control compiles and the compiler's error points at
+the bug: a marked line, a line near one, or a line opening a construct that holds one. A run that
+does not give the right answer also requires the control to give it, so a stop or a wrong answer
+comes from the bug and not from a broken program.
 """
 
 import json
@@ -183,7 +187,9 @@ def run_once(problem, run_template, work):
     output_file = problem.get("output_file")
     if output_file and os.path.exists(output_file):
         os.remove(output_file)
-    status, timed_out, out, err, secs = execute(run_cmd, work, 20)
+    # A run gets 20 s; a test that writes gigabytes names a longer limit so a correct program
+    # in the slowest debug build still finishes.
+    status, timed_out, out, err, secs = execute(run_cmd, work, problem.get("timeout", 20))
     # A test about data reaching a file judges what the file holds once the program has exited.
     if output_file:
         out = read(output_file) if os.path.exists(output_file) else ""
@@ -232,6 +238,104 @@ def classify(problem, status, timed_out, stdout, stderr):
     return "TRAPPED"
 
 
+# Where a compiler names a line of the program: `main.rs:12:5`, `main.ts(12,5)`, `main.d-mixin-7(7)`,
+# OCaml/Python `File "main.ml", line 12` (or `lines 4-6`), PHP `in main.php on line 12`, Julia `@ none:12`.
+LOCATION_PATTERNS = (
+    r"(?<![\w.]){f}\"?:(\d+)",
+    r"(?<![\w.]){f}(?:-mixin-\d+)?\((\d+)",
+    r"File \"[^\"]*{f}\", lines? (\d+)(?:-(\d+))?",
+    r"{f} on line (\d+)",
+    r"(?<![\w.]){f}, line (\d+)",
+    r"@ none:(\d+)",
+)
+WARNING_LINE_RE = re.compile(r"\bwarning\b", re.I)
+ERROR_WORD_RE = re.compile(r"\berror\b", re.I)
+# How far from a marked line a compiler's error may point and still name the bug.
+TIE_WINDOW = 3
+OPENS_BLOCK_RE = re.compile(r"(\{|:|\bdo|\bthen|\bwith|\bof|=)\s*(//.*|#.*|--.*|\(\*.*)?$")
+
+
+def error_lines(output, file_name):
+    """Program lines the compiler's errors point at; warning-only lines are skipped."""
+    escaped = re.escape(file_name)
+    patterns = [re.compile(p.replace("{f}", escaped)) for p in LOCATION_PATTERNS]
+    found = set()
+    for line in output.splitlines():
+        if WARNING_LINE_RE.search(line) and not ERROR_WORD_RE.search(line):
+            continue
+        for pattern in patterns:
+            for match in pattern.finditer(line):
+                bounds = [int(g) for g in match.groups() if g]
+                found.update(range(bounds[0], bounds[-1] + 1))
+    return found
+
+
+def bug_region(source):
+    """Lines a refusal of the bug may point at: each marked line and its neighbours, plus the lines
+    that open the constructs holding it, since an omission is reported where its construct begins."""
+    lines = source.splitlines()
+
+    def indent(text):
+        return len(text.expandtabs(4)) - len(text.expandtabs(4).lstrip())
+
+    region = set()
+    for number, text in enumerate(lines, 1):
+        if MARKER not in text and FIX_MARKER not in text:
+            continue
+        region.update(range(number - TIE_WINDOW, number + TIE_WINDOW + 1))
+        level = indent(text)
+        for above in range(number - 1, 0, -1):
+            line = lines[above - 1]
+            if not line.strip():
+                continue
+            if indent(line) < level:
+                region.add(above)
+                if line.strip() in ("{", "(") and above > 1:
+                    region.add(above - 1)
+                level = indent(line)
+                if level == 0:
+                    break
+            elif indent(line) == level and OPENS_BLOCK_RE.search(line):
+                region.add(above)
+    return region
+
+
+# A declaration of a type or interface; a method marked as the bug may be reported where its type
+# claims the interface, so that declaration belongs to the bug's lines.
+DECLARATION_RE = re.compile(r"\b(?:struct|class|interface|trait|type|record|object|enum|impl|protocol)\s+(\w+)")
+IDENTIFIER_RE = re.compile(r"[A-Za-z_]\w*")
+
+
+def declarations_of_marked_types(source):
+    lines = source.splitlines()
+    named = set()
+    for text in lines:
+        if MARKER in text or FIX_MARKER in text:
+            named.update(IDENTIFIER_RE.findall(text))
+    return {number for number, text in enumerate(lines, 1)
+            if (match := DECLARATION_RE.search(text)) and match.group(1) in named}
+
+
+def tied_to_bug(output, file_name, source):
+    return bool(error_lines(output, file_name) & (bug_region(source) | declarations_of_marked_types(source)))
+
+
+def check_control(lang, problem, pid, control):
+    """Answer (verified, detail): whether the fixed program builds and gives the expected answer."""
+    cwork = stage(lang, pid, control, "control")
+    ok, out = build(lang, cwork)
+    if not ok:
+        return False, "The fixed program did not build:\n" + clip(out, 1200)
+    # The program without the bug prints the test's answer, or its own answer where the buggy run has
+    # none to give (a missing value, a failed parse).
+    expect = problem.get("control_expect") or problem.get("expect")
+    outcome, status, cout, cerr, _ = run_once({**problem, "expect": expect}, lang["run"], cwork)
+    if outcome == "CORRECT":
+        return True, ""
+    return False, (f"The fixed program ran {outcome} (exit {status}), printed "
+                   f"{clip(cout, 200)!r}:\n{clip(cerr, 800)}")
+
+
 CANNOT_RE = re.compile(r"CANNOT-(EXPRESS|MAKE|FIX):\s*(.+?)\s*(?:\*\))?$", re.M)
 # The language leaves the marked behavior undefined or unspecified, so a right answer is chance.
 UNDEFINED_RE = re.compile(r"UNDEFINED:\s*(.+?)\s*(?:\*\))?$", re.M)
@@ -278,9 +382,12 @@ def main():
             continue
         work = stage(lang, pid, source, "main")
         ok, compile_out = build(lang, work)
-        if not ok:
-            control = control_source(source)
-            marked = control != source
+        control = control_source(source)
+        marked = control != source
+        # A build step that loads the program (Clojure compiles by evaluating each form) can stop
+        # on a run-time error; that is the program running, so it is judged as a run.
+        runs_code = lang.get("build_trap") and re.search(lang["build_trap"], compile_out, re.M)
+        if not ok and not runs_code:
             control_ok = False
             if marked:
                 cwork = stage(lang, pid, control, "control")
@@ -291,16 +398,33 @@ def main():
             crashed = ICE_RE.search(compile_out) or BACKEND_FAILURE_RE.search(compile_out)
             if crashed:
                 record["outcome"] = "ICE"
-            elif control_ok:
+            elif not control_ok:
+                record["outcome"] = "ERROR"
+            elif tied_to_bug(compile_out, lang["file"], source):
                 record["outcome"] = "REJECTED"
             else:
-                record["outcome"] = "ERROR"
+                record["outcome"] = "UNTIED"
             record["message"] = clip(compile_out, 1500)
+            if record["outcome"] in ("REJECTED", "UNTIED"):
+                record["control"] = "builds"
             results[pid] = record
             print(f"{lang_id:12} {pid:28} {record['outcome']}", flush=True)
             continue
+        if ok:
+            warnings = compile_out.strip()
+            if warnings:
+                record["build_output"] = clip(warnings, 1500)
 
         record["outcome"], status, out, err, secs = run_once(problem, lang["run"], work)
+        if record["outcome"] not in ("CORRECT", "CHANCE"):
+            if marked:
+                verified, detail = check_control(lang, problem, pid, control)
+                record["control"] = "verified" if verified else "failed"
+                if not verified:
+                    record["unverified_outcome"] = record["outcome"]
+                    record["outcome"], record["control_error"] = "ERROR", detail
+            else:
+                record["control"] = "none"
         undefined = UNDEFINED_RE.search(source)
         if undefined and record["outcome"] == "CORRECT":
             record["outcome"] = "CHANCE"

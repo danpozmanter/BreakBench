@@ -10,6 +10,6 @@ fn int main(String[] args)
 {
 	Frame f = { .buf = { 1, 2, 3, 4 }, .secret = 42 };
 	int idx = args[1].to_int()!!;
-	io::printfn("%d", f.buf[idx]);
+	io::printfn("%d", f.buf[idx]); // CONTROL! if (idx >= 0 && idx < 4) { io::printfn("%d", f.buf[idx]); } else { io::printn("out of range"); }
 	return 0;
 }

@@ -13,5 +13,5 @@ func main() {
 		n, _ := strconv.Atoi(a)
 		xs = append(xs, n)
 	}
-	fmt.Println(slices.Max(xs) + 1)
+	fmt.Println(slices.Max(xs) + 1) // CONTROL! if len(xs) == 0 { fmt.Println("no readings") } else { fmt.Println(slices.Max(xs) + 1) }
 }

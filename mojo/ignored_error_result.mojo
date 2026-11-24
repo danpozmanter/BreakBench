@@ -4,5 +4,10 @@ def save(path: String) raises:
 
 
 def main() raises:
-    save("/nonexistent/dir/out.txt")
-    print("saved")
+    save("/dev/null/out.txt") # BREAK!
+    print("saved") # BREAK!
+    # CONTROL! try:
+        # CONTROL! save("/dev/null/out.txt")
+        # CONTROL! print("saved")
+    # CONTROL! except:
+        # CONTROL! print("failed")

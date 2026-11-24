@@ -14,7 +14,8 @@ fn (mut l Ledger) post() {
 	}
 	l.debits += 50
 	if l.debits > 0 {
-		panic('crash mid-update')
+		panic('crash mid-update') // CONTROL! l.debits -= 50
+		// CONTROL! return
 	}
 	l.credits += 50
 }

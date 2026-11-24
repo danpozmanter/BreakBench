@@ -8,4 +8,4 @@ main = do
   args <- getArgs
   putStrLn "before"
   hFlush stdout
-  print (toEnum (read (head args)) :: Color)
+  print (toEnum (read (head args)) :: Color) -- CONTROL! let n = read (head args) :: Int in putStrLn (if n >= 0 && n <= fromEnum Blue then show (toEnum n :: Color) else "invalid")

@@ -1,5 +1,5 @@
 def count(xs: list[int]) -> int:
-    xs.sort()
+    xs.sort() # CONTROL! xs = sorted(xs)
     return len(xs)
 
 

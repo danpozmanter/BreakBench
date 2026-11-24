@@ -14,7 +14,7 @@ def work() -> None:
 worker = threading.Thread(target=work)
 worker.start()
 items = [1, 2, 3]
-lists.put(items)
+lists.put(items) # CONTROL! lists.put(items.copy())
 items[0] = 99
 go_on.set()
 worker.join()

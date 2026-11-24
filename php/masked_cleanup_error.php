@@ -19,9 +19,9 @@ function save(): void
     $report = new Report();
     try {
         $report->write('totals');
-    } finally {
-        $report->close();
-    }
+    } finally { // CONTROL! } catch (RuntimeException $e) { try { $report->close(); } catch (RuntimeException) {} throw $e; }
+        $report->close(); // CONTROL! $report->close();
+    } // BREAK!
 }
 
 try {

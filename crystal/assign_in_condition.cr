@@ -1,5 +1,5 @@
 x = ARGV[0].to_i
-if x = 1
+if x = 1 # CONTROL! if x == 1
   puts "one"
 else
   puts "not one"

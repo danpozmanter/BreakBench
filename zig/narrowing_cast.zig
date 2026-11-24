@@ -8,6 +8,6 @@ pub fn main(init: std.process.Init) !void {
     defer out.flush() catch {};
     _ = &args;
     const v = try std.fmt.parseInt(i64, args[1], 10);
-    const b: u8 = @intCast(v);
+    const b: u8 = @intCast(v); // CONTROL! const b: u8 = std.math.cast(u8, v) orelse { try out.print("out of range\n", .{}); return; };
     try out.print("{d}\n", .{b});
 }

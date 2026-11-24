@@ -9,4 +9,4 @@ final class User
 $users = array_fill(0, 3, null);
 $users[1] = new User("bob");
 $users[2] = new User("carol");
-echo strlen($users[0]->name), "\n";
+echo strlen($users[0]->name), "\n"; // CONTROL! echo $users[0] === null ? "missing" : strlen($users[0]->name), "\n";

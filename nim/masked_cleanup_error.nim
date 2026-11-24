@@ -10,8 +10,14 @@ proc save() =
   let report = Report()
   try:
     report.write("totals")
-  finally:
-    report.close()
+  finally: # CONTROL! except IOError:
+    report.close() # BREAK!
+    # CONTROL! try:
+      # CONTROL! report.close()
+    # CONTROL! except IOError:
+      # CONTROL! discard
+    # CONTROL! raise
+  # CONTROL! report.close()
 
 try:
   save()

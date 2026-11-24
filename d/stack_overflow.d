@@ -8,5 +8,5 @@ long walk(long n)
 
 void main(string[] args)
 {
-    writeln(walk(args[1].to!long));
+    writeln(walk(args[1].to!long)); // CONTROL! long n = args[1].to!long, acc = 0; foreach (i; 1 .. n + 1) acc = (acc * 31 + i) % 1_000_000_007; writeln(acc);
 }

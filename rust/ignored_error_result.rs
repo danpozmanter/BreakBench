@@ -6,6 +6,6 @@ fn save(path: &str) -> io::Result<()> {
 }
 
 fn main() {
-    save("/nonexistent/dir/out.txt");
-    println!("saved");
+    save("/dev/null/out.txt"); // CONTROL! match save("/dev/null/out.txt") { Ok(()) => println!("saved"), Err(_) => println!("failed") }
+    println!("saved"); // BREAK!
 }

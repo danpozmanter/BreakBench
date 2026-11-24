@@ -10,5 +10,5 @@ pub fn main(init: std.process.Init) !void {
     defer out.flush() catch {};
     const f = Frame{ .buf = .{ 1, 2, 3, 4 }, .secret = 42 };
     const idx = try std.fmt.parseInt(usize, args[1], 10);
-    try out.print("{d}\n", .{f.buf[idx]});
+    try out.print("{d}\n", .{f.buf[idx]}); // CONTROL! if (idx < f.buf.len) try out.print("{d}\n", .{f.buf[idx]}) else try out.print("out of range\n", .{});
 }

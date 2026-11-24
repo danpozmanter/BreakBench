@@ -4,6 +4,7 @@ class Account {
 }
 
 void transfer(Account from, Account to, int amount) {
+  // CONTROL! if (identical(from, to)) return;
   final newFrom = from.balance - amount;
   final newTo = to.balance + amount;
   from.balance = newFrom;

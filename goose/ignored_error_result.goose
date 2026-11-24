@@ -5,7 +5,7 @@ fn save(path: const u8[:]) -> bool {
 }
 
 fn main() {
-    save("/nonexistent/dir/out.txt"); // BREAK!
-    // CONTROL! let ok = save("/nonexistent/dir/out.txt"); if !ok { print("failed"); }
-    print("saved");
+    save("/dev/null/out.txt"); // CONTROL! let ok = save("/dev/null/out.txt"); if ok { print("saved"); } else { print("failed"); }
+    // CONTROL! let ok = save("/dev/null/out.txt"); if !ok { print("failed"); } // BREAK!
+    print("saved"); // BREAK!
 }

@@ -5,7 +5,7 @@ function name(c::Color)
         "red"
     elseif c == Green
         "green"
-    end
+    end # CONTROL! else; "blue"; end
 end
 
 println(name(Color(parse(Int, ARGS[1]))))

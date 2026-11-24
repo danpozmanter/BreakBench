@@ -4,7 +4,7 @@ createDir("/tmp/bb_files")
 writeFile("/tmp/bb_files/report.txt", "secret\n")
 
 let name = "report.txt\0.png"
-if not name.endsWith(".png"):
+if not name.endsWith(".png"): # CONTROL! if not name.endsWith(".png") or '\0' in name:
   echo "rejected"
 else:
   try:

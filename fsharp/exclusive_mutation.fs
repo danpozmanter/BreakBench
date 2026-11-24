@@ -9,6 +9,6 @@ let transfer (from: Account) (dest: Account) amount =
 [<EntryPoint>]
 let main _ =
     let a = { Balance = 100 }
-    transfer a a 30
+    transfer a a 30 // CONTROL! if not (obj.ReferenceEquals(a, a)) then transfer a a 30
     printfn "%d" a.Balance
     0

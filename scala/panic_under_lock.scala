@@ -5,7 +5,7 @@ object Main {
 
   def post(): Unit = lock.synchronized {
     debits += 50
-    if debits > 0 then throw IllegalStateException("crash mid-update")
+    if debits > 0 then throw IllegalStateException("crash mid-update") // CONTROL! if debits > 0 then { debits -= 50; throw IllegalStateException("crash mid-update") }
     credits += 50
   }
 

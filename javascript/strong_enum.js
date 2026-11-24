@@ -13,4 +13,4 @@ function name(c) {
   }
 }
 
-console.log(name(7));
+console.log(name(7)); // CONTROL! console.log(name(Color.GREEN));

@@ -1,9 +1,9 @@
 def describe(s: String) -> String:
     match s:
-        case _:
-            return "other"
-        case "circle":
-            return "circle"
+        case _: # CONTROL! case "circle":
+            return "other" # CONTROL! return "circle"
+        case "circle": # CONTROL! case _:
+            return "circle" # CONTROL! return "other"
 
 
 def main():

@@ -1,7 +1,7 @@
 import std/[asyncdispatch, monotimes, os, times]
 
 proc job() {.async.} =
-  sleep(500)
+  sleep(500) # CONTROL! await sleepAsync(500)
 
 proc main() {.async.} =
   let start = getMonoTime()

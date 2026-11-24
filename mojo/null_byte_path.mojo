@@ -7,6 +7,7 @@ def main() raises:
         seed.write("secret\n")
 
     var name = String("report.txt\0.png")
+    # CONTROL! if "\0" in name: print("rejected"); return
     if not name.endswith(".png"):
         print("rejected")
         return

@@ -6,6 +6,6 @@ type Config struct{ Port int }
 
 func main() {
 	c := Config{Port: 8080}
-	c.Port = 1
+	c.Port = 1 // BREAK!
 	fmt.Println(c.Port)
 }

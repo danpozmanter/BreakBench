@@ -2,6 +2,7 @@ use std::env
 
 fn main() {
     let count = env::args()[0].to_i64().unwrap()
+    // CONTROL! if count > (1 << 27) { println("too large"); return }
     let size = count * 8
     let mut records = #[0u8; size]
     records[8] = 99

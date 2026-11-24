@@ -12,6 +12,7 @@ function name(Color $c): string
     return match ($c) {
         Color::Red => "red",
         Color::Green => "green",
+        // CONTROL! Color::Blue => "blue",
     };
 }
 

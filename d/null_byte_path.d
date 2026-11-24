@@ -1,4 +1,4 @@
-import std.algorithm : endsWith;
+import std.algorithm : endsWith; // CONTROL! import std.algorithm : canFind, endsWith;
 import std.file, std.stdio;
 
 void main()
@@ -7,6 +7,7 @@ void main()
     std.file.write("/tmp/bb_files/report.txt", "secret\n");
 
     string name = "report.txt\0.png";
+    // CONTROL! if (name.canFind('\0')) { writeln("rejected"); return; }
     if (!name.endsWith(".png"))
     {
         writeln("rejected");

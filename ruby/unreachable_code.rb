@@ -1,6 +1,6 @@
 def check
   puts "ok"
-  return
+  return # BREAK!
   puts "checked"
 end
 

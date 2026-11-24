@@ -8,6 +8,7 @@ function name(c) {
       return "red";
     case Color.Green:
       return "green";
+    // CONTROL! case Color.Blue: return "blue";
   }
 }
 

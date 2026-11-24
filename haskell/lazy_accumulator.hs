@@ -12,5 +12,5 @@ main = do
   withBinaryFile "/dev/zero" ReadMode $ \source ->
     replicateM_ count $ do
       message <- BS.hGet source 4096
-      modifyIORef total (+ BS.length message)
+      modifyIORef total (+ BS.length message) -- CONTROL! modifyIORef' total (+ BS.length message)
   readIORef total >>= print

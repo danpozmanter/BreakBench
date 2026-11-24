@@ -13,8 +13,14 @@ def save() raises:
     var report = Report()
     try:
         report.write("totals")
-    finally:
-        report.close()
+    finally: # CONTROL! except e:
+        report.close() # BREAK!
+        # CONTROL! try:
+            # CONTROL! report.close()
+        # CONTROL! except:
+            # CONTROL! pass
+        # CONTROL! raise e
+    # CONTROL! report.close()
 
 
 def main():

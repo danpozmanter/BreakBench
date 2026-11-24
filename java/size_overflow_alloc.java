@@ -1,6 +1,7 @@
 public class Main {
     public static void main(String[] args) {
         long count = Long.parseLong(args[0]);
+        // CONTROL! if (count > (1L << 27)) { System.out.println("too large"); return; }
         long size = count * 8;
         byte[] records = new byte[(int) size];
         records[8] = 99;

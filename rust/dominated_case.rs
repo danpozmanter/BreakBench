@@ -5,8 +5,8 @@ enum Shape {
 
 fn describe(s: Shape) -> &'static str {
     match s {
-        _ => "other",
-        Shape::Circle => "circle",
+        _ => "other", // CONTROL! Shape::Circle => "circle",
+        Shape::Circle => "circle", // CONTROL! _ => "other",
     }
 }
 

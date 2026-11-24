@@ -2,7 +2,7 @@ using System.Diagnostics;
 
 static async Task Job()
 {
-    Thread.Sleep(500);
+    Thread.Sleep(500); // CONTROL! await Task.Delay(500);
 }
 
 var sw = Stopwatch.StartNew();

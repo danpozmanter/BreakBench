@@ -2,7 +2,7 @@
 
 static void check(void) {
     puts("ok");
-    return;
+    return; // BREAK!
     puts("checked");
 }
 

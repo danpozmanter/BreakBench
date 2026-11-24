@@ -4,4 +4,4 @@
 
 (defn -main [& args]
   (let [raw (first args)]
-    (println (add raw 3))))
+    (println (add raw 3)))) ; CONTROL! (println (add (parse-long raw) 3))))

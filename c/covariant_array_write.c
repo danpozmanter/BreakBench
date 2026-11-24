@@ -11,7 +11,7 @@ int main(void) {
     Dog dogs[1] = {{{woof}}};
     Animal *animals = (Animal *)dogs;
     Cat cat = {{meow}};
-    animals[0] = cat.base;
+    animals[0] = cat.base; // BREAK!
     puts(dogs[0].base.sound());
     return 0;
 }

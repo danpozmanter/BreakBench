@@ -1,4 +1,5 @@
-def add_item(item: str, cart: list[str] = []) -> list[str]:
+def add_item(item: str, cart: list[str] = []) -> list[str]: # CONTROL! def add_item(item: str, cart: list[str] | None = None) -> list[str]:
+    # CONTROL! if cart is None: cart = []
     cart.append(item)
     return cart
 

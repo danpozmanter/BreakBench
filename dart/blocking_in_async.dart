@@ -1,7 +1,7 @@
 import 'dart:io';
 
 Future<void> job() async {
-  sleep(const Duration(milliseconds: 500));
+  sleep(const Duration(milliseconds: 500)); // CONTROL! await Future.delayed(const Duration(milliseconds: 500));
 }
 
 Future<void> main() async {

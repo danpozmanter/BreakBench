@@ -9,10 +9,10 @@ pub fn main(init: std.process.Init) !void {
     const out = &stdout.interface;
     defer out.flush() catch {};
     const message = args[1];
-    const payload = message.len - HEADER;
-    if (payload < 0) {
+    const payload = message.len - HEADER; // CONTROL! const len = message.len;
+    if (payload < 0) { // CONTROL! if (len < HEADER) {
         try out.print("short\n", .{});
     } else {
-        try out.print("{d}\n", .{payload});
+        try out.print("{d}\n", .{payload}); // CONTROL! try out.print("{d}\n", .{len - HEADER});
     }
 }

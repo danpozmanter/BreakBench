@@ -4,8 +4,8 @@ type Shape =
 
 let describe s =
     match s with
-    | _ -> "other"
-    | Circle -> "circle"
+    | _ -> "other" // CONTROL! | Circle -> "circle"
+    | Circle -> "circle" // CONTROL! | _ -> "other"
 
 [<EntryPoint>]
 let main _ =

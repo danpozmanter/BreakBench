@@ -12,8 +12,10 @@ def save
   report = Report.new
   begin
     report.write("totals")
-  ensure
-    report.close
+  ensure # CONTROL! rescue error
+    report.close # CONTROL! begin; report.close; rescue IO::Error; end; raise error
+  # CONTROL! else
+    # CONTROL! report.close
   end
 end
 

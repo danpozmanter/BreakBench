@@ -13,7 +13,7 @@ pub fn main(init: std.process.Init) !void {
     const a = try gpa.create(Rec);
     a.* = .{ .value = 0 };
     gpa.destroy(a);
-    gpa.destroy(a);
+    gpa.destroy(a); // BREAK!
     const x = try gpa.create(Rec);
     const y = try gpa.create(Rec);
     x.* = .{ .value = 1 };

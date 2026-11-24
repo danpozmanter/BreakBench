@@ -12,7 +12,7 @@ let ledger = Mutex(Ledger())
 let worker = Task.detached {
     try ledger.withLock { l in
         l.debits += 50
-        if l.debits > 0 { throw CrashMidUpdate() }
+        if l.debits > 0 { throw CrashMidUpdate() } // CONTROL! if l.debits > 0 { l.debits -= 50; throw CrashMidUpdate() }
         l.credits += 50
     }
 }

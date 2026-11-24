@@ -12,8 +12,8 @@ class Account
     {
         if (Balance >= amount)
         {
-            await Task.Delay(10);
-            lock (gate) Balance -= amount;
+            await Task.Delay(10); // CONTROL! lock (gate) Balance -= amount;
+            lock (gate) Balance -= amount; // CONTROL! await Task.Delay(10);
         }
     }
 }

@@ -6,7 +6,7 @@ class Ledger
   def post
     @lock.synchronize do
       @debits += 50
-      raise "crash mid-update" if @debits > 0
+      raise "crash mid-update" if @debits > 0 # CONTROL! if @debits > 0; @debits -= 50; raise "crash mid-update"; end
       @credits += 50
     end
   end

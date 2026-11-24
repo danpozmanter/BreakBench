@@ -14,7 +14,7 @@ fn rendezvous(io: std.Io) void {
 fn transfer(io: std.Io, first: *std.Io.Mutex, second: *std.Io.Mutex) void {
     first.lockUncancelable(io);
     defer first.unlock(io);
-    rendezvous(io);
+    rendezvous(io); // BREAK!
     second.lockUncancelable(io);
     defer second.unlock(io);
 }
@@ -29,7 +29,7 @@ pub fn main(init: std.process.Init) !void {
     defer out.flush() catch {};
     _ = &args;
     const t1 = try std.Thread.spawn(.{}, transfer, .{ init.io, &a, &b });
-    const t2 = try std.Thread.spawn(.{}, transfer, .{ init.io, &b, &a });
+    const t2 = try std.Thread.spawn(.{}, transfer, .{ init.io, &b, &a }); // CONTROL! const t2 = try std.Thread.spawn(.{}, transfer, .{ init.io, &a, &b });
     t1.join();
     t2.join();
     try out.print("finished\n", .{});

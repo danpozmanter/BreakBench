@@ -4,7 +4,7 @@ let apply_update weights =
 
 let () =
   let weights = [| 3; 3; 3; 3 |] in
-  let before = weights in
+  let before = weights in (* CONTROL! let before = Array.copy weights in *)
   apply_update weights;
   let changes = ref 0 in
   Array.iteri (fun i w -> if before.(i) <> w then incr changes) weights;

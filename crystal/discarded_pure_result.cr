@@ -1,3 +1,3 @@
 name = "ada"
-name.upcase
-puts name
+name.upcase # BREAK!
+puts name # CONTROL! puts name.upcase

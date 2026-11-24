@@ -4,7 +4,7 @@ end
 
 function main()
     cfg = Config("blue")
-    cfg.colour = "red"
+    cfg.colour = "red" # CONTROL! cfg.color = "red"
     println(cfg.color)
 end
 

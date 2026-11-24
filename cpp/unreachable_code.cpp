@@ -2,7 +2,7 @@
 
 static void check() {
     std::puts("ok");
-    return;
+    return; // BREAK!
     std::puts("checked");
 }
 

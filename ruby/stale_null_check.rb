@@ -7,6 +7,6 @@ end
 
 session = Session.new(User.new("alice"))
 if session.user
-  logout(session)
-  puts session.user.name.length
+  logout(session) # CONTROL! puts session.user.name.length
+  puts session.user.name.length # CONTROL! logout(session)
 end

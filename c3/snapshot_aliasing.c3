@@ -11,7 +11,7 @@ fn int main(String[] args)
 {
 	List{int} weights;
 	weights.push_all({ 3, 3, 3, 3 });
-	List{int} before = weights;
+	List{int} before = weights; // CONTROL! List{int} before; foreach (w : weights) before.push(w);
 	apply_update(&weights);
 	int changes = 0;
 	for (sz i = 0; i < weights.len(); i++)

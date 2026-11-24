@@ -7,7 +7,7 @@ var balance = 100
 fun withdraw(amount: Int) {
     lock.lock()
     if (amount > balance) {
-        return
+        return // CONTROL! lock.unlock(); return
     }
     balance -= amount
     lock.unlock()

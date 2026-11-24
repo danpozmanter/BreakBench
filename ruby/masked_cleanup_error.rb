@@ -11,8 +11,8 @@ end
 def save
   report = Report.new
   report.write("totals")
-ensure
-  report&.close
+ensure # CONTROL! rescue IOError => e
+  report&.close # CONTROL! begin; report&.close; rescue IOError; end; raise e
 end
 
 begin

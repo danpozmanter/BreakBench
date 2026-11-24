@@ -1,6 +1,6 @@
 import std::io;
 
-const long SPAN = 1_000_000_000L * 60 * 60 * 24 * 365 * 300;
+const long SPAN = 1_000_000_000L * 60 * 60 * 24 * 365 * 300; // CONTROL! const ulong SPAN = (ulong)1_000_000_000 * 60 * 60 * 24 * 365 * 300;
 
 fn int main(String[] args)
 {

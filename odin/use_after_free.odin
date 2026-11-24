@@ -11,7 +11,7 @@ main :: proc() {
 	a := new(Rec)
 	a.value = 1234
 	b := a
-	free(a)
+	free(a) // BREAK!
 	for _ in 0 ..< 16 {
 		c := new(Rec)
 		c.value = 6666

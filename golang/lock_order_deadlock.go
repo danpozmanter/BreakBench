@@ -9,8 +9,8 @@ func transfer(first, second *sync.Mutex, wg *sync.WaitGroup, ready *sync.WaitGro
 	defer wg.Done()
 	first.Lock()
 	defer first.Unlock()
-	ready.Done()
-	ready.Wait()
+	ready.Done() // BREAK!
+	ready.Wait() // BREAK!
 	second.Lock()
 	defer second.Unlock()
 }
@@ -22,7 +22,7 @@ func main() {
 	wg.Add(2)
 	ready.Add(2)
 	go transfer(&a, &b, &wg, &ready)
-	go transfer(&b, &a, &wg, &ready)
+	go transfer(&b, &a, &wg, &ready) // CONTROL! go transfer(&a, &b, &wg, &ready)
 	wg.Wait()
 	fmt.Println("finished")
 }

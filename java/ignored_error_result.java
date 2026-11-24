@@ -8,8 +8,8 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        save("/nonexistent/dir/out.txt"); // BREAK!
-        // CONTROL! try { save("/nonexistent/dir/out.txt"); } catch (IOException e) { }
+        save("/dev/null/out.txt"); // BREAK!
+        // CONTROL! try { save("/dev/null/out.txt"); } catch (IOException e) { }
         System.out.println("saved");
     }
 }

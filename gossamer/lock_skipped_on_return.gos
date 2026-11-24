@@ -3,7 +3,7 @@ use std::sync::{Mutex, Shared}
 fn withdraw(lock: Mutex, balance: Shared<i64>, amount: i64) {
     lock.lock()
     if amount > balance.get() {
-        return
+        return // CONTROL! lock.unlock(); return
     }
     balance.update(|b| b - amount)
     lock.unlock()

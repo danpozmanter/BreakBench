@@ -6,9 +6,9 @@ int main(int argc, char **argv) {
     int a = atoi(argv[1]) != 0;
     int b = 1;
     const char *r = "unset";
-    if (a)
+    if (a) // CONTROL! if (a) {
         if (b) r = "both";
-    else
+    else // CONTROL! } else
         r = "not a";
     puts(r);
     return 0;

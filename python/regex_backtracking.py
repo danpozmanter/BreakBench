@@ -1,4 +1,4 @@
 import re
 import sys
 
-print("match" if re.match(r"^(a+)+$", sys.argv[1]) else "no match")
+print("match" if re.match(r"^(a+)+$", sys.argv[1]) else "no match") # CONTROL! print("match" if re.match(r"^a+$", sys.argv[1]) else "no match")

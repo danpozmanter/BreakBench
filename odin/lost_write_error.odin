@@ -10,8 +10,8 @@ main :: proc() {
 	}
 	defer os.close(f)
 	if _, werr := os.write_string(f, "data\n"); werr != nil {
-		fmt.eprintln("write:", werr)
-		os.exit(1)
+		fmt.eprintln("write:", werr) // CONTROL! fmt.println("failed")
+		os.exit(1) // CONTROL! return
 	}
 	fmt.println("saved")
 }

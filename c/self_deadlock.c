@@ -11,9 +11,9 @@ static void deposit(int amount) {
 }
 
 int main(void) {
-    pthread_mutex_lock(&lock);
+    pthread_mutex_lock(&lock); // BREAK!
     deposit(10);
-    pthread_mutex_unlock(&lock);
+    pthread_mutex_unlock(&lock); // BREAK!
     puts("done");
     return 0;
 }

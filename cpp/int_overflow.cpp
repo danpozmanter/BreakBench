@@ -3,5 +3,5 @@
 
 int main(int, char **argv) {
     long long n = std::stoll(argv[1]);
-    std::cout << n + 1 << "\n";
+    std::cout << n + 1 << "\n"; // CONTROL! std::cout << static_cast<unsigned long long>(n) + 1 << "\n";
 }

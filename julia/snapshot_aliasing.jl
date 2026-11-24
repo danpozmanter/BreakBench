@@ -5,7 +5,7 @@ end
 
 function main()
     weights = [3, 3, 3, 3]
-    before = weights
+    before = weights # CONTROL! before = copy(weights)
     apply_update!(weights)
     println(count(before .!= weights))
 end

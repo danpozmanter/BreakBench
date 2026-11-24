@@ -16,8 +16,8 @@ fn (mut b Bank) deposit(amount int) {
 
 fn main() {
 	mut b := Bank{}
-	b.mu.lock()
+	b.mu.lock() // BREAK!
 	b.deposit(10)
-	b.mu.unlock()
+	b.mu.unlock() // BREAK!
 	println('done')
 }

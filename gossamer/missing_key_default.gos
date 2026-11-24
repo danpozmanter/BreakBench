@@ -3,5 +3,5 @@ use std::env
 fn main() {
     let stock = {"apple": 3, "plum": 4}
     let name = env::args()[0]
-    println(stock[name] + 5)
+    println(stock[name] + 5) // CONTROL! match stock.get(name) { Some(n) => println(f"{n + 5}"), None => println("unknown") }
 }

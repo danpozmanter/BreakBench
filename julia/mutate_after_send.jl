@@ -7,7 +7,7 @@ function main()
         println(received[1])
     end
     list = [1, 2, 3]
-    put!(lists, list)
+    put!(lists, list) # CONTROL! put!(lists, copy(list))
     list[1] = 99
     put!(go_on, true)
     wait(worker)

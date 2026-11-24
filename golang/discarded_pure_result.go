@@ -7,6 +7,6 @@ import (
 
 func main() {
 	name := "ada"
-	strings.ToUpper(name)
-	fmt.Println(name)
+	strings.ToUpper(name) // BREAK!
+	fmt.Println(name) // CONTROL! fmt.Println(strings.ToUpper(name))
 }

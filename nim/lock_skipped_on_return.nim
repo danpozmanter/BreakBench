@@ -7,7 +7,7 @@ initLock(lock)
 proc withdraw(amount: int) =
   acquire(lock)
   if amount > balance:
-    return
+    return # CONTROL! release(lock); return
   balance -= amount
   release(lock)
 

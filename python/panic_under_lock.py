@@ -8,7 +8,7 @@ def post() -> None:
     with lock:
         ledger["debits"] += 50
         if ledger["debits"] > 0:
-            raise RuntimeError("crash mid-update")
+            raise RuntimeError("crash mid-update") # CONTROL! ledger["debits"] -= 50; raise RuntimeError("crash mid-update")
         ledger["credits"] += 50
 
 

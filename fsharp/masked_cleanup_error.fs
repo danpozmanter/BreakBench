@@ -8,8 +8,8 @@ type Report() =
         member _.Dispose() = raise (IOException "close failed")
 
 let save () =
-    use report = new Report()
-    report.Write "totals"
+    use report = new Report() // CONTROL! let report = new Report()
+    report.Write "totals" // CONTROL! (try report.Write "totals" with _ -> (try (report :> IDisposable).Dispose() with :? IOException -> ()); reraise ()); (report :> IDisposable).Dispose()
 
 [<EntryPoint>]
 let main _ =

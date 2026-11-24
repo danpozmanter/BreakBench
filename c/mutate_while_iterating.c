@@ -7,7 +7,7 @@ int main(void) {
     for (int i = 0; i < len; i++) {
         if (xs[i] == 2) {
             memmove(&xs[i], &xs[i + 1], (size_t)(len - i - 1) * sizeof(int));
-            len--;
+            len--; // CONTROL! len--; i--;
         }
     }
     for (int i = 0; i < len; i++) printf(i ? ",%d" : "%d", xs[i]);

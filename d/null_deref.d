@@ -11,5 +11,5 @@ User findUser(long id) { return id == 1 ? new User("alice") : null; }
 void main(string[] args)
 {
     auto u = findUser(args[1].to!long);
-    writeln(u.name.length);
+    writeln(u.name.length); // CONTROL! if (u is null) writeln("missing"); else writeln(u.name.length);
 }

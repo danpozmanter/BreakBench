@@ -9,7 +9,8 @@ mut:
 fn (mut a Account) withdraw(amount int) {
 	a.mu.lock()
 	if amount > a.balance {
-		return
+		return // CONTROL! a.mu.unlock()
+		// CONTROL! return
 	}
 	a.balance -= amount
 	a.mu.unlock()

@@ -4,4 +4,4 @@ class Frame
 end
 
 f = Frame.new
-puts f.buf[ARGV[0].to_i]
+puts f.buf[ARGV[0].to_i] # CONTROL! i = ARGV[0].to_i; puts(i >= 0 && i < 4 ? f.buf[i] : "out of range")

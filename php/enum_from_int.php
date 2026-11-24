@@ -9,4 +9,4 @@ enum Color: int
 }
 
 echo "before\n";
-echo Color::from((int)$argv[1])->name, "\n";
+echo Color::from((int)$argv[1])->name, "\n"; // CONTROL! echo Color::tryFrom((int)$argv[1])?->name ?? "invalid", "\n";

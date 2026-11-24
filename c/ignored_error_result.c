@@ -9,7 +9,7 @@ static int save(const char *path) {
 }
 
 int main(void) {
-    save("/nonexistent/dir/out.txt");
-    puts("saved");
+    save("/dev/null/out.txt"); // CONTROL! if (save("/dev/null/out.txt") != 0) puts("failed"); else puts("saved");
+    puts("saved"); // BREAK!
     return 0;
 }

@@ -18,6 +18,6 @@ function logout(Session $session): void
 
 $session = new Session(new User("alice"));
 if ($session->user !== null) {
-    logout($session);
-    echo strlen($session->user->name), "\n";
+    logout($session); // CONTROL! echo strlen($session->user->name), "\n";
+    echo strlen($session->user->name), "\n"; // CONTROL! logout($session);
 }

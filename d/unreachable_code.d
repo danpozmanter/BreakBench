@@ -3,7 +3,7 @@ import std.stdio;
 void check()
 {
     writeln("ok");
-    return;
+    return; // BREAK!
     writeln("checked");
 }
 

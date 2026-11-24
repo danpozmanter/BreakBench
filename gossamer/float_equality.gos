@@ -4,5 +4,5 @@ fn main() {
     let x = env::args()[0].to_f64().unwrap()
     let y = env::args()[1].to_f64().unwrap()
     let a = x + y
-    println(if a == 0.3 { "equal" } else { "not equal" })
+    println(if a == 0.3 { "equal" } else { "not equal" }) // CONTROL! println(if (a - 0.3).abs() < 1e-9 { "equal" } else { "not equal" })
 }

@@ -5,5 +5,5 @@ class Config {
 }
 
 const cfg = new Config();
-cfg.colour = "red";
+cfg.colour = "red"; // CONTROL! cfg.color = "red";
 console.log(cfg.color);

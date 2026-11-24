@@ -5,7 +5,7 @@ fn worker(woken chan bool, done chan bool) {
 }
 
 fn main() {
-	woken := chan bool{}
+	woken := chan bool{} // CONTROL! woken := chan bool{cap: 1}
 	done := chan bool{}
 	woken <- true
 	spawn worker(woken, done)

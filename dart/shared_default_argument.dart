@@ -1,5 +1,5 @@
-List<String> addItem(String item, [List<String> cart = const []]) {
-  cart.add(item);
+List<String> addItem(String item, [List<String> cart = const []]) { // CONTROL! List<String> addItem(String item, [List<String>? cart]) {
+  cart.add(item); // CONTROL! cart ??= <String>[]; cart.add(item);
   return cart;
 }
 

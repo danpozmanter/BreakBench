@@ -10,7 +10,7 @@ var worker = new Thread(() =>
 });
 worker.Start();
 var list = new List<int> { 1, 2, 3 };
-lists.Add(list);
+lists.Add(list); // CONTROL! lists.Add(new List<int>(list));
 list[0] = 99;
 goOn.Set();
 worker.Join();

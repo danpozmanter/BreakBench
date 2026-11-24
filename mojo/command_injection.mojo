@@ -7,5 +7,5 @@ from std.sys import argv
 def main() raises:
     if exists("/tmp/bb_pwned"):
         remove("/tmp/bb_pwned")
-    _ = run("echo " + String(argv()[1]))
+    _ = run("echo " + String(argv()[1])) # CONTROL! _ = run("echo '" + String(argv()[1]).replace("'", "'\\''") + "'")
     print("injected" if exists("/tmp/bb_pwned") else "safe")

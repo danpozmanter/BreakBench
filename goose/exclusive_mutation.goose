@@ -9,6 +9,6 @@ fn transfer(from: Account&, to: Account&, amount: i64) {
 
 fn main() {
     var a = Account { balance: 100 };
-    transfer(a, a, 30);
+    transfer(a, a, 30); // BREAK!
     print(a.balance);
 }

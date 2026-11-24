@@ -12,7 +12,7 @@ Account :: struct {
 withdraw :: proc(account: ^Account, amount: int) {
 	sync.mutex_lock(&account.lock)
 	if amount > account.balance {
-		return
+		return // CONTROL! sync.mutex_unlock(&account.lock); return
 	}
 	account.balance -= amount
 	sync.mutex_unlock(&account.lock)

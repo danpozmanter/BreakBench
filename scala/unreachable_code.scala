@@ -1,7 +1,7 @@
 object Main {
   def check(): Unit = {
     println("ok")
-    return
+    return // BREAK!
     println("checked")
   }
 

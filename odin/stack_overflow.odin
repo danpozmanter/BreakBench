@@ -11,5 +11,5 @@ walk :: proc(n: i64) -> i64 {
 
 main :: proc() {
 	n, _ := strconv.parse_i64(os.args[1])
-	fmt.println(walk(n))
+	fmt.println(walk(n)) // CONTROL! acc: i64 = 0; for i in 1 ..= n do acc = (acc * 31 + i) % 1_000_000_007; fmt.println(acc)
 }

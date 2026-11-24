@@ -6,6 +6,7 @@
 struct Node {
     std::vector<unsigned char> data = std::vector<unsigned char>(4096, 1);
     std::shared_ptr<Node> other;
+    // CONTROL! std::weak_ptr<Node> back;
 };
 
 int main(int, char **argv) {
@@ -14,7 +15,7 @@ int main(int, char **argv) {
         auto parent = std::make_shared<Node>();
         auto child = std::make_shared<Node>();
         parent->other = child;
-        child->other = parent;
+        child->other = parent; // CONTROL! child->back = parent;
     }
     std::cout << "done\n";
 }

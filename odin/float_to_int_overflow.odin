@@ -6,6 +6,6 @@ import "core:strconv"
 
 main :: proc() {
 	x, _ := strconv.parse_f64(os.args[1])
-	v := i64(x)
+	v := i64(x) // CONTROL! v := i128(x)
 	fmt.println(v)
 }

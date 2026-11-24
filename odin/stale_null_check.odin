@@ -18,7 +18,7 @@ main :: proc() {
 	alice := User{name = "alice"}
 	session := Session{user = &alice}
 	if session.user != nil {
-		logout(&session)
-		fmt.println(len(session.user.name))
+		logout(&session) // CONTROL! fmt.println(len(session.user.name))
+		fmt.println(len(session.user.name)) // CONTROL! logout(&session)
 	}
 }

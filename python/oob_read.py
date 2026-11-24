@@ -8,4 +8,5 @@ class Frame:
 
 
 f = Frame()
-print(f.buf[int(sys.argv[1])])
+print(f.buf[int(sys.argv[1])]) # CONTROL! i = int(sys.argv[1])
+# CONTROL! print(f.buf[i] if 0 <= i < len(f.buf) else "out of range")

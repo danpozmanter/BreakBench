@@ -13,8 +13,8 @@ deposit :: proc(amount: int) {
 }
 
 main :: proc() {
-	sync.mutex_lock(&lock)
+	sync.mutex_lock(&lock) // BREAK!
 	deposit(10)
-	sync.mutex_unlock(&lock)
+	sync.mutex_unlock(&lock) // BREAK!
 	fmt.println("done")
 }

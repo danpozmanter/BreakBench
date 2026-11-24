@@ -10,6 +10,6 @@ def deposit(amount: int) -> None:
         balance += amount
 
 
-with lock:
-    deposit(10)
+with lock: # CONTROL! deposit(10)
+    deposit(10) # BREAK!
 print("done")

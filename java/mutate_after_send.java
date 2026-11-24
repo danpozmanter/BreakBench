@@ -19,7 +19,7 @@ public class Main {
         });
         worker.start();
         List<Integer> list = new ArrayList<>(List.of(1, 2, 3));
-        lists.put(list);
+        lists.put(list); // CONTROL! lists.put(new ArrayList<>(list));
         list.set(0, 99);
         goOn.countDown();
         worker.join();

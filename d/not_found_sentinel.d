@@ -4,5 +4,5 @@ void main(string[] args)
 {
     auto line = args[1];
     auto pos = line.indexOf(':');
-    writeln(line[pos + 1 .. $]);
+    writeln(line[pos + 1 .. $]); // CONTROL! writeln(pos < 0 ? "no colon" : line[pos + 1 .. $]);
 }

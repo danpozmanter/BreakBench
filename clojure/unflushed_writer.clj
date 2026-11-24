@@ -3,4 +3,4 @@
 
 (defn -main [& _]
   (let [^java.io.Writer report (io/writer "/tmp/bb_report.txt")]
-    (.write report "total=42\n")))
+    (.write report "total=42\n"))) ; CONTROL! (.write report "total=42\n") (.close report)))

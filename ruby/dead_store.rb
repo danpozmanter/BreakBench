@@ -1,3 +1,3 @@
 price = Integer(ARGV[0])
 total = price + 2
-puts price
+puts price # CONTROL! puts total

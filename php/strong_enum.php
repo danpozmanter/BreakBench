@@ -17,4 +17,4 @@ function name(Color $c): string
     };
 }
 
-echo name(7), "\n";
+echo name(7), "\n"; // CONTROL! echo name(Color::Green), "\n";

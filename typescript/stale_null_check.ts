@@ -12,6 +12,6 @@ function logout(session: Session): void {
 
 const session: Session = { user: { name: "alice" } };
 if (session.user !== null) {
-  logout(session);
-  console.log(session.user.name.length);
+  logout(session); // CONTROL! console.log(session.user.name.length);
+  console.log(session.user.name.length); // CONTROL! logout(session);
 }

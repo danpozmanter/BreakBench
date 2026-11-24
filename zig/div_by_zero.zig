@@ -8,5 +8,5 @@ pub fn main(init: std.process.Init) !void {
     defer out.flush() catch {};
     _ = &args;
     const d = try std.fmt.parseInt(i64, args[1], 10);
-    try out.print("{d}\n", .{@divTrunc(100, d)});
+    try out.print("{d}\n", .{@divTrunc(100, d)}); // CONTROL! if (d == 0) try out.print("cannot divide\n", .{}) else try out.print("{d}\n", .{@divTrunc(100, d)});
 }

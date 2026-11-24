@@ -13,6 +13,7 @@ fn main() {
         let child = Rc::new(RefCell::new(Node { data: vec![1; 4096], other: Some(Rc::clone(&parent)) }));
         parent.borrow_mut().other = Some(Rc::clone(&child));
         assert_eq!(child.borrow().data.len(), parent.borrow().data.len());
+        // CONTROL! parent.borrow_mut().other = None;
     }
     println!("done");
 }

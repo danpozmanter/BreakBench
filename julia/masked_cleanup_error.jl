@@ -7,9 +7,10 @@ function save()
     report = Report()
     try
         write_report(report, "totals")
-    finally
-        close_report(report)
+    finally # CONTROL! catch e
+        close_report(report) # CONTROL! try close_report(report) catch end; rethrow()
     end
+    # CONTROL! close_report(report)
 end
 
 try

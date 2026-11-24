@@ -23,7 +23,7 @@ int main(int argc, char **argv) {
     struct job job = {argc, argv, 0};
     pthread_t worker;
     pthread_create(&worker, NULL, sum, &job);
-    pthread_join(worker, NULL);
-    printf("total %ld\n", job.total);
+    pthread_join(worker, NULL); // CONTROL! void *res; pthread_join(worker, &res);
+    printf("total %ld\n", job.total); // CONTROL! if (res) puts("failed"); else printf("total %ld\n", job.total);
     return 0;
 }

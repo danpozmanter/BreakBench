@@ -10,7 +10,7 @@ fn int main(String[] args)
 {
 	Rec* a = mem::new(Rec);
 	free(a);
-	free(a);
+	free(a); // BREAK!
 	Rec* x = mem::new(Rec);
 	Rec* y = mem::new(Rec);
 	x.value = 1;

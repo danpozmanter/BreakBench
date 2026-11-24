@@ -12,7 +12,7 @@ fn main() {
             let mut l = ledger.lock().unwrap();
             l.debits += 50;
             if l.debits > 0 {
-                panic!("crash mid-update");
+                panic!("crash mid-update"); // CONTROL! l.debits -= 50; drop(l); panic!("crash mid-update");
             }
             l.credits += 50;
         });

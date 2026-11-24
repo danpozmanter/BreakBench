@@ -1,4 +1,4 @@
 save(path) = write(path, "data")
 
-save("/nonexistent/dir/out.txt")
-println("saved")
+save("/dev/null/out.txt") # CONTROL! try; save("/dev/null/out.txt"); println("saved"); catch; println("failed"); end
+println("saved") # BREAK!

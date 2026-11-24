@@ -17,5 +17,5 @@ def logout(session: Session) -> None:
 
 session = Session(User("alice"))
 if session.user is not None:
-    logout(session)
-    print(len(session.user.name))
+    logout(session) # CONTROL! print(len(session.user.name))
+    print(len(session.user.name)) # CONTROL! logout(session)

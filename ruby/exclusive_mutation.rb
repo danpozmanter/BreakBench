@@ -1,6 +1,7 @@
 Account = Struct.new(:balance)
 
 def transfer(from, to, amount)
+  # CONTROL! return if from.equal?(to)
   new_from = from.balance - amount
   new_to = to.balance + amount
   from.balance = new_from

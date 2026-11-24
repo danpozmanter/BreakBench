@@ -11,7 +11,7 @@ fn main() {
 	done := chan bool{}
 	spawn worker(lists, go_on, done)
 	mut list := [1, 2, 3]
-	lists <- list
+	lists <- list // CONTROL! lists <- list.clone()
 	list[0] = 99
 	go_on <- true
 	_ := <-done

@@ -11,6 +11,7 @@ int main(void) {
 
     static const char name[] = "report.txt\0.png";
     size_t length = sizeof name - 1;
+    // CONTROL! if (strlen(name) != length) { puts("rejected"); return 0; }
     if (length < 4 || memcmp(name + length - 4, ".png", 4) != 0) {
         puts("rejected");
         return 0;

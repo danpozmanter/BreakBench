@@ -1,5 +1,5 @@
 void main() {
   final name = "ada";
-  name.toUpperCase();
-  print(name);
+  name.toUpperCase(); // BREAK!
+  print(name); // CONTROL! print(name.toUpperCase());
 }

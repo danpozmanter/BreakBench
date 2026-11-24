@@ -6,7 +6,7 @@ import Data.IORef
 claim :: MVar (IORef Bool, IORef Int) -> Chan () -> MVar () -> Chan () -> IO ()
 claim state ready release done = do
   (claimed, winners) <- readMVar state
-  available <- withMVarLock claimed
+  available <- withMVarLock claimed -- CONTROL! available <- atomicModifyIORef' claimed (\c -> (True, not c))
   writeChan ready ()
   takeMVar release
   when available $ do

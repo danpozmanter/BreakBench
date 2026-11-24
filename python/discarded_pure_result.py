@@ -1,3 +1,3 @@
 name = "ada"
-name.upper()
-print(name)
+name.upper() # BREAK!
+print(name) # CONTROL! print(name.upper())

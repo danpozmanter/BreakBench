@@ -5,6 +5,6 @@ public class Main {
         User[] users = new User[3];
         users[1] = new User("bob");
         users[2] = new User("carol");
-        System.out.println(users[0].name().length());
+        System.out.println(users[0].name().length()); // CONTROL! System.out.println(users[0] == null ? "missing" : String.valueOf(users[0].name().length()));
     }
 }

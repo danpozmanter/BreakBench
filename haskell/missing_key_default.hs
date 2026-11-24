@@ -5,4 +5,4 @@ main :: IO ()
 main = do
   args <- getArgs
   let stock = M.fromList [("apple", 3), ("plum", 4 :: Int)]
-  print (stock M.! head args + 5)
+  print (stock M.! head args + 5) -- CONTROL! putStrLn (maybe "unknown" (show . (+ 5)) (M.lookup (head args) stock))

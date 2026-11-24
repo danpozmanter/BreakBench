@@ -6,7 +6,7 @@ import (
 )
 
 func count(xs []int) int {
-	sort.Ints(xs)
+	sort.Ints(xs) // CONTROL! xs = append([]int(nil), xs...); sort.Ints(xs)
 	return len(xs)
 }
 

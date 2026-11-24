@@ -6,6 +6,7 @@ name :: Color -> String
 name c = case c of
   Red -> "red"
   Green -> "green"
+  -- CONTROL! Blue -> "blue"
 
 main :: IO ()
 main = do

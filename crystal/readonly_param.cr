@@ -1,5 +1,5 @@
 def count(xs : Array(Int32)) : Int32
-  xs.sort!
+  xs.sort! # CONTROL! xs = xs.sort
   xs.size
 end
 

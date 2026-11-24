@@ -5,4 +5,5 @@ backup.executableURL = URL(fileURLWithPath: "/bin/sh")
 backup.arguments = ["-c", "exit 3"]
 try backup.run()
 backup.waitUntilExit()
-print("backed up")
+// CONTROL! if backup.terminationStatus != 0 { print("backup failed") } else {
+print("backed up") // CONTROL! print("backed up") }

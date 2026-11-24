@@ -2,6 +2,6 @@ use std::env
 
 fn main() {
     let x = env::args()[0].to_f64().unwrap()
-    let v = x as i64
-    println(f"{v}")
+    let v = x as i64 // BREAK!
+    println(f"{v}") // CONTROL! println(f"{x:.0}")
 }

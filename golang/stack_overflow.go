@@ -15,5 +15,5 @@ func walk(n int64) int64 {
 
 func main() {
 	n, _ := strconv.ParseInt(os.Args[1], 10, 64)
-	fmt.Println(walk(n))
+	fmt.Println(walk(n)) // CONTROL! acc := int64(0); for i := int64(1); i <= n; i++ { acc = (acc*31 + i) % 1000000007 }; fmt.Println(acc)
 }

@@ -8,7 +8,7 @@ static void *post(void *arg) {
     (void)arg;
     pthread_mutex_lock(&lock);
     debits += 50;
-    if (debits > 0) {
+    if (debits > 0) { // CONTROL! if (debits > 0) { debits -= 50;
         pthread_mutex_unlock(&lock);
         return (void *)1;
     }

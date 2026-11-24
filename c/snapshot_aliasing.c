@@ -9,7 +9,7 @@ static void apply_update(int *weights) {
 int main(void) {
     int *weights = malloc(4 * sizeof(int));
     for (int i = 0; i < 4; i++) weights[i] = 3;
-    int *before = weights;
+    int *before = weights; // CONTROL! int before[4]; for (int i = 0; i < 4; i++) before[i] = weights[i];
     apply_update(weights);
     int changes = 0;
     for (int i = 0; i < 4; i++) {

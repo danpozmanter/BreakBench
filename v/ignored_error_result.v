@@ -5,7 +5,7 @@ fn save(path string) ! {
 }
 
 fn main() {
-	save('/nonexistent/dir/out.txt') // BREAK!
-	// CONTROL! save('/nonexistent/dir/out.txt') or {}
+	save('/dev/null/out.txt') // BREAK!
+	// CONTROL! save('/dev/null/out.txt') or {}
 	println('saved')
 }

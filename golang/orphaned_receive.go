@@ -10,9 +10,9 @@ func main() {
 	go func() {
 		n, err := strconv.Atoi("x")
 		if err != nil {
-			return
+			return // CONTROL! close(answer); return
 		}
 		answer <- n
 	}()
-	fmt.Println(<-answer)
+	fmt.Println(<-answer) // CONTROL! if n, ok := <-answer; ok { fmt.Println(n) } else { fmt.Println("failed") }
 }

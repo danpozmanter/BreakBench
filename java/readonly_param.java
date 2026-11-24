@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Main {
     static int count(List<Integer> xs) {
-        Collections.sort(xs);
+        Collections.sort(xs); // CONTROL! xs = new ArrayList<>(xs); Collections.sort(xs);
         return xs.size();
     }
 

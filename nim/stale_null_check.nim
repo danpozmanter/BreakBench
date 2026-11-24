@@ -9,5 +9,5 @@ proc logout(session: Session) =
 
 let session = Session(user: User(name: "alice"))
 if session.user != nil:
-  logout(session)
-  echo session.user.name.len
+  logout(session) # CONTROL! echo session.user.name.len
+  echo session.user.name.len # CONTROL! logout(session)

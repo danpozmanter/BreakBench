@@ -8,6 +8,6 @@ proc deposit(amount: int) =
   withLock lock:
     balance += amount
 
-withLock lock:
-  deposit(10)
+withLock lock: # CONTROL! deposit(10)
+  deposit(10) # BREAK!
 echo "done"

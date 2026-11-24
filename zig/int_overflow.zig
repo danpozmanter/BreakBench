@@ -7,5 +7,5 @@ pub fn main(init: std.process.Init) !void {
     const out = &stdout.interface;
     defer out.flush() catch {};
     const n = try std.fmt.parseInt(i64, args[1], 10);
-    try out.print("{d}\n", .{n + 1});
+    try out.print("{d}\n", .{n + 1}); // CONTROL! try out.print("{d}\n", .{@as(i128, n) + 1});
 }

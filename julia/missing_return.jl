@@ -3,7 +3,7 @@ function grade(score)
         return "pass"
     elseif score < 50
         return "fail"
-    end
+    end # CONTROL! else; return "borderline"; end
 end
 
 println(grade(parse(Int, ARGS[1])))

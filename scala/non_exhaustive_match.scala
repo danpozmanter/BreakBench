@@ -6,6 +6,7 @@ object Main {
   def name(c: Color): String = c match {
     case Color.Red => "red"
     case Color.Green => "green"
+    // CONTROL! case Color.Blue => "blue"
   }
 
   def main(args: Array[String]): Unit = {

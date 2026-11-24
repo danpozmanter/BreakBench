@@ -8,4 +8,9 @@ def walk(n: Int) -> Int:
 
 
 def main() raises:
-    print(walk(atol(argv()[1])))
+    print(walk(atol(argv()[1]))) # BREAK!
+    # CONTROL! var n = atol(argv()[1])
+    # CONTROL! var acc = 0
+    # CONTROL! for i in range(1, n + 1):
+        # CONTROL! acc = (acc * 31 + i) % 1_000_000_007
+    # CONTROL! print(acc)

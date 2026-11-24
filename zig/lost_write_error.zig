@@ -12,6 +12,6 @@ pub fn main(init: std.process.Init) !void {
     var buf: [64]u8 = undefined;
     var fw = f.writerStreaming(init.io, &buf);
     try fw.interface.writeAll("data\n");
-    try fw.interface.flush();
+    try fw.interface.flush(); // CONTROL! fw.interface.flush() catch { try out.print("failed\n", .{}); return; };
     try out.print("saved\n", .{});
 }

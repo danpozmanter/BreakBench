@@ -10,7 +10,7 @@ async function sum(items: string[]): Promise<number> {
 
 async function main(): Promise<void> {
   const worker = sum(process.argv.slice(2));
-  const total = await worker;
+  const total = await worker; // CONTROL! let total: number; try { total = await worker; } catch { console.log("failed"); return; }
   console.log(`total ${total}`);
 }
 

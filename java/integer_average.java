@@ -3,7 +3,7 @@ public class Main {
         int[] values = {3, 4};
         int sum = values[0] + values[1];
         int count = values.length;
-        double avg = sum / count;
+        double avg = sum / count; // CONTROL! double avg = (double) sum / count;
         System.out.printf("%.1f%n", avg);
     }
 }

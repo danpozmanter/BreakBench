@@ -14,9 +14,9 @@ void save() {
   final report = Report();
   try {
     report.write('totals');
-  } finally {
-    report.close();
-  }
+  } finally { // CONTROL! } catch (_) { try { report.close(); } on FileSystemException { } rethrow; }
+    report.close(); // CONTROL! report.close();
+  } // BREAK!
 }
 
 void main() {

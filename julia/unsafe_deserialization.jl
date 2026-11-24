@@ -18,8 +18,8 @@ attacker = IOBuffer()
 serialize(attacker, Cleanup("/tmp/bb_cache"))
 seekstart(attacker)
 try
-    session = deserialize(attacker)
-    println(session.user)
+    session = deserialize(attacker) # CONTROL! throw(ArgumentError("untrusted bytes are not deserialized"))
+    println(session.user) # BREAK!
 catch
     println("rejected")
 end

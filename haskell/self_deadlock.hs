@@ -6,7 +6,7 @@ deposit lock amount = modifyMVar_ lock (return . (+ amount))
 main :: IO ()
 main = do
   lock <- newMVar 0
-  balance <- takeMVar lock
+  balance <- takeMVar lock -- BREAK!
   deposit lock 10
-  putMVar lock balance
+  putMVar lock balance -- BREAK!
   putStrLn "done"

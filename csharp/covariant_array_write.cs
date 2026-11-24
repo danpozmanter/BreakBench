@@ -1,6 +1,6 @@
 Dog[] dogs = { new Dog() };
 Animal[] animals = dogs;
-animals[0] = new Cat();
+animals[0] = new Cat(); // BREAK!
 Console.WriteLine(dogs[0].Sound());
 
 abstract class Animal { public abstract string Sound(); }

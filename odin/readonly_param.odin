@@ -4,7 +4,7 @@ import "core:fmt"
 import "core:slice"
 
 count :: proc(xs: []int) -> int {
-	slice.sort(xs)
+	slice.sort(xs) // CONTROL! sorted := slice.clone(xs); defer delete(sorted); slice.sort(sorted)
 	return len(xs)
 }
 

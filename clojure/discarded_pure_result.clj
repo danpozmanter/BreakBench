@@ -3,5 +3,5 @@
 
 (defn -main [& _]
   (let [name "ada"]
-    (str/upper-case name)
-    (println name)))
+    (str/upper-case name) ; BREAK!
+    (println name))) ; CONTROL! (println (str/upper-case name))))

@@ -3,8 +3,8 @@ actor Account {
 
     func withdraw(_ amount: Int) async {
         if balance >= amount {
-            try? await Task.sleep(nanoseconds: 10_000_000)
-            balance -= amount
+            try? await Task.sleep(nanoseconds: 10_000_000) // CONTROL! balance -= amount
+            balance -= amount // CONTROL! try? await Task.sleep(nanoseconds: 10_000_000)
         }
     }
 }

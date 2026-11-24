@@ -2,6 +2,7 @@ use std::env
 
 fn main() {
     let v = env::args()[0].to_i64().unwrap()
+    // CONTROL! if v < 0 || v > 255 { println("out of range"); return }
     let b = v as u8
     println(f"{b}")
 }

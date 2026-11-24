@@ -15,5 +15,5 @@ pub fn main(init: std.process.Init) !void {
     try out.flush();
     var id: i64 = 2;
     _ = &id;
-    try out.print("{d}\n", .{find(id).? + 1});
+    try out.print("{d}\n", .{find(id).? + 1}); // CONTROL! if (find(id)) |a| try out.print("{d}\n", .{a + 1}) else try out.print("missing\n", .{});
 }

@@ -2,6 +2,7 @@ use std::env
 
 fn main() {
     let n = env::args()[0].to_i64().unwrap()
+    // CONTROL! if n > (1 << 30) { println("too large"); return }
     let mut buf = #[0u8; n]
     buf[n - 1] = 1
     println(f"{buf.len()}")

@@ -11,6 +11,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	// CONTROL! if count > 1<<27 { fmt.Println("too large"); return }
 	size := count * 8
 	records := make([]byte, size)
 	records[8] = 99

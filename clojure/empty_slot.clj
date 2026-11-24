@@ -4,4 +4,4 @@
   (let [users (-> (vec (repeat 3 nil))
                   (assoc 1 {:name "bob"})
                   (assoc 2 {:name "carol"}))]
-    (println (count (:name (users 0))))))
+    (println (count (:name (users 0)))))) ; CONTROL! (println (if-let [u (users 0)] (count (:name u)) "missing"))))

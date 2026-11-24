@@ -8,5 +8,5 @@ recursive fn walk(n: i64) -> i64 {
 
 fn main() {
     let n, ok = parse_int(args()[1]);
-    print(walk(n));
+    print(walk(n)); // CONTROL! var acc = 0; for i in n { acc = (acc * 31 + i + 1) % 1000000007; } print(acc);
 }

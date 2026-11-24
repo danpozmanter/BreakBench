@@ -10,6 +10,6 @@ fn main() {
     users.push(User { id: 1, age: 36 });
     print("before");
     let u = find(users, 2);
-    assert(u);
-    print(u.age + 1);
+    assert(u); // CONTROL! if u { print(u.age + 1); } else { print("missing"); }
+    print(u.age + 1); // BREAK!
 }

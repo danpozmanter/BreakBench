@@ -9,7 +9,7 @@ public class Main {
         lock.lock();
         try {
             debits += 50;
-            if (debits > 0) throw new IllegalStateException("crash mid-update");
+            if (debits > 0) throw new IllegalStateException("crash mid-update"); // CONTROL! if (debits > 0) { debits -= 50; throw new IllegalStateException("crash mid-update"); }
             credits += 50;
         } finally {
             lock.unlock();

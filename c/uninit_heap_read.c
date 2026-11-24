@@ -14,7 +14,7 @@ int main(int argc, char **argv) {
     sessions[0] = session;
     snprintf((char *)session + 32, 32, "SECRET-%s", argv[0][0] ? "TOKEN" : "");
     free(session);
-    unsigned char *reply = malloc(64);
+    unsigned char *reply = malloc(64); // CONTROL! unsigned char *reply = calloc(1, 64);
     sessions[1] = reply;
     fflush(stdout);
     send_response(reply + 32, 12);

@@ -3,7 +3,7 @@ $balance = 100
 
 def withdraw(amount)
   LOCK.lock
-  return if amount > $balance
+  return if amount > $balance # CONTROL! if amount > $balance then LOCK.unlock; return end
   $balance -= amount
   LOCK.unlock
 end

@@ -24,13 +24,13 @@ ready = Barrier.new(2)
 
 def transfer(first, second, ready)
   first.synchronize do
-    ready.wait
+    ready.wait # BREAK!
     second.synchronize {}
   end
 end
 
 t1 = Thread.new { transfer(a, b, ready) }
-t2 = Thread.new { transfer(b, a, ready) }
+t2 = Thread.new { transfer(b, a, ready) } # CONTROL! t2 = Thread.new { transfer(a, b, ready) }
 t1.join
 t2.join
 puts "finished"

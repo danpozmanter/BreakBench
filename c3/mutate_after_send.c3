@@ -32,7 +32,7 @@ fn int main(String[] args)
 	list[0] = 1;
 	list[1] = 2;
 	list[2] = 3;
-	(void)pipes.lists.push(list);
+	(void)pipes.lists.push(list); // CONTROL! int[] copy = mem::new_array(int, 3); copy[..] = list[..]; (void)pipes.lists.push(copy);
 	list[0] = 99;
 	(void)pipes.go_on.push(true);
 	(void)t.join();

@@ -9,5 +9,5 @@ find :: proc(id: int) -> Maybe(int) {
 
 main :: proc() {
 	fmt.println("before")
-	fmt.println(find(2).? + 1)
+	fmt.println(find(2).? + 1) // CONTROL! if a, ok := find(2).?; ok { fmt.println(a + 1) } else { fmt.println("missing") }
 }

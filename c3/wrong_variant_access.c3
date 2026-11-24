@@ -19,6 +19,6 @@ struct Value
 fn int main(String[] args)
 {
 	Value v = { .kind = INT, .i = 42 };
-	io::printfn("%d", v.text.len());
+	io::printfn("%d", v.text.len()); // CONTROL! if (v.kind == TEXT) { io::printfn("%d", v.text.len()); } else { io::printn("not text"); }
 	return 0;
 }

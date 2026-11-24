@@ -7,5 +7,5 @@ class Config
 end
 
 cfg = Config.new
-cfg.colour = "red"
+cfg.colour = "red" # CONTROL! cfg.color = "red"
 puts cfg.color

@@ -10,6 +10,6 @@ func save(path string) error {
 }
 
 func main() {
-	save("/nonexistent/dir/out.txt")
-	fmt.Println("saved")
+	save("/dev/null/out.txt") // CONTROL! if err := save("/dev/null/out.txt"); err != nil { fmt.Println("failed") } else { fmt.Println("saved") }
+	fmt.Println("saved") // BREAK!
 }

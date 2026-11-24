@@ -6,4 +6,4 @@ def find_name(user_id: int) -> str | None:
 
 
 name = find_name(int(sys.argv[1]))
-print(f"hello, {name}")
+print(f"hello, {name}") # CONTROL! print(f"hello, {name or 'nobody'}")

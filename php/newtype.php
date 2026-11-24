@@ -20,4 +20,4 @@ final class Seconds
     }
 }
 
-echo (new Meters(2.0))->add(new Seconds(3.0))->v, "\n";
+echo (new Meters(2.0))->add(new Seconds(3.0))->v, "\n"; // CONTROL! echo (new Meters(2.0))->v, "\n";

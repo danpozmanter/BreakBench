@@ -3,4 +3,4 @@ def find_name(id)
 end
 
 name = find_name(ARGV[0].to_i)
-puts "hello, #{name}"
+puts "hello, #{name}" # CONTROL! puts "hello, #{name || "nobody"}"

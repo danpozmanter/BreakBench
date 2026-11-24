@@ -9,5 +9,5 @@ final class Config
 }
 
 $c = new Config(8080);
-$c->port = 1;
+$c->port = 1; // BREAK!
 echo $c->port, "\n";

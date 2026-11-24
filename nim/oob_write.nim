@@ -5,5 +5,6 @@ type Frame = object
   guard: int
 
 var f = Frame(guard: 7)
-f.buf[parseInt(paramStr(1))] = 99
+f.buf[parseInt(paramStr(1))] = 99 # CONTROL! let i = parseInt(paramStr(1))
+# CONTROL! if i in 0..3: f.buf[i] = 99
 echo f.guard

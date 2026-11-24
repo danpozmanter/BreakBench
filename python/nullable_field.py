@@ -7,4 +7,4 @@ class User:
 
 
 decoded = User(None)
-print(len(decoded.name))  # CONTROL! print(len(decoded.name or ""))
+print(len(decoded.name)) # CONTROL! print("no name" if decoded.name is None else len(decoded.name))

@@ -14,9 +14,9 @@ fn main() {
     worker := fn [mut state, ready, release] () {
         mut available := false
         state.mu.lock()
-        available = !state.claimed // BREAK!
+        available = !state.claimed
+        // CONTROL! if available { state.claimed = true }
         state.mu.unlock()
-        // CONTROL! available = !state.claimed; if available { state.claimed = true }
         ready <- true
         _ = <-release
         if available {

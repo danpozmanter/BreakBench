@@ -6,4 +6,4 @@ def name(c)
   end
 end
 
-puts name(7)
+puts name(7) # CONTROL! puts name(:green)

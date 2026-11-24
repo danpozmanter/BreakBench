@@ -5,7 +5,7 @@ fun applyUpdate(weights: MutableList<Int>) {
 
 fun main() {
     val weights = mutableListOf(3, 3, 3, 3)
-    val before = weights
+    val before = weights // CONTROL! val before = weights.toList()
     applyUpdate(weights)
     val changes = weights.indices.count { before[it] != weights[it] }
     println(changes)

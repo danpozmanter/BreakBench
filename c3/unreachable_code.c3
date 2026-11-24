@@ -3,7 +3,7 @@ import std::io;
 fn void check()
 {
 	io::printn("ok");
-	return;
+	return; // BREAK!
 	io::printn("checked");
 }
 

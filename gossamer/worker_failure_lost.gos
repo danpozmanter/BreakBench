@@ -1,11 +1,11 @@
 use std::{env, errors}
 
-fn sum(xs: Vec<String>) -> i64 {
+fn sum(xs: Vec<String>) -> i64 { // CONTROL! fn sum(xs: Vec<String>) -> Option<i64> {
     let mut total = 0
     for x in xs {
-        total += x.to_i64().unwrap()
+        total += x.to_i64().unwrap() // CONTROL! total += x.to_i64()?
     }
-    total
+    total // CONTROL! Some(total)
 }
 
 fn run() -> Result<(), errors::Error> {
@@ -13,7 +13,7 @@ fn run() -> Result<(), errors::Error> {
     cohort {
         let worker = spawn(|| sum(args))
         let total = worker.join()?
-        println(f"total {total}")
+        println(f"total {total}") // CONTROL! match total { Some(t) => println(f"total {t}"), None => println("failed") }
     }
 }
 

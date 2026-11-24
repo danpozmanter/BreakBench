@@ -16,7 +16,7 @@ pub fn main(init: std.process.Init) !void {
     var weights: std.ArrayList(i64) = .empty;
     defer weights.deinit(gpa);
     try weights.appendSlice(gpa, &.{ 3, 3, 3, 3 });
-    const before = weights;
+    const before = weights; // CONTROL! var before = try weights.clone(gpa); defer before.deinit(gpa);
     applyUpdate(weights.items);
     var changes: usize = 0;
     for (before.items, weights.items) |b, w| {

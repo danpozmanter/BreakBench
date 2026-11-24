@@ -16,7 +16,7 @@ func (l *Ledger) post() {
 	defer l.mu.Unlock()
 	l.debits += 50
 	if l.debits > 0 {
-		panic("crash mid-update")
+		panic("crash mid-update") // CONTROL! l.debits -= 50; return
 	}
 	l.credits += 50
 }

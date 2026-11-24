@@ -5,9 +5,9 @@
 
 (defn withdraw [amount]
   (go
-    (when (>= @balance amount)
-      (<! (timeout 10))
-      (swap! balance - amount))))
+    (when (>= @balance amount) ; CONTROL! (when (>= (first (swap-vals! balance #(if (>= % amount) (- % amount) %))) amount)
+      (<! (timeout 10)) ; CONTROL! (<! (timeout 10)))))
+      (swap! balance - amount)))) ; BREAK!
 
 (defn -main [& _]
   (let [first-withdrawal (withdraw 80)

@@ -16,7 +16,7 @@ class Account
         Monitor.Enter(gate);
         if (amount > Balance)
         {
-            return;
+            return; // CONTROL! Monitor.Exit(gate); return;
         }
         Balance -= amount;
         Monitor.Exit(gate);

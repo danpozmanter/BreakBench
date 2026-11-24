@@ -6,14 +6,14 @@
 
 (defn transfer [first-lock second-lock]
   (locking first-lock
-    (.countDown ready)
-    (.await ready)
+    (.countDown ready) ; BREAK!
+    (.await ready) ; BREAK!
     (locking second-lock
       :done)))
 
 (defn -main [& _]
   (let [t1 (future (transfer a b))
-        t2 (future (transfer b a))]
+        t2 (future (transfer b a))] ; CONTROL! t2 (future (transfer a b))]
     @t1
     @t2
     (println "finished")

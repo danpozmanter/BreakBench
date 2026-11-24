@@ -1,6 +1,7 @@
 package main
 
 import "core:fmt"
+// CONTROL! import "core:slice"
 
 apply_update :: proc(weights: []int) {
 	weights[1] = 5
@@ -10,7 +11,7 @@ apply_update :: proc(weights: []int) {
 main :: proc() {
 	weights: [dynamic]int
 	append(&weights, 3, 3, 3, 3)
-	before := weights
+	before := weights // CONTROL! before := slice.clone(weights[:])
 	apply_update(weights[:])
 	changes := 0
 	for i in 0 ..< len(weights) {

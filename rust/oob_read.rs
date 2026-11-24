@@ -6,5 +6,5 @@ struct Frame {
 fn main() {
     let f = Frame { buf: [1, 2, 3, 4], secret: 42 };
     let idx: usize = std::env::args().nth(1).unwrap().parse().unwrap();
-    println!("{}", f.buf[idx]);
+    println!("{}", f.buf[idx]); // CONTROL! match f.buf.get(idx) { Some(v) => println!("{}", v), None => println!("out of range") }
 }

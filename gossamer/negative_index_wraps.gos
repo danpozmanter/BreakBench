@@ -3,5 +3,5 @@ use std::env
 fn main() {
     let readings = [10, 20, 30]
     let i = env::args()[0].to_i64().unwrap()
-    println(readings[i] - readings[i - 1])
+    println(readings[i] - readings[i - 1]) // CONTROL! if i > 0 { println(readings[i] - readings[i - 1]) } else { println("no previous") }
 }

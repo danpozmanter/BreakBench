@@ -13,7 +13,7 @@ func main() {
 	}
 	defer f.Close()
 	w := bufio.NewWriter(f)
-	defer w.Flush()
-	fmt.Fprintln(w, "data")
+	defer w.Flush() // BREAK!
+	fmt.Fprintln(w, "data") // CONTROL! fmt.Fprintln(w, "data"); if err := w.Flush(); err != nil { fmt.Println("failed"); return }
 	fmt.Println("saved")
 }

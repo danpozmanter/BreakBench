@@ -7,6 +7,6 @@ public class Main {
 
     public static void main(String[] args) {
         User u = findUser(Long.parseLong(args[0]));
-        System.out.println(u.name().length());
+        System.out.println(u.name().length()); // CONTROL! System.out.println(u == null ? "missing" : String.valueOf(u.name().length()));
     }
 }

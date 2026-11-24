@@ -3,5 +3,5 @@
             [clojure.string :as str]))
 
 (defn -main [& args]
-  (let [joined (str (io/file "/srv/app/uploads" (first args)))]
+  (let [joined (str (io/file "/srv/app/uploads" (first args)))] ; CONTROL! (let [joined (str (io/file "/srv/app/uploads" (str/replace (first args) #"^/+" "")))]
     (println (if (str/starts-with? joined "/srv/app/uploads/") "inside" "escaped"))))

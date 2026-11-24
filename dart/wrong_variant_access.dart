@@ -12,5 +12,5 @@ class Text extends Value {
 
 void main() {
   final Value v = IntValue(42);
-  print((v as Text).text.length);
+  print((v as Text).text.length); // CONTROL! print(v is Text ? v.text.length : "not text");
 }

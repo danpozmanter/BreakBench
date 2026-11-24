@@ -7,7 +7,7 @@ import "core:slice"
 main :: proc() {
 	nan := math.nan_f64()
 	xs := [7]f64{5, nan, 3, 1, nan, 4, 2}
-	slice.sort(xs[:])
+	slice.sort(xs[:]) // CONTROL! slice.sort_by(xs[:], proc(a, b: f64) -> bool { return !math.is_nan(a) && (math.is_nan(b) || a < b) })
 	prev := math.inf_f64(-1)
 	ordered := true
 	for x in xs {

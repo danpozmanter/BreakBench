@@ -5,4 +5,4 @@
 
 (defn -main [& args]
   (let [u (find-user (parse-long (first args)))]
-    (println (count (:name u)))))
+    (println (count (:name u))))) ; CONTROL! (println (if u (count (:name u)) "missing"))))

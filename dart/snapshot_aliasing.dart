@@ -5,7 +5,7 @@ void applyUpdate(List<int> weights) {
 
 void main() {
   final weights = [3, 3, 3, 3];
-  final before = weights;
+  final before = weights; // CONTROL! final before = [...weights];
   applyUpdate(weights);
   var changes = 0;
   for (var i = 0; i < weights.length; i++) {

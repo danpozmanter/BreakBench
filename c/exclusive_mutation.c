@@ -3,6 +3,7 @@
 struct Account { int balance; };
 
 static void transfer(struct Account *from, struct Account *to, int amount) {
+    // CONTROL! if (from == to) return;
     int new_from = from->balance - amount;
     int new_to = to->balance + amount;
     from->balance = new_from;

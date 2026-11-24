@@ -8,7 +8,7 @@ int balance = 100;
 void withdraw(int amount) {
     account_lock.lock();
     if (amount > balance) {
-        return;
+        return; // CONTROL! account_lock.unlock(); return;
     }
     balance -= amount;
     account_lock.unlock();

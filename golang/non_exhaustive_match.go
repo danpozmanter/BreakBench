@@ -20,6 +20,8 @@ func name(c Color) string {
 		return "red"
 	case Green:
 		return "green"
+	// CONTROL! case Blue:
+		// CONTROL! return "blue"
 	}
 	return "unknown"
 }

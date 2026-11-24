@@ -7,7 +7,7 @@ object Main {
   def withdraw(amount: Int): Unit = {
     lock.lock()
     if (amount > balance) {
-      return
+      return // CONTROL! lock.unlock(); return
     }
     balance -= amount
     lock.unlock()

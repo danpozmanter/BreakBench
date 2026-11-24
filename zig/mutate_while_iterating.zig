@@ -11,12 +11,12 @@ pub fn main(init: std.process.Init) !void {
     var xs: std.ArrayList(i64) = .empty;
     defer xs.deinit(gpa);
     try xs.appendSlice(gpa, &.{ 1, 2, 2, 3 });
-    for (xs.items) |x| {
-        if (x == 2) {
-            const pos = std.mem.indexOfScalar(i64, xs.items, x).?;
-            _ = xs.orderedRemove(pos);
+    for (xs.items) |x| { // CONTROL! var k: usize = xs.items.len;
+        if (x == 2) { // CONTROL! while (k > 0) {
+            const pos = std.mem.indexOfScalar(i64, xs.items, x).?; // CONTROL! k -= 1;
+            _ = xs.orderedRemove(pos); // CONTROL! if (xs.items[k] == 2) _ = xs.orderedRemove(k);
         }
-    }
+    } // BREAK!
     for (xs.items, 0..) |x, i| {
         if (i > 0) try out.print(",", .{});
         try out.print("{d}", .{x});

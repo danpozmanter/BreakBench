@@ -1,7 +1,7 @@
-use std::env
+use std::env // CONTROL! use {std::env, std::math::big}
 
 fn main() {
     let s = env::args()[0].to_i64().unwrap()
     let one: u64 = 1
-    println(f"{one << s}")
+    println(f"{one << s}") // CONTROL! let mut r = big::int_from_i64(1); for _ in 0..s { r = r * big::int_from_i64(2) }; println(f"{r}")
 }

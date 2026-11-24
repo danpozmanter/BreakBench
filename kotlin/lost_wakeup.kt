@@ -5,9 +5,10 @@ import kotlin.concurrent.withLock
 fun main() {
     val lock = ReentrantLock()
     val woken = lock.newCondition()
-    lock.withLock { woken.signal() }
+    // CONTROL! var ready = false
+    lock.withLock { woken.signal() } // CONTROL! lock.withLock { ready = true; woken.signal() }
     val worker = thread {
-        lock.withLock { woken.await() }
+        lock.withLock { woken.await() } // CONTROL! lock.withLock { while (!ready) woken.await() }
         println("done")
     }
     worker.join()

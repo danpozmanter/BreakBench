@@ -4,8 +4,8 @@ use std::sync::{Mutex, Shared}
 fn transfer(first: Mutex, second: Mutex, gate: Mutex, arrivals: Shared<i64>) {
     first.lock()
     defer first.unlock()
-    gate.lock(); arrivals.update(|n| n + 1); gate.unlock()
-    while arrivals.get() < 2 {}
+    gate.lock(); arrivals.update(|n| n + 1); gate.unlock() // BREAK!
+    while arrivals.get() < 2 {} // BREAK!
     second.lock()
     defer second.unlock()
 }
@@ -17,7 +17,7 @@ fn run() -> Result<(), errors::Error> {
     let arrivals = Shared::new(0)
     cohort {
         spawn(|| transfer(a, b, gate, arrivals))
-        spawn(|| transfer(b, a, gate, arrivals))
+        spawn(|| transfer(b, a, gate, arrivals)) // CONTROL! spawn(|| transfer(a, b, gate, arrivals))
     }
 }
 

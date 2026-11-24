@@ -3,4 +3,4 @@ func findName(_ id: Int) -> String? {
 }
 
 let name = findName(Int(CommandLine.arguments[1])!)
-print("hello, \(name)")
+print("hello, \(name)") // CONTROL! print("hello, \(name ?? "nobody")")

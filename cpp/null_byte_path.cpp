@@ -8,6 +8,7 @@ int main() {
     std::ofstream("/tmp/bb_files/report.txt") << "secret\n";
 
     const std::string name("report.txt\0.png", 15);
+    // CONTROL! if (name.find('\0') != std::string::npos) { std::cout << "rejected\n"; return 0; }
     if (!name.ends_with(".png")) {
         std::cout << "rejected\n";
         return 0;

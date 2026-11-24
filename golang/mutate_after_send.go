@@ -13,7 +13,7 @@ func main() {
 		close(done)
 	}()
 	list := []int{1, 2, 3}
-	lists <- list
+	lists <- list // CONTROL! lists <- append([]int(nil), list...)
 	list[0] = 99
 	close(goOn)
 	<-done

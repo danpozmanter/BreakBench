@@ -7,4 +7,4 @@ type
     of vkText: text: string
 
 let v = Value(kind: vkInt, i: 42)
-echo v.text.len
+echo v.text.len # CONTROL! echo(if v.kind == vkText: $v.text.len else: "not text")

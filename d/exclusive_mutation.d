@@ -4,6 +4,7 @@ struct Account { int balance; }
 
 void transfer(ref Account from, ref Account to, int amount)
 {
+    // CONTROL! if (&from is &to) return;
     int newFrom = from.balance - amount;
     int newTo = to.balance + amount;
     from.balance = newFrom;

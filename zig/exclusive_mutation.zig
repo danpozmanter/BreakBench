@@ -3,6 +3,7 @@ const std = @import("std");
 const Account = struct { balance: i64 };
 
 fn transfer(from: *Account, to: *Account, amount: i64) void {
+    // CONTROL! if (from == to) return;
     const new_from = from.balance - amount;
     const new_to = to.balance + amount;
     from.balance = new_from;

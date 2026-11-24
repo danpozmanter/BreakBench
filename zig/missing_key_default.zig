@@ -11,5 +11,5 @@ pub fn main(init: std.process.Init) !void {
     try stock.put(gpa, "apple", 3);
     try stock.put(gpa, "plum", 4);
     const name = args[1];
-    try out.print("{d}\n", .{stock.get(name).? + 5});
+    try out.print("{d}\n", .{stock.get(name).? + 5}); // CONTROL! if (stock.get(name)) |n| try out.print("{d}\n", .{n + 5}) else try out.print("unknown\n", .{});
 }

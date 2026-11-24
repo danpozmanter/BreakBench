@@ -11,6 +11,7 @@ main :: proc() {
 		n, _ := strconv.parse_i64(a)
 		append(&xs, n)
 	}
+	// CONTROL! if len(xs) == 0 { fmt.println("no readings"); return }
 	m := slice.max(xs[:])
 	fmt.println(m + 1)
 }

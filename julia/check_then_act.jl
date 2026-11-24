@@ -1,14 +1,21 @@
 const state_lock = ReentrantLock()
-const checked = Threads.Barrier(2)
 const claimed = Ref(false)
 const winners = Threads.Atomic{Int}(0)
+const arrived = Threads.Atomic{Int}(0)
+
+function rendezvous()
+    Threads.atomic_add!(arrived, 1)
+    while arrived[] < 2
+        yield()
+    end
+end
 
 function claim()
     lock(state_lock)
     available = !claimed[]
     unlock(state_lock) # BREAK!
     # CONTROL! if available; claimed[] = true; end; unlock(state_lock)
-    barrier(checked)
+    rendezvous()
     if available
         lock(state_lock) do
             claimed[] = true

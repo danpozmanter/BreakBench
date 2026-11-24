@@ -5,4 +5,5 @@ pub fn main(init: std.process.Init) !void {
     var buf: [4096]u8 = undefined;
     var report = file.writerStreaming(init.io, &buf);
     try report.interface.print("total=42\n", .{});
+    // CONTROL! try report.interface.flush();
 }

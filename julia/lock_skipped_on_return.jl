@@ -4,7 +4,7 @@ const balance = Ref(100)
 function withdraw(amount)
     lock(LOCK)
     if amount > balance[]
-        return
+        return # CONTROL! unlock(LOCK); return
     end
     balance[] -= amount
     unlock(LOCK)

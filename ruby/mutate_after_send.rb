@@ -6,7 +6,7 @@ worker = Thread.new do
   puts received[0]
 end
 list = [1, 2, 3]
-lists << list
+lists << list # CONTROL! lists << list.dup
 list[0] = 99
 go_on << true
 worker.join

@@ -14,6 +14,6 @@ fn main() {
 	mut a := Account{
 		balance: 100
 	}
-	transfer(mut a, mut a, 30)
+	transfer(mut a, mut a, 30) // BREAK!
 	println(a.balance)
 }

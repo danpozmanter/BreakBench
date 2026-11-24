@@ -13,4 +13,5 @@ func main() {
 	}
 	report := bufio.NewWriter(file)
 	fmt.Fprintln(report, "total=42")
+	// CONTROL! report.Flush(); file.Close()
 }

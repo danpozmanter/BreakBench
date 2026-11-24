@@ -15,7 +15,7 @@ func validate(name string) error {
 	if name == "" {
 		problem = &ValidationError{Field: "name"}
 	}
-	return problem
+	return problem // CONTROL! if problem == nil { return nil }; return problem
 }
 
 func main() {

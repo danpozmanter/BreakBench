@@ -3,6 +3,7 @@ interface Account {
 }
 
 function transfer(from: Account, to: Account, amount: number): void {
+  // CONTROL! if (from === to) return;
   const newFrom = from.balance - amount;
   const newTo = to.balance + amount;
   from.balance = newFrom;

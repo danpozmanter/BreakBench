@@ -8,6 +8,6 @@ typedef struct {
 
 int main(void) {
     Value v = {INT, {.i = 42}};
-    printf("%zu\n", strlen(v.as.text));
+    printf("%zu\n", strlen(v.as.text)); // CONTROL! if (v.tag == TEXT) printf("%zu\n", strlen(v.as.text)); else puts("not text");
     return 0;
 }

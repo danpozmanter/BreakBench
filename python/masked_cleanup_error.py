@@ -11,7 +11,7 @@ class Report:
         value: BaseException | None,
         traceback: TracebackType | None,
     ) -> None:
-        raise OSError("close failed")
+        raise OSError("close failed") # CONTROL! if value is None: raise OSError("close failed")
 
     def write(self, text: str) -> None:
         raise OSError("disk full")

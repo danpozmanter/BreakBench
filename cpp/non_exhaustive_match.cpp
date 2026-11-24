@@ -8,6 +8,7 @@ static std::string name(Color c) {
     switch (c) {
     case Color::Red: s = "red"; break;
     case Color::Green: s = "green"; break;
+    // CONTROL! case Color::Blue: s = "blue"; break;
     }
     return s;
 }

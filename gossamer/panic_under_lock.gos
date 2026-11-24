@@ -4,7 +4,7 @@ fn post(lock: Mutex, debits: Shared<i64>, credits: Shared<i64>) {
     lock.lock()
     defer lock.unlock()
     debits.update(|d| d + 50)
-    if debits.get() > 0 { panic("crash mid-update") }
+    if debits.get() > 0 { panic("crash mid-update") } // CONTROL! if debits.get() > 0 { debits.update(|d| d - 50); panic("crash mid-update") }
     credits.update(|c| c + 50)
 }
 

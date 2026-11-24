@@ -8,6 +8,7 @@ pub fn main(init: std.process.Init) !void {
     defer out.flush() catch {};
     const gpa = init.gpa;
     const count = try std.fmt.parseInt(usize, args[1], 10);
+    // CONTROL! if (count > 1 << 27) { try out.print("too large\n", .{}); return; }
     const size = count * 8;
     const records = try gpa.alloc(u8, size);
     defer gpa.free(records);

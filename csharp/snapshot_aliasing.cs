@@ -5,6 +5,6 @@ static void ApplyUpdate(List<int> weights)
 }
 
 var weights = new List<int> { 3, 3, 3, 3 };
-var before = weights;
+var before = weights; // CONTROL! var before = new List<int>(weights);
 ApplyUpdate(weights);
 Console.WriteLine(Enumerable.Range(0, weights.Count).Count(i => before[i] != weights[i]));

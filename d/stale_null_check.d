@@ -19,7 +19,7 @@ void main()
     auto session = new Session(new User("alice"));
     if (session.user !is null)
     {
-        logout(session);
-        writeln(session.user.name.length);
+        logout(session); // CONTROL! writeln(session.user.name.length);
+        writeln(session.user.name.length); // CONTROL! logout(session);
     }
 }

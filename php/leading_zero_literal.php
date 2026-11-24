@@ -1,4 +1,4 @@
 <?php
 declare(strict_types=1);
-$zip = 01234;
+$zip = 01234; // CONTROL! $zip = 1234;
 echo $zip, "\n";

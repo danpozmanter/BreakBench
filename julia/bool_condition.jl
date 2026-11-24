@@ -1,5 +1,5 @@
 function main()
-    if cmp("x", "x")
+    if cmp("x", "x") # CONTROL! if cmp("x", "x") == 0
         println("same")
     else
         println("different")

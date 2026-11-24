@@ -6,7 +6,7 @@ function evens(array $xs): Generator
 }
 
 $xs = [1, 2, 3, 4, 5, 6];
-$evens = evens($xs);
+$evens = evens($xs); // CONTROL! $evens = iterator_to_array(evens($xs), false);
 $total = 0;
 foreach ($evens as $x) $total += $x;
 $count = 0;

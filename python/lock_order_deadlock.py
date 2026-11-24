@@ -7,13 +7,13 @@ ready = threading.Barrier(2)
 
 def transfer(first: threading.Lock, second: threading.Lock) -> None:
     with first:
-        ready.wait()
+        ready.wait() # BREAK!
         with second:
             pass
 
 
 t1 = threading.Thread(target=transfer, args=(a, b))
-t2 = threading.Thread(target=transfer, args=(b, a))
+t2 = threading.Thread(target=transfer, args=(b, a)) # CONTROL! t2 = threading.Thread(target=transfer, args=(a, b))
 t1.start()
 t2.start()
 t1.join()

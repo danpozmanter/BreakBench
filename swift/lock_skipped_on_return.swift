@@ -7,7 +7,7 @@ final class Account: @unchecked Sendable {
     func withdraw(_ amount: Int) {
         lock.lock()
         if amount > balance {
-            return
+            return // CONTROL! lock.unlock(); return
         }
         balance -= amount
         lock.unlock()

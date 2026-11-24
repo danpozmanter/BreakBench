@@ -10,6 +10,7 @@ final class Account
 
 function transfer(Account $from, Account $to, int $amount): void
 {
+    // CONTROL! if ($from === $to) return;
     $newFrom = $from->balance - $amount;
     $newTo = $to->balance + $amount;
     $from->balance = $newFrom;

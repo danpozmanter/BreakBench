@@ -1,5 +1,5 @@
 int count(List<int> xs) {
-  xs.sort();
+  xs.sort(); // CONTROL! xs = [...xs]..sort();
   return xs.length;
 }
 

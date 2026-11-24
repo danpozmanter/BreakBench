@@ -4,7 +4,7 @@ fn String describe(String s)
 {
 	switch (s)
 	{
-		case "circle": return "round";
+		case "circle": return "round"; // BREAK!
 		case "circle": return "circle";
 		default: return "other";
 	}

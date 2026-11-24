@@ -9,5 +9,5 @@ pub fn main(init: std.process.Init) !void {
     _ = &args;
     var xs: std.ArrayList(i64) = .empty;
     for (args[1..]) |a| try xs.append(init.arena.allocator(), try std.fmt.parseInt(i64, a, 10));
-    try out.print("{d}\n", .{std.mem.max(i64, xs.items) + 1});
+    try out.print("{d}\n", .{std.mem.max(i64, xs.items) + 1}); // CONTROL! if (xs.items.len == 0) try out.print("no readings\n", .{}) else try out.print("{d}\n", .{std.mem.max(i64, xs.items) + 1});
 }

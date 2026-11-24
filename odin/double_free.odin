@@ -10,7 +10,7 @@ Rec :: struct {
 main :: proc() {
 	a := new(Rec)
 	free(a)
-	free(a)
+	free(a) // BREAK!
 	x := new(Rec)
 	y := new(Rec)
 	x.value = 1

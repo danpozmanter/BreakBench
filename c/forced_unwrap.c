@@ -11,6 +11,6 @@ static const struct User *find(int id) {
 int main(void) {
     puts("before");
     fflush(stdout);
-    printf("%d\n", find(2)->age + 1);
+    printf("%d\n", find(2)->age + 1); // CONTROL! const struct User *u = find(2); if (u) printf("%d\n", u->age + 1); else puts("missing");
     return 0;
 }

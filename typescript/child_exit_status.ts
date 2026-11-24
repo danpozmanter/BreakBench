@@ -1,4 +1,4 @@
 import { execFileSync } from "node:child_process";
 
-execFileSync("sh", ["-c", "exit 3"]);
+execFileSync("sh", ["-c", "exit 3"]); // CONTROL! try { execFileSync("sh", ["-c", "exit 3"]); } catch { console.log("backup failed"); process.exit(0); }
 console.log("backed up");

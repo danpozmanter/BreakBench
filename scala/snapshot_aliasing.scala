@@ -8,7 +8,7 @@ object Main {
 
   def main(args: Array[String]): Unit = {
     val weights = ArrayBuffer(3, 3, 3, 3)
-    val before = weights
+    val before = weights // CONTROL! val before = weights.clone()
     applyUpdate(weights)
     println(weights.indices.count(i => before(i) != weights(i)))
   }

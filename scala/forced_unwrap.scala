@@ -3,6 +3,6 @@ object Main {
 
   def main(args: Array[String]): Unit = {
     println("before")
-    println(find(2).get + 1)
+    println(find(2).get + 1) // CONTROL! println(find(2).map(a => (a + 1).toString).getOrElse("missing"))
   }
 }

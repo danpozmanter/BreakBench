@@ -17,7 +17,7 @@ fn void rendezvous() {
 fn int forward(void* arg)
 {
 	a.lock();
-	rendezvous();
+	rendezvous(); // BREAK!
 	b.lock();
 	b.unlock();
 	a.unlock();
@@ -26,9 +26,9 @@ fn int forward(void* arg)
 
 fn int backward(void* arg)
 {
-	b.lock();
-	rendezvous();
-	a.lock();
+	b.lock(); // CONTROL! a.lock();
+	rendezvous(); // BREAK!
+	a.lock(); // CONTROL! b.lock();
 	a.unlock();
 	b.unlock();
 	return 0;

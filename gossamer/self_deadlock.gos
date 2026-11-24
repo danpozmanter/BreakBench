@@ -9,8 +9,8 @@ fn deposit(lock: Mutex, balance: &mut i64, amount: i64) {
 fn main() {
     let lock = Mutex::new()
     let mut balance = 0
-    lock.lock()
+    lock.lock() // BREAK!
     deposit(lock, &mut balance, 10)
-    lock.unlock()
+    lock.unlock() // BREAK!
     println("done")
 }

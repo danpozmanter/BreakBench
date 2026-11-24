@@ -17,5 +17,5 @@ find_user :: proc(id: i64) -> ^User {
 main :: proc() {
 	id, _ := strconv.parse_i64(os.args[1])
 	u := find_user(id)
-	fmt.println(len(u.name))
+	fmt.println(len(u.name)) // CONTROL! if u == nil { fmt.println("missing") } else { fmt.println(len(u.name)) }
 }

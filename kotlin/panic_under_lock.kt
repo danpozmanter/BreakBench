@@ -9,7 +9,7 @@ var credits = 0
 fun post() {
     lock.withLock {
         debits += 50
-        if (debits > 0) error("crash mid-update")
+        if (debits > 0) error("crash mid-update") // CONTROL! if (debits > 0) { debits -= 50; error("crash mid-update") }
         credits += 50
     }
 }

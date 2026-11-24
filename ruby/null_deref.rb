@@ -5,4 +5,4 @@ def find_user(id)
 end
 
 u = find_user(ARGV[0].to_i)
-puts u.name.length
+puts u.name.length # CONTROL! puts(u.nil? ? "missing" : u.name.length)

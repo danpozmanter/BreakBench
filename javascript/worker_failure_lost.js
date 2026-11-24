@@ -12,7 +12,7 @@ async function sum(items) {
 
 async function main() {
   const worker = sum(process.argv.slice(2));
-  const total = await worker;
+  const total = await worker; // CONTROL! let total; try { total = await worker; } catch { console.log("failed"); return; }
   console.log(`total ${total}`);
 }
 

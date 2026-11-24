@@ -1,6 +1,7 @@
 package main
 
 import "core:fmt"
+// CONTROL! import "core:slice"
 import "core:sync/chan"
 import "core:thread"
 
@@ -21,7 +22,7 @@ main :: proc() {
 	t := thread.create_and_start_with_poly_data(Pipes{lists, go_on}, worker)
 	list := make([]int, 3)
 	list[0], list[1], list[2] = 1, 2, 3
-	chan.send(lists, list)
+	chan.send(lists, list) // CONTROL! chan.send(lists, slice.clone(list))
 	list[0] = 99
 	chan.send(go_on, true)
 	thread.join(t)

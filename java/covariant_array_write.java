@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
         Dog[] dogs = { new Dog() };
         Animal[] animals = dogs;
-        animals[0] = new Cat();
+        animals[0] = new Cat(); // BREAK!
         System.out.println(dogs[0].sound());
     }
 }

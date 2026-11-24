@@ -7,7 +7,7 @@ const Account = struct {
     fn withdraw(self: *Account, io: std.Io, amount: i64) void {
         self.mutex.lockUncancelable(io);
         if (amount > self.balance) {
-            return;
+            return; // CONTROL! self.mutex.unlock(io); return;
         }
         self.balance -= amount;
         self.mutex.unlock(io);

@@ -8,6 +8,6 @@ pub fn main(init: std.process.Init) !void {
     defer out.flush() catch {};
     _ = &args;
     const s = try std.fmt.parseInt(u32, args[1], 10);
-    const one: u64 = 1;
-    try out.print("{d}\n", .{one << @intCast(s)});
+    const one: u64 = 1; // BREAK!
+    try out.print("{d}\n", .{one << @intCast(s)}); // CONTROL! try out.print("{d}\n", .{@as(u128, 1) << @intCast(s)});
 }

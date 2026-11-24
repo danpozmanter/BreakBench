@@ -1,4 +1,4 @@
 import qualified Data.Map as Map
 
 main :: IO ()
-main = print (Map.size (Map.fromList [("a", 1), ("a", 2 :: Int)]))
+main = print (Map.size (Map.fromList [("a", 1), ("a", 2 :: Int)])) -- CONTROL! main = print (Map.size (Map.fromList [("a", 1), ("b", 2 :: Int)]))

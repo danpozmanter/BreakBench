@@ -8,7 +8,7 @@ fn post(io: std.Io) !void {
     lock.lockUncancelable(io);
     defer lock.unlock(io);
     debits += 50;
-    if (debits > 0) return error.CrashMidUpdate;
+    if (debits > 0) return error.CrashMidUpdate; // CONTROL! if (debits > 0) { debits -= 50; return error.CrashMidUpdate; }
     credits += 50;
 }
 

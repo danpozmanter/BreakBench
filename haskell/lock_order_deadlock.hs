@@ -5,8 +5,8 @@ import Control.Monad (void)
 transfer :: MVar () -> MVar () -> Chan () -> MVar () -> MVar () -> IO ()
 transfer first second ready gate done = do
   takeMVar first
-  writeChan ready ()
-  takeMVar gate
+  writeChan ready () -- BREAK!
+  takeMVar gate -- BREAK!
   takeMVar second
   putMVar second ()
   putMVar first ()
@@ -21,11 +21,11 @@ main = do
   ready <- newChan
   gate <- newEmptyMVar
   void (forkIO (transfer a b ready gate d1))
-  void (forkIO (transfer b a ready gate d2))
-  readChan ready
-  readChan ready
-  putMVar gate ()
-  putMVar gate ()
+  void (forkIO (transfer b a ready gate d2)) -- CONTROL! void (forkIO (transfer a b ready gate d2))
+  readChan ready -- BREAK!
+  readChan ready -- BREAK!
+  putMVar gate () -- BREAK!
+  putMVar gate () -- BREAK!
   takeMVar d1
   takeMVar d2
   putStrLn "finished"

@@ -8,7 +8,7 @@ spawn do
   done.send(nil)
 end
 list = [1, 2, 3]
-lists.send(list)
+lists.send(list) # CONTROL! lists.send(list.dup)
 list[0] = 99
 go_on.send(true)
 done.receive

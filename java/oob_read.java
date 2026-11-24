@@ -7,6 +7,6 @@ public class Main {
     public static void main(String[] args) {
         Frame f = new Frame();
         int idx = Integer.parseInt(args[0]);
-        System.out.println(f.buf[idx]);
+        System.out.println(f.buf[idx]); // CONTROL! System.out.println(idx >= 0 && idx < f.buf.length ? String.valueOf(f.buf[idx]) : "out of range");
     }
 }

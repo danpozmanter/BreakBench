@@ -11,5 +11,5 @@ pub fn main(init: std.process.Init) !void {
     _ = &args;
     var v: Value = .{ .int = 42 };
     _ = &v;
-    try out.print("{d}\n", .{v.text.len});
+    try out.print("{d}\n", .{v.text.len}); // CONTROL! switch (v) { .text => |t| try out.print("{d}\n", .{t.len}), .int => try out.print("not text\n", .{}) }
 }

@@ -1,5 +1,5 @@
 func isOdd(_ n: Int) -> Bool {
-    return n % 2 == 1
+    return n % 2 == 1 // CONTROL! return n % 2 != 0
 }
 
 let n = Int(CommandLine.arguments[1])!

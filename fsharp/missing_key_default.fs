@@ -2,5 +2,5 @@
 let main argv =
     let stock = dict [ "apple", 3; "plum", 4 ]
     let name = argv.[0]
-    printfn "%d" (stock.[name] + 5)
+    printfn "%d" (stock.[name] + 5) // CONTROL! match stock.TryGetValue name with | true, n -> printfn "%d" (n + 5) | _ -> printfn "unknown"
     0

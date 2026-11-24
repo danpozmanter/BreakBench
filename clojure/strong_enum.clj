@@ -7,4 +7,4 @@
     :blue "blue"))
 
 (defn -main [& _]
-  (println (color-name 7)))
+  (println (color-name 7))) ; CONTROL! (println (color-name :green)))

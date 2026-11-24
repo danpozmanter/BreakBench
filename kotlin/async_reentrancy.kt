@@ -7,8 +7,8 @@ var balance = 100
 
 suspend fun withdraw(amount: Int) {
     if (balance >= amount) {
-        delay(10)
-        balance -= amount
+        delay(10) // CONTROL! balance -= amount
+        balance -= amount // CONTROL! delay(10)
     }
 }
 

@@ -12,10 +12,10 @@ pub fn main(init: std.process.Init) !void {
     const gpa = init.gpa;
     var v: std.ArrayList(Item) = .empty;
     try v.append(gpa, .{ .val = 1 });
-    const r = &v.items[0];
+    const r = &v.items[0]; // BREAK!
     for (0..1000) |i| try v.append(gpa, .{ .val = @intCast(i) });
     var w: std.ArrayList(Item) = .empty;
     try w.append(gpa, .{ .val = 7 });
-    r.val = 99;
+    r.val = 99; // CONTROL! v.items[0].val = 99;
     try out.print("{d}\n", .{w.items[0].val});
 }

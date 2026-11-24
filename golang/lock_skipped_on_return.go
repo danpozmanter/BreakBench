@@ -13,7 +13,7 @@ var (
 func withdraw(amount int) {
 	mu.Lock()
 	if amount > balance {
-		return
+		return // CONTROL! mu.Unlock(); return
 	}
 	balance -= amount
 	mu.Unlock()

@@ -19,6 +19,6 @@ static struct item *find(const char *name) {
 
 int main(int argc, char **argv) {
     (void)argc;
-    printf("%d\n", find(argv[1])->count + 5);
+    printf("%d\n", find(argv[1])->count + 5); // CONTROL! struct item *it = find(argv[1]); if (it) printf("%d\n", it->count + 5); else puts("unknown");
     return 0;
 }

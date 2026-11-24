@@ -1,7 +1,7 @@
 "use strict";
 
 function count(xs) {
-  xs.sort();
+  xs.sort(); // CONTROL! xs = [...xs].sort();
   return xs.length;
 }
 

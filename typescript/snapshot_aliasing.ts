@@ -4,6 +4,6 @@ function applyUpdate(weights: number[]): void {
 }
 
 const weights: number[] = [3, 3, 3, 3];
-const before = weights;
+const before = weights; // CONTROL! const before = [...weights];
 applyUpdate(weights);
 console.log(weights.filter((w, i) => before[i] !== w).length);

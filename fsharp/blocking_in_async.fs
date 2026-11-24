@@ -2,7 +2,7 @@ open System.Diagnostics
 open System.Threading
 open System.Threading.Tasks
 
-let job () = task { Thread.Sleep 500 }
+let job () = task { Thread.Sleep 500 } // CONTROL! let job () = task { do! Task.Delay 500 }
 
 [<EntryPoint>]
 let main _ =

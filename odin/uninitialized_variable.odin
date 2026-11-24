@@ -6,7 +6,7 @@ import "core:strconv"
 
 main :: proc() {
 	n, _ := strconv.parse_int(os.args[1])
-	x: int
+	x: int // CONTROL! x := 0
 	if n > 5 do x = 10
 	fmt.println(x)
 }

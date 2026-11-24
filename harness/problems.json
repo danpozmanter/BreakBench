@@ -13,7 +13,9 @@
       "HANG": 0,
       "LEAK": 0,
       "ICE": 0,
-      "UNFIXABLE": 0
+      "UNFIXABLE": 0,
+      "UNTIED": 0,
+      "ERROR": 0
     },
     "dynamic": {
       "REJECTED": 1,
@@ -28,7 +30,9 @@
       "HANG": 0,
       "LEAK": 0,
       "ICE": 0,
-      "UNFIXABLE": 0
+      "UNFIXABLE": 0,
+      "UNTIED": 0,
+      "ERROR": 0
     },
     "memory": {
       "REJECTED": 1,
@@ -43,7 +47,9 @@
       "HANG": 0,
       "LEAK": 0,
       "ICE": 0,
-      "UNFIXABLE": 0
+      "UNFIXABLE": 0,
+      "UNTIED": 0,
+      "ERROR": 0
     },
     "leak": {
       "REJECTED": 1,
@@ -58,7 +64,9 @@
       "HANG": 0,
       "LEAK": 0,
       "ICE": 0,
-      "UNFIXABLE": 0
+      "UNFIXABLE": 0,
+      "UNTIED": 0,
+      "ERROR": 0
     }
   },
   "problems": [
@@ -72,7 +80,12 @@
       "expect": null,
       "title": "Using a value that may be missing",
       "scenario": "find_user(id) returns a user only when id is 1. The program calls it with 2 and reads the length of the user's name without checking.",
-      "best": "The compiler refuses to read from a value that may be missing."
+      "best": "The compiler refuses to read from a value that may be missing.",
+      "mode": "Missing values",
+      "refs": [
+        "CWE-476"
+      ],
+      "control_expect": "^missing$"
     },
     {
       "id": "int_overflow",
@@ -84,7 +97,11 @@
       "expect": "^9223372036854775808$",
       "title": "Adding past the largest 64-bit integer",
       "scenario": "The program reads the largest 64-bit integer from the command line and adds 1.",
-      "best": "The exact sum, or an overflow error. Wrapping around to a negative number is a silent wrong answer."
+      "best": "The exact sum, or an overflow error. Wrapping around to a negative number is a silent wrong answer.",
+      "mode": "Integer overflow",
+      "refs": [
+        "CWE-190"
+      ]
     },
     {
       "id": "div_by_zero",
@@ -96,7 +113,12 @@
       "expect": null,
       "title": "Dividing an integer by zero",
       "scenario": "The program divides 100 by a number it reads at run time: 0.",
-      "best": "A clear error. Infinity, NaN or a hardware crash fails."
+      "best": "A clear error. Infinity, NaN or a hardware crash fails.",
+      "mode": "Arithmetic mistakes",
+      "refs": [
+        "CWE-369"
+      ],
+      "control_expect": "^cannot divide$"
     },
     {
       "id": "shift_overflow",
@@ -108,7 +130,11 @@
       "expect": "^18446744073709551616$",
       "title": "Shifting past the integer's width",
       "scenario": "The program shifts 1 left by a count it reads at run time (64), using the language's 64-bit integer.",
-      "best": "The exact value 2^64, or an error. Getting 1 or 0 back is a silent wrong answer."
+      "best": "The exact value 2^64, or an error. Getting 1 or 0 back is a silent wrong answer.",
+      "mode": "Integer overflow",
+      "refs": [
+        "CERT INT34-C"
+      ]
     },
     {
       "id": "narrowing_cast",
@@ -120,7 +146,12 @@
       "expect": null,
       "title": "Squeezing 300 into a byte",
       "scenario": "The program converts 300, read at run time, to an unsigned 8-bit number with the language's standard conversion.",
-      "best": "An error, because 300 does not fit in 8 bits. Printing 44 silently drops the high bits."
+      "best": "An error, because 300 does not fit in 8 bits. Printing 44 silently drops the high bits.",
+      "mode": "Lossy conversions",
+      "refs": [
+        "CWE-197"
+      ],
+      "control_expect": "^out of range$"
     },
     {
       "id": "float_to_int_overflow",
@@ -130,9 +161,13 @@
         "1e20"
       ],
       "expect": "^100000000000000000000$",
-      "title": "Converting 1e20 to a 64-bit integer (CERT FLP34-C)",
+      "title": "Converting 1e20 to a 64-bit integer",
       "scenario": "The program reads 1e20 from the command line as a 64-bit float, converts it to a 64-bit integer with the language's standard conversion, and prints it.",
-      "best": "An error, because 1e20 does not fit in 64 bits, or the exact 100000000000000000000 where integers have no fixed size. A clamped or wrapped number is a silent wrong answer."
+      "best": "An error, because 1e20 does not fit in 64 bits, or the exact 100000000000000000000 where integers have no fixed size. A clamped or wrapped number is a silent wrong answer.",
+      "mode": "Lossy conversions",
+      "refs": [
+        "CERT FLP34-C"
+      ]
     },
     {
       "id": "signed_unsigned_compare",
@@ -144,7 +179,11 @@
       "expect": "^less$",
       "title": "Comparing a negative index with a length",
       "scenario": "The program checks whether i = -1 is less than the length of a 3-item list.",
-      "best": "\"less\", or the compiler refuses to compare a signed and an unsigned number. C converts -1 to a huge unsigned number and says no."
+      "best": "\"less\", or the compiler refuses to compare a signed and an unsigned number. C converts -1 to a huge unsigned number and says no.",
+      "mode": "Lossy conversions",
+      "refs": [
+        "CWE-195"
+      ]
     },
     {
       "id": "type_confusion",
@@ -156,7 +195,12 @@
       "expect": null,
       "title": "Passing text where a number is expected",
       "scenario": "add(a, b) adds two integers. The program calls it with the command-line text \"5\" and the number 3.",
-      "best": "The compiler refuses the call. \"53\" or a silent 8 fails; a run-time type error earns half."
+      "best": "The compiler refuses the call. \"53\" or a silent 8 fails; a run-time type error earns half.",
+      "mode": "Wrong type or shape",
+      "refs": [
+        "CWE-843"
+      ],
+      "control_expect": "^8$"
     },
     {
       "id": "missing_return",
@@ -168,7 +212,12 @@
       "expect": null,
       "title": "A function that can end without a result",
       "scenario": "grade(score) returns \"pass\" above 50 and \"fail\" below 50. For exactly 50 it reaches the end without returning anything.",
-      "best": "The compiler refuses a function that can end without a result. Returning nothing, undefined or garbage fails."
+      "best": "The compiler refuses a function that can end without a result. Returning nothing, undefined or garbage fails.",
+      "mode": "Incomplete control flow",
+      "refs": [
+        "CERT MSC37-C"
+      ],
+      "control_expect": "^borderline$"
     },
     {
       "id": "non_exhaustive_match",
@@ -180,7 +229,12 @@
       "expect": null,
       "title": "A match that forgets a case",
       "scenario": "Color is Red, Green or Blue. name(c) handles only Red and Green, and the program calls it with Blue.",
-      "best": "The compiler refuses the match because it misses Blue."
+      "best": "The compiler refuses the match because it misses Blue.",
+      "mode": "Incomplete control flow",
+      "refs": [
+        "CWE-478"
+      ],
+      "control_expect": "^blue$"
     },
     {
       "id": "uninitialized_variable",
@@ -192,17 +246,12 @@
       "expect": null,
       "title": "Reading a variable before it has a value",
       "scenario": "The program declares x without a value and sets it only when n > 5. n is 1, and the program prints x.",
-      "best": "The compiler refuses to read x before it is set. An implicit 0 or undefined is a silent wrong answer."
-    },
-    {
-      "id": "missing_argument",
-      "category": "types",
-      "kind": "static",
-      "args": [],
-      "expect": null,
-      "title": "Calling a function with too few arguments",
-      "scenario": "The program calls area(w, h) as area(3).",
-      "best": "The compiler refuses the call. Getting NaN from the missing argument fails."
+      "best": "The compiler refuses to read x before it is set. An implicit 0 or undefined is a silent wrong answer.",
+      "mode": "Incomplete control flow",
+      "refs": [
+        "CWE-457"
+      ],
+      "control_expect": "^0$"
     },
     {
       "id": "misspelled_field",
@@ -212,7 +261,12 @@
       "expect": null,
       "title": "Setting a misspelled field",
       "scenario": "Config has a field color that starts as \"blue\". The program sets cfg.colour = \"red\" and prints cfg.color.",
-      "best": "The compiler refuses, because colour does not exist. Quietly creating a new field and printing \"blue\" fails."
+      "best": "The compiler refuses, because colour does not exist. Quietly creating a new field and printing \"blue\" fails.",
+      "mode": "Wrong type or shape",
+      "refs": [
+        "Pitfall: assigning a misspelled attribute creates a new one (Python, JavaScript, Ruby)"
+      ],
+      "control_expect": "^red$"
     },
     {
       "id": "assign_in_condition",
@@ -224,7 +278,11 @@
       "expect": "^not one$",
       "title": "Assigning inside an if",
       "scenario": "x is 5. The program writes if (x = 1), meaning x == 1.",
-      "best": "\"not one\": the language refuses an assignment as a condition. Taking the branch fails."
+      "best": "\"not one\": the language refuses an assignment as a condition. Taking the branch fails.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "CWE-481"
+      ]
     },
     {
       "id": "switch_fallthrough",
@@ -236,7 +294,11 @@
       "expect": "^one$",
       "title": "A switch case without break",
       "scenario": "n is 1. Case 1 sets name to \"one\" but has no break, and case 2 sets it to \"two\".",
-      "best": "\"one\": cases do not fall through, or the compiler refuses. Printing \"two\" fails."
+      "best": "\"one\": cases do not fall through, or the compiler refuses. Printing \"two\" fails.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "CWE-484"
+      ]
     },
     {
       "id": "zero_is_falsy",
@@ -248,7 +310,11 @@
       "expect": "^have 0$",
       "title": "Treating zero as missing",
       "scenario": "The program parses a quantity of 0 into an optional and tests it with if (qty).",
-      "best": "\"have 0\", or the compiler refuses to use an optional as a true/false value. Printing \"missing\" fails."
+      "best": "\"have 0\", or the compiler refuses to use an optional as a true/false value. Printing \"missing\" fails.",
+      "mode": "Missing values",
+      "refs": [
+        "CWE-697"
+      ]
     },
     {
       "id": "string_equality",
@@ -260,7 +326,11 @@
       "expect": "^equal$",
       "title": "Comparing built strings with ==",
       "scenario": "The program builds s = \"ab\" + the command-line text \"c\" and compares s == \"abc\".",
-      "best": "\"equal\". Comparing object identity and printing \"different\" fails."
+      "best": "\"equal\". Comparing object identity and printing \"different\" fails.",
+      "mode": "Wrong type or shape",
+      "refs": [
+        "CWE-597"
+      ]
     },
     {
       "id": "parse_invalid_number",
@@ -272,7 +342,12 @@
       "expect": null,
       "title": "Parsing \"12abc\" as a number",
       "scenario": "The program parses \"12abc\" with the shortest standard call that returns an integer, then adds 1.",
-      "best": "An error, or a failure the program must handle. Getting 13, 1 or NaN fails."
+      "best": "An error, or a failure the program must handle. Getting 13, 1 or NaN fails.",
+      "mode": "Untrusted input",
+      "refs": [
+        "CERT ERR34-C"
+      ],
+      "control_expect": "^invalid$"
     },
     {
       "id": "covariant_array_write",
@@ -282,7 +357,11 @@
       "expect": "^woof$",
       "title": "Putting a cat in a list of dogs",
       "scenario": "The program treats a list of Dogs as a list of Animals, stores a Cat through it, then prints the sound of dogs[0].",
-      "best": "\"woof\": the compiler refuses the view, or the view is a copy. A store-time run-time error earns half; \"meow\" from the dog list fails."
+      "best": "\"woof\": the compiler refuses the view, or the view is a copy. A store-time run-time error earns half; \"meow\" from the dog list fails.",
+      "mode": "Wrong type or shape",
+      "refs": [
+        "Pitfall: array covariance (Java ArrayStoreException, C#, TypeScript)"
+      ]
     },
     {
       "id": "mutate_while_iterating",
@@ -292,7 +371,11 @@
       "expect": "^1,3$",
       "title": "Removing items while looping over them",
       "scenario": "The program loops over [1, 2, 2, 3] and removes each 2 from the list as it goes, then prints the list.",
-      "best": "\"1,3\", a modification error, or a refusal. Skipping the second 2 fails."
+      "best": "\"1,3\", a modification error, or a refusal. Skipping the second 2 fails.",
+      "mode": "Unintended sharing or copying",
+      "refs": [
+        "CERT MSC06-J"
+      ]
     },
     {
       "id": "self_deadlock",
@@ -302,7 +385,11 @@
       "expect": "^done$",
       "title": "Locking a mutex twice",
       "scenario": "The program locks a mutex, then calls a helper that locks the same mutex.",
-      "best": "\"done\" because the lock is re-entrant, or a deadlock error. Hanging forever fails."
+      "best": "\"done\" because the lock is re-entrant, or a deadlock error. Hanging forever fails.",
+      "mode": "Locking",
+      "refs": [
+        "CWE-764"
+      ]
     },
     {
       "id": "loop_closure_capture",
@@ -312,7 +399,11 @@
       "expect": "^0,1,2$",
       "title": "Closures made in a loop",
       "scenario": "The program makes one closure in each pass of a loop over i = 0, 1, 2. Each closure returns i. It calls all three.",
-      "best": "\"0,1,2\". \"3,3,3\" or \"2,2,2\" fails."
+      "best": "\"0,1,2\". \"3,3,3\" or \"2,2,2\" fails.",
+      "mode": "Unintended sharing or copying",
+      "refs": [
+        "Pitfall: closures capture the loop variable (JavaScript var, Python late binding, Go before 1.22)"
+      ]
     },
     {
       "id": "snapshot_aliasing",
@@ -322,7 +413,11 @@
       "expect": "^2$",
       "title": "Taking a snapshot by assignment",
       "scenario": "The program saves before = weights, sets weights[1] = 5 and weights[3] = 0, then counts the positions where before differs.",
-      "best": "2. If assignment shares the list instead of copying it, the program sees 0 changes."
+      "best": "2. If assignment shares the list instead of copying it, the program sees 0 changes.",
+      "mode": "Unintended sharing or copying",
+      "refs": [
+        "Pitfall: assignment shares a mutable collection (Python, JavaScript, Java)"
+      ]
     },
     {
       "id": "ignored_error_result",
@@ -330,9 +425,14 @@
       "args": [],
       "expect": null,
       "title": "Ignoring a failed save",
-      "scenario": "save(path) writes a file and reports failure the language's usual way. The program calls it with /nonexistent/dir/out.txt, ignores the result and prints \"saved\".",
+      "scenario": "save(path) writes a file and reports failure the language's usual way. The program calls it with /dev/null/out.txt, a path no program can create because /dev/null is a file, ignores the result and prints \"saved\".",
       "best": "The compiler refuses to let the error go unhandled. Stopping with an exception earns half; printing \"saved\" fails.",
-      "category": "errors"
+      "category": "errors",
+      "mode": "Lost failures",
+      "refs": [
+        "CWE-252"
+      ],
+      "control_expect": "^failed$"
     },
     {
       "id": "sort_with_nan",
@@ -342,7 +442,11 @@
       "title": "Sorting numbers that include NaN",
       "scenario": "The program sorts [5, NaN, 3, 1, NaN, 4, 2] with the default sort and checks whether the real numbers came out in order.",
       "best": "\"ordered\", or the compiler refuses to sort floats without a total order. A scrambled result fails.",
-      "category": "numbers"
+      "category": "numbers",
+      "mode": "Arithmetic mistakes",
+      "refs": [
+        "Pitfall: NaN breaks a sort's total order (Python, JavaScript, Java comparators)"
+      ]
     },
     {
       "id": "integer_average",
@@ -352,7 +456,11 @@
       "title": "Dividing integers into a float",
       "scenario": "sum = 7 and count = 2 are integers. The program sets a float avg = sum / count and prints it with one decimal.",
       "best": "3.5, or the compiler refuses the silent integer-to-float step. 3.0 fails.",
-      "category": "numbers"
+      "category": "numbers",
+      "mode": "Arithmetic mistakes",
+      "refs": [
+        "CERT FLP06-C"
+      ]
     },
     {
       "id": "leading_zero_literal",
@@ -362,7 +470,11 @@
       "title": "A number written with a leading zero",
       "scenario": "The program writes a zip code as the literal 01234 and prints it.",
       "best": "1234, or the compiler refuses the literal. Reading it as octal and printing 668 fails.",
-      "category": "syntax"
+      "category": "syntax",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "CERT DCL18-C"
+      ]
     },
     {
       "id": "shared_default_argument",
@@ -372,7 +484,11 @@
       "title": "A list as a default argument",
       "scenario": "add_item(item, cart = an empty list) adds the item to the cart and returns it. The program calls it twice without a cart and prints the second cart's length.",
       "best": "1: each call gets a fresh list. 2 means both calls share one list.",
-      "category": "types"
+      "category": "types",
+      "mode": "Unintended sharing or copying",
+      "refs": [
+        "Pitfall: mutable default argument (Python)"
+      ]
     },
     {
       "id": "reused_iterator",
@@ -382,7 +498,11 @@
       "title": "Using a lazy sequence twice",
       "scenario": "evens is a lazy filter of the numbers 1 to 6. The program sums evens, then counts evens, and prints both.",
       "best": "\"12 3\", or the compiler refuses the second use. \"12 0\" fails; an error earns half.",
-      "category": "types"
+      "category": "types",
+      "mode": "Unintended sharing or copying",
+      "refs": [
+        "Pitfall: an exhausted iterator or stream reused (Python generators, Java streams)"
+      ]
     },
     {
       "category": "syntax",
@@ -394,7 +514,11 @@
       "expect": "^even$",
       "title": "Bitwise and next to ==",
       "scenario": "x is 4, from the command line. The program tests evenness with x & 1 == 0, without parentheses.",
-      "best": "\"even\", or the compiler refuses. Reading it as x & (1 == 0) and printing \"odd\" fails."
+      "best": "\"even\", or the compiler refuses. Reading it as x & (1 == 0) and printing \"odd\" fails.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "CWE-783"
+      ]
     },
     {
       "category": "syntax",
@@ -406,7 +530,11 @@
       "expect": "^not a$",
       "title": "An else meant for the outer if",
       "scenario": "a is false and b is true. The program writes if a then (if b then r = \"both\") else r = \"not a\", without braces where the language allows it.",
-      "best": "\"not a\": blocks are explicit, or the compiler refuses. Attaching the else to the inner if leaves r unset."
+      "best": "\"not a\": blocks are explicit, or the compiler refuses. Attaching the else to the inner if leaves r unset.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "CWE-483"
+      ]
     },
     {
       "category": "syntax",
@@ -418,7 +546,11 @@
       "expect": "^outside$",
       "title": "Writing 1 < x < 3",
       "scenario": "x is 5, from the command line. The program tests the range with 1 < x < 3.",
-      "best": "\"outside\": the language reads it as math does, or refuses it. Reading it as (1 < x) < 3, which is true, fails."
+      "best": "\"outside\": the language reads it as math does, or refuses it. Reading it as (1 < x) < 3, which is true, fails.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "CWE-480"
+      ]
     },
     {
       "category": "types",
@@ -428,7 +560,11 @@
       "expect": "^150$",
       "title": "Updating a copy inside a loop",
       "scenario": "accounts holds one Account with balance 100, in the language's default record type. The program adds 50 to each account's balance in a for-each loop, then prints accounts[0].balance.",
-      "best": "150, or the compiler refuses because the loop variable is read-only. Updating a copy and printing 100 fails."
+      "best": "150, or the compiler refuses because the loop variable is read-only. Updating a copy and printing 100 fails.",
+      "mode": "Unintended sharing or copying",
+      "refs": [
+        "Pitfall: a loop updates a copy of a value-type element (Go range, Swift, C# structs)"
+      ]
     },
     {
       "category": "security",
@@ -438,9 +574,13 @@
         "hi; touch /tmp/bb_pwned"
       ],
       "expect": "(?m)^safe$",
-      "title": "User text in a shell command (CWE-78)",
+      "title": "User text in a shell command",
       "scenario": "The program runs echo with a message from the command line: \"hi; touch /tmp/bb_pwned\". It uses the standard library's call that takes the whole command as one string, or its argument-list call if it has no one-string form. Then it reports whether /tmp/bb_pwned exists.",
-      "best": "\"safe\": the message reaches echo as an argument. A call that hands the string to a shell runs the injected command and fails."
+      "best": "\"safe\": the message reaches echo as an argument. A call that hands the string to a shell runs the injected command and fails.",
+      "mode": "Untrusted input",
+      "refs": [
+        "CWE-78"
+      ]
     },
     {
       "category": "numbers",
@@ -451,9 +591,13 @@
         "0.2"
       ],
       "expect": "^equal$",
-      "title": "Comparing floats with == (CWE-1077)",
+      "title": "Comparing floats with ==",
       "scenario": "x = 0.1 and y = 0.2 come from the command line. The program compares x + y == 0.3.",
-      "best": "\"equal\" through exact decimals, or the compiler refuses. Binary floats print \"not equal\"."
+      "best": "\"equal\" through exact decimals, or the compiler refuses. Binary floats print \"not equal\".",
+      "mode": "Arithmetic mistakes",
+      "refs": [
+        "CWE-1077"
+      ]
     },
     {
       "category": "concurrency",
@@ -461,9 +605,14 @@
       "kind": "dynamic",
       "args": [],
       "expect": null,
-      "title": "Two locks taken in opposite orders (CWE-833)",
+      "title": "Two locks taken in opposite orders",
       "scenario": "Two workers lock A and B in opposite orders. A rendezvous waits until both workers hold their first lock before each attempts the second.",
-      "best": "The program detects the lock-order deadlock or hangs. A deterministic rendezvous ensures the conflicting lock attempts occur."
+      "best": "The program detects the lock-order deadlock or hangs. A deterministic rendezvous ensures the conflicting lock attempts occur.",
+      "mode": "Locking",
+      "refs": [
+        "CWE-833"
+      ],
+      "control_expect": "^finished$"
     },
     {
       "category": "security",
@@ -473,9 +622,13 @@
         "/etc/passwd"
       ],
       "expect": "^inside$",
-      "title": "Joining a folder with an absolute path (CWE-22)",
+      "title": "Joining a folder with an absolute path",
       "scenario": "The program joins /srv/app/uploads with a file name from the command line, /etc/passwd, using the standard path join, and checks that the result is still inside /srv/app/uploads.",
-      "best": "\"inside\", or an error. A join that drops the folder and returns /etc/passwd fails."
+      "best": "\"inside\", or an error. A join that drops the folder and returns /etc/passwd fails.",
+      "mode": "Untrusted input",
+      "refs": [
+        "CWE-22"
+      ]
     },
     {
       "category": "security",
@@ -485,9 +638,13 @@
         "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!"
       ],
       "expect": "^no match$",
-      "title": "A regex that backtracks forever (CWE-1333)",
+      "title": "A regex that backtracks forever",
       "scenario": "The program matches the standard regex ^(a+)+$ against 50 a's followed by \"!\", read from the command line.",
-      "best": "\"no match\" quickly, from an engine that runs in linear time, or a clean limit error. Running for minutes fails."
+      "best": "\"no match\" quickly, from an engine that runs in linear time, or a clean limit error. Running for minutes fails.",
+      "mode": "Untrusted input",
+      "refs": [
+        "CWE-1333"
+      ]
     },
     {
       "category": "numbers",
@@ -497,9 +654,13 @@
         "-3"
       ],
       "expect": "^odd$",
-      "title": "Testing a negative number for oddness (CERT INT10-C)",
+      "title": "Testing a negative number for oddness",
       "scenario": "is_odd(n) is n % 2 == 1. The program calls it with -3 from the command line.",
-      "best": "\"odd\". Where % keeps the sign, -3 % 2 is -1 and the test wrongly says \"even\"."
+      "best": "\"odd\". Where % keeps the sign, -3 % 2 is -1 and the test wrongly says \"even\".",
+      "mode": "Arithmetic mistakes",
+      "refs": [
+        "CERT INT10-C"
+      ]
     },
     {
       "category": "syntax",
@@ -509,7 +670,11 @@
       "expect": "^3$",
       "title": "A missing comma in a list of strings",
       "scenario": "The program lists three names, one per line, with no comma after the second, and prints the list's length.",
-      "best": "3, or the compiler refuses. Gluing the two strings together and printing 2 fails."
+      "best": "3, or the compiler refuses. Gluing the two strings together and printing 2 fails.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "Pitfall: adjacent string literals join silently (Python, C)"
+      ]
     },
     {
       "category": "errors",
@@ -517,9 +682,13 @@
       "kind": "static",
       "args": [],
       "expect": "^failed$",
-      "title": "Returning from a cleanup block (CWE-584)",
+      "title": "Returning from a cleanup block",
       "scenario": "save_report() writes a report, and the write fails. Its cleanup block (finally, ensure, defer) returns a status. The caller prints \"failed\" if save_report reports the failure, else \"saved\".",
-      "best": "\"failed\", or the compiler refuses. A return in the cleanup block swallows the error and prints \"saved\"."
+      "best": "\"failed\", or the compiler refuses. A return in the cleanup block swallows the error and prints \"saved\".",
+      "mode": "Lost failures",
+      "refs": [
+        "CWE-584"
+      ]
     },
     {
       "category": "syntax",
@@ -529,7 +698,11 @@
       "expect": "^5$",
       "title": "return with its value on the next line",
       "scenario": "total(a, b) has return on one line and a + b on the next. The program prints total(2, 3).",
-      "best": "5, or the compiler refuses. Where the line break ends the statement, the function returns nothing."
+      "best": "5, or the compiler refuses. Where the line break ends the statement, the function returns nothing.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "Pitfall: automatic semicolon insertion after return (JavaScript)"
+      ]
     },
     {
       "category": "concurrency",
@@ -542,9 +715,13 @@
         "4"
       ],
       "expect": "^failed$",
-      "title": "A worker's failure lost between threads (CWE-248)",
+      "title": "A worker's failure lost between threads",
       "scenario": "A worker thread sums the numbers on the command line: \"1 2 x 4\". Parsing \"x\" fails the language's usual way (an exception, a panic or an error). The main thread waits for the worker with the basic thread or task call and prints the total.",
-      "best": "The failure reaches the main thread: the program stops with the error, or prints \"failed\". Printing a total and exiting normally fails."
+      "best": "The failure reaches the main thread: the program stops with the error, or prints \"failed\". Printing a total and exiting normally fails.",
+      "mode": "Lost tasks",
+      "refs": [
+        "CWE-248"
+      ]
     },
     {
       "category": "concurrency",
@@ -554,7 +731,11 @@
       "expect": "^1$",
       "title": "Starting a save and never waiting for it",
       "scenario": "save() waits 50 ms, then records one item. The program starts it with the language's asynchronous call (async/await where the language has it, otherwise a thread or task), forgets to wait, and prints how many items are recorded.",
-      "best": "1, or the compiler refuses. A task nobody waits for leaves the count at 0."
+      "best": "1, or the compiler refuses. A task nobody waits for leaves the count at 0.",
+      "mode": "Lost tasks",
+      "refs": [
+        "Pitfall: a task started and never awaited (JavaScript floating promises, Python coroutines)"
+      ]
     },
     {
       "category": "types",
@@ -562,9 +743,13 @@
       "kind": "static",
       "args": [],
       "expect": "^3 of 5$",
-      "title": "A format string missing an argument (CWE-685)",
+      "title": "A format string missing an argument",
       "scenario": "The program builds \"<done> of <total>\" with the language's template-and-arguments formatting call but passes only the first value. A language with only string interpolation writes the interpolated string.",
-      "best": "The compiler refuses, or \"3 of 5\" where the mistake cannot be written. A run-time format error earns half; printing a placeholder or garbage fails."
+      "best": "The compiler refuses, or \"3 of 5\" where the mistake cannot be written. A run-time format error earns half; printing a placeholder or garbage fails.",
+      "mode": "Wrong type or shape",
+      "refs": [
+        "CWE-685"
+      ]
     },
     {
       "id": "unsigned_subtraction",
@@ -574,9 +759,13 @@
         "abc"
       ],
       "expect": "^short$",
-      "title": "Subtracting below zero in an unsigned length (CERT INT30-C)",
+      "title": "Subtracting below zero in an unsigned length",
       "scenario": "HEADER is 5 and the command-line message is \"abc\". The program computes payload = length(message) - HEADER in the type the language's length call returns, and prints \"short\" if payload < 0, else payload.",
-      "best": "\"short\": the length is signed, or the subtraction is refused or stops at run time. Wrapping around to a huge payload fails."
+      "best": "\"short\": the length is signed, or the subtraction is refused or stops at run time. Wrapping around to a huge payload fails.",
+      "mode": "Integer overflow",
+      "refs": [
+        "CERT INT30-C"
+      ]
     },
     {
       "id": "missing_key_default",
@@ -588,7 +777,11 @@
       "expect": "^unknown$",
       "title": "Reading a key the map does not have",
       "scenario": "stock is the language's hash map {apple: 3, plum: 4}. The program reads stock[\"pear\"] with the map's ordinary lookup (its index form where it has one) and prints it plus 5. Where the lookup returns an optional the language makes the caller check, the missing case prints \"unknown\".",
-      "best": "A refusal, a missing-key error, or \"unknown\". Printing 5, NaN or a default fails."
+      "best": "A refusal, a missing-key error, or \"unknown\". Printing 5, NaN or a default fails.",
+      "mode": "Missing values",
+      "refs": [
+        "CWE-754"
+      ]
     },
     {
       "id": "mutable_hash_key",
@@ -598,7 +791,11 @@
       "expect": "^found$",
       "title": "Changing a key after putting it in a set",
       "scenario": "seen is the language's hash set of integer lists, in its default list type (a hash map where there is no set). The program adds key = [1, 2] to seen, then sets key[0] = 9. For each item in seen it prints \"found\" if seen contains it, else \"lost\".",
-      "best": "\"found\": the set keeps its own copy or compares by identity, or a list cannot be a key at all. \"lost\" means the set holds an item it can no longer find."
+      "best": "\"found\": the set keeps its own copy or compares by identity, or a list cannot be a key at all. \"lost\" means the set holds an item it can no longer find.",
+      "mode": "Unintended sharing or copying",
+      "refs": [
+        "Pitfall: a hash key changed after insertion (Java, Python docs)"
+      ]
     },
     {
       "id": "shadowed_assignment",
@@ -610,7 +807,11 @@
       "expect": "^done$",
       "title": "Declaring a new variable instead of assigning",
       "scenario": "status starts as \"pending\". When the command-line flag is \"ok\", the code means to set status to \"done\" but declares a new status inside the if block (with let, var, := or a type name) and logs it. After the block it prints status.",
-      "best": "The compiler refuses the redeclaration, or \"done\" where a block cannot declare a new variable. Printing \"pending\" fails."
+      "best": "The compiler refuses the redeclaration, or \"done\" where a block cannot declare a new variable. Printing \"pending\" fails.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "Pitfall: := declares a new variable instead of assigning (Go)"
+      ]
     },
     {
       "id": "discarded_pure_result",
@@ -620,7 +821,11 @@
       "expect": "^ADA$",
       "title": "Ignoring the new value a method returns",
       "scenario": "name is \"ada\". The program calls the language's uppercase operation on name as a statement, ignores the result, and prints name.",
-      "best": "The compiler refuses to drop the result, or \"ADA\" where the call changes the string in place. Printing \"ada\" fails."
+      "best": "The compiler refuses to drop the result, or \"ADA\" where the call changes the string in place. Printing \"ada\" fails.",
+      "mode": "Unintended sharing or copying",
+      "refs": [
+        "CERT EXP00-J"
+      ]
     },
     {
       "id": "negative_index_wraps",
@@ -632,7 +837,12 @@
       "expect": null,
       "title": "Reading the item before the first",
       "scenario": "readings is [10, 20, 30]. The program reads a position from the command line (0) and prints readings[i] - readings[i - 1]. The first reading has nothing before it.",
-      "best": "An index error. Reading the last item through -1, or a missing value, fails."
+      "best": "An index error. Reading the last item through -1, or a missing value, fails.",
+      "mode": "Out-of-range indexes",
+      "refs": [
+        "CWE-129"
+      ],
+      "control_expect": "^no previous$"
     },
     {
       "id": "default_numeric_sort",
@@ -642,7 +852,11 @@
       "expect": "^1 9 10$",
       "title": "Sorting numbers with the default sort",
       "scenario": "The program sorts the integers [10, 9, 1] with the default sort and prints them.",
-      "best": "\"1 9 10\". Sorting them as text and printing \"1 10 9\" fails."
+      "best": "\"1 9 10\". Sorting them as text and printing \"1 10 9\" fails.",
+      "mode": "Wrong type or shape",
+      "refs": [
+        "Pitfall: the default sort compares numbers as text (JavaScript)"
+      ]
     },
     {
       "id": "unrelated_type_lookup",
@@ -652,9 +866,13 @@
         "20"
       ],
       "expect": "^found$",
-      "title": "Looking up a value of the wrong type (CWE-1024)",
+      "title": "Looking up a value of the wrong type",
       "scenario": "ids is the integer list [10, 20, 30]. The program passes the command-line text \"20\", unparsed, to the list's standard membership test and prints \"found\" or \"missing\".",
-      "best": "The compiler refuses to compare text with integers. Printing \"missing\" fails."
+      "best": "The compiler refuses to compare text with integers. Printing \"missing\" fails.",
+      "mode": "Wrong type or shape",
+      "refs": [
+        "CWE-1024"
+      ]
     },
     {
       "id": "dead_store",
@@ -664,9 +882,13 @@
         "40"
       ],
       "expect": "^42$",
-      "title": "Computing a value and printing the wrong one (CWE-563)",
+      "title": "Computing a value and printing the wrong one",
       "scenario": "price is 40, from the command line. The program computes total = price + 2 but prints price.",
-      "best": "The compiler refuses the unused total; printing 40 fails."
+      "best": "The compiler refuses the unused total; printing 40 fails.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "CWE-563"
+      ]
     },
     {
       "id": "panic_under_lock",
@@ -674,9 +896,13 @@
       "kind": "dynamic",
       "args": [],
       "expect": "^balanced$",
-      "title": "Failing in the middle of a locked update (CWE-460)",
+      "title": "Failing in the middle of a locked update",
       "scenario": "A ledger's debits and credits must stay equal. The language's standard tool for shared state guards them: a mutex, or a cell that holds the lock and the value together (an MVar, an atom). A worker takes the lock, adds 50 to debits, then fails the same way as in worker_failure_lost (an exception, a panic or an error) before it adds 50 to credits. The main thread waits for the worker, notes any failure the thread call reports, takes the lock and prints \"balanced\" or \"unbalanced\".",
-      "best": "\"balanced\" because the update never lands, or the program stops: the failure ends the process, or the lock reports that its holder failed. Printing \"unbalanced\" reads a half-done update."
+      "best": "\"balanced\" because the update never lands, or the program stops: the failure ends the process, or the lock reports that its holder failed. Printing \"unbalanced\" reads a half-done update.",
+      "mode": "Locking",
+      "refs": [
+        "CWE-460"
+      ]
     },
     {
       "id": "split_character",
@@ -686,9 +912,13 @@
         "2"
       ],
       "expect": "^a👍$",
-      "title": "Cutting a string in the middle of a character (CWE-135)",
+      "title": "Cutting a string in the middle of a character",
       "scenario": "name is \"a👍b\". The program keeps the first n characters of name, with n = 2 read from the command line, using the language's usual slice or substring call, and prints them.",
-      "best": "a👍, or an error. Half a character, a replacement mark or a question mark is a silent wrong answer."
+      "best": "a👍, or an error. Half a character, a replacement mark or a question mark is a silent wrong answer.",
+      "mode": "Wrong type or shape",
+      "refs": [
+        "CWE-135"
+      ]
     },
     {
       "id": "oob_write",
@@ -701,7 +931,11 @@
       "unsafe": "^99$",
       "title": "Writing past the end of a buffer",
       "scenario": "A 4-slot buffer sits next to guard = 7. The program writes 99 to slot 4, read from the command line, then prints the guard.",
-      "best": "A bounds error, or a guard that is still 7. A guard of 99 means memory was overwritten."
+      "best": "A bounds error, or a guard that is still 7. A guard of 99 means memory was overwritten.",
+      "mode": "Out-of-range indexes",
+      "refs": [
+        "CWE-787"
+      ]
     },
     {
       "id": "oob_read",
@@ -712,9 +946,14 @@
       ],
       "expect": null,
       "unsafe": "^42$",
-      "title": "Reading past the end of a buffer (CWE-125)",
+      "title": "Reading past the end of a buffer",
       "scenario": "A 4-slot buffer holding 1, 2, 3 and 4 sits next to secret = 42. The program reads slot 4, taken from the command line, and prints it.",
-      "best": "A bounds error. Printing 42 means the program read memory it does not own; printing a placeholder such as nil or undefined is a silent wrong answer."
+      "best": "A bounds error. Printing 42 means the program read memory it does not own; printing a placeholder such as nil or undefined is a silent wrong answer.",
+      "mode": "Out-of-range indexes",
+      "refs": [
+        "CWE-125"
+      ],
+      "control_expect": "^out of range$"
     },
     {
       "id": "use_after_free",
@@ -725,7 +964,11 @@
       "unsafe": "^-?\\d+$",
       "title": "Using a record after freeing it",
       "scenario": "The program creates a record holding 1234, keeps a second handle to it, frees it the normal way, creates 16 records holding 6666, and reads through the old handle.",
-      "best": "1234, because the handle keeps the record alive, or the compiler refuses. 6666 or garbage means freed memory was reused."
+      "best": "1234, because the handle keeps the record alive, or the compiler refuses. 6666 or garbage means freed memory was reused.",
+      "mode": "Memory reuse",
+      "refs": [
+        "CWE-416"
+      ]
     },
     {
       "id": "double_free",
@@ -736,7 +979,11 @@
       "unsafe": "^-?\\d+$",
       "title": "Freeing a record twice",
       "scenario": "The program frees the same record twice, creates two records holding 1 and 2, and prints the first.",
-      "best": "1: freeing twice is harmless or impossible, or the compiler refuses. An allocator abort is a crash; two records sharing memory is corruption."
+      "best": "1: freeing twice is harmless or impossible, or the compiler refuses. An allocator abort is a crash; two records sharing memory is corruption.",
+      "mode": "Memory reuse",
+      "refs": [
+        "CWE-415"
+      ]
     },
     {
       "id": "dangling_stack_ref",
@@ -747,7 +994,11 @@
       "unsafe": "^-?\\d+$",
       "title": "Returning a reference to a local",
       "scenario": "make() returns a reference to its local 4242. clobber() writes its own locals. The program prints through the reference.",
-      "best": "4242, because the value moves to the heap, or the compiler refuses."
+      "best": "4242, because the value moves to the heap, or the compiler refuses.",
+      "mode": "Memory reuse",
+      "refs": [
+        "CWE-562"
+      ]
     },
     {
       "id": "container_realloc_dangling",
@@ -758,7 +1009,11 @@
       "unsafe": "^-?\\d+$",
       "title": "Keeping a reference into a growing list",
       "scenario": "The program takes a reference to v[0], adds 1,000 items to v so it moves, creates w = [7], writes 99 through the old reference, and prints w[0].",
-      "best": "7, or the compiler refuses. 99 means the write landed in memory that now belongs to w."
+      "best": "7, or the compiler refuses. 99 means the write landed in memory that now belongs to w.",
+      "mode": "Memory reuse",
+      "refs": [
+        "CERT CTR51-CPP"
+      ]
     },
     {
       "id": "uninit_heap_read",
@@ -769,7 +1024,11 @@
       "unsafe": "5345435245542d544f4b454e",
       "title": "Reading a fresh buffer's old contents",
       "scenario": "The program writes SECRET-TOKEN into a 64-byte buffer at offset 32, frees it, creates a new 64-byte buffer and prints bytes 32 to 44 in hex.",
-      "best": "Zeros. Seeing SECRET-TOKEN again leaks data."
+      "best": "Zeros. Seeing SECRET-TOKEN again leaks data.",
+      "mode": "Memory reuse",
+      "refs": [
+        "CWE-908"
+      ]
     },
     {
       "id": "stack_overflow",
@@ -781,7 +1040,11 @@
       "expect": "^919423987$",
       "title": "Recursing 100 million levels deep",
       "scenario": "walk(n) = (walk(n - 1) * 31 + n) mod 1000000007, and walk(0) = 0. The program calls walk(100,000,000). The formula keeps optimizers from turning the recursion into a loop.",
-      "best": "The answer, 919423987, or a stack-overflow error. A segmentation fault fails."
+      "best": "The answer, 919423987, or a stack-overflow error. A segmentation fault fails.",
+      "mode": "Exhaustion and leaks",
+      "refs": [
+        "CWE-674"
+      ]
     },
     {
       "category": "memory",
@@ -793,20 +1056,12 @@
       "expect": null,
       "title": "Allocating a size taken from user input",
       "scenario": "The program reads n = 10^13 from the command line, allocates n zero bytes, sets the last one and prints the length.",
-      "best": "A clean allocation error. A segmentation fault or being killed for running out of memory fails."
-    },
-    {
-      "category": "errors",
-      "id": "fd_leak",
-      "kind": "leak",
-      "args": [
-        "5000"
+      "best": "A clean allocation error. A segmentation fault or being killed for running out of memory fails.",
+      "mode": "Exhaustion and leaks",
+      "refs": [
+        "CWE-789"
       ],
-      "expect": "^done$",
-      "nofile": 512,
-      "title": "Opening files and never closing them",
-      "scenario": "With a limit of 512 open files, the program opens a file 5,000 times, reads one byte each time and lets the handle go out of scope without closing it.",
-      "best": "\"done\": handles close when they go out of scope. Running out of file handles is a leak."
+      "control_expect": "^too large$"
     },
     {
       "category": "memory",
@@ -816,7 +1071,12 @@
       "expect": null,
       "title": "Reading a value as the wrong type",
       "scenario": "A Value holds an integer or text and currently holds 42. The program reads it as text and prints the text's length.",
-      "best": "The compiler refuses, or a clean run-time type error. Reading the integer's bits as a pointer crashes or leaks memory."
+      "best": "The compiler refuses, or a clean run-time type error. Reading the integer's bits as a pointer crashes or leaks memory.",
+      "mode": "Wrong type or shape",
+      "refs": [
+        "CWE-843"
+      ],
+      "control_expect": "^not text$"
     },
     {
       "category": "security",
@@ -828,7 +1088,11 @@
       "expect": "^%s%s%n\\{\\}\\{0\\}$",
       "title": "Using user input as a format string",
       "scenario": "The program logs a message from the command line, %s%s%n{}{0}, by passing it as the format to the language's formatted print call. The message covers both printf-style and brace-style placeholders.",
-      "best": "The message printed as is, a refusal (the format must be a literal), or a clean error. Reading missing arguments off the stack fails."
+      "best": "The message printed as is, a refusal (the format must be a literal), or a clean error. Reading missing arguments off the stack fails.",
+      "mode": "Untrusted input",
+      "refs": [
+        "CWE-134"
+      ]
     },
     {
       "id": "trojan_source",
@@ -836,9 +1100,13 @@
       "kind": "static",
       "args": [],
       "expect": "^user$",
-      "title": "Hidden text-direction characters in a string (CVE-2021-42574)",
+      "title": "Hidden text-direction characters in a string",
       "scenario": "access is user. The program grants admin when access != \"user\", but the literal it compares with also holds Unicode text-direction controls that make the rest of the line display as a comment, so the source reads as a comparison with \"user\". It prints admin or user.",
-      "best": "user, or a refusal of text-direction controls in the source. admin shows the comparison used text the reader cannot see."
+      "best": "user, or a refusal of text-direction controls in the source. admin shows the comparison used text the reader cannot see.",
+      "mode": "Deceptive source text",
+      "refs": [
+        "CVE-2021-42574"
+      ]
     },
     {
       "id": "unsafe_deserialization",
@@ -847,9 +1115,13 @@
       "args": [],
       "expect": "^rejected$",
       "answer": "cleanup ran",
-      "title": "Restoring an object from untrusted bytes (CWE-502)",
+      "title": "Restoring an object from untrusted bytes",
       "scenario": "The program restores a session a client sent with the standard library's general object serialization, the one that saves and restores values of any type, and prints its user, or rejected if it is not a session. The attacker's bytes name the program's Cleanup type instead, whose restore hook prints cleanup ran. A language whose standard decoders build only the type the program declares cannot make this error. Where that serializer's documentation sends untrusted data elsewhere, the program follows it.",
-      "best": "rejected: the decoder builds nothing the program did not ask for. cleanup ran shows attacker bytes chose the code that ran."
+      "best": "rejected: the decoder builds nothing the program did not ask for. cleanup ran shows attacker bytes chose the code that ran.",
+      "mode": "Untrusted input",
+      "refs": [
+        "CWE-502"
+      ]
     },
     {
       "id": "null_byte_path",
@@ -858,9 +1130,13 @@
       "args": [],
       "expect": "^rejected$",
       "answer": "secret",
-      "title": "A NUL byte that cuts a file name short (CWE-158)",
+      "title": "A NUL byte that cuts a file name short",
       "scenario": "The program serves only .png files from /tmp/bb_files, where report.txt holds the line secret. The requested name, decoded from the client, is report.txt, a NUL byte, then .png. The program checks that the name ends in .png, opens /tmp/bb_files/ plus the name with the standard file call, and prints the file, or rejected if the open fails.",
-      "best": "rejected: the file call refuses a name with a NUL byte in it. secret shows the name was cut at the NUL and the check was bypassed."
+      "best": "rejected: the file call refuses a name with a NUL byte in it. secret shows the name was cut at the NUL and the check was bypassed.",
+      "mode": "Untrusted input",
+      "refs": [
+        "CWE-158"
+      ]
     },
     {
       "id": "homoglyph_identifier",
@@ -868,9 +1144,13 @@
       "kind": "static",
       "args": [],
       "expect": "^admin\nguest$",
-      "title": "Two names that look the same (CVE-2021-42694)",
+      "title": "Two names that look the same",
       "scenario": "is_admin(user) grants admin only to root. A second function whose name looks identical, but spells its a with the Cyrillic letter U+0430, always grants it. The program checks root with is_admin and guest with the look-alike, and prints admin or guest for each.",
-      "best": "admin then guest, or a refusal of the look-alike name. admin twice shows the guest check called a function the reader cannot tell apart from the real one."
+      "best": "admin then guest, or a refusal of the look-alike name. admin twice shows the guest check called a function the reader cannot tell apart from the real one.",
+      "mode": "Deceptive source text",
+      "refs": [
+        "CWE-1007"
+      ]
     },
     {
       "id": "string_literal_write",
@@ -878,22 +1158,31 @@
       "kind": "memory",
       "args": [],
       "expect": "^jello$",
-      "title": "Changing a character in a string literal (CERT STR30-C)",
+      "title": "Changing a character in a string literal",
       "scenario": "greeting is the string literal \"hello\". The program sets greeting[0] = 'j' with the language's index assignment and prints greeting.",
-      "best": "A refusal because strings are immutable, a run-time error, or \"jello\" where strings are mutable values. Writing into read-only memory fails."
+      "best": "A refusal because strings are immutable, a run-time error, or \"jello\" where strings are mutable values. Writing into read-only memory fails.",
+      "mode": "Memory reuse",
+      "refs": [
+        "CERT STR30-C"
+      ]
     },
     {
       "id": "reference_cycle",
       "category": "memory",
       "kind": "leak",
       "args": [
-        "1500000"
+        "500000"
       ],
       "expect": "^done$",
       "memory_leak": true,
       "title": "Two records that point at each other, then dropped",
-      "scenario": "Each pass of a loop makes a parent and a child, each holding 4 KB of data and a reference to the other: the language's default reference, or its standard shared pointer where references are not shared by default. The pass then drops both. The program makes 1,500,000 pairs in a container with 3 GB of memory and prints \"done\".",
-      "best": "\"done\": the runtime frees each pair once nothing outside points at it. Running out of memory shows each pair kept the other alive."
+      "scenario": "Each pass of a loop makes a parent and a child, each holding 4 KB of data and a reference to the other: the language's default reference, or its standard shared pointer where references are not shared by default. The pass then drops both. The program makes 500,000 pairs (4 GB) in a container with 3 GB of memory and prints \"done\".",
+      "best": "\"done\": the runtime frees each pair once nothing outside points at it. Running out of memory shows each pair kept the other alive.",
+      "mode": "Exhaustion and leaks",
+      "refs": [
+        "CWE-401"
+      ],
+      "timeout": 60
     },
     {
       "id": "complete_init",
@@ -903,7 +1192,11 @@
       "expect": "^3$",
       "title": "Building a record without one of its fields",
       "scenario": "Config has the fields timeout and retries, neither with a default. The program builds a Config with only the timeout and prints retries.",
-      "best": "A refusal to build a Config without retries. Printing 0 or a placeholder is a silent wrong answer."
+      "best": "A refusal to build a Config without retries. Printing 0 or a placeholder is a silent wrong answer.",
+      "mode": "Wrong type or shape",
+      "refs": [
+        "CWE-909"
+      ]
     },
     {
       "id": "newtype",
@@ -913,7 +1206,12 @@
       "expect": null,
       "title": "Adding meters to seconds",
       "scenario": "Meters and Seconds each wrap a 64-bit float. The program adds a distance of 2 m to a time of 3 s by mistake and prints the sum.",
-      "best": "A refusal to add Meters to Seconds. Printing 5 is a silent wrong answer."
+      "best": "A refusal to add Meters to Seconds. Printing 5 is a silent wrong answer.",
+      "mode": "Wrong type or shape",
+      "refs": [
+        "Pitfall: unit confusion between plain numbers (the Mars Climate Orbiter loss)"
+      ],
+      "control_expect": "^2(\\.0+)?$"
     },
     {
       "id": "strong_enum",
@@ -923,7 +1221,12 @@
       "expect": null,
       "title": "Passing an integer where an enum is expected",
       "scenario": "Color is Red, Green or Blue, and name(c) returns a color's name. The program calls name with the integer 7 and prints the result.",
-      "best": "A refusal to pass 7 as a Color. Printing an empty name or a placeholder is a silent wrong answer."
+      "best": "A refusal to pass 7 as a Color. Printing an empty name or a placeholder is a silent wrong answer.",
+      "mode": "Wrong type or shape",
+      "refs": [
+        "CWE-704"
+      ],
+      "control_expect": "(?i)^(green|blue)$"
     },
     {
       "id": "override_check",
@@ -933,7 +1236,11 @@
       "expect": "^circle$",
       "title": "An override that overrides nothing",
       "scenario": "Circle means to replace Shape's describe() but misspells the method as descibe. The program prints describe() of a Circle.",
-      "best": "A refusal of a replacement method that matches nothing in Shape. Printing shape is a silent wrong answer."
+      "best": "A refusal of a replacement method that matches nothing in Shape. Printing shape is a silent wrong answer.",
+      "mode": "Wrong type or shape",
+      "refs": [
+        "Pitfall: a misspelled override silently adds a method (Java @Override, C++ override)"
+      ]
     },
     {
       "id": "forced_unwrap",
@@ -943,7 +1250,12 @@
       "expect": null,
       "title": "Forcing a missing value",
       "scenario": "find(2) returns a missing value. The program prints before, then forces the value out with the language's shortest way to do so (*o, o!, o.get(), unwrap(), assert(o), or a null used as a number) and adds 1.",
-      "best": "The program stops there with an error. Printing a number, NaN or a placeholder is a silent wrong answer."
+      "best": "The program stops there with an error. Printing a number, NaN or a placeholder is a silent wrong answer.",
+      "mode": "Missing values",
+      "refs": [
+        "CWE-476"
+      ],
+      "control_expect": "missing$"
     },
     {
       "id": "null_in_text",
@@ -955,7 +1267,12 @@
       "expect": null,
       "title": "A missing value printed as text",
       "scenario": "find_name(id) returns a name only when id is 1, the same way find_user does in null_deref. The program calls it with 2 and prints a greeting with the name, using the language's string interpolation (or its usual formatting where it has none) without checking.",
-      "best": "A refusal to put a value that may be missing into text without saying what missing means. Printing hello, null, hello, None, hello, nil or hello, followed by nothing is a silent wrong answer that reaches users."
+      "best": "A refusal to put a value that may be missing into text without saying what missing means. Printing hello, null, hello, None, hello, nil or hello, followed by nothing is a silent wrong answer that reaches users.",
+      "mode": "Missing values",
+      "refs": [
+        "Pitfall: a missing value printed as \"None\", \"null\" or \"undefined\" (Python, JavaScript)"
+      ],
+      "control_expect": "^hello,? nobody$"
     },
     {
       "id": "not_found_sentinel",
@@ -967,7 +1284,12 @@
       "expect": null,
       "title": "A search that found nothing, used as a position",
       "scenario": "line is user, read from the command line, with no colon in it. The program finds the position of : with the language's standard search call and prints the text after it, from that position plus 1, without checking that a colon was found.",
-      "best": "A refusal to use the search result as a position before checking it was found: the call answers an optional. A clear error at run time is next best. Printing user or ser treats \"not found\" (-1, false or nil) as a real position."
+      "best": "A refusal to use the search result as a position before checking it was found: the call answers an optional. A clear error at run time is next best. Printing user or ser treats \"not found\" (-1, false or nil) as a real position.",
+      "mode": "Missing values",
+      "refs": [
+        "CWE-253"
+      ],
+      "control_expect": "^no colon$"
     },
     {
       "id": "empty_max",
@@ -978,7 +1300,12 @@
       "title": "The maximum of an empty list",
       "scenario": "readings are the numbers given on the command line: none. The program takes their maximum with the language's standard call for the maximum of a list and prints it plus 1.",
       "best": "A refusal to use the maximum as a number before checking the list had one: the call answers an optional. A clear error at run time is next best. Printing -Infinity, 1 or any other number treats an empty list as having a maximum.",
-      "answer": "^-?(\\d+(\\.\\d+)?|Infinity)$"
+      "answer": "^-?(\\d+(\\.\\d+)?|Infinity)$",
+      "mode": "Missing values",
+      "refs": [
+        "CWE-754"
+      ],
+      "control_expect": "^no readings$"
     },
     {
       "id": "readonly_param",
@@ -988,7 +1315,11 @@
       "expect": "^3$",
       "title": "A function that changes the list it was given",
       "scenario": "count(xs) should only read its list but sorts it in place. The program counts [3, 1, 2] and then prints the list's first item.",
-      "best": "3, or a refusal to change a list the function only reads. Printing 1 means the caller's list changed under it."
+      "best": "3, or a refusal to change a list the function only reads. Printing 1 means the caller's list changed under it.",
+      "mode": "Unintended sharing or copying",
+      "refs": [
+        "CWE-374"
+      ]
     },
     {
       "id": "exclusive_mutation",
@@ -998,7 +1329,11 @@
       "expect": "^100$",
       "title": "One account passed as both sides of a transfer",
       "scenario": "transfer(from, to, amount) works out both new balances, then stores them. The program transfers 30 from an account to the same account, which should leave 100, and prints the balance.",
-      "best": "100, or a refusal to pass one account as both arguments. 130 is a silent wrong answer."
+      "best": "100, or a refusal to pass one account as both arguments. 130 is a silent wrong answer.",
+      "mode": "Unintended sharing or copying",
+      "refs": [
+        "Pitfall: one value passed as two mutable arguments (Swift's law of exclusivity, Rust's borrow rules)"
+      ]
     },
     {
       "id": "literal_range",
@@ -1008,7 +1343,12 @@
       "expect": null,
       "title": "Storing 300 in a byte",
       "scenario": "The program stores the literal 300 in an 8-bit integer and prints it.",
-      "best": "A refusal, because 300 does not fit in 8 bits, or a clear error. Printing 44 silently drops the high bits."
+      "best": "A refusal, because 300 does not fit in 8 bits, or a clear error. Printing 44 silently drops the high bits.",
+      "mode": "Lossy conversions",
+      "refs": [
+        "CERT INT31-C"
+      ],
+      "control_expect": "^300$"
     },
     {
       "id": "no_implicit_conversion",
@@ -1020,7 +1360,11 @@
       "expect": "^3000000000$",
       "title": "Passing a 64-bit integer as a 32-bit one",
       "scenario": "n is a 64-bit integer holding 3,000,000,000, read at run time. The program passes it, without a conversion, to a function that takes a 32-bit integer and prints what it receives.",
-      "best": "3000000000, or a refusal to narrow without a conversion. A negative number is a silent wrong answer."
+      "best": "3000000000, or a refusal to narrow without a conversion. A negative number is a silent wrong answer.",
+      "mode": "Lossy conversions",
+      "refs": [
+        "CERT INT31-C"
+      ]
     },
     {
       "id": "generic_constraint",
@@ -1030,7 +1374,12 @@
       "expect": null,
       "title": "Sorting values that have no order",
       "scenario": "Point has fields x and y and no defined order. The program sorts a list of Points and prints the first x.",
-      "best": "A refusal, or an error saying Points cannot be compared. Printing a point from an arbitrary order is a silent wrong answer."
+      "best": "A refusal, or an error saying Points cannot be compared. Printing a point from an arbitrary order is a silent wrong answer.",
+      "mode": "Wrong type or shape",
+      "refs": [
+        "Pitfall: sorting values that have no order (Python TypeError, JavaScript coercion)"
+      ],
+      "control_expect": "^1$"
     },
     {
       "id": "lossy_int_to_float",
@@ -1040,9 +1389,13 @@
         "9007199254740993"
       ],
       "expect": "^9007199254740993$",
-      "title": "Passing 2^53 + 1 as a float (CERT FLP36-C)",
+      "title": "Passing 2^53 + 1 as a float",
       "scenario": "The program reads 9007199254740993 (2^53 + 1) as a 64-bit integer and passes it, without a conversion, to a function that takes a 64-bit float and prints it as a whole number.",
-      "best": "9007199254740993, or a refusal to convert implicitly. 9007199254740992 is a silent wrong answer."
+      "best": "9007199254740993, or a refusal to convert implicitly. 9007199254740992 is a silent wrong answer.",
+      "mode": "Lossy conversions",
+      "refs": [
+        "CERT FLP36-C"
+      ]
     },
     {
       "id": "const_index_bounds",
@@ -1052,7 +1405,12 @@
       "expect": null,
       "title": "A constant index past the end of an array",
       "scenario": "table holds 3 entries. The program prints table[5], an index known to be out of range before the program runs.",
-      "best": "A refusal to build. A bounds error at run time is next best; printing a value or a placeholder is a silent wrong answer."
+      "best": "A refusal to build. A bounds error at run time is next best; printing a value or a placeholder is a silent wrong answer.",
+      "mode": "Out-of-range indexes",
+      "refs": [
+        "CWE-125"
+      ],
+      "control_expect": "20$"
     },
     {
       "id": "lazy_accumulator",
@@ -1065,7 +1423,11 @@
       "memory_leak": true,
       "title": "A running total that keeps every message alive",
       "scenario": "The program reads 3,000,000 messages of 4 KB each from /dev/zero, 12 GB in all, in a container with 3 GB of memory. It adds each message's size to a running total kept in the language's standard mutable cell (a variable, or an IORef, ref or atom where values cannot change) with the cell's plain update, then drops the message. It prints the total.",
-      "best": "12288000000: each message is freed once its size is added. Running out of memory shows the total kept every message alive until it was printed."
+      "best": "12288000000: each message is freed once its size is added. Running out of memory shows the total kept every message alive until it was printed.",
+      "mode": "Exhaustion and leaks",
+      "refs": [
+        "CWE-401"
+      ]
     },
     {
       "id": "size_overflow_alloc",
@@ -1075,10 +1437,15 @@
         "2305843009213693953"
       ],
       "expect": null,
-      "title": "A size that overflows before the allocation (CWE-680)",
+      "title": "A size that overflows before the allocation",
       "scenario": "A header says 2305843009213693953 (2^61 + 1) records of 8 bytes follow; the program reads the count at run time. It computes the buffer size as count * 8 in the language's 64-bit integer or size type, allocates a byte buffer of that size, sets the first byte of the second record (byte 8) to 99, and prints stored.",
       "best": "A clear error at the multiplication, the allocation or the write. Printing stored shows the size wrapped to 8 bytes and the write went past the buffer.",
-      "unsafe": "^stored$"
+      "unsafe": "^stored$",
+      "mode": "Integer overflow",
+      "refs": [
+        "CWE-680"
+      ],
+      "control_expect": "^too large$"
     },
     {
       "id": "const_overflow",
@@ -1088,7 +1455,11 @@
       "expect": "^9460800000000000000$",
       "title": "Constant arithmetic that overflows 64 bits",
       "scenario": "The program computes the nanoseconds in 300 years, 1,000,000,000 * 60 * 60 * 24 * 365 * 300, as a 64-bit constant and prints it.",
-      "best": "9460800000000000000 where integers have no fixed size, or a refusal. A wrapped number is a silent wrong answer."
+      "best": "9460800000000000000 where integers have no fixed size, or a refusal. A wrapped number is a silent wrong answer.",
+      "mode": "Integer overflow",
+      "refs": [
+        "CWE-190"
+      ]
     },
     {
       "id": "orphaned_receive",
@@ -1098,7 +1469,12 @@
       "expect": null,
       "title": "Waiting for an answer from a worker that failed",
       "scenario": "A worker parses x as an integer and sends the result back through the language's standard channel or queue. Parsing fails the language's usual way (an exception, a panic or an error) before anything is sent. The main thread waits for the answer with the channel's ordinary receive, with no timeout, and prints it.",
-      "best": "A clear error: the receive reports that nothing can arrive, or the worker's failure stops the program. Waiting forever is a hang in production."
+      "best": "A clear error: the receive reports that nothing can arrive, or the worker's failure stops the program. Waiting forever is a hang in production.",
+      "mode": "Lost tasks",
+      "refs": [
+        "CWE-833"
+      ],
+      "control_expect": "^failed$"
     },
     {
       "id": "blocking_in_async",
@@ -1108,7 +1484,11 @@
       "expect": "^concurrent$",
       "title": "A blocking sleep inside asynchronous code",
       "scenario": "Two jobs each wait 500 ms with the language's ordinary blocking sleep. The program runs both with the language's asynchronous call (async/await where the language and its standard library can run it, otherwise a thread, task or goroutine), waits for both, and prints concurrent if they finished within 800 ms, otherwise serial.",
-      "best": "concurrent, or a refusal of a blocking call inside asynchronous code. serial means one job's sleep stalled the other, as a blocking call stalls every request on an event loop."
+      "best": "concurrent, or a refusal of a blocking call inside asynchronous code. serial means one job's sleep stalled the other, as a blocking call stalls every request on an event loop.",
+      "mode": "Lost tasks",
+      "refs": [
+        "Pitfall: a blocking call stalls the event loop (Node.js, Python asyncio docs)"
+      ]
     },
     {
       "id": "unreachable_code",
@@ -1116,9 +1496,13 @@
       "kind": "static",
       "args": [],
       "expect": "^ok\\nchecked$",
-      "title": "A statement after an early return (CWE-561)",
+      "title": "A statement after an early return",
       "scenario": "check() is meant to print ok and then checked, but a stray return sits between them, the shape of Apple's goto fail bug. The program calls check().",
-      "best": "A refusal of the code after the return. Printing only ok is a silent wrong answer."
+      "best": "A refusal of the code after the return. Printing only ok is a silent wrong answer.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "CWE-561"
+      ]
     },
     {
       "id": "checked_interpolation",
@@ -1128,7 +1512,12 @@
       "expect": null,
       "title": "A misspelled name in string interpolation",
       "scenario": "name is Ada. The program prints a greeting with string interpolation, but the placeholder misspells the variable as nmae.",
-      "best": "A refusal to build. A clear error at run time is next best; a greeting with an empty name is a silent wrong answer."
+      "best": "A refusal to build. A clear error at run time is next best; a greeting with an empty name is a silent wrong answer.",
+      "mode": "Wrong type or shape",
+      "refs": [
+        "Pitfall: a misspelled name inside interpolated text"
+      ],
+      "control_expect": "Ada$"
     },
     {
       "id": "evaluation_order",
@@ -1136,9 +1525,13 @@
       "kind": "static",
       "args": [],
       "expect": "^1 2$",
-      "title": "Arguments with side effects (CERT EXP30-C)",
+      "title": "Arguments with side effects",
       "scenario": "next() returns 1, then 2. The program prints pair(next(), next()).",
-      "best": "1 2: the language runs a call's arguments left to right. 2 1 is a silent wrong answer."
+      "best": "1 2: the language runs a call's arguments left to right. 2 1 is a silent wrong answer.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "CERT EXP30-C"
+      ]
     },
     {
       "id": "dominated_case",
@@ -1148,7 +1541,11 @@
       "expect": "^circle$",
       "title": "A match arm that can never run",
       "scenario": "describe(s) is meant to say circle for a circle and other for anything else, but the catch-all arm (or, where switch arms do not match in order, a repeated case) comes first. The program prints describe of a circle.",
-      "best": "A refusal of the arm that can never run. Printing other is a silent wrong answer."
+      "best": "A refusal of the arm that can never run. Printing other is a silent wrong answer.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "CWE-561"
+      ]
     },
     {
       "id": "duplicate_key",
@@ -1158,7 +1555,11 @@
       "expect": "^2$",
       "title": "A repeated key in a map literal",
       "scenario": "The program builds a map literal meant to hold the keys a and b, but types a twice, and prints the map's size.",
-      "best": "2 cannot happen here, so the best outcome is a refusal; a clear error at run time is next best. Printing 1 means the second value silently replaced the first."
+      "best": "2 cannot happen here, so the best outcome is a refusal; a clear error at run time is next best. Printing 1 means the second value silently replaced the first.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "CWE-694"
+      ]
     },
     {
       "id": "char_arithmetic",
@@ -1168,7 +1569,11 @@
       "expect": "^b$",
       "title": "A character used as a number",
       "scenario": "c is the letter a. The program works out the next letter as c + 1 and prints it.",
-      "best": "b, or a refusal to add a number to a character without a conversion. Printing 98 or a1 is a silent wrong answer."
+      "best": "b, or a refusal to add a number to a character without a conversion. Printing 98 or a1 is a silent wrong answer.",
+      "mode": "Lossy conversions",
+      "refs": [
+        "Pitfall: a character silently used as its code number (Java, C, C#)"
+      ]
     },
     {
       "id": "json_big_integer",
@@ -1178,7 +1583,11 @@
       "expect": "^9007199254740993$",
       "title": "A large integer read from JSON",
       "scenario": "The program parses {\"id\": 9007199254740993} (2^53 + 1) with the standard library's JSON parser into its general value type, or with a typed decode where that is the only kind, and prints the id.",
-      "best": "9007199254740993: the parser keeps the integer exact. 9007199254740992 shows it silently became a 64-bit float."
+      "best": "9007199254740993: the parser keeps the integer exact. 9007199254740992 shows it silently became a 64-bit float.",
+      "mode": "Lossy conversions",
+      "refs": [
+        "CWE-681"
+      ]
     },
     {
       "id": "comparison_statement",
@@ -1186,9 +1595,13 @@
       "kind": "static",
       "args": [],
       "expect": "^5$",
-      "title": "A comparison written instead of an assignment (CWE-482)",
+      "title": "A comparison written instead of an assignment",
       "scenario": "count starts at 0. The program means to set it to 5 but writes count == 5, then prints count.",
-      "best": "A refusal of a comparison whose result is unused. Printing 0 is a silent wrong answer."
+      "best": "A refusal of a comparison whose result is unused. Printing 0 is a silent wrong answer.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "CWE-482"
+      ]
     },
     {
       "id": "structural_equality",
@@ -1196,9 +1609,13 @@
       "kind": "static",
       "args": [],
       "expect": "^equal$",
-      "title": "Comparing records with == (CWE-595)",
+      "title": "Comparing records with ==",
       "scenario": "a and b are two records built separately, each with x = 1 and y = 2. The program compares them with == and prints equal or different.",
-      "best": "equal, or a refusal of == on records. different means == compared identity, not content."
+      "best": "equal, or a refusal of == on records. different means == compared identity, not content.",
+      "mode": "Wrong type or shape",
+      "refs": [
+        "CWE-595"
+      ]
     },
     {
       "id": "array_literal_length",
@@ -1208,7 +1625,11 @@
       "expect": "^40$",
       "title": "A table with a missing entry",
       "scenario": "table is meant to hold 4 entries but is written with 3 values. The program prints table[3].",
-      "best": "A refusal of a 4-entry table with 3 values, or a clear error. Printing 0 or a placeholder is a silent wrong answer."
+      "best": "A refusal of a 4-entry table with 3 values, or a clear error. Printing 0 or a placeholder is a silent wrong answer.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "CWE-665"
+      ]
     },
     {
       "id": "enum_from_int",
@@ -1220,7 +1641,11 @@
       "expect": "^before\\ninvalid$",
       "title": "Converting 7 to an enum with three values",
       "scenario": "Color is Red, Green or Blue. The program prints before, then converts 7, read at run time, to a Color with the language's standard conversion and prints the result, or invalid if the conversion reports failure.",
-      "best": "invalid, or the program stops with an error. A Color that is none of the three is a silent wrong answer."
+      "best": "invalid, or the program stops with an error. A Color that is none of the three is a silent wrong answer.",
+      "mode": "Wrong type or shape",
+      "refs": [
+        "CERT INT50-CPP"
+      ]
     },
     {
       "id": "bitwise_on_bool",
@@ -1228,9 +1653,13 @@
       "kind": "static",
       "args": [],
       "expect": "^no$",
-      "title": "& where && was meant (CWE-768)",
+      "title": "& where && was meant",
       "scenario": "s is empty. The program tests that s is not empty and starts with a, using & where && was meant, and prints yes or no.",
-      "best": "no, or a refusal of & between booleans. With & both sides run, so reading the first letter of an empty string may stop the program."
+      "best": "no, or a refusal of & between booleans. With & both sides run, so reading the first letter of an empty string may stop the program.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "CWE-768"
+      ]
     },
     {
       "id": "readonly_field",
@@ -1240,7 +1669,11 @@
       "expect": "^8080$",
       "title": "Changing a field meant to be fixed",
       "scenario": "Config has a port fixed when it is built. The program builds one with port 8080, then sets the port to 1 by mistake and prints it.",
-      "best": "A refusal to change the port. A clear error at run time is next best; printing 1 is a silent wrong answer."
+      "best": "A refusal to change the port. A clear error at run time is next best; printing 1 is a silent wrong answer.",
+      "mode": "Unintended sharing or copying",
+      "refs": [
+        "CWE-471"
+      ]
     },
     {
       "id": "bool_condition",
@@ -1250,7 +1683,11 @@
       "expect": "^same$",
       "title": "An integer used as a condition",
       "scenario": "compare(a, b) returns 0 when a equals b, as C's strcmp does. The program writes if (compare(\"x\", \"x\")) meaning they are equal and prints same or different.",
-      "best": "same, or a refusal of an integer as a condition. Printing different is a silent wrong answer."
+      "best": "same, or a refusal of an integer as a condition. Printing different is a silent wrong answer.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "CERT EXP20-C"
+      ]
     },
     {
       "id": "lost_write_error",
@@ -1258,9 +1695,14 @@
       "kind": "dynamic",
       "args": [],
       "expect": null,
-      "title": "A failed write lost when the file closes (CWE-252)",
+      "title": "A failed write lost when the file closes",
       "scenario": "The program writes the line data to /dev/full, a device where every write fails with no space left, using the language's usual file writer, closes it the usual way (the end of a block, defer, with or using, or a close call whose result it does not check) and prints saved.",
-      "best": "An error that stops the program. Printing saved means the data was lost with no sign, as when a disk fills up in production."
+      "best": "An error that stops the program. Printing saved means the data was lost with no sign, as when a disk fills up in production.",
+      "mode": "Lost failures",
+      "refs": [
+        "CWE-252"
+      ],
+      "control_expect": "^failed$"
     },
     {
       "id": "short_read",
@@ -1268,9 +1710,13 @@
       "kind": "dynamic",
       "args": [],
       "expect": "^HELLO-WORLD-1234$",
-      "title": "A read that returns part of a message (CWE-252)",
+      "title": "A read that returns part of a message",
       "scenario": "The program starts sh -c 'printf HELLO-WO; sleep 0.2; printf RLD-1234' and reads 16 bytes of its output with the language's usual call that reads a stream into a buffer, ignoring the count of bytes the call reports, then prints the buffer. Where the usual process call returns the whole output, the program uses it.",
-      "best": "HELLO-WORLD-1234: the read waits for all 16 bytes, or a refusal to ignore the count. HELLO-WO shows the first read returned half and the program used the rest of the buffer as if it were filled."
+      "best": "HELLO-WORLD-1234: the read waits for all 16 bytes, or a refusal to ignore the count. HELLO-WO shows the first read returned half and the program used the rest of the buffer as if it were filled.",
+      "mode": "Lost failures",
+      "refs": [
+        "CWE-252"
+      ]
     },
     {
       "id": "masked_cleanup_error",
@@ -1280,7 +1726,11 @@
       "expect": "disk full",
       "title": "A cleanup failure that hides the original error",
       "scenario": "save() writes a report through a resource whose write fails with disk full and whose close then fails with close failed. The resource is released the language's usual way (with, using, try-with-resources, use, defer, ensure, a destructor or a finally block). The caller catches save's error and prints its message.",
-      "best": "disk full, alone or with the close failure attached: the error that stopped the save survives. close failed alone shows the cleanup error replaced it."
+      "best": "disk full, alone or with the close failure attached: the error that stopped the save survives. close failed alone shows the cleanup error replaced it.",
+      "mode": "Lost failures",
+      "refs": [
+        "CERT ERR05-J"
+      ]
     },
     {
       "id": "unflushed_writer",
@@ -1291,7 +1741,11 @@
       "output_file": "/tmp/bb_report.txt",
       "title": "A buffered file never flushed before exit",
       "scenario": "The program writes the line total=42 to /tmp/bb_report.txt the language's usual way to write a file line by line (through its standard buffered writer where it pairs one with files), never flushes or closes it, and exits normally. The test reads the file after the program ends.",
-      "best": "total=42: the data reaches the file because the writer is unbuffered, is flushed when it goes out of scope or at exit, or the compiler refuses the unclosed writer. An empty file shows the buffered line was lost."
+      "best": "total=42: the data reaches the file because the writer is unbuffered, is flushed when it goes out of scope or at exit, or the compiler refuses the unclosed writer. An empty file shows the buffered line was lost.",
+      "mode": "Lost failures",
+      "refs": [
+        "CERT FIO14-J"
+      ]
     },
     {
       "id": "child_exit_status",
@@ -1302,7 +1756,12 @@
       "answer": "backed up",
       "title": "A failed command treated as a success",
       "scenario": "A backup step, sh -c 'exit 3', fails. The program runs it with the language's usual call to run a command and wait for it, ignores how it exited, and prints backed up.",
-      "best": "A refusal to ignore the result, or a clear error from the call. backed up shows the failure went unseen."
+      "best": "A refusal to ignore the result, or a clear error from the call. backed up shows the failure went unseen.",
+      "mode": "Lost failures",
+      "refs": [
+        "CWE-252"
+      ],
+      "control_expect": "^backup failed$"
     },
     {
       "id": "nullable_field",
@@ -1312,7 +1771,12 @@
       "expect": null,
       "title": "Using an explicitly null field as a value",
       "scenario": "A decoded record is present, but its optional name field is explicitly null. The program reads the field as a string and prints its length without checking it.",
-      "best": "The compiler refuses the unchecked read, or the program stops with a clear null or missing-value error. Treating null as a valid name fails."
+      "best": "The compiler refuses the unchecked read, or the program stops with a clear null or missing-value error. Treating null as a valid name fails.",
+      "mode": "Missing values",
+      "refs": [
+        "CWE-476"
+      ],
+      "control_expect": "^no name$"
     },
     {
       "id": "stale_null_check",
@@ -1322,7 +1786,11 @@
       "expect": "^5$",
       "title": "A null check that a later call undoes",
       "scenario": "session.user holds alice. The program checks that session.user is present, calls logout(session), which clears session.user, then prints the length of the user's name. Where the language checks an optional value by binding it to a name, the program binds it and reads the name from that binding.",
-      "best": "5, from the user the check found, or a refusal to trust the check after a call that can change the field. Reading session.user again after logout reads a missing value."
+      "best": "5, from the user the check found, or a refusal to trust the check after a call that can change the field. Reading session.user again after logout reads a missing value.",
+      "mode": "Missing values",
+      "refs": [
+        "CWE-476"
+      ]
     },
     {
       "id": "empty_slot",
@@ -1332,7 +1800,12 @@
       "expect": null,
       "title": "An array of records with an empty slot",
       "scenario": "Records arrive by position. Before any arrive, the program makes an array for 3 users the language's usual way to make an array it fills later. It stores users at positions 1 and 2, then prints the length of the name at position 0, which never arrived.",
-      "best": "A refusal to read a slot that may be empty, or a clear error. Printing 0, or garbage, treats the empty slot as a user."
+      "best": "A refusal to read a slot that may be empty, or a clear error. Printing 0, or garbage, treats the empty slot as a user.",
+      "mode": "Missing values",
+      "refs": [
+        "CWE-476"
+      ],
+      "control_expect": "^missing$"
     },
     {
       "id": "typed_nil",
@@ -1342,7 +1815,11 @@
       "expect": "^valid$",
       "title": "A missing error passed on as a present one",
       "scenario": "validate(name) returns the language's general error type. The name is valid, so the pointer to the specific ValidationError it holds is empty, and validate returns that pointer as the general error. The caller checks whether there is an error and prints valid or invalid.",
-      "best": "valid: an empty pointer stays empty as the general error type, or a refusal. invalid shows the general error counts as present while it holds an empty pointer."
+      "best": "valid: an empty pointer stays empty as the general error type, or a refusal. invalid shows the general error counts as present while it holds an empty pointer.",
+      "mode": "Missing values",
+      "refs": [
+        "Pitfall: a nil pointer in an interface is not a nil interface (Go FAQ)"
+      ]
     },
     {
       "id": "check_then_act",
@@ -1352,7 +1829,11 @@
       "expect": "^1$",
       "title": "Checking and claiming a shared resource in separate steps",
       "scenario": "Two workers each check under a lock whether one resource is unclaimed, release the lock, then claim it under a later lock. A barrier makes both checks happen before either claim.",
-      "best": "Exactly one worker claims the resource. Two successful claims show the check and update were not atomic."
+      "best": "Exactly one worker claims the resource. Two successful claims show the check and update were not atomic.",
+      "mode": "Races and lost signals",
+      "refs": [
+        "CWE-367"
+      ]
     },
     {
       "id": "mutate_after_send",
@@ -1362,7 +1843,11 @@
       "expect": "^1$",
       "title": "Changing a list after sending it to another thread",
       "scenario": "The main thread sends the list [1, 2, 3] to a worker through the language's channel or queue, sets the first item of its own list to 99, then tells the worker to go on. The worker prints the first item of the list it received. Where the language's usual list cannot change, the program builds a new list with 99 first.",
-      "best": "1: the worker got its own copy, or the compiler refuses the change because the list moved. 99 shows both threads hold one list."
+      "best": "1: the worker got its own copy, or the compiler refuses the change because the list moved. 99 shows both threads hold one list.",
+      "mode": "Races and lost signals",
+      "refs": [
+        "CWE-362"
+      ]
     },
     {
       "id": "lost_wakeup",
@@ -1372,7 +1857,11 @@
       "expect": "^done$",
       "title": "A wake-up sent before anyone waits",
       "scenario": "The main thread sends a wake-up, then starts a worker that waits for it and prints \"done\", and waits for the worker to finish. The program uses the standard library's condition variable where it has one, and otherwise its standard way for one thread to wait for another (a channel, an MVar, a promise). The worker waits without first checking whether the wake-up already came.",
-      "best": "\"done\": the tool keeps a wake-up until someone takes it, or the program stops with a deadlock error. A condition variable drops a wake-up nobody waits for, so the worker waits forever."
+      "best": "\"done\": the tool keeps a wake-up until someone takes it, or the program stops with a deadlock error. A condition variable drops a wake-up nobody waits for, so the worker waits forever.",
+      "mode": "Races and lost signals",
+      "refs": [
+        "CERT CON38-C"
+      ]
     },
     {
       "id": "async_reentrancy",
@@ -1382,7 +1871,11 @@
       "expect": "^20$",
       "title": "A balance checked before an await and spent after it",
       "scenario": "balance is 100. withdraw(80) checks that the balance covers it, awaits a 10 ms fraud check, then subtracts. The program runs two withdrawals of 80 at once with the language's asynchronous call (async/await, fibers or go blocks run by the standard library's scheduler) and prints the balance. A language whose standard library has no asynchronous tasks cannot write this form; its threaded form is check_then_act.",
-      "best": "20: one withdrawal goes through and the other is turned down, or a refusal to keep the check across the await. -60 shows both checks passed before either update."
+      "best": "20: one withdrawal goes through and the other is turned down, or a refusal to keep the check across the await. -60 shows both checks passed before either update.",
+      "mode": "Races and lost signals",
+      "refs": [
+        "CWE-367"
+      ]
     },
     {
       "id": "lock_skipped_on_return",
@@ -1390,9 +1883,32 @@
       "kind": "dynamic",
       "args": [],
       "expect": "^70$",
-      "title": "An early return that skips the unlock (CWE-667)",
+      "title": "An early return that skips the unlock",
       "scenario": "withdraw(amount) locks the account's mutex, returns early when the balance is too low, and unlocks at its end. The program calls withdraw(500), which returns early, then starts a worker that calls withdraw(30), waits for the worker and prints the balance of 100. It locks and unlocks with the standard mutex's explicit calls; where the standard library offers only a lock released at the end of its scope, the early return cannot skip the release.",
-      "best": "70: the lock is released on every way out of the function, or the program stops with a deadlock error. Waiting forever shows the early return kept the lock."
+      "best": "70: the lock is released on every way out of the function, or the program stops with a deadlock error. Waiting forever shows the early return kept the lock.",
+      "mode": "Locking",
+      "refs": [
+        "CWE-667"
+      ]
     }
+  ],
+  "modes": [
+    "Missing values",
+    "Out-of-range indexes",
+    "Integer overflow",
+    "Lossy conversions",
+    "Arithmetic mistakes",
+    "Wrong type or shape",
+    "Unintended sharing or copying",
+    "Code that reads one way and runs another",
+    "Incomplete control flow",
+    "Memory reuse",
+    "Exhaustion and leaks",
+    "Lost failures",
+    "Locking",
+    "Races and lost signals",
+    "Lost tasks",
+    "Untrusted input",
+    "Deceptive source text"
   ]
 }

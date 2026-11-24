@@ -5,8 +5,8 @@ import kotlin.concurrent.withLock
 
 fun transfer(first: ReentrantLock, second: ReentrantLock, ready: CountDownLatch) {
     first.withLock {
-        ready.countDown()
-        ready.await()
+        ready.countDown() // BREAK!
+        ready.await() // BREAK!
         second.withLock { }
     }
 }
@@ -16,7 +16,7 @@ fun main() {
     val b = ReentrantLock()
     val ready = CountDownLatch(2)
     val t1 = thread { transfer(a, b, ready) }
-    val t2 = thread { transfer(b, a, ready) }
+    val t2 = thread { transfer(b, a, ready) } // CONTROL! val t2 = thread { transfer(a, b, ready) }
     t1.join()
     t2.join()
     println("finished")

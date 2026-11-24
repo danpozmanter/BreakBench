@@ -4,6 +4,7 @@ class Account:
 
 
 def transfer(src: Account, dst: Account, amount: int) -> None:
+    # CONTROL! if src is dst: return
     new_from = src.balance - amount
     new_to = dst.balance + amount
     src.balance = new_from

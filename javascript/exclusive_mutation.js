@@ -1,6 +1,7 @@
 "use strict";
 
 function transfer(from, to, amount) {
+  // CONTROL! if (from === to) return;
   const newFrom = from.balance - amount;
   const newTo = to.balance + amount;
   from.balance = newFrom;

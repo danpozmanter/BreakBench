@@ -10,7 +10,7 @@ fn int main(String[] args)
 {
 	Frame f = { .guard = 7 };
 	int idx = args[1].to_int()!!;
-	f.buf[idx] = 99;
+	f.buf[idx] = 99; // CONTROL! if (idx >= 0 && idx < 4) f.buf[idx] = 99;
 	io::printfn("%d", f.guard);
 	return 0;
 }

@@ -6,7 +6,7 @@ fn save(path: String) -> Result<(), errors::Error> {
 }
 
 fn main() {
-    save("/nonexistent/dir/out.txt") // BREAK!
-    // CONTROL! if save("/nonexistent/dir/out.txt").is_err() { println("failed") }
+    save("/dev/null/out.txt") // BREAK!
+    // CONTROL! if save("/dev/null/out.txt").is_err() { println("failed") }
     println("saved")
 }

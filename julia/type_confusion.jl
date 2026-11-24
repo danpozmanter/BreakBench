@@ -2,7 +2,7 @@ add(a::Int, b::Int) = a + b
 
 function main()
     raw = ARGS[1]
-    println(add(raw, 3))
+    println(add(raw, 3)) # CONTROL! println(add(parse(Int, raw), 3))
 end
 
 main()

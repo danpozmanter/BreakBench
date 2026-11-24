@@ -1,5 +1,5 @@
 function count_items(xs::Vector{Int})
-    sort!(xs)
+    sort!(xs) # CONTROL! xs = sort(xs)
     length(xs)
 end
 

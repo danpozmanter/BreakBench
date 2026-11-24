@@ -7,7 +7,7 @@ let mutable credits = 0
 let post () =
     lock gate (fun () ->
         debits <- debits + 50
-        if debits > 0 then invalidOp "crash mid-update"
+        if debits > 0 then invalidOp "crash mid-update" // CONTROL! if debits > 0 then (debits <- debits - 50; invalidOp "crash mid-update")
         credits <- credits + 50)
 
 [<EntryPoint>]

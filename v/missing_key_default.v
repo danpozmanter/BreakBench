@@ -6,5 +6,5 @@ fn main() {
 		'plum':  4
 	}
 	name := os.args[1]
-	println(stock[name] + 5)
+	println(stock[name] + 5) // CONTROL! if name in stock { println(stock[name] + 5) } else { println('unknown') }
 }

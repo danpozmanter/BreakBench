@@ -4,6 +4,7 @@
 int main(int argc, char **argv) {
     (void)argc;
     size_t n = strtoull(argv[1], NULL, 10);
+    // CONTROL! if (n > (1u << 30)) { puts("too large"); return 0; }
     unsigned char *buf = calloc(n, 1);
     buf[n - 1] = 1;
     printf("%zu\n", n);

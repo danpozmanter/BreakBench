@@ -15,9 +15,9 @@ let rendezvous () =
 let claim () =
   let available = ref false in
   Mutex.lock state_lock;
-  available := not !claimed; (* BREAK! *)
+  available := not !claimed;
+  (* CONTROL! if !available then claimed := true; *)
   Mutex.unlock state_lock;
-  (* CONTROL! available := not !claimed; if !available then claimed := true *)
   rendezvous ();
   if !available then (Mutex.lock state_lock; claimed := true; incr winners; Mutex.unlock state_lock)
 

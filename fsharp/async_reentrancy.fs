@@ -6,8 +6,8 @@ let mutable balance = 100
 let withdraw amount =
     task {
         if balance >= amount then
-            do! Task.Delay 10
-            lock gate (fun () -> balance <- balance - amount)
+            do! Task.Delay 10 // CONTROL! lock gate (fun () -> balance <- balance - amount)
+            lock gate (fun () -> balance <- balance - amount) // CONTROL! do! Task.Delay 10
     }
 
 [<EntryPoint>]

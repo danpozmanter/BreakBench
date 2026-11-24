@@ -7,8 +7,8 @@ fn void? save(String path)
 
 fn int main(String[] args)
 {
-	save("/nonexistent/dir/out.txt"); // BREAK!
-	// CONTROL! (void)save("/nonexistent/dir/out.txt");
+	save("/dev/null/out.txt"); // BREAK!
+	// CONTROL! (void)save("/dev/null/out.txt");
 	io::printn("saved");
 	return 0;
 }

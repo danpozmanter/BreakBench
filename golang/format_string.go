@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	fmt.Printf(os.Args[1])
+	fmt.Printf(os.Args[1]) // CONTROL! fmt.Print(os.Args[1])
 	fmt.Println()
 }

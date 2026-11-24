@@ -3,6 +3,6 @@ Check();
 static void Check()
 {
     Console.WriteLine("ok");
-    return;
+    return; // BREAK!
     Console.WriteLine("checked");
 }

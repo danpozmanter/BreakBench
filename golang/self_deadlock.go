@@ -15,8 +15,8 @@ func deposit(amount int) {
 }
 
 func main() {
-	mu.Lock()
+	mu.Lock() // BREAK!
 	deposit(10)
-	mu.Unlock()
+	mu.Unlock() // BREAK!
 	fmt.Println("done")
 }

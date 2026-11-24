@@ -1,7 +1,7 @@
 import os
 
 fn is_odd(n i64) bool {
-	return n % 2 == 1
+	return n % 2 == 1 // CONTROL! return n % 2 != 0
 }
 
 fn main() {

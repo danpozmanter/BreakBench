@@ -10,9 +10,9 @@ func main() {
         balance += amount
     }
 
-    lock.lock()
+    lock.lock() // BREAK!
     deposit(10)
-    lock.unlock()
+    lock.unlock() // BREAK!
     print("done")
 }
 

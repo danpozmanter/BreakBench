@@ -21,8 +21,8 @@ fn int main(String[] args)
 	Session session = { &alice };
 	if (session.user != null)
 	{
-		logout(&session);
-		io::printfn("%d", session.user.name.len);
+		logout(&session); // CONTROL! io::printfn("%d", session.user.name.len);
+		io::printfn("%d", session.user.name.len); // CONTROL! logout(&session);
 	}
 	return 0;
 }

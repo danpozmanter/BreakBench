@@ -4,5 +4,5 @@ fn find(id: i64) -> Option<i64> {
 
 fn main() {
     println("before")
-    println(f"{find(2).unwrap() + 1}")
+    println(f"{find(2).unwrap() + 1}") // CONTROL! match find(2) { Some(a) => println(f"{a + 1}"), None => println("missing") }
 }

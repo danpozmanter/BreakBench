@@ -8,7 +8,7 @@ proc post() {.thread.} =
   withLock lock:
     debits += 50
     if debits > 0:
-      raise newException(ValueError, "crash mid-update")
+      raise newException(ValueError, "crash mid-update") # CONTROL! debits -= 50; return
     credits += 50
 
 var worker: Thread[void]

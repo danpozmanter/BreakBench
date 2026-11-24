@@ -6,4 +6,4 @@
 (defn add-meters [a b] (->Meters (+ (:v a) (:v b))))
 
 (defn -main [& _]
-  (println (:v (add-meters (->Meters 2.0) (->Seconds 3.0)))))
+  (println (:v (add-meters (->Meters 2.0) (->Seconds 3.0))))) ; CONTROL! (println (:v (->Meters 2.0))))

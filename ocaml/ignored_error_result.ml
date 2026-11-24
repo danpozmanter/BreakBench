@@ -4,5 +4,5 @@ let save path =
   close_out oc
 
 let () =
-  save "/nonexistent/dir/out.txt";
-  print_endline "saved"
+  save "/dev/null/out.txt"; (* CONTROL! (try save "/dev/null/out.txt"; print_endline "saved" with Sys_error _ -> print_endline "failed") *)
+  print_endline "saved" (* BREAK! *)

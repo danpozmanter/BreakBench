@@ -5,7 +5,7 @@ void main()
     int delegate()[] fs;
     for (int i = 0; i < 3; i++)
     {
-        fs ~= () => i;
+        fs ~= () => i; // CONTROL! fs ~= ((int j) => () => j)(i);
     }
     writeln(fs.map!(f => f().to!string).join(","));
 }

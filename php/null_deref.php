@@ -11,4 +11,4 @@ function find_user(int $id): ?User
 }
 
 $u = find_user((int)$argv[1]);
-echo strlen($u->name), "\n";
+echo strlen($u->name), "\n"; // CONTROL! echo $u === null ? "missing" : strlen($u->name), "\n";

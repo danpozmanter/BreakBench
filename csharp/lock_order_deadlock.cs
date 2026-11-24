@@ -6,13 +6,13 @@ void Transfer(Lock first, Lock second)
 {
     lock (first)
     {
-        ready.SignalAndWait();
+        ready.SignalAndWait(); // BREAK!
         lock (second) { }
     }
 }
 
 var t1 = new Thread(() => Transfer(a, b));
-var t2 = new Thread(() => Transfer(b, a));
+var t2 = new Thread(() => Transfer(b, a)); // CONTROL! var t2 = new Thread(() => Transfer(a, b));
 t1.Start();
 t2.Start();
 t1.Join();

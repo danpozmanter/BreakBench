@@ -10,7 +10,7 @@ int main(void) {
     a->value = 0;
     registry[0] = a;
     free(a);
-    free(registry[0]);
+    free(registry[0]); // BREAK!
     Rec *x = malloc(sizeof(Rec));
     Rec *y = malloc(sizeof(Rec));
     x->value = 1;

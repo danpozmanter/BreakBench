@@ -5,5 +5,5 @@ function save(string $path): bool
     return file_put_contents($path, "data") !== false;
 }
 
-save("/nonexistent/dir/out.txt");
-echo "saved\n";
+save("/dev/null/out.txt"); // CONTROL! echo save("/dev/null/out.txt") ? "saved" : "failed", "\n";
+echo "saved\n"; // BREAK!

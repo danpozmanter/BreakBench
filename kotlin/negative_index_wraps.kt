@@ -1,5 +1,5 @@
 fun main(args: Array<String>) {
     val readings = listOf(10, 20, 30)
     val i = args[0].toInt()
-    println(readings[i] - readings[i - 1])
+    println(readings[i] - readings[i - 1]) // CONTROL! println(if (i > 0) (readings[i] - readings[i - 1]).toString() else "no previous")
 }

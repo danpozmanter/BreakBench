@@ -8,5 +8,5 @@ end
 
 dogs = [Dog.new]
 animals = dogs
-animals[0] = Cat.new
+animals[0] = Cat.new # BREAK!
 puts dogs[0].sound

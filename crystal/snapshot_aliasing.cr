@@ -4,6 +4,6 @@ def apply_update(weights)
 end
 
 weights = [3, 3, 3, 3]
-before = weights
+before = weights # CONTROL! before = weights.dup
 apply_update(weights)
 puts before.zip(weights).count { |b, w| b != w }

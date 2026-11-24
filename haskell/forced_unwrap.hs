@@ -8,4 +8,4 @@ main :: IO ()
 main = do
   putStrLn "before"
   hFlush stdout
-  print (fromJust (find 2) + 1)
+  print (fromJust (find 2) + 1) -- CONTROL! putStrLn (maybe "missing" (show . (+ 1)) (find 2))

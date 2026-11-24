@@ -12,6 +12,6 @@ pub fn main(init: std.process.Init) !void {
     try out.print("before\n", .{});
     try out.flush();
     const n = try std.fmt.parseInt(u8, args[1], 10);
-    const c: Color = @enumFromInt(n);
+    const c: Color = @enumFromInt(n); // CONTROL! if (n > @intFromEnum(Color.blue)) { try out.print("invalid\n", .{}); return; } const c: Color = @enumFromInt(n);
     try out.print("{s}\n", .{@tagName(c)});
 }

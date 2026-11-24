@@ -21,14 +21,14 @@ proc rendezvous() =
 
 proc forward() {.thread.} =
   withLock a:
-    rendezvous()
+    rendezvous() # BREAK!
     withLock b:
       discard
 
 proc backward() {.thread.} =
-  withLock b:
-    rendezvous()
-    withLock a:
+  withLock b: # CONTROL! withLock a:
+    rendezvous() # BREAK!
+    withLock a: # CONTROL! withLock b:
       discard
 
 var t1, t2: Thread[void]

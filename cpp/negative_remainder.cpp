@@ -2,7 +2,7 @@
 #include <string>
 
 static bool is_odd(long n) {
-    return n % 2 == 1;
+    return n % 2 == 1; // CONTROL! return n % 2 != 0;
 }
 
 int main(int, char **argv) {

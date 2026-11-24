@@ -7,7 +7,7 @@ sound(::Cat) = "meow"
 function main()
     dogs = [Dog()]
     animals = dogs
-    animals[1] = Cat()
+    animals[1] = Cat() # BREAK!
     println(sound(dogs[1]))
 end
 

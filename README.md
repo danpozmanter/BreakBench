@@ -10,10 +10,13 @@ This is a general signal, and not meant to be an absolute ranking of these langu
 
 "How much does a language help the programmer avoid production bugs?" is the primary driver.
 
-A language scores the mean over tests it can attempt, as a percentage. Tests marked N/A need a
-feature the language lacks (a mutex, threads, a JSON parser); they are excluded from that language's
-denominator, not counted against it, and the leaderboard shows their count as Missing features. The
-Missing features tab lists, for each language, what it lacks and which test that rules out.
+A language's score is its mean over the tests it can express, as a percentage; every test counts
+once. Tests marked N/A need a feature the language lacks (a mutex, threads, a JSON parser); they are
+left out of that language's mean, not counted against it, and the leaderboard shows their count as
+Missing features. Each category shows the points a language
+earned over the tests it ran (for example 3.5 / 6), so a category a language could only partly
+run shows how few tests stand behind it. The Missing features tab lists, for each language, what it
+lacks and which test that rules out.
 
 Each language runs its latest release, built from LangArena's Dockerfiles or the language's own
 images.
@@ -38,8 +41,9 @@ leaderboard as one unranked example of how much a checker adds.
 
 ## Tests
 
-122 tests in eight categories. Each has a CWE or CERT entry or appears in a language's pitfall list,
-and covers a mistake no other test covers. Each test is one scenario: the same steps, inputs and
+120 tests in eight categories. Each has a CWE or CERT entry, a CVE, or appears in a language's
+pitfall list, and covers a mistake no other test covers; `harness/problems.json` gives each test's
+reference and failure mode, and the site's Notes tab maps the failure modes to their tests. Each test is one scenario: the same steps, inputs and
 expected answer in every language, written the way that language teaches first. The code follows the
 language, so the site lists every place a language could not write a test (N/A), where its design
 rules the mistake out, and where its documentation sent a program to another call.
@@ -48,16 +52,20 @@ rules the mistake out, and where its documentation sent a program to another cal
 | Category | Tests | The bug |
 |---|---|---|
 | Numbers | 17 | Arithmetic or a conversion gives the wrong value: overflow, a narrowing cast, a negative remainder, float equality, a large integer read from JSON, ... |
-| Types and APIs | 29 | A value or call is used the wrong way: text passed as a number, a missing match case, a misspelled field, a list changed while looping over it, a copy taken for a reference, ... |
+| Types and APIs | 28 | A value or call is used the wrong way: text passed as a number, a missing match case, a misspelled field, a list changed while looping over it, a copy taken for a reference, ... |
 | Syntax traps | 21 | The code reads as one thing and does another: an assignment in a condition, a dangling else, a missing comma, a stray return, a variable declared where one was meant to be set, ... |
-| Error handling | 8 | A failure goes unseen: an ignored result, a return in a cleanup block, a cleanup failure that hides the original error, a read that returns part of a message, a buffered file never flushed, a failed command treated as a success, ... |
+| Error handling | 7 | A failure goes unseen: an ignored result, a return in a cleanup block, a cleanup failure that hides the original error, a read that returns part of a message, a buffered file never flushed, a failed command treated as a success, ... |
 | Security | 9 | Input from outside takes control: command injection, a path that escapes its folder, a NUL byte that cuts a file name short, user text as a format string, an object restored from untrusted bytes, hidden or look-alike characters in source, ... |
 | Null safety | 11 | The program uses a value that may be missing as if it were there: a lookup that found nothing, a search that returned -1, a missing name printed as text, a check a later call undoes, an empty pointer passed on as an error, ... |
 | Memory safety | 15 | The program reads or writes memory it does not own, or keeps memory it dropped: use after free, out-of-bounds writes, records that keep each other alive, a size that overflows before the allocation, a running total that keeps every message alive, ... |
 | Concurrency | 12 | Threads or tasks interfere: a deadlock, a check-then-act race, a balance checked before an await and spent after it, an early return that skips the unlock, a wake-up sent before anyone waits, ... |
 
-Every test gives the same result on every run. Tests whose result changed from run to run were
-removed; the site's Notes tab names them and says why.
+Every test gives the same result on every run: the full bench runs three times, and a test whose
+result changes between runs in any language is removed. The site's Notes tab names the removed
+tests. This leaves a gap: bugs that show only on some runs, such as unsynchronized writes to shared
+memory, are not measured.
+
+Tests every language scores 0 on stay in the bench, labelled "No language passes".
 
 ### Outcomes
 
@@ -73,6 +81,8 @@ removed; the site's Notes tab names them and says why.
 | HANG | Never finished |
 | LEAK | The program ran out of file descriptors or memory it should have freed |
 | SAFE_BY_DESIGN | The language design prevents the error |
+| UNTIED | The compiler refused the program, but no error points at the bug's lines |
+| ERROR | The program without the bug did not give the expected answer, so the result cannot be trusted |
 | UNFIXABLE | The error is expressible but the fix is not |
 | N/A | The language cannot express the error; excluded from its mean |
 
@@ -83,7 +93,7 @@ removed; the site's Notes tab names them and says why.
 | REJECTED, CORRECT, SAFE_BY_DESIGN | 1 |
 | TRAPPED in the build that ships | 0.5 |
 | TRAPPED only in the debug build | 0.25 |
-| SILENT, CHANCE, CORRUPT, CRASH, HANG, LEAK, ICE, UNFIXABLE | 0 |
+| SILENT, CHANCE, CORRUPT, CRASH, HANG, LEAK, ICE, UNTIED, UNFIXABLE, ERROR | 0 |
 
 Two things count: when the bug is caught, and whether it does harm. A refusal catches it before the
 program runs, so it never reaches production: 1 point. A clear stop in the shipped build reaches
@@ -92,12 +102,25 @@ be found in testing, but the shipped build runs on past the bug and does the har
 answer, corruption or a crash does the harm unseen: 0. A stop counts only if it comes before the
 program prints its result; once a wrong value is out, the harm is done.
 
+Each program marks its bug. The control, the same program without the bug, drops each `BREAK!` line
+and uses each `CONTROL! <code>` line in its place. A compile error counts as a refusal only if the
+control compiles and one of the compiler's errors points at the bug: a marked line, a line within
+three of one, the line that opens the function, match or block holding one, or the declaration of a
+type a marked line names. A run that does not
+give the right answer counts only if the control, built and run the same way, gives the expected
+answer; otherwise the result is ERROR, a broken program rather than a property of the language.
+
+The release build is the release profile a new project gets from the language's standard build
+tool, with none of the switches the scored build adds; where the tool asks for a choice (Zig, C3) it
+takes the mode that keeps the language's safety checks, and C and C++ take CMake's Release profile.
+
+Every test counts once. The categories group results; they do not weight them, since their sizes
+reflect only how many tests were written for each.
+
 Warnings do not score. Matching a warning to a bug needs a pattern per test, and no pattern tells a
 warning about the bug from one that only shares its words. Some languages warn far better than
-others; that strength does not show in the score.
-
-A compile error counts as a refusal only if the same program without the bug compiles: that
-version, the control, drops each `BREAK!` line and uses each `CONTROL! <code>` line in its place.
+others; that strength does not show in the score, so each result on the site shows the compiler's
+output from a build that succeeded, marked as not scored.
 
 ## Notes
 
@@ -122,7 +145,9 @@ Requires `docker`, `docker compose` and [`uv`](https://docs.astral.sh/uv/).
     uv run bench.py                             # full run of every test
     uv run bench.py rust gossamer               # rerun some languages
     uv run bench.py c --only use_after_free     # rerun some tests
+    uv run bench.py --jobs 6                    # run six languages at once
     uv run bench.py --aggregate                 # rebuild the rankings and the site
+    uv run bench.py --audit                     # list N/A claims a program elsewhere contradicts
 
 Each full run writes a folder named for its start time, `results/YYYY-MM-DDTHHMMSSZ/`, holding raw
 results in `raw/` and the ranking in `results.json`. Partial runs update the newest folder. The site goes to `docs/index.html`.

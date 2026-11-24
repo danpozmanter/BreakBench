@@ -7,6 +7,6 @@ pub fn main(init: std.process.Init) !void {
     const out = &stdout.interface;
     defer out.flush() catch {};
     const x = try std.fmt.parseFloat(f64, args[1]);
-    const v: i64 = @intFromFloat(x);
+    const v: i64 = @intFromFloat(x); // CONTROL! const v: i128 = @intFromFloat(x);
     try out.print("{d}\n", .{v});
 }

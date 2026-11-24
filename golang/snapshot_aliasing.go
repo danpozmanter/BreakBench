@@ -1,6 +1,6 @@
 package main
 
-import "fmt"
+import "fmt" // CONTROL! import ("fmt"; "slices")
 
 func applyUpdate(weights []int) {
 	weights[1] = 5
@@ -9,7 +9,7 @@ func applyUpdate(weights []int) {
 
 func main() {
 	weights := []int{3, 3, 3, 3}
-	before := weights
+	before := weights // CONTROL! before := slices.Clone(weights)
 	applyUpdate(weights)
 	changes := 0
 	for i := range weights {

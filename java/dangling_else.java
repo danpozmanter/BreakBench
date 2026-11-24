@@ -3,9 +3,9 @@ public class Main {
         boolean a = Integer.parseInt(args[0]) != 0;
         boolean b = true;
         String r = "unset";
-        if (a)
+        if (a) // CONTROL! if (a) {
             if (b) r = "both";
-        else
+        else // CONTROL! } else
             r = "not a";
         System.out.println(r);
     }

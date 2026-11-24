@@ -1,2 +1,2 @@
-let re = try! Regex("^(a+)+$")
+let re = try! Regex("^(a+)+$") // CONTROL! let re = try! Regex("^a+$")
 print(CommandLine.arguments[1].wholeMatch(of: re) != nil ? "match" : "no match")

@@ -18,4 +18,5 @@ def main() raises:
         var child = ArcPointer(Node())
         parent[].other = child
         child[].other = parent
+        # CONTROL! child[].other = None
     print("done")

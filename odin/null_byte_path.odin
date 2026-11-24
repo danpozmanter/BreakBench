@@ -9,6 +9,7 @@ main :: proc() {
 	_ = os.write_entire_file("/tmp/bb_files/report.txt", transmute([]u8)string("secret\n"))
 
 	name := "report.txt\x00.png"
+	// CONTROL! if strings.index_byte(name, 0) >= 0 { fmt.println("rejected"); return }
 	if !strings.has_suffix(name, ".png") {
 		fmt.println("rejected")
 		return

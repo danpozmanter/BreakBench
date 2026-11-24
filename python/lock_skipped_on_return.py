@@ -8,7 +8,7 @@ def withdraw(amount: int) -> None:
     global balance
     lock.acquire()
     if amount > balance:
-        return
+        return # CONTROL! lock.release(); return
     balance -= amount
     lock.release()
 

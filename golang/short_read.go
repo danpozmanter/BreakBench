@@ -1,7 +1,7 @@
 package main
 
 import (
-	"fmt"
+	"fmt" // CONTROL! "fmt"; "io"
 	"os/exec"
 )
 
@@ -15,7 +15,7 @@ func main() {
 		panic(err)
 	}
 	message := make([]byte, 16)
-	stdout.Read(message)
+	stdout.Read(message) // CONTROL! io.ReadFull(stdout, message)
 	cmd.Wait()
 	fmt.Println(string(message))
 }

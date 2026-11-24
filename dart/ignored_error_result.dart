@@ -5,6 +5,6 @@ void save(String path) {
 }
 
 void main() {
-  save("/nonexistent/dir/out.txt");
-  print("saved");
+  save("/dev/null/out.txt"); // CONTROL! try { save("/dev/null/out.txt"); print("saved"); } on FileSystemException { print("failed"); }
+  print("saved"); // BREAK!
 }

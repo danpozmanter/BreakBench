@@ -6,5 +6,5 @@ void main()
 {
     writeln("before");
     stdout.flush();
-    writeln(find(2).get + 1);
+    writeln(find(2).get + 1); // CONTROL! auto a = find(2); if (a.isNull) writeln("missing"); else writeln(a.get + 1);
 }

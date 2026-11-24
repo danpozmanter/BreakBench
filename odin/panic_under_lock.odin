@@ -12,7 +12,7 @@ post :: proc() {
 	defer sync.mutex_unlock(&lock)
 	debits += 50
 	if debits > 0 {
-		fmt.eprintln("crash mid-update")
+		fmt.eprintln("crash mid-update") // CONTROL! debits -= 50
 		return
 	}
 	credits += 50

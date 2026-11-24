@@ -6,6 +6,6 @@ import "core:strconv"
 
 main :: proc() {
 	s, _ := strconv.parse_uint(os.args[1])
-	one: u64 = 1
-	fmt.println(one << s)
+	one: u64 = 1 // BREAK!
+	fmt.println(one << s) // CONTROL! fmt.println(u128(1) << s)
 }

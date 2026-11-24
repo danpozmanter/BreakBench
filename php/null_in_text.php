@@ -7,4 +7,4 @@ function find_name(int $id): ?string
 }
 
 $name = find_name((int)$argv[1]);
-echo "hello, $name\n";
+echo "hello, $name\n"; // CONTROL! echo "hello, " . ($name ?? "nobody") . "\n";

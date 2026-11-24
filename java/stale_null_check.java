@@ -13,8 +13,8 @@ public class Main {
     public static void main(String[] args) {
         Session session = new Session(new User("alice"));
         if (session.user != null) {
-            logout(session);
-            System.out.println(session.user.name().length());
+            logout(session); // CONTROL! System.out.println(session.user.name().length());
+            System.out.println(session.user.name().length()); // CONTROL! logout(session);
         }
     }
 }

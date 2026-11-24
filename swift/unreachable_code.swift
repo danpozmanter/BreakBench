@@ -1,6 +1,6 @@
 func check() {
     print("ok")
-    return
+    return // BREAK!
     let note = "checked"
     print(note)
 }

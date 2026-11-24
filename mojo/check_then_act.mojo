@@ -11,9 +11,9 @@ def main():
     def claim(t: Int) {mut state_lock, mut gate_lock, mut claimed, mut winners, mut arrivals}:
         var available = False
         state_lock.lock(t)
-        available = not claimed # BREAK!
+        available = not claimed
+        # CONTROL! if available: claimed = True
         state_lock.unlock(t)
-        # CONTROL! available = not claimed; if available: claimed = True
         gate_lock.lock(t); arrivals += 1; gate_lock.unlock(t)
         while True:
             gate_lock.lock(t); var open = arrivals == 2; gate_lock.unlock(t)

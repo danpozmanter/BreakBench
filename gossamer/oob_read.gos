@@ -8,5 +8,5 @@ struct Frame {
 fn main() {
     let f = Frame { buf: [1, 2, 3, 4], secret: 42 }
     let idx = env::args()[0].to_i64().unwrap()
-    println(f"{f.buf[idx]}")
+    println(f"{f.buf[idx]}") // CONTROL! if idx >= 0 && idx < 4 { println(f"{f.buf[idx]}") } else { println("out of range") }
 }

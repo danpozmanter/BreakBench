@@ -5,4 +5,4 @@
 
 (defn -main [& args]
   (let [name (find-name (parse-long (first args)))]
-    (println (str "hello, " name))))
+    (println (str "hello, " name)))) ; CONTROL! (println (str "hello, " (or name "nobody")))))

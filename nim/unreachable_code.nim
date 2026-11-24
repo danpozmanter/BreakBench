@@ -1,6 +1,6 @@
 proc check() =
   echo "ok"
-  return
+  return # BREAK!
   echo "checked"
 
 check()

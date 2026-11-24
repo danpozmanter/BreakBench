@@ -1,7 +1,7 @@
 import Data.IORef
 
 transfer :: IORef Int -> IORef Int -> Int -> IO ()
-transfer from to amount = do
+transfer from to amount = do -- CONTROL! transfer from to amount = if from == to then return () else do
   f <- readIORef from
   t <- readIORef to
   writeIORef from (f - amount)

@@ -12,5 +12,5 @@ find_name :: proc(id: i64) -> Maybe(string) {
 main :: proc() {
 	id, _ := strconv.parse_i64(os.args[1])
 	name := find_name(id)
-	fmt.printfln("hello, %v", name)
+	fmt.printfln("hello, %v", name) // CONTROL! fmt.printfln("hello, %v", name.? or_else "nobody")
 }

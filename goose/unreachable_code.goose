@@ -1,6 +1,6 @@
 fn check() {
     print("ok");
-    return;
+    return; // BREAK!
     print("checked");
 }
 

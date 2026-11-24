@@ -7,7 +7,7 @@ class Shape {
 }
 
 class Circle extends Shape {
-  descibe() {
+  descibe() { // CONTROL! describe() {
     return "circle";
   }
 }

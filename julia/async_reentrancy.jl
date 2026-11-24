@@ -2,8 +2,8 @@ const balance = Ref(100)
 
 function withdraw(amount)
     if balance[] >= amount
-        sleep(0.01)
-        balance[] -= amount
+        sleep(0.01) # CONTROL! balance[] -= amount
+        balance[] -= amount # CONTROL! sleep(0.01)
     end
 end
 

@@ -3,5 +3,5 @@ let find id = if id = 1 then Some 36 else None
 [<EntryPoint>]
 let main _ =
     printfn "before"
-    printfn "%d" (Option.get (find 2) + 1)
+    printfn "%d" (Option.get (find 2) + 1) // CONTROL! match find 2 with Some a -> printfn "%d" (a + 1) | None -> printfn "missing"
     0

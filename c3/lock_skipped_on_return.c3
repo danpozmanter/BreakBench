@@ -7,7 +7,7 @@ int balance = 100;
 fn void withdraw(int amount)
 {
 	lock.lock();
-	if (amount > balance) return;
+	if (amount > balance) return; // CONTROL! if (amount > balance) { lock.unlock(); return; }
 	balance -= amount;
 	lock.unlock();
 }

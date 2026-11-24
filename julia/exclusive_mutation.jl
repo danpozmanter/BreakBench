@@ -3,6 +3,7 @@ mutable struct Account
 end
 
 function transfer(from::Account, to::Account, amount::Int)
+    # CONTROL! from === to && return
     new_from = from.balance - amount
     new_to = to.balance + amount
     from.balance = new_from

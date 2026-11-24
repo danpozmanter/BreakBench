@@ -10,6 +10,6 @@ static bool save(const std::string &path) {
 }
 
 int main() {
-    save("/nonexistent/dir/out.txt");
-    std::cout << "saved\n";
+    save("/dev/null/out.txt"); // CONTROL! std::cout << (save("/dev/null/out.txt") ? "saved" : "failed") << "\n";
+    std::cout << "saved\n"; // BREAK!
 }

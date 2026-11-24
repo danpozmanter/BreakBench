@@ -1,5 +1,5 @@
 def count(xs)
-  xs.sort!
+  xs.sort! # CONTROL! xs = xs.sort
   xs.size
 end
 

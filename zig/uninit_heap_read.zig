@@ -12,6 +12,7 @@ pub fn main(init: std.process.Init) !void {
     @memcpy(session[32..44], "SECRET-TOKEN");
     gpa.free(session);
     const reply = try gpa.alloc(u8, 64);
+    // CONTROL! @memset(reply, 0);
     defer gpa.free(reply);
     for (reply[32..44]) |b| try out.print("{x:0>2}", .{b});
     try out.print("\n", .{});

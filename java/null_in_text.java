@@ -5,6 +5,6 @@ public class Main {
 
     public static void main(String[] args) {
         String name = findName(Long.parseLong(args[0]));
-        System.out.println("hello, " + name);
+        System.out.println("hello, " + name); // CONTROL! System.out.println("hello, " + (name == null ? "nobody" : name));
     }
 }

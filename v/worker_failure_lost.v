@@ -11,6 +11,9 @@ fn sum(items []string) !i64 {
 
 fn main() {
 	worker := spawn sum(os.args[1..])
-	total := worker.wait() or { panic(err) }
+	total := worker.wait() or { panic(err) } // CONTROL! total := worker.wait() or {
+		// CONTROL! println('failed')
+		// CONTROL! return
+	// CONTROL! }
 	println('total ${total}')
 }

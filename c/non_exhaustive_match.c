@@ -8,6 +8,7 @@ static const char *name(enum Color c) {
     switch (c) {
     case RED: s = "red"; break;
     case GREEN: s = "green"; break;
+    // CONTROL! case BLUE: s = "blue"; break;
     }
     return s;
 }

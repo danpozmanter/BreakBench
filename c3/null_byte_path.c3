@@ -8,6 +8,7 @@ fn int main(String[] args)
 	file::save("/tmp/bb_files/report.txt", "secret\n")!!;
 
 	String name = "report.txt\0.png";
+	// CONTROL! foreach (c : name) { if (c == 0) { io::printn("rejected"); return 0; } }
 	if (!name.ends_with(".png"))
 	{
 		io::printn("rejected");

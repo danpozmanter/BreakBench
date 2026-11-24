@@ -3,7 +3,7 @@ find(id) = id == 1 ? 36 : nothing
 function main()
     println("before")
     flush(stdout)
-    println(find(2) + 1)
+    println(find(2) + 1) # CONTROL! a = find(2); println(a === nothing ? "missing" : a + 1)
 end
 
 main()

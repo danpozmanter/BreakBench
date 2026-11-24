@@ -3,8 +3,8 @@ class Account
 
   def withdraw(amount)
     if @balance >= amount
-      sleep 10.milliseconds
-      @balance -= amount
+      sleep 10.milliseconds # CONTROL! @balance -= amount
+      @balance -= amount # CONTROL! sleep 10.milliseconds
     end
   end
 end

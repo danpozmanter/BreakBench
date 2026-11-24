@@ -9,5 +9,5 @@ pub fn main(init: std.process.Init) !void {
     const x = try std.fmt.parseFloat(f64, args[1]);
     const y = try std.fmt.parseFloat(f64, args[2]);
     const a = x + y;
-    try out.print("{s}\n", .{if (a == 0.3) "equal" else "not equal"});
+    try out.print("{s}\n", .{if (a == 0.3) "equal" else "not equal"}); // CONTROL! try out.print("{s}\n", .{if (@abs(a - 0.3) < 1e-9) "equal" else "not equal"});
 }

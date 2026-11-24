@@ -10,7 +10,7 @@ static void deposit(int amount) {
 }
 
 int main() {
-    std::lock_guard<std::mutex> guard(lock);
+    std::lock_guard<std::mutex> guard(lock); // BREAK!
     deposit(10);
     std::cout << "done\n";
 }

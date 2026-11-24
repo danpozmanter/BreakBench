@@ -11,4 +11,5 @@ main :: proc() {
 	report: bufio.Writer
 	bufio.writer_init(&report, os.to_stream(file))
 	bufio.writer_write_string(&report, "total=42\n")
+	// CONTROL! bufio.writer_flush(&report)
 }

@@ -23,7 +23,7 @@ int main(void) {
     Item *w = malloc(sizeof(Item));
     w[0].val = 7;
     handles[1] = w;
-    handles[0]->val = 99;
+    handles[0]->val = 99; // CONTROL! v[0].val = 99;
     printf("%d\n", handles[1]->val);
     return 0;
 }

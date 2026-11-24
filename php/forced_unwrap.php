@@ -7,4 +7,4 @@ function find(int $id): ?int
 }
 
 echo "before\n";
-echo find(2) + 1, "\n";
+echo find(2) + 1, "\n"; // CONTROL! $a = find(2); echo $a === null ? "missing" : $a + 1, "\n";

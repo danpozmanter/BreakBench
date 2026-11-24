@@ -2,6 +2,7 @@ type Account = object
   balance: int
 
 proc transfer(src, dst: var Account, amount: int) =
+  # CONTROL! if addr(src) == addr(dst): return
   let newFrom = src.balance - amount
   let newTo = dst.balance + amount
   src.balance = newFrom

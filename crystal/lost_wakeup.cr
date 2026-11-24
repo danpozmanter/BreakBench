@@ -1,4 +1,4 @@
-woken = Channel(Nil).new
+woken = Channel(Nil).new # CONTROL! woken = Channel(Nil).new(1)
 done = Channel(Nil).new
 woken.send(nil)
 spawn do

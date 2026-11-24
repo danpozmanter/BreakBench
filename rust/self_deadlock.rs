@@ -8,7 +8,7 @@ fn deposit(amount: i64) {
 }
 
 fn main() {
-    let _guard = BALANCE.lock().unwrap();
+    let _guard = BALANCE.lock().unwrap(); // BREAK!
     deposit(10);
     println!("done");
 }

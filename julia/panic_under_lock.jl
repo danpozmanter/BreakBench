@@ -4,7 +4,7 @@ const ledger = Dict(:debits => 0, :credits => 0)
 function post()
     lock(LOCK) do
         ledger[:debits] += 50
-        ledger[:debits] > 0 && error("crash mid-update")
+        ledger[:debits] > 0 && error("crash mid-update") # CONTROL! ledger[:debits] > 0 && (ledger[:debits] -= 50; error("crash mid-update"))
         ledger[:credits] += 50
     end
 end

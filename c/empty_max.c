@@ -6,6 +6,7 @@ int main(int argc, char **argv) {
     long *xs = malloc(sizeof(long) * (size_t)(argc - 1));
     for (int i = 1; i < argc; i++) xs[i - 1] = atol(argv[i]);
     long n = argc - 1;
+    // CONTROL! if (n == 0) { puts("no readings"); free(xs); return 0; }
     long m = xs[0];
     for (long i = 1; i < n; i++)
         if (xs[i] > m) m = xs[i];

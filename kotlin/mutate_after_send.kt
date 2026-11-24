@@ -11,7 +11,7 @@ fun main() {
         println(received[0])
     }
     val list = mutableListOf(1, 2, 3)
-    lists.put(list)
+    lists.put(list) // CONTROL! lists.put(list.toMutableList())
     list[0] = 99
     goOn.countDown()
     worker.join()
