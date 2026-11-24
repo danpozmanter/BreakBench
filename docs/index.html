@@ -94,7 +94,6 @@ td.lang a:hover, td.lang a:focus-visible { color: var(--accent); text-decoration
 #ranking a.home { color: inherit; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
 #ranking a.home:hover, #ranking a.home:focus-visible { color: var(--accent); text-decoration-color: currentColor; }
 #ranking a.src { margin-left: 8px; color: var(--accent); }
-.dflt { display: block; margin-top: 4px; font-size: 11.5px; color: var(--muted); white-space: normal; }
 th.breakdown { text-align: right; white-space: normal; max-width: 7.5em; vertical-align: bottom; }
 .bar { width: 80px; }
 .num { display: inline-block; min-width: 3.2em; text-align: right; font-weight: 600; }
@@ -180,9 +179,6 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   .docs-table td:nth-child(3)::before { content: "What the docs say"; }
   .docs-table td:nth-child(4)::before { content: "Path used"; }
   .docs-table td:nth-child(5)::before { content: "The first-taught call would fail"; }
-  .modes-table td:nth-child(n+2)::before { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-top: 4px; }
-  .modes-table td:nth-child(2)::before { content: "Strict"; }
-  .modes-table td:nth-child(3)::before { content: "Default"; }
   .paths-table td:nth-child(n+3)::before { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-top: 4px; }
   .paths-table td:nth-child(3)::before { content: "Path used"; }
   .paths-table td:nth-child(4)::before { content: "Why that path"; }
@@ -233,7 +229,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   </div>
 
   <section role="tabpanel" id="leaderboard" aria-labelledby="tab-leaderboard">
-    <p class="muted">The score is the average over counted tests, as a percentage. It measures the language itself: its compiler and runtime with their own checks switched on, without linters, sanitizers or third-party checkers. Python (mypy) is an unranked example of what such a checker adds. Default is the same programs built with the bare toolchain. The categories break the score down. Caught or prevented by design is the share refused or made impossible. Missing features counts the tests the language cannot express; they are left out of its average, not counted against it. Select a heading to sort.</p>
+    <p class="muted">The score is the average over counted tests, as a percentage. It measures the language itself: its compiler and runtime with their own checks switched on, without linters, sanitizers or third-party checkers. Python (mypy) is an unranked example of what such a checker adds. The categories break the score down. Caught or prevented by design is the share refused or made impossible. Missing features counts the tests the language cannot express; they are left out of its average, not counted against it. Select a heading to sort.</p>
     <div class="scroll"><table id="ranking"></table></div>
   </section>
 
@@ -262,32 +258,32 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   <section role="tabpanel" id="notes" aria-labelledby="tab-notes" hidden>
     <p class="muted">Every note on how BreakBench builds, runs and scores lives here; the README points to this tab.</p>
     <h3>What the score measures</h3>
-    <p class="muted" id="mode-note">The score measures the language itself: its compiler or interpreter, its runtime, and the switches they offer that make the compiler refuse more programs or the program stop on more bugs (checked arithmetic, a debug build, assertions, strict type checking). Linters, sanitizers and third-party checkers are left out, even where the language's project ships them. They raise a language's score, and how much each language gets from them varies, so counting them would measure tooling as much as language design. Python with mypy runs as one unranked example of what a checker adds. Default runs the same programs with the bare toolchain a new project gets.</p>
-    <h3>Strict and default builds</h3>
-    <div class="scroll"><table class="notes-table modes-table"><thead><tr><th>Language</th><th>Strict (scored)</th><th>Default</th></tr></thead><tbody>
-      <tr><td>C</td><td>debug build, <code>clang -O0 -g</code></td><td>same</td></tr>
-      <tr><td>C++</td><td>debug build with the standard library's assertions, <code>clang++ -O0 -g -D_GLIBCXX_ASSERTIONS</code></td><td>same; libstdc++ turns its assertions on in any unoptimized build</td></tr>
-      <tr><td>Rust</td><td>debug build (overflow checks on)</td><td>same</td></tr>
-      <tr><td>Zig</td><td><code>-O Debug</code></td><td>same</td></tr>
-      <tr><td>Go</td><td><code>go build</code></td><td>same</td></tr>
-      <tr><td>Swift</td><td>Swift 6 mode, <code>-strict-memory-safety</code></td><td>Swift 6 mode</td></tr>
-      <tr><td>Crystal, Nim, D, V</td><td>the default debug build</td><td>same</td></tr>
-      <tr><td>Odin</td><td><code>-debug -vet</code> plus the cast, nil-dereference, uninitialized, using-parameter and atomic-access checks</td><td><code>-debug</code></td></tr>
-      <tr><td>C3</td><td><code>--validation=strict</code> (<code>obnoxious</code> rejects C3's own standard library)</td><td><code>c3c compile -O0</code></td></tr>
-      <tr><td>Mojo</td><td><code>-O0 -D ASSERT=all</code></td><td><code>mojo build</code></td></tr>
-      <tr><td>Gossamer</td><td><code>gos build</code></td><td>same</td></tr>
-      <tr><td>Goose</td><td><code>--debug</code></td><td>without <code>--debug</code></td></tr>
-      <tr><td>Java, Scala</td><td>assertions on, <code>-ea</code></td><td><code>java</code></td></tr>
-      <tr><td>Kotlin</td><td><code>-progressive</code>, <code>-ea</code></td><td><code>kotlinc</code>, <code>java</code></td></tr>
-      <tr><td>C#</td><td>checked arithmetic, nullable checks</td><td>the <code>dotnet new console</code> project (nullable checks on)</td></tr>
-      <tr><td>F#</td><td><code>--checked+</code>, nullness checks</td><td>the default project</td></tr>
-      <tr><td>Dart</td><td><code>--enable-asserts</code></td><td><code>dart</code></td></tr>
-      <tr><td>TypeScript</td><td><code>--strict</code> and every extra check flag</td><td><code>tsc</code> (TypeScript 7 turns <code>--strict</code> on by default)</td></tr>
-      <tr><td>JavaScript</td><td><code>"use strict"</code></td><td>same; each program opts in itself</td></tr>
-      <tr><td>PHP</td><td>assertions on, errors to stderr</td><td><code>php</code>; each program keeps <code>strict_types=1</code></td></tr>
-      <tr><td>Julia</td><td><code>--check-bounds=yes</code></td><td><code>julia</code></td></tr>
-      <tr><td>Python, Ruby, OCaml, Haskell, Clojure</td><td>the default build (dune's development profile for OCaml)</td><td>same</td></tr>
-      <tr><td>Python (mypy), example</td><td><code>mypy --strict</code> with every optional error code, then <code>python3</code></td><td>not run; the Python row is its bare build</td></tr>
+    <p class="muted" id="mode-note">The score measures the language itself: its compiler or interpreter, its runtime, and the switches they offer that make the compiler refuse more programs or the program stop on more bugs (checked arithmetic, a debug build, assertions, strict type checking). Linters, sanitizers and third-party checkers are left out, even where the language's project ships them. They raise a language's score, and how much each language gets from them varies, so counting them would measure tooling as much as language design. Python with mypy runs as one unranked example of what a checker adds.</p>
+    <h3>Builds</h3>
+    <div class="scroll"><table class="notes-table"><thead><tr><th>Language</th><th>Build</th></tr></thead><tbody>
+      <tr><td>C</td><td>debug build, <code>clang -O0 -g</code></td></tr>
+      <tr><td>C++</td><td>debug build with the standard library's assertions, <code>clang++ -O0 -g -D_GLIBCXX_ASSERTIONS</code></td></tr>
+      <tr><td>Rust</td><td>debug build (overflow checks on)</td></tr>
+      <tr><td>Zig</td><td><code>-O Debug</code></td></tr>
+      <tr><td>Go</td><td><code>go build</code></td></tr>
+      <tr><td>Swift</td><td>Swift 6 mode, <code>-strict-memory-safety</code></td></tr>
+      <tr><td>Crystal, Nim, D, V</td><td>the default debug build</td></tr>
+      <tr><td>Odin</td><td><code>-debug -vet</code> plus the cast, nil-dereference, uninitialized, using-parameter and atomic-access checks</td></tr>
+      <tr><td>C3</td><td><code>--validation=strict</code> (<code>obnoxious</code> rejects C3's own standard library)</td></tr>
+      <tr><td>Mojo</td><td><code>-O0 -D ASSERT=all</code></td></tr>
+      <tr><td>Gossamer</td><td><code>gos build</code></td></tr>
+      <tr><td>Goose</td><td><code>--debug</code></td></tr>
+      <tr><td>Java, Scala</td><td>assertions on, <code>-ea</code></td></tr>
+      <tr><td>Kotlin</td><td><code>-progressive</code>, <code>-ea</code></td></tr>
+      <tr><td>C#</td><td>checked arithmetic, nullable checks</td></tr>
+      <tr><td>F#</td><td><code>--checked+</code>, nullness checks</td></tr>
+      <tr><td>Dart</td><td><code>--enable-asserts</code></td></tr>
+      <tr><td>TypeScript</td><td><code>--strict</code> and every extra check flag</td></tr>
+      <tr><td>JavaScript</td><td><code>"use strict"</code></td></tr>
+      <tr><td>PHP</td><td>assertions on, errors to stderr</td></tr>
+      <tr><td>Julia</td><td><code>--check-bounds=yes</code></td></tr>
+      <tr><td>Python, Ruby, OCaml, Haskell, Clojure</td><td>the default build (dune's development profile for OCaml)</td></tr>
+      <tr><td>Python (mypy), example</td><td><code>mypy --strict</code> with every optional error code, then <code>python3</code></td></tr>
     </tbody></table></div>
     <h3>Left out of the score</h3>
     <div class="scroll"><table class="notes-table"><thead><tr><th>Language</th><th>Tool left out</th></tr></thead><tbody>
@@ -330,7 +326,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     <h3>A stop after the answer</h3>
     <p class="muted">A stop counts only if it comes before the program prints its result. A test may name its answer pattern; a run that prints a matching result and stops afterwards let the wrong value out, so it scores as a wrong answer. <code>empty_max</code> uses this for Nim, whose <code>max</code> of an empty sequence answers 0, so the program prints 1 before its <code>IndexDefect</code> stops it. <code>unsafe_deserialization</code>, <code>null_byte_path</code> and <code>child_exit_status</code> use it the same way: the restore hook ran, the secret was read, or the backup was reported done, before any stop.</p>
     <h3>Release builds</h3>
-    <p class="muted">A program that stops at run time in the strict build is built again the way the language ships, and run again. If that build runs on past the bug, the stop scores 0.25 instead of 0.5.</p>
+    <p class="muted">A program that stops at run time in the scored build is built again the way the language ships, and run again. If that build runs on past the bug, the stop scores 0.25 instead of 0.5.</p>
     <div class="scroll"><table class="notes-table"><thead><tr><th>Language</th><th>Release build</th><th>What changes</th></tr></thead><tbody>
       <tr><td>C</td><td><code>-O2 -D_FORTIFY_SOURCE=3</code>, stack protector</td><td>Optimized; the C library's fortified calls stay.</td></tr>
       <tr><td>C++</td><td>as C, plus <code>-D_GLIBCXX_ASSERTIONS</code></td><td>Library bounds checks stay.</td></tr>
@@ -474,15 +470,6 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     .forEach(([k, v]) => meta.append(el("span", {}, k + " ", el("b", { text: String(v) }))));
 
   const pct = (v) => v.toFixed(1) + "%";
-  // How much each language's extra checks add over its bare toolchain.
-  const gains = D.languages.filter((L) => L.default != null && !L.example).map((L) => [L, L.score - L.default]).sort((a, b) => b[1] - a[1]);
-  if (gains.length) {
-    const avg = gains.reduce((n, [, g]) => n + g, 0) / gains.length;
-    const top = gains.filter(([, g]) => g >= 0.05).slice(0, 5).map(([L, g]) => L.name + " +" + g.toFixed(1));
-    const none = gains.filter(([, g]) => Math.abs(g) < 0.05).map(([L]) => L.name);
-    document.getElementById("mode-note").append(" On average the strict build adds " + avg.toFixed(1) + " points. The largest gains: " + top.join(", ") + "." +
-      (none.length ? " No change: " + none.join(", ") + "." : ""));
-  }
   // The example row shows what one outside checker adds to its language.
   const mypy = D.languages.find((L) => L.id === "python_mypy");
   const python = D.languages.find((L) => L.id === "python");
@@ -504,7 +491,6 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     const t = document.getElementById("ranking");
     t.replaceChildren();
     const cols = [["score", "Score", "Mean over every test, with the language's own checks on"],
-      ["default", "Default", "Mean over every test, bare toolchain with no extra checks"],
       ...Object.entries(CAT).map(([c, name]) => [c, name, "Mean over the " + name.toLowerCase() + " tests"]),
       ["caught", "Caught or impossible by design", "Share refused or prevented by design"],
       ["missing", "Missing features", "Tests the language cannot express; left out of its average, not counted against it"]];
@@ -649,7 +635,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
       const r = L.results[p.id] || { o: "MISSING", s: 0 };
       tb.append(el("tr", { class: L.id === langId ? "hl" : "" },
         el("td", { class: "lang" }, srcLink(L, p)),
-        el("td", { class: "chipcell" }, chip(r.o), r.d ? el("span", { class: "dflt", title: "The same program built with the bare toolchain", text: "Default: " + (NAME[r.d] || r.d) + " (" + (r.ds == null ? "N/A" : r.ds) + ")" }) : null),
+        el("td", { class: "chipcell" }, chip(r.o)),
         el("td", { class: "mono", text: r.s == null ? "N/A" : String(r.s) }),
         el("td", { class: "full", "data-label": "Printed" }, el("pre", { class: "out", text: r.out || "" })),
         el("td", { class: "full", "data-label": "Evidence" }, el("pre", { text: r.ev || "" }))));

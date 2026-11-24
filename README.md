@@ -36,8 +36,6 @@ mypy). Those tools raise a language's score, and how much each language gets fro
 counting them would measure tooling as much as language design. Python with mypy appears on the
 leaderboard as one unranked example of how much a checker adds.
 
-Every program also runs with the bare toolchain a new project gets, shown as Default.
-
 ## Tests
 
 122 tests in eight categories. Each has a CWE or CERT entry or appears in a language's pitfall list,
@@ -104,7 +102,7 @@ version, the control, drops each `BREAK!` line and uses each `CONTROL! <code>` l
 ## Notes
 
 The site's [Notes tab](https://danpozmanter.github.io/BreakBench/#notes) holds every note in one
-place: the build commands for each mode, the release builds, what counts as standard, the removed
+place: the build commands for each language, the release builds, what counts as standard, the removed
 tests, the N/A and design rules, the results that are right only by chance, where the docs sent a
 program to another call, the paths that cost points, and each test's limits.
 

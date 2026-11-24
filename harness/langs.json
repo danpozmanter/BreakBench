@@ -104,11 +104,6 @@
         "swiftc -swift-version 6 -O -I /opt/swiftdeps/.build/debug -o main main.swift /opt/swiftdeps/.build/debug/libDeps.a -lstdc++"
       ],
       "run": "./main"
-    },
-    "default": {
-      "build": [
-        "swiftc -swift-version 6 -Onone -g -I /opt/swiftdeps/.build/debug -o main main.swift /opt/swiftdeps/.build/debug/libDeps.a -lstdc++"
-      ]
     }
   },
   "crystal": {
@@ -204,12 +199,6 @@
         "odin build main.odin -file -o:speed -out:main"
       ],
       "run": "./main"
-    },
-    "default": {
-      "build": [
-        "odin build main.odin -file -debug -out:main"
-      ],
-      "run": "./main"
     }
   },
   "c3": {
@@ -227,12 +216,6 @@
     "release": {
       "build": [
         "c3c compile -O3 -o main main.c3"
-      ],
-      "run": "./main"
-    },
-    "default": {
-      "build": [
-        "c3c compile -O0 -o main main.c3"
       ],
       "run": "./main"
     }
@@ -254,11 +237,6 @@
         "pixi run --manifest-path /opt/mojo-ws/pixi.toml mojo build -o main main.mojo"
       ],
       "run": "./main"
-    },
-    "default": {
-      "build": [
-        "pixi run --manifest-path /opt/mojo-ws/pixi.toml mojo build -o main main.mojo"
-      ]
     }
   },
   "gossamer": {
@@ -298,12 +276,6 @@
         "goose --standalone -o main.c main.goose && cc -O2 -w main.c -o main -lm -pthread"
       ],
       "run": "./main"
-    },
-    "default": {
-      "build": [
-        "goose --standalone -o main.c main.goose",
-        "cc -g -O0 -w main.c -o main -lm -pthread"
-      ]
     }
   },
   "java": {
@@ -319,12 +291,6 @@
     "run": "java -ea -cp out Main",
     "version": "java -version 2>&1 | head -1",
     "release": {
-      "build": [
-        "javac -d out Main.java"
-      ],
-      "run": "java -cp out Main"
-    },
-    "default": {
       "build": [
         "javac -d out Main.java"
       ],
@@ -348,12 +314,6 @@
         "kotlinc main.kt -cp $(ls /opt/kotlinx/*.jar | tr '\\n' ':') -include-runtime -d main.jar 2>&1 | grep -v '^warning' ; test -f main.jar"
       ],
       "run": "java -cp main.jar:$(ls /opt/kotlinx/*.jar | tr '\\n' ':') MainKt"
-    },
-    "default": {
-      "build": [
-        "kotlinc main.kt -cp $(ls /opt/kotlinx/*.jar | tr '\\n' ':') -include-runtime -d main.jar 2>&1 | grep -v '^warning' ; test -f main.jar"
-      ],
-      "run": "java -cp main.jar:$(ls /opt/kotlinx/*.jar | tr '\\n' ':') MainKt"
     }
   },
   "scala": {
@@ -369,12 +329,6 @@
     "run": "java -ea -cp out:/opt/scalaxml/scala-xml.jar:$(find /opt/scala/maven2 -name \"scala*-library*.jar\" | tr \"\\n\" \":\") Main",
     "version": "scalac -version 2>&1 | tail -1",
     "release": {
-      "build": [
-        "mkdir -p out && scalac -cp /opt/scalaxml/scala-xml.jar -d out main.scala"
-      ],
-      "run": "java -cp out:/opt/scalaxml/scala-xml.jar:$(find /opt/scala/maven2 -name \"scala*-library*.jar\" | tr \"\\n\" \":\") Main"
-    },
-    "default": {
       "build": [
         "mkdir -p out && scalac -cp /opt/scalaxml/scala-xml.jar -d out main.scala"
       ],
@@ -401,11 +355,6 @@
         "dotnet build -c Release -p:CheckForOverflowUnderflow=false -o out -nologo -v minimal -clp:NoSummary"
       ],
       "run": "dotnet out/bb.dll"
-    },
-    "default": {
-      "extra_files": {
-        "bb.csproj": "<Project Sdk=\"Microsoft.NET.Sdk\"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net11.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable></PropertyGroup></Project>"
-      }
     }
   },
   "fsharp": {
@@ -428,11 +377,6 @@
         "dotnet build -c Release -p:OtherFlags= -o out -nologo -v minimal -clp:NoSummary"
       ],
       "run": "dotnet out/bb.dll"
-    },
-    "default": {
-      "extra_files": {
-        "bb.fsproj": "<Project Sdk=\"Microsoft.NET.Sdk\"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net11.0</TargetFramework></PropertyGroup><ItemGroup><Compile Include=\"Program.fs\" /></ItemGroup></Project>"
-      }
     }
   },
   "dart": {
@@ -452,12 +396,6 @@
         "dart compile exe -o main main.dart"
       ],
       "run": "./main"
-    },
-    "default": {
-      "build": [
-        "dart compile kernel -o main.dill main.dart"
-      ],
-      "run": "dart main.dill"
     }
   },
   "typescript": {
@@ -471,12 +409,7 @@
       "tsc --strict --noImplicitReturns --noFallthroughCasesInSwitch --noUncheckedIndexedAccess --noImplicitOverride --noUnusedLocals --noUnusedParameters --noPropertyAccessFromIndexSignature --exactOptionalPropertyTypes --allowUnreachableCode false --allowUnusedLabels false --target es2024 --module nodenext --typeRoots /usr/lib/node_modules/@types --types node --outDir out main.ts"
     ],
     "run": "node out/main.js",
-    "version": "echo tsc $(tsc --version) / node $(node --version)",
-    "default": {
-      "build": [
-        "tsc --target es2024 --module nodenext --typeRoots /usr/lib/node_modules/@types --types node --outDir out main.ts"
-      ]
-    }
+    "version": "echo tsc $(tsc --version) / node $(node --version)"
   },
   "javascript": {
     "name": "JavaScript",
@@ -489,12 +422,7 @@
       "node --use_strict --check main.js"
     ],
     "run": "node main.js",
-    "version": "echo node $(node --version)",
-    "default": {
-      "build": [
-        "node --check main.js"
-      ]
-    }
+    "version": "echo node $(node --version)"
   },
   "python": {
     "name": "Python",
@@ -555,9 +483,6 @@
         "php -l main.php"
       ],
       "run": "php -d error_reporting=E_ALL -d display_errors=stderr -d zend.assertions=-1 main.php"
-    },
-    "default": {
-      "run": "php main.php"
     }
   },
   "julia": {
@@ -576,9 +501,6 @@
       "build": [
         "julia --startup-file=no -e 'src = read(\"main.jl\", String); ex = Meta.parseall(src); bad(e) = e isa Expr && (e.head in (:error, :incomplete) || any(bad, e.args)); bad(ex) && (show(ex); exit(1))'"
       ],
-      "run": "julia --startup-file=no -t 8 main.jl"
-    },
-    "default": {
       "run": "julia --startup-file=no -t 8 main.jl"
     }
   },

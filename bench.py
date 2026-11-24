@@ -8,7 +8,6 @@ Usage:
     uv run bench.py                        # full run of every test into a new results folder
     uv run bench.py rust gossamer          # rerun languages in the newest folder
     uv run bench.py rust --only int_overflow,oob_write
-    uv run bench.py rust --mode strict     # one mode only (both run by default)
     uv run bench.py --aggregate            # rebuild the newest folder's rankings and the site
 
 Each full run gets a folder named by its UTC start time, results/YYYY-MM-DDTHHMMSSZ, holding
@@ -53,13 +52,12 @@ def load(path):
         return json.load(f)
 
 
-def run_language(run, lang_id, lang, only, mode):
-    service = lang.get("default", {}).get("service", lang["service"]) if mode == "default" else lang["service"]
+def run_language(run, lang_id, lang, only):
     cmd = [
         "docker", "compose", "run", "--rm", "-T", "-e", "BB_RUN=" + os.path.relpath(run, ROOT),
-        "-e", "BB_MODE=" + mode, service, "python3", "/src/harness/driver.py", lang_id, *only,
+        lang["service"], "python3", "/src/harness/driver.py", lang_id, *only,
     ]
-    print(f"== {lang['name']} ({mode})", flush=True)
+    print(f"== {lang['name']}", flush=True)
     return subprocess.run(cmd, cwd=ROOT).returncode
 
 
@@ -123,18 +121,6 @@ def aggregate(run):
         caught = sum(o in {"REJECTED", "SAFE_BY_DESIGN"} for o in counted)
         safe = sum(o in SAFE for o in counted)
         mean = [s for scores in by_category.values() for s in scores]
-        # The same programs built with the bare toolchain: what the language catches with no extra checks.
-        default_path = os.path.join(run, "raw", lang_id + ".default.json")
-        default_raw = load(default_path)["results"] if os.path.exists(default_path) else {}
-        default_scores = []
-        for problem in spec["problems"]:
-            drec = default_raw.get(problem["id"])
-            if drec is None:
-                continue
-            dscore = score_of(problem, drec, kinds)
-            per_problem[problem["id"]]["default"] = {"outcome": drec["outcome"], "score": dscore}
-            if dscore is not None:
-                default_scores.append(dscore)
         rows.append(
             {
                 "id": lang_id,
@@ -152,7 +138,6 @@ def aggregate(run):
                 "safe": round(100 * safe / len(counted), 1) if counted else 0.0,
                 "scored": len(counted),
                 "missing": len(outcomes) - len(counted),
-                "default": percent(default_scores) if default_raw else None,
                 "results": per_problem,
             }
         )
@@ -187,9 +172,8 @@ def aggregate(run):
         f.write("\n</body>\n</html>\n")
     for row in rows:
         parts = "  ".join(f"{name.lower()} {row[c]:5.1f}%" for c, name in CATEGORIES.items())
-        dflt = f"default {row['default']:5.1f}%" if row["default"] is not None else "default   n/a "
         rank = f"{row['rank']:>2}." if row["rank"] else " -."
-        print(f"{rank} {row['name']:<13} score {row['score']:5.1f}%  {dflt}  {parts}")
+        print(f"{rank} {row['name']:<13} score {row['score']:5.1f}%  {parts}")
 
 
 def describe_run(rec):
@@ -241,12 +225,8 @@ def site_payload(out):
                 "out": (rec.get("stdout") or "")[:160],
                 "ev": evidence[:600],
             }
-            dflt = rec.get("default")
-            if dflt and (dflt["outcome"], dflt["score"]) != (rec["outcome"], rec["score"]):
-                results[pid]["d"] = dflt["outcome"]
-                results[pid]["ds"] = dflt["score"]
         langs.append({k: row[k] for k in ("id", "name", "example", "homepage", "repository", "dir", "ext", "version", "rank", "score", "caught", "safe",
-                                           "scored", "missing", "default", *CATEGORIES)} | {"results": results})
+                                           "scored", "missing", *CATEGORIES)} | {"results": results})
     return {**{k: out[k] for k in ("date", "kinds", "categories", "problems")},
             "languages": langs}
 
@@ -256,8 +236,6 @@ def main():
     parser.add_argument("languages", nargs="*")
     parser.add_argument("--only", default="")
     parser.add_argument("--aggregate", action="store_true")
-    parser.add_argument("--mode", choices=("both", "strict", "default"), default="both",
-                        help="strict: the language's own checks switched on; default: the bare toolchain")
     args = parser.parse_args()
     run = newest_run()
     if not args.aggregate:
@@ -270,11 +248,8 @@ def main():
         full = not (args.languages or only)
         if full or run is None:
             run = new_run()
-        modes = ("strict", "default") if args.mode == "both" else (args.mode,)
         for lang_id in selected:
-            # An example entry is one language plus an outside tool; its bare build is the language's own row.
-            for mode in ("strict",) if langs[lang_id].get("example") else modes:
-                run_language(run, lang_id, langs[lang_id], only, mode)
+            run_language(run, lang_id, langs[lang_id], only)
     if run is None:
         sys.exit("no results yet: run `uv run bench.py` first")
     aggregate(run)
