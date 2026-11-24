@@ -1,6 +1,9 @@
 use std::env
 
 fn main() {
-    let n = env::args()[0].to_i64().unwrap() // CONTROL! let n = env::args()[0].to_i64()
-    println(f"{n + 1}") // CONTROL! match n { Some(v) => println(f"{v + 1}"), None => println("invalid") }
+    // to_i64 answers an Option, so the number is reached only through a check.
+    match env::args()[0].to_i64() {
+        Some(n) => println(f"{n + 1}"),
+        None => println("invalid"),
+    }
 }

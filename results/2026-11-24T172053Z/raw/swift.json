@@ -116,15 +116,11 @@
    "stderr": ""
   },
   "parse_invalid_number": {
-   "outcome": "TRAPPED",
-   "control": "verified",
-   "release": "TRAPPED",
-   "release_stdout": "",
-   "release_stderr": "*** Signal 4: Backtracing from 0x5bd2745dc4e0... done ***\n\n*** Program crashed: Illegal instruction at 0x00005bd2745dc4e0 ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0  0x00005bd2745dc4e0 main + 432 in main\n\n\nRegisters:\n\nrax 0x0000000000000000  0\nrdx 0xe50000000000000\n...\n  \u00b7\u00b7\u00ba\u00b7\u00b7\u00b7\u00b7L\u00b7\u00f7H\u00b7\u00de\u00e8\u00be\u00f1\n\nrflags 0x0000000000010246  ZF PF\n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (21 omitted):\n\n0x00005bd2745d9000\u20130x00005bd2745dc5b9 1b860dfc81f12d1e81bde693dbd54fcb500c20a3 main /tmp/breakbench/parse_invalid_number/release/main\n\nBacktrace took 0.00s\n\nIllegal instruction (core dumped)",
-   "exit": 132,
-   "secs": 0.11,
-   "stdout": "",
-   "stderr": "main/main.swift:1: Fatal error: Unexpectedly found nil while unwrapping an Optional value\n\n*** Signal 4: Backtracing from 0x75436642b1ef... done ***\n\n*** Program crashed: Illegal instruction at 0x000075436642b1ef ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0      0x000075436642b1ef closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 623 in libswiftCore.so\n1 [ra] 0x00007543665c22cc _assertionFailure(_:_:file:line:flags:) + 283 in libswiftCore.so\n2 [ra] 0x00005b4e3d0ae5c3 main + 210 in main at /tmp/breakbench/parse_invalid_number/main/main.swift:1:38\n3 [ra] 0x0000754364b04601 <unknown> in libc.so.6\n4 [ra] 0x0000754364b04718 <unknown> in libc.so.6\n\n\nRegisters:\n\nrax 0x0000000000000003  3\nrdx 0x0\n...\n74 3e 8e 66 43 75 00 00  \u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7t>\u00b7fCu\u00b7\u00b7\nr14 0x0000000000000001  1\nr15 0x000000000000000b  11\nrip 0x000075436642b1ef  0f 0b 48 83 ec 08 48 8d 05 24 78 49 00 48 8d 3d  \u00b7\u00b7H\u00b7\u00ec\u00b7H\u00b7\u00b7$xI\u00b7H\u00b7=\n\nrflags 0x0000000000010206  PF\n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (19 omitted):\n\n0x00005b4e3d0ad000\u20130x00005b4e3d0ae695 07a312cb130a50dfec795112adfe0262bc14ded8 main            /tmp/breakbench/parse_invalid_number/main/main\n0x0000754364ada000\u20130x0000754364c99819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6       /usr/lib/x86_64-linux-gnu/libc.so.6\n0x00007543662b8000\u20130x0000754366891b70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.02s\n\nIllegal instruction (core dumped)"
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": ""
   },
   "covariant_array_write": {
    "outcome": "CORRECT",
@@ -843,7 +839,7 @@
    "outcome": "SILENT",
    "control": "verified",
    "exit": 0,
-   "secs": 0.01,
+   "secs": 0.02,
    "stdout": "-60",
    "stderr": ""
   },

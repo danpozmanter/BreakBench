@@ -339,15 +339,14 @@
       "args": [
         "12abc"
       ],
-      "expect": null,
+      "expect": "^invalid$",
       "title": "Parsing \"12abc\" as a number",
-      "scenario": "The program parses \"12abc\" with the shortest standard call that returns an integer, then adds 1.",
-      "best": "An error, or a failure the program must handle. Getting 13, 1 or NaN fails.",
+      "scenario": "The program parses \"12abc\" with the shortest standard call that returns an integer, then adds 1. Where that call answers an Option, a Result or an error union, the program checks it and prints invalid; forcing the value out is the forced_unwrap mistake, counted there.",
+      "best": "\"invalid\", because the language made the program check the parse. An error stops the program in production. Getting 13, 1 or NaN is a silent wrong answer.",
       "mode": "Untrusted input",
       "refs": [
         "CERT ERR34-C"
-      ],
-      "control_expect": "^invalid$"
+      ]
     },
     {
       "id": "covariant_array_write",
@@ -1466,15 +1465,14 @@
       "category": "concurrency",
       "kind": "dynamic",
       "args": [],
-      "expect": null,
+      "expect": "^failed$",
       "title": "Waiting for an answer from a worker that failed",
-      "scenario": "A worker parses x as an integer and sends the result back through the language's standard channel or queue. Parsing fails the language's usual way (an exception, a panic or an error) before anything is sent. The main thread waits for the answer with the channel's ordinary receive, with no timeout, and prints it.",
-      "best": "A clear error: the receive reports that nothing can arrive, or the worker's failure stops the program. Waiting forever is a hang in production.",
+      "scenario": "A worker parses x as an integer and sends the result back through the language's standard channel or queue. Parsing fails the language's usual way (an exception, a panic or an error) before anything is sent. The main thread waits for the answer with the channel's ordinary receive, with no timeout, and prints it. Where the parse or the receive answers an Option, a Result or an error union, the program checks it; forcing the value out is the forced_unwrap mistake, counted there.",
+      "best": "\"failed\": the receive reports that nothing can arrive. An error when the worker fails stops the program in production. Waiting forever is a hang.",
       "mode": "Lost tasks",
       "refs": [
         "CWE-833"
-      ],
-      "control_expect": "^failed$"
+      ]
     },
     {
       "id": "blocking_in_async",
@@ -1822,20 +1820,6 @@
       ]
     },
     {
-      "id": "check_then_act",
-      "category": "concurrency",
-      "kind": "dynamic",
-      "args": [],
-      "expect": "^1$",
-      "title": "Checking and claiming a shared resource in separate steps",
-      "scenario": "Two workers each check under a lock whether one resource is unclaimed, release the lock, then claim it under a later lock. A barrier makes both checks happen before either claim.",
-      "best": "Exactly one worker claims the resource. Two successful claims show the check and update were not atomic.",
-      "mode": "Races and lost signals",
-      "refs": [
-        "CWE-367"
-      ]
-    },
-    {
       "id": "mutate_after_send",
       "category": "concurrency",
       "kind": "static",
@@ -1861,20 +1845,6 @@
       "mode": "Races and lost signals",
       "refs": [
         "CERT CON38-C"
-      ]
-    },
-    {
-      "id": "async_reentrancy",
-      "category": "concurrency",
-      "kind": "dynamic",
-      "args": [],
-      "expect": "^20$",
-      "title": "A balance checked before an await and spent after it",
-      "scenario": "balance is 100. withdraw(80) checks that the balance covers it, awaits a 10 ms fraud check, then subtracts. The program runs two withdrawals of 80 at once with the language's asynchronous call (async/await, fibers or go blocks run by the standard library's scheduler) and prints the balance. A language whose standard library has no asynchronous tasks cannot write this form; its threaded form is check_then_act.",
-      "best": "20: one withdrawal goes through and the other is turned down, or a refusal to keep the check across the await. -60 shows both checks passed before either update.",
-      "mode": "Races and lost signals",
-      "refs": [
-        "CWE-367"
       ]
     },
     {

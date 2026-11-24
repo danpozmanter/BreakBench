@@ -134,14 +134,14 @@
    "stderr": ""
   },
   "parse_invalid_number": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/parse_invalid_number/main/bb.fsproj (in 161 ms).\n  bb -> /tmp/breakbench/parse_invalid_number/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.25",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/parse_invalid_number/main/bb.fsproj (in 286 ms).\n  bb -> /tmp/breakbench/parse_invalid_number/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.29",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
    "release_stderr": "Unhandled exception. System.FormatException: The input string '12abc' was not in a correct format.\n   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)\n   at System.Int32.Parse(String s, NumberStyles style, IFormatProvider provider)\n   at Microsoft.FSharp.Core.LanguagePrimitives.ParseInt32(String s) in /__w/1/s/src/fsharp/src/FSharp.Core/prim-types.fs:line 2648\n   at Program.main(String[] argv) in /tmp/breakbench/parse_invalid_number/release/Program.fs:line 3\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.22,
+   "secs": 0.2,
    "stdout": "",
    "stderr": "Unhandled exception. System.FormatException: The input string '12abc' was not in a correct format.\n   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)\n   at System.Int32.Parse(String s, NumberStyles style, IFormatProvider provider)\n   at Microsoft.FSharp.Core.LanguagePrimitives.ParseInt32(String s) in /__w/1/s/src/fsharp/src/FSharp.Core/prim-types.fs:line 2648\n   at Program.main(String[] argv) in /tmp/breakbench/parse_invalid_number/main/Program.fs:line 3\nAborted (core dumped)"
   },
@@ -752,7 +752,7 @@
    "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.main(String[] _arg1) in /tmp/breakbench/const_overflow/main/Program.fs:line 3\nAborted (core dumped)"
   },
   "orphaned_receive": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/orphaned_receive/main/bb.fsproj (in 138 ms).\n  bb -> /tmp/breakbench/orphaned_receive/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.15",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/orphaned_receive/main/bb.fsproj (in 127 ms).\n  bb -> /tmp/breakbench/orphaned_receive/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.10",
    "outcome": "HANG",
    "control": "verified",
    "exit": -9,
@@ -980,7 +980,7 @@
    "stderr": ""
   },
   "async_reentrancy": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/async_reentrancy/main/bb.fsproj (in 129 ms).\n  bb -> /tmp/breakbench/async_reentrancy/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.15",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/async_reentrancy/main/bb.fsproj (in 339 ms).\n  bb -> /tmp/breakbench/async_reentrancy/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.79",
    "outcome": "SILENT",
    "control": "verified",
    "exit": 0,

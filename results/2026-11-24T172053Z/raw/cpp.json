@@ -706,7 +706,7 @@
    "release_stdout": "",
    "release_stderr": "terminate called after throwing an instance of 'std::invalid_argument'\n  what():  stol\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.11,
+   "secs": 0.22,
    "stdout": "",
    "stderr": "terminate called after throwing an instance of 'std::invalid_argument'\n  what():  stol\nAborted (core dumped)"
   },
@@ -911,7 +911,7 @@
   },
   "async_reentrancy": {
    "outcome": "INEXPRESSIBLE",
-   "message": "std::async runs each task on a thread and C++20 coroutines come with no task type or executor, so nothing suspends at an await; the threaded form of this race is check_then_act"
+   "message": "std::async runs each task on a thread and C++20 coroutines come with no task type or executor, so nothing suspends at an await"
   },
   "lock_skipped_on_return": {
    "outcome": "HANG",

@@ -135,14 +135,14 @@
    "stderr": ""
   },
   "parse_invalid_number": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/parse_invalid_number/main/bb.csproj (in 54 ms).\n  bb -> /tmp/breakbench/parse_invalid_number/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.42",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/parse_invalid_number/main/bb.csproj (in 35 ms).\n  bb -> /tmp/breakbench/parse_invalid_number/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.22",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
    "release_stderr": "Unhandled exception. System.FormatException: The input string '12abc' was not in a correct format.\n   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)\n   at System.Int32.Parse(String s)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/parse_invalid_number/release/Program.cs:line 1\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.22,
+   "secs": 0.16,
    "stdout": "",
    "stderr": "Unhandled exception. System.FormatException: The input string '12abc' was not in a correct format.\n   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)\n   at System.Int32.Parse(String s)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/parse_invalid_number/main/Program.cs:line 1\nAborted (core dumped)"
   },
@@ -767,7 +767,7 @@
    "control": "builds"
   },
   "orphaned_receive": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/orphaned_receive/main/bb.csproj (in 53 ms).\n  bb -> /tmp/breakbench/orphaned_receive/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.40",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/orphaned_receive/main/bb.csproj (in 39 ms).\n  bb -> /tmp/breakbench/orphaned_receive/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.08",
    "outcome": "HANG",
    "control": "verified",
    "exit": -9,
@@ -1016,7 +1016,7 @@
    "stderr": ""
   },
   "async_reentrancy": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/async_reentrancy/main/bb.csproj (in 42 ms).\n  bb -> /tmp/breakbench/async_reentrancy/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.14",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/async_reentrancy/main/bb.csproj (in 50 ms).\n  bb -> /tmp/breakbench/async_reentrancy/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.58",
    "outcome": "SILENT",
    "control": "verified",
    "exit": 0,

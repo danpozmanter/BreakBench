@@ -111,15 +111,11 @@
    "stderr": ""
   },
   "parse_invalid_number": {
-   "outcome": "TRAPPED",
-   "control": "verified",
-   "release": "TRAPPED",
-   "release_stdout": "",
-   "release_stderr": "thread 'main' (1141) panicked at main.rs:2:59:\ncalled `Result::unwrap()` on an `Err` value: ParseIntError { kind: InvalidDigit }\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
-   "exit": 101,
+   "outcome": "CORRECT",
+   "exit": 0,
    "secs": 0.0,
-   "stdout": "",
-   "stderr": "thread 'main' (1063) panicked at main.rs:2:59:\ncalled `Result::unwrap()` on an `Err` value: ParseIntError { kind: InvalidDigit }\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+   "stdout": "invalid",
+   "stderr": ""
   },
   "covariant_array_write": {
    "outcome": "REJECTED",
@@ -630,15 +626,11 @@
    "control": "builds"
   },
   "orphaned_receive": {
-   "outcome": "TRAPPED",
-   "control": "verified",
-   "release": "TRAPPED",
-   "release_stdout": "",
-   "release_stderr": "thread '<unnamed>' (5749) panicked at main.rs:7:34:\ncalled `Result::unwrap()` on an `Err` value: ParseIntError { kind: InvalidDigit }\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' (5748) panicked at main.rs:10:30:\ncalled `Result::unwrap()` on an `Err` value: RecvError",
-   "exit": 101,
+   "outcome": "CORRECT",
+   "exit": 0,
    "secs": 0.0,
-   "stdout": "",
-   "stderr": "thread '<unnamed>' (5662) panicked at main.rs:7:34:\ncalled `Result::unwrap()` on an `Err` value: ParseIntError { kind: InvalidDigit }\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' (5661) panicked at main.rs:10:30:\ncalled `Result::unwrap()` on an `Err` value: RecvError"
+   "stdout": "failed",
+   "stderr": ""
   },
   "blocking_in_async": {
    "outcome": "CORRECT",
@@ -825,7 +817,7 @@
   },
   "async_reentrancy": {
    "outcome": "INEXPRESSIBLE",
-   "message": "the standard library has no executor to run async functions; the threaded form of this race is check_then_act"
+   "message": "the standard library has no executor to run async functions"
   },
   "lock_skipped_on_return": {
    "outcome": "CORRECT",

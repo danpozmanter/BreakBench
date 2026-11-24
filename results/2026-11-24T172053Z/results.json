@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-24 19:06 UTC",
+ "generated": "2026-11-24 23:40 UTC",
  "date": "2026-11-24",
  "kinds": {
   "static": {
@@ -374,15 +374,14 @@
    "args": [
     "12abc"
    ],
-   "expect": null,
+   "expect": "^invalid$",
    "title": "Parsing \"12abc\" as a number",
-   "scenario": "The program parses \"12abc\" with the shortest standard call that returns an integer, then adds 1.",
-   "best": "An error, or a failure the program must handle. Getting 13, 1 or NaN fails.",
+   "scenario": "The program parses \"12abc\" with the shortest standard call that returns an integer, then adds 1. Where that call answers an Option, a Result or an error union, the program checks it and prints invalid; forcing the value out is the forced_unwrap mistake, counted there.",
+   "best": "\"invalid\", because the language made the program check the parse. An error stops the program in production. Getting 13, 1 or NaN is a silent wrong answer.",
    "mode": "Untrusted input",
    "refs": [
     "CERT ERR34-C"
-   ],
-   "control_expect": "^invalid$"
+   ]
   },
   {
    "id": "covariant_array_write",
@@ -1501,15 +1500,14 @@
    "category": "concurrency",
    "kind": "dynamic",
    "args": [],
-   "expect": null,
+   "expect": "^failed$",
    "title": "Waiting for an answer from a worker that failed",
-   "scenario": "A worker parses x as an integer and sends the result back through the language's standard channel or queue. Parsing fails the language's usual way (an exception, a panic or an error) before anything is sent. The main thread waits for the answer with the channel's ordinary receive, with no timeout, and prints it.",
-   "best": "A clear error: the receive reports that nothing can arrive, or the worker's failure stops the program. Waiting forever is a hang in production.",
+   "scenario": "A worker parses x as an integer and sends the result back through the language's standard channel or queue. Parsing fails the language's usual way (an exception, a panic or an error) before anything is sent. The main thread waits for the answer with the channel's ordinary receive, with no timeout, and prints it. Where the parse or the receive answers an Option, a Result or an error union, the program checks it; forcing the value out is the forced_unwrap mistake, counted there.",
+   "best": "\"failed\": the receive reports that nothing can arrive. An error when the worker fails stops the program in production. Waiting forever is a hang.",
    "mode": "Lost tasks",
    "refs": [
     "CWE-833"
-   ],
-   "control_expect": "^failed$"
+   ]
   },
   {
    "id": "blocking_in_async",
@@ -1857,20 +1855,6 @@
    ]
   },
   {
-   "id": "check_then_act",
-   "category": "concurrency",
-   "kind": "dynamic",
-   "args": [],
-   "expect": "^1$",
-   "title": "Checking and claiming a shared resource in separate steps",
-   "scenario": "Two workers each check under a lock whether one resource is unclaimed, release the lock, then claim it under a later lock. A barrier makes both checks happen before either claim.",
-   "best": "Exactly one worker claims the resource. Two successful claims show the check and update were not atomic.",
-   "mode": "Races and lost signals",
-   "refs": [
-    "CWE-367"
-   ]
-  },
-  {
    "id": "mutate_after_send",
    "category": "concurrency",
    "kind": "static",
@@ -1899,20 +1883,6 @@
    ]
   },
   {
-   "id": "async_reentrancy",
-   "category": "concurrency",
-   "kind": "dynamic",
-   "args": [],
-   "expect": "^20$",
-   "title": "A balance checked before an await and spent after it",
-   "scenario": "balance is 100. withdraw(80) checks that the balance covers it, awaits a 10 ms fraud check, then subtracts. The program runs two withdrawals of 80 at once with the language's asynchronous call (async/await, fibers or go blocks run by the standard library's scheduler) and prints the balance. A language whose standard library has no asynchronous tasks cannot write this form; its threaded form is check_then_act.",
-   "best": "20: one withdrawal goes through and the other is turned down, or a refusal to keep the check across the await. -60 shows both checks passed before either update.",
-   "mode": "Races and lost signals",
-   "refs": [
-    "CWE-367"
-   ]
-  },
-  {
    "id": "lock_skipped_on_return",
    "category": "concurrency",
    "kind": "dynamic",
@@ -1928,9 +1898,7 @@
   }
  ],
  "unsolved": [
-  "float_equality",
-  "check_then_act",
-  "async_reentrancy"
+  "float_equality"
  ],
  "languages": [
   {
@@ -1976,7 +1944,7 @@
      7
     ],
     "security": [
-     6.5,
+     7.0,
      9
     ],
     "null": [
@@ -1988,14 +1956,14 @@
      15
     ],
     "concurrency": [
-     5.0,
-     11
+     5.5,
+     10
     ]
    },
    "caught": 50,
    "safe": 109,
-   "scored": 119,
-   "missing": 1,
+   "scored": 118,
+   "missing": 0,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -2139,16 +2107,12 @@
     },
     "parse_invalid_number": {
      "build_output": "build: 854088B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
-     "outcome": "TRAPPED",
-     "control": "verified",
-     "release": "TRAPPED",
-     "release_stdout": "",
-     "release_stderr": "error[GX0005]: panic: called `Option::unwrap()` on a `None` value\n  call stack (outermost first):\n    at main",
-     "exit": 101,
+     "outcome": "CORRECT",
+     "exit": 0,
      "secs": 0.0,
-     "stdout": "",
-     "stderr": "error[GX0005]: panic: called `Option::unwrap()` on a `None` value\n  call stack (outermost first):\n    at main (main.gos:4:13)",
-     "score": 0.5
+     "stdout": "invalid",
+     "stderr": "",
+     "score": 1
     },
     "covariant_array_write": {
      "outcome": "REJECTED",
@@ -2771,16 +2735,12 @@
     },
     "orphaned_receive": {
      "build_output": "build: 1105304B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
-     "outcome": "TRAPPED",
-     "control": "verified",
-     "release": "TRAPPED",
-     "release_stdout": "",
-     "release_stderr": "error[GX0005]: panic: all goroutines are asleep - deadlock! (receive can never complete)",
-     "exit": 101,
+     "outcome": "CORRECT",
+     "exit": 0,
      "secs": 0.0,
-     "stdout": "",
-     "stderr": "error[GX0005]: panic: all goroutines are asleep - deadlock! (receive can never complete)",
-     "score": 0.5
+     "stdout": "failed",
+     "stderr": "",
+     "score": 1
     },
     "blocking_in_async": {
      "build_output": "build: 1117912B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
@@ -2970,16 +2930,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "build_output": "build: 1118328B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "build_output": "build: 1117920B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
@@ -3002,11 +2952,6 @@
      "stderr": "error[GX0005]: panic: all goroutines are asleep - deadlock! (send can never complete)\n  call stack (outermost first):\n    at main (main.gos:5:5)",
      "score": 0.5
     },
-    "async_reentrancy": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "goroutines run in parallel rather than as asynchronous tasks; the threaded form of this race is check_then_act",
-     "score": null
-    },
     "lock_skipped_on_return": {
      "build_output": "build: 1113904B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "TRAPPED",
@@ -3021,7 +2966,7 @@
      "score": 0.5
     }
    },
-   "score": 82.4,
+   "score": 83.9,
    "rank": 1
   },
   {
@@ -3067,7 +3012,7 @@
      7
     ],
     "security": [
-     5.5,
+     6,
      8
     ],
     "null": [
@@ -3079,14 +3024,14 @@
      15
     ],
     "concurrency": [
-     4.5,
-     11
+     5.0,
+     10
     ]
    },
    "caught": 52,
    "safe": 95,
-   "scored": 117,
-   "missing": 3,
+   "scored": 116,
+   "missing": 2,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -3213,16 +3158,12 @@
      "score": 1
     },
     "parse_invalid_number": {
-     "outcome": "TRAPPED",
-     "control": "verified",
-     "release": "TRAPPED",
-     "release_stdout": "",
-     "release_stderr": "thread 'main' (1141) panicked at main.rs:2:59:\ncalled `Result::unwrap()` on an `Err` value: ParseIntError { kind: InvalidDigit }\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
-     "exit": 101,
+     "outcome": "CORRECT",
+     "exit": 0,
      "secs": 0.0,
-     "stdout": "",
-     "stderr": "thread 'main' (1063) panicked at main.rs:2:59:\ncalled `Result::unwrap()` on an `Err` value: ParseIntError { kind: InvalidDigit }\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
-     "score": 0.5
+     "stdout": "invalid",
+     "stderr": "",
+     "score": 1
     },
     "covariant_array_write": {
      "outcome": "REJECTED",
@@ -3806,16 +3747,12 @@
      "score": 1
     },
     "orphaned_receive": {
-     "outcome": "TRAPPED",
-     "control": "verified",
-     "release": "TRAPPED",
-     "release_stdout": "",
-     "release_stderr": "thread '<unnamed>' (5749) panicked at main.rs:7:34:\ncalled `Result::unwrap()` on an `Err` value: ParseIntError { kind: InvalidDigit }\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' (5748) panicked at main.rs:10:30:\ncalled `Result::unwrap()` on an `Err` value: RecvError",
-     "exit": 101,
+     "outcome": "CORRECT",
+     "exit": 0,
      "secs": 0.0,
-     "stdout": "",
-     "stderr": "thread '<unnamed>' (5662) panicked at main.rs:7:34:\ncalled `Result::unwrap()` on an `Err` value: ParseIntError { kind: InvalidDigit }\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' (5661) panicked at main.rs:10:30:\ncalled `Result::unwrap()` on an `Err` value: RecvError",
-     "score": 0.5
+     "stdout": "failed",
+     "stderr": "",
+     "score": 1
     },
     "blocking_in_async": {
      "outcome": "CORRECT",
@@ -4003,15 +3940,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "outcome": "REJECTED",
      "message": "error[E0382]: borrow of moved value: `list`\n  --> main.rs:14:5\n   |\n12 |     let mut list = vec![1, 2, 3];\n   |         -------- move occurs because `list` has type `Vec<i64>`, which does not implement the `Copy` trait\n13 |     list_tx.send(list).unwrap();\n   |                  ---- value moved here\n14 |     list[0] = 99; // BREAK!\n   |     ^^^^ value borrowed here after move\n   |\nhelp: consider cloning the value if the performance cost is acceptable\n   |\n13 |     list_tx.send(list.clone()).unwrap();\n   |                      ++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0382`.",
@@ -4027,11 +3955,6 @@
      "stderr": "",
      "score": 0
     },
-    "async_reentrancy": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "the standard library has no executor to run async functions; the threaded form of this race is check_then_act",
-     "score": null
-    },
     "lock_skipped_on_return": {
      "outcome": "CORRECT",
      "exit": 0,
@@ -4041,7 +3964,7 @@
      "score": 1
     }
    },
-   "score": 72.9,
+   "score": 74.4,
    "rank": 2
   },
   {
@@ -4087,7 +4010,7 @@
      7
     ],
     "security": [
-     3.5,
+     4.0,
      9
     ],
     "null": [
@@ -4100,12 +4023,12 @@
     ],
     "concurrency": [
      3.5,
-     12
+     10
     ]
    },
    "caught": 41,
    "safe": 93,
-   "scored": 120,
+   "scored": 118,
    "missing": 0,
    "results": {
     "null_deref": {
@@ -4238,16 +4161,12 @@
      "score": 1
     },
     "parse_invalid_number": {
-     "outcome": "TRAPPED",
-     "control": "verified",
-     "release": "TRAPPED",
-     "release_stdout": "",
-     "release_stderr": "*** Signal 4: Backtracing from 0x5bd2745dc4e0... done ***\n\n*** Program crashed: Illegal instruction at 0x00005bd2745dc4e0 ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0  0x00005bd2745dc4e0 main + 432 in main\n\n\nRegisters:\n\nrax 0x0000000000000000  0\nrdx 0xe50000000000000\n...\n  ··º····L·÷H·Þè¾ñ\n\nrflags 0x0000000000010246  ZF PF\n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (21 omitted):\n\n0x00005bd2745d9000–0x00005bd2745dc5b9 1b860dfc81f12d1e81bde693dbd54fcb500c20a3 main /tmp/breakbench/parse_invalid_number/release/main\n\nBacktrace took 0.00s\n\nIllegal instruction (core dumped)",
-     "exit": 132,
-     "secs": 0.11,
-     "stdout": "",
-     "stderr": "main/main.swift:1: Fatal error: Unexpectedly found nil while unwrapping an Optional value\n\n*** Signal 4: Backtracing from 0x75436642b1ef... done ***\n\n*** Program crashed: Illegal instruction at 0x000075436642b1ef ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0      0x000075436642b1ef closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 623 in libswiftCore.so\n1 [ra] 0x00007543665c22cc _assertionFailure(_:_:file:line:flags:) + 283 in libswiftCore.so\n2 [ra] 0x00005b4e3d0ae5c3 main + 210 in main at /tmp/breakbench/parse_invalid_number/main/main.swift:1:38\n3 [ra] 0x0000754364b04601 <unknown> in libc.so.6\n4 [ra] 0x0000754364b04718 <unknown> in libc.so.6\n\n\nRegisters:\n\nrax 0x0000000000000003  3\nrdx 0x0\n...\n74 3e 8e 66 43 75 00 00  ········t>·fCu··\nr14 0x0000000000000001  1\nr15 0x000000000000000b  11\nrip 0x000075436642b1ef  0f 0b 48 83 ec 08 48 8d 05 24 78 49 00 48 8d 3d  ··H·ì·H··$xI·H·=\n\nrflags 0x0000000000010206  PF\n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (19 omitted):\n\n0x00005b4e3d0ad000–0x00005b4e3d0ae695 07a312cb130a50dfec795112adfe0262bc14ded8 main            /tmp/breakbench/parse_invalid_number/main/main\n0x0000754364ada000–0x0000754364c99819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6       /usr/lib/x86_64-linux-gnu/libc.so.6\n0x00007543662b8000–0x0000754366891b70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.02s\n\nIllegal instruction (core dumped)",
-     "score": 0.5
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "invalid",
+     "stderr": "",
+     "score": 1
     },
     "covariant_array_write": {
      "outcome": "CORRECT",
@@ -5037,15 +4956,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "outcome": "CORRECT",
      "exit": 0,
@@ -5063,15 +4973,6 @@
      "stderr": "",
      "score": 0
     },
-    "async_reentrancy": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "-60",
-     "stderr": "",
-     "score": 0
-    },
     "lock_skipped_on_return": {
      "outcome": "HANG",
      "control": "verified",
@@ -5082,7 +4983,7 @@
      "score": 0
     }
    },
-   "score": 71.2,
+   "score": 72.9,
    "rank": 3
   },
   {
@@ -5128,7 +5029,7 @@
      7
     ],
     "security": [
-     6.5,
+     7.0,
      8
     ],
     "null": [
@@ -5141,13 +5042,13 @@
     ],
     "concurrency": [
      2,
-     11
+     10
     ]
    },
    "caught": 49,
    "safe": 91,
-   "scored": 115,
-   "missing": 5,
+   "scored": 114,
+   "missing": 4,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -5283,16 +5184,12 @@
      "score": 1
     },
     "parse_invalid_number": {
-     "outcome": "TRAPPED",
-     "control": "verified",
-     "release": "TRAPPED",
-     "release_stdout": "",
-     "release_stderr": "error: InvalidCharacter",
-     "exit": 1,
-     "secs": 0.08,
-     "stdout": "",
-     "stderr": "error: InvalidCharacter\n/opt/zig/lib/std/fmt.zig:583:24: 0x10f4e5a in charToDigit (std.zig)\n    if (value >= base) return error.InvalidCharacter;\n                       ^\n/opt/zig/lib/std/fmt.zig:448:23: 0x11f3b6a in parseIntWithSign__func_829 (std.zig)\n        const digit = try charToDigit(math.cast(u8, c) orelse return error.InvalidCharacter, buf_base);\n                      ^\n/opt/zig/lib/std/fmt.zig:336:5: 0x11f0417 in parseIntWithGenericCharacter__func_828 (std.zig)\n    return parseIntWithSign(Result, Character, buf, base, .pos);\n    ^\n/opt/zig/lib/std/fmt.zig:323:5: 0x11eff65 in parseInt__func_791 (std.zig)\n    return parseIntWithGenericCharacter(T, u8, buf, base);\n    ^\n/tmp/breakbench/parse_invalid_number/main/main.zig:10:15: 0x11e3484 in main (main.zig)\n    const n = try std.fmt.parseInt(i64, args[1], 10); // CONTROL! const n = std.fmt.parseInt(i64, args[1], 10) catch { try out.print(\"invalid\\n\", .{}); return; };\n              ^",
-     "score": 0.5
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "invalid",
+     "stderr": "",
+     "score": 1
     },
     "covariant_array_write": {
      "outcome": "REJECTED",
@@ -6058,15 +5955,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "outcome": "SILENT",
      "control": "verified",
@@ -6085,11 +5973,6 @@
      "stderr": "",
      "score": 0
     },
-    "async_reentrancy": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no asynchronous tasks in the language or its standard library; the threaded form of this race is check_then_act",
-     "score": null
-    },
     "lock_skipped_on_return": {
      "outcome": "HANG",
      "control": "verified",
@@ -6100,7 +5983,7 @@
      "score": 0
     }
    },
-   "score": 70.4,
+   "score": 71.5,
    "rank": 4
   },
   {
@@ -6159,13 +6042,13 @@
     ],
     "concurrency": [
      4.0,
-     11
+     10
     ]
    },
    "caught": 36,
    "safe": 92,
-   "scored": 117,
-   "missing": 3,
+   "scored": 116,
+   "missing": 2,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -7112,15 +6995,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "outcome": "CORRECT",
      "exit": 0,
@@ -7138,11 +7012,6 @@
      "stderr": "",
      "score": 0
     },
-    "async_reentrancy": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no asynchronous tasks in the language or its standard library; the threaded form of this race is check_then_act",
-     "score": null
-    },
     "lock_skipped_on_return": {
      "outcome": "CORRECT",
      "exit": 0,
@@ -7152,7 +7021,7 @@
      "score": 1
     }
    },
-   "score": 70.1,
+   "score": 70.7,
    "rank": 5
   },
   {
@@ -7211,13 +7080,13 @@
     ],
     "concurrency": [
      7.0,
-     11
+     10
     ]
    },
    "caught": 31,
    "safe": 94,
-   "scored": 117,
-   "missing": 3,
+   "scored": 116,
+   "missing": 2,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -8278,16 +8147,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
      "outcome": "CORRECT",
@@ -8306,11 +8165,6 @@
      "stderr": "",
      "score": 1
     },
-    "async_reentrancy": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no asynchronous tasks among the packages GHC ships, only threads; the threaded form of this race is check_then_act",
-     "score": null
-    },
     "lock_skipped_on_return": {
      "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
      "outcome": "CORRECT",
@@ -8321,7 +8175,7 @@
      "score": 1
     }
    },
-   "score": 69.2,
+   "score": 69.8,
    "rank": 6
   },
   {
@@ -8386,7 +8240,7 @@
    "caught": 32,
    "safe": 82,
    "scored": 108,
-   "missing": 12,
+   "missing": 10,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -9303,11 +9157,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no mutex in the language or its standard library, and no asynchronous tasks",
-     "score": null
-    },
     "mutate_after_send": {
      "outcome": "CORRECT",
      "exit": 0,
@@ -9323,11 +9172,6 @@
      "stdout": "done",
      "stderr": "",
      "score": 1
-    },
-    "async_reentrancy": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no asynchronous tasks in the language or its standard library; the threaded form of this race is check_then_act",
-     "score": null
     },
     "lock_skipped_on_return": {
      "outcome": "INEXPRESSIBLE",
@@ -9394,13 +9238,13 @@
     ],
     "concurrency": [
      2.0,
-     11
+     10
     ]
    },
    "caught": 39,
    "safe": 83,
-   "scored": 119,
-   "missing": 1,
+   "scored": 118,
+   "missing": 0,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -10314,15 +10158,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "outcome": "SILENT",
      "control": "verified",
@@ -10341,11 +10176,6 @@
      "stderr": "",
      "score": 0
     },
-    "async_reentrancy": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no asynchronous tasks in the language or its standard library; the threaded form of this race is check_then_act",
-     "score": null
-    },
     "lock_skipped_on_return": {
      "outcome": "HANG",
      "control": "verified",
@@ -10356,7 +10186,7 @@
      "score": 0
     }
    },
-   "score": 66.0,
+   "score": 66.5,
    "rank": 8
   },
   {
@@ -10415,12 +10245,12 @@
     ],
     "concurrency": [
      3.5,
-     12
+     10
     ]
    },
    "caught": 29,
    "safe": 90,
-   "scored": 120,
+   "scored": 118,
    "missing": 0,
    "results": {
     "null_deref": {
@@ -10571,14 +10401,14 @@
      "score": 1
     },
     "parse_invalid_number": {
-     "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/parse_invalid_number/main/bb.fsproj (in 161 ms).\n  bb -> /tmp/breakbench/parse_invalid_number/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.25",
+     "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/parse_invalid_number/main/bb.fsproj (in 286 ms).\n  bb -> /tmp/breakbench/parse_invalid_number/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.29",
      "outcome": "TRAPPED",
      "control": "verified",
      "release": "TRAPPED",
      "release_stdout": "",
      "release_stderr": "Unhandled exception. System.FormatException: The input string '12abc' was not in a correct format.\n   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)\n   at System.Int32.Parse(String s, NumberStyles style, IFormatProvider provider)\n   at Microsoft.FSharp.Core.LanguagePrimitives.ParseInt32(String s) in /__w/1/s/src/fsharp/src/FSharp.Core/prim-types.fs:line 2648\n   at Program.main(String[] argv) in /tmp/breakbench/parse_invalid_number/release/Program.fs:line 3\nAborted (core dumped)",
      "exit": 134,
-     "secs": 0.22,
+     "secs": 0.2,
      "stdout": "",
      "stderr": "Unhandled exception. System.FormatException: The input string '12abc' was not in a correct format.\n   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)\n   at System.Int32.Parse(String s, NumberStyles style, IFormatProvider provider)\n   at Microsoft.FSharp.Core.LanguagePrimitives.ParseInt32(String s) in /__w/1/s/src/fsharp/src/FSharp.Core/prim-types.fs:line 2648\n   at Program.main(String[] argv) in /tmp/breakbench/parse_invalid_number/main/Program.fs:line 3\nAborted (core dumped)",
      "score": 0.5
@@ -11263,7 +11093,7 @@
      "score": 0.25
     },
     "orphaned_receive": {
-     "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/orphaned_receive/main/bb.fsproj (in 138 ms).\n  bb -> /tmp/breakbench/orphaned_receive/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.15",
+     "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/orphaned_receive/main/bb.fsproj (in 127 ms).\n  bb -> /tmp/breakbench/orphaned_receive/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.10",
      "outcome": "HANG",
      "control": "verified",
      "exit": -9,
@@ -11489,16 +11319,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/check_then_act/main/bb.fsproj (in 187 ms).\n/tmp/breakbench/check_then_act/main/Program.fs(4,13): warning FS0760: It is recommended that objects supporting the IDisposable interface are created using the syntax 'new Type(args)', rather than 'Type(args)' or 'Type' as a function value representing the constructor, to indicate that resources may be owned by the generated value [/tmp/breakbench/check_then_act/main/bb.fsproj]\n  bb -> /tmp/breakbench/check_then_act/main/out/bb.dll\n\nBuild succeeded.\n\n/tmp/breakbench/check_then_act/main/Program.fs(4,13): warning FS0760: It is recommended that objects supporting the IDisposable interface are created using the syntax 'new Type(args)', rather than 'Type(args)' or 'Type' as a function value representing the constructor, to indicate that resources may be owned by the generated value [/tmp/breakbench/check_then_act/main/bb.fsproj]\n    1 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.52",
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/mutate_after_send/main/bb.fsproj (in 148 ms).\n  bb -> /tmp/breakbench/mutate_after_send/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.21",
      "outcome": "CORRECT",
@@ -11518,16 +11338,6 @@
      "stderr": "",
      "score": 0
     },
-    "async_reentrancy": {
-     "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/async_reentrancy/main/bb.fsproj (in 129 ms).\n  bb -> /tmp/breakbench/async_reentrancy/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.15",
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.04,
-     "stdout": "-60",
-     "stderr": "",
-     "score": 0
-    },
     "lock_skipped_on_return": {
      "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/lock_skipped_on_return/main/bb.fsproj (in 124 ms).\n  bb -> /tmp/breakbench/lock_skipped_on_return/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.11",
      "outcome": "CORRECT",
@@ -11538,7 +11348,7 @@
      "score": 1
     }
    },
-   "score": 64.4,
+   "score": 65.5,
    "rank": 9
   },
   {
@@ -11597,13 +11407,13 @@
     ],
     "concurrency": [
      4,
-     8
+     7
     ]
    },
    "caught": 34,
    "safe": 76,
-   "scored": 111,
-   "missing": 9,
+   "scored": 110,
+   "missing": 8,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -12535,16 +12345,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "build_output": "/tmp/breakbench/check_then_act/main/main.mojo:16:26: warning: 'Bool' value is unused; assign to '_' to discard the result\n        state_lock.unlock(t)\n        ~~~~~~~~~~~~~~~~~^~~\n        _ = \n/tmp/breakbench/check_then_act/main/main.mojo:17:59: warning: 'Bool' value is unused; assign to '_' to discard the result\n        gate_lock.lock(t); arrivals += 1; gate_lock.unlock(t)\n                                          ~~~~~~~~~~~~~~~~^~~\n                                          _ = \n/tmp/breakbench/check_then_act/main/main.mojo:19:74: warning: 'Bool' value is unused; assign to '_' to discard the result\n            gate_lock.lock(t); var open = arrivals == 2; gate_lock.unlock(t)\n                                                         ~~~~~~~~~~~~~~~~^~~\n                                                         _ = \n/tmp/breakbench/check_then_act/main/main.mojo:22:80: warning: 'Bool' value is unused; assign to '_' to discard the result\n            state_lock.lock(t); claimed = True; winners += 1; state_lock.unlock(t)\n                                                              ~~~~~~~~~~~~~~~~~^~~\n                                                              _ = \n/tmp/breakbench/check_then_act/main/main.mojo:12:25: warning: assignment to 'available' was never used; assign to '_' instead?\n        var available = False\n                        ^",
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "outcome": "INEXPRESSIBLE",
      "message": "no channel or queue between threads in the standard library; the standard library's parallelize only runs a function per index",
@@ -12553,11 +12353,6 @@
     "lost_wakeup": {
      "outcome": "INEXPRESSIBLE",
      "message": "no condition variable, channel or queue between threads in the standard library; the standard library's parallelize only runs a function per index",
-     "score": null
-    },
-    "async_reentrancy": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no asynchronous tasks in the language or its standard library; the threaded form of this race is check_then_act",
      "score": null
     },
     "lock_skipped_on_return": {
@@ -12570,7 +12365,7 @@
      "score": 0
     }
    },
-   "score": 61.9,
+   "score": 62.5,
    "rank": 10
   },
   {
@@ -12629,12 +12424,12 @@
     ],
     "concurrency": [
      3.5,
-     12
+     10
     ]
    },
    "caught": 36,
    "safe": 83,
-   "scored": 120,
+   "scored": 118,
    "missing": 0,
    "results": {
     "null_deref": {
@@ -13597,15 +13392,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "outcome": "CORRECT",
      "exit": 0,
@@ -13623,15 +13409,6 @@
      "stderr": "",
      "score": 0
     },
-    "async_reentrancy": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "-60",
-     "stderr": "",
-     "score": 0
-    },
     "lock_skipped_on_return": {
      "outcome": "HANG",
      "control": "verified",
@@ -13642,1003 +13419,8 @@
      "score": 0
     }
    },
-   "score": 61.0,
+   "score": 62.1,
    "rank": 11
-  },
-  {
-   "id": "typescript",
-   "name": "TypeScript",
-   "example": false,
-   "homepage": "https://www.typescriptlang.org/",
-   "repository": "https://github.com/microsoft/typescript-go",
-   "dir": "typescript",
-   "ext": "ts",
-   "version": "tsc Version 7.0.2 / node v26.13.1",
-   "categories": {
-    "numbers": [
-     8,
-     17
-    ],
-    "api": [
-     8,
-     14
-    ],
-    "aliasing": [
-     6,
-     11
-    ],
-    "incomplete": [
-     3,
-     3
-    ],
-    "operators": [
-     4,
-     8
-    ],
-    "control_flow": [
-     5,
-     6
-    ],
-    "names": [
-     6,
-     7
-    ],
-    "errors": [
-     3.5,
-     7
-    ],
-    "security": [
-     5.0,
-     9
-    ],
-    "null": [
-     5.5,
-     11
-    ],
-    "memory": [
-     12.5,
-     15
-    ],
-    "concurrency": [
-     4.0,
-     8
-    ]
-   },
-   "caught": 35,
-   "safe": 75,
-   "scored": 116,
-   "missing": 4,
-   "results": {
-    "null_deref": {
-     "outcome": "REJECTED",
-     "message": "main.ts(10,13): error TS18047: 'u' is possibly 'null'.",
-     "control": "builds",
-     "score": 1
-    },
-    "int_overflow": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "9223372036854776000",
-     "stderr": "",
-     "score": 0
-    },
-    "div_by_zero": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.04,
-     "stdout": "Infinity",
-     "stderr": "",
-     "score": 0
-    },
-    "shift_overflow": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "1",
-     "stderr": "",
-     "score": 0
-    },
-    "narrowing_cast": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "44",
-     "stderr": "",
-     "score": 0
-    },
-    "float_to_int_overflow": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "100000000000000000000",
-     "stderr": "",
-     "score": 1
-    },
-    "signed_unsigned_compare": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "less",
-     "stderr": "",
-     "score": 1
-    },
-    "type_confusion": {
-     "outcome": "REJECTED",
-     "message": "main.ts(6,17): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'number'.\n  Type 'undefined' is not assignable to type 'number'.",
-     "control": "builds",
-     "score": 1
-    },
-    "missing_return": {
-     "outcome": "REJECTED",
-     "message": "main.ts(1,32): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.",
-     "control": "builds",
-     "score": 1
-    },
-    "non_exhaustive_match": {
-     "outcome": "REJECTED",
-     "message": "main.ts(7,26): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.",
-     "control": "builds",
-     "score": 1
-    },
-    "uninitialized_variable": {
-     "outcome": "REJECTED",
-     "message": "main.ts(4,13): error TS2454: Variable 'x' is used before being assigned.",
-     "control": "builds",
-     "score": 1
-    },
-    "misspelled_field": {
-     "outcome": "REJECTED",
-     "message": "main.ts(6,5): error TS2551: Property 'colour' does not exist on type 'Config'. Did you mean 'color'?",
-     "control": "builds",
-     "score": 1
-    },
-    "assign_in_condition": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "one",
-     "stderr": "x is 1",
-     "score": 0
-    },
-    "switch_fallthrough": {
-     "outcome": "REJECTED",
-     "message": "main.ts(4,3): error TS7029: Fallthrough case in switch.",
-     "control": "builds",
-     "score": 1
-    },
-    "zero_is_falsy": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "missing",
-     "stderr": "",
-     "score": 0
-    },
-    "string_equality": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "equal",
-     "stderr": "",
-     "score": 1
-    },
-    "parse_invalid_number": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "13",
-     "stderr": "",
-     "score": 0
-    },
-    "covariant_array_write": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "meow",
-     "stderr": "",
-     "score": 0
-    },
-    "mutate_while_iterating": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "1,2,3",
-     "stderr": "",
-     "score": 0
-    },
-    "self_deadlock": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no mutex in the language or its standard library",
-     "score": null
-    },
-    "loop_closure_capture": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "0,1,2",
-     "stderr": "",
-     "score": 1
-    },
-    "snapshot_aliasing": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "0",
-     "stderr": "",
-     "score": 0
-    },
-    "ignored_error_result": {
-     "outcome": "TRAPPED",
-     "control": "verified",
-     "exit": 1,
-     "secs": 0.03,
-     "stdout": "",
-     "stderr": "node:fs:3028\n    return binding.writeFileUtf8(\n                   ^\n\nError: ENOTDIR: not a directory, open '/dev/null/out.txt'\n    at Object.writeFileSync (node:fs:3028:20)\n    at save (/tmp/breakbench/ignored_error_result/main/out/main.js:38:8)\n    at Object.<anonymous> (/tmp/breakbench/ignored_error_result/main/out/main.js:40:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  errno: -20,\n  code: 'ENOTDIR',\n  syscall: 'open',\n  path: '/dev/null/out.txt'\n}\n\nNode.js v26.13.1",
-     "score": 0.5
-    },
-    "sort_with_nan": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "unordered",
-     "stderr": "",
-     "score": 0
-    },
-    "integer_average": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "3.5",
-     "stderr": "",
-     "score": 1
-    },
-    "leading_zero_literal": {
-     "outcome": "REJECTED",
-     "message": "main.ts(1,13): error TS1121: Octal literals are not allowed. Use the syntax '0o1234'.",
-     "control": "builds",
-     "score": 1
-    },
-    "shared_default_argument": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "1",
-     "stderr": "",
-     "score": 1
-    },
-    "reused_iterator": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "12 0",
-     "stderr": "",
-     "score": 0
-    },
-    "bitwise_precedence": {
-     "outcome": "REJECTED",
-     "message": "main.ts(2,18): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.\nmain.ts(2,18): error TS2367: This comparison appears to be unintentional because the types '1' and '0' have no overlap.",
-     "control": "builds",
-     "score": 1
-    },
-    "dangling_else": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "unset",
-     "stderr": "",
-     "score": 0
-    },
-    "chained_comparison": {
-     "outcome": "REJECTED",
-     "message": "main.ts(2,16): error TS2365: Operator '<' cannot be applied to types 'boolean' and 'number'.",
-     "control": "builds",
-     "score": 1
-    },
-    "lost_update_on_copy": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "150",
-     "stderr": "",
-     "score": 1
-    },
-    "command_injection": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.06,
-     "stdout": "safe",
-     "stderr": "",
-     "score": 1
-    },
-    "float_equality": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "not equal",
-     "stderr": "",
-     "score": 0
-    },
-    "lock_order_deadlock": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no mutex in the language or its standard library",
-     "score": null
-    },
-    "path_join_escape": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "inside",
-     "stderr": "",
-     "score": 1
-    },
-    "regex_backtracking": {
-     "outcome": "HANG",
-     "control": "verified",
-     "exit": -9,
-     "secs": 20.0,
-     "stdout": "",
-     "stderr": "",
-     "score": 0
-    },
-    "negative_remainder": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "even",
-     "stderr": "",
-     "score": 0
-    },
-    "missing_comma_concat": {
-     "outcome": "REJECTED",
-     "message": "main.ts(4,3): error TS1005: ',' expected.",
-     "control": "builds",
-     "score": 1
-    },
-    "return_in_finally": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "saved",
-     "stderr": "",
-     "score": 0
-    },
-    "return_line_break": {
-     "outcome": "REJECTED",
-     "message": "main.ts(2,3): error TS2322: Type 'undefined' is not assignable to type 'number'.\nmain.ts(3,5): error TS7027: Unreachable code detected.",
-     "control": "builds",
-     "score": 1
-    },
-    "worker_failure_lost": {
-     "outcome": "TRAPPED",
-     "control": "verified",
-     "exit": 1,
-     "secs": 0.05,
-     "stdout": "",
-     "stderr": "/tmp/breakbench/worker_failure_lost/main/out/main.js:8\n            throw new Error(`bad number: ${item}`);\n                  ^\n\nError: bad number: x\n    at sum (/tmp/breakbench/worker_failure_lost/main/out/main.js:8:19)\n    at main (/tmp/breakbench/worker_failure_lost/main/out/main.js:14:20)\n    at Object.<anonymous> (/tmp/breakbench/worker_failure_lost/main/out/main.js:18:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1",
-     "score": 0.5
-    },
-    "unawaited_task": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.12,
-     "stdout": "0",
-     "stderr": "",
-     "score": 0
-    },
-    "format_arg_mismatch": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "3 of %d",
-     "stderr": "",
-     "score": 0
-    },
-    "unsigned_subtraction": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "short",
-     "stderr": "",
-     "score": 1
-    },
-    "missing_key_default": {
-     "outcome": "REJECTED",
-     "message": "main.ts(3,13): error TS2532: Object is possibly 'undefined'.",
-     "control": "builds",
-     "score": 1
-    },
-    "mutable_hash_key": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "found",
-     "stderr": "",
-     "score": 1
-    },
-    "shadowed_assignment": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "pending",
-     "stderr": "status: done",
-     "score": 0
-    },
-    "discarded_pure_result": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "ada",
-     "stderr": "",
-     "score": 0
-    },
-    "negative_index_wraps": {
-     "outcome": "REJECTED",
-     "message": "main.ts(3,13): error TS2532: Object is possibly 'undefined'.\nmain.ts(3,27): error TS2532: Object is possibly 'undefined'.",
-     "control": "builds",
-     "score": 1
-    },
-    "default_numeric_sort": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "1 10 9",
-     "stderr": "",
-     "score": 0
-    },
-    "unrelated_type_lookup": {
-     "outcome": "REJECTED",
-     "message": "main.ts(3,26): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.",
-     "control": "builds",
-     "score": 1
-    },
-    "dead_store": {
-     "outcome": "REJECTED",
-     "message": "main.ts(2,7): error TS6133: 'total' is declared but its value is never read.",
-     "control": "builds",
-     "score": 1
-    },
-    "panic_under_lock": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no mutex in the language or its standard library",
-     "score": null
-    },
-    "split_character": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "a�",
-     "stderr": "",
-     "score": 0
-    },
-    "oob_write": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "7",
-     "stderr": "",
-     "score": 1
-    },
-    "oob_read": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "undefined",
-     "stderr": "",
-     "score": 0
-    },
-    "use_after_free": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "1234",
-     "stderr": "",
-     "score": 1
-    },
-    "double_free": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "1",
-     "stderr": "",
-     "score": 1
-    },
-    "dangling_stack_ref": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "4242",
-     "stderr": "",
-     "score": 1
-    },
-    "container_realloc_dangling": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "7",
-     "stderr": "",
-     "score": 1
-    },
-    "uninit_heap_read": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "000000000000000000000000",
-     "stderr": "",
-     "score": 1
-    },
-    "stack_overflow": {
-     "outcome": "TRAPPED",
-     "control": "verified",
-     "exit": 1,
-     "secs": 0.02,
-     "stdout": "",
-     "stderr": "/tmp/breakbench/stack_overflow/main/out/main.js:4\n    if (n === 0)\n    ^\n\nRangeError: Maximum call stack size exceeded\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:4:5)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n\nNode.js v26.13.1",
-     "score": 0.5
-    },
-    "huge_allocation": {
-     "outcome": "TRAPPED",
-     "control": "verified",
-     "exit": 1,
-     "secs": 0.03,
-     "stdout": "",
-     "stderr": "/tmp/breakbench/huge_allocation/main/out/main.js:5\nconst buf = new Uint8Array(n);\n            ^\n\nRangeError: Array buffer allocation failed\n    at new ArrayBuffer (<anonymous>)\n    at new Uint8Array (<anonymous>)\n    at Object.<anonymous> (/tmp/breakbench/huge_allocation/main/out/main.js:5:13)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1",
-     "score": 0.5
-    },
-    "wrong_variant_access": {
-     "outcome": "REJECTED",
-     "message": "main.ts(4,15): error TS2339: Property 'text' does not exist on type 'Value'.\n  Property 'text' does not exist on type '{ kind: \"int\"; value: number; }'.",
-     "control": "builds",
-     "score": 1
-    },
-    "format_string": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "%s%s%n{}{0}",
-     "stderr": "",
-     "score": 1
-    },
-    "trojan_source": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "admin",
-     "stderr": "",
-     "score": 0
-    },
-    "unsafe_deserialization": {
-     "outcome": "SAFE_BY_DESIGN",
-     "message": "JSON.parse builds only plain data; nothing in the standard library rebuilds a named class",
-     "score": 1.0
-    },
-    "null_byte_path": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "rejected",
-     "stderr": "",
-     "score": 1
-    },
-    "homoglyph_identifier": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "admin\nadmin",
-     "stderr": "",
-     "score": 0
-    },
-    "string_literal_write": {
-     "outcome": "REJECTED",
-     "message": "main.ts(2,1): error TS2542: Index signature in type 'String' only permits reading.",
-     "control": "builds",
-     "score": 1
-    },
-    "reference_cycle": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 1.46,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1
-    },
-    "complete_init": {
-     "outcome": "REJECTED",
-     "message": "main.ts(4,7): error TS2741: Property 'retries' is missing in type '{ timeout: number; }' but required in type 'Config'.\nmain.ts(4,7): error TS6133: 'partial' is declared but its value is never read.",
-     "control": "builds",
-     "score": 1
-    },
-    "newtype": {
-     "outcome": "REJECTED",
-     "message": "main.ts(6,76): error TS2345: Argument of type 'Seconds' is not assignable to parameter of type 'Meters'.\n  Type 'Seconds' is not assignable to type '{ readonly unit: \"m\"; }'.\n    Types of property 'unit' are incompatible.\n      Type '\"s\"' is not assignable to type '\"m\"'.",
-     "control": "builds",
-     "score": 1
-    },
-    "strong_enum": {
-     "outcome": "REJECTED",
-     "message": "main.ts(19,18): error TS2345: Argument of type '7' is not assignable to parameter of type 'Color'.",
-     "control": "builds",
-     "score": 1
-    },
-    "override_check": {
-     "outcome": "REJECTED",
-     "message": "main.ts(11,12): error TS4117: This member cannot have an 'override' modifier because it is not declared in the base class 'Shape'. Did you mean 'describe'?",
-     "control": "builds",
-     "score": 1
-    },
-    "forced_unwrap": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "before\nNaN",
-     "stderr": "",
-     "score": 0
-    },
-    "null_in_text": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "hello, null",
-     "stderr": "",
-     "score": 0
-    },
-    "not_found_sentinel": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "user",
-     "stderr": "",
-     "score": 0
-    },
-    "empty_max": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "-Infinity",
-     "stderr": "",
-     "score": 0
-    },
-    "readonly_param": {
-     "outcome": "REJECTED",
-     "message": "main.ts(2,3): error TS2542: Index signature in type 'readonly number[]' only permits reading.",
-     "control": "builds",
-     "score": 1
-    },
-    "exclusive_mutation": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "130",
-     "stderr": "",
-     "score": 0
-    },
-    "literal_range": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "44",
-     "stderr": "",
-     "score": 0
-    },
-    "no_implicit_conversion": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "3000000000",
-     "stderr": "",
-     "score": 1
-    },
-    "generic_constraint": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "3",
-     "stderr": "",
-     "score": 0
-    },
-    "lossy_int_to_float": {
-     "outcome": "REJECTED",
-     "message": "main.ts(7,6): error TS2345: Argument of type 'bigint' is not assignable to parameter of type 'number'.",
-     "control": "builds",
-     "score": 1
-    },
-    "const_index_bounds": {
-     "outcome": "REJECTED",
-     "message": "main.ts(3,19): error TS2493: Tuple type 'readonly [number, number, number]' of length '3' has no element at index '5'.",
-     "control": "builds",
-     "score": 1
-    },
-    "lazy_accumulator": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 4.74,
-     "stdout": "12288000000",
-     "stderr": "",
-     "score": 1
-    },
-    "size_overflow_alloc": {
-     "outcome": "TRAPPED",
-     "control": "verified",
-     "exit": 1,
-     "secs": 0.02,
-     "stdout": "",
-     "stderr": "/tmp/breakbench/size_overflow_alloc/main/out/main.js:6\nconst records = new Uint8Array(size);\n                ^\n\nRangeError: Invalid typed array length: 18446744073709552000\n    at new Uint8Array (<anonymous>)\n    at Object.<anonymous> (/tmp/breakbench/size_overflow_alloc/main/out/main.js:6:17)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1",
-     "score": 0.5
-    },
-    "const_overflow": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "9460800000000000000",
-     "stderr": "",
-     "score": 1
-    },
-    "orphaned_receive": {
-     "outcome": "TRAPPED",
-     "control": "verified",
-     "exit": 1,
-     "secs": 0.02,
-     "stdout": "",
-     "stderr": "/tmp/breakbench/orphaned_receive/main/out/main.js:9\n            throw new Error(\"not a number: x\"); // CONTROL! if (Number.isNaN(n)) { deliver(null); return; }\n                  ^\n\nError: not a number: x\n    at /tmp/breakbench/orphaned_receive/main/out/main.js:9:19\n    at main (/tmp/breakbench/orphaned_receive/main/out/main.js:11:7)\n    at Object.<anonymous> (/tmp/breakbench/orphaned_receive/main/out/main.js:14:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1",
-     "score": 0.5
-    },
-    "blocking_in_async": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.52,
-     "stdout": "concurrent",
-     "stderr": "",
-     "score": 1
-    },
-    "unreachable_code": {
-     "outcome": "REJECTED",
-     "message": "main.ts(8,3): error TS7027: Unreachable code detected.",
-     "control": "builds",
-     "score": 1
-    },
-    "checked_interpolation": {
-     "outcome": "REJECTED",
-     "message": "main.ts(3,22): error TS2304: Cannot find name 'nmae'.",
-     "control": "builds",
-     "score": 1
-    },
-    "evaluation_order": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "1 2",
-     "stderr": "",
-     "score": 1
-    },
-    "dominated_case": {
-     "outcome": "REJECTED",
-     "message": "main.ts(6,7): error TS2358: The left-hand side of an 'instanceof' expression must be of type 'any', an object type or a type parameter.",
-     "control": "builds",
-     "score": 1
-    },
-    "duplicate_key": {
-     "outcome": "REJECTED",
-     "message": "main.ts(3,33): error TS1117: An object literal cannot have multiple properties with the same name.",
-     "control": "builds",
-     "score": 1
-    },
-    "char_arithmetic": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "a1",
-     "stderr": "",
-     "score": 0
-    },
-    "json_big_integer": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "9007199254740993",
-     "stderr": "",
-     "score": 1
-    },
-    "comparison_statement": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "0",
-     "stderr": "",
-     "score": 0
-    },
-    "structural_equality": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "different",
-     "stderr": "",
-     "score": 0
-    },
-    "array_literal_length": {
-     "outcome": "REJECTED",
-     "message": "main.ts(3,7): error TS2322: Type '[number, number, number]' is not assignable to type 'readonly [number, number, number, number]'.\n  Source has 3 element(s) but target requires 4.",
-     "control": "builds",
-     "score": 1
-    },
-    "enum_from_int": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "before\n7",
-     "stderr": "",
-     "score": 0
-    },
-    "bitwise_on_bool": {
-     "outcome": "REJECTED",
-     "message": "main.ts(3,20): error TS2447: The '&' operator is not allowed for boolean types. Consider using '&&' instead.",
-     "control": "builds",
-     "score": 1
-    },
-    "readonly_field": {
-     "outcome": "REJECTED",
-     "message": "main.ts(6,3): error TS2540: Cannot assign to 'port' because it is a read-only property.",
-     "control": "builds",
-     "score": 1
-    },
-    "bool_condition": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "different",
-     "stderr": "",
-     "score": 0
-    },
-    "lost_write_error": {
-     "outcome": "TRAPPED",
-     "control": "verified",
-     "exit": 1,
-     "secs": 0.02,
-     "stdout": "",
-     "stderr": "node:fs:3028\n    return binding.writeFileUtf8(\n                   ^\n\nError: ENOSPC: no space left on device, write\n    at writeFileSync (node:fs:3028:20)\n    at Object.<anonymous> (/tmp/breakbench/lost_write_error/main/out/main.js:4:29)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  errno: -28,\n  code: 'ENOSPC',\n  syscall: 'write'\n}\n\nNode.js v26.13.1",
-     "score": 0.5
-    },
-    "short_read": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.22,
-     "stdout": "HELLO-WORLD-1234",
-     "stderr": "",
-     "score": 1
-    },
-    "masked_cleanup_error": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "close failed",
-     "stderr": "",
-     "score": 0
-    },
-    "unflushed_writer": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "total=42",
-     "stderr": "",
-     "score": 1
-    },
-    "child_exit_status": {
-     "outcome": "TRAPPED",
-     "control": "verified",
-     "exit": 1,
-     "secs": 0.02,
-     "stdout": "",
-     "stderr": "node:child_process:1029\n    throw err;\n    ^\n\nError: Command failed: sh -c exit 3\n    at genericNodeError (node:internal/errors:999:15)\n    at wrappedFn (node:internal/errors:544:14)\n    at checkExecSyncError (node:child_process:990:11)\n    at execFileSync (node:child_process:1026:15)\n    at Object.<anonymous> (/tmp/breakbench/child_exit_status/main/out/main.js:4:39)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19) {\n  status: 3,\n  signal: null,\n  output: [ null, Buffer(0) [Uint8Array] [], Buffer(0) [Uint8Array] [] ],\n  pid: 8180,\n  stdout: Buffer(0) [Uint8Array] [],\n  stderr: Buffer(0) [Uint8Array] []\n}\n\nNode.js v26.13.1",
-     "score": 0.5
-    },
-    "nullable_field": {
-     "outcome": "REJECTED",
-     "message": "main.ts(3,13): error TS18047: 'decoded.name' is possibly 'null'.",
-     "control": "builds",
-     "score": 1
-    },
-    "stale_null_check": {
-     "outcome": "TRAPPED",
-     "control": "verified",
-     "exit": 1,
-     "secs": 0.02,
-     "stdout": "",
-     "stderr": "/tmp/breakbench/stale_null_check/main/out/main.js:9\n    console.log(session.user.name.length); // CONTROL! logout(session);\n                             ^\n\nTypeError: Cannot read properties of null (reading 'name')\n    at Object.<anonymous> (/tmp/breakbench/stale_null_check/main/out/main.js:9:30)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1",
-     "score": 0.5
-    },
-    "empty_slot": {
-     "outcome": "REJECTED",
-     "message": "main.ts(8,13): error TS2532: Object is possibly 'undefined'.",
-     "control": "builds",
-     "score": 1
-    },
-    "typed_nil": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "valid",
-     "stderr": "",
-     "score": 1
-    },
-    "check_then_act": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
-    "mutate_after_send": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "1",
-     "stderr": "",
-     "score": 1
-    },
-    "lost_wakeup": {
-     "outcome": "CORRECT",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1
-    },
-    "async_reentrancy": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "-60",
-     "stderr": "",
-     "score": 0
-    },
-    "lock_skipped_on_return": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no mutex in the language or its standard library",
-     "score": null
-    }
-   },
-   "score": 60.8,
-   "rank": 12
   },
   {
    "id": "kotlin",
@@ -14696,12 +13478,12 @@
     ],
     "concurrency": [
      1,
-     12
+     10
     ]
    },
    "caught": 34,
    "safe": 82,
-   "scored": 120,
+   "scored": 118,
    "missing": 0,
    "results": {
     "null_deref": {
@@ -15663,15 +14445,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "outcome": "SILENT",
      "control": "verified",
@@ -15690,15 +14463,6 @@
      "stderr": "",
      "score": 0
     },
-    "async_reentrancy": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.07,
-     "stdout": "-60",
-     "stderr": "",
-     "score": 0
-    },
     "lock_skipped_on_return": {
      "outcome": "HANG",
      "control": "verified",
@@ -15709,7 +14473,984 @@
      "score": 0
     }
    },
-   "score": 60.8,
+   "score": 61.9,
+   "rank": 12
+  },
+  {
+   "id": "typescript",
+   "name": "TypeScript",
+   "example": false,
+   "homepage": "https://www.typescriptlang.org/",
+   "repository": "https://github.com/microsoft/typescript-go",
+   "dir": "typescript",
+   "ext": "ts",
+   "version": "tsc Version 7.0.2 / node v26.13.1",
+   "categories": {
+    "numbers": [
+     8,
+     17
+    ],
+    "api": [
+     8,
+     14
+    ],
+    "aliasing": [
+     6,
+     11
+    ],
+    "incomplete": [
+     3,
+     3
+    ],
+    "operators": [
+     4,
+     8
+    ],
+    "control_flow": [
+     5,
+     6
+    ],
+    "names": [
+     6,
+     7
+    ],
+    "errors": [
+     3.5,
+     7
+    ],
+    "security": [
+     5.0,
+     9
+    ],
+    "null": [
+     5.5,
+     11
+    ],
+    "memory": [
+     12.5,
+     15
+    ],
+    "concurrency": [
+     4.0,
+     6
+    ]
+   },
+   "caught": 35,
+   "safe": 75,
+   "scored": 114,
+   "missing": 4,
+   "results": {
+    "null_deref": {
+     "outcome": "REJECTED",
+     "message": "main.ts(10,13): error TS18047: 'u' is possibly 'null'.",
+     "control": "builds",
+     "score": 1
+    },
+    "int_overflow": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "9223372036854776000",
+     "stderr": "",
+     "score": 0
+    },
+    "div_by_zero": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.04,
+     "stdout": "Infinity",
+     "stderr": "",
+     "score": 0
+    },
+    "shift_overflow": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "1",
+     "stderr": "",
+     "score": 0
+    },
+    "narrowing_cast": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "44",
+     "stderr": "",
+     "score": 0
+    },
+    "float_to_int_overflow": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "100000000000000000000",
+     "stderr": "",
+     "score": 1
+    },
+    "signed_unsigned_compare": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "less",
+     "stderr": "",
+     "score": 1
+    },
+    "type_confusion": {
+     "outcome": "REJECTED",
+     "message": "main.ts(6,17): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'number'.\n  Type 'undefined' is not assignable to type 'number'.",
+     "control": "builds",
+     "score": 1
+    },
+    "missing_return": {
+     "outcome": "REJECTED",
+     "message": "main.ts(1,32): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.",
+     "control": "builds",
+     "score": 1
+    },
+    "non_exhaustive_match": {
+     "outcome": "REJECTED",
+     "message": "main.ts(7,26): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.",
+     "control": "builds",
+     "score": 1
+    },
+    "uninitialized_variable": {
+     "outcome": "REJECTED",
+     "message": "main.ts(4,13): error TS2454: Variable 'x' is used before being assigned.",
+     "control": "builds",
+     "score": 1
+    },
+    "misspelled_field": {
+     "outcome": "REJECTED",
+     "message": "main.ts(6,5): error TS2551: Property 'colour' does not exist on type 'Config'. Did you mean 'color'?",
+     "control": "builds",
+     "score": 1
+    },
+    "assign_in_condition": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "one",
+     "stderr": "x is 1",
+     "score": 0
+    },
+    "switch_fallthrough": {
+     "outcome": "REJECTED",
+     "message": "main.ts(4,3): error TS7029: Fallthrough case in switch.",
+     "control": "builds",
+     "score": 1
+    },
+    "zero_is_falsy": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "missing",
+     "stderr": "",
+     "score": 0
+    },
+    "string_equality": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "equal",
+     "stderr": "",
+     "score": 1
+    },
+    "parse_invalid_number": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "13",
+     "stderr": "",
+     "score": 0
+    },
+    "covariant_array_write": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "meow",
+     "stderr": "",
+     "score": 0
+    },
+    "mutate_while_iterating": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "1,2,3",
+     "stderr": "",
+     "score": 0
+    },
+    "self_deadlock": {
+     "outcome": "INEXPRESSIBLE",
+     "message": "no mutex in the language or its standard library",
+     "score": null
+    },
+    "loop_closure_capture": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "0,1,2",
+     "stderr": "",
+     "score": 1
+    },
+    "snapshot_aliasing": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "0",
+     "stderr": "",
+     "score": 0
+    },
+    "ignored_error_result": {
+     "outcome": "TRAPPED",
+     "control": "verified",
+     "exit": 1,
+     "secs": 0.03,
+     "stdout": "",
+     "stderr": "node:fs:3028\n    return binding.writeFileUtf8(\n                   ^\n\nError: ENOTDIR: not a directory, open '/dev/null/out.txt'\n    at Object.writeFileSync (node:fs:3028:20)\n    at save (/tmp/breakbench/ignored_error_result/main/out/main.js:38:8)\n    at Object.<anonymous> (/tmp/breakbench/ignored_error_result/main/out/main.js:40:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  errno: -20,\n  code: 'ENOTDIR',\n  syscall: 'open',\n  path: '/dev/null/out.txt'\n}\n\nNode.js v26.13.1",
+     "score": 0.5
+    },
+    "sort_with_nan": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "unordered",
+     "stderr": "",
+     "score": 0
+    },
+    "integer_average": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "3.5",
+     "stderr": "",
+     "score": 1
+    },
+    "leading_zero_literal": {
+     "outcome": "REJECTED",
+     "message": "main.ts(1,13): error TS1121: Octal literals are not allowed. Use the syntax '0o1234'.",
+     "control": "builds",
+     "score": 1
+    },
+    "shared_default_argument": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "1",
+     "stderr": "",
+     "score": 1
+    },
+    "reused_iterator": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "12 0",
+     "stderr": "",
+     "score": 0
+    },
+    "bitwise_precedence": {
+     "outcome": "REJECTED",
+     "message": "main.ts(2,18): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.\nmain.ts(2,18): error TS2367: This comparison appears to be unintentional because the types '1' and '0' have no overlap.",
+     "control": "builds",
+     "score": 1
+    },
+    "dangling_else": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "unset",
+     "stderr": "",
+     "score": 0
+    },
+    "chained_comparison": {
+     "outcome": "REJECTED",
+     "message": "main.ts(2,16): error TS2365: Operator '<' cannot be applied to types 'boolean' and 'number'.",
+     "control": "builds",
+     "score": 1
+    },
+    "lost_update_on_copy": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "150",
+     "stderr": "",
+     "score": 1
+    },
+    "command_injection": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.06,
+     "stdout": "safe",
+     "stderr": "",
+     "score": 1
+    },
+    "float_equality": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "not equal",
+     "stderr": "",
+     "score": 0
+    },
+    "lock_order_deadlock": {
+     "outcome": "INEXPRESSIBLE",
+     "message": "no mutex in the language or its standard library",
+     "score": null
+    },
+    "path_join_escape": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "inside",
+     "stderr": "",
+     "score": 1
+    },
+    "regex_backtracking": {
+     "outcome": "HANG",
+     "control": "verified",
+     "exit": -9,
+     "secs": 20.0,
+     "stdout": "",
+     "stderr": "",
+     "score": 0
+    },
+    "negative_remainder": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "even",
+     "stderr": "",
+     "score": 0
+    },
+    "missing_comma_concat": {
+     "outcome": "REJECTED",
+     "message": "main.ts(4,3): error TS1005: ',' expected.",
+     "control": "builds",
+     "score": 1
+    },
+    "return_in_finally": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "saved",
+     "stderr": "",
+     "score": 0
+    },
+    "return_line_break": {
+     "outcome": "REJECTED",
+     "message": "main.ts(2,3): error TS2322: Type 'undefined' is not assignable to type 'number'.\nmain.ts(3,5): error TS7027: Unreachable code detected.",
+     "control": "builds",
+     "score": 1
+    },
+    "worker_failure_lost": {
+     "outcome": "TRAPPED",
+     "control": "verified",
+     "exit": 1,
+     "secs": 0.05,
+     "stdout": "",
+     "stderr": "/tmp/breakbench/worker_failure_lost/main/out/main.js:8\n            throw new Error(`bad number: ${item}`);\n                  ^\n\nError: bad number: x\n    at sum (/tmp/breakbench/worker_failure_lost/main/out/main.js:8:19)\n    at main (/tmp/breakbench/worker_failure_lost/main/out/main.js:14:20)\n    at Object.<anonymous> (/tmp/breakbench/worker_failure_lost/main/out/main.js:18:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1",
+     "score": 0.5
+    },
+    "unawaited_task": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.12,
+     "stdout": "0",
+     "stderr": "",
+     "score": 0
+    },
+    "format_arg_mismatch": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "3 of %d",
+     "stderr": "",
+     "score": 0
+    },
+    "unsigned_subtraction": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "short",
+     "stderr": "",
+     "score": 1
+    },
+    "missing_key_default": {
+     "outcome": "REJECTED",
+     "message": "main.ts(3,13): error TS2532: Object is possibly 'undefined'.",
+     "control": "builds",
+     "score": 1
+    },
+    "mutable_hash_key": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "found",
+     "stderr": "",
+     "score": 1
+    },
+    "shadowed_assignment": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "pending",
+     "stderr": "status: done",
+     "score": 0
+    },
+    "discarded_pure_result": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "ada",
+     "stderr": "",
+     "score": 0
+    },
+    "negative_index_wraps": {
+     "outcome": "REJECTED",
+     "message": "main.ts(3,13): error TS2532: Object is possibly 'undefined'.\nmain.ts(3,27): error TS2532: Object is possibly 'undefined'.",
+     "control": "builds",
+     "score": 1
+    },
+    "default_numeric_sort": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "1 10 9",
+     "stderr": "",
+     "score": 0
+    },
+    "unrelated_type_lookup": {
+     "outcome": "REJECTED",
+     "message": "main.ts(3,26): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.",
+     "control": "builds",
+     "score": 1
+    },
+    "dead_store": {
+     "outcome": "REJECTED",
+     "message": "main.ts(2,7): error TS6133: 'total' is declared but its value is never read.",
+     "control": "builds",
+     "score": 1
+    },
+    "panic_under_lock": {
+     "outcome": "INEXPRESSIBLE",
+     "message": "no mutex in the language or its standard library",
+     "score": null
+    },
+    "split_character": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "a�",
+     "stderr": "",
+     "score": 0
+    },
+    "oob_write": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "7",
+     "stderr": "",
+     "score": 1
+    },
+    "oob_read": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "undefined",
+     "stderr": "",
+     "score": 0
+    },
+    "use_after_free": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "1234",
+     "stderr": "",
+     "score": 1
+    },
+    "double_free": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "1",
+     "stderr": "",
+     "score": 1
+    },
+    "dangling_stack_ref": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "4242",
+     "stderr": "",
+     "score": 1
+    },
+    "container_realloc_dangling": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "7",
+     "stderr": "",
+     "score": 1
+    },
+    "uninit_heap_read": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "000000000000000000000000",
+     "stderr": "",
+     "score": 1
+    },
+    "stack_overflow": {
+     "outcome": "TRAPPED",
+     "control": "verified",
+     "exit": 1,
+     "secs": 0.02,
+     "stdout": "",
+     "stderr": "/tmp/breakbench/stack_overflow/main/out/main.js:4\n    if (n === 0)\n    ^\n\nRangeError: Maximum call stack size exceeded\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:4:5)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n\nNode.js v26.13.1",
+     "score": 0.5
+    },
+    "huge_allocation": {
+     "outcome": "TRAPPED",
+     "control": "verified",
+     "exit": 1,
+     "secs": 0.03,
+     "stdout": "",
+     "stderr": "/tmp/breakbench/huge_allocation/main/out/main.js:5\nconst buf = new Uint8Array(n);\n            ^\n\nRangeError: Array buffer allocation failed\n    at new ArrayBuffer (<anonymous>)\n    at new Uint8Array (<anonymous>)\n    at Object.<anonymous> (/tmp/breakbench/huge_allocation/main/out/main.js:5:13)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1",
+     "score": 0.5
+    },
+    "wrong_variant_access": {
+     "outcome": "REJECTED",
+     "message": "main.ts(4,15): error TS2339: Property 'text' does not exist on type 'Value'.\n  Property 'text' does not exist on type '{ kind: \"int\"; value: number; }'.",
+     "control": "builds",
+     "score": 1
+    },
+    "format_string": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "%s%s%n{}{0}",
+     "stderr": "",
+     "score": 1
+    },
+    "trojan_source": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "admin",
+     "stderr": "",
+     "score": 0
+    },
+    "unsafe_deserialization": {
+     "outcome": "SAFE_BY_DESIGN",
+     "message": "JSON.parse builds only plain data; nothing in the standard library rebuilds a named class",
+     "score": 1.0
+    },
+    "null_byte_path": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "rejected",
+     "stderr": "",
+     "score": 1
+    },
+    "homoglyph_identifier": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "admin\nadmin",
+     "stderr": "",
+     "score": 0
+    },
+    "string_literal_write": {
+     "outcome": "REJECTED",
+     "message": "main.ts(2,1): error TS2542: Index signature in type 'String' only permits reading.",
+     "control": "builds",
+     "score": 1
+    },
+    "reference_cycle": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 1.46,
+     "stdout": "done",
+     "stderr": "",
+     "score": 1
+    },
+    "complete_init": {
+     "outcome": "REJECTED",
+     "message": "main.ts(4,7): error TS2741: Property 'retries' is missing in type '{ timeout: number; }' but required in type 'Config'.\nmain.ts(4,7): error TS6133: 'partial' is declared but its value is never read.",
+     "control": "builds",
+     "score": 1
+    },
+    "newtype": {
+     "outcome": "REJECTED",
+     "message": "main.ts(6,76): error TS2345: Argument of type 'Seconds' is not assignable to parameter of type 'Meters'.\n  Type 'Seconds' is not assignable to type '{ readonly unit: \"m\"; }'.\n    Types of property 'unit' are incompatible.\n      Type '\"s\"' is not assignable to type '\"m\"'.",
+     "control": "builds",
+     "score": 1
+    },
+    "strong_enum": {
+     "outcome": "REJECTED",
+     "message": "main.ts(19,18): error TS2345: Argument of type '7' is not assignable to parameter of type 'Color'.",
+     "control": "builds",
+     "score": 1
+    },
+    "override_check": {
+     "outcome": "REJECTED",
+     "message": "main.ts(11,12): error TS4117: This member cannot have an 'override' modifier because it is not declared in the base class 'Shape'. Did you mean 'describe'?",
+     "control": "builds",
+     "score": 1
+    },
+    "forced_unwrap": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "before\nNaN",
+     "stderr": "",
+     "score": 0
+    },
+    "null_in_text": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "hello, null",
+     "stderr": "",
+     "score": 0
+    },
+    "not_found_sentinel": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "user",
+     "stderr": "",
+     "score": 0
+    },
+    "empty_max": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "-Infinity",
+     "stderr": "",
+     "score": 0
+    },
+    "readonly_param": {
+     "outcome": "REJECTED",
+     "message": "main.ts(2,3): error TS2542: Index signature in type 'readonly number[]' only permits reading.",
+     "control": "builds",
+     "score": 1
+    },
+    "exclusive_mutation": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "130",
+     "stderr": "",
+     "score": 0
+    },
+    "literal_range": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "44",
+     "stderr": "",
+     "score": 0
+    },
+    "no_implicit_conversion": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "3000000000",
+     "stderr": "",
+     "score": 1
+    },
+    "generic_constraint": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "3",
+     "stderr": "",
+     "score": 0
+    },
+    "lossy_int_to_float": {
+     "outcome": "REJECTED",
+     "message": "main.ts(7,6): error TS2345: Argument of type 'bigint' is not assignable to parameter of type 'number'.",
+     "control": "builds",
+     "score": 1
+    },
+    "const_index_bounds": {
+     "outcome": "REJECTED",
+     "message": "main.ts(3,19): error TS2493: Tuple type 'readonly [number, number, number]' of length '3' has no element at index '5'.",
+     "control": "builds",
+     "score": 1
+    },
+    "lazy_accumulator": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 4.74,
+     "stdout": "12288000000",
+     "stderr": "",
+     "score": 1
+    },
+    "size_overflow_alloc": {
+     "outcome": "TRAPPED",
+     "control": "verified",
+     "exit": 1,
+     "secs": 0.02,
+     "stdout": "",
+     "stderr": "/tmp/breakbench/size_overflow_alloc/main/out/main.js:6\nconst records = new Uint8Array(size);\n                ^\n\nRangeError: Invalid typed array length: 18446744073709552000\n    at new Uint8Array (<anonymous>)\n    at Object.<anonymous> (/tmp/breakbench/size_overflow_alloc/main/out/main.js:6:17)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1",
+     "score": 0.5
+    },
+    "const_overflow": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "9460800000000000000",
+     "stderr": "",
+     "score": 1
+    },
+    "orphaned_receive": {
+     "outcome": "TRAPPED",
+     "control": "verified",
+     "exit": 1,
+     "secs": 0.02,
+     "stdout": "",
+     "stderr": "/tmp/breakbench/orphaned_receive/main/out/main.js:9\n            throw new Error(\"not a number: x\"); // CONTROL! if (Number.isNaN(n)) { deliver(null); return; }\n                  ^\n\nError: not a number: x\n    at /tmp/breakbench/orphaned_receive/main/out/main.js:9:19\n    at main (/tmp/breakbench/orphaned_receive/main/out/main.js:11:7)\n    at Object.<anonymous> (/tmp/breakbench/orphaned_receive/main/out/main.js:14:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1",
+     "score": 0.5
+    },
+    "blocking_in_async": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.52,
+     "stdout": "concurrent",
+     "stderr": "",
+     "score": 1
+    },
+    "unreachable_code": {
+     "outcome": "REJECTED",
+     "message": "main.ts(8,3): error TS7027: Unreachable code detected.",
+     "control": "builds",
+     "score": 1
+    },
+    "checked_interpolation": {
+     "outcome": "REJECTED",
+     "message": "main.ts(3,22): error TS2304: Cannot find name 'nmae'.",
+     "control": "builds",
+     "score": 1
+    },
+    "evaluation_order": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "1 2",
+     "stderr": "",
+     "score": 1
+    },
+    "dominated_case": {
+     "outcome": "REJECTED",
+     "message": "main.ts(6,7): error TS2358: The left-hand side of an 'instanceof' expression must be of type 'any', an object type or a type parameter.",
+     "control": "builds",
+     "score": 1
+    },
+    "duplicate_key": {
+     "outcome": "REJECTED",
+     "message": "main.ts(3,33): error TS1117: An object literal cannot have multiple properties with the same name.",
+     "control": "builds",
+     "score": 1
+    },
+    "char_arithmetic": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "a1",
+     "stderr": "",
+     "score": 0
+    },
+    "json_big_integer": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "9007199254740993",
+     "stderr": "",
+     "score": 1
+    },
+    "comparison_statement": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "0",
+     "stderr": "",
+     "score": 0
+    },
+    "structural_equality": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "different",
+     "stderr": "",
+     "score": 0
+    },
+    "array_literal_length": {
+     "outcome": "REJECTED",
+     "message": "main.ts(3,7): error TS2322: Type '[number, number, number]' is not assignable to type 'readonly [number, number, number, number]'.\n  Source has 3 element(s) but target requires 4.",
+     "control": "builds",
+     "score": 1
+    },
+    "enum_from_int": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.01,
+     "stdout": "before\n7",
+     "stderr": "",
+     "score": 0
+    },
+    "bitwise_on_bool": {
+     "outcome": "REJECTED",
+     "message": "main.ts(3,20): error TS2447: The '&' operator is not allowed for boolean types. Consider using '&&' instead.",
+     "control": "builds",
+     "score": 1
+    },
+    "readonly_field": {
+     "outcome": "REJECTED",
+     "message": "main.ts(6,3): error TS2540: Cannot assign to 'port' because it is a read-only property.",
+     "control": "builds",
+     "score": 1
+    },
+    "bool_condition": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "different",
+     "stderr": "",
+     "score": 0
+    },
+    "lost_write_error": {
+     "outcome": "TRAPPED",
+     "control": "verified",
+     "exit": 1,
+     "secs": 0.02,
+     "stdout": "",
+     "stderr": "node:fs:3028\n    return binding.writeFileUtf8(\n                   ^\n\nError: ENOSPC: no space left on device, write\n    at writeFileSync (node:fs:3028:20)\n    at Object.<anonymous> (/tmp/breakbench/lost_write_error/main/out/main.js:4:29)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  errno: -28,\n  code: 'ENOSPC',\n  syscall: 'write'\n}\n\nNode.js v26.13.1",
+     "score": 0.5
+    },
+    "short_read": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.22,
+     "stdout": "HELLO-WORLD-1234",
+     "stderr": "",
+     "score": 1
+    },
+    "masked_cleanup_error": {
+     "outcome": "SILENT",
+     "control": "verified",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "close failed",
+     "stderr": "",
+     "score": 0
+    },
+    "unflushed_writer": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "total=42",
+     "stderr": "",
+     "score": 1
+    },
+    "child_exit_status": {
+     "outcome": "TRAPPED",
+     "control": "verified",
+     "exit": 1,
+     "secs": 0.02,
+     "stdout": "",
+     "stderr": "node:child_process:1029\n    throw err;\n    ^\n\nError: Command failed: sh -c exit 3\n    at genericNodeError (node:internal/errors:999:15)\n    at wrappedFn (node:internal/errors:544:14)\n    at checkExecSyncError (node:child_process:990:11)\n    at execFileSync (node:child_process:1026:15)\n    at Object.<anonymous> (/tmp/breakbench/child_exit_status/main/out/main.js:4:39)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19) {\n  status: 3,\n  signal: null,\n  output: [ null, Buffer(0) [Uint8Array] [], Buffer(0) [Uint8Array] [] ],\n  pid: 8180,\n  stdout: Buffer(0) [Uint8Array] [],\n  stderr: Buffer(0) [Uint8Array] []\n}\n\nNode.js v26.13.1",
+     "score": 0.5
+    },
+    "nullable_field": {
+     "outcome": "REJECTED",
+     "message": "main.ts(3,13): error TS18047: 'decoded.name' is possibly 'null'.",
+     "control": "builds",
+     "score": 1
+    },
+    "stale_null_check": {
+     "outcome": "TRAPPED",
+     "control": "verified",
+     "exit": 1,
+     "secs": 0.02,
+     "stdout": "",
+     "stderr": "/tmp/breakbench/stale_null_check/main/out/main.js:9\n    console.log(session.user.name.length); // CONTROL! logout(session);\n                             ^\n\nTypeError: Cannot read properties of null (reading 'name')\n    at Object.<anonymous> (/tmp/breakbench/stale_null_check/main/out/main.js:9:30)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1",
+     "score": 0.5
+    },
+    "empty_slot": {
+     "outcome": "REJECTED",
+     "message": "main.ts(8,13): error TS2532: Object is possibly 'undefined'.",
+     "control": "builds",
+     "score": 1
+    },
+    "typed_nil": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "valid",
+     "stderr": "",
+     "score": 1
+    },
+    "mutate_after_send": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "1",
+     "stderr": "",
+     "score": 1
+    },
+    "lost_wakeup": {
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "done",
+     "stderr": "",
+     "score": 1
+    },
+    "lock_skipped_on_return": {
+     "outcome": "INEXPRESSIBLE",
+     "message": "no mutex in the language or its standard library",
+     "score": null
+    }
+   },
+   "score": 61.8,
    "rank": 13
   },
   {
@@ -15768,12 +15509,12 @@
     ],
     "concurrency": [
      3.0,
-     8
+     6
     ]
    },
    "caught": 24,
    "safe": 82,
-   "scored": 116,
+   "scored": 114,
    "missing": 4,
    "results": {
     "null_deref": {
@@ -15912,7 +15653,7 @@
      "release_stdout": "",
      "release_stderr": "Unhandled exception:\nFormatException: Invalid radix-10 number (at character 1)\n12abc\n^\n\n#0      int._handleFormatError (dart:core-patch/integers_patch.dart:150)\n#1      int._parseRadix (dart:core-patch/integers_patch.dart:179)\n#2      int._parse (dart:core-patch/integers_patch.dart:121)\n#3      int.\n...\ndart:core-patch/integers_patch.dart:81)\n#4      main (file:///tmp/breakbench/parse_invalid_number/release/main.dart:2)\n#5      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311)\n#6      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192)",
      "exit": 255,
-     "secs": 0.05,
+     "secs": 0.07,
      "stdout": "",
      "stderr": "Unhandled exception:\nFormatException: Invalid radix-10 number (at character 1)\n12abc\n^\n\n#0      int._handleFormatError (dart:core-patch/integers_patch.dart:150:5)\n#1      int._parseRadix (dart:core-patch/integers_patch.dart:179:14)\n#2      int._parse (dart:core-patch/integers_patch.dart:121:12)\n#3      int.parse (dart:core-patch/integers_patch.dart:81:12)\n#4      main (file:///tmp/breakbench/parse_invalid_number/main/main.dart:2:17)\n#5      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)\n#6      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)",
      "score": 0.5
@@ -16850,16 +16591,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "build_output": "Compiling main.dart to kernel file main.dill.",
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.06,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "build_output": "Compiling main.dart to kernel file main.dill.",
      "outcome": "CORRECT",
@@ -16878,23 +16609,13 @@
      "stderr": "",
      "score": 1
     },
-    "async_reentrancy": {
-     "build_output": "Compiling main.dart to kernel file main.dill.",
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.06,
-     "stdout": "-60",
-     "stderr": "",
-     "score": 0
-    },
     "lock_skipped_on_return": {
      "outcome": "INEXPRESSIBLE",
      "message": "no mutex in the language or its standard library",
      "score": null
     }
    },
-   "score": 60.8,
+   "score": 61.8,
    "rank": 14
   },
   {
@@ -16953,12 +16674,12 @@
     ],
     "concurrency": [
      1.5,
-     12
+     10
     ]
    },
    "caught": 28,
    "safe": 84,
-   "scored": 120,
+   "scored": 118,
    "missing": 0,
    "results": {
     "null_deref": {
@@ -17952,15 +17673,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "outcome": "SILENT",
      "control": "verified",
@@ -17979,15 +17691,6 @@
      "stderr": "",
      "score": 0
     },
-    "async_reentrancy": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "-60",
-     "stderr": "",
-     "score": 0
-    },
     "lock_skipped_on_return": {
      "outcome": "HANG",
      "control": "verified",
@@ -17998,7 +17701,7 @@
      "score": 0
     }
    },
-   "score": 60.0,
+   "score": 61.0,
    "rank": 15
   },
   {
@@ -18057,12 +17760,12 @@
     ],
     "concurrency": [
      6.5,
-     12
+     10
     ]
    },
    "caught": 4,
    "safe": 88,
-   "scored": 118,
+   "scored": 116,
    "missing": 2,
    "results": {
     "null_deref": {
@@ -18223,7 +17926,7 @@
      "exit": 1,
      "secs": 0.33,
      "stdout": "",
-     "stderr": "Execution error (NullPointerException) at main/-main (main.clj:4).\nCannot invoke \"Object.getClass()\" because \"x\" is null\n\nFull report at:\n/tmp/clojure-10704180659136373140.edn",
+     "stderr": "Execution error (NullPointerException) at main/-main (main.clj:4).\nCannot invoke \"Object.getClass()\" because \"x\" is null\n\nFull report at:\n/tmp/clojure-13329538145909972069.edn",
      "score": 0.5
     },
     "covariant_array_write": {
@@ -19142,16 +18845,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "build_output": "main",
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.24,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "build_output": "main",
      "outcome": "CORRECT",
@@ -19170,16 +18863,6 @@
      "stderr": "",
      "score": 1
     },
-    "async_reentrancy": {
-     "build_output": "main",
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.27,
-     "stdout": "-60",
-     "stderr": "",
-     "score": 0
-    },
     "lock_skipped_on_return": {
      "build_output": "main",
      "outcome": "CORRECT",
@@ -19190,7 +18873,7 @@
      "score": 1
     }
    },
-   "score": 59.7,
+   "score": 60.8,
    "rank": 16
   },
   {
@@ -19249,12 +18932,12 @@
     ],
     "concurrency": [
      1,
-     12
+     10
     ]
    },
    "caught": 26,
    "safe": 81,
-   "scored": 120,
+   "scored": 118,
    "missing": 0,
    "results": {
     "null_deref": {
@@ -19388,7 +19071,7 @@
      "outcome": "TRAPPED",
      "control": "verified",
      "exit": 1,
-     "secs": 0.03,
+     "secs": 0.02,
      "stdout": "",
      "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/parse_invalid_number/main/main.py\", line 3, in <module>\n    n = int(sys.argv[1]) # CONTROL! n = int(sys.argv[1]) if sys.argv[1].lstrip(\"-\").isdigit() else None\nValueError: invalid literal for int() with base 10: '12abc'",
      "score": 0.5
@@ -20269,16 +19952,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "build_output": "Success: no issues found in 1 source file",
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "build_output": "Success: no issues found in 1 source file",
      "outcome": "SILENT",
@@ -20299,16 +19972,6 @@
      "stderr": "",
      "score": 0
     },
-    "async_reentrancy": {
-     "build_output": "Success: no issues found in 1 source file",
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.09,
-     "stdout": "-60",
-     "stderr": "",
-     "score": 0
-    },
     "lock_skipped_on_return": {
      "build_output": "Success: no issues found in 1 source file",
      "outcome": "HANG",
@@ -20320,7 +19983,7 @@
      "score": 0
     }
    },
-   "score": 58.8,
+   "score": 59.7,
    "rank": null
   },
   {
@@ -20379,13 +20042,13 @@
     ],
     "concurrency": [
      3,
-     11
+     10
     ]
    },
    "caught": 24,
    "safe": 80,
-   "scored": 118,
-   "missing": 2,
+   "scored": 117,
+   "missing": 1,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -21383,15 +21046,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.09,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "outcome": "CORRECT",
      "exit": 0,
@@ -21409,11 +21063,6 @@
      "stderr": "",
      "score": 0
     },
-    "async_reentrancy": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "Futures run on a thread pool and the standard library has no await; the threaded form of this race is check_then_act",
-     "score": null
-    },
     "lock_skipped_on_return": {
      "outcome": "HANG",
      "control": "verified",
@@ -21424,7 +21073,7 @@
      "score": 0
     }
    },
-   "score": 58.5,
+   "score": 59.0,
    "rank": 17
   },
   {
@@ -21483,12 +21132,12 @@
     ],
     "concurrency": [
      1.5,
-     12
+     10
     ]
    },
    "caught": 29,
    "safe": 85,
-   "scored": 120,
+   "scored": 118,
    "missing": 0,
    "results": {
     "null_deref": {
@@ -21640,14 +21289,14 @@
      "score": 1
     },
     "parse_invalid_number": {
-     "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/parse_invalid_number/main/bb.csproj (in 54 ms).\n  bb -> /tmp/breakbench/parse_invalid_number/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.42",
+     "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/parse_invalid_number/main/bb.csproj (in 35 ms).\n  bb -> /tmp/breakbench/parse_invalid_number/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.22",
      "outcome": "TRAPPED",
      "control": "verified",
      "release": "TRAPPED",
      "release_stdout": "",
      "release_stderr": "Unhandled exception. System.FormatException: The input string '12abc' was not in a correct format.\n   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)\n   at System.Int32.Parse(String s)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/parse_invalid_number/release/Program.cs:line 1\nAborted (core dumped)",
      "exit": 134,
-     "secs": 0.22,
+     "secs": 0.16,
      "stdout": "",
      "stderr": "Unhandled exception. System.FormatException: The input string '12abc' was not in a correct format.\n   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)\n   at System.Int32.Parse(String s)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/parse_invalid_number/main/Program.cs:line 1\nAborted (core dumped)",
      "score": 0.5
@@ -22346,7 +21995,7 @@
      "score": 1
     },
     "orphaned_receive": {
-     "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/orphaned_receive/main/bb.csproj (in 53 ms).\n  bb -> /tmp/breakbench/orphaned_receive/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.40",
+     "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/orphaned_receive/main/bb.csproj (in 39 ms).\n  bb -> /tmp/breakbench/orphaned_receive/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.08",
      "outcome": "HANG",
      "control": "verified",
      "exit": -9,
@@ -22592,16 +22241,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/check_then_act/main/bb.csproj (in 51 ms).\n  bb -> /tmp/breakbench/check_then_act/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.40",
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/mutate_after_send/main/bb.csproj (in 40 ms).\n  bb -> /tmp/breakbench/mutate_after_send/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.14",
      "outcome": "SILENT",
@@ -22622,16 +22261,6 @@
      "stderr": "",
      "score": 0
     },
-    "async_reentrancy": {
-     "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/async_reentrancy/main/bb.csproj (in 42 ms).\n  bb -> /tmp/breakbench/async_reentrancy/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.14",
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "-60",
-     "stderr": "",
-     "score": 0
-    },
     "lock_skipped_on_return": {
      "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/lock_skipped_on_return/main/bb.csproj (in 43 ms).\n  bb -> /tmp/breakbench/lock_skipped_on_return/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.13",
      "outcome": "HANG",
@@ -22643,7 +22272,7 @@
      "score": 0
     }
    },
-   "score": 57.3,
+   "score": 58.3,
    "rank": 18
   },
   {
@@ -22702,13 +22331,13 @@
     ],
     "concurrency": [
      2,
-     11
+     10
     ]
    },
    "caught": 35,
    "safe": 69,
-   "scored": 116,
-   "missing": 4,
+   "scored": 115,
+   "missing": 3,
    "results": {
     "null_deref": {
      "outcome": "CRASH",
@@ -23633,15 +23262,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "outcome": "SILENT",
      "control": "verified",
@@ -23660,11 +23280,6 @@
      "stderr": "",
      "score": 0
     },
-    "async_reentrancy": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no asynchronous tasks in the language or its standard library; the threaded form of this race is check_then_act",
-     "score": null
-    },
     "lock_skipped_on_return": {
      "outcome": "HANG",
      "control": "verified",
@@ -23675,7 +23290,7 @@
      "score": 0
     }
    },
-   "score": 55.2,
+   "score": 55.7,
    "rank": 19
   },
   {
@@ -23721,7 +23336,7 @@
      7
     ],
     "security": [
-     4.5,
+     5.0,
      8
     ],
     "null": [
@@ -23733,14 +23348,14 @@
      14
     ],
     "concurrency": [
-     3.0,
-     11
+     2.5,
+     10
     ]
    },
    "caught": 31,
-   "safe": 73,
-   "scored": 115,
-   "missing": 5,
+   "safe": 72,
+   "scored": 114,
+   "missing": 4,
    "results": {
     "null_deref": {
      "build_output": "Program linked to executable './main'.",
@@ -23883,16 +23498,12 @@
     },
     "parse_invalid_number": {
      "build_output": "Program linked to executable './main'.",
-     "outcome": "TRAPPED",
-     "control": "verified",
-     "release": "TRAPPED",
-     "release_stdout": "",
-     "release_stderr": "ERROR: 'Unexpected fault 'string::MALFORMED_INTEGER' was unwrapped!'\n  in main.main (/tmp/breakbench/parse_invalid_number/release/main.c3:5) [./main] [inline]",
-     "exit": 132,
-     "secs": 0.02,
-     "stdout": "",
-     "stderr": "ERROR: 'Unexpected fault 'string::MALFORMED_INTEGER' was unwrapped!'\n  in main.main (/tmp/breakbench/parse_invalid_number/main/main.c3:5) [./main] [inline]",
-     "score": 0.5
+     "outcome": "CORRECT",
+     "exit": 0,
+     "secs": 0.0,
+     "stdout": "invalid",
+     "stderr": "",
+     "score": 1
     },
     "covariant_array_write": {
      "outcome": "REJECTED",
@@ -24547,16 +24158,13 @@
     },
     "orphaned_receive": {
      "build_output": "Program linked to executable './main'.",
-     "outcome": "TRAPPED",
+     "outcome": "HANG",
      "control": "verified",
-     "release": "TRAPPED",
-     "release_stdout": "",
-     "release_stderr": "ERROR: 'Unexpected fault 'string::MALFORMED_INTEGER' was unwrapped!'\n  in main.worker (/tmp/breakbench/orphaned_receive/release/main.c3:11) [./main] [inline]\n  in std.thread.os.callback (/opt/c3/lib/std/threads/os/thread_posix.c3:207) [./main] [inline]\n  in pthread_condattr_setpshared (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in __clone (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]",
-     "exit": 132,
-     "secs": 0.02,
+     "exit": -9,
+     "secs": 20.0,
      "stdout": "",
-     "stderr": "ERROR: 'Unexpected fault 'string::MALFORMED_INTEGER' was unwrapped!'\n  in main.worker (/tmp/breakbench/orphaned_receive/main/main.c3:11) [./main] [inline]\n  in std.thread.os.callback (/opt/c3/lib/std/threads/os/thread_posix.c3:207) [./main] [inline]\n  in pthread_condattr_setpshared (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in __clone (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]",
-     "score": 0.5
+     "stderr": "",
+     "score": 0
     },
     "blocking_in_async": {
      "build_output": "Program linked to executable './main'.",
@@ -24773,16 +24381,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "build_output": "Program linked to executable './main'.",
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "build_output": "Program linked to executable './main'.",
      "outcome": "SILENT",
@@ -24803,11 +24401,6 @@
      "stderr": "",
      "score": 0
     },
-    "async_reentrancy": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no asynchronous tasks in the language or its standard library; the threaded form of this race is check_then_act",
-     "score": null
-    },
     "lock_skipped_on_return": {
      "build_output": "Program linked to executable './main'.",
      "outcome": "HANG",
@@ -24819,7 +24412,7 @@
      "score": 0
     }
    },
-   "score": 55.2,
+   "score": 55.7,
    "rank": 20
   },
   {
@@ -24878,13 +24471,13 @@
     ],
     "concurrency": [
      4.5,
-     11
+     10
     ]
    },
    "caught": 26,
    "safe": 74,
-   "scored": 118,
-   "missing": 2,
+   "scored": 117,
+   "missing": 1,
    "results": {
     "null_deref": {
      "outcome": "TRAPPED",
@@ -25810,15 +25403,6 @@
      "stderr": "",
      "score": 0
     },
-    "check_then_act": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "outcome": "SILENT",
      "control": "verified",
@@ -25837,11 +25421,6 @@
      "stderr": "fatal error: all goroutines are asleep - deadlock!\n\ngoroutine 1 [sync.WaitGroup.Wait]:\nsync.runtime_SemacquireWaitGroup(0x206fea116000?, 0xe0?)\n\t/usr/local/go/src/runtime/sema.go:114 +0x2e\nsync.(*WaitGroup).Wait(0x206fea108020)\n\t/usr/local/go/src/sync/waitgroup.go:206 +0x85\nmain.main()\n\t/tmp/breakbench/lost_wakeup/main/main.go:24 +0x14f\n\ngoroutine 19 [sync.Cond.Wait]:\nsync.runtime_notifyListWait(0x206fea104090, 0x0)\n\t/usr/local/go/src/runtime/sema.go:617 +0x1b3\nsync.(*Cond).Wait(0x0?)\n\t/usr/local/go/src/sync/cond.go:71 +0x73\nmain.main.func1()\n\t/tmp/breakbench/lost_wakeup/main/main.go:20 +0x7e\ncreated by main.main in goroutine 1\n\t/tmp/breakbench/lost_wakeup/main/main.go:17 +0x145",
      "score": 0.5
     },
-    "async_reentrancy": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "goroutines run in parallel rather than as asynchronous tasks; the threaded form of this race is check_then_act",
-     "score": null
-    },
     "lock_skipped_on_return": {
      "outcome": "TRAPPED",
      "control": "verified",
@@ -25852,7 +25431,7 @@
      "score": 0.5
     }
    },
-   "score": 54.2,
+   "score": 54.7,
    "rank": 21
   },
   {
@@ -25911,13 +25490,13 @@
     ],
     "concurrency": [
      2,
-     11
+     10
     ]
    },
    "caught": 26,
    "safe": 76,
-   "scored": 117,
-   "missing": 3,
+   "scored": 116,
+   "missing": 2,
    "results": {
     "null_deref": {
      "outcome": "TRAPPED",
@@ -26054,7 +25633,7 @@
      "release_stdout": "",
      "release_stderr": "Exception in thread \"main\" java.lang.NumberFormatException: For input string: \"12abc\"\n\tat java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)\n\tat java.base/java.lang.Integer.parseInt(Integer.java:529)\n\tat java.base/java.lang.Integer.parseInt(Integer.java:626)\n\tat Main.main(Main.java:3)",
      "exit": 1,
-     "secs": 0.02,
+     "secs": 0.01,
      "stdout": "",
      "stderr": "Exception in thread \"main\" java.lang.NumberFormatException: For input string: \"12abc\"\n\tat java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)\n\tat java.base/java.lang.Integer.parseInt(Integer.java:529)\n\tat java.base/java.lang.Integer.parseInt(Integer.java:626)\n\tat Main.main(Main.java:3)",
      "score": 0.5
@@ -26927,15 +26506,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "outcome": "SILENT",
      "control": "verified",
@@ -26954,11 +26524,6 @@
      "stderr": "",
      "score": 0
     },
-    "async_reentrancy": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no asynchronous tasks in the standard library, only threads; the threaded form of this race is check_then_act",
-     "score": null
-    },
     "lock_skipped_on_return": {
      "outcome": "HANG",
      "control": "verified",
@@ -26969,7 +26534,7 @@
      "score": 0
     }
    },
-   "score": 53.4,
+   "score": 53.9,
    "rank": 22
   },
   {
@@ -27028,13 +26593,13 @@
     ],
     "concurrency": [
      3.5,
-     11
+     10
     ]
    },
    "caught": 33,
    "safe": 72,
-   "scored": 119,
-   "missing": 1,
+   "scored": 118,
+   "missing": 0,
    "results": {
     "null_deref": {
      "outcome": "CRASH",
@@ -27165,11 +26730,11 @@
      "control": "verified",
      "release": "TRAPPED",
      "release_stdout": "",
-     "release_stderr": "std.conv.ConvException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d(2033): Unexpected 'a' when converting from type string to type int\n----------------\n??:? pure @safe int std.conv.toImpl!(int, immutable(char)[]).toImpl(immutable(char)[]) [0x61c8dfdfae99]\n??:? _Dmain [0x61c8dfdfa853]",
+     "release_stderr": "std.conv.ConvException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d(2033): Unexpected 'a' when converting from type string to type int\n----------------\n??:? pure @safe int std.conv.toImpl!(int, immutable(char)[]).toImpl(immutable(char)[]) [0x5b6e727c7e99]\n??:? _Dmain [0x5b6e727c7853]",
      "exit": 1,
      "secs": 0.0,
      "stdout": "",
-     "stderr": "std.conv.ConvException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d(2033): Unexpected 'a' when converting from type string to type int\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:2033 pure @safe int std.conv.toImpl!(int, immutable(char)[]).toImpl(immutable(char)[]) [0x5824ef64a0a0]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:214 pure @safe int std.conv.to!(int).to!(immutable(char)[]).to(immutable(char)[]) [0x5824ef6498cc]\nmain.d:5 _Dmain [0x5824ef649872]",
+     "stderr": "std.conv.ConvException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d(2033): Unexpected 'a' when converting from type string to type int\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:2033 pure @safe int std.conv.toImpl!(int, immutable(char)[]).toImpl(immutable(char)[]) [0x641a16aa70a0]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:214 pure @safe int std.conv.to!(int).to!(immutable(char)[]).to(immutable(char)[]) [0x641a16aa68cc]\nmain.d:5 _Dmain [0x641a16aa6872]",
      "score": 0.5
     },
     "covariant_array_write": {
@@ -27999,15 +27564,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "outcome": "REJECTED",
      "message": "/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/concurrency.d(697): Error: static assert:  \"Aliases to mutable thread-local data not allowed.\"\n    static assert(!hasLocalAliasing!(T), \"Aliases to mutable thread-local data not allowed.\");\n    ^\nmain.d(14):        instantiated from here: `send!(int[])`\n    tid.send(list); // BREAK!\n            ^",
@@ -28023,11 +27579,6 @@
      "stderr": "",
      "score": 0
     },
-    "async_reentrancy": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "D's core.thread.Fiber has no scheduler in the standard library; the threaded form of this race is check_then_act",
-     "score": null
-    },
     "lock_skipped_on_return": {
      "outcome": "HANG",
      "control": "verified",
@@ -28038,7 +27589,7 @@
      "score": 0
     }
    },
-   "score": 52.5,
+   "score": 53.0,
    "rank": 23
   },
   {
@@ -28097,13 +27648,13 @@
     ],
     "concurrency": [
      3.5,
-     11
+     10
     ]
    },
    "caught": 1,
    "safe": 76,
-   "scored": 118,
-   "missing": 2,
+   "scored": 117,
+   "missing": 1,
    "results": {
     "null_deref": {
      "build_output": "Syntax OK",
@@ -28263,7 +27814,7 @@
      "outcome": "SILENT",
      "control": "verified",
      "exit": 0,
-     "secs": 0.03,
+     "secs": 0.04,
      "stdout": "13",
      "stderr": "",
      "score": 0
@@ -28973,7 +28524,7 @@
      "exit": -9,
      "secs": 20.0,
      "stdout": "",
-     "stderr": "#<Thread:0x00007cbd9fa0afa8 main.rb:2 run> terminated with exception (report_on_exception is true):\nmain.rb:2:in 'Kernel#Integer': invalid value for Integer(): \"x\" (ArgumentError)\n\nThread.new { answer << Integer(\"x\") } # CONTROL! Thread.new { answer << Integer(\"x\", exception: false) }\n                               ^^^\n\tfrom main.rb:2:in 'block in <main>'",
+     "stderr": "#<Thread:0x00007a5800a3b038 main.rb:2 run> terminated with exception (report_on_exception is true):\nmain.rb:2:in 'Kernel#Integer': invalid value for Integer(): \"x\" (ArgumentError)\n\nThread.new { answer << Integer(\"x\") } # CONTROL! Thread.new { answer << Integer(\"x\", exception: false) }\n                               ^^^\n\tfrom main.rb:2:in 'block in <main>'",
      "score": 0
     },
     "blocking_in_async": {
@@ -29202,16 +28753,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "build_output": "Syntax OK",
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "build_output": "Syntax OK",
      "outcome": "SILENT",
@@ -29232,11 +28773,6 @@
      "stderr": "main.rb:9:in 'Thread#join': No live threads left. Deadlock? (fatal)\n2 threads, 2 sleeps current:0x000063d4fb4b8bf0 main thread:0x000063d4fb1c30b0\n* #<Thread:0x00007cd036107f60 sleep_forever>\n   rb_thread_t:0x000063d4fb1c30b0 native:0x00007cd0362f6800 int:0\n   main.rb:9:in 'Thread#join'\n   main.rb:9:in '<main>'\n* #<Thread:0x00007cd01ae5ae18 main.rb:5 sleep_forever>\n   rb_thread_t:0x000063d4fb4b8bf0 native:0x00007cd01ad3e6c0 int:0\n    depended by: tb_thread_id:0x000063d4fb1c30b0\n   main.rb:6:in 'Thread::ConditionVariable#wait'\n   main.rb:6:in 'block (2 levels) in <main>'\n   main.rb:6:in 'Thread::Mutex#synchronize'\n   main.rb:6:in 'block in <main>'\n\n\tfrom main.rb:9:in '<main>'",
      "score": 0.5
     },
-    "async_reentrancy": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "Fibers have no scheduler in the standard library; the threaded form of this race is check_then_act",
-     "score": null
-    },
     "lock_skipped_on_return": {
      "build_output": "Syntax OK",
      "outcome": "TRAPPED",
@@ -29248,7 +28784,7 @@
      "score": 0.5
     }
    },
-   "score": 51.3,
+   "score": 51.7,
    "rank": 24
   },
   {
@@ -29307,12 +28843,12 @@
     ],
     "concurrency": [
      2.5,
-     12
+     10
     ]
    },
    "caught": 2,
    "safe": 83,
-   "scored": 119,
+   "scored": 117,
    "missing": 1,
    "results": {
     "null_deref": {
@@ -29490,7 +29026,7 @@
      "release_stdout": "",
      "release_stderr": "ERROR: LoadError: ArgumentError: invalid base 10 digit 'a' in \"12abc\"\nStacktrace:\n [1] tryparse_internal(::Type{Int64}, s::String, startpos::Int64, endpos::Int64, base_::Int64, raise::Bool)\n   @ Base ./parse.jl:143\n [2] #parse#476\n   @ ./parse.jl:254 [inlined]\n [3] parse\n   @ ./parse.jl:253 [inlined\n...\nreakbench/parse_invalid_number/release/main.jl:6\n [6] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [7] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [8] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/parse_invalid_number/release/main.jl:6",
      "exit": 1,
-     "secs": 0.91,
+     "secs": 1.01,
      "stdout": "",
      "stderr": "ERROR: LoadError: ArgumentError: invalid base 10 digit 'a' in \"12abc\"\nStacktrace:\n [1] tryparse_internal(::Type{Int64}, s::String, startpos::Int64, endpos::Int64, base_::Int64, raise::Bool)\n   @ Base ./parse.jl:143\n [2] #parse#476\n   @ ./parse.jl:254 [inlined]\n [3] parse\n   @ ./parse.jl:253 [inlined]\n [4] main()\n   @ Main /tmp/breakbench/parse_invalid_number/main/main.jl:2\n [5] top-level scope\n   @ /tmp/breakbench/parse_invalid_number/main/main.jl:6\n [6] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [7] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [8] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/parse_invalid_number/main/main.jl:6",
      "score": 0.5
@@ -30451,15 +29987,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.18,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "outcome": "SILENT",
      "control": "verified",
@@ -30478,15 +30005,6 @@
      "stderr": "",
      "score": 0
     },
-    "async_reentrancy": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.14,
-     "stdout": "-60",
-     "stderr": "",
-     "score": 0
-    },
     "lock_skipped_on_return": {
      "outcome": "HANG",
      "control": "verified",
@@ -30497,7 +30015,7 @@
      "score": 0
     }
    },
-   "score": 49.6,
+   "score": 50.4,
    "rank": 25
   },
   {
@@ -30556,13 +30074,13 @@
     ],
     "concurrency": [
      0,
-     1
+     0
     ]
    },
    "caught": 3,
    "safe": 62,
-   "scored": 109,
-   "missing": 11,
+   "scored": 108,
+   "missing": 10,
    "results": {
     "null_deref": {
      "build_output": "No syntax errors detected in main.php",
@@ -31692,16 +31210,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "build_output": "No syntax errors detected in main.php",
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "outcome": "INEXPRESSIBLE",
      "message": "no threads or asynchronous tasks in the language or its standard library",
@@ -31712,18 +31220,13 @@
      "message": "no threads or asynchronous tasks in the language or its standard library",
      "score": null
     },
-    "async_reentrancy": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "Fibers have no scheduler in the standard library; the threaded form of this race is check_then_act",
-     "score": null
-    },
     "lock_skipped_on_return": {
      "outcome": "INEXPRESSIBLE",
      "message": "no mutex in the language or its standard library",
      "score": null
     }
    },
-   "score": 47.2,
+   "score": 47.7,
    "rank": 26
   },
   {
@@ -31782,12 +31285,12 @@
     ],
     "concurrency": [
      0,
-     12
+     10
     ]
    },
    "caught": 3,
    "safe": 71,
-   "scored": 120,
+   "scored": 118,
    "missing": 0,
    "results": {
     "null_deref": {
@@ -31929,7 +31432,7 @@
      "outcome": "TRAPPED",
      "control": "verified",
      "exit": 1,
-     "secs": 0.03,
+     "secs": 0.04,
      "stdout": "",
      "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/parse_invalid_number/main/main.py\", line 3, in <module>\n    n = int(sys.argv[1]) # CONTROL! n = int(sys.argv[1]) if sys.argv[1].lstrip(\"-\").isdigit() else None\nValueError: invalid literal for int() with base 10: '12abc'",
      "score": 0.5
@@ -32783,15 +32286,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "outcome": "SILENT",
      "control": "verified",
@@ -32810,15 +32304,6 @@
      "stderr": "",
      "score": 0
     },
-    "async_reentrancy": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.06,
-     "stdout": "-60",
-     "stderr": "",
-     "score": 0
-    },
     "lock_skipped_on_return": {
      "outcome": "HANG",
      "control": "verified",
@@ -32829,7 +32314,7 @@
      "score": 0
     }
    },
-   "score": 45.0,
+   "score": 45.8,
    "rank": 27
   },
   {
@@ -32888,13 +32373,13 @@
     ],
     "concurrency": [
      3.5,
-     11
+     10
     ]
    },
    "caught": 18,
    "safe": 53,
-   "scored": 116,
-   "missing": 4,
+   "scored": 115,
+   "missing": 3,
    "results": {
     "null_deref": {
      "outcome": "CRASH",
@@ -33690,7 +33175,7 @@
      "release_stdout": "",
      "release_stderr": "terminate called after throwing an instance of 'std::invalid_argument'\n  what():  stol\nAborted (core dumped)",
      "exit": 134,
-     "secs": 0.11,
+     "secs": 0.22,
      "stdout": "",
      "stderr": "terminate called after throwing an instance of 'std::invalid_argument'\n  what():  stol\nAborted (core dumped)",
      "score": 0.5
@@ -33895,15 +33380,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "outcome": "CORRECT",
      "exit": 0,
@@ -33921,11 +33397,6 @@
      "stderr": "",
      "score": 0
     },
-    "async_reentrancy": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "std::async runs each task on a thread and C++20 coroutines come with no task type or executor, so nothing suspends at an await; the threaded form of this race is check_then_act",
-     "score": null
-    },
     "lock_skipped_on_return": {
      "outcome": "HANG",
      "control": "verified",
@@ -33936,7 +33407,7 @@
      "score": 0
     }
    },
-   "score": 37.9,
+   "score": 38.3,
    "rank": 28
   },
   {
@@ -33995,12 +33466,12 @@
     ],
     "concurrency": [
      4.0,
-     8
+     6
     ]
    },
    "caught": 3,
    "safe": 51,
-   "scored": 115,
+   "scored": 113,
    "missing": 5,
    "results": {
     "null_deref": {
@@ -34148,7 +33619,7 @@
      "outcome": "SILENT",
      "control": "verified",
      "exit": 0,
-     "secs": 0.03,
+     "secs": 0.01,
      "stdout": "13",
      "stderr": "",
      "score": 0
@@ -34772,7 +34243,7 @@
      "outcome": "TRAPPED",
      "control": "verified",
      "exit": 1,
-     "secs": 0.02,
+     "secs": 0.01,
      "stdout": "",
      "stderr": "/tmp/breakbench/orphaned_receive/main/main.js:8\n    if (Number.isNaN(n)) throw new Error(\"not a number: x\"); // CONTROL! if (Number.isNaN(n)) { deliver(null); return; }\n                               ^\n\nError: not a number: x\n    at /tmp/breakbench/orphaned_receive/main/main.js:8:32\n    at main (/tmp/breakbench/orphaned_receive/main/main.js:10:5)\n    at Object.<anonymous> (/tmp/breakbench/orphaned_receive/main/main.js:14:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1",
      "score": 0.5
@@ -34982,15 +34453,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.04,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "outcome": "CORRECT",
      "exit": 0,
@@ -35007,22 +34469,13 @@
      "stderr": "",
      "score": 1
     },
-    "async_reentrancy": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "-60",
-     "stderr": "",
-     "score": 0
-    },
     "lock_skipped_on_return": {
      "outcome": "INEXPRESSIBLE",
      "message": "no mutex in the language or its standard library",
      "score": null
     }
    },
-   "score": 37.4,
+   "score": 38.1,
    "rank": 29
   },
   {
@@ -35081,13 +34534,13 @@
     ],
     "concurrency": [
      1,
-     11
+     10
     ]
    },
    "caught": 10,
    "safe": 31,
-   "scored": 112,
-   "missing": 8,
+   "scored": 111,
+   "missing": 7,
    "results": {
     "null_deref": {
      "outcome": "CRASH",
@@ -36062,15 +35515,6 @@
      "stderr": "",
      "score": 1
     },
-    "check_then_act": {
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0
-    },
     "mutate_after_send": {
      "outcome": "SILENT",
      "control": "verified",
@@ -36089,11 +35533,6 @@
      "stderr": "",
      "score": 0
     },
-    "async_reentrancy": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no asynchronous tasks in the language or its standard library; the threaded form of this race is check_then_act",
-     "score": null
-    },
     "lock_skipped_on_return": {
      "outcome": "HANG",
      "control": "verified",
@@ -36104,7 +35543,7 @@
      "score": 0
     }
    },
-   "score": 27.2,
+   "score": 27.5,
    "rank": 30
   }
  ]

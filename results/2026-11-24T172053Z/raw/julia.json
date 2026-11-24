@@ -161,7 +161,7 @@
    "release_stdout": "",
    "release_stderr": "ERROR: LoadError: ArgumentError: invalid base 10 digit 'a' in \"12abc\"\nStacktrace:\n [1] tryparse_internal(::Type{Int64}, s::String, startpos::Int64, endpos::Int64, base_::Int64, raise::Bool)\n   @ Base ./parse.jl:143\n [2] #parse#476\n   @ ./parse.jl:254 [inlined]\n [3] parse\n   @ ./parse.jl:253 [inlined\n...\nreakbench/parse_invalid_number/release/main.jl:6\n [6] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [7] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [8] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/parse_invalid_number/release/main.jl:6",
    "exit": 1,
-   "secs": 0.91,
+   "secs": 1.01,
    "stdout": "",
    "stderr": "ERROR: LoadError: ArgumentError: invalid base 10 digit 'a' in \"12abc\"\nStacktrace:\n [1] tryparse_internal(::Type{Int64}, s::String, startpos::Int64, endpos::Int64, base_::Int64, raise::Bool)\n   @ Base ./parse.jl:143\n [2] #parse#476\n   @ ./parse.jl:254 [inlined]\n [3] parse\n   @ ./parse.jl:253 [inlined]\n [4] main()\n   @ Main /tmp/breakbench/parse_invalid_number/main/main.jl:2\n [5] top-level scope\n   @ /tmp/breakbench/parse_invalid_number/main/main.jl:6\n [6] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [7] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [8] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/parse_invalid_number/main/main.jl:6"
   },
@@ -1051,7 +1051,7 @@
    "outcome": "SILENT",
    "control": "verified",
    "exit": 0,
-   "secs": 0.14,
+   "secs": 0.19,
    "stdout": "-60",
    "stderr": ""
   },

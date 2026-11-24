@@ -144,7 +144,7 @@
    "outcome": "SILENT",
    "control": "verified",
    "exit": 0,
-   "secs": 0.03,
+   "secs": 0.04,
    "stdout": "13",
    "stderr": ""
   },
@@ -780,7 +780,7 @@
    "exit": -9,
    "secs": 20.0,
    "stdout": "",
-   "stderr": "#<Thread:0x00007cbd9fa0afa8 main.rb:2 run> terminated with exception (report_on_exception is true):\nmain.rb:2:in 'Kernel#Integer': invalid value for Integer(): \"x\" (ArgumentError)\n\nThread.new { answer << Integer(\"x\") } # CONTROL! Thread.new { answer << Integer(\"x\", exception: false) }\n                               ^^^\n\tfrom main.rb:2:in 'block in <main>'"
+   "stderr": "#<Thread:0x00007a5800a3b038 main.rb:2 run> terminated with exception (report_on_exception is true):\nmain.rb:2:in 'Kernel#Integer': invalid value for Integer(): \"x\" (ArgumentError)\n\nThread.new { answer << Integer(\"x\") } # CONTROL! Thread.new { answer << Integer(\"x\", exception: false) }\n                               ^^^\n\tfrom main.rb:2:in 'block in <main>'"
   },
   "blocking_in_async": {
    "build_output": "Syntax OK",
@@ -1013,7 +1013,7 @@
   },
   "async_reentrancy": {
    "outcome": "INEXPRESSIBLE",
-   "message": "Fibers have no scheduler in the standard library; the threaded form of this race is check_then_act"
+   "message": "Fibers have no scheduler in the standard library"
   },
   "lock_skipped_on_return": {
    "build_output": "Syntax OK",

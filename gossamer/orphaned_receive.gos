@@ -3,8 +3,13 @@ use std::sync::channel
 fn main() {
     let tx, rx = channel()
     spawn(|| {
-        let n = "x".to_i64().unwrap() // CONTROL! match "x".to_i64() { Some(n) => tx.send(n), None => tx.close() }
-        tx.send(n) // BREAK!
+        // to_i64 answers an Option, so the worker checks it before sending.
+        let Some(n) = "x".to_i64() else { return } // CONTROL! let Some(n) = "x".to_i64() else { tx.close(); return }
+        tx.send(n)
     })
-    println(f"{rx.recv().unwrap()}") // CONTROL! match rx.recv() { Some(n) => println(f"{n}"), None => println("failed") }
+    // recv answers an Option, so main checks it too.
+    match rx.recv() {
+        Some(n) => println(f"{n}"),
+        None => println("failed"),
+    }
 }

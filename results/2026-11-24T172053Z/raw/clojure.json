@@ -144,7 +144,7 @@
    "exit": 1,
    "secs": 0.33,
    "stdout": "",
-   "stderr": "Execution error (NullPointerException) at main/-main (main.clj:4).\nCannot invoke \"Object.getClass()\" because \"x\" is null\n\nFull report at:\n/tmp/clojure-10704180659136373140.edn"
+   "stderr": "Execution error (NullPointerException) at main/-main (main.clj:4).\nCannot invoke \"Object.getClass()\" because \"x\" is null\n\nFull report at:\n/tmp/clojure-13329538145909972069.edn"
   },
   "covariant_array_write": {
    "build_output": "main",
@@ -994,7 +994,7 @@
    "outcome": "SILENT",
    "control": "verified",
    "exit": 0,
-   "secs": 0.27,
+   "secs": 0.32,
    "stdout": "-60",
    "stderr": ""
   },

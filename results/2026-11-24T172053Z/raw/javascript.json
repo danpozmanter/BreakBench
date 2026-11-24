@@ -131,7 +131,7 @@
    "outcome": "SILENT",
    "control": "verified",
    "exit": 0,
-   "secs": 0.03,
+   "secs": 0.01,
    "stdout": "13",
    "stderr": ""
   },
@@ -681,7 +681,7 @@
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.02,
+   "secs": 0.01,
    "stdout": "",
    "stderr": "/tmp/breakbench/orphaned_receive/main/main.js:8\n    if (Number.isNaN(n)) throw new Error(\"not a number: x\"); // CONTROL! if (Number.isNaN(n)) { deliver(null); return; }\n                               ^\n\nError: not a number: x\n    at /tmp/breakbench/orphaned_receive/main/main.js:8:32\n    at main (/tmp/breakbench/orphaned_receive/main/main.js:10:5)\n    at Object.<anonymous> (/tmp/breakbench/orphaned_receive/main/main.js:14:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1"
   },

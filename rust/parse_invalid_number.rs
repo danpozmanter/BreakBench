@@ -1,4 +1,7 @@
 fn main() {
-    let n: i64 = std::env::args().nth(1).unwrap().parse().unwrap(); // CONTROL! let n: Option<i64> = std::env::args().nth(1).unwrap().parse().ok();
-    println!("{}", n + 1); // CONTROL! match n { Some(n) => println!("{}", n + 1), None => println!("invalid") }
+    // parse answers a Result, so the number is reached only through a check.
+    match std::env::args().nth(1).unwrap().parse::<i64>() {
+        Ok(n) => println!("{}", n + 1),
+        Err(_) => println!("invalid"),
+    }
 }

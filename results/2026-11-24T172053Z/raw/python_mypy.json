@@ -117,7 +117,7 @@
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.03,
+   "secs": 0.02,
    "stdout": "",
    "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/parse_invalid_number/main/main.py\", line 3, in <module>\n    n = int(sys.argv[1]) # CONTROL! n = int(sys.argv[1]) if sys.argv[1].lstrip(\"-\").isdigit() else None\nValueError: invalid literal for int() with base 10: '12abc'"
   },
@@ -931,7 +931,7 @@
    "outcome": "SILENT",
    "control": "verified",
    "exit": 0,
-   "secs": 0.09,
+   "secs": 0.1,
    "stdout": "-60",
    "stderr": ""
   },

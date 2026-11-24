@@ -122,7 +122,7 @@
    "release_stdout": "",
    "release_stderr": "Unhandled exception:\nFormatException: Invalid radix-10 number (at character 1)\n12abc\n^\n\n#0      int._handleFormatError (dart:core-patch/integers_patch.dart:150)\n#1      int._parseRadix (dart:core-patch/integers_patch.dart:179)\n#2      int._parse (dart:core-patch/integers_patch.dart:121)\n#3      int.\n...\ndart:core-patch/integers_patch.dart:81)\n#4      main (file:///tmp/breakbench/parse_invalid_number/release/main.dart:2)\n#5      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311)\n#6      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192)",
    "exit": 255,
-   "secs": 0.05,
+   "secs": 0.07,
    "stdout": "",
    "stderr": "Unhandled exception:\nFormatException: Invalid radix-10 number (at character 1)\n12abc\n^\n\n#0      int._handleFormatError (dart:core-patch/integers_patch.dart:150:5)\n#1      int._parseRadix (dart:core-patch/integers_patch.dart:179:14)\n#2      int._parse (dart:core-patch/integers_patch.dart:121:12)\n#3      int.parse (dart:core-patch/integers_patch.dart:81:12)\n#4      main (file:///tmp/breakbench/parse_invalid_number/main/main.dart:2:17)\n#5      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)\n#6      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
   },
@@ -991,7 +991,7 @@
    "outcome": "SILENT",
    "control": "verified",
    "exit": 0,
-   "secs": 0.06,
+   "secs": 0.1,
    "stdout": "-60",
    "stderr": ""
   },

@@ -120,15 +120,11 @@
    "control": "builds"
   },
   "parse_invalid_number": {
-   "outcome": "TRAPPED",
-   "control": "verified",
-   "release": "TRAPPED",
-   "release_stdout": "",
-   "release_stderr": "error: InvalidCharacter",
-   "exit": 1,
-   "secs": 0.08,
-   "stdout": "",
-   "stderr": "error: InvalidCharacter\n/opt/zig/lib/std/fmt.zig:583:24: 0x10f4e5a in charToDigit (std.zig)\n    if (value >= base) return error.InvalidCharacter;\n                       ^\n/opt/zig/lib/std/fmt.zig:448:23: 0x11f3b6a in parseIntWithSign__func_829 (std.zig)\n        const digit = try charToDigit(math.cast(u8, c) orelse return error.InvalidCharacter, buf_base);\n                      ^\n/opt/zig/lib/std/fmt.zig:336:5: 0x11f0417 in parseIntWithGenericCharacter__func_828 (std.zig)\n    return parseIntWithSign(Result, Character, buf, base, .pos);\n    ^\n/opt/zig/lib/std/fmt.zig:323:5: 0x11eff65 in parseInt__func_791 (std.zig)\n    return parseIntWithGenericCharacter(T, u8, buf, base);\n    ^\n/tmp/breakbench/parse_invalid_number/main/main.zig:10:15: 0x11e3484 in main (main.zig)\n    const n = try std.fmt.parseInt(i64, args[1], 10); // CONTROL! const n = std.fmt.parseInt(i64, args[1], 10) catch { try out.print(\"invalid\\n\", .{}); return; };\n              ^"
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": ""
   },
   "covariant_array_write": {
    "outcome": "REJECTED",
@@ -822,7 +818,7 @@
   },
   "async_reentrancy": {
    "outcome": "INEXPRESSIBLE",
-   "message": "no asynchronous tasks in the language or its standard library; the threaded form of this race is check_then_act"
+   "message": "no asynchronous tasks in the language or its standard library"
   },
   "lock_skipped_on_return": {
    "outcome": "HANG",

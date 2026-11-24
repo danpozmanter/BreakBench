@@ -127,15 +127,11 @@
   },
   "parse_invalid_number": {
    "build_output": "Program linked to executable './main'.",
-   "outcome": "TRAPPED",
-   "control": "verified",
-   "release": "TRAPPED",
-   "release_stdout": "",
-   "release_stderr": "ERROR: 'Unexpected fault 'string::MALFORMED_INTEGER' was unwrapped!'\n  in main.main (/tmp/breakbench/parse_invalid_number/release/main.c3:5) [./main] [inline]",
-   "exit": 132,
-   "secs": 0.02,
-   "stdout": "",
-   "stderr": "ERROR: 'Unexpected fault 'string::MALFORMED_INTEGER' was unwrapped!'\n  in main.main (/tmp/breakbench/parse_invalid_number/main/main.c3:5) [./main] [inline]"
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": ""
   },
   "covariant_array_write": {
    "outcome": "REJECTED",
@@ -717,15 +713,12 @@
   },
   "orphaned_receive": {
    "build_output": "Program linked to executable './main'.",
-   "outcome": "TRAPPED",
+   "outcome": "HANG",
    "control": "verified",
-   "release": "TRAPPED",
-   "release_stdout": "",
-   "release_stderr": "ERROR: 'Unexpected fault 'string::MALFORMED_INTEGER' was unwrapped!'\n  in main.worker (/tmp/breakbench/orphaned_receive/release/main.c3:11) [./main] [inline]\n  in std.thread.os.callback (/opt/c3/lib/std/threads/os/thread_posix.c3:207) [./main] [inline]\n  in pthread_condattr_setpshared (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in __clone (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]",
-   "exit": 132,
-   "secs": 0.02,
+   "exit": -9,
+   "secs": 20.0,
    "stdout": "",
-   "stderr": "ERROR: 'Unexpected fault 'string::MALFORMED_INTEGER' was unwrapped!'\n  in main.worker (/tmp/breakbench/orphaned_receive/main/main.c3:11) [./main] [inline]\n  in std.thread.os.callback (/opt/c3/lib/std/threads/os/thread_posix.c3:207) [./main] [inline]\n  in pthread_condattr_setpshared (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in __clone (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]"
+   "stderr": ""
   },
   "blocking_in_async": {
    "build_output": "Program linked to executable './main'.",
@@ -947,7 +940,7 @@
   },
   "async_reentrancy": {
    "outcome": "INEXPRESSIBLE",
-   "message": "no asynchronous tasks in the language or its standard library; the threaded form of this race is check_then_act"
+   "message": "no asynchronous tasks in the language or its standard library"
   },
   "lock_skipped_on_return": {
    "build_output": "Program linked to executable './main'.",

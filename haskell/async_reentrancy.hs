@@ -1,1 +1,0 @@
--- CANNOT-EXPRESS: no asynchronous tasks among the packages GHC ships, only threads; the threaded form of this race is check_then_act

@@ -325,7 +325,8 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
       <li><code>hash_matches_equality</code>: equal elements with different hashes. Swift seeds its hash per run: right in 5 of 20.</li>
       <li><code>fd_leak</code>: files never closed. Haskell closes handles from a finalizer thread: ran out in 8 of 20.</li>
     </ul>
-    <p class="muted">Races stay tested by <code>check_then_act</code>, <code>lock_order_deadlock</code>, <code>lost_wakeup</code> and <code>async_reentrancy</code>, which force one interleaving. Gap: bugs that show only on some runs (unsynchronized writes, per-run hash seeds) are not measured.</p>
+    <p class="muted"><code>check_then_act</code> and <code>async_reentrancy</code> were removed too: a program checks shared state, gives up control (a lock release or an <code>await</code>), then acts on the stale check. Nothing in the program says the two steps belong together, so no compiler or runtime can catch it, and no language could pass.</p>
+    <p class="muted">Races stay tested by <code>lock_order_deadlock</code> and <code>lost_wakeup</code>, which force one interleaving. Gap: bugs that show only on some runs (unsynchronized writes, per-run hash seeds) are not measured.</p>
     <h3>Right by chance</h3>
     <p class="muted">A right answer counts only where the language defines the behavior. Where it is undefined or unspecified, the program marks the line and a right answer scores 0 as right by chance.</p>
     <ul class="notes muted">
@@ -337,9 +338,10 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     <p class="muted">Every other right answer in C, C++, Zig, Odin, C3, D, Mojo, Nim, V and Goose rests on defined behavior.</p>
     <h3>N/A and prevented by design</h3>
     <p class="muted">N/A only when the language lacks the construct the mistake needs (a mutex, threads, a map literal, inheritance, interpolation). Otherwise the program is written the way the language allows and scored; a design that rules the mistake out runs correctly. A missing feature never counts as prevention.</p>
-    <p class="muted">The one design marker left is <code>unsafe_deserialization</code>: standard decoders build only the declared type. A language with no standard decoder is N/A there. <code>async_reentrancy</code> is N/A without standard async tasks; its threaded form is <code>check_then_act</code>. Kotlin uses kotlinx.coroutines.</p>
+    <p class="muted">The one design marker left is <code>unsafe_deserialization</code>: standard decoders build only the declared type. A language with no standard decoder is N/A there. Kotlin uses kotlinx.coroutines for <code>blocking_in_async</code>.</p>
     <h3>One scenario per test</h3>
     <p class="muted">Each test is one program and one input, written the way the language teaches first. A right answer shows the language handled this program, not every input or idiom. The paths that cost points are listed below.</p>
+    <p class="muted">A forced unwrap is counted once, in <code>forced_unwrap</code>. Where a standard call answers an Option, a Result or an error union, the other tests check it the way the language requires instead of forcing the value out (<code>parse_invalid_number</code>, <code>orphaned_receive</code>). A check the language does not require, such as Go's discarded <code>err</code>, stays out.</p>
     <h3>A stop after the answer</h3>
     <p class="muted">A stop after the result is printed scores as a wrong answer: the wrong value already got out. Examples: Nim <code>empty_max</code> prints 1 before its <code>IndexDefect</code>; <code>unsafe_deserialization</code>, <code>null_byte_path</code> and <code>child_exit_status</code> do harm before any stop.</p>
     <h3>Release builds</h3>

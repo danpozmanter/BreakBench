@@ -886,7 +886,7 @@
   },
   "async_reentrancy": {
    "outcome": "INEXPRESSIBLE",
-   "message": "no asynchronous tasks in the language or its standard library; the threaded form of this race is check_then_act"
+   "message": "no asynchronous tasks in the language or its standard library"
   },
   "lock_skipped_on_return": {
    "outcome": "HANG",
