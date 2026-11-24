@@ -1,6 +1,7 @@
 {
   "c": {
     "name": "C",
+    "homepage": "https://www.open-std.org/jtc1/sc22/wg14/",
     "service": "c",
     "ext": "c",
     "file": "main.c",
@@ -24,6 +25,8 @@
   },
   "cpp": {
     "name": "C++",
+    "homepage": "https://isocpp.org/",
+    "repository": "https://github.com/cplusplus/draft",
     "service": "cpp",
     "ext": "cpp",
     "file": "main.cpp",
@@ -47,6 +50,8 @@
   },
   "rust": {
     "name": "Rust",
+    "homepage": "https://www.rust-lang.org/",
+    "repository": "https://github.com/rust-lang/rust",
     "service": "rust",
     "ext": "rs",
     "file": "main.rs",
@@ -69,6 +74,8 @@
   },
   "zig": {
     "name": "Zig",
+    "homepage": "https://ziglang.org/",
+    "repository": "https://codeberg.org/ziglang/zig",
     "service": "zig",
     "ext": "zig",
     "file": "main.zig",
@@ -86,6 +93,8 @@
   },
   "golang": {
     "name": "Go",
+    "homepage": "https://go.dev/",
+    "repository": "https://go.googlesource.com/go",
     "service": "golang",
     "ext": "go",
     "file": "main.go",
@@ -104,6 +113,8 @@
   },
   "swift": {
     "name": "Swift",
+    "homepage": "https://www.swift.org/",
+    "repository": "https://github.com/swiftlang/swift",
     "service": "swift",
     "ext": "swift",
     "file": "main.swift",
@@ -126,6 +137,8 @@
   },
   "crystal": {
     "name": "Crystal",
+    "homepage": "https://crystal-lang.org/",
+    "repository": "https://github.com/crystal-lang/crystal",
     "service": "crystal",
     "ext": "cr",
     "file": "main.cr",
@@ -143,6 +156,8 @@
   },
   "d": {
     "name": "D",
+    "homepage": "https://dlang.org/",
+    "repository": "https://github.com/dlang/dmd",
     "service": "d",
     "ext": "d",
     "file": "main.d",
@@ -166,6 +181,8 @@
   },
   "nim": {
     "name": "Nim",
+    "homepage": "https://nim-lang.org/",
+    "repository": "https://github.com/nim-lang/Nim",
     "service": "nim",
     "ext": "nim",
     "file": "main.nim",
@@ -183,6 +200,8 @@
   },
   "v": {
     "name": "V",
+    "homepage": "https://vlang.io/",
+    "repository": "https://github.com/vlang/v",
     "service": "v",
     "ext": "v",
     "file": "main.v",
@@ -206,6 +225,8 @@
   },
   "odin": {
     "name": "Odin",
+    "homepage": "https://odin-lang.org/",
+    "repository": "https://github.com/odin-lang/Odin",
     "service": "odin",
     "ext": "odin",
     "file": "main.odin",
@@ -229,6 +250,8 @@
   },
   "c3": {
     "name": "C3",
+    "homepage": "https://c3-lang.org/",
+    "repository": "https://github.com/c3lang/c3c",
     "service": "c3",
     "ext": "c3",
     "file": "main.c3",
@@ -252,6 +275,8 @@
   },
   "mojo": {
     "name": "Mojo",
+    "homepage": "https://www.modular.com/mojo",
+    "repository": "https://github.com/modular/modular",
     "service": "mojo",
     "ext": "mojo",
     "file": "main.mojo",
@@ -274,6 +299,8 @@
   },
   "gossamer": {
     "name": "Gossamer",
+    "homepage": "https://gossamer-lang.org/",
+    "repository": "https://github.com/gossamer-lang/gossamer",
     "service": "gossamer",
     "ext": "gos",
     "file": "main.gos",
@@ -297,6 +324,8 @@
   },
   "goose": {
     "name": "Goose",
+    "homepage": "https://github.com/aardappel/goose",
+    "repository": "https://github.com/aardappel/goose",
     "service": "goose",
     "ext": "goose",
     "file": "main.goose",
@@ -321,6 +350,8 @@
   },
   "java": {
     "name": "Java",
+    "homepage": "https://dev.java/",
+    "repository": "https://github.com/openjdk/jdk",
     "service": "java",
     "ext": "java",
     "file": "Main.java",
@@ -344,6 +375,8 @@
   },
   "kotlin": {
     "name": "Kotlin",
+    "homepage": "https://kotlinlang.org/",
+    "repository": "https://github.com/JetBrains/kotlin",
     "service": "kotlin",
     "ext": "kt",
     "file": "main.kt",
@@ -367,6 +400,8 @@
   },
   "scala": {
     "name": "Scala",
+    "homepage": "https://www.scala-lang.org/",
+    "repository": "https://github.com/scala/scala3",
     "service": "scala",
     "ext": "scala",
     "file": "main.scala",
@@ -390,6 +425,8 @@
   },
   "csharp": {
     "name": "C#",
+    "homepage": "https://learn.microsoft.com/dotnet/csharp/",
+    "repository": "https://github.com/dotnet/roslyn",
     "service": "csharp",
     "ext": "cs",
     "file": "Program.cs",
@@ -415,6 +452,8 @@
   },
   "fsharp": {
     "name": "F#",
+    "homepage": "https://fsharp.org/",
+    "repository": "https://github.com/dotnet/fsharp",
     "service": "fsharp",
     "ext": "fs",
     "file": "Program.fs",
@@ -440,6 +479,8 @@
   },
   "dart": {
     "name": "Dart",
+    "homepage": "https://dart.dev/",
+    "repository": "https://github.com/dart-lang/sdk",
     "service": "dart",
     "ext": "dart",
     "file": "main.dart",
@@ -468,6 +509,8 @@
   },
   "typescript": {
     "name": "TypeScript",
+    "homepage": "https://www.typescriptlang.org/",
+    "repository": "https://github.com/microsoft/typescript-go",
     "service": "typescript",
     "ext": "ts",
     "file": "main.ts",
@@ -484,6 +527,8 @@
   },
   "javascript": {
     "name": "JavaScript",
+    "homepage": "https://tc39.es/",
+    "repository": "https://github.com/tc39/ecma262",
     "service": "javascript",
     "ext": "js",
     "file": "main.js",
@@ -500,6 +545,8 @@
   },
   "python": {
     "name": "Python",
+    "homepage": "https://www.python.org/",
+    "repository": "https://github.com/python/cpython",
     "service": "python_mypy",
     "ext": "py",
     "file": "main.py",
@@ -520,6 +567,8 @@
   },
   "ruby": {
     "name": "Ruby",
+    "homepage": "https://www.ruby-lang.org/",
+    "repository": "https://github.com/ruby/ruby",
     "service": "ruby",
     "ext": "rb",
     "file": "main.rb",
@@ -537,6 +586,8 @@
   },
   "php": {
     "name": "PHP",
+    "homepage": "https://www.php.net/",
+    "repository": "https://github.com/php/php-src",
     "service": "php",
     "ext": "php",
     "file": "main.php",
@@ -557,6 +608,8 @@
   },
   "julia": {
     "name": "Julia",
+    "homepage": "https://julialang.org/",
+    "repository": "https://github.com/JuliaLang/julia",
     "service": "julia",
     "ext": "jl",
     "file": "main.jl",
@@ -577,6 +630,8 @@
   },
   "ocaml": {
     "name": "OCaml",
+    "homepage": "https://ocaml.org/",
+    "repository": "https://github.com/ocaml/ocaml",
     "service": "ocaml",
     "ext": "ml",
     "file": "main.ml",
@@ -598,6 +653,8 @@
   },
   "haskell": {
     "name": "Haskell",
+    "homepage": "https://www.haskell.org/",
+    "repository": "https://gitlab.haskell.org/ghc/ghc",
     "service": "haskell",
     "ext": "hs",
     "file": "main.hs",
@@ -620,6 +677,8 @@
   },
   "clojure": {
     "name": "Clojure",
+    "homepage": "https://clojure.org/",
+    "repository": "https://github.com/clojure/clojure",
     "service": "clojure",
     "ext": "clj",
     "file": "main.clj",

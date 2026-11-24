@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-24 03:16 UTC",
+ "generated": "2026-11-24 03:26 UTC",
  "kinds": {
   "static": {
    "REJECTED": 1,
@@ -1577,6 +1577,8 @@
   {
    "id": "gossamer",
    "name": "Gossamer",
+   "homepage": "https://gossamer-lang.org/",
+   "repository": "https://github.com/gossamer-lang/gossamer",
    "dir": "gossamer",
    "ext": "gos",
    "version": "gos 0.84.4",
@@ -3357,6 +3359,8 @@
   {
    "id": "rust",
    "name": "Rust",
+   "homepage": "https://www.rust-lang.org/",
+   "repository": "https://github.com/rust-lang/rust",
    "dir": "rust",
    "ext": "rs",
    "version": "rustc 1.100.0 (0ef1bc386 2026-11-09)",
@@ -5027,6 +5031,8 @@
   {
    "id": "swift",
    "name": "Swift",
+   "homepage": "https://www.swift.org/",
+   "repository": "https://github.com/swiftlang/swift",
    "dir": "swift",
    "ext": "swift",
    "version": "Swift version 6.4.2 (swift-6.4.2-RELEASE)",
@@ -6777,6 +6783,8 @@
   {
    "id": "goose",
    "name": "Goose",
+   "homepage": "https://github.com/aardappel/goose",
+   "repository": "https://github.com/aardappel/goose",
    "dir": "goose",
    "ext": "goose",
    "version": "goose 9412b80f",
@@ -8504,6 +8512,8 @@
   {
    "id": "haskell",
    "name": "Haskell",
+   "homepage": "https://www.haskell.org/",
+   "repository": "https://gitlab.haskell.org/ghc/ghc",
    "dir": "haskell",
    "ext": "hs",
    "version": "The Glorious Glasgow Haskell Compilation System, version 9.14.1",
@@ -10375,6 +10385,8 @@
   {
    "id": "v",
    "name": "V",
+   "homepage": "https://vlang.io/",
+   "repository": "https://github.com/vlang/v",
    "dir": "v",
    "ext": "v",
    "version": "V 0.5.2 7647ce1",
@@ -12114,6 +12126,8 @@
   {
    "id": "zig",
    "name": "Zig",
+   "homepage": "https://ziglang.org/",
+   "repository": "https://codeberg.org/ziglang/zig",
    "dir": "zig",
    "ext": "zig",
    "version": "0.17.1",
@@ -13821,6 +13835,8 @@
   {
    "id": "ocaml",
    "name": "OCaml",
+   "homepage": "https://ocaml.org/",
+   "repository": "https://github.com/ocaml/ocaml",
    "dir": "ocaml",
    "ext": "ml",
    "version": "The OCaml toplevel, version 5.5.2",
@@ -15543,6 +15559,8 @@
   {
    "id": "mojo",
    "name": "Mojo",
+   "homepage": "https://www.modular.com/mojo",
+   "repository": "https://github.com/modular/modular",
    "dir": "mojo",
    "ext": "mojo",
    "version": "Mojo 1.2.0 (2016d0cd)",
@@ -17272,6 +17290,8 @@
   {
    "id": "fsharp",
    "name": "F#",
+   "homepage": "https://fsharp.org/",
+   "repository": "https://github.com/dotnet/fsharp",
    "dir": "fsharp",
    "ext": "fs",
    "version": "11.0.100",
@@ -19202,6 +19222,8 @@
   {
    "id": "typescript",
    "name": "TypeScript",
+   "homepage": "https://www.typescriptlang.org/",
+   "repository": "https://github.com/microsoft/typescript-go",
    "dir": "typescript",
    "ext": "ts",
    "version": "tsc Version 7.0.2 / node v26.13.1",
@@ -20920,6 +20942,8 @@
   {
    "id": "dart",
    "name": "Dart",
+   "homepage": "https://dart.dev/",
+   "repository": "https://github.com/dart-lang/sdk",
    "dir": "dart",
    "ext": "dart",
    "version": "Dart SDK version: 3.14.1 (stable) (Tue Nov 17 00:01:24 2026 -0800) on \"linux_x64\"",
@@ -22789,6 +22813,8 @@
   {
    "id": "kotlin",
    "name": "Kotlin",
+   "homepage": "https://kotlinlang.org/",
+   "repository": "https://github.com/JetBrains/kotlin",
    "dir": "kotlin",
    "ext": "kt",
    "version": "info: kotlinc-jvm 2.4.21 (JRE 27.0.1.1+4)",
@@ -24599,6 +24625,8 @@
   {
    "id": "nim",
    "name": "Nim",
+   "homepage": "https://nim-lang.org/",
+   "repository": "https://github.com/nim-lang/Nim",
    "dir": "nim",
    "ext": "nim",
    "version": "Nim Compiler Version 2.4.2 [Linux: amd64]",
@@ -26392,6 +26420,8 @@
   {
    "id": "scala",
    "name": "Scala",
+   "homepage": "https://www.scala-lang.org/",
+   "repository": "https://github.com/scala/scala3",
    "dir": "scala",
    "ext": "scala",
    "version": "Scala compiler version 3.10.1 -- Copyright 2002-2026, LAMP/EPFL",
@@ -28278,6 +28308,8 @@
   {
    "id": "python",
    "name": "Python",
+   "homepage": "https://www.python.org/",
+   "repository": "https://github.com/python/cpython",
    "dir": "python",
    "ext": "py",
    "version": "Python 3.15.2",
@@ -30070,6 +30102,8 @@
   {
    "id": "crystal",
    "name": "Crystal",
+   "homepage": "https://crystal-lang.org/",
+   "repository": "https://github.com/crystal-lang/crystal",
    "dir": "crystal",
    "ext": "cr",
    "version": "Crystal 1.22.3 [3462c0774] (2026-11-13)",
@@ -31920,6 +31954,8 @@
   {
    "id": "csharp",
    "name": "C#",
+   "homepage": "https://learn.microsoft.com/dotnet/csharp/",
+   "repository": "https://github.com/dotnet/roslyn",
    "dir": "csharp",
    "ext": "cs",
    "version": "11.0.100",
@@ -33889,6 +33925,8 @@
   {
    "id": "c3",
    "name": "C3",
+   "homepage": "https://c3-lang.org/",
+   "repository": "https://github.com/c3lang/c3c",
    "dir": "c3",
    "ext": "c3",
    "version": "C3 Compiler Version:       0.8.6",
@@ -35681,6 +35719,8 @@
   {
    "id": "clojure",
    "name": "Clojure",
+   "homepage": "https://clojure.org/",
+   "repository": "https://github.com/clojure/clojure",
    "dir": "clojure",
    "ext": "clj",
    "version": "Clojure 1.12.7",
@@ -37570,6 +37610,8 @@
   {
    "id": "odin",
    "name": "Odin",
+   "homepage": "https://odin-lang.org/",
+   "repository": "https://github.com/odin-lang/Odin",
    "dir": "odin",
    "ext": "odin",
    "version": "odin version dev-2026-11-nightly:9a69916",
@@ -39333,6 +39375,8 @@
   {
    "id": "golang",
    "name": "Go",
+   "homepage": "https://go.dev/",
+   "repository": "https://go.googlesource.com/go",
    "dir": "golang",
    "ext": "go",
    "version": "go version go1.27.4 linux/amd64",
@@ -41113,6 +41157,8 @@
   {
    "id": "d",
    "name": "D",
+   "homepage": "https://dlang.org/",
+   "repository": "https://github.com/dlang/dmd",
    "dir": "d",
    "ext": "d",
    "version": "LDC - the LLVM D compiler (1.43.0):",
@@ -42910,6 +42956,8 @@
   {
    "id": "java",
    "name": "Java",
+   "homepage": "https://dev.java/",
+   "repository": "https://github.com/openjdk/jdk",
    "dir": "java",
    "ext": "java",
    "version": "openjdk version \"27.0.1.1\" 2026-11-17",
@@ -44770,6 +44818,8 @@
   {
    "id": "cpp",
    "name": "C++",
+   "homepage": "https://isocpp.org/",
+   "repository": "https://github.com/cplusplus/draft",
    "dir": "cpp",
    "ext": "cpp",
    "version": "clang version 23.1.6 (https://github.com/llvm/llvm-project 5b10d2d74929eae78912771222c9855af97496f4)",
@@ -46693,6 +46743,8 @@
   {
    "id": "ruby",
    "name": "Ruby",
+   "homepage": "https://www.ruby-lang.org/",
+   "repository": "https://github.com/ruby/ruby",
    "dir": "ruby",
    "ext": "rb",
    "version": "ruby 4.0.10 (2026-11-19 revision a704b7cd95) +PRISM [x86_64-linux]",
@@ -48616,6 +48668,8 @@
   {
    "id": "php",
    "name": "PHP",
+   "homepage": "https://www.php.net/",
+   "repository": "https://github.com/php/php-src",
    "dir": "php",
    "ext": "php",
    "version": "PHP 8.5.4 (cli) (built: Nov 19 2026 00:22:49) (NTS)",
@@ -50542,6 +50596,8 @@
   {
    "id": "c",
    "name": "C",
+   "homepage": "https://www.open-std.org/jtc1/sc22/wg14/",
+   "repository": "",
    "dir": "c",
    "ext": "c",
    "version": "clang version 23.1.6 (https://github.com/llvm/llvm-project 5b10d2d74929eae78912771222c9855af97496f4)",
@@ -52492,6 +52548,8 @@
   {
    "id": "julia",
    "name": "Julia",
+   "homepage": "https://julialang.org/",
+   "repository": "https://github.com/JuliaLang/julia",
    "dir": "julia",
    "ext": "jl",
    "version": "julia version 1.13.4",
@@ -54550,6 +54608,8 @@
   {
    "id": "javascript",
    "name": "JavaScript",
+   "homepage": "https://tc39.es/",
+   "repository": "https://github.com/tc39/ecma262",
    "dir": "javascript",
    "ext": "js",
    "version": "node v26.13.1",

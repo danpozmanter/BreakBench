@@ -82,6 +82,9 @@ td.lang a:hover, td.lang a:focus-visible { color: var(--accent); text-decoration
 .missing-card ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14px; line-height: 1.45; }
 .missing-card .why { display: block; color: var(--muted); font-size: 12.5px; }
 .missing-card a, .breakdown a { color: var(--accent); }
+#ranking a.home { color: inherit; text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 3px; }
+#ranking a.home:hover, #ranking a.home:focus-visible { color: var(--accent); text-decoration-color: currentColor; }
+#ranking a.src { margin-left: 8px; color: var(--accent); }
 .dflt { display: block; margin-top: 4px; font-size: 11.5px; color: var(--muted); white-space: normal; }
 th.breakdown { text-align: right; white-space: normal; max-width: 7.5em; vertical-align: bottom; }
 .bar { width: 80px; }
@@ -463,7 +466,10 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     rows.forEach((L) => {
       const tr = el("tr", { "data-lang": L.id },
         el("td", { class: "rank", text: String(L.rank) }),
-        el("td", { class: "lang" }, L.name, el("span", { class: "ver", title: shortVersion(L.id, L.version), text: shortVersion(L.id, L.version) })),
+        // The name links to the language's homepage; the line below it to its source repository, where public.
+        el("td", { class: "lang" }, L.homepage ? el("a", { class: "home", href: L.homepage, target: "_blank", rel: "noopener", title: L.name + " homepage", text: L.name }) : L.name,
+          el("span", { class: "ver", title: shortVersion(L.id, L.version) }, shortVersion(L.id, L.version),
+            L.repository ? el("a", { class: "src", href: L.repository, target: "_blank", rel: "noopener", title: L.name + " source repository", text: "source" }) : null)),
         el("td", {}, bar(L.score, "")),
         ...cols.slice(1).map(([k]) => k === "missing" && L[k]
           ? el("td", { class: "breakdown" }, el("a", { href: "#missing/" + L.id, title: "What " + L.name + " is missing", text: String(L[k]) }))

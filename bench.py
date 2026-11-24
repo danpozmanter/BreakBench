@@ -137,6 +137,8 @@ def aggregate(run):
             {
                 "id": lang_id,
                 "name": lang["name"],
+                "homepage": lang.get("homepage", ""),
+                "repository": lang.get("repository", ""),
                 "dir": lang.get("dir", lang_id),
                 "ext": lang["ext"],
                 "version": raw.get("version", ""),
@@ -233,7 +235,7 @@ def site_payload(out):
                 results[pid]["d"] = dflt["outcome"]
                 results[pid]["ds"] = dflt["score"]
                 results[pid]["dw"] = dflt["warned"]
-        langs.append({k: row[k] for k in ("id", "name", "dir", "ext", "version", "rank", "score", "caught", "safe",
+        langs.append({k: row[k] for k in ("id", "name", "homepage", "repository", "dir", "ext", "version", "rank", "score", "caught", "safe",
                                            "scored", "missing", "default", *CATEGORIES)} | {"results": results})
     return {**{k: out[k] for k in ("generated", "kinds", "categories", "problems")},
             "languages": langs}
