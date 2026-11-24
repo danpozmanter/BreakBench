@@ -6,19 +6,13 @@
     "ext": "c",
     "file": "main.c",
     "build": [
-      "clang -std=c23 -Weverything -Wno-declaration-after-statement -Wno-unsafe-buffer-usage -Wno-c++98-compat -Wno-pre-c23-compat -Wno-padded -Werror=return-type -Werror=address -O0 -g -fsanitize=address,undefined -fno-sanitize-recover=undefined -fno-omit-frame-pointer -pthread -o main main.c"
+      "clang -std=c23 -O0 -g -pthread -o main main.c"
     ],
-    "run": "ASAN_OPTIONS=${ASAN_OPTIONS:-detect_leaks=0} ./main",
+    "run": "./main",
     "version": "clang --version | head -1",
     "release": {
       "build": [
         "clang -std=c23 -O2 -D_FORTIFY_SOURCE=3 -fstack-protector-strong -fstack-clash-protection -pthread -o main main.c"
-      ],
-      "run": "./main"
-    },
-    "default": {
-      "build": [
-        "clang -std=c23 -g -pthread -o main main.c"
       ],
       "run": "./main"
     }
@@ -31,19 +25,13 @@
     "ext": "cpp",
     "file": "main.cpp",
     "build": [
-      "clang++ -std=c++23 -Weverything -Wno-declaration-after-statement -Wno-unsafe-buffer-usage -Wno-c++98-compat -Wno-pre-c23-compat -Wno-padded -Werror=return-type -Werror=address -O0 -g -fsanitize=address,undefined -fno-sanitize-recover=undefined -fno-omit-frame-pointer -pthread -o main main.cpp -lstdc++exp"
+      "clang++ -std=c++23 -O0 -g -D_GLIBCXX_ASSERTIONS -pthread -o main main.cpp -lstdc++exp"
     ],
-    "run": "ASAN_OPTIONS=${ASAN_OPTIONS:-detect_leaks=0} ./main",
+    "run": "./main",
     "version": "clang++ --version | head -1",
     "release": {
       "build": [
         "clang++ -std=c++23 -O2 -D_FORTIFY_SOURCE=3 -D_GLIBCXX_ASSERTIONS -fstack-protector-strong -fstack-clash-protection -pthread -o main main.cpp -lstdc++exp"
-      ],
-      "run": "./main"
-    },
-    "default": {
-      "build": [
-        "clang++ -std=c++23 -g -pthread -o main main.cpp -lstdc++exp"
       ],
       "run": "./main"
     }
@@ -56,7 +44,7 @@
     "ext": "rs",
     "file": "main.rs",
     "build": [
-      "clippy-driver --edition 2024 -W clippy::pedantic -g --extern regex=/opt/rustdeps/libregex.rlib -L dependency=/opt/rustdeps/lib -o main main.rs"
+      "rustc --edition 2024 -g --extern regex=/opt/rustdeps/libregex.rlib -L dependency=/opt/rustdeps/lib -o main main.rs"
     ],
     "run": "./main",
     "version": "rustc --version",
@@ -65,11 +53,6 @@
         "rustc --edition 2024 -O --extern regex=/opt/rustdeps/libregex.rlib -L dependency=/opt/rustdeps/lib -o main main.rs"
       ],
       "run": "./main"
-    },
-    "default": {
-      "build": [
-        "rustc --edition 2024 -g --extern regex=/opt/rustdeps/libregex.rlib -L dependency=/opt/rustdeps/lib -o main main.rs"
-      ]
     }
   },
   "zig": {
@@ -99,17 +82,10 @@
     "ext": "go",
     "file": "main.go",
     "build": [
-      "cp /opt/gomod/go.mod /opt/gomod/go.sum . && GOFLAGS=-buildvcs=false go vet main.go 2>&1 || true",
-      "GOFLAGS=-buildvcs=false go build -o main main.go"
+      "cp /opt/gomod/go.mod /opt/gomod/go.sum . && GOFLAGS=-buildvcs=false go build -o main main.go"
     ],
     "run": "./main",
-    "version": "go version",
-    "warn_line": "^(\\./)?main\\.go:\\d+:\\d+: ",
-    "default": {
-      "build": [
-        "cp /opt/gomod/go.mod /opt/gomod/go.sum . && GOFLAGS=-buildvcs=false go build -o main main.go"
-      ]
-    }
+    "version": "go version"
   },
   "swift": {
     "name": "Swift",
@@ -162,19 +138,13 @@
     "ext": "d",
     "file": "main.d",
     "build": [
-      "ldc2 -g -L--export-dynamic -wi -fsanitize=address -of=main main.d"
+      "ldc2 -g -L--export-dynamic -of=main main.d"
     ],
-    "run": "ASAN_OPTIONS=${ASAN_OPTIONS:-detect_leaks=0} ./main",
+    "run": "./main",
     "version": "ldc2 --version | head -1",
     "release": {
       "build": [
         "ldc2 -O -release -L--export-dynamic -of=main main.d"
-      ],
-      "run": "./main"
-    },
-    "default": {
-      "build": [
-        "ldc2 -g -L--export-dynamic -of=main main.d"
       ],
       "run": "./main"
     }
@@ -206,7 +176,6 @@
     "ext": "v",
     "file": "main.v",
     "build": [
-      "v vet main.v 2>&1 || true",
       "v -cc clang -o main main.v"
     ],
     "run": "./main",
@@ -216,11 +185,6 @@
         "v -prod -cc clang -o main main.v"
       ],
       "run": "./main"
-    },
-    "default": {
-      "build": [
-        "v -cc clang -o main main.v"
-      ]
     }
   },
   "odin": {
@@ -231,9 +195,9 @@
     "ext": "odin",
     "file": "main.odin",
     "build": [
-      "odin build main.odin -file -debug -vet -vet-cast -vet-nil-deref -vet-uninitialized -vet-using-param -vet-atomic-access -sanitize:address -out:main"
+      "odin build main.odin -file -debug -vet -vet-cast -vet-nil-deref -vet-uninitialized -vet-using-param -vet-atomic-access -out:main"
     ],
-    "run": "ASAN_OPTIONS=${ASAN_OPTIONS:-detect_leaks=0} ./main",
+    "run": "./main",
     "version": "odin version",
     "release": {
       "build": [
@@ -256,9 +220,9 @@
     "ext": "c3",
     "file": "main.c3",
     "build": [
-      "c3c compile -O0 --validation=strict --sanitize=address -o main main.c3"
+      "c3c compile -O0 --validation=strict -o main main.c3"
     ],
-    "run": "ASAN_OPTIONS=${ASAN_OPTIONS:-detect_leaks=0} ./main",
+    "run": "./main",
     "version": "c3c --version | head -1",
     "release": {
       "build": [
@@ -305,7 +269,6 @@
     "ext": "gos",
     "file": "main.gos",
     "build": [
-      "gos lint main.gos 2>&1 || true",
       "gos build main.gos"
     ],
     "run": "./target/debug/main",
@@ -315,11 +278,6 @@
         "gos build --release main.gos"
       ],
       "run": "./target/release/main"
-    },
-    "default": {
-      "build": [
-        "gos build main.gos"
-      ]
     }
   },
   "goose": {
@@ -356,13 +314,13 @@
     "ext": "java",
     "file": "Main.java",
     "build": [
-      "javac -Xlint:all -d out Main.java"
+      "javac -d out Main.java"
     ],
     "run": "java -ea -cp out Main",
     "version": "java -version 2>&1 | head -1",
     "release": {
       "build": [
-        "javac -Xlint:all -d out Main.java"
+        "javac -d out Main.java"
       ],
       "run": "java -cp out Main"
     },
@@ -381,7 +339,7 @@
     "ext": "kt",
     "file": "main.kt",
     "build": [
-      "kotlinc -Wextra -progressive main.kt -cp $(ls /opt/kotlinx/*.jar | tr '\\n' ':') -include-runtime -d main.jar 2>&1 | grep -v '^warning' ; test -f main.jar"
+      "kotlinc -progressive main.kt -cp $(ls /opt/kotlinx/*.jar | tr '\\n' ':') -include-runtime -d main.jar 2>&1 | grep -v '^warning' ; test -f main.jar"
     ],
     "run": "java -ea -cp main.jar:$(ls /opt/kotlinx/*.jar | tr '\\n' ':') MainKt",
     "version": "kotlinc -version 2>&1 | tail -1",
@@ -406,13 +364,13 @@
     "ext": "scala",
     "file": "main.scala",
     "build": [
-      "mkdir -p out && scalac -Wall -deprecation -feature -unchecked -Wnonunit-statement -Wvalue-discard -Wsafe-init -Wimplausible-patterns -Wtostring-interpolated -Wshadow:all -Wunused:all -cp /opt/scalaxml/scala-xml.jar -d out main.scala"
+      "mkdir -p out && scalac -cp /opt/scalaxml/scala-xml.jar -d out main.scala"
     ],
     "run": "java -ea -cp out:/opt/scalaxml/scala-xml.jar:$(find /opt/scala/maven2 -name \"scala*-library*.jar\" | tr \"\\n\" \":\") Main",
     "version": "scalac -version 2>&1 | tail -1",
     "release": {
       "build": [
-        "mkdir -p out && scalac -Wall -deprecation -feature -unchecked -Wnonunit-statement -Wvalue-discard -Wsafe-init -Wimplausible-patterns -Wtostring-interpolated -Wshadow:all -Wunused:all -cp /opt/scalaxml/scala-xml.jar -d out main.scala"
+        "mkdir -p out && scalac -cp /opt/scalaxml/scala-xml.jar -d out main.scala"
       ],
       "run": "java -cp out:/opt/scalaxml/scala-xml.jar:$(find /opt/scala/maven2 -name \"scala*-library*.jar\" | tr \"\\n\" \":\") Main"
     },
@@ -431,7 +389,7 @@
     "ext": "cs",
     "file": "Program.cs",
     "extra_files": {
-      "bb.csproj": "<Project Sdk=\"Microsoft.NET.Sdk\"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net11.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><AllowUnsafeBlocks>false</AllowUnsafeBlocks><CheckForOverflowUnderflow>true</CheckForOverflowUnderflow><AnalysisMode>All</AnalysisMode><WarningLevel>9999</WarningLevel></PropertyGroup></Project>"
+      "bb.csproj": "<Project Sdk=\"Microsoft.NET.Sdk\"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net11.0</TargetFramework><ImplicitUsings>enable</ImplicitUsings><Nullable>enable</Nullable><AllowUnsafeBlocks>false</AllowUnsafeBlocks><CheckForOverflowUnderflow>true</CheckForOverflowUnderflow></PropertyGroup></Project>"
     },
     "build": [
       "dotnet build -c Debug -o out -nologo -v minimal -clp:NoSummary"
@@ -458,7 +416,7 @@
     "ext": "fs",
     "file": "Program.fs",
     "extra_files": {
-      "bb.fsproj": "<Project Sdk=\"Microsoft.NET.Sdk\"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net11.0</TargetFramework><OtherFlags>--checked+</OtherFlags><WarningLevel>5</WarningLevel><Nullable>enable</Nullable><WarnOn>21;52;1178;1182;3387;3388;3389;3390;3517;3559</WarnOn></PropertyGroup><ItemGroup><Compile Include=\"Program.fs\" /></ItemGroup></Project>"
+      "bb.fsproj": "<Project Sdk=\"Microsoft.NET.Sdk\"><PropertyGroup><OutputType>Exe</OutputType><TargetFramework>net11.0</TargetFramework><OtherFlags>--checked+</OtherFlags><Nullable>enable</Nullable></PropertyGroup><ItemGroup><Compile Include=\"Program.fs\" /></ItemGroup></Project>"
     },
     "build": [
       "dotnet build -c Debug -o out -nologo -v minimal -clp:NoSummary"
@@ -485,14 +443,10 @@
     "ext": "dart",
     "file": "main.dart",
     "build": [
-      "cp -r /opt/dartlints/.dart_tool /opt/dartlints/pubspec.yaml . && dart analyze --no-fatal-warnings main.dart 2>&1",
       "dart compile kernel -o main.dill main.dart"
     ],
     "run": "dart --enable-asserts main.dill",
     "version": "dart --version 2>&1",
-    "extra_files": {
-      "analysis_options.yaml": "include: package:lints/recommended.yaml\nanalyzer:\n  language:\n    strict-casts: true\n    strict-inference: true\n    strict-raw-types: true\n"
-    },
     "release": {
       "build": [
         "dart compile exe -o main main.dart"
@@ -503,8 +457,7 @@
       "build": [
         "dart compile kernel -o main.dill main.dart"
       ],
-      "run": "dart main.dill",
-      "extra_files": {}
+      "run": "dart main.dill"
     }
   },
   "typescript": {
@@ -547,23 +500,30 @@
     "name": "Python",
     "homepage": "https://www.python.org/",
     "repository": "https://github.com/python/cpython",
+    "service": "python",
+    "ext": "py",
+    "file": "main.py",
+    "build": [
+      "python3 -m py_compile main.py"
+    ],
+    "run": "python3 main.py",
+    "version": "python3 --version"
+  },
+  "python_mypy": {
+    "name": "Python (mypy)",
+    "homepage": "https://mypy-lang.org/",
+    "repository": "https://github.com/python/mypy",
+    "example": true,
+    "dir": "python",
     "service": "python_mypy",
     "ext": "py",
     "file": "main.py",
     "build": [
-      "python3 -X dev -m py_compile main.py",
+      "python3 -m py_compile main.py",
       "mypy --strict --warn-unreachable --strict-equality-for-none --enable-error-code possibly-undefined --enable-error-code redundant-expr --enable-error-code truthy-bool --enable-error-code truthy-iterable --enable-error-code unused-awaitable --enable-error-code explicit-override --enable-error-code mutable-override --enable-error-code exhaustive-match --enable-error-code deprecated --cache-dir /dev/null --no-color-output main.py"
     ],
-    "run": "python3 -X dev main.py",
-    "version": "python3 --version",
-    "warn_line": "^Executing <.*> took [\\d.]+ seconds",
-    "default": {
-      "service": "python",
-      "build": [
-        "python3 -X dev -m py_compile main.py"
-      ],
-      "run": "python3 main.py"
-    }
+    "run": "python3 main.py",
+    "version": "mypy --version"
   },
   "ruby": {
     "name": "Ruby",
@@ -573,16 +533,10 @@
     "ext": "rb",
     "file": "main.rb",
     "build": [
-      "ruby -wc main.rb"
+      "ruby -c main.rb"
     ],
-    "run": "ruby -w main.rb",
-    "version": "ruby --version",
-    "default": {
-      "build": [
-        "ruby -c main.rb"
-      ],
-      "run": "ruby main.rb"
-    }
+    "run": "ruby main.rb",
+    "version": "ruby --version"
   },
   "php": {
     "name": "PHP",
@@ -616,7 +570,7 @@
     "build": [
       "julia --startup-file=no -e 'src = read(\"main.jl\", String); ex = Meta.parseall(src); bad(e) = e isa Expr && (e.head in (:error, :incomplete) || any(bad, e.args)); bad(ex) && (show(ex); exit(1))'"
     ],
-    "run": "julia --startup-file=no --check-bounds=yes --depwarn=yes --warn-overwrite=yes -t 8 main.jl",
+    "run": "julia --startup-file=no --check-bounds=yes -t 8 main.jl",
     "version": "julia --version",
     "release": {
       "build": [
@@ -636,20 +590,14 @@
     "ext": "ml",
     "file": "main.ml",
     "extra_files": {
-      "dune": "(executable (name main) (flags (:standard -w +a)) (libraries str unix threads.posix re zarith))\n",
+      "dune": "(executable (name main) (libraries str unix threads.posix re zarith))\n",
       "dune-project": "(lang dune 3.0)\n"
     },
     "build": [
       "dune build ./main.exe 2>&1"
     ],
     "run": "./_build/default/main.exe",
-    "version": "ocaml -version",
-    "default": {
-      "extra_files": {
-        "dune": "(executable (name main) (libraries str unix threads.posix re zarith))\n",
-        "dune-project": "(lang dune 3.0)\n"
-      }
-    }
+    "version": "ocaml -version"
   },
   "haskell": {
     "name": "Haskell",
@@ -659,7 +607,7 @@
     "ext": "hs",
     "file": "main.hs",
     "build": [
-      "ghc -Weverything -Wno-missing-safe-haskell-mode -Wno-unsafe -Wno-safe -Wno-implicit-prelude -Wno-missing-import-lists -Wno-missing-export-lists -Wno-missing-local-signatures -Wno-monomorphism-restriction -Wno-missing-deriving-strategies -Wno-prepositive-qualified-module -Wno-missing-kind-signatures -Wno-missing-poly-kind-signatures -Wno-missing-role-annotations -Wno-all-missed-specialisations -Wno-missed-specialisations -Wno-implicit-lift -O0 -threaded -package-db /opt/hsdb -o main main.hs"
+      "ghc -O0 -threaded -package-db /opt/hsdb -o main main.hs"
     ],
     "run": "./main",
     "version": "ghc --version",
@@ -668,11 +616,6 @@
         "ghc -O1 -threaded -package-db /opt/hsdb -o main main.hs"
       ],
       "run": "./main"
-    },
-    "default": {
-      "build": [
-        "ghc -O0 -threaded -package-db /opt/hsdb -o main main.hs"
-      ]
     }
   },
   "clojure": {
@@ -683,14 +626,9 @@
     "ext": "clj",
     "file": "main.clj",
     "build": [
-      "cp /opt/clj/deps.edn . && mkdir -p classes && clojure -M -e \"(set! *warn-on-reflection* true) (compile (quote main))\""
+      "cp /opt/clj/deps.edn . && mkdir -p classes && clojure -M -e \"(compile (quote main))\""
     ],
     "run": "clojure -M -m main",
-    "version": "clojure -M -e '(println \"Clojure\" (clojure-version))'",
-    "default": {
-      "build": [
-        "cp /opt/clj/deps.edn . && mkdir -p classes && clojure -M -e \"(compile (quote main))\""
-      ]
-    }
+    "version": "clojure -M -e '(println \"Clojure\" (clojure-version))'"
   }
 }

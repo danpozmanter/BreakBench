@@ -1,1 +1,18 @@
-// CANNOT-EXPRESS: no asynchronous tasks in the standard library, only threads; the threaded form of this race is check_then_act
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.joinAll
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+
+var balance = 100
+
+suspend fun withdraw(amount: Int) {
+    if (balance >= amount) {
+        delay(10)
+        balance -= amount
+    }
+}
+
+fun main() = runBlocking {
+    joinAll(launch { withdraw(80) }, launch { withdraw(80) })
+    println(balance)
+}

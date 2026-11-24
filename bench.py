@@ -22,10 +22,18 @@ import os
 import re
 import subprocess
 import sys
+import zoneinfo
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 RESULTS = os.path.join(ROOT, "results")
 RUN_NAME = re.compile(r"^\d{4}-\d{2}-\d{2}T\d{6}Z$")
+EASTERN = zoneinfo.ZoneInfo("America/New_York")
+
+
+def run_date(run):
+    """The day a run started, in US Eastern time; its folder name holds the UTC start."""
+    started = datetime.datetime.strptime(os.path.basename(run), "%Y-%m-%dT%H%M%SZ")
+    return started.replace(tzinfo=datetime.timezone.utc).astimezone(EASTERN).date().isoformat()
 
 
 def newest_run():
@@ -56,8 +64,7 @@ def run_language(run, lang_id, lang, only, mode):
 
 
 def score_of(problem, rec, kinds):
-    """The highest of the outcome's points and the points for a warning that names the bug,
-    printed by the build or by the running program; they never add up. Unexpressible tests are excluded."""
+    """The outcome's points; a stop only the debug build makes scores less. Unexpressible tests are excluded."""
     if rec["outcome"] == "INEXPRESSIBLE":
         return None
     if rec["outcome"] == "SAFE_BY_DESIGN":
@@ -68,10 +75,6 @@ def score_of(problem, rec, kinds):
     score = table.get(rec["outcome"], 0.0)
     if debug_only(rec):
         score = table.get("DEBUG_TRAPPED", score)
-    if rec.get("warned"):
-        score = max(score, table.get("WARNED", 0.0))
-    if rec.get("run_warned"):
-        score = max(score, table.get("RUN_WARNED", 0.0))
     return score
 
 
@@ -129,14 +132,15 @@ def aggregate(run):
             if drec is None:
                 continue
             dscore = score_of(problem, drec, kinds)
-            per_problem[problem["id"]]["default"] = {"outcome": drec["outcome"], "score": dscore,
-                                                     "warned": bool(drec.get("warned"))}
+            per_problem[problem["id"]]["default"] = {"outcome": drec["outcome"], "score": dscore}
             if dscore is not None:
                 default_scores.append(dscore)
         rows.append(
             {
                 "id": lang_id,
                 "name": lang["name"],
+                # An example shows what a tool outside the language adds; it is not ranked.
+                "example": bool(lang.get("example")),
                 "homepage": lang.get("homepage", ""),
                 "repository": lang.get("repository", ""),
                 "dir": lang.get("dir", lang_id),
@@ -153,10 +157,14 @@ def aggregate(run):
             }
         )
     rows.sort(key=lambda r: (-r["score"], -r["caught"], r["name"]))
-    for rank, row in enumerate(rows, 1):
+    ranked = [row for row in rows if not row["example"]]
+    for rank, row in enumerate(ranked, 1):
         row["rank"] = rank
+    for row in rows:
+        row.setdefault("rank", None)
     out = {
         "generated": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M UTC"),
+        "date": run_date(run),
         "kinds": kinds,
         "categories": CATEGORIES,
         "problems": spec["problems"],
@@ -180,7 +188,8 @@ def aggregate(run):
     for row in rows:
         parts = "  ".join(f"{name.lower()} {row[c]:5.1f}%" for c, name in CATEGORIES.items())
         dflt = f"default {row['default']:5.1f}%" if row["default"] is not None else "default   n/a "
-        print(f"{row['rank']:>2}. {row['name']:<12} score {row['score']:5.1f}%  {dflt}  {parts}")
+        rank = f"{row['rank']:>2}." if row["rank"] else " -."
+        print(f"{rank} {row['name']:<13} score {row['score']:5.1f}%  {dflt}  {parts}")
 
 
 def describe_run(rec):
@@ -194,6 +203,8 @@ def describe_run(rec):
         return "The program or operating system reported resource exhaustion."
     if outcome == "CORRECT":
         return f"Built and ran cleanly (exit {status}), {shown}. The output is the expected answer."
+    if outcome == "CHANCE":
+        return f"Built and ran cleanly (exit {status}), {shown}. The answer is right only by chance."
     if outcome == "REJECTED":
         return "The compiler refused to build the program."
     return (f"Built and ran to the end (exit {status}), {shown}. "
@@ -218,6 +229,8 @@ def site_payload(out):
         for pid, rec in row["results"].items():
             evidence = (rec.get("message") or rec.get("stderr")
                         or describe_run(rec))
+            if rec["outcome"] == "CHANCE":
+                evidence = f"Printed the expected answer, but only by chance: {rec['message']}."
             if debug_only(rec):
                 evidence = (f"The release build did not stop: {RELEASE_WORDS.get(rec['release'], rec['release'])}.\n\n"
                             + evidence)
@@ -227,17 +240,14 @@ def site_payload(out):
                 "s": rec["score"],
                 "out": (rec.get("stdout") or "")[:160],
                 "ev": evidence[:600],
-                "w": (rec.get("warnings") or "")[:400] if rec.get("warned") else "",
-                "rw": bool(rec.get("run_warned")),
             }
             dflt = rec.get("default")
             if dflt and (dflt["outcome"], dflt["score"]) != (rec["outcome"], rec["score"]):
                 results[pid]["d"] = dflt["outcome"]
                 results[pid]["ds"] = dflt["score"]
-                results[pid]["dw"] = dflt["warned"]
-        langs.append({k: row[k] for k in ("id", "name", "homepage", "repository", "dir", "ext", "version", "rank", "score", "caught", "safe",
+        langs.append({k: row[k] for k in ("id", "name", "example", "homepage", "repository", "dir", "ext", "version", "rank", "score", "caught", "safe",
                                            "scored", "missing", "default", *CATEGORIES)} | {"results": results})
-    return {**{k: out[k] for k in ("generated", "kinds", "categories", "problems")},
+    return {**{k: out[k] for k in ("date", "kinds", "categories", "problems")},
             "languages": langs}
 
 
@@ -247,7 +257,7 @@ def main():
     parser.add_argument("--only", default="")
     parser.add_argument("--aggregate", action="store_true")
     parser.add_argument("--mode", choices=("both", "strict", "default"), default="both",
-                        help="strict: every check the toolchain offers; default: the bare toolchain")
+                        help="strict: the language's own checks switched on; default: the bare toolchain")
     args = parser.parse_args()
     run = newest_run()
     if not args.aggregate:
@@ -262,7 +272,8 @@ def main():
             run = new_run()
         modes = ("strict", "default") if args.mode == "both" else (args.mode,)
         for lang_id in selected:
-            for mode in modes:
+            # An example entry is one language plus an outside tool; its bare build is the language's own row.
+            for mode in ("strict",) if langs[lang_id].get("example") else modes:
                 run_language(run, lang_id, langs[lang_id], only, mode)
     if run is None:
         sys.exit("no results yet: run `uv run bench.py` first")

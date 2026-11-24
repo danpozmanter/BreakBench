@@ -1,3 +1,4 @@
+// UNDEFINED: V emits one C call with both arguments, and C leaves their order unspecified; clang happens to run them left to right
 struct Counter {
 mut:
 	n int

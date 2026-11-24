@@ -1,3 +1,4 @@
+// UNDEFINED: C++ leaves the order of a call's arguments unspecified; clang happens to run them left to right
 #include <iostream>
 
 static int counter;

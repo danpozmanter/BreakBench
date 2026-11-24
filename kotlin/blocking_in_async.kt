@@ -1,10 +1,9 @@
-import kotlin.concurrent.thread
+import kotlinx.coroutines.joinAll
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
-fun main() {
+fun main() = runBlocking {
     val start = System.nanoTime()
-    val a = thread { Thread.sleep(500) }
-    val b = thread { Thread.sleep(500) }
-    a.join()
-    b.join()
+    joinAll(launch { Thread.sleep(500) }, launch { Thread.sleep(500) })
     println(if ((System.nanoTime() - start) / 1_000_000 < 800) "concurrent" else "serial")
 }

@@ -2,7 +2,7 @@
 
 Usage: python3 harness/driver.py LANG [PROBLEM ...]
 
-BB_MODE=default runs the language's bare build instead of its strictest one and
+BB_MODE=default runs the language's bare build instead of its strict one and
 writes RUN/raw/LANG.default.json.
 
 Each problem is compiled (or syntax-checked) and run; the outcome is
@@ -51,12 +51,7 @@ CRASH_RE = re.compile(
     re.IGNORECASE,
 )
 # Language-level runtime errors whose text mentions a signal they were translated from.
-TRAP_RE = re.compile(
-    r"panic: runtime error:|NullPointerException|NullReferenceException"
-    r"|AddressSanitizer|UndefinedBehaviorSanitizer|runtime error:|WARNING: DATA RACE|ThreadSanitizer"
-)
-# A sanitizer that only reports a hardware fault did not catch the bug before it happened.
-SANITIZER_FAULT_RE = re.compile(r"Sanitizer: (SEGV|BUS|FPE|ILL)\b")
+TRAP_RE = re.compile(r"panic: runtime error:|NullPointerException|NullReferenceException|runtime error:")
 FD_EXHAUSTION_RE = re.compile(
     r"too many open files|\bEMFILE\b|file descriptor.{0,40}(limit|exhaust)|open file limit",
     re.IGNORECASE,
@@ -182,107 +177,24 @@ def build(lang, work, steps=None):
     return True, "\n".join(combined)
 
 
-def run_worst(problem, spec, run_template, work, runs=None):
-    """Run the built program; answer (score, outcome, status, stdout, stderr, secs) of its worst run."""
+def run_once(problem, run_template, work):
+    """Run the built program once; answer (outcome, status, stdout, stderr, secs)."""
     limit = f"ulimit -n {problem['nofile']} && " if problem.get("nofile") else ""
     run_cmd = limit + fill(run_template, {"dir": work}) + "".join(
         " " + shlex.quote(a) for a in problem["args"]
     )
-    # A race shows only in some schedules, so the worst of several runs counts.
-    worst = None
     output_file = problem.get("output_file")
-    for _ in range(runs or problem.get("runs", 1)):
-        if output_file and os.path.exists(output_file):
-            os.remove(output_file)
-        status, timed_out, out, err, secs = execute(run_cmd, work, 20)
-        # A test about data reaching a file judges what the file holds once the program has exited.
-        if output_file:
-            out = read(output_file) if os.path.exists(output_file) else ""
-        out, err = ANSI_RE.sub("", out), ANSI_RE.sub("", err)
-        outcome = classify(problem, spec["kinds"], status, timed_out, out, err)
-        score = spec["kinds"][problem["kind"]].get(outcome, 0)
-        if worst is None or score < worst[0]:
-            worst = (score, outcome, status, out, err, secs)
-        # No later run can score below zero, so the worst case is already known.
-        if worst[0] == 0:
-            break
-    return worst
+    if output_file and os.path.exists(output_file):
+        os.remove(output_file)
+    status, timed_out, out, err, secs = execute(run_cmd, work, 20)
+    # A test about data reaching a file judges what the file holds once the program has exited.
+    if output_file:
+        out = read(output_file) if os.path.exists(output_file) else ""
+    out, err = ANSI_RE.sub("", out), ANSI_RE.sub("", err)
+    return classify(problem, status, timed_out, out, err), status, out, err, secs
 
 
-# A numbered gutter line echoes the program; a gutter line of only markers points into it.
-SOURCE_ECHO_RE = re.compile(r"^\s*\d+\s*\|")
-MARKER_LINE_RE = re.compile(r"^\s*[|^~\-+][\s|^~\-+]*$")
-WARN_LINE_RE = re.compile(r"warn|deprecat|GL\d{4}|^w: |notice:|\bvet\b|\binfo\b -", re.IGNORECASE)
-
-
-# A compiler prints a warning's details indented or decorated under its header; a line that
-# starts flush with a word is a new message, such as a runtime error that followed the warning.
-CONTINUATION_RE = re.compile(r"^(\s|[-=|^~>\[(])")
-
-
-def is_warning(line, extra):
-    return bool(WARN_LINE_RE.search(line) or (extra and extra.search(line)))
-
-
-def warning_lines(text, source="", extra=None):
-    """Lines that carry a warning, each joined with up to two following lines that are not
-    warnings themselves (some compilers print the message under the header)."""
-    # Compilers echo the offending source under the message, some with a `N |` gutter and some
-    # bare; that text is the program, not the diagnosis, so it never counts toward a match.
-    program = {l.strip() for l in source.splitlines() if l.strip()}
-    lines = [
-        l
-        for l in text.splitlines()
-        if not SOURCE_ECHO_RE.match(l) and not MARKER_LINE_RE.match(l) and l.strip() not in program
-    ]
-    found = []
-    for i, line in enumerate(lines):
-        if is_warning(line, extra):
-            window = [line]
-            for follow in lines[i + 1 : i + 3]:
-                if is_warning(follow, extra) or not CONTINUATION_RE.match(follow):
-                    break
-                window.append(follow)
-            found.append(" ".join(l.strip() for l in window))
-    return found
-
-
-# Work directories are named after the problem, and diagnostics quote the program's string
-# literals; neither is the diagnostic's own wording, so neither may match the warn pattern.
-WORK_PATH_RE = re.compile(re.escape(WORK) + r"/\S*")
-QUOTED_RE = re.compile(r'"[^"]*"')
-
-
-# Ignoring a result the toolchain marks must-use counts as a refusal, though it prints as a warning.
-MUST_USE_RE = re.compile(
-    r"must be used|nodiscard|warn_unused_result|result of call to .* is unused"
-    r"|is implicitly ignored|result of \S+ call not used|discards return value"
-    r"|value is unused|answers a new value, which is not used|does not use the new \S+ instance"
-    r"|discarded a result of type|result of operator \S+ is unused|is implicitly discarded",
-    re.IGNORECASE,
-)
-
-
-def diagnostic_words(line):
-    return QUOTED_RE.sub("", WORK_PATH_RE.sub("", line))
-
-
-def relevant_warnings(problem, lang, source, *texts):
-    pattern = problem.get("warn")
-    if not pattern:
-        return []
-    rx = re.compile(pattern, re.IGNORECASE)
-    # A checker whose diagnostics carry no "warning" label (go vet) names its own line shape.
-    extra = re.compile(lang["warn_line"]) if lang.get("warn_line") else None
-    hits = []
-    for text in texts:
-        hits.extend(
-            w for w in warning_lines(text, source, extra) if rx.search(diagnostic_words(w))
-        )
-    return hits
-
-
-def classify(problem, kinds, status, timed_out, stdout, stderr):
+def classify(problem, status, timed_out, stdout, stderr):
     kind = problem["kind"]
     text = stdout.strip()
     expect = problem.get("expect")
@@ -316,19 +228,16 @@ def classify(problem, kinds, status, timed_out, stdout, stderr):
     answer = problem.get("answer")
     if answer and re.search(answer, text, re.MULTILINE):
         return "SILENT"
-    if not killed and TRAP_RE.search(stderr) and not SANITIZER_FAULT_RE.search(stderr):
+    if not killed and TRAP_RE.search(stderr):
         return "TRAPPED"
-    if (
-        killed
-        or signum in CRASH_SIGNALS
-        or CRASH_RE.search(stderr)
-        or SANITIZER_FAULT_RE.search(stderr)
-    ):
+    if killed or signum in CRASH_SIGNALS or CRASH_RE.search(stderr):
         return "CRASH"
     return "TRAPPED"
 
 
 CANNOT_RE = re.compile(r"CANNOT-(EXPRESS|MAKE|FIX):\s*(.+?)\s*(?:\*\))?$", re.M)
+# The language leaves the marked behavior undefined or unspecified, so a right answer is chance.
+UNDEFINED_RE = re.compile(r"UNDEFINED:\s*(.+?)\s*(?:\*\))?$", re.M)
 BACKEND_FAILURE_RE = re.compile(r"\.ll:\d+:\d+: error")
 def main():
     lang_id = sys.argv[1]
@@ -376,15 +285,6 @@ def main():
             continue
         work = stage(lang, pid, source, "main")
         ok, compile_out = build(lang, work)
-        if ok:
-            build_warnings = relevant_warnings(problem, lang, source, compile_out)
-            if any(MUST_USE_RE.search(w) for w in build_warnings):
-                record["outcome"] = "REJECTED"
-                record["message"] = clip("\n".join(dict.fromkeys(build_warnings)), 1500)
-                record["must_use"] = True
-                results[pid] = record
-                print(f"{lang_id:12} {pid:28} REJECTED (must use)", flush=True)
-                continue
         if not ok:
             control = control_source(source)
             marked = control != source
@@ -407,37 +307,23 @@ def main():
             print(f"{lang_id:12} {pid:28} {record['outcome']}", flush=True)
             continue
 
-        runs = problem.get("runs", 1)
-        _, record["outcome"], status, out, err, secs = run_worst(problem, spec, lang["run"], work)
-        if runs > 1:
-            record["runs"] = runs
+        record["outcome"], status, out, err, secs = run_once(problem, lang["run"], work)
+        undefined = UNDEFINED_RE.search(source)
+        if undefined and record["outcome"] == "CORRECT":
+            record["outcome"] = "CHANCE"
+            record["message"] = undefined.group(1).strip()
         # A stop that only the debug build makes is gone from the build that ships.
         if record["outcome"] == "TRAPPED" and lang.get("release"):
             rwork = stage(lang, pid, source, "release")
             rok, rout = build(lang, rwork, lang["release"]["build"])
             if rok:
-                # A race the release build stops only most of the time needs more runs to show its worst case.
-                _, rel_outcome, _, rel_out, rel_err, _ = run_worst(
-                    problem, spec, lang["release"]["run"], rwork, problem.get("release_runs"))
+                rel_outcome, _, rel_out, rel_err, _ = run_once(problem, lang["release"]["run"], rwork)
                 record["release"] = rel_outcome
                 record["release_stdout"] = clip(rel_out, 400)
                 record["release_stderr"] = clip(rel_err, 600)
             else:
                 record["release"] = "ERROR"
                 record["release_stderr"] = clip(rout, 600)
-        run_warnings = relevant_warnings(problem, lang, source, err)
-        hits = build_warnings + run_warnings
-        # Only a warning the build prints can stop the bug before it ships; one the running
-        # program prints is seen where the bug already runs.
-        record["warned"] = bool(build_warnings)
-        record["run_warned"] = bool(run_warnings)
-        # Every warning the toolchain printed, matched or not, so the warn patterns can be audited.
-        extra = re.compile(lang["warn_line"]) if lang.get("warn_line") else None
-        every = warning_lines(compile_out, source, extra) + warning_lines(err, source, extra)
-        if every:
-            record["all_warnings"] = clip("\n".join(dict.fromkeys(every)), 1500)
-        if hits:
-            record["warnings"] = clip("\n".join(dict.fromkeys(hits)), 800)
         record.update(
             {
                 "exit": status,

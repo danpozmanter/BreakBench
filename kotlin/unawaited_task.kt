@@ -1,11 +1,12 @@
-import java.util.concurrent.atomic.AtomicInteger
-import kotlin.concurrent.thread
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
-fun main() {
-    val saved = AtomicInteger()
-    val task = thread { // CONTROL! thread {
-        Thread.sleep(50)
-        saved.incrementAndGet()
+fun main() = runBlocking {
+    var saved = 0
+    launch { // CONTROL! launch {
+        delay(50)
+        saved += 1
     } // CONTROL! }.join()
-    println(saved.get())
+    println(saved)
 }

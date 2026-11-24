@@ -8,7 +8,9 @@ RUN wget -O kotlin-compiler.zip "https://github.com/JetBrains/kotlin/releases/do
 ENV KOTLIN_HOME="/opt/kotlinc"
 ENV PATH="${KOTLIN_HOME}/bin:${PATH}"
 
-# kotlinx.serialization, published by the Kotlin project; its JsonElement API needs no compiler plugin.
+# kotlinx.serialization and kotlinx.coroutines, published by the Kotlin project; the JsonElement API
+# needs no compiler plugin.
 RUN mkdir -p /opt/kotlinx && cd /opt/kotlinx \
     && wget -q https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-serialization-core-jvm/1.13.0/kotlinx-serialization-core-jvm-1.13.0.jar \
-    && wget -q https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-serialization-json-jvm/1.13.0/kotlinx-serialization-json-jvm-1.13.0.jar
+    && wget -q https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-serialization-json-jvm/1.13.0/kotlinx-serialization-json-jvm-1.13.0.jar \
+    && wget -q https://repo1.maven.org/maven2/org/jetbrains/kotlinx/kotlinx-coroutines-core-jvm/1.11.0/kotlinx-coroutines-core-jvm-1.11.0.jar

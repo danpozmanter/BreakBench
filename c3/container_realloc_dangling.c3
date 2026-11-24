@@ -1,3 +1,4 @@
+// UNDEFINED: writing through a pointer into the list's old buffer is undefined; the allocator happened to grow the list in place or leave the old buffer unused
 import std::io;
 import std::collections::list;
 
