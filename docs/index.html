@@ -777,8 +777,8 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   const clearBtn = document.getElementById("cmp-clear");
   const differWrap = document.getElementById("cmp-differ-wrap");
   const differ = document.getElementById("cmp-differ");
-  const byRank = [...D.languages].sort((a, b) => rankOf(a) - rankOf(b));
-  const pickButtons = byRank.map((L) => {
+  const byName = [...D.languages].sort((a, b) => a.name.localeCompare(b.name));
+  const pickButtons = byName.map((L) => {
     const b = el("button", { type: "button", "aria-pressed": "false", text: L.name });
     b.addEventListener("click", () => setChosen(chosen.includes(L.id) ? chosen.filter((x) => x !== L.id) : [...chosen, L.id], true));
     picker.append(b);
