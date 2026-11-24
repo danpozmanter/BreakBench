@@ -225,8 +225,8 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   <div class="tabs" role="tablist" aria-label="Sections">
     <button type="button" role="tab" id="tab-leaderboard" aria-controls="leaderboard" aria-selected="true">Leaderboard</button>
     <button type="button" role="tab" id="tab-tests" aria-controls="tests" aria-selected="false" tabindex="-1">Tests</button>
-    <button type="button" role="tab" id="tab-missing" aria-controls="missing" aria-selected="false" tabindex="-1">Missing features</button>
     <button type="button" role="tab" id="tab-scoring" aria-controls="scoring-panel" aria-selected="false" tabindex="-1">Scoring</button>
+    <button type="button" role="tab" id="tab-missing" aria-controls="missing" aria-selected="false" tabindex="-1">Missing features</button>
     <button type="button" role="tab" id="tab-notes" aria-controls="notes" aria-selected="false" tabindex="-1">Notes</button>
   </div>
 
@@ -242,11 +242,6 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     <div class="case" id="case" hidden></div>
   </section>
 
-  <section role="tabpanel" id="missing" aria-labelledby="tab-missing" hidden>
-    <p class="muted">What each language lacks that a test needs. A missing feature means the program cannot be written, so the test is left out of that language's score: it is not counted against it, and it earns nothing either. Compare languages to see only them.</p>
-    <div id="missing-list" class="missing-list"></div>
-  </section>
-
   <section role="tabpanel" id="scoring-panel" aria-labelledby="tab-scoring" hidden>
     <div class="legend" id="legend"></div>
     <div class="scoring" id="scoring"></div>
@@ -254,6 +249,11 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     <p class="muted">Ignoring a result the language marks must-use counts as a refusal.</p>
     <p class="muted">A compile error counts as a refusal only if the same program with the bug removed compiles.</p>
     <p class="muted">N/A means the language lacks a feature the test needs (a mutex, threads, a JSON parser), so it cannot express the error. The test is left out of its mean, not counted against it, and the leaderboard shows the count as Missing features. Prevented by design means the language has the feature and its design rules the error out; it earns 1 point. UNFIXABLE means the error can be made but the fix cannot be expressed, and earns 0. A missing library call is replaced with what the language has when the scenario remains expressible.</p>
+  </section>
+
+  <section role="tabpanel" id="missing" aria-labelledby="tab-missing" hidden>
+    <p class="muted">What each language lacks that a test needs. A missing feature means the program cannot be written, so the test is left out of that language's score: it is not counted against it, and it earns nothing either. Compare languages to see only them.</p>
+    <div id="missing-list" class="missing-list"></div>
   </section>
 
   <section role="tabpanel" id="notes" aria-labelledby="tab-notes" hidden>
@@ -510,7 +510,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
 
   const SHORT = NAME;
   const CMP_MAX = 5;
-  const TABS = { leaderboard: "leaderboard", tests: "tests", missing: "missing", scoring: "scoring-panel", notes: "notes" };
+  const TABS = { leaderboard: "leaderboard", tests: "tests", scoring: "scoring-panel", missing: "missing", notes: "notes" };
   const catIds = Object.keys(CAT);
   let tab = "leaderboard";
   let cat = catIds[0];
