@@ -83,6 +83,13 @@ td.lang a:hover, td.lang a:focus-visible { color: var(--accent); text-decoration
 .bar.c i { background: var(--o-correct); }
 .bar.m i { background: var(--o-rejected); }
 .breakdown { color: var(--muted); text-align: right; font-size: 13px; }
+.missing-list { display: grid; gap: 12px; }
+.missing-card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
+.missing-card h3 { margin: 0 0 8px; font-size: 15px; }
+.missing-card h3 span { font-weight: 400; color: var(--muted); font-size: 13px; }
+.missing-card ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14px; line-height: 1.45; }
+.missing-card .why { display: block; color: var(--muted); font-size: 12.5px; }
+.missing-card a, .breakdown a { color: var(--accent); }
 .dflt { display: block; margin-top: 4px; font-size: 11.5px; color: var(--muted); white-space: normal; }
 th.breakdown { text-align: right; white-space: normal; max-width: 7.5em; vertical-align: bottom; }
 .bar { width: 80px; }
@@ -215,6 +222,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   <div class="tabs" role="tablist" aria-label="Sections">
     <button type="button" role="tab" id="tab-leaderboard" aria-controls="leaderboard" aria-selected="true">Leaderboard</button>
     <button type="button" role="tab" id="tab-tests" aria-controls="tests" aria-selected="false" tabindex="-1">Tests</button>
+    <button type="button" role="tab" id="tab-missing" aria-controls="missing" aria-selected="false" tabindex="-1">Missing features</button>
     <button type="button" role="tab" id="tab-scoring" aria-controls="scoring-panel" aria-selected="false" tabindex="-1">Scoring</button>
     <button type="button" role="tab" id="tab-notes" aria-controls="notes" aria-selected="false" tabindex="-1">Notes</button>
   </div>
@@ -229,6 +237,11 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     <p class="muted">Each row is a test and each column a language, in rank order. Select a test or a cell to see its evidence below the grid. An outlined cell is a failure the language accepts by design.</p>
     <div id="grids" class="grids"></div>
     <div class="case" id="case" hidden></div>
+  </section>
+
+  <section role="tabpanel" id="missing" aria-labelledby="tab-missing" hidden>
+    <p class="muted">What each language lacks that a test needs. A missing feature means the program cannot be written, so the test is left out of that language's score: it is not counted against it, and it earns nothing either. Compare languages to see only them.</p>
+    <div id="missing-list" class="missing-list"></div>
   </section>
 
   <section role="tabpanel" id="scoring-panel" aria-labelledby="tab-scoring" hidden>
@@ -460,7 +473,9 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
         el("td", { class: "rank", text: String(L.rank) }),
         el("td", { class: "lang" }, L.name, el("span", { class: "ver", title: shortVersion(L.id, L.version), text: shortVersion(L.id, L.version) })),
         el("td", {}, bar(L.score, "")),
-        ...cols.slice(1).map(([k]) => el("td", { class: "breakdown", text: L[k] == null ? "n/a" : k === "missing" ? String(L[k]) : pct(L[k]) })));
+        ...cols.slice(1).map(([k]) => k === "missing" && L[k]
+          ? el("td", { class: "breakdown" }, el("a", { href: "#missing/" + L.id, title: "What " + L.name + " is missing", text: String(L[k]) }))
+          : el("td", { class: "breakdown", text: L[k] == null ? "n/a" : k === "missing" ? String(L[k]) : pct(L[k]) })));
       body.append(tr);
     });
     t.append(body);
@@ -489,7 +504,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
 
   const SHORT = NAME;
   const CMP_MAX = 5;
-  const TABS = { leaderboard: "leaderboard", tests: "tests", scoring: "scoring-panel", notes: "notes" };
+  const TABS = { leaderboard: "leaderboard", tests: "tests", missing: "missing", scoring: "scoring-panel", notes: "notes" };
   const catIds = Object.keys(CAT);
   let tab = "leaderboard";
   let cat = catIds[0];
@@ -659,16 +674,42 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     differWrap.hidden = names.length < 2;
   }
 
+  // Each N/A test, by language: the feature the language lacks, then the test that needs it.
+  const sentence = (t) => t.charAt(0).toUpperCase() + t.slice(1);
+  // A test named by its id reads as its title.
+  const plain = (t) => t.replace(/\b[a-z]+(?:_[a-z]+)+\b/g, (id) => { const q = probs.find((p) => p.id === id); return q ? "\u201c" + q.title + "\u201d" : id; });
+  function renderMissing() {
+    const box = document.getElementById("missing-list");
+    box.replaceChildren();
+    const complete = [];
+    [...visibleLanguages()].sort((a, b) => a.rank - b.rank).forEach((L) => {
+      const gaps = probs.filter((p) => L.results[p.id] && L.results[p.id].o === "INEXPRESSIBLE");
+      if (!gaps.length) { complete.push(L.name); return; }
+      const list = el("ul");
+      gaps.forEach((p) => {
+        const [feature, ...more] = (L.results[p.id].ev || "").split(";");
+        const link = el("a", { href: "#" + slug(p.id), text: p.title });
+        link.addEventListener("click", (e) => { e.preventDefault(); openProblem(p.id, L.id, true); });
+        list.append(el("li", {}, el("strong", { text: sentence(feature.trim()) + ". " }), "Rules out: ", link, ".",
+          more.length ? el("span", { class: "why", text: sentence(plain(more.join(";").trim())) + "." }) : null));
+      });
+      box.append(el("div", { class: "missing-card", id: "missing-" + L.id },
+        el("h3", {}, L.name + " ", el("span", { text: gaps.length + (gaps.length === 1 ? " test it cannot express" : " tests it cannot express") })), list));
+    });
+    if (complete.length) box.append(el("p", { class: "muted", text: "Nothing missing: " + complete.join(", ") + " can express every test." }));
+  }
+
   function setChosen(ids, record) {
     chosen = [...new Set(ids)].slice(0, CMP_MAX);
     renderRanking();
+    renderMissing();
     renderGrid();
     if (openId) renderCase();
     renderCmpBar();
     if (record) writeHash();
   }
 
-  // The hash names a tab (#leaderboard, #tests/<category>, #scoring, #notes) or a test (#p-..., with
+  // The hash names a tab (#leaderboard, #tests/<category>, #missing[/<language>], #scoring, #notes) or a test (#p-..., with
   // #x-... an older name for one), and may carry &compare=a,b; a bare #compare=a,b is an older link.
   function route() {
     const h = decodeURIComponent(location.hash.slice(1));
@@ -677,6 +718,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     const ids = cmpPart.slice("compare=".length).split(",").filter((id) => D.languages.some((L) => L.id === id));
     chosen = ids.slice(0, CMP_MAX);
     renderRanking();
+    renderMissing();
     renderCmpBar();
     const pid = view.startsWith("p-") || view.startsWith("x-") ? view.slice(2).replace(/-/g, "_") : null;
     if (pid && probs.some((p) => p.id === pid)) { openProblem(pid, null, false); return; }
@@ -687,6 +729,13 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
       renderGrid();
       document.getElementById("case").hidden = true;
       showTab("tests", false);
+      return;
+    }
+    if (view.startsWith("missing")) {
+      renderGrid();
+      showTab("missing", false);
+      const card = document.getElementById("missing-" + (view.split("/")[1] || ""));
+      if (card) card.scrollIntoView({ block: "start" });
       return;
     }
     renderGrid();

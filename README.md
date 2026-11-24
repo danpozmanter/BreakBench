@@ -12,7 +12,8 @@ beside it as Default. Python's strict mode includes mypy, the Python project's o
 
 A language scores the mean over tests it can attempt, as a percentage. Tests marked N/A need a
 feature the language lacks (a mutex, threads, a JSON parser); they are excluded from that language's
-denominator, not counted against it, and the leaderboard shows their count as Missing features.
+denominator, not counted against it, and the leaderboard shows their count as Missing features. The
+Missing features tab lists, for each language, what it lacks and which test that rules out.
 
 Each language runs its latest release, built from LangArena's Dockerfiles or the language's own
 images.

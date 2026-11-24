@@ -731,7 +731,7 @@
   },
   "orphaned_receive": {
    "outcome": "INEXPRESSIBLE",
-   "message": "no channel or queue between threads in the standard library; parallelize only runs a function per index"
+   "message": "no channel or queue between threads in the standard library; the standard library's parallelize only runs a function per index"
   },
   "blocking_in_async": {
    "outcome": "CORRECT",
@@ -938,11 +938,11 @@
   },
   "mutate_after_send": {
    "outcome": "INEXPRESSIBLE",
-   "message": "no channel or queue between threads in the standard library; parallelize only runs a function per index"
+   "message": "no channel or queue between threads in the standard library; the standard library's parallelize only runs a function per index"
   },
   "lost_wakeup": {
    "outcome": "INEXPRESSIBLE",
-   "message": "no condition variable, channel or queue between threads in the standard library; parallelize only runs a function per index"
+   "message": "no condition variable, channel or queue between threads in the standard library; the standard library's parallelize only runs a function per index"
   },
   "async_reentrancy": {
    "outcome": "INEXPRESSIBLE",

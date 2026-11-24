@@ -862,7 +862,7 @@
   },
   "generic_constraint": {
    "outcome": "INEXPRESSIBLE",
-   "message": "qsort takes any comparison function, so nothing ties sorting to an ordering"
+   "message": "the standard qsort takes any comparison function, so nothing ties sorting to an ordering"
   },
   "lossy_int_to_float": {
    "outcome": "SILENT",

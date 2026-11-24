@@ -923,7 +923,7 @@
   },
   "checked_interpolation": {
    "outcome": "INEXPRESSIBLE",
-   "message": "no string interpolation; std::format takes its values by position"
+   "message": "no string interpolation; C++'s std::format takes its values by position"
   },
   "evaluation_order": {
    "outcome": "CORRECT",

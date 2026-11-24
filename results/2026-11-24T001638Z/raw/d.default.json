@@ -1015,7 +1015,7 @@
   },
   "async_reentrancy": {
    "outcome": "INEXPRESSIBLE",
-   "message": "core.thread.Fiber has no scheduler in the standard library; the threaded form of this race is check_then_act"
+   "message": "D's core.thread.Fiber has no scheduler in the standard library; the threaded form of this race is check_then_act"
   },
   "lock_skipped_on_return": {
    "outcome": "HANG",

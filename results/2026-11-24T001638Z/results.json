@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-24 02:57 UTC",
+ "generated": "2026-11-24 03:16 UTC",
  "kinds": {
   "static": {
    "REJECTED": 1,
@@ -16856,7 +16856,7 @@
     },
     "orphaned_receive": {
      "outcome": "INEXPRESSIBLE",
-     "message": "no channel or queue between threads in the standard library; parallelize only runs a function per index",
+     "message": "no channel or queue between threads in the standard library; the standard library's parallelize only runs a function per index",
      "score": null,
      "default": {
       "outcome": "INEXPRESSIBLE",
@@ -17228,7 +17228,7 @@
     },
     "mutate_after_send": {
      "outcome": "INEXPRESSIBLE",
-     "message": "no channel or queue between threads in the standard library; parallelize only runs a function per index",
+     "message": "no channel or queue between threads in the standard library; the standard library's parallelize only runs a function per index",
      "score": null,
      "default": {
       "outcome": "INEXPRESSIBLE",
@@ -17238,7 +17238,7 @@
     },
     "lost_wakeup": {
      "outcome": "INEXPRESSIBLE",
-     "message": "no condition variable, channel or queue between threads in the standard library; parallelize only runs a function per index",
+     "message": "no condition variable, channel or queue between threads in the standard library; the standard library's parallelize only runs a function per index",
      "score": null,
      "default": {
       "outcome": "INEXPRESSIBLE",
@@ -42881,7 +42881,7 @@
     },
     "async_reentrancy": {
      "outcome": "INEXPRESSIBLE",
-     "message": "core.thread.Fiber has no scheduler in the standard library; the threaded form of this race is check_then_act",
+     "message": "D's core.thread.Fiber has no scheduler in the standard library; the threaded form of this race is check_then_act",
      "score": null,
      "default": {
       "outcome": "INEXPRESSIBLE",
@@ -46284,7 +46284,7 @@
     },
     "checked_interpolation": {
      "outcome": "INEXPRESSIBLE",
-     "message": "no string interpolation; std::format takes its values by position",
+     "message": "no string interpolation; C++'s std::format takes its values by position",
      "score": null,
      "default": {
       "outcome": "INEXPRESSIBLE",
@@ -51943,7 +51943,7 @@
     },
     "generic_constraint": {
      "outcome": "INEXPRESSIBLE",
-     "message": "qsort takes any comparison function, so nothing ties sorting to an ordering",
+     "message": "the standard qsort takes any comparison function, so nothing ties sorting to an ordering",
      "score": null,
      "default": {
       "outcome": "INEXPRESSIBLE",
