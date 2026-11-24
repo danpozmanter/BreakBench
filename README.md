@@ -27,7 +27,7 @@ images.
 
 ## Tests
 
-127 tests in eight categories. Each has a CWE or CERT entry or appears in a language's pitfall list,
+126 tests in eight categories. Each has a CWE or CERT entry or appears in a language's pitfall list,
 reads the same in every language, and covers a mistake no other test covers.
 `harness/problems.json` describes each one.
 
@@ -39,7 +39,7 @@ reads the same in every language, and covers a mistake no other test covers.
 | Error handling | 9 | A failure goes unseen: an ignored result, a return in a cleanup block, a cleanup failure that hides the original error, a read that returns part of a message, a buffered file never flushed, a failed command treated as a success, ... |
 | Security | 9 | Input from outside takes control: command injection, a path that escapes its folder, a NUL byte that cuts a file name short, user text as a format string, an object restored from untrusted bytes, hidden or look-alike characters in source, ... |
 | Null safety | 11 | The program uses a value that may be missing as if it were there: a lookup that found nothing, a search that returned -1, a missing name printed as text, a check a later call undoes, an empty pointer passed on as an error, ... |
-| Memory safety | 16 | The program reads or writes memory it does not own, or keeps memory it dropped: use after free, out-of-bounds writes, records that keep each other alive, a size that overflows before the allocation, a running total that keeps every message alive, ... |
+| Memory safety | 15 | The program reads or writes memory it does not own, or keeps memory it dropped: use after free, out-of-bounds writes, records that keep each other alive, a size that overflows before the allocation, a running total that keeps every message alive, ... |
 | Concurrency | 14 | Threads or tasks interfere: a counter that loses increments, a deadlock, a check-then-act race, a balance checked before an await and spent after it, an early return that skips the unlock, a wake-up sent before anyone waits, ... |
 
 The site breaks each language's score down by category, and reports the share of tests caught
@@ -80,8 +80,7 @@ stopping or by warning, reaches production unless a test happens to run that pat
 0.25. A stop that only the debug build makes is gone from the release build that ships, so it
 earns 0.125. A test scores the highest row that applies; a warning and a stop never add up. The same
 table holds for every test, whether the language is compiled or dynamic and whether the bug is a
-logic or a memory error. The one exception is `deep_structure_release`, a correct program that
-must run to the end: refusing, stopping or warning about it scores 0.
+logic or a memory error.
 
 - **Warnings** count when the toolchain's own compiler or checker, or the running program, names
   the bug in words the test's `warn` pattern matches. File paths, quoted strings, echoed source

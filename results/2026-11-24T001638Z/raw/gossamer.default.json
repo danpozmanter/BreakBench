@@ -1,7 +1,7 @@
 {
  "lang": "gossamer",
  "mode": "default",
- "version": "gos 0.84.3",
+ "version": "gos 0.84.4",
  "results": {
   "null_deref": {
    "outcome": "REJECTED",
@@ -596,15 +596,6 @@
    "stdout": "admin\nadmin",
    "stderr": ""
   },
-  "deep_structure_release": {
-   "outcome": "CORRECT",
-   "warned": false,
-   "run_warned": false,
-   "exit": 0,
-   "secs": 0.03,
-   "stdout": "done",
-   "stderr": ""
-  },
   "string_literal_write": {
    "outcome": "REJECTED",
    "message": "error[GT0130]: a `String` cannot be written by index\n  --> main.gos:3:5\n     3 |     greeting[0] = 'j' // CONTROL! greeting = \"jello\"\n       |     ^^^^^^^^^^^\n  = help: build the new text: `greeting = greeting.replacen(old, new, 1)`, or edit a `Vec<char>` and join it back: `let mut cs: Vec<char> = greeting.chars().collect()`, then `greeting = cs.map(|c| c.to_string()).join(\"\")`\n\nerror: 1 front-end error(s); refusing to build"
@@ -614,7 +605,7 @@
    "warned": false,
    "run_warned": false,
    "exit": 0,
-   "secs": 0.3,
+   "secs": 0.29,
    "stdout": "done",
    "stderr": ""
   },
@@ -703,7 +694,7 @@
    "warned": false,
    "run_warned": false,
    "exit": 0,
-   "secs": 0.6,
+   "secs": 0.58,
    "stdout": "12288000000",
    "stderr": ""
   },
@@ -750,7 +741,7 @@
   },
   "checked_interpolation": {
    "outcome": "REJECTED",
-   "message": "error[GR0001]: cannot find `nmae` in this scope\n  --> main.gos:4:22\n     4 |     println(f\"hello {nmae}\") // BREAK!\n       |                      ^^^^\n  = suggestion: did you mean `name`?\n\nerror: 1 front-end error(s); refusing to build"
+   "message": "error[GR0001]: cannot find `nmae` in this scope\n  --> main.gos:4:22\n     4 |     println(f\"hello {nmae}\") // BREAK!\n       |                      ^^^^\n  = suggestion: did you mean `max`?\n\nerror: 1 front-end error(s); refusing to build"
   },
   "evaluation_order": {
    "outcome": "CORRECT",

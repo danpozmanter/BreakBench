@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-24 01:17 UTC",
+ "generated": "2026-11-24 02:57 UTC",
  "kinds": {
   "static": {
    "REJECTED": 1,
@@ -11,6 +11,7 @@
    "CRASH": 0,
    "HANG": 0,
    "LEAK": 0,
+   "ICE": 0,
    "WARNED": 0.5,
    "RUN_WARNED": 0.25,
    "SAFE_BY_DESIGN": 1,
@@ -26,6 +27,7 @@
    "CRASH": 0,
    "HANG": 0,
    "LEAK": 0,
+   "ICE": 0,
    "WARNED": 0.5,
    "RUN_WARNED": 0.25,
    "SAFE_BY_DESIGN": 1,
@@ -57,24 +59,9 @@
    "CRASH": 0,
    "HANG": 0,
    "LEAK": 0,
+   "ICE": 0,
    "WARNED": 0.5,
    "RUN_WARNED": 0.25,
-   "SAFE_BY_DESIGN": 1,
-   "UNFIXABLE": 0
-  },
-  "valid": {
-   "REJECTED": 0,
-   "CORRECT": 1,
-   "TRAPPED": 0,
-   "DEBUG_TRAPPED": 0.0,
-   "SILENT": 0,
-   "CORRUPT": 0,
-   "CRASH": 0,
-   "HANG": 0,
-   "LEAK": 0,
-   "ICE": 0,
-   "WARNED": 0,
-   "RUN_WARNED": 0,
    "SAFE_BY_DESIGN": 1,
    "UNFIXABLE": 0
   }
@@ -1009,18 +996,6 @@
    "warn": "confusabl|homoglyph|look(s)? alike|mixed.script|non-?ascii|uncommon (unicode )?codepoint|cyrillic"
   },
   {
-   "category": "memory",
-   "id": "deep_structure_release",
-   "kind": "valid",
-   "args": [
-    "1000000"
-   ],
-   "expect": "^done$",
-   "title": "Freeing a long linked list",
-   "scenario": "The program builds a linked list of 1,000,000 nodes, each owning the next, then frees it the language's usual way (dropping it, freeing it in a loop, or leaving it to the collector) and prints \"done\".",
-   "best": "\"done\". This program has no bug; a runtime that frees the chain by recursion and overflows the stack fails."
-  },
-  {
    "id": "string_literal_write",
    "category": "memory",
    "kind": "memory",
@@ -1604,21 +1579,21 @@
    "name": "Gossamer",
    "dir": "gossamer",
    "ext": "gos",
-   "version": "gos 0.84.3",
-   "score": 81.0,
+   "version": "gos 0.84.4",
+   "score": 80.8,
    "numbers": 76.5,
    "types": 94.2,
    "syntax": 94.0,
    "errors": 83.3,
    "security": 69.4,
    "null": 81.8,
-   "memory": 76.6,
+   "memory": 75.0,
    "concurrency": 46.2,
-   "caught": 43.7,
-   "safe": 92.9,
-   "scored": 126,
+   "caught": 44.0,
+   "safe": 92.8,
+   "scored": 125,
    "missing": 1,
-   "default": 79.0,
+   "default": 78.8,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -2422,7 +2397,7 @@
      "run_warned": false,
      "all_warnings": "warning[GL0055]: the tail value of `post` is discarded; it declares no return type --> /tmp/breakbench/panic_under_lock/main/main.gos:8:5 = note: lint: undeclared_return_value\nlint: 1 warning(s), 0 error(s)\nwarning[GL0055]: the tail value of `post` is discarded; it declares no return type --> main.gos:8:5 = note: lint: undeclared_return_value",
      "exit": 0,
-     "secs": 0.0,
+     "secs": 0.01,
      "stdout": "unbalanced",
      "stderr": "worker failed",
      "score": 0,
@@ -2706,22 +2681,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:17:13 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "REJECTED",
      "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GT0130]: a `String` cannot be written by index\n  --> main.gos:3:5\n     3 |     greeting[0] = 'j' // CONTROL! greeting = \"jello\"\n       |     ^^^^^^^^^^^\n  = help: build the new text: `greeting = greeting.replacen(old, new, 1)`, or edit a `Vec<char>` and join it back: `let mut cs: Vec<char> = greeting.chars().collect()`, then `greeting = cs.map(|c| c.to_string()).join(\"\")`\n\nerror: 1 front-end error(s); refusing to build",
@@ -2738,7 +2697,7 @@
      "run_warned": false,
      "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:13:13 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
      "exit": 0,
-     "secs": 0.31,
+     "secs": 0.29,
      "stdout": "done",
      "stderr": "",
      "score": 1,
@@ -2926,7 +2885,7 @@
      "run_warned": false,
      "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:17 = note: lint: unwrap_used\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:5:22 = note: lint: unwrap_used\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:8:23 = note: lint: unwrap_used\nlint: 3 warning(s), 0 error(s)",
      "exit": 0,
-     "secs": 0.64,
+     "secs": 0.58,
      "stdout": "12288000000",
      "stderr": "",
      "score": 1,
@@ -3012,7 +2971,7 @@
     },
     "checked_interpolation": {
      "outcome": "REJECTED",
-     "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GR0001]: cannot find `nmae` in this scope\n  --> main.gos:4:22\n     4 |     println(f\"hello {nmae}\") // BREAK!\n       |                      ^^^^\n  = suggestion: did you mean `name`?\n\nerror: 1 front-end error(s); refusing to build",
+     "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GR0001]: cannot find `nmae` in this scope\n  --> main.gos:4:22\n     4 |     println(f\"hello {nmae}\") // BREAK!\n       |                      ^^^^\n  = suggestion: did you mean `max`?\n\nerror: 1 front-end error(s); refusing to build",
      "score": 1,
      "default": {
       "outcome": "REJECTED",
@@ -3238,7 +3197,7 @@
      "outcome": "CORRECT",
      "warned": false,
      "run_warned": false,
-     "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:22 = note: lint: unwrap_used\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:5:5 = note: lint: unwrap_used\nlint: 2 warning(s), 0 error(s)",
+     "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:41 = note: lint: unwrap_used\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:5:5 = note: lint: unwrap_used\nlint: 2 warning(s), 0 error(s)",
      "exit": 0,
      "secs": 0.0,
      "stdout": "total=42",
@@ -3401,20 +3360,20 @@
    "dir": "rust",
    "ext": "rs",
    "version": "rustc 1.100.0 (0ef1bc386 2026-11-09)",
-   "score": 77.0,
+   "score": 77.6,
    "numbers": 68.8,
    "types": 95.0,
    "syntax": 82.1,
    "errors": 77.8,
    "security": 71.9,
    "null": 86.4,
-   "memory": 64.1,
+   "memory": 68.3,
    "concurrency": 48.1,
-   "caught": 50.8,
-   "safe": 84.7,
-   "scored": 124,
+   "caught": 51.2,
+   "safe": 84.6,
+   "scored": 123,
    "missing": 3,
-   "default": 73.8,
+   "default": 74.4,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -4433,25 +4392,6 @@
       "warned": true
      }
     },
-    "deep_structure_release": {
-     "outcome": "TRAPPED",
-     "release": "TRAPPED",
-     "release_stdout": "",
-     "release_stderr": "thread 'main' (3642) has overflowed its stack\nfatal runtime error: stack overflow, aborting\nAborted (core dumped)",
-     "warned": false,
-     "run_warned": false,
-     "all_warnings": "warning: field `next` is never read --> main.rs:3:5 |        ---- field in this struct\n= note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\nwarning: 1 warning emitted",
-     "exit": 134,
-     "secs": 0.17,
-     "stdout": "",
-     "stderr": "thread 'main' (3602) has overflowed its stack\nfatal runtime error: stack overflow, aborting\nAborted (core dumped)",
-     "score": 0,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "REJECTED",
      "message": "error[E0277]: the type `str` cannot be indexed by `{integer}`\n --> main.rs:3:14\n  |\n3 |     greeting[0] = 'j'; // CONTROL! let greeting = format!(\"j{}\", &greeting[1..]);\n  |              ^ string indices are ranges of `usize`\n  |\n  = help: the trait `std::slice::SliceIndex<str>` is not implemented for `{integer}`\n  = note: you can use `.chars().nth()` or `.bytes().nth()`\n          for more information, see chapter 8 in The Book: <https://doc.rust-lang.org/book/ch08-02-strings.html#indexing-into-strings>\nhelp: `usize` implements trait `std::slice::SliceIndex<T>`\n --> /rustc/0ef1bc386059596dada8fb65b50425aab2ea637a/library/core/src/slice/index.rs:179:0\n  |\n  = note: `std::slice::SliceIndex<[T]>`\n --> /rustc/0ef1bc386059596dada8fb65b50425aab2ea637a/library/core/src/bstr/traits.rs:201:0\n  |\n  = note: `std::slice::SliceIndex<std::bstr::ByteStr>`\n  = note: required for `str` to implement `std::ops::Index<{integer}>`\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0277`.",
@@ -5090,20 +5030,20 @@
    "dir": "swift",
    "ext": "swift",
    "version": "Swift version 6.4.2 (swift-6.4.2-RELEASE)",
-   "score": 71.1,
+   "score": 70.8,
    "numbers": 58.8,
    "types": 90.8,
    "syntax": 85.7,
    "errors": 72.2,
    "security": 36.1,
    "null": 88.6,
-   "memory": 64.1,
+   "memory": 61.7,
    "concurrency": 37.5,
-   "caught": 36.2,
-   "safe": 78.7,
-   "scored": 127,
+   "caught": 36.5,
+   "safe": 78.6,
+   "scored": 126,
    "missing": 0,
-   "default": 71.1,
+   "default": 70.8,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -6160,21 +6100,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.08,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "REJECTED",
      "message": "error: emit-module command failed with exit code 1 (use -v to see invocation)\nmain.swift:2:9: error: cannot assign through subscript: subscript is get-only\n1 | var greeting = \"hello\"\n2 | greeting[0] = \"j\" // CONTROL! greeting = \"j\" + greeting.dropFirst()\n  |         `- error: cannot assign through subscript: subscript is get-only\n3 | print(greeting)\n4 |",
@@ -6855,20 +6780,20 @@
    "dir": "goose",
    "ext": "goose",
    "version": "goose 9412b80f",
-   "score": 66.9,
+   "score": 66.6,
    "numbers": 39.7,
    "types": 79.5,
    "syntax": 78.9,
    "errors": 71.4,
    "security": 75.0,
    "null": 59.1,
-   "memory": 59.4,
+   "memory": 56.7,
    "concurrency": 65.6,
-   "caught": 29.8,
-   "safe": 77.2,
-   "scored": 114,
+   "caught": 30.1,
+   "safe": 77.0,
+   "scored": 113,
    "missing": 13,
-   "default": 66.4,
+   "default": 66.2,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -7908,21 +7833,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.01,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "REJECTED",
      "message": "main.goose:5: error: cannot assign through this path (const, or a read-only instantiation, §9.5)\n    greeting[0] = 'j'; // CONTROL! greeting = \"jello\";\n    ^~~~~~~~~~~~~~~~~~\n  in fn main() instantiated from main.goose:3",
@@ -8597,20 +8507,20 @@
    "dir": "haskell",
    "ext": "hs",
    "version": "The Glorious Glasgow Haskell Compilation System, version 9.14.1",
-   "score": 66.7,
+   "score": 66.5,
    "numbers": 51.5,
    "types": 80.0,
    "syntax": 83.8,
    "errors": 44.4,
    "security": 43.8,
    "null": 70.5,
-   "memory": 59.4,
+   "memory": 56.7,
    "concurrency": 65.4,
-   "caught": 25.8,
-   "safe": 80.6,
-   "scored": 124,
+   "caught": 26.0,
+   "safe": 80.5,
+   "scored": 123,
    "missing": 3,
-   "default": 65.1,
+   "default": 64.8,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -9742,22 +9652,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "all_warnings": "main.hs:17:17: warning: [GHC-63394] [-Wx-partial] In the use of ‘head’ (imported from Prelude, but defined in GHC.Internal.List):",
-     "exit": 0,
-     "secs": 0.15,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "REJECTED",
      "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:6:14: error: [GHC-83865]\n    • Couldn't match type ‘[]’ with ‘a0 i0’\n      Expected: a0 i0 Char\n        Actual: String\n    • In the first argument of ‘writeArray’, namely ‘greeting’\n      In a stmt of a 'do' block: writeArray greeting 0 'j'\n      In the expression:\n        do let greeting = \"hello\"\n           writeArray greeting 0 'j'\n           putStrLn greeting\n  |\n6 |   writeArray greeting 0 'j' -- BREAK!\n  |              ^^^^^^^^",
@@ -10484,20 +10378,20 @@
    "dir": "v",
    "ext": "v",
    "version": "V 0.5.2 7647ce1",
-   "score": 65.4,
+   "score": 65.1,
    "numbers": 42.6,
    "types": 76.7,
    "syntax": 97.6,
    "errors": 61.1,
    "security": 66.7,
    "null": 56.8,
-   "memory": 68.8,
+   "memory": 66.7,
    "concurrency": 23.1,
-   "caught": 32.8,
-   "safe": 71.2,
-   "scored": 125,
+   "caught": 33.1,
+   "safe": 71.0,
+   "scored": 124,
    "missing": 2,
-   "default": 65.4,
+   "default": 65.1,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -11562,21 +11456,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "REJECTED",
      "message": "main.v:3:10: error: cannot assign to s[i] since V strings are immutable\n(note, that variables may be mutable but string values are always immutable, like in Go and Java)\n    1 | fn main() {\n    2 |     mut greeting := 'hello'\n    3 |     greeting[0] = `j` // CONTROL! greeting = 'j' + greeting[1..]\n      |             ~~~\n    4 |     println(greeting)\n    5 | }",
@@ -12238,20 +12117,20 @@
    "dir": "zig",
    "ext": "zig",
    "version": "0.17.1",
-   "score": 64.4,
+   "score": 64.2,
    "numbers": 67.6,
    "types": 70.7,
    "syntax": 91.2,
    "errors": 63.9,
    "security": 78.1,
    "null": 70.5,
-   "memory": 43.3,
+   "memory": 39.3,
    "concurrency": 16.3,
-   "caught": 41.8,
-   "safe": 78.7,
-   "scored": 122,
+   "caught": 42.1,
+   "safe": 78.5,
+   "scored": 121,
    "missing": 5,
-   "default": 64.4,
+   "default": 64.2,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -13287,21 +13166,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 4.37,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "REJECTED",
      "message": "main.zig:11:13: error: cannot assign to constant\n    greeting[0] = 'j'; // CONTROL! _ = greeting.len;\n    ~~~~~~~~^~~\nreferenced by:\n    callMain [inlined]: /opt/zig/lib/std/start.zig:827:30\n    callMainWithArgs [inlined]: /opt/zig/lib/std/start.zig:729:20\n    posixCallMainAndExit: /opt/zig/lib/std/start.zig:681:38\n    2 reference(s) hidden; use '-freference-trace=5' to see all references",
@@ -13960,20 +13824,20 @@
    "dir": "ocaml",
    "ext": "ml",
    "version": "The OCaml toplevel, version 5.5.2",
-   "score": 63.9,
+   "score": 63.6,
    "numbers": 48.4,
    "types": 80.8,
    "syntax": 76.2,
    "errors": 52.8,
    "security": 47.2,
    "null": 72.7,
-   "memory": 71.9,
+   "memory": 70.0,
    "concurrency": 26.9,
-   "caught": 29.8,
-   "safe": 76.6,
-   "scored": 124,
+   "caught": 30.1,
+   "safe": 76.4,
+   "scored": 123,
    "missing": 3,
-   "default": 63.9,
+   "default": 63.6,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -15009,22 +14873,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "all_warnings": "Warning 69 [unused-field]: record field value is never read. (However, this field is used to build or mutate values.)\nWarning 69 [unused-field]: record field next is never read. (However, this field is used to build or mutate values.)",
-     "exit": 0,
-     "secs": 0.04,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "REJECTED",
      "message": "File \"main.ml\", line 3, characters 2-21:\n3 |   greeting.[0] <- 'j'; (* BREAK! *)\n      ^^^^^^^^^^^^^^^^^^^\nError: Syntax error: strings are immutable, there is no assignment syntax for\n       them.\nHint: Mutable sequences of bytes are available in the Bytes module.\nHint: Did you mean to use Bytes.set?",
@@ -15698,20 +15546,20 @@
    "dir": "mojo",
    "ext": "mojo",
    "version": "Mojo 1.2.0 (2016d0cd)",
-   "score": 62.3,
+   "score": 62.0,
    "numbers": 43.8,
    "types": 83.6,
    "syntax": 68.8,
    "errors": 47.2,
    "security": 32.1,
    "null": 54.5,
-   "memory": 64.1,
+   "memory": 61.7,
    "concurrency": 56.9,
-   "caught": 33.3,
-   "safe": 70.9,
-   "scored": 117,
+   "caught": 33.6,
+   "safe": 70.7,
+   "scored": 116,
    "missing": 10,
-   "default": 62.8,
+   "default": 62.5,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -16747,21 +16595,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.06,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "REJECTED",
      "message": "/tmp/breakbench/string_literal_write/main/main.mojo:3:13: error: String does not support direct positional indexing like `s[i]` because Mojo strings are UTF-8 encoded, and the same position can mean three different things. Use one of: `s[byte=i]` for a raw UTF-8 byte, `s[codepoint=i]` for a Unicode code point, or `s[grapheme=i]` for a user-visible character (grapheme cluster).\n    greeting[0] = \"j\"  # CONTROL! greeting = \"jello\"\n    ~~~~~~~~^~~\n<unknown>:0: note: '__getitem__' declared here\n/tmp/breakbench/string_literal_write/main/main.mojo:3:13: error: expression must be mutable in assignment\n    greeting[0] = \"j\"  # CONTROL! greeting = \"jello\"\n    ~~~~~~~~^~~\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
@@ -17442,20 +17275,20 @@
    "dir": "fsharp",
    "ext": "fs",
    "version": "11.0.100",
-   "score": 62.2,
+   "score": 61.9,
    "numbers": 57.4,
    "types": 82.5,
    "syntax": 82.1,
    "errors": 19.4,
    "security": 47.2,
    "null": 54.5,
-   "memory": 68.0,
+   "memory": 65.8,
    "concurrency": 31.2,
-   "caught": 26.0,
-   "safe": 75.6,
-   "scored": 127,
+   "caught": 26.2,
+   "safe": 75.4,
+   "scored": 126,
    "missing": 0,
-   "default": 61.4,
+   "default": 61.1,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -18621,22 +18454,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "all_warnings": "0 Warning(s) 0 Error(s)",
-     "exit": 0,
-     "secs": 0.04,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "REJECTED",
      "message": "Determining projects to restore...\n  Restored /tmp/breakbench/string_literal_write/main/bb.fsproj (in 143 ms).\n/tmp/breakbench/string_literal_write/main/Program.fs(4,5): error FS0810: Property 'Chars' cannot be set [/tmp/breakbench/string_literal_write/main/bb.fsproj]\n/tmp/breakbench/string_literal_write/main/Program.fs(4,5): error FS0257: Invalid mutation of a constant expression. Consider copying the expression to a mutable local, e.g. 'let mutable x = ...'. [/tmp/breakbench/string_literal_write/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/string_literal_write/main/Program.fs(4,5): error FS0810: Property 'Chars' cannot be set [/tmp/breakbench/string_literal_write/main/bb.fsproj]\n/tmp/breakbench/string_literal_write/main/Program.fs(4,5): error FS0257: Invalid mutation of a constant expression. Consider copying the expression to a mutable local, e.g. 'let mutable x = ...'. [/tmp/breakbench/string_literal_write/main/bb.fsproj]\n    0 Warning(s)\n    2 Error(s)\n\nTime Elapsed 00:00:01.03",
@@ -19388,20 +19205,20 @@
    "dir": "typescript",
    "ext": "ts",
    "version": "tsc Version 7.0.2 / node v26.13.1",
-   "score": 58.9,
+   "score": 58.6,
    "numbers": 47.1,
    "types": 60.0,
    "syntax": 71.4,
    "errors": 33.3,
    "security": 55.6,
    "null": 47.7,
-   "memory": 79.7,
+   "memory": 78.3,
    "concurrency": 55.0,
-   "caught": 29.3,
-   "safe": 65.0,
-   "scored": 123,
+   "caught": 29.5,
+   "safe": 64.8,
+   "scored": 122,
    "missing": 4,
-   "default": 54.3,
+   "default": 53.9,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -20421,21 +20238,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.05,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "REJECTED",
      "message": "main.ts(2,1): error TS2542: Index signature in type 'String' only permits reading.",
@@ -21121,20 +20923,20 @@
    "dir": "dart",
    "ext": "dart",
    "version": "Dart SDK version: 3.14.1 (stable) (Tue Nov 17 00:01:24 2026 -0800) on \"linux_x64\"",
-   "score": 58.5,
+   "score": 58.2,
    "numbers": 54.4,
    "types": 63.3,
    "syntax": 66.7,
    "errors": 36.1,
    "security": 63.9,
    "null": 68.2,
-   "memory": 67.2,
+   "memory": 65.0,
    "concurrency": 25.0,
-   "caught": 20.3,
-   "safe": 69.1,
-   "scored": 123,
+   "caught": 20.5,
+   "safe": 68.9,
+   "scored": 122,
    "missing": 4,
-   "default": 54.5,
+   "default": 54.1,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -22240,21 +22042,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.04,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "REJECTED",
      "message": "Analyzing main.dart...\n\n  error - main.dart:3:11 - The operator '[]=' isn't defined for the type 'String'. Try defining the operator '[]='. - undefined_operator\n\n1 issue found.",
@@ -23005,20 +22792,20 @@
    "dir": "kotlin",
    "ext": "kt",
    "version": "info: kotlinc-jvm 2.4.21 (JRE 27.0.1.1+4)",
-   "score": 58.1,
+   "score": 57.8,
    "numbers": 54.4,
    "types": 75.8,
    "syntax": 67.9,
    "errors": 19.4,
    "security": 50.0,
    "null": 68.2,
-   "memory": 67.2,
+   "memory": 65.0,
    "concurrency": 19.2,
-   "caught": 27.8,
-   "safe": 68.3,
-   "scored": 126,
+   "caught": 28.0,
+   "safe": 68.0,
+   "scored": 125,
    "missing": 1,
-   "default": 56.9,
+   "default": 56.6,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -24110,21 +23897,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.06,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "REJECTED",
      "message": "main.kt:3:13: error: no 'set' operator method providing array access.\n    greeting[0] = 'j' // CONTROL! greeting = \"j\" + greeting.substring(1)\n            ^^^",
@@ -24830,20 +24602,20 @@
    "dir": "nim",
    "ext": "nim",
    "version": "Nim Compiler Version 2.4.2 [Linux: amd64]",
-   "score": 56.6,
+   "score": 57.0,
    "numbers": 61.8,
    "types": 63.3,
    "syntax": 81.0,
    "errors": 50.0,
    "security": 36.1,
    "null": 31.8,
-   "memory": 64.8,
+   "memory": 69.2,
    "concurrency": 26.8,
-   "caught": 29.9,
-   "safe": 67.7,
-   "scored": 127,
+   "caught": 30.2,
+   "safe": 68.3,
+   "scored": 126,
    "missing": 0,
-   "default": 56.6,
+   "default": 57.0,
    "results": {
     "null_deref": {
      "outcome": "CRASH",
@@ -25938,21 +25710,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CRASH",
-     "warned": false,
-     "run_warned": false,
-     "exit": 139,
-     "secs": 0.19,
-     "stdout": "",
-     "stderr": "Segmentation fault (core dumped)",
-     "score": 0,
-     "default": {
-      "outcome": "CRASH",
-      "score": 0,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "CORRECT",
      "warned": false,
@@ -26638,20 +26395,20 @@
    "dir": "scala",
    "ext": "scala",
    "version": "Scala compiler version 3.10.1 -- Copyright 2002-2026, LAMP/EPFL",
-   "score": 56.6,
+   "score": 56.2,
    "numbers": 35.9,
    "types": 72.5,
    "syntax": 73.8,
    "errors": 25.0,
    "security": 50.0,
    "null": 59.1,
-   "memory": 68.8,
+   "memory": 66.7,
    "concurrency": 26.9,
-   "caught": 20.0,
-   "safe": 66.4,
-   "scored": 125,
+   "caught": 20.2,
+   "safe": 66.1,
+   "scored": 124,
    "missing": 2,
-   "default": 53.4,
+   "default": 53.0,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -27784,22 +27541,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "all_warnings": "-- [E176] Potential Issue Warning: main.scala:12:19 ---------------------------- |    unused value of type Long\n1 warning found",
-     "exit": 0,
-     "secs": 0.12,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "REJECTED",
      "message": "-- [E008] Not Found Error: main.scala:5:4 --------------------------------------\n5 |    greeting(0) = 'j' // CONTROL! greeting = \"j\" + greeting.substring(1)\n  |    ^^^^^^^^\n  |    value update is not a member of String\n1 error found",
@@ -28540,20 +28281,20 @@
    "dir": "python",
    "ext": "py",
    "version": "Python 3.15.2",
-   "score": 56.3,
+   "score": 56.0,
    "numbers": 69.1,
    "types": 59.2,
    "syntax": 69.0,
    "errors": 47.2,
    "security": 38.9,
    "null": 45.5,
-   "memory": 71.9,
+   "memory": 70.0,
    "concurrency": 23.2,
-   "caught": 21.3,
-   "safe": 69.3,
-   "scored": 127,
+   "caught": 21.4,
+   "safe": 69.0,
+   "scored": 126,
    "missing": 0,
-   "default": 40.2,
+   "default": 39.7,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -29612,21 +29353,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.26,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "REJECTED",
      "message": "main.py:2: error: Unsupported target for indexed assignment (\"str\")  [index]\nFound 1 error in 1 file (checked 1 source file)",
@@ -30347,20 +30073,20 @@
    "dir": "crystal",
    "ext": "cr",
    "version": "Crystal 1.22.3 [3462c0774] (2026-11-13)",
-   "score": 56.1,
+   "score": 55.8,
    "numbers": 61.8,
    "types": 60.8,
    "syntax": 67.9,
    "errors": 30.6,
    "security": 41.7,
    "null": 70.5,
-   "memory": 67.2,
+   "memory": 65.0,
    "concurrency": 23.2,
-   "caught": 22.8,
-   "safe": 70.9,
-   "scored": 127,
+   "caught": 23.0,
+   "safe": 70.6,
+   "scored": 126,
    "missing": 0,
-   "default": 56.1,
+   "default": 55.8,
    "results": {
     "null_deref": {
      "outcome": "REJECTED",
@@ -31480,21 +31206,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.04,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "REJECTED",
      "message": "Showing last frame. Use --error-trace for full trace.\n\nIn main.cr:2:9\n\n 2 | greeting[0] = 'j' # CONTROL! greeting = \"j\" + greeting[1..]\n             ^\nError: undefined method '[]=' for String",
@@ -32212,20 +31923,20 @@
    "dir": "csharp",
    "ext": "cs",
    "version": "11.0.100",
-   "score": 54.6,
+   "score": 54.3,
    "numbers": 44.9,
    "types": 68.3,
    "syntax": 77.4,
    "errors": 36.1,
    "security": 38.9,
    "null": 38.6,
-   "memory": 71.9,
+   "memory": 70.0,
    "concurrency": 17.9,
-   "caught": 24.4,
-   "safe": 70.9,
-   "scored": 127,
+   "caught": 24.6,
+   "safe": 70.6,
+   "scored": 126,
    "missing": 0,
-   "default": 52.2,
+   "default": 51.8,
    "results": {
     "null_deref": {
      "outcome": "TRAPPED",
@@ -33406,22 +33117,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "all_warnings": "/tmp/breakbench/deep_structure_release/main/Program.cs(8,17): warning CA1305: The behavior of 'long.Parse(string)' could vary based on the current user's locale settings. Replace this call in '<top-level-statements-entry-point>' with a call to 'long.Parse(string, IFormatProvider)'. (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1305) [/tmp/breakbench/deep_structure_release/main/bb.csproj]\n/tmp/breakbench/deep_structure_release/main/Program.cs(10,19): warning CA1303: Method '<top-level-statements-entry-point>' passes a literal string as parameter 'value' of a call to 'void Console.WriteLine(string? value)'. Retrieve the following string(s) from a resource table instead: \"done\". (https://learn.microsoft.com/dot\n...\ncsproj]\n/tmp/breakbench/deep_structure_release/main/Program.cs(12,8): warning CA1852: Type 'Node' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/deep_structure_release/main/bb.csproj] bb -> /tmp/breakbench/deep_structure_release/main/out/bb.dll\n/tmp/breakbench/deep_structure_release/main/Program.cs(12,8): warning CA1852: Type 'Node' can be sealed because it has no subtypes in its containing assembly and is not externally visible (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca1852) [/tmp/breakbench/deep_structure_release/main/bb.csproj]\n3 Warning(s) 0 Error(s)",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "REJECTED",
      "message": "Determining projects to restore...\n  Restored /tmp/breakbench/string_literal_write/main/bb.csproj (in 35 ms).\n/tmp/breakbench/string_literal_write/main/Program.cs(2,1): error CS0200: Property or indexer 'string.this[int]' cannot be assigned to -- it is read only [/tmp/breakbench/string_literal_write/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/string_literal_write/main/Program.cs(2,1): error CS0200: Property or indexer 'string.this[int]' cannot be assigned to -- it is read only [/tmp/breakbench/string_literal_write/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.02",
@@ -34197,20 +33892,20 @@
    "dir": "c3",
    "ext": "c3",
    "version": "C3 Compiler Version:       0.8.6",
-   "score": 53.0,
+   "score": 52.6,
    "numbers": 42.6,
    "types": 64.6,
    "syntax": 72.4,
    "errors": 70.8,
    "security": 65.6,
    "null": 43.2,
-   "memory": 39.2,
+   "memory": 34.8,
    "concurrency": 15.4,
-   "caught": 28.7,
-   "safe": 68.9,
-   "scored": 122,
+   "caught": 28.9,
+   "safe": 68.6,
+   "scored": 121,
    "missing": 5,
-   "default": 52.7,
+   "default": 52.3,
    "results": {
     "null_deref": {
      "outcome": "CRASH",
@@ -35287,21 +34982,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.11,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "CRASH",
      "warned": false,
@@ -36004,20 +35684,20 @@
    "dir": "clojure",
    "ext": "clj",
    "version": "Clojure 1.12.7",
-   "score": 52.8,
+   "score": 52.4,
    "numbers": 50.0,
    "types": 49.1,
    "syntax": 72.5,
    "errors": 19.4,
    "security": 52.8,
    "null": 36.4,
-   "memory": 62.5,
+   "memory": 60.0,
    "concurrency": 58.9,
    "caught": 4.0,
-   "safe": 74.4,
-   "scored": 125,
+   "safe": 74.2,
+   "scored": 124,
    "missing": 2,
-   "default": 52.8,
+   "default": 52.4,
    "results": {
     "null_deref": {
      "outcome": "SILENT",
@@ -37145,21 +36825,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.42,
-     "stdout": "done",
-     "stderr": "999999",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "TRAPPED",
      "warned": false,
@@ -37908,20 +37573,20 @@
    "dir": "odin",
    "ext": "odin",
    "version": "odin version dev-2026-11-nightly:9a69916",
-   "score": 52.2,
+   "score": 51.8,
    "numbers": 48.5,
    "types": 56.0,
    "syntax": 91.2,
    "errors": 50.0,
    "security": 44.4,
    "null": 29.5,
-   "memory": 50.8,
+   "memory": 47.3,
    "concurrency": 16.3,
-   "caught": 29.3,
-   "safe": 61.8,
-   "scored": 123,
+   "caught": 29.5,
+   "safe": 61.5,
+   "scored": 122,
    "missing": 4,
-   "default": 49.4,
+   "default": 49.0,
    "results": {
     "null_deref": {
      "outcome": "CRASH",
@@ -38989,21 +38654,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.18,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "REJECTED",
      "message": "/tmp/breakbench/string_literal_write/main/main.odin(7:2) Error: Cannot assign to 'greeting[0]' \n\tgreeting[0] = 'j' // CONTROL! greeting = \"jello\" \n\t^~~~~~~~~~^",
@@ -39686,20 +39336,20 @@
    "dir": "golang",
    "ext": "go",
    "version": "go version go1.27.4 linux/amd64",
-   "score": 50.4,
+   "score": 50.0,
    "numbers": 48.5,
    "types": 45.8,
    "syntax": 82.5,
    "errors": 25.0,
    "security": 61.1,
    "null": 20.5,
-   "memory": 71.9,
+   "memory": 70.0,
    "concurrency": 23.1,
-   "caught": 21.6,
-   "safe": 62.4,
-   "scored": 125,
+   "caught": 21.8,
+   "safe": 62.1,
+   "scored": 124,
    "missing": 2,
-   "default": 49.2,
+   "default": 48.8,
    "results": {
     "null_deref": {
      "outcome": "TRAPPED",
@@ -40763,21 +40413,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "REJECTED",
      "message": "# command-line-arguments\n# [command-line-arguments]\nvet: ./main.go:7:2: cannot assign to greeting[0] (neither addressable nor a map index expression)\n\n\n\n# command-line-arguments\n./main.go:7:2: cannot assign to greeting[0] (neither addressable nor a map index expression)",
@@ -41481,20 +41116,20 @@
    "dir": "d",
    "ext": "d",
    "version": "LDC - the LLVM D compiler (1.43.0):",
-   "score": 49.7,
+   "score": 49.3,
    "numbers": 17.6,
    "types": 57.9,
    "syntax": 77.4,
    "errors": 63.9,
    "security": 38.9,
    "null": 22.7,
-   "memory": 68.8,
+   "memory": 66.7,
    "concurrency": 25.0,
-   "caught": 27.0,
-   "safe": 61.1,
-   "scored": 126,
+   "caught": 27.2,
+   "safe": 60.8,
+   "scored": 125,
    "missing": 1,
-   "default": 49.6,
+   "default": 49.2,
    "results": {
     "null_deref": {
      "outcome": "CRASH",
@@ -42568,21 +42203,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.04,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "REJECTED",
      "message": "main.d(6): Error: cannot modify `immutable` expression `greeting[0]`\n    greeting[0] = 'j'; // CONTROL! greeting = \"j\" ~ greeting[1 .. $];\n            ^",
@@ -43293,20 +42913,20 @@
    "dir": "java",
    "ext": "java",
    "version": "openjdk version \"27.0.1.1\" 2026-11-17",
-   "score": 48.0,
+   "score": 47.6,
    "numbers": 32.8,
    "types": 60.0,
    "syntax": 61.2,
    "errors": 33.3,
    "security": 50.0,
    "null": 34.1,
-   "memory": 67.2,
+   "memory": 65.0,
    "concurrency": 15.4,
-   "caught": 21.8,
-   "safe": 63.7,
-   "scored": 124,
+   "caught": 22.0,
+   "safe": 63.4,
+   "scored": 123,
    "missing": 3,
-   "default": 46.8,
+   "default": 46.3,
    "results": {
     "null_deref": {
      "outcome": "TRAPPED",
@@ -44419,21 +44039,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.08,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "REJECTED",
      "message": "Main.java:5: error: array required, but String found\n        greeting[0] = 'j'; // CONTROL! greeting = \"j\" + greeting.substring(1);\n                ^\n1 error",
@@ -45163,1963 +44768,25 @@
    "rank": 24
   },
   {
-   "id": "ruby",
-   "name": "Ruby",
-   "dir": "ruby",
-   "ext": "rb",
-   "version": "ruby 4.0.10 (2026-11-19 revision a704b7cd95) +PRISM [x86_64-linux]",
-   "score": 48.0,
-   "numbers": 63.2,
-   "types": 26.7,
-   "syntax": 60.7,
-   "errors": 41.7,
-   "security": 58.3,
-   "null": 36.4,
-   "memory": 68.8,
-   "concurrency": 36.5,
-   "caught": 0.8,
-   "safe": 65.6,
-   "scored": 125,
-   "missing": 2,
-   "default": 46.6,
-   "results": {
-    "null_deref": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.05,
-     "stdout": "",
-     "stderr": "main.rb:8:in '<main>': undefined method 'name' for nil (NoMethodError)\n\nputs u.name.length\n      ^^^^^",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "int_overflow": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "9223372036854775808",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "div_by_zero": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.03,
-     "stdout": "",
-     "stderr": "main.rb:2:in 'Integer#/': divided by 0 (ZeroDivisionError)\n\tfrom main.rb:2:in '<main>'",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "shift_overflow": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "18446744073709551616",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "narrowing_cast": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "44",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "float_to_int_overflow": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "100000000000000000000",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "signed_unsigned_compare": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "less",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "type_confusion": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.05,
-     "stdout": "",
-     "stderr": "main.rb:2:in 'String#+': no implicit conversion of Integer into String (TypeError)\n\n  a + b\n      ^\n\tfrom main.rb:2:in 'Object#add'\n\tfrom main.rb:6:in '<main>'",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "missing_return": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "nil",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "non_exhaustive_match": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.04,
-     "stdout": "nil",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "uninitialized_variable": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "nil",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "missing_argument": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.05,
-     "stdout": "",
-     "stderr": "main.rb:1:in 'Object#area': wrong number of arguments (given 1, expected 2) (ArgumentError)\n\n    caller: main.rb:5\n    | puts area(3)\n           ^^^^\n    callee: main.rb:1\n    | def area(w, h)\n          ^^^^\n\tfrom main.rb:5:in '<main>'",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "misspelled_field": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.06,
-     "stdout": "",
-     "stderr": "main.rb:10:in '<main>': undefined method 'colour=' for an instance of Config (NoMethodError)\n\ncfg.colour = \"red\"\n   ^^^^^^^^^\nDid you mean?  color=",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "assign_in_condition": {
-     "outcome": "SILENT",
-     "warned": true,
-     "run_warned": true,
-     "all_warnings": "main.rb:2: warning: found '= literal' in conditional, should be ==",
-     "warnings": "main.rb:2: warning: found '= literal' in conditional, should be ==",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "one",
-     "stderr": "main.rb:2: warning: found '= literal' in conditional, should be ==",
-     "score": 0.5,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0.5,
-      "warned": true
-     }
-    },
-    "switch_fallthrough": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "one",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "zero_is_falsy": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "have 0",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "string_equality": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "equal",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "parse_invalid_number": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "13",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "covariant_array_write": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "meow",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "mutate_while_iterating": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "1,2,3",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "self_deadlock": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.03,
-     "stdout": "",
-     "stderr": "main.rb:5:in 'Thread::Mutex#synchronize': deadlock; recursive locking (ThreadError)\n\tfrom main.rb:5:in 'Object#deposit'\n\tfrom main.rb:8:in 'block in <main>'\n\tfrom main.rb:8:in 'Thread::Mutex#synchronize'\n\tfrom main.rb:8:in '<main>'",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "loop_closure_capture": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "0,1,2",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "snapshot_aliasing": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "0",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "ignored_error_result": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.03,
-     "stdout": "",
-     "stderr": "main.rb:2:in 'IO.write': No such file or directory @ rb_sysopen - /nonexistent/dir/out.txt (Errno::ENOENT)\n\tfrom main.rb:2:in 'Object#save'\n\tfrom main.rb:5:in '<main>'",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "sort_with_nan": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.05,
-     "stdout": "",
-     "stderr": "main.rb:2:in 'Array#sort': comparison of Float with 3.0 failed (ArgumentError)\n\tfrom main.rb:2:in '<main>'",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "integer_average": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "3.0",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "leading_zero_literal": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "668",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "shared_default_argument": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "1",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "reused_iterator": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "12 3",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "bitwise_precedence": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "even",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "dangling_else": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "not a",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "chained_comparison": {
-     "outcome": "TRAPPED",
-     "warned": true,
-     "run_warned": true,
-     "all_warnings": "main.rb:2: warning: comparison '<' after comparison",
-     "warnings": "main.rb:2: warning: comparison '<' after comparison",
-     "exit": 1,
-     "secs": 0.04,
-     "stdout": "",
-     "stderr": "main.rb:2: warning: comparison '<' after comparison\nmain.rb:2:in '<main>': undefined method '<' for true (NoMethodError)\n\ninside = 1 < x < 3\n               ^",
-     "score": 0.5,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "lost_update_on_copy": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "150",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "command_injection": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "safe",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "float_equality": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.05,
-     "stdout": "not equal",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "lock_order_deadlock": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.03,
-     "stdout": "",
-     "stderr": "main.rb:34:in 'Thread#join': No live threads left. Deadlock? (fatal)\n3 threads, 3 sleeps current:0x000055b5818f2130 main thread:0x000055b5815ff0b0\n* #<Thread:0x0000753e6eaf7f40 sleep_forever>\n   rb_thread_t:0x000055b5815ff0b0 native:0x0000753e6ece0800 int:0\n   main.rb:34:in 'Thread#join'\n   main.rb:34:in '<main>'\n* #<Thread:0x0000753e5384a808 main.rb:32 sleep_forever>\n   rb_thread_t:0x000055b5818f2130 native:0x0000753e5372e6c0 int:0\n    depended by: tb_thread_id:0x000055b5815ff0b0\n   main.rb:28:in 'Thread::Mutex#synchronize'\n   main.rb:28:in 'block in Object#transfer'\n   main.rb:26:in 'Thread::Mutex#synchronize'\n   main.rb:26:in 'Object#transfer'\n   main.rb:32:in 'block in <main>'\n* #<Thread:0x0000753e5384a6f0 main.rb:33 sleep_forever>\n   rb_thread_t:0x000055b5818f2720 native:0x0000753e5352c6c0 int:0 mutex:2 cond:1\n   main.rb:28:in 'Thread::Mutex#synchronize'\n   main.rb:28:in 'block in Object#transfer'\n   main.rb:26:in 'Thread::Mutex#synchronize'\n   main.rb:26:in 'Object#transfer'\n   main.rb:33:in 'block in <main>'\n\n\tfrom main.rb:34:in '<main>'",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "path_join_escape": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "inside",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "regex_backtracking": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "no match",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "negative_remainder": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "odd",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "missing_comma_concat": {
-     "outcome": "REJECTED",
-     "message": "ruby: main.rb:4: syntax error found (SyntaxError)\n  2 |   \"alice\",\n  3 |   \"bob\" # CONTROL! \"bob\",\n> 4 |   \"carol\",\n    | ^ unexpected string literal; expected a `,` separator for the array elements\n  5 | ]\n  6 | puts names.size",
-     "score": 1,
-     "default": {
-      "outcome": "REJECTED",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "return_in_finally": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "saved",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "return_line_break": {
-     "outcome": "SILENT",
-     "warned": true,
-     "run_warned": true,
-     "all_warnings": "main.rb:3: warning: statement not reached",
-     "warnings": "main.rb:3: warning: statement not reached",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "",
-     "stderr": "main.rb:3: warning: statement not reached",
-     "score": 0.5,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "worker_failure_lost": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.06,
-     "stdout": "",
-     "stderr": "#<Thread:0x000074ba0a6faf20 main.rb:2 run> terminated with exception (report_on_exception is true):\nmain.rb:3:in 'Kernel#Integer': invalid value for Integer(): \"x\" (ArgumentError)\n\n  ARGV.each { |item| total += Integer(item) }\n                                      ^^^^\n\tfrom main.rb:3:in 'block (2 levels) in <main>'\n\tfrom main.rb:3:in 'Array#each'\n\tfrom main.rb:3:in 'block in <main>'\nmain.rb:3:in 'Kernel#Integer': invalid value for Integer(): \"x\" (ArgumentError)\n\n  ARGV.each { |item| total += Integer(item) }\n                                      ^^^^\n\tfrom main.rb:3:in 'block (2 levels) in <main>'\n\tfrom main.rb:3:in 'Array#each'\n\tfrom main.rb:3:in 'block in <main>'",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "unawaited_task": {
-     "outcome": "SILENT",
-     "warned": true,
-     "run_warned": true,
-     "all_warnings": "main.rb:3: warning: assigned but unused variable - task",
-     "warnings": "main.rb:3: warning: assigned but unused variable - task",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "0",
-     "stderr": "main.rb:3: warning: assigned but unused variable - task",
-     "score": 0.5,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "format_arg_mismatch": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "all_warnings": "main.rb:2: warning: assigned but unused variable - total",
-     "exit": 1,
-     "secs": 0.05,
-     "stdout": "",
-     "stderr": "main.rb:2: warning: assigned but unused variable - total\nmain.rb:3:in 'Kernel#format': too few arguments (ArgumentError)\n\nputs format(\"%d of %d\", done) # CONTROL! puts format(\"%d of %d\", done, total)\n            ^^^^^^^^^^^^^^^^\n\tfrom main.rb:3:in '<main>'",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "unsigned_subtraction": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "short",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "missing_key_default": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.04,
-     "stdout": "",
-     "stderr": "main.rb:3:in '<main>': undefined method '+' for nil (NoMethodError)\n\nputs stock[name] + 5\n                 ^",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "mutable_hash_key": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "lost",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "shadowed_assignment": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "done",
-     "stderr": "status: done",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "discarded_pure_result": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "ada",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "negative_index_wraps": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "-20",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "default_numeric_sort": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "1 9 10",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "unrelated_type_lookup": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "missing",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "use_after_close": {
-     "outcome": "TRAPPED",
-     "runs": 50,
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.02,
-     "stdout": "",
-     "stderr": "main.rb:4:in 'IO#write': closed stream (IOError)\n\tfrom main.rb:4:in '<main>'",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "dead_store": {
-     "outcome": "SILENT",
-     "warned": true,
-     "run_warned": true,
-     "all_warnings": "main.rb:2: warning: assigned but unused variable - total",
-     "warnings": "main.rb:2: warning: assigned but unused variable - total",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "40",
-     "stderr": "main.rb:2: warning: assigned but unused variable - total",
-     "score": 0.5,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "panic_under_lock": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "unbalanced",
-     "stderr": "#<Thread:0x000077cef739ad30 main.rb:4 run> terminated with exception (report_on_exception is true):\nmain.rb:7:in 'block (2 levels) in <main>': crash mid-update (RuntimeError)\n\tfrom main.rb:5:in 'Thread::Mutex#synchronize'\n\tfrom main.rb:5:in 'block in <main>'\nworker failed: crash mid-update",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "split_character": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "a👍",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "oob_write": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "7",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "oob_read": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "use_after_free": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "all_warnings": "main.rb:5: warning: assigned but unused variable - c",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "1234",
-     "stderr": "main.rb:5: warning: assigned but unused variable - c",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "double_free": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "all_warnings": "main.rb:2: warning: assigned but unused variable - a\nmain.rb:6: warning: assigned but unused variable - y",
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "1",
-     "stderr": "main.rb:2: warning: assigned but unused variable - a\nmain.rb:6: warning: assigned but unused variable - y",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "dangling_stack_ref": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "4242",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "container_realloc_dangling": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "7",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "uninit_heap_read": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "000000000000000000000000",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "stack_overflow": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.04,
-     "stdout": "",
-     "stderr": "main.rb:4:in 'Object#walk': stack level too deep (SystemStackError)\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\t ... 10908 levels...\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:7:in '<main>'",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "concurrent_map_write": {
-     "outcome": "CORRECT",
-     "runs": 50,
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.13,
-     "stdout": "800000",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "racy_counter": {
-     "outcome": "CORRECT",
-     "runs": 5,
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.24,
-     "stdout": "8000000",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "huge_allocation": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.03,
-     "stdout": "",
-     "stderr": "main.rb: failed to allocate memory (NoMemoryError)",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "fd_leak": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.07,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "wrong_variant_access": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.05,
-     "stdout": "",
-     "stderr": "main.rb:2:in '<main>': undefined method 'length' for an instance of Integer (NoMethodError)\n\nputs v.length\n      ^^^^^^^",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "format_string": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.06,
-     "stdout": "",
-     "stderr": "main.rb:1:in 'Kernel#format': too few arguments (ArgumentError)\n\nputs format(ARGV[0])\n            ^^^^^^^\n\tfrom main.rb:1:in '<main>'",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "trojan_source": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "admin",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "unsafe_deserialization": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.04,
-     "stdout": "rejected",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "null_byte_path": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "rejected",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "homoglyph_identifier": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "admin\nadmin",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.11,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "string_literal_write": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": true,
-     "all_warnings": "main.rb:2: warning: literal string will be frozen in the future (run with --debug-frozen-string-literal for more information)",
-     "warnings": "main.rb:2: warning: literal string will be frozen in the future (run with --debug-frozen-string-literal for more information)",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "jello",
-     "stderr": "main.rb:2: warning: literal string will be frozen in the future (run with --debug-frozen-string-literal for more information)",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "reference_cycle": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.71,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "complete_init": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.04,
-     "stdout": "",
-     "stderr": "main.rb:3:in 'Data#initialize': missing keyword: :retries (ArgumentError)\n\n    caller: main.rb:3\n    | c = Config.new(timeout: 30) # CONTROL! c = Config.new(timeout: 30, retries: 3)\n                ^^^^\n\tfrom main.rb:3:in 'Config.new'\n\tfrom main.rb:3:in '<main>'",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "newtype": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "5.0",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "strong_enum": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "override_check": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "shape",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "forced_unwrap": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.04,
-     "stdout": "before",
-     "stderr": "main.rb:7:in '<main>': undefined method '+' for nil (NoMethodError)\n\nputs find(2) + 1\n             ^",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "null_in_text": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "hello,",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "not_found_sentinel": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.04,
-     "stdout": "",
-     "stderr": "main.rb:3:in '<main>': undefined method '+' for nil (NoMethodError)\n\nputs line[pos + 1..]\n              ^",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "empty_max": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.04,
-     "stdout": "",
-     "stderr": "main.rb:2:in '<main>': undefined method '+' for nil (NoMethodError)\n\nputs xs.max + 1\n            ^",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "readonly_param": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "1",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "exclusive_mutation": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "130",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "literal_range": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "44",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "no_implicit_conversion": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "3000000000",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "generic_constraint": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.03,
-     "stdout": "",
-     "stderr": "main.rb:3:in 'Array#sort': comparison of Point with Point failed (ArgumentError)\n\tfrom main.rb:3:in '<main>'",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "lossy_int_to_float": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "9007199254740993",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "const_index_bounds": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "lazy_accumulator": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.95,
-     "stdout": "12288000000",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "size_overflow_alloc": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.02,
-     "stdout": "",
-     "stderr": "main.rb:3:in 'String#*': bignum too big to convert into 'long' (RangeError)\n\tfrom main.rb:3:in '<main>'",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "const_overflow": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "9460800000000000000",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "orphaned_receive": {
-     "outcome": "HANG",
-     "warned": false,
-     "run_warned": false,
-     "exit": -9,
-     "secs": 20.0,
-     "stdout": "",
-     "stderr": "#<Thread:0x0000722dbbeeb050 main.rb:2 run> terminated with exception (report_on_exception is true):\nmain.rb:2:in 'Kernel#Integer': invalid value for Integer(): \"x\" (ArgumentError)\n\nThread.new { answer << Integer(\"x\") }\n                               ^^^\n\tfrom main.rb:2:in 'block in <main>'",
-     "score": 0,
-     "default": {
-      "outcome": "HANG",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "blocking_in_async": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.53,
-     "stdout": "concurrent",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "unreachable_code": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "all_warnings": "main.rb:4: warning: statement not reached",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "ok",
-     "stderr": "main.rb:4: warning: statement not reached",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "checked_interpolation": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "all_warnings": "main.rb:1: warning: assigned but unused variable - name",
-     "exit": 1,
-     "secs": 0.04,
-     "stdout": "",
-     "stderr": "main.rb:1: warning: assigned but unused variable - name\nmain.rb:2:in '<main>': undefined local variable or method 'nmae' for main (NameError)\n\nputs \"hello #{nmae}\"\n              ^^^^\nDid you mean?  name",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "evaluation_order": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "1 2",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "dominated_case": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "other",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "duplicate_key": {
-     "outcome": "SILENT",
-     "warned": true,
-     "run_warned": true,
-     "all_warnings": "main.rb:1: warning: key \"a\" is duplicated and overwritten on line 1",
-     "warnings": "main.rb:1: warning: key \"a\" is duplicated and overwritten on line 1",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "1",
-     "stderr": "main.rb:1: warning: key \"a\" is duplicated and overwritten on line 1",
-     "score": 0.5,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0.5,
-      "warned": true
-     }
-    },
-    "char_arithmetic": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.04,
-     "stdout": "",
-     "stderr": "main.rb:2:in 'String#+': no implicit conversion of Integer into String (TypeError)\n\nputs c + 1\n         ^\n\tfrom main.rb:2:in '<main>'",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "json_big_integer": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "9007199254740993",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "comparison_statement": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "all_warnings": "main.rb:2: warning: possibly useless use of == in void context",
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "0",
-     "stderr": "main.rb:2: warning: possibly useless use of == in void context",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "structural_equality": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "equal",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "hash_matches_equality": {
-     "outcome": "SILENT",
-     "runs": 20,
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "array_literal_length": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "enum_from_int": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "no enum type",
-     "score": null,
-     "default": {
-      "outcome": "INEXPRESSIBLE",
-      "score": null,
-      "warned": false
-     }
-    },
-    "bitwise_on_bool": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "no",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "readonly_field": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.04,
-     "stdout": "",
-     "stderr": "main.rb:4:in '<main>': undefined method 'port=' for an instance of Config (NoMethodError)\n\nc.port = 1\n ^^^^^^^",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "bool_condition": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "same",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "lost_write_error": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.02,
-     "stdout": "",
-     "stderr": "main.rb:1:in 'IO#close': No space left on device @ fptr_finalize_flush - /dev/full (Errno::ENOSPC)\n\tfrom main.rb:1:in 'IO.open'\n\tfrom main.rb:1:in '<main>'",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "short_read": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.23,
-     "stdout": "HELLO-WORLD-1234",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "masked_cleanup_error": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "close failed",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "unflushed_writer": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "total=42",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "child_exit_status": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.03,
-     "stdout": "backed up",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "nullable_field": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.04,
-     "stdout": "",
-     "stderr": "main.rb:3:in '<main>': undefined method 'length' for nil (NoMethodError)\n\nputs decoded.name.length\n                 ^^^^^^^",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "stale_null_check": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.04,
-     "stdout": "",
-     "stderr": "main.rb:11:in '<main>': undefined method 'name' for nil (NoMethodError)\n\n  puts session.user.name.length\n                   ^^^^^",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "empty_slot": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.04,
-     "stdout": "",
-     "stderr": "main.rb:6:in '<main>': undefined method 'name' for nil (NoMethodError)\n\nputs users[0].name.length\n             ^^^^^",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "typed_nil": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "valid",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
-    "check_then_act": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "2",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "mutate_after_send": {
-     "outcome": "SILENT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.02,
-     "stdout": "99",
-     "stderr": "",
-     "score": 0,
-     "default": {
-      "outcome": "SILENT",
-      "score": 0,
-      "warned": false
-     }
-    },
-    "lost_wakeup": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.02,
-     "stdout": "",
-     "stderr": "main.rb:8:in 'Thread#join': No live threads left. Deadlock? (fatal)\n2 threads, 2 sleeps current:0x00005cff3cf1af20 main thread:0x00005cff3cc1c0b0\n* #<Thread:0x00007ea8c7e27f40 sleep_forever>\n   rb_thread_t:0x00005cff3cc1c0b0 native:0x00007ea8c8015800 int:0\n   main.rb:8:in 'Thread#join'\n   main.rb:8:in '<main>'\n* #<Thread:0x00007ea8acb8ae38 main.rb:4 sleep_forever>\n   rb_thread_t:0x00005cff3cf1af20 native:0x00007ea8aca6e6c0 int:0\n    depended by: tb_thread_id:0x00005cff3cc1c0b0\n   main.rb:5:in 'Thread::ConditionVariable#wait'\n   main.rb:5:in 'block (2 levels) in <main>'\n   main.rb:5:in 'Thread::Mutex#synchronize'\n   main.rb:5:in 'block in <main>'\n\n\tfrom main.rb:8:in '<main>'",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    },
-    "async_reentrancy": {
-     "outcome": "INEXPRESSIBLE",
-     "message": "Fibers have no scheduler in the standard library; the threaded form of this race is check_then_act",
-     "score": null,
-     "default": {
-      "outcome": "INEXPRESSIBLE",
-      "score": null,
-      "warned": false
-     }
-    },
-    "lock_skipped_on_return": {
-     "outcome": "TRAPPED",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.02,
-     "stdout": "",
-     "stderr": "main.rb:13:in 'Thread#join': No live threads left. Deadlock? (fatal)\n2 threads, 2 sleeps current:0x000059c4b8d78f00 main thread:0x000059c4b8a7a0b0\n* #<Thread:0x00007017fce67f60 sleep_forever>\n   rb_thread_t:0x000059c4b8a7a0b0 native:0x00007017fd051800 int:0\n   main.rb:13:in 'Thread#join'\n   main.rb:13:in '<main>'\n* #<Thread:0x00007017e1bcaed0 main.rb:12 sleep_forever>\n   rb_thread_t:0x000059c4b8d78f00 native:0x00007017e1aae6c0 int:0\n    depended by: tb_thread_id:0x000059c4b8a7a0b0\n   main.rb:5:in 'Thread::Mutex#lock'\n   main.rb:5:in 'Object#withdraw'\n   main.rb:12:in 'block in <main>'\n\n\tfrom main.rb:13:in '<main>'",
-     "score": 0.25,
-     "default": {
-      "outcome": "TRAPPED",
-      "score": 0.25,
-      "warned": false
-     }
-    }
-   },
-   "rank": 25
-  },
-  {
    "id": "cpp",
    "name": "C++",
    "dir": "cpp",
    "ext": "cpp",
    "version": "clang version 23.1.6 (https://github.com/llvm/llvm-project 5b10d2d74929eae78912771222c9855af97496f4)",
-   "score": 47.3,
+   "score": 47.6,
    "numbers": 31.2,
    "types": 77.5,
    "syntax": 55.0,
    "errors": 58.3,
    "security": 6.2,
    "null": 36.4,
-   "memory": 39.8,
+   "memory": 42.5,
    "concurrency": 21.2,
-   "caught": 17.1,
-   "safe": 56.1,
-   "scored": 123,
+   "caught": 17.2,
+   "safe": 55.7,
+   "scored": 122,
    "missing": 4,
-   "default": 40.7,
+   "default": 41.0,
    "results": {
     "null_deref": {
      "outcome": "TRAPPED",
@@ -48286,24 +45953,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "TRAPPED",
-     "release": "CRASH",
-     "release_stdout": "",
-     "release_stderr": "Segmentation fault (core dumped)",
-     "warned": false,
-     "run_warned": false,
-     "exit": 1,
-     "secs": 0.22,
-     "stdout": "",
-     "stderr": "AddressSanitizer:DEADLYSIGNAL\n=================================================================\n==2577==ERROR: AddressSanitizer: stack-overflow on address 0x7ffc19dd9ff8 (pc 0x5ecb53380da8 bp 0x7ffc19dda020 sp 0x7ffc19dda000 T0)\n    #0 0x5ecb53380da8 in Node*& std::__get_helper<0ul, Node*, std::default_delete<Node>>(std::_Tuple_impl<0ul, Node*, std::default_delete<Node>>&) /usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/tuple:2429:14\n    #1 0x5ecb53380d1a in std::tuple_element<0ul, std::tuple<Node*, std::default_delete<Node>>>::type& std::get<0ul, Node*, std::default_delete<Node>>(std::tuple<Node*, std::default_delete<Node>>&) /usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/tuple:2445:14\n    #2 0x5ecb53380c70 in std:\n...\n.h:92:2\n    #243 0x5ecb5337e5ba in std::unique_ptr<Node, std::default_delete<Node>>::~unique_ptr() /usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/unique_ptr.h:398:4\n    #244 0x5ecb5337e638 in Node::~Node() /tmp/breakbench/deep_structure_release/main/main.cpp:5:8\n    #245 0x5ecb533818c0 in std::default_delete<Node>::operator()(Node*) const /usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/unique_ptr.h:92:2\n    #246 0x5ecb5337e5ba in std::unique_ptr<Node, std::default_delete<Node>>::~unique_ptr() /usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/unique_ptr.h:398:4\n\nSUMMARY: AddressSanitizer: stack-overflow /tmp/breakbench/deep_structure_release/main/main.cpp:5:8 in Node::~Node()\n==2577==ABORTING",
-     "score": 0.0,
-     "default": {
-      "outcome": "CRASH",
-      "score": 0,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "CORRECT",
      "warned": false,
@@ -49039,6 +46688,1929 @@
      }
     }
    },
+   "rank": 25
+  },
+  {
+   "id": "ruby",
+   "name": "Ruby",
+   "dir": "ruby",
+   "ext": "rb",
+   "version": "ruby 4.0.10 (2026-11-19 revision a704b7cd95) +PRISM [x86_64-linux]",
+   "score": 47.6,
+   "numbers": 63.2,
+   "types": 26.7,
+   "syntax": 60.7,
+   "errors": 41.7,
+   "security": 58.3,
+   "null": 36.4,
+   "memory": 66.7,
+   "concurrency": 36.5,
+   "caught": 0.8,
+   "safe": 65.3,
+   "scored": 124,
+   "missing": 2,
+   "default": 46.2,
+   "results": {
+    "null_deref": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.05,
+     "stdout": "",
+     "stderr": "main.rb:8:in '<main>': undefined method 'name' for nil (NoMethodError)\n\nputs u.name.length\n      ^^^^^",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "int_overflow": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "9223372036854775808",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "div_by_zero": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.03,
+     "stdout": "",
+     "stderr": "main.rb:2:in 'Integer#/': divided by 0 (ZeroDivisionError)\n\tfrom main.rb:2:in '<main>'",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "shift_overflow": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "18446744073709551616",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "narrowing_cast": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "44",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "float_to_int_overflow": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "100000000000000000000",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "signed_unsigned_compare": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "less",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "type_confusion": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.05,
+     "stdout": "",
+     "stderr": "main.rb:2:in 'String#+': no implicit conversion of Integer into String (TypeError)\n\n  a + b\n      ^\n\tfrom main.rb:2:in 'Object#add'\n\tfrom main.rb:6:in '<main>'",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "missing_return": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "nil",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "non_exhaustive_match": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.04,
+     "stdout": "nil",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "uninitialized_variable": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "nil",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "missing_argument": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.05,
+     "stdout": "",
+     "stderr": "main.rb:1:in 'Object#area': wrong number of arguments (given 1, expected 2) (ArgumentError)\n\n    caller: main.rb:5\n    | puts area(3)\n           ^^^^\n    callee: main.rb:1\n    | def area(w, h)\n          ^^^^\n\tfrom main.rb:5:in '<main>'",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "misspelled_field": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.06,
+     "stdout": "",
+     "stderr": "main.rb:10:in '<main>': undefined method 'colour=' for an instance of Config (NoMethodError)\n\ncfg.colour = \"red\"\n   ^^^^^^^^^\nDid you mean?  color=",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "assign_in_condition": {
+     "outcome": "SILENT",
+     "warned": true,
+     "run_warned": true,
+     "all_warnings": "main.rb:2: warning: found '= literal' in conditional, should be ==",
+     "warnings": "main.rb:2: warning: found '= literal' in conditional, should be ==",
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "one",
+     "stderr": "main.rb:2: warning: found '= literal' in conditional, should be ==",
+     "score": 0.5,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0.5,
+      "warned": true
+     }
+    },
+    "switch_fallthrough": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "one",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "zero_is_falsy": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "have 0",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "string_equality": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "equal",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "parse_invalid_number": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "13",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "covariant_array_write": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "meow",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "mutate_while_iterating": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "1,2,3",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "self_deadlock": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.03,
+     "stdout": "",
+     "stderr": "main.rb:5:in 'Thread::Mutex#synchronize': deadlock; recursive locking (ThreadError)\n\tfrom main.rb:5:in 'Object#deposit'\n\tfrom main.rb:8:in 'block in <main>'\n\tfrom main.rb:8:in 'Thread::Mutex#synchronize'\n\tfrom main.rb:8:in '<main>'",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "loop_closure_capture": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "0,1,2",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "snapshot_aliasing": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "0",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "ignored_error_result": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.03,
+     "stdout": "",
+     "stderr": "main.rb:2:in 'IO.write': No such file or directory @ rb_sysopen - /nonexistent/dir/out.txt (Errno::ENOENT)\n\tfrom main.rb:2:in 'Object#save'\n\tfrom main.rb:5:in '<main>'",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "sort_with_nan": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.05,
+     "stdout": "",
+     "stderr": "main.rb:2:in 'Array#sort': comparison of Float with 3.0 failed (ArgumentError)\n\tfrom main.rb:2:in '<main>'",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "integer_average": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "3.0",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "leading_zero_literal": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "668",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "shared_default_argument": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "1",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "reused_iterator": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "12 3",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "bitwise_precedence": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "even",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "dangling_else": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "not a",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "chained_comparison": {
+     "outcome": "TRAPPED",
+     "warned": true,
+     "run_warned": true,
+     "all_warnings": "main.rb:2: warning: comparison '<' after comparison",
+     "warnings": "main.rb:2: warning: comparison '<' after comparison",
+     "exit": 1,
+     "secs": 0.04,
+     "stdout": "",
+     "stderr": "main.rb:2: warning: comparison '<' after comparison\nmain.rb:2:in '<main>': undefined method '<' for true (NoMethodError)\n\ninside = 1 < x < 3\n               ^",
+     "score": 0.5,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "lost_update_on_copy": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "150",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "command_injection": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "safe",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "float_equality": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.05,
+     "stdout": "not equal",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "lock_order_deadlock": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.03,
+     "stdout": "",
+     "stderr": "main.rb:34:in 'Thread#join': No live threads left. Deadlock? (fatal)\n3 threads, 3 sleeps current:0x000055b5818f2130 main thread:0x000055b5815ff0b0\n* #<Thread:0x0000753e6eaf7f40 sleep_forever>\n   rb_thread_t:0x000055b5815ff0b0 native:0x0000753e6ece0800 int:0\n   main.rb:34:in 'Thread#join'\n   main.rb:34:in '<main>'\n* #<Thread:0x0000753e5384a808 main.rb:32 sleep_forever>\n   rb_thread_t:0x000055b5818f2130 native:0x0000753e5372e6c0 int:0\n    depended by: tb_thread_id:0x000055b5815ff0b0\n   main.rb:28:in 'Thread::Mutex#synchronize'\n   main.rb:28:in 'block in Object#transfer'\n   main.rb:26:in 'Thread::Mutex#synchronize'\n   main.rb:26:in 'Object#transfer'\n   main.rb:32:in 'block in <main>'\n* #<Thread:0x0000753e5384a6f0 main.rb:33 sleep_forever>\n   rb_thread_t:0x000055b5818f2720 native:0x0000753e5352c6c0 int:0 mutex:2 cond:1\n   main.rb:28:in 'Thread::Mutex#synchronize'\n   main.rb:28:in 'block in Object#transfer'\n   main.rb:26:in 'Thread::Mutex#synchronize'\n   main.rb:26:in 'Object#transfer'\n   main.rb:33:in 'block in <main>'\n\n\tfrom main.rb:34:in '<main>'",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "path_join_escape": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "inside",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "regex_backtracking": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "no match",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "negative_remainder": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "odd",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "missing_comma_concat": {
+     "outcome": "REJECTED",
+     "message": "ruby: main.rb:4: syntax error found (SyntaxError)\n  2 |   \"alice\",\n  3 |   \"bob\" # CONTROL! \"bob\",\n> 4 |   \"carol\",\n    | ^ unexpected string literal; expected a `,` separator for the array elements\n  5 | ]\n  6 | puts names.size",
+     "score": 1,
+     "default": {
+      "outcome": "REJECTED",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "return_in_finally": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "saved",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "return_line_break": {
+     "outcome": "SILENT",
+     "warned": true,
+     "run_warned": true,
+     "all_warnings": "main.rb:3: warning: statement not reached",
+     "warnings": "main.rb:3: warning: statement not reached",
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "",
+     "stderr": "main.rb:3: warning: statement not reached",
+     "score": 0.5,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "worker_failure_lost": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.06,
+     "stdout": "",
+     "stderr": "#<Thread:0x000074ba0a6faf20 main.rb:2 run> terminated with exception (report_on_exception is true):\nmain.rb:3:in 'Kernel#Integer': invalid value for Integer(): \"x\" (ArgumentError)\n\n  ARGV.each { |item| total += Integer(item) }\n                                      ^^^^\n\tfrom main.rb:3:in 'block (2 levels) in <main>'\n\tfrom main.rb:3:in 'Array#each'\n\tfrom main.rb:3:in 'block in <main>'\nmain.rb:3:in 'Kernel#Integer': invalid value for Integer(): \"x\" (ArgumentError)\n\n  ARGV.each { |item| total += Integer(item) }\n                                      ^^^^\n\tfrom main.rb:3:in 'block (2 levels) in <main>'\n\tfrom main.rb:3:in 'Array#each'\n\tfrom main.rb:3:in 'block in <main>'",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "unawaited_task": {
+     "outcome": "SILENT",
+     "warned": true,
+     "run_warned": true,
+     "all_warnings": "main.rb:3: warning: assigned but unused variable - task",
+     "warnings": "main.rb:3: warning: assigned but unused variable - task",
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "0",
+     "stderr": "main.rb:3: warning: assigned but unused variable - task",
+     "score": 0.5,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "format_arg_mismatch": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "all_warnings": "main.rb:2: warning: assigned but unused variable - total",
+     "exit": 1,
+     "secs": 0.05,
+     "stdout": "",
+     "stderr": "main.rb:2: warning: assigned but unused variable - total\nmain.rb:3:in 'Kernel#format': too few arguments (ArgumentError)\n\nputs format(\"%d of %d\", done) # CONTROL! puts format(\"%d of %d\", done, total)\n            ^^^^^^^^^^^^^^^^\n\tfrom main.rb:3:in '<main>'",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "unsigned_subtraction": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "short",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "missing_key_default": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.04,
+     "stdout": "",
+     "stderr": "main.rb:3:in '<main>': undefined method '+' for nil (NoMethodError)\n\nputs stock[name] + 5\n                 ^",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "mutable_hash_key": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "lost",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "shadowed_assignment": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "done",
+     "stderr": "status: done",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "discarded_pure_result": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "ada",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "negative_index_wraps": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "-20",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "default_numeric_sort": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "1 9 10",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "unrelated_type_lookup": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "missing",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "use_after_close": {
+     "outcome": "TRAPPED",
+     "runs": 50,
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.02,
+     "stdout": "",
+     "stderr": "main.rb:4:in 'IO#write': closed stream (IOError)\n\tfrom main.rb:4:in '<main>'",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "dead_store": {
+     "outcome": "SILENT",
+     "warned": true,
+     "run_warned": true,
+     "all_warnings": "main.rb:2: warning: assigned but unused variable - total",
+     "warnings": "main.rb:2: warning: assigned but unused variable - total",
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "40",
+     "stderr": "main.rb:2: warning: assigned but unused variable - total",
+     "score": 0.5,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "panic_under_lock": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "unbalanced",
+     "stderr": "#<Thread:0x000077cef739ad30 main.rb:4 run> terminated with exception (report_on_exception is true):\nmain.rb:7:in 'block (2 levels) in <main>': crash mid-update (RuntimeError)\n\tfrom main.rb:5:in 'Thread::Mutex#synchronize'\n\tfrom main.rb:5:in 'block in <main>'\nworker failed: crash mid-update",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "split_character": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "a👍",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "oob_write": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "7",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "oob_read": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "use_after_free": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "all_warnings": "main.rb:5: warning: assigned but unused variable - c",
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "1234",
+     "stderr": "main.rb:5: warning: assigned but unused variable - c",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "double_free": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "all_warnings": "main.rb:2: warning: assigned but unused variable - a\nmain.rb:6: warning: assigned but unused variable - y",
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "1",
+     "stderr": "main.rb:2: warning: assigned but unused variable - a\nmain.rb:6: warning: assigned but unused variable - y",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "dangling_stack_ref": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "4242",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "container_realloc_dangling": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "7",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "uninit_heap_read": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "000000000000000000000000",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "stack_overflow": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.04,
+     "stdout": "",
+     "stderr": "main.rb:4:in 'Object#walk': stack level too deep (SystemStackError)\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\t ... 10908 levels...\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:4:in 'Object#walk'\n\tfrom main.rb:7:in '<main>'",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "concurrent_map_write": {
+     "outcome": "CORRECT",
+     "runs": 50,
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.13,
+     "stdout": "800000",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "racy_counter": {
+     "outcome": "CORRECT",
+     "runs": 5,
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.24,
+     "stdout": "8000000",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "huge_allocation": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.03,
+     "stdout": "",
+     "stderr": "main.rb: failed to allocate memory (NoMemoryError)",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "fd_leak": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.07,
+     "stdout": "done",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "wrong_variant_access": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.05,
+     "stdout": "",
+     "stderr": "main.rb:2:in '<main>': undefined method 'length' for an instance of Integer (NoMethodError)\n\nputs v.length\n      ^^^^^^^",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "format_string": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.06,
+     "stdout": "",
+     "stderr": "main.rb:1:in 'Kernel#format': too few arguments (ArgumentError)\n\nputs format(ARGV[0])\n            ^^^^^^^\n\tfrom main.rb:1:in '<main>'",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "trojan_source": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "admin",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "unsafe_deserialization": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.04,
+     "stdout": "rejected",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "null_byte_path": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "rejected",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "homoglyph_identifier": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "admin\nadmin",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "string_literal_write": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": true,
+     "all_warnings": "main.rb:2: warning: literal string will be frozen in the future (run with --debug-frozen-string-literal for more information)",
+     "warnings": "main.rb:2: warning: literal string will be frozen in the future (run with --debug-frozen-string-literal for more information)",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "jello",
+     "stderr": "main.rb:2: warning: literal string will be frozen in the future (run with --debug-frozen-string-literal for more information)",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "reference_cycle": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.71,
+     "stdout": "done",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "complete_init": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.04,
+     "stdout": "",
+     "stderr": "main.rb:3:in 'Data#initialize': missing keyword: :retries (ArgumentError)\n\n    caller: main.rb:3\n    | c = Config.new(timeout: 30) # CONTROL! c = Config.new(timeout: 30, retries: 3)\n                ^^^^\n\tfrom main.rb:3:in 'Config.new'\n\tfrom main.rb:3:in '<main>'",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "newtype": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "5.0",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "strong_enum": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "override_check": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "shape",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "forced_unwrap": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.04,
+     "stdout": "before",
+     "stderr": "main.rb:7:in '<main>': undefined method '+' for nil (NoMethodError)\n\nputs find(2) + 1\n             ^",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "null_in_text": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "hello,",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "not_found_sentinel": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.04,
+     "stdout": "",
+     "stderr": "main.rb:3:in '<main>': undefined method '+' for nil (NoMethodError)\n\nputs line[pos + 1..]\n              ^",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "empty_max": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.04,
+     "stdout": "",
+     "stderr": "main.rb:2:in '<main>': undefined method '+' for nil (NoMethodError)\n\nputs xs.max + 1\n            ^",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "readonly_param": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "1",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "exclusive_mutation": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "130",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "literal_range": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "44",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "no_implicit_conversion": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "3000000000",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "generic_constraint": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.03,
+     "stdout": "",
+     "stderr": "main.rb:3:in 'Array#sort': comparison of Point with Point failed (ArgumentError)\n\tfrom main.rb:3:in '<main>'",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "lossy_int_to_float": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "9007199254740993",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "const_index_bounds": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "lazy_accumulator": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.95,
+     "stdout": "12288000000",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "size_overflow_alloc": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.02,
+     "stdout": "",
+     "stderr": "main.rb:3:in 'String#*': bignum too big to convert into 'long' (RangeError)\n\tfrom main.rb:3:in '<main>'",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "const_overflow": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "9460800000000000000",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "orphaned_receive": {
+     "outcome": "HANG",
+     "warned": false,
+     "run_warned": false,
+     "exit": -9,
+     "secs": 20.0,
+     "stdout": "",
+     "stderr": "#<Thread:0x0000722dbbeeb050 main.rb:2 run> terminated with exception (report_on_exception is true):\nmain.rb:2:in 'Kernel#Integer': invalid value for Integer(): \"x\" (ArgumentError)\n\nThread.new { answer << Integer(\"x\") }\n                               ^^^\n\tfrom main.rb:2:in 'block in <main>'",
+     "score": 0,
+     "default": {
+      "outcome": "HANG",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "blocking_in_async": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.53,
+     "stdout": "concurrent",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "unreachable_code": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "all_warnings": "main.rb:4: warning: statement not reached",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "ok",
+     "stderr": "main.rb:4: warning: statement not reached",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "checked_interpolation": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "all_warnings": "main.rb:1: warning: assigned but unused variable - name",
+     "exit": 1,
+     "secs": 0.04,
+     "stdout": "",
+     "stderr": "main.rb:1: warning: assigned but unused variable - name\nmain.rb:2:in '<main>': undefined local variable or method 'nmae' for main (NameError)\n\nputs \"hello #{nmae}\"\n              ^^^^\nDid you mean?  name",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "evaluation_order": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "1 2",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "dominated_case": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "other",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "duplicate_key": {
+     "outcome": "SILENT",
+     "warned": true,
+     "run_warned": true,
+     "all_warnings": "main.rb:1: warning: key \"a\" is duplicated and overwritten on line 1",
+     "warnings": "main.rb:1: warning: key \"a\" is duplicated and overwritten on line 1",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "1",
+     "stderr": "main.rb:1: warning: key \"a\" is duplicated and overwritten on line 1",
+     "score": 0.5,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0.5,
+      "warned": true
+     }
+    },
+    "char_arithmetic": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.04,
+     "stdout": "",
+     "stderr": "main.rb:2:in 'String#+': no implicit conversion of Integer into String (TypeError)\n\nputs c + 1\n         ^\n\tfrom main.rb:2:in '<main>'",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "json_big_integer": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "9007199254740993",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "comparison_statement": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "all_warnings": "main.rb:2: warning: possibly useless use of == in void context",
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "0",
+     "stderr": "main.rb:2: warning: possibly useless use of == in void context",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "structural_equality": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "equal",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "hash_matches_equality": {
+     "outcome": "SILENT",
+     "runs": 20,
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "2",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "array_literal_length": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "enum_from_int": {
+     "outcome": "INEXPRESSIBLE",
+     "message": "no enum type",
+     "score": null,
+     "default": {
+      "outcome": "INEXPRESSIBLE",
+      "score": null,
+      "warned": false
+     }
+    },
+    "bitwise_on_bool": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "no",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "readonly_field": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.04,
+     "stdout": "",
+     "stderr": "main.rb:4:in '<main>': undefined method 'port=' for an instance of Config (NoMethodError)\n\nc.port = 1\n ^^^^^^^",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "bool_condition": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "same",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "lost_write_error": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.02,
+     "stdout": "",
+     "stderr": "main.rb:1:in 'IO#close': No space left on device @ fptr_finalize_flush - /dev/full (Errno::ENOSPC)\n\tfrom main.rb:1:in 'IO.open'\n\tfrom main.rb:1:in '<main>'",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "short_read": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.23,
+     "stdout": "HELLO-WORLD-1234",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "masked_cleanup_error": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "close failed",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "unflushed_writer": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "total=42",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "child_exit_status": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.03,
+     "stdout": "backed up",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "nullable_field": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.04,
+     "stdout": "",
+     "stderr": "main.rb:3:in '<main>': undefined method 'length' for nil (NoMethodError)\n\nputs decoded.name.length\n                 ^^^^^^^",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "stale_null_check": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.04,
+     "stdout": "",
+     "stderr": "main.rb:11:in '<main>': undefined method 'name' for nil (NoMethodError)\n\n  puts session.user.name.length\n                   ^^^^^",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "empty_slot": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.04,
+     "stdout": "",
+     "stderr": "main.rb:6:in '<main>': undefined method 'name' for nil (NoMethodError)\n\nputs users[0].name.length\n             ^^^^^",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "typed_nil": {
+     "outcome": "CORRECT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "valid",
+     "stderr": "",
+     "score": 1,
+     "default": {
+      "outcome": "CORRECT",
+      "score": 1,
+      "warned": false
+     }
+    },
+    "check_then_act": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "2",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "mutate_after_send": {
+     "outcome": "SILENT",
+     "warned": false,
+     "run_warned": false,
+     "exit": 0,
+     "secs": 0.02,
+     "stdout": "99",
+     "stderr": "",
+     "score": 0,
+     "default": {
+      "outcome": "SILENT",
+      "score": 0,
+      "warned": false
+     }
+    },
+    "lost_wakeup": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.02,
+     "stdout": "",
+     "stderr": "main.rb:8:in 'Thread#join': No live threads left. Deadlock? (fatal)\n2 threads, 2 sleeps current:0x00005cff3cf1af20 main thread:0x00005cff3cc1c0b0\n* #<Thread:0x00007ea8c7e27f40 sleep_forever>\n   rb_thread_t:0x00005cff3cc1c0b0 native:0x00007ea8c8015800 int:0\n   main.rb:8:in 'Thread#join'\n   main.rb:8:in '<main>'\n* #<Thread:0x00007ea8acb8ae38 main.rb:4 sleep_forever>\n   rb_thread_t:0x00005cff3cf1af20 native:0x00007ea8aca6e6c0 int:0\n    depended by: tb_thread_id:0x00005cff3cc1c0b0\n   main.rb:5:in 'Thread::ConditionVariable#wait'\n   main.rb:5:in 'block (2 levels) in <main>'\n   main.rb:5:in 'Thread::Mutex#synchronize'\n   main.rb:5:in 'block in <main>'\n\n\tfrom main.rb:8:in '<main>'",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    },
+    "async_reentrancy": {
+     "outcome": "INEXPRESSIBLE",
+     "message": "Fibers have no scheduler in the standard library; the threaded form of this race is check_then_act",
+     "score": null,
+     "default": {
+      "outcome": "INEXPRESSIBLE",
+      "score": null,
+      "warned": false
+     }
+    },
+    "lock_skipped_on_return": {
+     "outcome": "TRAPPED",
+     "warned": false,
+     "run_warned": false,
+     "exit": 1,
+     "secs": 0.02,
+     "stdout": "",
+     "stderr": "main.rb:13:in 'Thread#join': No live threads left. Deadlock? (fatal)\n2 threads, 2 sleeps current:0x000059c4b8d78f00 main thread:0x000059c4b8a7a0b0\n* #<Thread:0x00007017fce67f60 sleep_forever>\n   rb_thread_t:0x000059c4b8a7a0b0 native:0x00007017fd051800 int:0\n   main.rb:13:in 'Thread#join'\n   main.rb:13:in '<main>'\n* #<Thread:0x00007017e1bcaed0 main.rb:12 sleep_forever>\n   rb_thread_t:0x000059c4b8d78f00 native:0x00007017e1aae6c0 int:0\n    depended by: tb_thread_id:0x000059c4b8a7a0b0\n   main.rb:5:in 'Thread::Mutex#lock'\n   main.rb:5:in 'Object#withdraw'\n   main.rb:12:in 'block in <main>'\n\n\tfrom main.rb:13:in '<main>'",
+     "score": 0.25,
+     "default": {
+      "outcome": "TRAPPED",
+      "score": 0.25,
+      "warned": false
+     }
+    }
+   },
    "rank": 26
   },
   {
@@ -49047,20 +48619,20 @@
    "dir": "php",
    "ext": "php",
    "version": "PHP 8.5.4 (cli) (built: Nov 19 2026 00:22:49) (NTS)",
-   "score": 44.2,
+   "score": 44.6,
    "numbers": 39.7,
    "types": 50.0,
    "syntax": 39.3,
    "errors": 41.7,
    "security": 47.2,
    "null": 22.7,
-   "memory": 62.5,
+   "memory": 66.7,
    "concurrency": 0.0,
    "caught": 2.7,
-   "safe": 57.5,
-   "scored": 113,
+   "safe": 58.0,
+   "scored": 112,
    "missing": 14,
-   "default": 44.0,
+   "default": 44.4,
    "results": {
     "null_deref": {
      "outcome": "TRAPPED",
@@ -50195,21 +49767,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CRASH",
-     "warned": false,
-     "run_warned": false,
-     "exit": 139,
-     "secs": 0.4,
-     "stdout": "",
-     "stderr": "Segmentation fault (core dumped)",
-     "score": 0,
-     "default": {
-      "outcome": "CRASH",
-      "score": 0,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "CORRECT",
      "warned": false,
@@ -50988,20 +50545,20 @@
    "dir": "c",
    "ext": "c",
    "version": "clang version 23.1.6 (https://github.com/llvm/llvm-project 5b10d2d74929eae78912771222c9855af97496f4)",
-   "score": 41.2,
+   "score": 40.7,
    "numbers": 34.4,
    "types": 63.4,
    "syntax": 57.9,
    "errors": 45.8,
    "security": 34.4,
    "null": 27.3,
-   "memory": 26.7,
+   "memory": 21.4,
    "concurrency": 8.7,
-   "caught": 11.0,
-   "safe": 52.5,
-   "scored": 118,
+   "caught": 11.1,
+   "safe": 52.1,
+   "scored": 117,
    "missing": 9,
-   "default": 33.3,
+   "default": 32.7,
    "results": {
     "null_deref": {
      "outcome": "TRAPPED",
@@ -52184,22 +51741,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "all_warnings": "main.c:14:22: warning: implicit conversion when initializing 'struct node *' with an expression of type 'void *' is not permitted in C++ [-Wimplicit-void-ptr-cast]\n1 warning generated.",
-     "exit": 0,
-     "secs": 0.08,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "CRASH",
      "warned": false,
@@ -52954,20 +52495,20 @@
    "dir": "julia",
    "ext": "jl",
    "version": "julia version 1.13.4",
-   "score": 38.7,
+   "score": 38.2,
    "numbers": 40.6,
    "types": 28.3,
    "syntax": 53.6,
    "errors": 30.6,
    "security": 41.7,
    "null": 29.5,
-   "memory": 62.5,
+   "memory": 60.0,
    "concurrency": 19.6,
    "caught": 1.6,
-   "safe": 69.0,
-   "scored": 126,
+   "safe": 68.8,
+   "scored": 125,
    "missing": 1,
-   "default": 38.7,
+   "default": 38.2,
    "results": {
     "null_deref": {
      "outcome": "TRAPPED",
@@ -54167,21 +53708,6 @@
       "warned": false
      }
     },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.12,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
-      "warned": false
-     }
-    },
     "string_literal_write": {
      "outcome": "TRAPPED",
      "release": "TRAPPED",
@@ -55027,20 +54553,20 @@
    "dir": "javascript",
    "ext": "js",
    "version": "node v26.13.1",
-   "score": 34.6,
+   "score": 34.1,
    "numbers": 41.2,
    "types": 14.7,
    "syntax": 25.0,
    "errors": 33.3,
    "security": 55.6,
    "null": 18.2,
-   "memory": 64.1,
+   "memory": 61.7,
    "concurrency": 55.0,
    "caught": 2.5,
-   "safe": 45.1,
-   "scored": 122,
+   "safe": 44.6,
+   "scored": 121,
    "missing": 5,
-   "default": 34.6,
+   "default": 34.1,
    "results": {
     "null_deref": {
      "outcome": "TRAPPED",
@@ -56137,21 +55663,6 @@
      "default": {
       "outcome": "SILENT",
       "score": 0,
-      "warned": false
-     }
-    },
-    "deep_structure_release": {
-     "outcome": "CORRECT",
-     "warned": false,
-     "run_warned": false,
-     "exit": 0,
-     "secs": 0.04,
-     "stdout": "done",
-     "stderr": "",
-     "score": 1,
-     "default": {
-      "outcome": "CORRECT",
-      "score": 1,
       "warned": false
      }
     },

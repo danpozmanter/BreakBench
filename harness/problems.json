@@ -10,6 +10,7 @@
       "CRASH": 0,
       "HANG": 0,
       "LEAK": 0,
+      "ICE": 0,
       "WARNED": 0.5,
       "RUN_WARNED": 0.25,
       "SAFE_BY_DESIGN": 1,
@@ -25,6 +26,7 @@
       "CRASH": 0,
       "HANG": 0,
       "LEAK": 0,
+      "ICE": 0,
       "WARNED": 0.5,
       "RUN_WARNED": 0.25,
       "SAFE_BY_DESIGN": 1,
@@ -56,24 +58,9 @@
       "CRASH": 0,
       "HANG": 0,
       "LEAK": 0,
+      "ICE": 0,
       "WARNED": 0.5,
       "RUN_WARNED": 0.25,
-      "SAFE_BY_DESIGN": 1,
-      "UNFIXABLE": 0
-    },
-    "valid": {
-      "REJECTED": 0,
-      "CORRECT": 1,
-      "TRAPPED": 0,
-      "DEBUG_TRAPPED": 0.0,
-      "SILENT": 0,
-      "CORRUPT": 0,
-      "CRASH": 0,
-      "HANG": 0,
-      "LEAK": 0,
-      "ICE": 0,
-      "WARNED": 0,
-      "RUN_WARNED": 0,
       "SAFE_BY_DESIGN": 1,
       "UNFIXABLE": 0
     }
@@ -996,18 +983,6 @@
       "scenario": "is_admin(user) grants admin only to root. A second function whose name looks identical, but spells its a with the Cyrillic letter U+0430, always grants it. The program checks root with is_admin and guest with the look-alike, and prints admin or guest for each.",
       "best": "admin then guest, a refusal of the look-alike name, or a warning that two names are confusable. admin twice shows the guest check called a function the reader cannot tell apart from the real one.",
       "warn": "confusabl|homoglyph|look(s)? alike|mixed.script|non-?ascii|uncommon (unicode )?codepoint|cyrillic"
-    },
-    {
-      "category": "memory",
-      "id": "deep_structure_release",
-      "kind": "valid",
-      "args": [
-        "1000000"
-      ],
-      "expect": "^done$",
-      "title": "Freeing a long linked list",
-      "scenario": "The program builds a linked list of 1,000,000 nodes, each owning the next, then frees it the language's usual way (dropping it, freeing it in a loop, or leaving it to the collector) and prints \"done\".",
-      "best": "\"done\". This program has no bug; a runtime that frees the chain by recursion and overflows the stack fails."
     },
     {
       "id": "string_literal_write",

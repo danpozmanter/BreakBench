@@ -1,7 +1,7 @@
 {
  "lang": "gossamer",
  "mode": "strict",
- "version": "gos 0.84.3",
+ "version": "gos 0.84.4",
  "results": {
   "null_deref": {
    "outcome": "REJECTED",
@@ -475,7 +475,7 @@
    "run_warned": false,
    "all_warnings": "warning[GL0055]: the tail value of `post` is discarded; it declares no return type --> /tmp/breakbench/panic_under_lock/main/main.gos:8:5 = note: lint: undeclared_return_value\nlint: 1 warning(s), 0 error(s)\nwarning[GL0055]: the tail value of `post` is discarded; it declares no return type --> main.gos:8:5 = note: lint: undeclared_return_value",
    "exit": 0,
-   "secs": 0.0,
+   "secs": 0.01,
    "stdout": "unbalanced",
    "stderr": "worker failed"
   },
@@ -639,16 +639,6 @@
    "stdout": "admin\nadmin",
    "stderr": ""
   },
-  "deep_structure_release": {
-   "outcome": "CORRECT",
-   "warned": false,
-   "run_warned": false,
-   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:17:13 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
-   "exit": 0,
-   "secs": 0.03,
-   "stdout": "done",
-   "stderr": ""
-  },
   "string_literal_write": {
    "outcome": "REJECTED",
    "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GT0130]: a `String` cannot be written by index\n  --> main.gos:3:5\n     3 |     greeting[0] = 'j' // CONTROL! greeting = \"jello\"\n       |     ^^^^^^^^^^^\n  = help: build the new text: `greeting = greeting.replacen(old, new, 1)`, or edit a `Vec<char>` and join it back: `let mut cs: Vec<char> = greeting.chars().collect()`, then `greeting = cs.map(|c| c.to_string()).join(\"\")`\n\nerror: 1 front-end error(s); refusing to build"
@@ -659,7 +649,7 @@
    "run_warned": false,
    "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:13:13 = note: lint: unwrap_used\nlint: 1 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.31,
+   "secs": 0.29,
    "stdout": "done",
    "stderr": ""
   },
@@ -751,7 +741,7 @@
    "run_warned": false,
    "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:17 = note: lint: unwrap_used\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:5:22 = note: lint: unwrap_used\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:8:23 = note: lint: unwrap_used\nlint: 3 warning(s), 0 error(s)",
    "exit": 0,
-   "secs": 0.64,
+   "secs": 0.58,
    "stdout": "12288000000",
    "stderr": ""
   },
@@ -801,7 +791,7 @@
   },
   "checked_interpolation": {
    "outcome": "REJECTED",
-   "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GR0001]: cannot find `nmae` in this scope\n  --> main.gos:4:22\n     4 |     println(f\"hello {nmae}\") // BREAK!\n       |                      ^^^^\n  = suggestion: did you mean `name`?\n\nerror: 1 front-end error(s); refusing to build"
+   "message": "lint: 0 warning(s), 0 error(s)\n\n\n\nerror[GR0001]: cannot find `nmae` in this scope\n  --> main.gos:4:22\n     4 |     println(f\"hello {nmae}\") // BREAK!\n       |                      ^^^^\n  = suggestion: did you mean `max`?\n\nerror: 1 front-end error(s); refusing to build"
   },
   "evaluation_order": {
    "outcome": "CORRECT",
@@ -925,7 +915,7 @@
    "outcome": "CORRECT",
    "warned": false,
    "run_warned": false,
-   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:22 = note: lint: unwrap_used\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:5:5 = note: lint: unwrap_used\nlint: 2 warning(s), 0 error(s)",
+   "all_warnings": "warning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:4:41 = note: lint: unwrap_used\nwarning[GL0068]: `.unwrap()` can panic when the value is `None` or `Err` --> main.gos:5:5 = note: lint: unwrap_used\nlint: 2 warning(s), 0 error(s)",
    "exit": 0,
    "secs": 0.0,
    "stdout": "total=42",

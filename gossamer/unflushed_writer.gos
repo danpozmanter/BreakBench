@@ -1,6 +1,6 @@
-use std::fs
+use std::{bufio, fs}
 
 fn main() -> () {
-    let mut report = fs::create("/tmp/bb_report.txt").unwrap()
+    let mut report = bufio::Writer::new(fs::create("/tmp/bb_report.txt").unwrap())
     report.write("total=42\n").unwrap()
 }
