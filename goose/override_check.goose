@@ -1,1 +1,1 @@
-// CANNOT-MAKE: no traits, interfaces or inheritance
+// CANNOT-EXPRESS: no traits, interfaces or inheritance

@@ -1,1 +1,1 @@
-// CANNOT-MAKE: no inheritance or interfaces, so nothing marks a replacement method
+// CANNOT-EXPRESS: no inheritance or interfaces, so no method replaces another

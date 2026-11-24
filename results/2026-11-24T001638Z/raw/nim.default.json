@@ -1,0 +1,1029 @@
+{
+ "lang": "nim",
+ "mode": "default",
+ "version": "Nim Compiler Version 2.4.2 [Linux: amd64]",
+ "results": {
+  "null_deref": {
+   "outcome": "CRASH",
+   "warned": false,
+   "run_warned": false,
+   "exit": 139,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last)\n/tmp/breakbench/null_deref/main/main.nim(10) main\nSIGSEGV: Illegal storage access. (Attempt to read from nil?)\nSegmentation fault (core dumped)"
+  },
+  "int_overflow": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "fatal.nim(62)            sysFatal\nError: unhandled exception: over- or underflow [OverflowDefect]",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/int_overflow/main/main.nim(4) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/system/fatal.nim(62) sysFatal\nError: unhandled exception: over- or underflow [OverflowDefect]"
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "fatal.nim(62)            sysFatal\nError: unhandled exception: division by zero [DivByZeroDefect]",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/div_by_zero/main/main.nim(4) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/system/fatal.nim(62) sysFatal\nError: unhandled exception: division by zero [DivByZeroDefect]"
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/type_confusion/main/main.nim(6, 9) Error: type mismatch\nExpression: add(raw, 3)\n  [1] raw: string\n  [2] 3: int literal(3)\n\nExpected one of (first mismatch at [position]):\n[1] proc add(a, b: int): int\n[1] proc add(x: var string; y: char)\n  expression 'raw' is immutable, not 'var'\n[1] proc add(x: var string; y: cstring)\n  expression 'raw' is immutable, not 'var'\n[1] proc add(x: var string; y: string)\n  expression 'raw' is immutable, not 'var'\n[1] proc add[T](x: var seq[T]; y: openArray[T])\n[1] proc add[T](x: var seq[T]; y: sink T)"
+  },
+  "missing_return": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "\"\"",
+   "stderr": ""
+  },
+  "non_exhaustive_match": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/non_exhaustive_match/main/main.nim(7, 3) Error: not all cases are covered; missing: {Blue}"
+  },
+  "uninitialized_variable": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "missing_argument": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/missing_argument/main/main.nim(3, 10) Error: type mismatch\nExpression: area(3)\n  [1] 3: int literal(3)\n\nExpected one of (first mismatch at [position]):\n[2] proc area(w, h: int): int\n  missing parameter: h"
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/misspelled_field/main/main.nim(5, 4) Error: undeclared field: 'colour' for type main.Config [type declared in /tmp/breakbench/misspelled_field/main/main.nim(1, 6)]"
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/assign_in_condition/main/main.nim(5, 7) Error: expected: ':', but got: '='"
+  },
+  "switch_fallthrough": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/zero_is_falsy/main/main.nim(5, 4) Error: type mismatch: got 'Option[system.int]' for 'qty' but expected 'bool'"
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "strutils.nim(1163)       parseInt\nError: unhandled exception: invalid integer: 12abc [ValueError]",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/parse_invalid_number/main/main.nim(3) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/strutils.nim(1163) parseInt\nError: unhandled exception: invalid integer: 12abc [ValueError]"
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/covariant_array_write/main/main.nim(11, 28) Error: type mismatch: got 'seq[Dog]' for 'dogs' but expected 'seq[Animal]'"
+  },
+  "mutate_while_iterating": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "fatal.nim(62)            sysFatal\nError: unhandled exception: iterators.nim(267, 11) `len(a) == L` the length of the seq changed while iterating over it [AssertionDefect]",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/root/.choosenim/toolchains/nim-2.4.2/lib/system/iterators.nim(267) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/std/assertions.nim(45) failedAssertImpl\n/root/.choosenim/toolchains/nim-2.4.2/lib/std/assertions.nim(40) raiseAssert\n/root/.choosenim/toolchains/nim-2.4.2/lib/system/fatal.nim(62) sysFatal\nError: unhandled exception: /root/.choosenim/toolchains/nim-2.4.2/lib/system/iterators.nim(267, 11) `len(a) == L` the length of the seq changed while iterating over it [AssertionDefect]"
+  },
+  "self_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2,2,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "syncio.nim(883)          writeFile\nError: unhandled exception: cannot open: /nonexistent/dir/out.txt [IOError]",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/ignored_error_result/main/main.nim(4) main\n/tmp/breakbench/ignored_error_result/main/main.nim(2) save\n/root/.choosenim/toolchains/nim-2.4.2/lib/std/syncio.nim(883) writeFile\nError: unhandled exception: cannot open: /nonexistent/dir/out.txt [IOError]"
+  },
+  "sort_with_nan": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3.5",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "12 0",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/bitwise_precedence/main/main.nim(4, 14) Error: type mismatch\nExpression: x and false\n  [1] x: int\n  [2] false: bool\n\nExpected one of (first mismatch at [position]):\n[1] proc `and`(a, b: typedesc): typedesc\n[1] proc `and`(x, y: bool): bool\n[1] proc `and`(x, y: int16): int16\n[1] proc `and`(x, y: int32): int32\n[1] proc `and`(x, y: int8): int8\n[1] proc `and`(x, y: uint): uint\n[1] proc `and`(x, y: uint16): uint16\n[1] proc `and`(x, y: uint32): uint32\n[1] proc `and`(x, y: uint64): uint64\n[1] proc `and`(x, y: uint8): uint8\n[2] proc `and`(x, y: int): int\n[2] proc `and`(x, y: int64): int64"
+  },
+  "dangling_else": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not a",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/chained_comparison/main/main.nim(4, 20) Error: type mismatch\nExpression: 1 < x < 3\n  [1] 1 < x: bool\n  [2] 3: int literal(3)\n\nExpected one of (first mismatch at [position]):\n[1] proc `<`(x, y: char): bool\n[1] proc `<`(x, y: float): bool\n[1] proc `<`(x, y: float32): bool\n[1] proc `<`(x, y: int): bool\n[1] proc `<`(x, y: int16): bool\n[1] proc `<`(x, y: int32): bool\n[1] proc `<`(x, y: int64): bool\n[1] proc `<`(x, y: int8): bool\n[1] proc `<`(x, y: pointer): bool\n[1] proc `<`(x, y: string): bool\n[1] proc `<`(x, y: uint): bool\n[1] proc `<`(x, y: uint16): bool\n[1] proc `<`(x, y: uint32): bool\n[1] proc `<`(x, y: uint64): bool\n[1] proc `<`(x, y: uint8): bool\n[1] proc `<`[Enum: enum](x, y: Enum): bool\n[1] proc `<`[T: tuple](x, y: T): bool\n[1] proc `<`[T](x, y: ptr T): bool\n[1] proc `<`[T](x, y: ref T): bool\n[1] proc `<`[T](x, y: set[T]): bool\n[2] proc `<`(x, y: bool): bool"
+  },
+  "lost_update_on_copy": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/lost_update_on_copy/main/main.nim(6, 16) Error: type mismatch\nExpression: acct.balance += 50\n  [1] acct.balance: int\n  [2] 50: int literal(50)\n\nExpected one of (first mismatch at [position]):\n[1] proc `+=`[T: SomeInteger](x: var T; y: T)\n  expression 'acct.balance' is immutable, not 'var'\n[1] proc `+=`[T: float | float32 | float64](x: var T; y: T)"
+  },
+  "command_injection": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hi\ninjected",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/lock_order_deadlock/main/main.nim(1, 20) Warning: imported and not used: 'os' [UnusedImport]",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "path_join_escape": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "inside",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "match",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/missing_comma_concat/main/main.nim(4, 10) Error: expected: ']', but got: 'carol'"
+  },
+  "return_in_finally": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/return_line_break/main/main.nim(3, 5) Warning: unreachable code after 'return' statement or '{.noReturn.}' proc [UnreachableCode]",
+   "warnings": "/tmp/breakbench/return_line_break/main/main.nim(3, 5) Warning: unreachable code after 'return' statement or '{.noReturn.}' proc [UnreachableCode]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "strutils.nim(1163)       parseInt\nError: unhandled exception: invalid integer: x [ValueError]",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/worker_failure_lost/main/main.nim(7) addAll\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/strutils.nim(1163) parseInt\nError: unhandled exception: invalid integer: x [ValueError]"
+  },
+  "unawaited_task": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/unawaited_task/main/main.nim(7, 15) template/generic instantiation of `async` from here\n/tmp/breakbench/unawaited_task/main/main.nim(9, 7) Error: expression 'save(store)' is of type 'Future[system.void]' and has to be used (or discarded)"
+  },
+  "format_arg_mismatch": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "strutils.nim(2831)       invalidFormatString\nError: unhandled exception: invalid format string: $1 of $2 [ValueError]",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/format_arg_mismatch/main/main.nim(5) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/strutils.nim(2947) %\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/strutils.nim(2859) addf\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/strutils.nim(2831) invalidFormatString\nError: unhandled exception: invalid format string: $1 of $2 [ValueError]"
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "tables.nim(232)          raiseKeyError\nError: unhandled exception: key not found: pear [KeyError]",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/missing_key_default/main/main.nim(5) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/collections/tables.nim(244) []\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/collections/tables.nim(232) raiseKeyError\nError: unhandled exception: key not found: pear [KeyError]"
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pending",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/discarded_pure_result/main/main.nim(4, 5) Error: expression 'toUpperAscii(name)' is of type 'string' and has to be used (or discarded)"
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "fatal.nim(62)            sysFatal\nError: unhandled exception: index -1 not in 0 .. 2 [IndexDefect]",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/negative_index_wraps/main/main.nim(5) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/system/fatal.nim(62) sysFatal\nError: unhandled exception: index -1 not in 0 .. 2 [IndexDefect]"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/unrelated_type_lookup/main/main.nim(5, 12) Error: type mismatch\nExpression: contains(ids, id)\n  [1] ids: seq[int]\n  [2] id: string\n\nExpected one of (first mismatch at [position]):\n[1] func contains(s, sub: string): bool\n[1] func contains(s: string; chars: set[char]): bool\n[1] func contains[T](x: set[T]; y: T): bool\n[1] proc contains[U, V, W](s: HSlice[U, V]; value: W): bool\n[2] proc contains[T](a: openArray[T]; item: T): bool"
+  },
+  "use_after_close": {
+   "outcome": "CRASH",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": 134,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "free(): invalid pointer\nTraceback (most recent call last)\n/tmp/breakbench/use_after_close/main/main.nim(4) main\nSIGABRT: Abnormal termination.\nAborted (core dumped)"
+  },
+  "dead_store": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main.nim(11)             post\nError: unhandled exception: crash mid-update [ValueError]",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/panic_under_lock/main/main.nim(11) post\nError: unhandled exception: crash mid-update [ValueError]"
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "fatal.nim(62)            sysFatal\nError: unhandled exception: index 4 not in 0 .. 3 [IndexDefect]",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/oob_write/main/main.nim(8) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/system/fatal.nim(62) sysFatal\nError: unhandled exception: index 4 not in 0 .. 3 [IndexDefect]"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "fatal.nim(62)            sysFatal\nError: unhandled exception: index 4 not in 0 .. 3 [IndexDefect]",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/oob_read/main/main.nim(8) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/system/fatal.nim(62) sysFatal\nError: unhandled exception: index 4 not in 0 .. 3 [IndexDefect]"
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/dangling_stack_ref/main/main.nim(3, 12) Error: 'local' escapes its stack frame; context: 'local'; see https://nim-lang.github.io/Nim/var_t_return.html"
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "TRAPPED",
+   "release": "CRASH",
+   "release_stdout": "",
+   "release_stderr": "Segmentation fault (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last)\n/tmp/breakbench/stack_overflow/main/main.nim(7) main\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overf\n...\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overflow/main/main.nim(5) walk\n/tmp/breakbench/stack_overflow/main/main.nim walk\nError: call depth limit reached in a debug build (2000 function calls). You can change it with -d:nimCallDepthLimit=<int> but really try to avoid deep recursions instead."
+  },
+  "concurrent_map_write": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/concurrent_map_write/main/main.nim(5, 6) Error: 'writer' is not GC-safe as it accesses 'table' which is a global using GC'ed memory"
+  },
+  "racy_counter": {
+   "outcome": "SILENT",
+   "runs": 5,
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "1183156",
+   "stderr": ""
+  },
+  "huge_allocation": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "out of memory",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "out of memory"
+  },
+  "fd_leak": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "syncio.nim(782)          open\nError: unhandled exception: cannot open: /tmp/bb_fd.txt [IOError]",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/fd_leak/main/main.nim(6) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/std/syncio.nim(782) open\nError: unhandled exception: cannot open: /tmp/bb_fd.txt [IOError]"
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "fatal.nim(62)            sysFatal\nError: unhandled exception: field 'text' is not accessible for type 'Value' using 'kind = vkInt' [FieldDefect]",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/wrong_variant_access/main/main.nim(10) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/system/fatal.nim(62) sysFatal\nError: unhandled exception: field 'text' is not accessible for type 'Value' using 'kind = vkInt' [FieldDefect]"
+  },
+  "format_string": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "%s%s%n{}{0}",
+   "stderr": ""
+  },
+  "trojan_source": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "admin",
+   "stderr": ""
+  },
+  "unsafe_deserialization": {
+   "outcome": "SAFE_BY_DESIGN",
+   "message": "std/marshal and std/json build only the type the program declares"
+  },
+  "null_byte_path": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "secret",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "admin\nadmin",
+   "stderr": ""
+  },
+  "deep_structure_release": {
+   "outcome": "CRASH",
+   "warned": false,
+   "run_warned": false,
+   "exit": 139,
+   "secs": 0.19,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "string_literal_write": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "jello",
+   "stderr": ""
+  },
+  "reference_cycle": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 8.19,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "complete_init": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/complete_init/main/main.nim(6, 21) Error: The Config type requires the following fields to be initialized: retries."
+  },
+  "newtype": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/newtype/main/main.nim(9, 25) Error: type mismatch\nExpression: Meters(2.0) + Seconds(3.0)\n  [1] Meters(2.0): Meters\n  [2] Seconds(3.0): Seconds\n\nExpected one of (first mismatch at [position]):\n[1] func `+`[T](x, y: set[T]): set[T]\n[1] proc `+`(x, y: float): float\n[1] proc `+`(x, y: float32): float32\n[1] proc `+`(x, y: int): int\n[1] proc `+`(x, y: int16): int16\n[1] proc `+`(x, y: int32): int32\n[1] proc `+`(x, y: int64): int64\n[1] proc `+`(x, y: int8): int8\n[1] proc `+`(x, y: uint): uint\n[1] proc `+`(x, y: uint16): uint16\n[1] proc `+`(x, y: uint32): uint32\n[1] proc `+`(x, y: uint64): uint64\n[1] proc `+`(x, y: uint8): uint8\n[1] proc `+`(x: float): float\n[1] proc `+`(x: float32): float32\n[1] proc `+`(x: int): int\n[1] proc `+`(x: int16): int16\n[1] proc `+`(x: int32): int32\n[1] proc `+`(x: int64): int64\n[1] proc `+`(x: int8): int8\n[2] proc `+`(a, b: Meters): Meters"
+  },
+  "strong_enum": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/strong_enum/main/main.nim(11, 10) Error: type mismatch\nExpression: name(7)\n  [1] 7: int literal(7)\n\nExpected one of (first mismatch at [position]):\n[1] proc name(c: Color): string"
+  },
+  "override_check": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/override_check/main/main.nim(6, 8) Warning: use {.base.} for base methods; baseless methods are deprecated [UseBase]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "shape",
+   "stderr": ""
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "before",
+   "release_stderr": "options.nim(203)         get\nError: unhandled exception: Can't obtain a value from a `none` [UnpackDefect]",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "/tmp/breakbench/forced_unwrap/main/main.nim(7) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/options.nim(203) get\nError: unhandled exception: Can't obtain a value from a `none` [UnpackDefect]"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hello, none(string)",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": "/tmp/breakbench/empty_max/main/main.nim(4) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/system/fatal.nim(62) sysFatal\nError: unhandled exception: index out of bounds, the container is empty [IndexDefect]"
+  },
+  "readonly_param": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/readonly_param/main/main.nim(2, 5) Error: 'xs[0]' cannot be assigned to"
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/literal_range/main/main.nim(2, 21) Error: cannot convert 300 to uint8"
+  },
+  "no_implicit_conversion": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/no_implicit_conversion/main/main.nim(3, 20) Error: type mismatch: got 'int64' for 'big' but expected 'int32'"
+  },
+  "generic_constraint": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/generic_constraint/main/main.nim(9, 3) template/generic instantiation of `sort` from here\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/algorithm.nim(423, 15) template/generic instantiation of `cmp` from here\n/root/.choosenim/toolchains/nim-2.4.2/lib/system.nim(898, 8) Error: type mismatch\nExpression: x < y\n  [1] x: Point\n  [2] y: Point\n\nExpected one of (first mismatch at [position]):\n[1] proc `<`(x, y: bool): bool\n[1] proc `<`(x, y: char): bool\n[1] proc `<`(x, y: float): bool\n[1] proc `<`(x, y: float32): bool\n[1] proc `<`(x, y: int): bool\n[1] proc `<`(x, y: int16): bool\n[1] proc `<`(x, y: int32): bool\n[1] proc `<`(x, y: int64): bool\n[1] proc `<`(x, y: int8): bool\n[1] proc `<`(x, y: pointer): bool\n[1] proc `<`(x, y: string): bool\n[1] proc `<`(x, y: uint): bool\n[1] proc `<`(x, y: uint16): bool\n[1] proc `<`(x, y: uint32): bool\n[1] proc `<`(x, y: uint64): bool\n[1] proc `<`(x, y: uint8): bool\n[1] proc `<`[Enum: enum](x, y: Enum): bool\n[1] proc `<`[T: tuple](x, y: T): bool\n[1] proc `<`[T](x, y: ptr T): bool\n[1] proc `<`[T](x, y: ref T): bool\n[1] proc `<`[T](x, y: set[T]): bool"
+  },
+  "lossy_int_to_float": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/lossy_int_to_float/main/main.nim(5, 5) Error: type mismatch\nExpression: show(n)\n  [1] n: int64\n\nExpected one of (first mismatch at [position]):\n[1] proc show(f: float)"
+  },
+  "const_index_bounds": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/const_index_bounds/main/main.nim(3, 12) Error: conversion from int literal(5) to range 0..2(int) is invalid"
+  },
+  "lazy_accumulator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 1.2,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "fatal.nim(62)            sysFatal\nError: unhandled exception: over- or underflow [OverflowDefect]",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/size_overflow_alloc/main/main.nim(4) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/system/fatal.nim(62) sysFatal\nError: unhandled exception: over- or underflow [OverflowDefect]"
+  },
+  "const_overflow": {
+   "outcome": "REJECTED",
+   "message": "stack trace: (most recent call last)\n/tmp/breakbench/const_overflow/main/main.nim(2, 53)\n/tmp/breakbench/const_overflow/main/main.nim(2, 53) Error: over- or underflow"
+  },
+  "orphaned_receive": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "strutils.nim(1163)       parseInt\nError: unhandled exception: invalid integer: x [ValueError]",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/orphaned_receive/main/main.nim(6) worker\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/strutils.nim(1163) parseInt\nError: unhandled exception: invalid integer: x [ValueError]"
+  },
+  "blocking_in_async": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 1.0,
+   "stdout": "serial",
+   "stderr": ""
+  },
+  "unreachable_code": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/unreachable_code/main/main.nim(4, 3) Warning: unreachable code after 'return' statement or '{.noReturn.}' proc [UnreachableCode]",
+   "warnings": "/tmp/breakbench/unreachable_code/main/main.nim(4, 3) Warning: unreachable code after 'return' statement or '{.noReturn.}' proc [UnreachableCode]",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ok",
+   "stderr": ""
+  },
+  "checked_interpolation": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/checked_interpolation/main/main.nim(5, 9) Error: undeclared identifier: 'nmae'\ncandidates (edit distance, scope distance); see '--spellSuggest': \n (2, 5): 'name'\n (2, 7): 'max'"
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/dominated_case/main/main.nim(7, 3) Error: expression expected, but found 'keyword of'"
+  },
+  "duplicate_key": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "char_arithmetic": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/char_arithmetic/main/main.nim(4, 16) Error: type mismatch\nExpression: c + 1\n  [1] c: char\n  [2] 1: int literal(1)\n\nExpected one of (first mismatch at [position]):\n[1] func `+`[T](x, y: set[T]): set[T]\n[1] proc `+`(x, y: float): float\n[1] proc `+`(x, y: float32): float32\n[1] proc `+`(x, y: int): int\n[1] proc `+`(x, y: int16): int16\n[1] proc `+`(x, y: int32): int32\n[1] proc `+`(x, y: int64): int64\n[1] proc `+`(x, y: int8): int8\n[1] proc `+`(x, y: uint): uint\n[1] proc `+`(x, y: uint16): uint16\n[1] proc `+`(x, y: uint32): uint32\n[1] proc `+`(x, y: uint64): uint64\n[1] proc `+`(x, y: uint8): uint8\n[1] proc `+`(x: float): float\n[1] proc `+`(x: float32): float32\n[1] proc `+`(x: int): int\n[1] proc `+`(x: int16): int16\n[1] proc `+`(x: int32): int32\n[1] proc `+`(x: int64): int64\n[1] proc `+`(x: int8): int8"
+  },
+  "json_big_integer": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "9007199254740993",
+   "stderr": ""
+  },
+  "comparison_statement": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/comparison_statement/main/main.nim(3, 7) Error: expression 'count == 5' is of type 'bool' and has to be used (or discarded)"
+  },
+  "structural_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "hash_matches_equality": {
+   "outcome": "SILENT",
+   "runs": 20,
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/array_literal_length/main/main.nim(3, 28) Error: type mismatch: got 'array[0..2, int]' for '[10, 20, 30]' but expected 'array[0..3, int]'"
+  },
+  "enum_from_int": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "before",
+   "release_stderr": "fatal.nim(62)            sysFatal\nError: unhandled exception: value out of range: 7 notin 0 .. 2 [RangeDefect]",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "/tmp/breakbench/enum_from_int/main/main.nim(7) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/system/fatal.nim(62) sysFatal\nError: unhandled exception: value out of range: 7 notin 0 .. 2 [RangeDefect]"
+  },
+  "bitwise_on_bool": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/bitwise_on_bool/main/main.nim(3, 16) Error: type mismatch\nExpression: (0 < len(s)) &\n    (s[0] == 'a')\n  [1] \n0 < len(s): bool\n  [2] s[0] == 'a': bool\n\nExpected one of (first mismatch at [position]):\n[1] proc `&`(x, y: char): string\n[1] proc `&`(x, y: string): string\n[1] proc `&`(x: char; y: string): string\n[1] proc `&`(x: string; y: char): string\n[1] proc `&`[T](x, y: sink seq[T]): seq[T]\n[1] proc `&`[T](x: sink seq[T]; y: sink T): seq[T]\n[2] proc `&`[T](x: sink T; y: sink seq[T]): seq[T]"
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/readonly_field/main/main.nim(5, 2) Error: 'c.port' cannot be assigned to"
+  },
+  "bool_condition": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/bool_condition/main/main.nim(2, 7) Error: type mismatch: got 'int' for 'cmp(\"x\", \"x\")' but expected 'bool'"
+  },
+  "lost_write_error": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "short_read": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/short_read/main/main.nim(5, 19) Error: expression 'readData(outputStream(child), addr(message[0]), 16)' is of type 'int' and has to be used (or discarded)"
+  },
+  "masked_cleanup_error": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "close failed",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "total=42",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/child_exit_status/main/main.nim(3, 8) Error: expression 'execCmd(\"sh -c \\'exit 3\\'\")' is of type 'int' and has to be used (or discarded)"
+  },
+  "nullable_field": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/nullable_field/main/main.nim(7, 18) Error: undeclared field: 'len' for type options.Option [type declared in /root/.choosenim/toolchains/nim-2.4.2/lib/pure/options.nim(91, 3)]"
+  },
+  "stale_null_check": {
+   "outcome": "CRASH",
+   "warned": false,
+   "run_warned": false,
+   "exit": 139,
+   "secs": 0.06,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last)\n/tmp/breakbench/stale_null_check/main/main.nim(13) main\nSIGSEGV: Illegal storage access. (Attempt to read from nil?)\nSegmentation fault (core dumped)"
+  },
+  "empty_slot": {
+   "outcome": "CRASH",
+   "warned": false,
+   "run_warned": false,
+   "exit": 139,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last)\n/tmp/breakbench/empty_slot/main/main.nim(7) main\nSIGSEGV: Illegal storage access. (Attempt to read from nil?)\nSegmentation fault (core dumped)"
+  },
+  "typed_nil": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "check_then_act": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "async_reentrancy": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "-60",
+   "stderr": ""
+  },
+  "lock_skipped_on_return": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  }
+ }
+}

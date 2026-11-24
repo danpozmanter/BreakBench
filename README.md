@@ -4,14 +4,15 @@
 
 BreakBench measures what 30 programming languages do about common bugs. It is inspired by
 [LangArena](https://github.com/kostya/LangArena), which measures speed and efficiency on correct
-programs, and covers LangArena's 27 languages plus OCaml, Haskell and Clojure. Python runs twice:
-as written, and checked by mypy, the way TypeScript checks JavaScript. mypy is the Python project's
-own type checker and a common step in Python release workflows.
+programs, and covers LangArena's 27 languages plus OCaml, Haskell and Clojure. Every program runs
+twice: in the language's strictest mode, which sets the score, and with the bare toolchain, shown
+beside it as Default. Python's strict mode includes mypy, the Python project's own type checker.
 
 "How much does a language help the programmer avoid production bugs?"
 
-A language scores the mean over tests it can attempt, as a percentage. Tests marked N/A are excluded
-from that language's denominator. The size of a language's standard library plays no part.
+A language scores the mean over tests it can attempt, as a percentage. Tests marked N/A need a
+feature the language lacks (a mutex, threads, a JSON parser); they are excluded from that language's
+denominator, not counted against it, and the leaderboard shows their count as Missing features.
 
 Each language runs its latest release, built from LangArena's Dockerfiles or the language's own
 images.
@@ -26,7 +27,7 @@ images.
 
 ## Tests
 
-126 tests in eight categories. Each has a CWE or CERT entry or appears in a language's pitfall list,
+127 tests in eight categories. Each has a CWE or CERT entry or appears in a language's pitfall list,
 reads the same in every language, and covers a mistake no other test covers.
 `harness/problems.json` describes each one.
 
@@ -39,7 +40,7 @@ reads the same in every language, and covers a mistake no other test covers.
 | Security | 9 | Input from outside takes control: command injection, a path that escapes its folder, a NUL byte that cuts a file name short, user text as a format string, an object restored from untrusted bytes, hidden or look-alike characters in source, ... |
 | Null safety | 11 | The program uses a value that may be missing as if it were there: a lookup that found nothing, a search that returned -1, a missing name printed as text, a check a later call undoes, an empty pointer passed on as an error, ... |
 | Memory safety | 16 | The program reads or writes memory it does not own, or keeps memory it dropped: use after free, out-of-bounds writes, records that keep each other alive, a size that overflows before the allocation, a running total that keeps every message alive, ... |
-| Concurrency | 13 | Threads or tasks interfere: a deadlock, a check-then-act race, a balance checked before an await and spent after it, an early return that skips the unlock, a wake-up sent before anyone waits, ... |
+| Concurrency | 14 | Threads or tasks interfere: a counter that loses increments, a deadlock, a check-then-act race, a balance checked before an await and spent after it, an early return that skips the unlock, a wake-up sent before anyone waits, ... |
 
 The site breaks each language's score down by category, and reports the share of tests caught
 before running (refused by the compiler or checker, or prevented by design).
@@ -94,49 +95,52 @@ must run to the end: refusing, stopping or warning about it scores 0.
   line in its place.
 - **N/A and design limits**: `CANNOT-EXPRESS:` cases are excluded from a language's score because
   it cannot construct the error. `CANNOT-MAKE:` means the language or its standard model prevents
-  the error and earns 1. `CANNOT-FIX:` means the error is expressible but cannot be prevented, and
+  the error and earns 1; a missing feature never counts as prevention (no mutex makes the lock tests
+  N/A, not safe). `CANNOT-FIX:` means the error is expressible but cannot be prevented, and
   earns 0. Each marker includes its reason. A missing library call is replaced with what the language
   has when the scenario remains expressible (a loop for the maximum of a list in C).
 - **Score**: the mean over counted tests, excluding N/A cases.
 
 ### Build modes
 
-Each language builds in the strictest stable mode its toolchain offers, at the language version a
-new project gets: the debug build, linters and checkers a team runs while it develops. No
-experimental switches. A program that stops at run time in that build is built again the way the
-language ships, and run again. If the release build runs on past the bug, the stop scores 0.125
-instead of 0.25.
+The score uses each language's strictest stable mode, at the language version a new project gets:
+every compiler check, linter, sanitizer and assertion its standard toolchain ships, the build a
+careful team runs while it develops. No experimental switches. The Default column runs the same
+programs with the bare toolchain and no extra checks, to show what the strict mode adds. A program
+that stops at run time in the strict build is built again the way the language ships, and run
+again. If the release build runs on past the bug, the stop scores 0.125 instead of 0.25.
 
-| Language | Development | Release |
-|---|---|---|
-| C, C++ | `-O0 -g -fsanitize=address,undefined -fno-sanitize-recover=undefined`, LangArena's warnings | `-O2 -D_FORTIFY_SOURCE=3 -fstack-protector-strong -fstack-clash-protection`; C++ adds `-D_GLIBCXX_ASSERTIONS` |
-| D (LDC) | debug, `-fsanitize=address` | `-O -release` |
-| Odin | `-debug -vet -sanitize:address` | `-o:speed` |
-| C3 | `-O0 --sanitize=address` | `-O3` |
-| Rust | debug (overflow checks), clippy | `-O` |
-| Zig | `-O Debug` | `-O ReleaseSafe` |
-| Go | `go vet`, `go build` | same |
-| Swift | `-swift-version 6 -Onone` | `-O` |
-| V | `v vet`, debug build | `-prod` |
-| Nim | debug build | `-d:release` |
-| Crystal | debug build | `--release` |
-| OCaml | dune dev profile (warnings are errors) | same |
-| Haskell | `ghc -Wall -O0` | `-O1` |
-| Clojure | AOT compile, `*warn-on-reflection*` | same |
-| Goose | `goose --debug` | without `--debug`, `cc -O2` |
-| Mojo | `-O0 -D ASSERT=all` | default |
-| Gossamer | `gos lint`, `gos build` | `gos build --release` |
-| C#, F# | Debug, checked arithmetic; C# runs every .NET analyzer | Release, unchecked arithmetic |
-| Java, Kotlin | `-Xlint:all`, `-ea` | without `-ea` |
-| Scala | `-Wall -deprecation -feature -unchecked` and every other stable `-W` warning, `-ea` | without `-ea` |
-| Dart | `dart analyze` with `package:lints/recommended`, `--enable-asserts` | `dart compile exe` |
-| TypeScript | `--strict` and every extra check flag | same |
-| JavaScript | `"use strict"` | same |
-| PHP | `strict_types=1`, `E_ALL`, assertions on | `zend.assertions=-1` |
-| Julia | `--check-bounds=yes` | default bounds checking |
-| Python | `-X dev` | same |
-| Python (mypy) | `mypy --strict`, `--warn-unreachable` and every optional error code, `-X dev` | same |
-| Ruby | `-w` | same |
+| Language | Strict | Default | Release |
+|---|---|---|---|
+| C, C++ | `-Weverything`, `-O0 -g -fsanitize=address,undefined -fno-sanitize-recover=undefined` | `clang -g` | `-O2 -D_FORTIFY_SOURCE=3 -fstack-protector-strong -fstack-clash-protection`; C++ adds `-D_GLIBCXX_ASSERTIONS` |
+| D (LDC) | debug, `-wi`, `-fsanitize=address` | `ldc2 -g` | `-O -release` |
+| Odin | `-debug -vet -vet-cast -vet-nil-deref -vet-uninitialized -vet-using-param -vet-atomic-access -sanitize:address` | `-debug` | `-o:speed` |
+| C3 | `-O0 --validation=strict --sanitize=address` (`obnoxious` rejects C3's own standard library) | `-O0` | `-O3` |
+| Rust | debug (overflow checks), clippy with `-W clippy::pedantic` | `rustc` debug | `-O` |
+| Zig | `-O Debug` | same | `-O ReleaseSafe` |
+| Go | `go vet`, `go build` | `go build` | same |
+| Swift | `-swift-version 6 -strict-memory-safety -Onone` | `-swift-version 6 -Onone` | `-O` |
+| V | `v vet`, debug build | debug build | `-prod` |
+| Nim | debug build | same | `-d:release` |
+| Crystal | debug build | same | `--release` |
+| OCaml | dune dev profile plus `-w +a` (every warning) | dune dev profile | same |
+| Haskell | `ghc -Weverything -O0`, less the warnings about module metadata (Safe Haskell mode, import lists, specialisations) | `ghc -O0` | `-O1` |
+| Clojure | AOT compile, `*warn-on-reflection*` | AOT compile | same |
+| Goose | `goose --debug` | without `--debug` | without `--debug`, `cc -O2` |
+| Mojo | `-O0 -D ASSERT=all` | default | default |
+| Gossamer | `gos lint`, `gos build` | `gos build` | `gos build --release` |
+| C# | Debug, checked arithmetic, `AnalysisMode=All`, warning level 9999, nullable | the `dotnet new console` project | Release, unchecked arithmetic |
+| F# | Debug, `--checked+`, warning level 5, nullness checks, the opt-in warnings | the default project | Release, unchecked arithmetic |
+| Java | `-Xlint:all`, `-ea` | `javac`, `java` | without `-ea` |
+| Kotlin | `-Wextra -progressive`, `-ea` | `kotlinc`, `java` | without `-ea` |
+| Scala | `-Wall -deprecation -feature -unchecked` and every other stable `-W` warning, `-ea` | `scalac`, `java` | without `-ea` |
+| Dart | `dart analyze` with `package:lints/recommended` and strict casts, inference and raw types (analyzer errors fail the build), `--enable-asserts` | `dart compile kernel`, `dart` | `dart compile exe` |
+| TypeScript | `--strict` and every extra check flag | `tsc` (TypeScript 7 turns `--strict` on by default) | same |
+| JavaScript | `"use strict"` | same | same |
+| PHP | `strict_types=1`, `E_ALL` to stderr, assertions on | `php` (programs keep `strict_types=1`) | `zend.assertions=-1` |
+| Julia | `--check-bounds=yes --depwarn=yes --warn-overwrite=yes` | `julia` | default bounds checking |
+| Python | `mypy --strict`, `--warn-unreachable` and every optional error code, `-X dev` | `python3` | same |
+| Ruby | `-w` at check and run | `ruby` | same |
 
 Where two modes conflict, the bench uses the one that catches more: AddressSanitizer over
 ThreadSanitizer, and Go's default runtime over `-race`, which turns off its deadlock detector.
@@ -196,7 +200,7 @@ results in `raw/` and the ranking in `results.json`. Partial runs update the new
   them runs out of memory; an out-of-memory kill or allocation failure there counts as a leak. RSS is recorded neither for scoring nor display.
 - Tests whose outcome can change from run to run run several times and keep the worst outcome,
   stopping early once a run scores 0: `use_after_close` (a write through a freed C `FILE`) and
-  `concurrent_map_write` (an unlocked race) up to fifty times, `hash_matches_equality` (Swift seeds
+  `concurrent_map_write` (an unlocked race) up to fifty times, `racy_counter` five times, `hash_matches_equality` (Swift seeds
   its hash per run, so equal elements meet only sometimes) up to twenty, and the release build of
   `concurrent_map_write` up to 500, since Zig's release build crashes on that race only now and
   then. The lock-order and check-then-act cases use rendezvous points to control their

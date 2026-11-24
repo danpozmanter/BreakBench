@@ -1,2 +1,2 @@
 <?php
-// CANNOT-MAKE: PHP execution has no shared-memory worker threads, so these concurrent map writes cannot race
+// CANNOT-EXPRESS: no threads in the language or its standard library

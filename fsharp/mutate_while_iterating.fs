@@ -1,7 +1,7 @@
+// F#'s default list is immutable: removing items builds a new list.
 [<EntryPoint>]
 let main argv =
-    let xs = ResizeArray [ 1; 2; 2; 3 ]
-    for x in xs do
-        if x = 2 then xs.Remove x |> ignore
+    let xs = [ 1; 2; 2; 3 ]
+    let xs = xs |> List.filter (fun x -> x <> 2)
     printfn "%s" (System.String.Join(",", xs))
     0

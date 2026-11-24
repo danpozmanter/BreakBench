@@ -83,6 +83,7 @@ td.lang a:hover, td.lang a:focus-visible { color: var(--accent); text-decoration
 .bar.c i { background: var(--o-correct); }
 .bar.m i { background: var(--o-rejected); }
 .breakdown { color: var(--muted); text-align: right; font-size: 13px; }
+.dflt { display: block; margin-top: 4px; font-size: 11.5px; color: var(--muted); white-space: normal; }
 th.breakdown { text-align: right; white-space: normal; max-width: 7.5em; vertical-align: bottom; }
 .bar { width: 80px; }
 .num { display: inline-block; min-width: 3.2em; text-align: right; font-weight: 600; }
@@ -167,6 +168,9 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   .docs-table td:nth-child(3)::before { content: "What the docs say"; }
   .docs-table td:nth-child(4)::before { content: "Path used"; }
   .docs-table td:nth-child(5)::before { content: "The first-taught call would fail"; }
+  .modes-table td:nth-child(n+2)::before { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-top: 4px; }
+  .modes-table td:nth-child(2)::before { content: "Strict"; }
+  .modes-table td:nth-child(3)::before { content: "Default"; }
   .paths-table td:nth-child(n+3)::before { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-top: 4px; }
   .paths-table td:nth-child(3)::before { content: "Path used"; }
   .paths-table td:nth-child(4)::before { content: "Why that path"; }
@@ -216,7 +220,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   </div>
 
   <section role="tabpanel" id="leaderboard" aria-labelledby="tab-leaderboard">
-    <p class="muted">The score is the average over counted tests, as a percentage. N/A cases are excluded. The categories break it down. Caught or prevented by design is the share refused or made impossible. Select a heading to sort.</p>
+    <p class="muted">The score is the average over counted tests, as a percentage, with each language in its strictest mode. Default is the same programs built with the bare toolchain, no extra checks. The categories break the score down. Caught or prevented by design is the share refused or made impossible. Missing features counts the tests the language cannot express; they are left out of its average, not counted against it. Select a heading to sort.</p>
     <div class="scroll"><table id="ranking"></table></div>
   </section>
 
@@ -233,12 +237,42 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     <p class="muted">A bug refused before the program runs earns a full point, and a build warning that names it earns half: either can keep the bug out of production. A bug the program only shows while running, by stopping with a clear error or by warning and going on, earns a quarter: a test may catch it, but otherwise it reaches production. A stop that only the debug build makes earns an eighth: the release build that ships runs on past the bug. A wrong answer earns nothing. A warning and a stop never add up; the higher counts. The same holds for every test, compiled or dynamic, logic or memory.</p>
     <p class="muted">Ignoring a result the language marks must-use counts as a refusal.</p>
     <p class="muted">A compile error counts as a refusal only if the same program with the bug removed compiles.</p>
-    <p class="muted">N/A means the language cannot express the error, so that case is excluded from its mean. SAFE_BY_DESIGN means the language or its standard model prevents the error and earns 1 point. UNFIXABLE means the error can be made but the fix cannot be expressed, and earns 0. A missing library call is replaced with what the language has when the scenario remains expressible.</p>
+    <p class="muted">N/A means the language lacks a feature the test needs (a mutex, threads, a JSON parser), so it cannot express the error. The test is left out of its mean, not counted against it, and the leaderboard shows the count as Missing features. Prevented by design means the language has the feature and its design rules the error out; it earns 1 point. UNFIXABLE means the error can be made but the fix cannot be expressed, and earns 0. A missing library call is replaced with what the language has when the scenario remains expressible.</p>
   </section>
 
   <section role="tabpanel" id="notes" aria-labelledby="tab-notes" hidden>
-    <h3>Python and mypy</h3>
-    <p class="muted" id="mypy-note">Python runs twice: as written, and checked by mypy in strict mode. mypy is the Python project's own type checker and a common step in Python release workflows, much as TypeScript checks JavaScript. Without it, Python catches most bugs only while running.</p>
+    <h3>Strict and default builds</h3>
+    <p class="muted" id="mode-note">Every program runs twice. The score uses each language's strictest mode: every compiler check, linter, sanitizer and assertion its standard toolchain ships, the build a careful team runs while it develops. Default is the bare toolchain with no extra checks, the build a new project gets. Python's strict mode includes mypy, the Python project's own type checker, in strict mode.</p>
+    <div class="scroll"><table class="notes-table modes-table"><thead><tr><th>Language</th><th>Strict</th><th>Default</th></tr></thead><tbody>
+      <tr><td>C, C++</td><td><code>-Weverything</code>, AddressSanitizer and UndefinedBehaviorSanitizer</td><td><code>clang -g</code></td></tr>
+      <tr><td>Rust</td><td>clippy with the pedantic group</td><td><code>rustc</code> debug build (overflow checks on)</td></tr>
+      <tr><td>Zig</td><td><code>-O Debug</code></td><td>same; Zig has no extra checks</td></tr>
+      <tr><td>Go</td><td><code>go vet</code></td><td><code>go build</code></td></tr>
+      <tr><td>Swift</td><td>Swift 6 mode, <code>-strict-memory-safety</code></td><td>Swift 6 mode</td></tr>
+      <tr><td>Crystal, Nim</td><td>the default build</td><td>same; no extra checks ship</td></tr>
+      <tr><td>D</td><td><code>-wi</code>, AddressSanitizer</td><td><code>ldc2 -g</code></td></tr>
+      <tr><td>V</td><td><code>v vet</code></td><td><code>v</code></td></tr>
+      <tr><td>Odin</td><td><code>-vet</code> plus the cast, nil-dereference, uninitialized, using-parameter and atomic-access checks, AddressSanitizer</td><td><code>-debug</code></td></tr>
+      <tr><td>C3</td><td><code>--validation=strict</code>, AddressSanitizer (<code>obnoxious</code> rejects C3's own standard library)</td><td><code>c3c compile -O0</code></td></tr>
+      <tr><td>Mojo</td><td><code>-O0 -D ASSERT=all</code></td><td><code>mojo build</code></td></tr>
+      <tr><td>Gossamer</td><td><code>gos lint</code>, <code>gos build</code></td><td><code>gos build</code></td></tr>
+      <tr><td>Goose</td><td><code>--debug</code></td><td>without <code>--debug</code></td></tr>
+      <tr><td>Java</td><td><code>-Xlint:all</code>, <code>-ea</code></td><td><code>javac</code>, <code>java</code></td></tr>
+      <tr><td>Kotlin</td><td><code>-Wextra -progressive</code>, <code>-ea</code></td><td><code>kotlinc</code>, <code>java</code></td></tr>
+      <tr><td>Scala</td><td><code>-Wall</code> and every extra warning flag, <code>-ea</code></td><td><code>scalac</code>, <code>java</code></td></tr>
+      <tr><td>C#</td><td>checked arithmetic, <code>AnalysisMode=All</code>, warning level 9999</td><td>the <code>dotnet new console</code> project (nullable checks on)</td></tr>
+      <tr><td>F#</td><td><code>--checked+</code>, warning level 5, nullness checks, the opt-in warnings</td><td>the default project</td></tr>
+      <tr><td>Dart</td><td><code>dart analyze</code> with the recommended lints and strict casts, inference and raw types; <code>--enable-asserts</code></td><td><code>dart compile kernel</code>, <code>dart</code></td></tr>
+      <tr><td>TypeScript</td><td><code>--strict</code> and every extra check flag</td><td><code>tsc</code> (TypeScript 7 turns <code>--strict</code> on by default)</td></tr>
+      <tr><td>JavaScript</td><td><code>"use strict"</code></td><td>same; each program opts in itself</td></tr>
+      <tr><td>Python</td><td>mypy <code>--strict</code> with every optional error code, <code>-X dev</code></td><td><code>python3</code></td></tr>
+      <tr><td>Ruby</td><td><code>-w</code> at check and run</td><td><code>ruby</code></td></tr>
+      <tr><td>PHP</td><td><code>E_ALL</code> to stderr, assertions on</td><td><code>php</code>; each program keeps <code>strict_types=1</code></td></tr>
+      <tr><td>Julia</td><td><code>--check-bounds=yes --depwarn=yes --warn-overwrite=yes</code></td><td><code>julia</code></td></tr>
+      <tr><td>OCaml</td><td>dune's development profile plus every warning (<code>-w +a</code>)</td><td>dune's development profile</td></tr>
+      <tr><td>Haskell</td><td><code>-Weverything</code>, less the warnings about module metadata (Safe Haskell mode, import lists, specialisations)</td><td><code>ghc</code></td></tr>
+      <tr><td>Clojure</td><td><code>*warn-on-reflection*</code></td><td><code>clojure</code></td></tr>
+    </tbody></table></div>
     <h3>Release builds</h3>
     <p class="muted">Each language builds in its strictest development mode. A program that stops at run time there is built again the way the language ships and run again; if that build runs on past the bug, the stop scores 0.125 instead of 0.25.</p>
     <div class="scroll"><table class="notes-table"><thead><tr><th>Language</th><th>Release build</th><th>What changes</th></tr></thead><tbody>
@@ -262,7 +296,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
       <tr><td>F#</td><td>Release, without <code>--checked+</code></td><td>Overflow wraps silently.</td></tr>
       <tr><td>Dart</td><td><code>dart compile exe</code></td><td>Assertions are off.</td></tr>
       <tr><td>TypeScript, JavaScript</td><td>same build</td><td>Same behavior.</td></tr>
-      <tr><td>Python, Python (mypy)</td><td>same run</td><td>Same behavior; <code>-X dev</code> only adds warnings.</td></tr>
+      <tr><td>Python</td><td>same run</td><td>Same behavior; <code>-X dev</code> only adds warnings.</td></tr>
       <tr><td>Ruby</td><td>same run</td><td>Same behavior; <code>-w</code> only adds warnings.</td></tr>
       <tr><td>PHP</td><td><code>zend.assertions=-1</code></td><td>Assertions are off.</td></tr>
       <tr><td>Julia</td><td>default bounds checking</td><td>Same checks; no program opts out with <code>@inbounds</code>.</td></tr>
@@ -273,12 +307,12 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     <h3>Where the docs point elsewhere</h3>
     <p class="muted">When the documentation for the call a program would use sends that situation to another call, the program follows it. These programs use the path the docs point to. Keeping to the first-taught call would fail each test, for the reason given. Where the docs are silent, the first-taught call stands.</p>
     <div class="scroll"><table class="notes-table docs-table"><thead><tr><th>Language</th><th>Test</th><th>What the docs say</th><th>Path used</th><th>The first-taught call would fail</th></tr></thead><tbody>
-      <tr><td>Python, Python (mypy)</td><td><code>unsafe_deserialization</code></td><td><a href="https://docs.python.org/3/library/pickle.html" target="_blank" rel="noopener"><code>pickle</code>: “json may be more appropriate if you are processing untrusted data”</a></td><td><code>json.loads</code></td><td><code>pickle.loads</code> runs the attacker's restore hook</td></tr>
+      <tr><td>Python</td><td><code>unsafe_deserialization</code></td><td><a href="https://docs.python.org/3/library/pickle.html" target="_blank" rel="noopener"><code>pickle</code>: “json may be more appropriate if you are processing untrusted data”</a></td><td><code>json.loads</code></td><td><code>pickle.loads</code> runs the attacker's restore hook</td></tr>
       <tr><td>Ruby</td><td><code>unsafe_deserialization</code></td><td><a href="https://docs.ruby-lang.org/en/master/Marshal.html" target="_blank" rel="noopener"><code>Marshal</code>: “If you need to deserialize untrusted data, use JSON”</a></td><td><code>JSON.parse</code></td><td><code>Marshal.load</code> runs <code>marshal_load</code></td></tr>
       <tr><td>PHP</td><td><code>unsafe_deserialization</code></td><td><a href="https://www.php.net/manual/en/function.unserialize.php" target="_blank" rel="noopener"><code>unserialize</code>: use JSON via <code>json_decode()</code></a></td><td><code>json_decode</code></td><td><code>unserialize</code> runs <code>__wakeup</code></td></tr>
       <tr><td>Java, Kotlin, Scala</td><td><code>unsafe_deserialization</code></td><td><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/ObjectInputStream.html" target="_blank" rel="noopener"><code>ObjectInputStream</code>: validate untrusted data with serialization filters</a></td><td>An <code>ObjectInputFilter</code> that allows only <code>Session</code></td><td><code>readObject</code> runs the attacker's restore hook</td></tr>
       <tr><td>Clojure</td><td><code>unsafe_deserialization</code></td><td><a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/read-string" target="_blank" rel="noopener"><code>read-string</code>: use <code>clojure.edn</code> for untrusted data</a></td><td><code>clojure.edn/read-string</code></td><td><code>read-string</code> evaluates <code>#=</code> forms</td></tr>
-      <tr><td>Python, Python (mypy)</td><td><code>command_injection</code></td><td><a href="https://docs.python.org/3/library/os.html#os.system" target="_blank" rel="noopener"><code>os.system</code>: the <code>subprocess</code> module is recommended</a></td><td><code>subprocess.run</code> with an argument list</td><td><code>os.system</code> hands the text to a shell, which runs the injected command</td></tr>
+      <tr><td>Python</td><td><code>command_injection</code></td><td><a href="https://docs.python.org/3/library/os.html#os.system" target="_blank" rel="noopener"><code>os.system</code>: the <code>subprocess</code> module is recommended</a></td><td><code>subprocess.run</code> with an argument list</td><td><code>os.system</code> hands the text to a shell, which runs the injected command</td></tr>
       <tr><td>JavaScript, TypeScript</td><td><code>command_injection</code></td><td><a href="https://nodejs.org/api/child_process.html#child_processexeccommand-options-callback" target="_blank" rel="noopener"><code>exec</code>: “Never pass unsanitized user input to this function”</a></td><td><code>execFileSync</code> with an argument list</td><td><code>execSync</code> runs the injected command in a shell</td></tr>
       <tr><td>Ruby</td><td><code>command_injection</code></td><td><a href="https://docs.ruby-lang.org/en/master/security/command_injection_rdoc.html" target="_blank" rel="noopener"><code>system</code>: not to be called with unsanitized commands</a></td><td><code>system</code> with separate arguments</td><td>One-string <code>system</code> runs the injected command in a shell</td></tr>
       <tr><td>V</td><td><code>command_injection, short_read, child_exit_status</code></td><td><a href="https://modules.vlang.io/os.html" target="_blank" rel="noopener"><code>os.execute</code>: deprecated because command strings allow shell injection; use <code>os.exec</code></a></td><td><code>os.exec</code> with an argument list</td><td><code>os.execute</code> runs the injected command in a shell</td></tr>
@@ -290,7 +324,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     <h3>Paths that cost points</h3>
     <p class="muted">Each program takes the path the language's documentation teaches first, unless those docs point elsewhere, or the path the test asks for. Where the same standard library offers a safer call for the same job, the language would score better with it. The link is the documentation for the path used.</p>
     <div class="scroll"><table class="notes-table paths-table"><thead><tr><th>Language</th><th>Test</th><th>Path used</th><th>Why that path</th><th>Path that scores better</th><th>Effect</th></tr></thead><tbody>
-      <tr><td>Python, Python (mypy)</td><td><code>child_exit_status</code></td><td><a href="https://docs.python.org/3/library/subprocess.html#subprocess.run" target="_blank" rel="noopener"><code>subprocess.run</code></a></td><td>Taught first; checking is off by default</td><td><code>check=True</code> raises on failure</td><td>0 → 0.25</td></tr>
+      <tr><td>Python</td><td><code>child_exit_status</code></td><td><a href="https://docs.python.org/3/library/subprocess.html#subprocess.run" target="_blank" rel="noopener"><code>subprocess.run</code></a></td><td>Taught first; checking is off by default</td><td><code>check=True</code> raises on failure</td><td>0 → 0.25</td></tr>
       <tr><td>Ruby</td><td><code>child_exit_status</code></td><td><a href="https://docs.ruby-lang.org/en/master/Kernel.html#method-i-system" target="_blank" rel="noopener"><code>system</code></a></td><td>Taught first; returns false on failure</td><td><code>system(..., exception: true)</code> raises</td><td>0 → 0.25</td></tr>
       <tr><td>Scala</td><td><code>child_exit_status</code></td><td><a href="https://www.scala-lang.org/api/current/scala/sys/process/ProcessBuilder.html" target="_blank" rel="noopener"><code>!</code></a></td><td>Taught first; returns the exit code</td><td><code>!!</code> throws on a non-zero exit</td><td>0 → 0.25</td></tr>
       <tr><td>Go</td><td><code>short_read</code></td><td><a href="https://pkg.go.dev/io#Reader" target="_blank" rel="noopener"><code>Reader.Read</code></a></td><td>The usual read call the test asks for</td><td><code>io.ReadFull</code></td><td>0 → 1</td></tr>
@@ -315,10 +349,10 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     <ul class="notes muted">
       <li>Each program is written the way the language's documentation teaches first, with only the language, its standard library and its project's own libraries and tools.</li>
       <li>Each container gets 3 GB of memory and a 20 s run limit. <code>reference_cycle</code> and <code>lazy_accumulator</code> pass 12 GB through it, so a program that keeps what it drops runs out of memory and counts as a leak.</li>
-      <li>Races use rendezvous points so the same schedule runs every time; <code>use_after_close</code>, <code>concurrent_map_write</code> and <code>hash_matches_equality</code> run several times and keep the worst outcome; the release build of <code>concurrent_map_write</code> runs up to 500 times, since a race it stops most of the time can still crash.</li>
+      <li>Races use rendezvous points so the same schedule runs every time; <code>use_after_close</code>, <code>concurrent_map_write</code>, <code>racy_counter</code> and <code>hash_matches_equality</code> run several times and keep the worst outcome; the release build of <code>concurrent_map_write</code> runs up to 500 times, since a race it stops most of the time can still crash.</li>
       <li>C-family programs keep stale pointers in data structures, and Rust's <code>huge_allocation</code> uses <code>std::hint::black_box</code>, so the optimizer cannot remove the access a real program would make.</li>
       <li><code>async_reentrancy</code> is N/A where the standard library has no asynchronous tasks, since its threaded form is <code>check_then_act</code>. Languages without an early return write <code>lock_skipped_on_return</code> with the unlock after the conditional, so they cannot skip it.</li>
-      <li><code>unsafe_deserialization</code> counts as prevented by design where the standard decoders build only the type the program declares, and is N/A where the standard library has no decoder. <code>short_read</code> uses the language's usual process call, so a language whose usual call returns the whole output reads all of it. <code>unflushed_writer</code> is judged by what the file holds after the program exits.</li>
+      <li><code>unsafe_deserialization</code> counts as prevented by design where the standard decoders build only the type the program declares, and is N/A where the standard library has no decoder. A missing feature is never credited as a design choice: the lock tests are N/A in languages without a mutex, <code>override_check</code> in languages without inheritance, and the thread tests in languages without threads. <code>short_read</code> uses the language's usual process call, so a language whose usual call returns the whole output reads all of it. <code>unflushed_writer</code> is judged by what the file holds after the program exits.</li>
       <li>A compile error counts as a refusal only when the program without the bug compiles. A compiler crash scores 0.</li>
       <li>The README lists every build command and the remaining language quirks.</li>
     </ul>
@@ -385,8 +419,15 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     .forEach(([k, v]) => meta.append(el("span", {}, k + " ", el("b", { text: String(v) }))));
 
   const pct = (v) => v.toFixed(1) + "%";
-  const py = D.languages.find((L) => L.id === "python"), pyMypy = D.languages.find((L) => L.id === "python_mypy");
-  if (py && pyMypy) document.getElementById("mypy-note").append(" Python scores " + pct(py.score) + " as written and " + pct(pyMypy.score) + " checked by mypy: leaving the checker out costs " + (pyMypy.score - py.score).toFixed(1) + " points.");
+  // How much each language's extra checks add over its bare toolchain.
+  const gains = D.languages.filter((L) => L.default != null).map((L) => [L, L.score - L.default]).sort((a, b) => b[1] - a[1]);
+  if (gains.length) {
+    const avg = gains.reduce((n, [, g]) => n + g, 0) / gains.length;
+    const top = gains.filter(([, g]) => g >= 0.05).slice(0, 5).map(([L, g]) => L.name + " +" + g.toFixed(1));
+    const none = gains.filter(([, g]) => Math.abs(g) < 0.05).map(([L]) => L.name);
+    document.getElementById("mode-note").append(" On average the strict build adds " + avg.toFixed(1) + " points. The largest gains: " + top.join(", ") + "." +
+      (none.length ? " No change: " + none.join(", ") + "." : ""));
+  }
   function shortVersion(id, value) {
     const s = (value || "").trim();
     if (id === "gossamer") return "0.84.3";
@@ -401,9 +442,11 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   function renderRanking() {
     const t = document.getElementById("ranking");
     t.replaceChildren();
-    const cols = [["score", "Score", "Mean over every test"],
+    const cols = [["score", "Score", "Mean over every test, strictest mode"],
+      ["default", "Default", "Mean over every test, bare toolchain with no extra checks"],
       ...Object.entries(CAT).map(([c, name]) => [c, name, "Mean over the " + name.toLowerCase() + " tests"]),
-      ["caught", "Caught or impossible by design", "Share refused or prevented by design"]];
+      ["caught", "Caught or impossible by design", "Share refused or prevented by design"],
+      ["missing", "Missing features", "Tests the language cannot express; left out of its average, not counted against it"]];
     const head = el("tr", {}, el("th", { class: "rank", text: "#" }), el("th", { text: "Language" }));
     cols.forEach(([k, label, title], i) => {
       const b = el("button", { type: "button", "aria-pressed": String(sortKey === k), title, text: label + (sortKey === k ? " ↓" : "") });
@@ -412,13 +455,13 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     });
     t.append(el("thead", {}, head));
     const body = el("tbody");
-    const rows = [...visibleLanguages()].sort((a, b) => b[sortKey] - a[sortKey] || a.rank - b.rank);
+    const rows = [...visibleLanguages()].sort((a, b) => (b[sortKey] ?? -1) - (a[sortKey] ?? -1) || a.rank - b.rank);
     rows.forEach((L) => {
       const tr = el("tr", { "data-lang": L.id },
         el("td", { class: "rank", text: String(L.rank) }),
         el("td", { class: "lang" }, L.name, el("span", { class: "ver", title: shortVersion(L.id, L.version), text: shortVersion(L.id, L.version) })),
         el("td", {}, bar(L.score, "")),
-        ...cols.slice(1).map(([k]) => el("td", { class: "breakdown", text: pct(L[k]) })));
+        ...cols.slice(1).map(([k]) => el("td", { class: "breakdown", text: L[k] == null ? "n/a" : k === "missing" ? String(L[k]) : pct(L[k]) })));
       body.append(tr);
     });
     t.append(body);
@@ -539,7 +582,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
       const r = L.results[p.id] || { o: "MISSING", s: 0 };
       tb.append(el("tr", { class: L.id === langId ? "hl" : "" },
         el("td", { class: "lang" }, srcLink(L, p)),
-        el("td", { class: "chipcell" }, chip(r.o)),
+        el("td", { class: "chipcell" }, chip(r.o), r.d ? el("span", { class: "dflt", title: "The same program built with the bare toolchain", text: "Default: " + (NAME[r.d] || r.d) + (r.dw && r.d !== "REJECTED" ? ", warned" : "") + " (" + (r.ds == null ? "N/A" : r.ds) + ")" }) : null),
         el("td", { class: "mono", text: r.s == null ? "N/A" : String(r.s) }),
         el("td", { class: "full", "data-label": "Printed" }, el("pre", { class: "out", text: r.out || "" })),
         el("td", { class: "full", "data-label": "Warning" }, el("pre", { class: "warn", text: r.w || (r.rw ? "The running program warned" : "") })),

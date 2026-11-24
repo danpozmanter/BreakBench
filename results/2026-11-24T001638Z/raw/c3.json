@@ -1,0 +1,1028 @@
+{
+ "lang": "c3",
+ "mode": "strict",
+ "version": "C3 Compiler Version:       0.8.6",
+ "results": {
+  "null_deref": {
+   "outcome": "CRASH",
+   "warned": false,
+   "run_warned": false,
+   "exit": 139,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "ERROR: 'Out of bounds memory access.'\n  in __sigaction (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in std.io.int_from_any (source unavailable) [./main] [inline]\n  in @wrap_bad (/opt/c3/lib/std/io/formatter.c3:305) [./main]\n  in std.io.Formatter.vprintf (/opt/c3/lib/std/io/formatter.c3:305) [./main] [inline]\n  in std.io.printfn (/opt/c3/lib/std/io/io.c3:363) [./main] [inline]\n  in main.main (/tmp/breakbench/null_deref/main/main.c3:18) [./main] [inline]"
+  },
+  "int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "release": "CRASH",
+   "release_stdout": "",
+   "release_stderr": "Floating point exception (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.18,
+   "stdout": "",
+   "stderr": "ERROR: 'Division by zero.'\n  in main.main (/tmp/breakbench/div_by_zero/main/main.c3:6) [./main] [inline]"
+  },
+  "shift_overflow": {
+   "outcome": "TRAPPED",
+   "release": "SILENT",
+   "release_stdout": "1",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.33,
+   "stdout": "",
+   "stderr": "ERROR: 'Shift amount out of range (was 64).'\n  in main.main (/tmp/breakbench/shift_overflow/main/main.c3:7) [./main] [inline]"
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "5: fn int main(String[] args)\n 6: {\n 7:     String raw = args[1];\n 8:     io::printfn(\"%d\", add(raw, 3)); // BREAK!\n                              ^^^\n/tmp/breakbench/type_confusion/main/main.c3:8:24: error: You cannot cast 'String' to 'long'."
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "1: import std::io;\n 2: \n 3: fn String grade(int score)\n              ^^^^^\n/tmp/breakbench/missing_return/main/main.c3:3:11: error: Missing return statement at the end of the function."
+  },
+  "non_exhaustive_match": {
+   "outcome": "REJECTED",
+   "message": "10: fn String name(Color c)\n 11: {\n 12:     String s;\n 13:     switch (c)\n         ^^^^^^\n/tmp/breakbench/non_exhaustive_match/main/main.c3:13:2: error: Enum value BLUE was not handled in the switch - either add it or add 'default'."
+  },
+  "uninitialized_variable": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "missing_argument": {
+   "outcome": "REJECTED",
+   "message": "4: \n 5: fn int main(String[] args)\n 6: {\n 7:     io::printfn(\"%d\", area(3)); // BREAK!\n                               ^\n/tmp/breakbench/missing_argument/main/main.c3:7:25: error: 1 more argument was expected after this one, did you forget it?\n\n 1: import std::io;\n 2: \n 3: fn int area(int w, int h) => w * h;\n           ^^^^\n/tmp/breakbench/missing_argument/main/main.c3:3:8: note: The definition was here."
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "8: fn int main(String[] args)\n  9: {\n 10:     Config cfg = { \"blue\" };\n 11:     cfg.colour = \"red\"; // BREAK!\n         ^^^^^^^^^^\n/tmp/breakbench/misspelled_field/main/main.c3:11:2: error: There is no field or method 'Config.colour'."
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "4: {\n 5:     int x = args[1].to_int()!!;\n 6:     String label = \"not one\";\n 7:     if (x = 1) label = \"one\"; // BREAK!\n            ^^^^^\n/tmp/breakbench/assign_in_condition/main/main.c3:7:6: error: An assignment in a conditional must have an extra parenthesis - did you mean to use '==' instead?"
+  },
+  "switch_fallthrough": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "REJECTED",
+   "message": "4: {\n 5:     int? qty = args[1].to_int();\n 6:     bool present = false;\n 7:     if (qty) present = true; // BREAK!\n            ^^^\n/tmp/breakbench/zero_is_falsy/main/main.c3:7:6: error: The expression may not be an optional, but was 'int?'."
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "ERROR: 'Unexpected fault 'string::MALFORMED_INTEGER' was unwrapped!'\n  in main.main (/tmp/breakbench/parse_invalid_number/release/main.c3:5) [./main]\nIllegal instruction (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.17,
+   "stdout": "",
+   "stderr": "ERROR: 'Unexpected fault 'string::MALFORMED_INTEGER' was unwrapped!'\n  in main.main (/tmp/breakbench/parse_invalid_number/main/main.c3:5) [./main] [inline]"
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "9: fn int main(String[] args)\n 10: {\n 11:     Dog[1] dogs;\n 12:     any[] animals = dogs[..]; // BREAK!\n                         ^^^^^^^^\n/tmp/breakbench/covariant_array_write/main/main.c3:12:18: error: It is not possible to cast 'Dog[]' to 'any[]'."
+  },
+  "mutate_while_iterating": {
+   "outcome": "TRAPPED",
+   "release": "SILENT",
+   "release_stdout": "1,2,3",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "ERROR: '@require \"index < self.size && index >= 0\" violated: 'Access out of bounds'.'\n  in @item_at (/opt/c3/lib/std/collections/list.c3:8) [./main]\n  in main.main (/tmp/breakbench/mutate_while_iterating/main/main.c3:8) [./main] [inline]"
+  },
+  "self_deadlock": {
+   "outcome": "TRAPPED",
+   "release": "HANG",
+   "release_stdout": "",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.19,
+   "stdout": "",
+   "stderr": "ERROR: 'Mutex deadlock'\n  in abort (/opt/c3/lib/std/core/builtin_panic.c3:136) [./main]\n  in std.thread.os.NativeMutex.lock (/opt/c3/lib/std/threads/os/thread_posix.c3:75) [./main] [inline]\n  in lock (/opt/c3/lib/std/threads/thread.c3:49) [./main]\n  in main.deposit (/tmp/breakbench/self_deadlock/main/main.c3:9) [./main] [inline]\n  in main.main (/tmp/breakbench/self_deadlock/main/main.c3:18) [./main] [inline]"
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "REJECTED",
+   "message": "7: \n  8: fn int main(String[] args)\n  9: {\n 10:     save(\"/nonexistent/dir/out.txt\"); // BREAK!\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/tmp/breakbench/ignored_error_result/main/main.c3:10:2: error: The function returns 'void?', which is an optional and must be handled. You can either assign it to a variable, rethrow it using '!', panic with '!!', use if-catch etc. You can also silence the error using a void cast (e.g. '(void)the_call()') to ignore the error."
+  },
+  "sort_with_nan": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "REJECTED",
+   "message": "5:     int[2] values = { 3, 4 };\n 6:     int sum = values[0] + values[1];\n 7:     int count = 2;\n 8:     double avg = sum / count; // BREAK!\n                     ^^^^^^^^^^^\n/tmp/breakbench/integer_average/main/main.c3:8:15: error: This conversion requires an explicit cast to 'double', because the widening of the expression may be done in more than one way."
+  },
+  "leading_zero_literal": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "REJECTED",
+   "message": "6:     bool b = true;\n 7:     String r = \"unset\";\n 8:     if (a) // BREAK!\n 9:         if (b) r = \"both\"; // BREAK!\n            ^^\n/tmp/breakbench/dangling_else/main/main.c3:9:3: error: The 'then' part of a single line if-statement must start on the same line as the 'if' or use '{ }'"
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "3: fn int main(String[] args)\n 4: {\n 5:     int x = args[1].to_int()!!;\n 6:     bool inside = 1 < x < 3; // BREAK!\n                      ^^^^^^^^^\n/tmp/breakbench/chained_comparison/main/main.c3:6:16: error: You need to add explicit parentheses to clarify precedence."
+  },
+  "lost_update_on_copy": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "path_join_escape": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "inside",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no regular expressions in the standard library"
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "return_in_finally": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "ERROR: 'Unexpected fault 'string::MALFORMED_INTEGER' was unwrapped!'\n  in main.add_all (/tmp/breakbench/worker_failure_lost/release/main.c3:9) [./main] [inline]\n  in std.thread.os.callback (source unavailable) [./main] [inline]\n  in pthread_condattr_setpshared (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in __clone (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\nIllegal instruction (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.14,
+   "stdout": "",
+   "stderr": "ERROR: 'Unexpected fault 'string::MALFORMED_INTEGER' was unwrapped!'\n  in main.add_all (/tmp/breakbench/worker_failure_lost/main/main.c3:9) [./main] [inline]\n  in std.thread.os.callback (/opt/c3/lib/std/threads/os/thread_posix.c3:207) [./main] [inline]\n  in asan_thread_start(void*) (/home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_interceptors.cpp:306) [./main] [inline]\n  in pthread_condattr_setpshared (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in __clone (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "REJECTED",
+   "message": "5: {\n 6:     int done = 3;\n 7:     int total = 5;\n 8:     io::printfn(\"%d of %d\", done); // CONTROL! io::printfn(\"%d of %d\", done, total);\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/tmp/breakbench/format_arg_mismatch/main/main.c3:8:2: error: Too few arguments were provided for the formatting string.\n\n 355:  @param [in] format : `The printf-style format string`\n 356:  @return `the number of characters printed`\n 357: *>\n 358: fn sz? printfn(String format, args...) @format(0) @maydiscard\n             ^^^^^^^\n/opt/c3/lib/std/io/io.c3:358:8: note: The definition was here."
+  },
+  "unsigned_subtraction": {
+   "outcome": "REJECTED",
+   "message": "6: {\n 7:     String message = args[1];\n 8:     usz payload = message.len - HEADER; // CONTROL! long payload = (long)message.len - HEADER;\n 9:     if (payload < 0)\n                      ^\n/tmp/breakbench/unsigned_subtraction/main/main.c3:9:16: error: Comparing 'unsigned expression < 0' can never be true, and is only allowed inside of macro expansions."
+  },
+  "missing_key_default": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "ERROR: 'Unexpected fault 'builtin::NOT_FOUND' was unwrapped!'\n  in main.main (/tmp/breakbench/missing_key_default/release/main.c3:11) [./main] [inline]\nIllegal instruction (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "ERROR: 'Unexpected fault 'builtin::NOT_FOUND' was unwrapped!'\n  in main.main (/tmp/breakbench/missing_key_default/main/main.c3:11) [./main] [inline]"
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "REJECTED",
+   "message": "5:     String status = \"pending\";\n 6:     if (args[1] == \"ok\")\n 7:     {\n 8:         String status = \"done\"; // CONTROL! status = \"done\";\n                   ^^^^^^\n/tmp/breakbench/shadowed_assignment/main/main.c3:8:10: error: 'status' would shadow a previous declaration.\n\n 2: \n 3: fn int main(String[] args)\n 4: {\n 5:     String status = \"pending\";\n               ^^^^^^\n/tmp/breakbench/shadowed_assignment/main/main.c3:5:9: note: The previous use of 'status' was here."
+  },
+  "discarded_pure_result": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "release": "SILENT",
+   "release_stdout": "-32930",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.15,
+   "stdout": "",
+   "stderr": "ERROR: 'Negative array indexing (index was -1)'\n  in main.main (/tmp/breakbench/negative_index_wraps/main/main.c3:7) [./main] [inline]"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "4: {\n 5:     int[3] ids = { 10, 20, 30 };\n 6:     String id = args[1];\n 7:     io::printn(array::contains(ids, id) ? \"found\" : \"missing\"); // CONTROL! io::printn(array::contains(ids, id.t ...\n                                        ^~\n/tmp/breakbench/unrelated_type_lookup/main/main.c3:7:34: error: @require \"@typematch(array[0], element)\" violated: 'array and element must have the same type'."
+  },
+  "use_after_close": {
+   "outcome": "TRAPPED",
+   "runs": 50,
+   "release": "CRASH",
+   "release_stdout": "",
+   "release_stderr": "Segmentation fault (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "ERROR: '@require \"self.file != null\" violated: 'File must be initialized'.'\n  in main.main (/tmp/breakbench/use_after_close/main/main.c3:8) [./main] [inline]"
+  },
+  "dead_store": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "ERROR: 'crash mid-update'\n  in abort (/opt/c3/lib/std/core/builtin_panic.c3:136) [./main]\n  in main.post (/tmp/breakbench/panic_under_lock/release/main.c3:13) [./main] [inline]\n  in std.thread.os.callback (source unavailable) [./main] [inline]\n  in pthread_condattr_setpshared (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in __clone (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\nIllegal instruction (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.15,
+   "stdout": "",
+   "stderr": "ERROR: 'crash mid-update'\n  in abort (/opt/c3/lib/std/core/builtin_panic.c3:136) [./main]\n  in main.post (/tmp/breakbench/panic_under_lock/main/main.c3:13) [./main] [inline]\n  in std.thread.os.callback (/opt/c3/lib/std/threads/os/thread_posix.c3:207) [./main] [inline]\n  in asan_thread_start(void*) (/home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_interceptors.cpp:306) [./main] [inline]\n  in pthread_condattr_setpshared (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in __clone (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]"
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "release": "CORRUPT",
+   "release_stdout": "99",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "ERROR: 'Array index out of bounds (array had size 4, index was 4)'\n  in main.main (/tmp/breakbench/oob_write/main/main.c3:13) [./main] [inline]"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "release": "CORRUPT",
+   "release_stdout": "42",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.15,
+   "stdout": "",
+   "stderr": "ERROR: 'Array index out of bounds (array had size 4, index was 4)'\n  in main.main (/tmp/breakbench/oob_read/main/main.c3:13) [./main] [inline]"
+  },
+  "use_after_free": {
+   "outcome": "TRAPPED",
+   "release": "CORRUPT",
+   "release_stdout": "6666",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==4092==ERROR: AddressSanitizer: heap-use-after-free on address 0x6e2d50fe0040 at pc 0x58d976a29aa7 bp 0x7ffdf673a530 sp 0x7ffdf673a528\nREAD of size 8 at 0x6e2d50fe0040 thread T0\n    #0 0x58d976a29aa6 in std.io.int_from_any /opt/c3/lib/std/io/formatter_private.c3:67:16\n    #1 0x58d976a5886b in @wrap_bad /opt/c3/lib/std/io/formatter.c3:305:53\n    #2 0x58d976a5886b in std.io.Formatter.vprintf /opt/c3/lib/std/io/formatter.c3:305:16\n    #3 0x58d976a59338 in std.io.printfn /opt/c3/lib/std/io/io.c3:363:12\n    #4 0x58d976a96434 in main.main /tmp/breakbench/use_after_free/main/main.c3:20:2\n    #5 0x58d976a96e52 in @main_args /opt/c3/lib/std/core/private/main_stub.c3:28:10\n    #6 0x58\n...\n0 fa fa 00 00 00 00 fa fa 00 00 00 00 fa fa\n  0x6e2d50fe0280: 00 00 00 00 fa fa 00 00 00 00 fa fa 00 00 00 00\nShadow byte legend (one shadow byte represents 8 application bytes):\n  Addressable:           00\n  Partially addressable: 01 02 03 04 05 06 07 \n  Heap left redzone:       fa\n  Freed heap region:       fd\n  Stack left redzone:      f1\n  Stack mid redzone:       f2\n  Stack right redzone:     f3\n  Stack after return:      f5\n  Stack use after scope:   f8\n  Global redzone:          f9\n  Global init order:       f6\n  Poisoned by user:        f7\n  Container overflow:      fc\n  Array cookie:            ac\n  Intra object redzone:    bb\n  ASan internal:           fe\n  Left alloca redzone:     ca\n  Right alloca redzone:    cb\n==4092==ABORTING"
+  },
+  "double_free": {
+   "outcome": "TRAPPED",
+   "release": "CRASH",
+   "release_stdout": "",
+   "release_stderr": "free(): double free detected in tcache 2\nAborted (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==4168==ERROR: AddressSanitizer: attempting double-free on 0x71e5cb7e0040 in thread T0:\n    #0 0x5adbb75a88a6 in free /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:51:3\n    #1 0x5adbb7630749 in std.core.mem.allocators.LibcAllocator.release /opt/c3/lib/std/core/allocators/libc_allocator.c3:78:2\n    #2 0x5adbb765a14d in free /opt/c3/lib/std/core/alloc.c3:180:2\n    #3 0x5adbb765a14d in std.core.mem.free /opt/c3/lib/std/core/mem.c3:1271:9\n    #4 0x5adbb7658360 in main.main /tmp/breakbench/double_free/main/main.c3:13:2\n    #5 0x5adbb7658e42 in @main_args /opt/c3/lib/std/core/private/main_stub.c3:28:10\n    #6 0x5adbb7658e42 in main /tmp/brea\n...\n1:18\n    #6 0x5adbb765833e in main.main /tmp/breakbench/double_free/main/main.c3:11:11\n    #7 0x5adbb7658e42 in @main_args /opt/c3/lib/std/core/private/main_stub.c3:28:10\n    #8 0x5adbb7658e42 in main /tmp/breakbench/double_free/main/main.c3:9:8\n    #9 0x75b5cc56c600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #10 0x75b5cc56c717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #11 0x5adbb74fa634 in _start (/tmp/breakbench/double_free/main/main+0x93634)\n\nSUMMARY: AddressSanitizer: double-free /opt/c3/lib/std/core/allocators/libc_allocator.c3:78:2 in std.core.mem.allocators.LibcAllocator.release\n==4168==ABORTING"
+  },
+  "dangling_stack_ref": {
+   "outcome": "REJECTED",
+   "message": "3: fn int* make()\n 4: {\n 5:     int local = 4242;\n 6:     return &local; // BREAK!\n               ^^^^^^\n/tmp/breakbench/dangling_stack_ref/main/main.c3:6:9: error: A pointer to a local variable will be invalid once the function returns. Allocate the data on the heap or temp memory to return a pointer."
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "bebebebebebebebebebebebe",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "CRASH",
+   "warned": false,
+   "run_warned": false,
+   "exit": 139,
+   "secs": 4.47,
+   "stdout": "",
+   "stderr": "ERROR: 'Out of bounds memory access.'\n  in __sigaction (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in main.walk (/tmp/breakbench/stack_overflow/main/main.c3:6) [./main] [inline]\n  ... (249 repetitions of main.walk)\n  in main.walk (/tmp/breakbench/stack_overflow/main/main.c3:6) [./main] [inline]"
+  },
+  "concurrent_map_write": {
+   "outcome": "TRAPPED",
+   "runs": 50,
+   "release": "HANG",
+   "release_stdout": "",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==4697==ERROR: AddressSanitizer: attempting double-free on 0x7069293e0080 in thread T2:\n    #0 0x65407ed94c06 in free /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:51:3\n    #1 0x65407ee1cd89 in std.core.mem.allocators.LibcAllocator.release /opt/c3/lib/std/core/allocators/libc_allocator.c3:78:2\n    #2 0x65407ee2e6ba in free /opt/c3/lib/std/core/alloc.c3:180:2\n    #3 0x65407ee2e6ba in std.collections.map.hashmap_free_internal$long$long$ /opt/c3/lib/std/collections/hashmap.c3:497:2\n    #4 0x65407ee2e6ba in std.collections.map.hashmap_resize$long$long$ /opt/c3/lib/std/collections/hashmap.c3:430:2\n    #5 0x65407ee2dc8f in std.collections.ma\n...\n8 in main.main /tmp/breakbench/concurrent_map_write/main/main.c3:29:3\n    #4 0x65407ee40192 in @main_args /opt/c3/lib/std/core/private/main_stub.c3:28:10\n    #5 0x65407ee40192 in main /tmp/breakbench/concurrent_map_write/main/main.c3:20:8\n    #6 0x73192a195600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #7 0x73192a195717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #8 0x65407ece6994 in _start (/tmp/breakbench/concurrent_map_write/main/main+0x96994)\n\nSUMMARY: AddressSanitizer: double-free /opt/c3/lib/std/core/allocators/libc_allocator.c3:78:2 in std.core.mem.allocators.LibcAllocator.release\n==4697==ABORTING"
+  },
+  "racy_counter": {
+   "outcome": "SILENT",
+   "runs": 5,
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1147168",
+   "stderr": ""
+  },
+  "huge_allocation": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "ERROR: 'Unexpected fault 'mem::OUT_OF_MEMORY' was unwrapped!'\n  in new_array (/opt/c3/lib/std/core/alloc.c3:435) [./main]\n  in new_array (/opt/c3/lib/std/core/mem.c3:1110) [./main]\n  in main.main (/tmp/breakbench/huge_allocation/release/main.c3:6) [./main] [inline]\nIllegal instruction (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "=================================================================\n==5462==ERROR: AddressSanitizer: requested allocation size 0x9184e72a000 (0x9184e72b000 after adjustments for alignment, red zones etc.) exceeds maximum supported size of 0x10000000000 (thread T0)\n    #0 0x5c35a454ce02 in calloc /home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_malloc_linux.cpp:116:3\n    #1 0x5c35a45d3e6c in std.core.mem.allocators.LibcAllocator.acquire /opt/c3/lib/std/core/allocators/libc_allocator.c3:28:10\n    #2 0x5c35a45f43f1 in calloc_try /opt/c3/lib/std/core/alloc.c3:128:9\n    #3 0x5c35a45f43f1 in new_array_try /opt/c3/lib/std/core/alloc.c3:453:18\n    #4 0x5c35a45f43f1 in new_array /opt/c3/lib/std/core/alloc.c3:435:9\n    #5 0x5c35a45\n...\n@main_args /opt/c3/lib/std/core/private/main_stub.c3:28:10\n    #8 0x5c35a45f5062 in main /tmp/breakbench/huge_allocation/main/main.c3:3:8\n    #9 0x7e6d2cb29600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #10 0x7e6d2cb29717 in __libc_start_main (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #11 0x5c35a449e3e4 in _start (/tmp/breakbench/huge_allocation/main/main+0x933e4)\n\n==5462==HINT: if you don't care about these errors you may set allocator_may_return_null=1\nSUMMARY: AddressSanitizer: allocation-size-too-big /opt/c3/lib/std/core/allocators/libc_allocator.c3:28:10 in std.core.mem.allocators.LibcAllocator.acquire\n==5462==ABORTING"
+  },
+  "fd_leak": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "ERROR: 'Unexpected fault 'io::TOO_MANY_DESCRIPTORS' was unwrapped!', in main (main.c3:9)\nIllegal instruction (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "==5549==WARNING: Can't create a socket pair to start external symbolizer (errno: 24)\n==5549==WARNING: Failed to use and restart external symbolizer! #0 0x649bebb27661  (/tmp/breakbench/fd_leak/main/main+0x14c661) #1 0x649bebb42562  (/tmp/breakbench/fd_leak/main/main+0x167562)",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "ERROR: 'Unexpected fault 'io::TOO_MANY_DESCRIPTORS' was unwrapped!', in main (main.c3:9)\nAddressSanitizer: CHECK failed: sanitizer_linux_libcdep.cpp:184 \"((pthread_getattr_np(pthread_self(), &attr))) == ((0))\" (0x18, 0x0) (tid=5549)\n==5549==WARNING: Can't create a socket pair to start external symbolizer (errno: 24)\n==5549==WARNING: Can't create a socket pair to start external symbolizer (errno: 24)\n==5549==WARNING: Can't create a socket pair to start external symbolizer (errno: 24)\n==5549==WARNING: Can't create a socket pair to start external symbolizer (errno: 24)\n==5549==WARNING: Can't create a socket pair to start external symbolizer (errno: 24)\n==5549==WARNING: Failed to use and restart external symbolizer!\n    #0 0x649bebb27661  (/tmp\n...\n/tmp/breakbench/fd_leak/main/main+0x1df47a)\n    #7 0x7583976edcaf  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x45caf) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #8 0x649bebbb9958  (/tmp/breakbench/fd_leak/main/main+0x1de958)\n    #9 0x649bebbbfc2f  (/tmp/breakbench/fd_leak/main/main+0x1e4c2f)\n    #10 0x649bebbcb3fa  (/tmp/breakbench/fd_leak/main/main+0x1f03fa)\n    #11 0x649bebbcc162  (/tmp/breakbench/fd_leak/main/main+0x1f1162)\n    #12 0x7583976d2600  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a600) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #13 0x7583976d2717  (/usr/lib/x86_64-linux-gnu/libc.so.6+0x2a717) (BuildId: 9851d79b1f32e900a27f8d0a68e29d750303f0c6)\n    #14 0x649beba6ea24  (/tmp/breakbench/fd_leak/main/main+0x93a24)"
+  },
+  "wrong_variant_access": {
+   "outcome": "CRASH",
+   "warned": false,
+   "run_warned": false,
+   "exit": 139,
+   "secs": 0.13,
+   "stdout": "",
+   "stderr": "ERROR: 'Out of bounds memory access.'\n  in __sigaction (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in std.core.string.ZString.len (source unavailable) [./main] [inline]\n  in main.main (/tmp/breakbench/wrong_variant_access/main/main.c3:22) [./main] [inline]"
+  },
+  "format_string": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "<MISSING><MISSING><MISSING>{}{0}",
+   "stderr": ""
+  },
+  "trojan_source": {
+   "outcome": "REJECTED",
+   "message": "1: import std::io;\n    ^\n/tmp/breakbench/trojan_source/main/main.c3:1:1: error: Invalid encoding - Unbalanced bidirectional markers."
+  },
+  "unsafe_deserialization": {
+   "outcome": "SAFE_BY_DESIGN",
+   "message": "std::encoding::json builds only JSON values and the types the program declares"
+  },
+  "null_byte_path": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "secret",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "outcome": "REJECTED",
+   "message": "1: import std::io;\n 2: \n 3: fn bool is_admin(String user) => user == \"root\";\n 4: fn bool is_\u0430dmin(String user) => true; // BREAK!\n               ^\n/tmp/breakbench/homoglyph_identifier/main/main.c3:4:12: error: The 0xd0 character may not be placed outside of a string or comment, did you forget a \" somewhere?\n\n  7: {\n  8:     String user = \"guest\";\n  9:     io::printn(is_admin(\"root\") ? \"admin\" : \"guest\");\n 10:     io::printn(is_\u0430dmin(user) ? \"admin\" : \"guest\"); // CONTROL! io::printn(is_admin(user) ? \"admin\" : \"guest\");\n                       ^\n/tmp/breakbench/homoglyph_identifier/main/main.c3:10:16: error: The 0xd0 character may not be placed outside of a string or comment, did you forget a \" somewhere?"
+  },
+  "deep_structure_release": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.11,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "CRASH",
+   "warned": false,
+   "run_warned": false,
+   "exit": 139,
+   "secs": 0.1,
+   "stdout": "",
+   "stderr": "ERROR: 'Out of bounds memory access.'\n  in __sigaction (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in main (source unavailable) [./main] [inline]\n  in __libc_init_first (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in __libc_start_main (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in _start (source unavailable) [./main] [inline]"
+  },
+  "reference_cycle": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no automatic memory management; a record is freed only by an explicit free, so dropping a reference never frees anything"
+  },
+  "complete_init": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "newtype": {
+   "outcome": "REJECTED",
+   "message": "8:     Meters a = (Meters)2.0;\n  9:     Meters b = (Meters)3.0;\n 10:     Seconds s = (Seconds)3.0;\n 11:     Meters wrong = a + s; // BREAK!\n                        ^^^^^\n/tmp/breakbench/newtype/main/main.c3:11:17: error: Cannot do the addition 'Meters' + 'Seconds'."
+  },
+  "strong_enum": {
+   "outcome": "REJECTED",
+   "message": "20: fn int main(String[] args)\n 21: {\n 22:     Color c = GREEN;\n 23:     io::printn(name(7)); // BREAK!\n                         ^\n/tmp/breakbench/strong_enum/main/main.c3:23:18: error: Implicitly casting 'int' to 'Color' is not permitted, but you may do an explicit cast by placing '(Color)' before the expression."
+  },
+  "override_check": {
+   "outcome": "REJECTED",
+   "message": "5:     fn String describe();\n 6: }\n 7: \n 8: struct Circle (Shape)\n                   ^^^^^\n/tmp/breakbench/override_check/main/main.c3:8:16: error: 'Shape' was not fully implemented, the required method 'describe' needs to be implemented, did you forget it?"
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "before",
+   "release_stderr": "ERROR: 'Unexpected fault 'main::MISSING' was unwrapped!'\n  in main.main (/tmp/breakbench/forced_unwrap/release/main.c3:14) [./main]\nIllegal instruction (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.16,
+   "stdout": "before",
+   "stderr": "ERROR: 'Unexpected fault 'main::MISSING' was unwrapped!'\n  in main.main (/tmp/breakbench/forced_unwrap/main/main.c3:14) [./main] [inline]"
+  },
+  "null_in_text": {
+   "outcome": "REJECTED",
+   "message": "11: fn int main(String[] args)\n 12: {\n 13:     String? name = find_name(args[1].to_long()!!);\n 14:     io::printfn(\"hello, %s\", name); // CONTROL! io::printfn(\"hello, %s\", name ?? \"nobody\");\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/tmp/breakbench/null_in_text/main/main.c3:14:2: error: The result of this call is optional due to its argument(s). This optional result may not be implicitly discarded. Please assign it to a variable, ignore it with '(void)', rethrow with '!' or panic with '!!'."
+  },
+  "not_found_sentinel": {
+   "outcome": "REJECTED",
+   "message": "4: {\n 5:     String line = args[1];\n 6:     sz? pos = line.index_of_char(':');\n 7:     io::printn(line[pos + 1..]); // CONTROL! io::printn(line[(pos ?? -1) + 1..]);\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/tmp/breakbench/not_found_sentinel/main/main.c3:7:2: error: The result of this call is optional due to its argument(s). This optional result may not be implicitly discarded. Please assign it to a variable, ignore it with '(void)', rethrow with '!' or panic with '!!'."
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "release": "CRASH",
+   "release_stdout": "",
+   "release_stderr": "Segmentation fault (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.15,
+   "stdout": "",
+   "stderr": "ERROR: 'Array index out of bounds (array had size 0, index was 0)'\n  in main.main (/tmp/breakbench/empty_max/main/main.c3:8) [./main] [inline]"
+  },
+  "readonly_param": {
+   "outcome": "REJECTED",
+   "message": "5: *>\n 6: fn usz count(int[] xs)\n 7: {\n 8:     xs[0] = 9; // BREAK!\n        ^^\n/tmp/breakbench/readonly_param/main/main.c3:8:2: error: 'in' parameters may not be assigned to."
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "REJECTED",
+   "message": "3: fn int main(String[] args)\n 4: {\n 5:     char ok = 100;\n 6:     char too_big = 300; // BREAK!\n                       ^^^\n/tmp/breakbench/literal_range/main/main.c3:6:17: error: The value '300' is out of range for 'char', so you need an explicit cast to truncate the value."
+  },
+  "no_implicit_conversion": {
+   "outcome": "REJECTED",
+   "message": "4: {\n 5:     long big = 42;\n 6:     int small = (int)big;\n 7:     int wrong = big; // BREAK!\n                    ^^^\n/tmp/breakbench/no_implicit_conversion/main/main.c3:7:14: error: 'long' cannot implicitly be narrowed to 'int', but you may use a cast."
+  },
+  "generic_constraint": {
+   "outcome": "REJECTED",
+   "message": "144:                 if (l < h) list_set(list, l++, list_get(list, h));\n 145:                 while (cmp(list_get_ref(list, l), &pivot) <= 0 && l < h) l++;\n 146:             $default:\n 147:                 while (greater_eq(list_get(list, h), pivot) && l < h) h--;\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/opt/c3/lib/std/sort/quicksort.c3:147:12: error: @require \"$defined(a < b) ||| $defined(a.less(b)) ||| $defined(a.compare_to(b))\" violated.\n\n 70: \n 71:             if (l < h)\n 72:             {\n 73:                 l = @partition(list, l, h, cmp, context);\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/opt/c3/lib/std/sort/quicksort.c3:73:9: note: Inlined from here.\n\n 144:                 if (l < h) l\n...\n:                     $default:\n 47:                         if (!less(*rhs, *lhs)) break;\n                                  ^^^^^^^^^^^^^^^^\n/opt/c3/lib/std/sort/insertionsort.c3:47:12: error: @require \"$defined(a < b) ||| $defined(a.less(b)) ||| $defined(a.compare_to(b))\" violated.\n\n 73:             $case $has_cmp:\n 74:                 bool cmp_result = cmp(list_get_ref(list, i), list_get_ref(list, j)) <= 0;\n 75:             $default:\n 76:                 bool cmp_result = less_eq(list_get(list, i), list_get(list, j));\n                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/opt/c3/lib/std/sort/mergesort.c3:76:23: error: @require \"$defined(a < b) ||| $defined(a.less(b)) ||| $defined(a.compare_to(b))\" violated."
+  },
+  "lossy_int_to_float": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "9007199254740992",
+   "stderr": ""
+  },
+  "const_index_bounds": {
+   "outcome": "REJECTED",
+   "message": "4: {\n 5:     int[3] table = { 10, 20, 30 };\n 6:     io::printfn(\"%d\", table[1]);\n 7:     io::printfn(\"%d\", table[5]); // BREAK!\n                                ^\n/tmp/breakbench/const_index_bounds/main/main.c3:7:26: error: An index of '5' is out of range, a value between 0 and 2 was expected."
+  },
+  "lazy_accumulator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 1.84,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "outcome": "TRAPPED",
+   "release": "CORRUPT",
+   "release_stdout": "stored",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "ERROR: 'Array index out of bounds (array had size 8, index was 8)'\n  in main.main (/tmp/breakbench/size_overflow_alloc/main/main.c3:8) [./main] [inline]"
+  },
+  "const_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-8985944073709551616",
+   "stderr": ""
+  },
+  "orphaned_receive": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "ERROR: 'Unexpected fault 'string::MALFORMED_INTEGER' was unwrapped!'\n  in main.worker (/tmp/breakbench/orphaned_receive/release/main.c3:10) [./main] [inline]\n  in std.thread.os.callback (source unavailable) [./main] [inline]\n  in pthread_condattr_setpshared (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in __clone (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\nIllegal instruction (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "ERROR: 'Unexpected fault 'string::MALFORMED_INTEGER' was unwrapped!'\n  in main.worker (/tmp/breakbench/orphaned_receive/main/main.c3:10) [./main] [inline]\n  in std.thread.os.callback (/opt/c3/lib/std/threads/os/thread_posix.c3:207) [./main] [inline]\n  in asan_thread_start(void*) (/home/runner/work/llvm-project/llvm-project/compiler-rt/lib/asan/asan_interceptors.cpp:306) [./main] [inline]\n  in pthread_condattr_setpshared (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in __clone (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]"
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "unreachable_code": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/unreachable_code/main/main.c3:7:2: warning: This code will never execute.",
+   "warnings": "/tmp/breakbench/unreachable_code/main/main.c3:7:2: warning: This code will never execute.",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ok",
+   "stderr": ""
+  },
+  "checked_interpolation": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no string interpolation"
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "round",
+   "stderr": ""
+  },
+  "duplicate_key": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no map literal"
+  },
+  "char_arithmetic": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "b",
+   "stderr": ""
+  },
+  "json_big_integer": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "9007199254740993",
+   "stderr": ""
+  },
+  "comparison_statement": {
+   "outcome": "REJECTED",
+   "message": "4: {\n 5:     int count = 0;\n 6:     count = 5;\n 7:     count == 5; // BREAK!\n        ^^^^^^^^^^\n/tmp/breakbench/comparison_statement/main/main.c3:7:2: error: This equals check was discarded, which isn't allowed. You can assign it to a variable or explicitly ignore it with a void cast '(void)' if this is what you want."
+  },
+  "structural_equality": {
+   "outcome": "REJECTED",
+   "message": "6: {\n 7:     Point a = { 1, 2 };\n 8:     Point b = { 1, 2 };\n 9:     io::printn(a == b ? \"equal\" : \"different\"); // CONTROL! io::printn(a.x == b.x && a.y == b.y ? \"equal\" : \"dif ...\n                   ^~~~~~\n/tmp/breakbench/structural_equality/main/main.c3:9:13: error: 'Point' does not support comparisons."
+  },
+  "hash_matches_equality": {
+   "outcome": "REJECTED",
+   "message": "7: \n  8: // CONTROL! fn uint Point.hash(self) => (uint)(self.x * 31 + self.y);\n  9: \n 10: alias Points = HashMap{Point, bool};\n                            ^^^^^^^^^^^\n/tmp/breakbench/hash_matches_equality/main/main.c3:10:24: error: Parameter(s) would violate constraint: @require \"$defined((Key){}.hash())\" violated: 'No .hash function found on the key'.."
+  },
+  "array_literal_length": {
+   "outcome": "REJECTED",
+   "message": "4: {\n 5:     int[4] table = { 10, 20, 30, 40 };\n 6:     io::printn(table[3]);\n 7:     int[4] short_table = { 10, 20, 30 }; // BREAK!\n                               ^^\n/tmp/breakbench/array_literal_length/main/main.c3:7:25: error: Too few (3) elements in initializer, expected 4."
+  },
+  "enum_from_int": {
+   "outcome": "TRAPPED",
+   "release": "CRASH",
+   "release_stdout": "before",
+   "release_stderr": "Segmentation fault (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.16,
+   "stdout": "before",
+   "stderr": "ERROR: 'Attempting to convert 7 to enum 'Color' failed as the value exceeds the max ordinal (2).'\n  in main.main (/tmp/breakbench/enum_from_int/main/main.c3:14) [./main] [inline]"
+  },
+  "bitwise_on_bool": {
+   "outcome": "TRAPPED",
+   "release": "CORRECT",
+   "release_stdout": "no",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "ERROR: 'Array index out of bounds (array had size 0, index was 0)'\n  in main.main (/tmp/breakbench/bitwise_on_bool/main/main.c3:6) [./main] [inline]"
+  },
+  "readonly_field": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "bool_condition": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "different",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "short_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.2,
+   "stdout": "HELLO-WORLD-1234",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "disk full",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "total=42",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "outcome": "REJECTED",
+   "message": "3: \n 4: fn int main(String[] args)\n 5: {\n 6:     process::run({ \"sh\", \"-c\", \"exit 3\" }); // CONTROL! (void)process::run({ \"sh\", \"-c\", \"exit 3\" });\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/tmp/breakbench/child_exit_status/main/main.c3:6:2: error: The function returns 'int?', which is an optional and must be handled. You can either assign it to a variable, rethrow it using '!', panic with '!!', use if-catch etc. You can also silence the error using a void cast (e.g. '(void)the_call()') to ignore the error."
+  },
+  "nullable_field": {
+   "outcome": "TRAPPED",
+   "release": "CRASH",
+   "release_stdout": "",
+   "release_stderr": "Segmentation fault (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 132,
+   "secs": 0.18,
+   "stdout": "",
+   "stderr": "ERROR: 'Reference parameter 'self' was passed a null pointer argument.'\n  in std.core.string.ZString.len (/opt/c3/lib/std/core/string.c3:770) [./main] [inline]\n  in main.main (/tmp/breakbench/nullable_field/main/main.c3:7) [./main] [inline]"
+  },
+  "stale_null_check": {
+   "outcome": "CRASH",
+   "warned": false,
+   "run_warned": false,
+   "exit": 139,
+   "secs": 0.17,
+   "stdout": "",
+   "stderr": "ERROR: 'Out of bounds memory access.'\n  in __sigaction (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in std.io.int_from_any (source unavailable) [./main] [inline]\n  in @wrap_bad (/opt/c3/lib/std/io/formatter.c3:305) [./main]\n  in std.io.Formatter.vprintf (/opt/c3/lib/std/io/formatter.c3:305) [./main] [inline]\n  in std.io.printfn (/opt/c3/lib/std/io/io.c3:363) [./main] [inline]\n  in main.main (/tmp/breakbench/stale_null_check/main/main.c3:25) [./main] [inline]"
+  },
+  "empty_slot": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "typed_nil": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "check_then_act": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "99",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "async_reentrancy": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no asynchronous tasks in the language or its standard library; the threaded form of this race is check_then_act"
+  },
+  "lock_skipped_on_return": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  }
+ }
+}

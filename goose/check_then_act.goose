@@ -1,1 +1,1 @@
-// CANNOT-MAKE: worker threads cannot share mutable program state, so two workers cannot race to claim one shared resource
+// CANNOT-EXPRESS: no mutex in the language or its standard library, and no asynchronous tasks

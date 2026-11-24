@@ -1,0 +1,1167 @@
+{
+ "lang": "fsharp",
+ "mode": "strict",
+ "version": "11.0.100",
+ "results": {
+  "null_deref": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/null_deref/main/bb.fsproj (in 292 ms).\n/tmp/breakbench/null_deref/main/Program.fs(8,20): error FS0039: The type 'Option<_>' does not define a field, constructor, or member named 'Name'. [/tmp/breakbench/null_deref/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/null_deref/main/Program.fs(8,20): error FS0039: The type 'Option<_>' does not define a field, constructor, or member named 'Name'. [/tmp/breakbench/null_deref/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.16"
+  },
+  "int_overflow": {
+   "outcome": "TRAPPED",
+   "release": "SILENT",
+   "release_stdout": "-9223372036854775808",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.18,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.main(String[] argv) in /tmp/breakbench/int_overflow/main/Program.fs:line 4\nAborted (core dumped)"
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.DivideByZeroException: Attempted to divide by zero.\n   at Program.main(String[] argv) in /tmp/breakbench/div_by_zero/release/Program.fs:line 4\nAborted (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.17,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.DivideByZeroException: Attempted to divide by zero.\n   at Program.main(String[] argv) in /tmp/breakbench/div_by_zero/main/Program.fs:line 4\nAborted (core dumped)"
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "TRAPPED",
+   "release": "SILENT",
+   "release_stdout": "44",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.main(String[] argv) in /tmp/breakbench/narrowing_cast/main/Program.fs:line 4\nAborted (core dumped)"
+  },
+  "float_to_int_overflow": {
+   "outcome": "TRAPPED",
+   "release": "SILENT",
+   "release_stdout": "9223372036854775807",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.43,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.main(String[] argv) in /tmp/breakbench/float_to_int_overflow/main/Program.fs:line 4\nAborted (core dumped)"
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/type_confusion/main/bb.fsproj (in 150 ms).\n/tmp/breakbench/type_confusion/main/Program.fs(6,23): error FS0001: This expression was expected to have type\u001d    'int64'    \u001dbut here has type\u001d    'string' [/tmp/breakbench/type_confusion/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/type_confusion/main/Program.fs(6,23): error FS0001: This expression was expected to have type\u001d    'int64'    \u001dbut here has type\u001d    'string' [/tmp/breakbench/type_confusion/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.11"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/missing_return/main/bb.fsproj (in 128 ms).\n/tmp/breakbench/missing_return/main/Program.fs(3,5): error FS0001: This 'if' expression is missing an 'else' branch. Because 'if' is an expression, and not a statement, add an 'else' branch which also returns a value of type 'string'. [/tmp/breakbench/missing_return/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/missing_return/main/Program.fs(3,5): error FS0001: This 'if' expression is missing an 'else' branch. Because 'if' is an expression, and not a statement, add an 'else' branch which also returns a value of type 'string'. [/tmp/breakbench/missing_return/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.95"
+  },
+  "non_exhaustive_match": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. Microsoft.FSharp.Core.MatchFailureException: The match cases were incomplete\n   at Program.name(Color c) in /tmp/breakbench/non_exhaustive_match/release/Program.fs:line 9\n   at Program.main(String[] argv) in /tmp/breakbench/non_exhaustive_match/release/Program.fs:line 14\nAborted (core dumped)",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/non_exhaustive_match/main/Program.fs(7,11): warning FS0025: Incomplete pattern matches on this expression. For example, the value 'Blue' may indicate a case not covered by the pattern(s). [/tmp/breakbench/non_exhaustive_match/main/bb.fsproj] bb -> /tmp/breakbench/non_exhaustive_match/main/out/bb.dll\n/tmp/breakbench/non_exhaustive_match/main/Program.fs(7,11): warning FS0025: Incomplete pattern matches on this expression. For example, the value 'Blue' may indicate a case not covered by the pattern(s). [/tmp/breakbench/non_exhaustive_match/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "warnings": "/tmp/breakbench/non_exhaustive_match/main/Program.fs(7,11): warning FS0025: Incomplete pattern matches on this expression. For example, the value 'Blue' may indicate a case not covered by the pattern(s). [/tmp/breakbench/non_exhaustive_match/main/bb.fsproj] bb -> /tmp/breakbench/non_exhaustive_match/main/out/bb.dll\n/tmp/breakbench/non_exhaustive_match/main/Program.fs(7,11): warning FS0025: Incomplete pattern matches on this expression. For example, the value 'Blue' may indicate a case not covered by the pattern(s). [/tmp/breakbench/non_exhaustive_match/main/bb.fsproj]",
+   "exit": 134,
+   "secs": 0.17,
+   "stdout": "",
+   "stderr": "Unhandled exception. Microsoft.FSharp.Core.MatchFailureException: The match cases were incomplete\n   at Program.name(Color c) in /tmp/breakbench/non_exhaustive_match/main/Program.fs:line 9\n   at Program.main(String[] argv) in /tmp/breakbench/non_exhaustive_match/main/Program.fs:line 14\nAborted (core dumped)"
+  },
+  "uninitialized_variable": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/uninitialized_variable/main/bb.fsproj (in 137 ms).\n/tmp/breakbench/uninitialized_variable/main/Program.fs(6,5): error FS0010: Incomplete structured construct at or before this point in binding. Expected '=' or other token. [/tmp/breakbench/uninitialized_variable/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/uninitialized_variable/main/Program.fs(6,5): error FS0010: Incomplete structured construct at or before this point in binding. Expected '=' or other token. [/tmp/breakbench/uninitialized_variable/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.93"
+  },
+  "missing_argument": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/missing_argument/main/bb.fsproj (in 133 ms).\n/tmp/breakbench/missing_argument/main/Program.fs(5,19): error FS0001: The type ''a -> 'c' is not compatible with any of the types byte,int16,int32,int64,sbyte,uint16,uint32,uint64,nativeint,unativeint, arising from the use of a printf-style format string [/tmp/breakbench/missing_argument/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/missing_argument/main/Program.fs(5,19): error FS0001: The type ''a -> 'c' is not compatible with any of the types byte,int16,int32,int64,sbyte,uint16,uint32,uint64,nativeint,unativeint, arising from the use of a printf-style format string [/tmp/breakbench/missing_argument/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.93"
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/misspelled_field/main/bb.fsproj (in 137 ms).\n/tmp/breakbench/misspelled_field/main/Program.fs(7,9): error FS0039: The type 'Config' does not define a field, constructor, or member named 'Colour'. Maybe you want one of the following:\u001d   Color [/tmp/breakbench/misspelled_field/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/misspelled_field/main/Program.fs(7,9): error FS0039: The type 'Config' does not define a field, constructor, or member named 'Colour'. Maybe you want one of the following:\u001d   Color [/tmp/breakbench/misspelled_field/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.08"
+  },
+  "assign_in_condition": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "not one",
+   "stderr": ""
+  },
+  "switch_fallthrough": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/zero_is_falsy/main/bb.fsproj (in 139 ms).\n/tmp/breakbench/zero_is_falsy/main/Program.fs(7,22): error FS0001: This expression was expected to have type\u001d    'bool'    \u001dbut here has type\u001d    'int option' [/tmp/breakbench/zero_is_falsy/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/zero_is_falsy/main/Program.fs(7,22): error FS0001: This expression was expected to have type\u001d    'bool'    \u001dbut here has type\u001d    'int option' [/tmp/breakbench/zero_is_falsy/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.10"
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.FormatException: The input string '12abc' was not in a correct format.\n   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)\n   at System.Int32.Parse(String s, NumberStyles style, IFormatProvider provider)\n   at Microsoft.FSharp.Core.LanguagePrimitives.ParseInt32(String s) in /__w/1/s/src/fsharp/src/FSharp.Core/prim-types.fs:line 2648\n   at Program.main(String[] argv) in /tmp/breakbench/parse_invalid_number/release/Program.fs:line 3\nAborted (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.23,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.FormatException: The input string '12abc' was not in a correct format.\n   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)\n   at System.Int32.Parse(String s, NumberStyles style, IFormatProvider provider)\n   at Microsoft.FSharp.Core.LanguagePrimitives.ParseInt32(String s) in /__w/1/s/src/fsharp/src/FSharp.Core/prim-types.fs:line 2648\n   at Program.main(String[] argv) in /tmp/breakbench/parse_invalid_number/main/Program.fs:line 3\nAborted (core dumped)"
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/covariant_array_write/main/bb.fsproj (in 126 ms).\n/tmp/breakbench/covariant_array_write/main/Program.fs(16,29): error FS0001: Type mismatch. Expecting a\u001d    'Animal array'    \u001dbut given a\u001d    'Dog array'    \u001dThe type 'Animal' does not match the type 'Dog' [/tmp/breakbench/covariant_array_write/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/covariant_array_write/main/Program.fs(16,29): error FS0001: Type mismatch. Expecting a\u001d    'Animal array'    \u001dbut given a\u001d    'Dog array'    \u001dThe type 'Animal' does not match the type 'Dog' [/tmp/breakbench/covariant_array_write/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.97"
+  },
+  "mutate_while_iterating": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/mutate_while_iterating/main/Program.fs(3,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/mutate_while_iterating/main/bb.fsproj] bb -> /tmp/breakbench/mutate_while_iterating/main/out/bb.dll\n/tmp/breakbench/mutate_while_iterating/main/Program.fs(3,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/mutate_while_iterating/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "1,3",
+   "stderr": ""
+  },
+  "self_deadlock": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/self_deadlock/main/Program.fs(7,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/self_deadlock/main/bb.fsproj] bb -> /tmp/breakbench/self_deadlock/main/out/bb.dll\n/tmp/breakbench/self_deadlock/main/Program.fs(7,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/self_deadlock/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/loop_closure_capture/main/Program.fs(2,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/loop_closure_capture/main/bb.fsproj] bb -> /tmp/breakbench/loop_closure_capture/main/out/bb.dll\n/tmp/breakbench/loop_closure_capture/main/Program.fs(2,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/loop_closure_capture/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/snapshot_aliasing/main/Program.fs(6,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/snapshot_aliasing/main/bb.fsproj] bb -> /tmp/breakbench/snapshot_aliasing/main/out/bb.dll\n/tmp/breakbench/snapshot_aliasing/main/Program.fs(6,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/snapshot_aliasing/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.IO.DirectoryNotFoundException: Could not find a part of the path '/nonexistent/dir/out.txt'.\nDirectory path: '/nonexistent/dir/out.txt'\n   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)\n   at Microsoft.Win32.SafeHandles.SafeFileH\n...\nss access, FileShare share, FileOptions options, Int64 preallocationSize)\n   at System.IO.File.WriteToFile(String path, FileMode mode, ReadOnlySpan`1 contents, Encoding encoding)\n   at Program.main(String[] argv) in /tmp/breakbench/ignored_error_result/release/Program.fs:line 5\nAborted (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/ignored_error_result/main/Program.fs(4,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/ignored_error_result/main/bb.fsproj] bb -> /tmp/breakbench/ignored_error_result/main/out/bb.dll\n/tmp/breakbench/ignored_error_result/main/Program.fs(4,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/ignored_error_result/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.17,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IO.DirectoryNotFoundException: Could not find a part of the path '/nonexistent/dir/out.txt'.\nDirectory path: '/nonexistent/dir/out.txt'\n   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)\n   at System.IO.File.OpenHandle(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)\n   at System.IO.File.WriteToFile(String path, FileMode mode, ReadOnlySpan`1 contents, Encoding encoding)\n   at Program.save(String path) in /tmp/breakbench/ignored_error_result/main/Program.fs:line 1\n   at Program.main(String[] argv) in /tmp/breakbench/ignored_error_result/main/Program.fs:line 5\nAborted (core dumped)"
+  },
+  "sort_with_nan": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/sort_with_nan/main/Program.fs(2,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/sort_with_nan/main/bb.fsproj] bb -> /tmp/breakbench/sort_with_nan/main/out/bb.dll\n/tmp/breakbench/sort_with_nan/main/Program.fs(2,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/sort_with_nan/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "ordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/integer_average/main/bb.fsproj (in 130 ms).\n/tmp/breakbench/integer_average/main/Program.fs(6,28): error FS0001: The type 'int' does not match the type 'float' [/tmp/breakbench/integer_average/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/integer_average/main/Program.fs(6,28): error FS0001: The type 'int' does not match the type 'float' [/tmp/breakbench/integer_average/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.93"
+  },
+  "leading_zero_literal": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/leading_zero_literal/main/Program.fs(2,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/leading_zero_literal/main/bb.fsproj] bb -> /tmp/breakbench/leading_zero_literal/main/out/bb.dll\n/tmp/breakbench/leading_zero_literal/main/Program.fs(2,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/leading_zero_literal/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/shared_default_argument/main/Program.fs(8,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/shared_default_argument/main/bb.fsproj] bb -> /tmp/breakbench/shared_default_argument/main/out/bb.dll\n/tmp/breakbench/shared_default_argument/main/Program.fs(8,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/shared_default_argument/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/reused_iterator/main/Program.fs(2,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/reused_iterator/main/bb.fsproj] bb -> /tmp/breakbench/reused_iterator/main/out/bb.dll\n/tmp/breakbench/reused_iterator/main/Program.fs(2,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/reused_iterator/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "not a",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/chained_comparison/main/bb.fsproj (in 139 ms).\n/tmp/breakbench/chained_comparison/main/Program.fs(4,26): error FS0001: This expression was expected to have type\u001d    'bool'    \u001dbut here has type\u001d    'int' [/tmp/breakbench/chained_comparison/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/chained_comparison/main/Program.fs(4,26): error FS0001: This expression was expected to have type\u001d    'bool'    \u001dbut here has type\u001d    'int' [/tmp/breakbench/chained_comparison/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.01"
+  },
+  "lost_update_on_copy": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/lost_update_on_copy/main/Program.fs(4,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/lost_update_on_copy/main/bb.fsproj] bb -> /tmp/breakbench/lost_update_on_copy/main/out/bb.dll\n/tmp/breakbench/lost_update_on_copy/main/Program.fs(4,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/lost_update_on_copy/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "150",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/command_injection/main/Program.fs(7,5): warning FS3261: Nullness warning: Possible dereference of a null value when accessing member 'WaitForExit' on the nullable value 'p' of type 'Process | null'. [/tmp/breakbench/command_injection/main/bb.fsproj]\n/tmp/breakbench/command_injection/main/Program.fs(7,5): warning FS3261: Nullness warning: Possible dereference of a null value when accessing member 'WaitForExit' on the nullable value 'p' of type 'Process | null'. [/tmp/breakbench/command_injection/main/bb.fsproj] bb -> /tmp/breakbench/command_injection/main/out/bb.dll\n2 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/lock_order_deadlock/main/Program.fs(12,17): warning FS0760: It is recommended that objects supporting the IDisposable interface are created using the syntax 'new Type(args)', rather than 'Type(args)' or 'Type' as a function value representing the constructor, to indicate that resources may be owned by the generated value [/tmp/breakbench/lock_order_deadlock/main/bb.fsproj]\n/tmp/breakbench/lock_order_deadlock/main/Program.fs(9,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/lock_order_deadlock/main/bb.fsproj] bb -> /tmp/breakbench/lock_order_deadlock/main/out/bb.dll\n/tmp/breakbench/lock_order_deadlock/main/Program.fs(9,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/lock_order_deadlock/main/bb.fsproj]\n2 Warning(s) 0 Error(s)",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "path_join_escape": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "escaped",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/missing_comma_concat/main/bb.fsproj (in 121 ms).\n/tmp/breakbench/missing_comma_concat/main/Program.fs(4,28): error FS0003: This value is not a function and cannot be applied. It has type 'string', which does not accept arguments. [/tmp/breakbench/missing_comma_concat/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/missing_comma_concat/main/Program.fs(4,28): error FS0003: This value is not a function and cannot be applied. It has type 'string', which does not accept arguments. [/tmp/breakbench/missing_comma_concat/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.90"
+  },
+  "return_in_finally": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/return_in_finally/main/Program.fs(14,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/return_in_finally/main/bb.fsproj] bb -> /tmp/breakbench/return_in_finally/main/out/bb.dll\n/tmp/breakbench/return_in_finally/main/Program.fs(14,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/return_in_finally/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/return_line_break/main/Program.fs(5,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/return_line_break/main/bb.fsproj] bb -> /tmp/breakbench/return_line_break/main/out/bb.dll\n/tmp/breakbench/return_line_break/main/Program.fs(5,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/return_line_break/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.AggregateException: One or more errors occurred. (The input string 'x' was not in a correct format.)\n ---> System.FormatException: The input string 'x' was not in a correct format.\n   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)\n   at System.Int64.Pa\n...\nTask& currentTaskSlot, Thread threadPoolThread)\n   --- End of inner exception stack trace ---\n   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)\n   at Program.main(String[] argv) in /tmp/breakbench/worker_failure_lost/release/Program.fs:line 5\nAborted (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.25,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.AggregateException: One or more errors occurred. (The input string 'x' was not in a correct format.)\n ---> System.FormatException: The input string 'x' was not in a correct format.\n   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)\n   at System.Int64.Parse(String s, NumberStyles style, IFormatProvider provider)\n   at Microsoft.FSharp.Core.LanguagePrimitives.ParseInt64(String s) in /__w/1/s/src/fsharp/src/FSharp.Core/prim-types.fs:line 2663\n   at Program.worker@4-1.Invoke(String value)\n   at Program.<sumBy>__debug@4(FSharpFunc`2 projection, String[] array)\n   at Program.worker@4.Invoke() in /tmp/breakbench/worker_failure_lost/main/Program.fs:line 4\n   at System.Threading.Tasks.Task`1.InnerInvoke()\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\n--- End of stack trace from previous location ---\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\n   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)\n   --- End of inner exception stack trace ---\n   at System.Threading.Tasks.Task`1.GetResultCore(Boolean waitCompletionNotification)\n   at Program.main(String[] argv) in /tmp/breakbench/worker_failure_lost/main/Program.fs:line 5\nAborted (core dumped)"
+  },
+  "unawaited_task": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/unawaited_task/main/Program.fs(13,5): warning FS0020: The result of this expression has type 'Task<unit>' and is implicitly ignored. Consider using 'ignore' to discard this value explicitly, e.g. 'expr |> ignore', or 'let' to bind the result to a name, e.g. 'let result = expr'. [/tmp/breakbench/unawaited_task/main/bb.fsproj]\n/tmp/breakbench/unawaited_task/main/Program.fs(11,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/unawaited_task/main/bb.fsproj] bb -> /tmp/breakbench/unawaited_task/main/out/bb.dll\n/tmp/breakbench/unawaited_task/main/Program.fs(11,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/unawaited_task/main/bb.fsproj]",
+   "must_use": true
+  },
+  "format_arg_mismatch": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/format_arg_mismatch/main/Program.fs(6,5): warning FS0193: This expression is a function value, i.e. is missing arguments. Its type is 'a -> unit. [/tmp/breakbench/format_arg_mismatch/main/bb.fsproj]\n/tmp/breakbench/format_arg_mismatch/main/Program.fs(3,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/format_arg_mismatch/main/bb.fsproj]\n/tmp/breakbench/format_arg_mismatch/main/Program.fs(5,9): warning FS1182: The value 'total' is unused [/tmp/breakbench/format_arg_mismatch/main/bb.fsproj] bb -> /tmp/breakbench/format_arg_mismatch/main/out/bb.dll\n/tmp/breakbench/format_arg_mismatch/main/Program.fs(5,9): warning FS1182: The value 'total' is unused [/tmp/breakbench/format_arg_mismatch/main/bb.fsproj]\n3 Warning(s) 0 Error(s)",
+   "warnings": "/tmp/breakbench/format_arg_mismatch/main/Program.fs(6,5): warning FS0193: This expression is a function value, i.e. is missing arguments. Its type is 'a -> unit. [/tmp/breakbench/format_arg_mismatch/main/bb.fsproj]",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": ""
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'Microsoft.FSharp.Core.CompilerServices.RuntimeHelpers+StructBox`1[System.String]' was not present in the dictionary.\n   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)\n   at Microsoft.FSharp.Core.ExtraTopLevelOperators.DictImpl`3.System.Collections.Generic.IDictionary<'Key, 'T>.get_Item(TKey x) in /__w/1/s/src/fsharp/src/FSharp.Core/fslib-extra-pervasives.fs:line 54\n   at Program.main(String[] argv) in /tmp/breakbench/missing_key_default/release/Program.fs:line 5\nAborted (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.2,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'Microsoft.FSharp.Core.CompilerServices.RuntimeHelpers+StructBox`1[System.String]' was not present in the dictionary.\n   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)\n   at Microsoft.FSharp.Core.ExtraTopLevelOperators.DictImpl`3.System.Collections.Generic.IDictionary<'Key, 'T>.get_Item(TKey x) in /__w/1/s/src/fsharp/src/FSharp.Core/fslib-extra-pervasives.fs:line 54\n   at Program.main(String[] argv) in /tmp/breakbench/missing_key_default/main/Program.fs:line 5\nAborted (core dumped)"
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "pending",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/discarded_pure_result/main/Program.fs(4,5): warning FS0020: The result of this expression has type 'string' and is implicitly ignored. Consider using 'ignore' to discard this value explicitly, e.g. 'expr |> ignore', or 'let' to bind the result to a name, e.g. 'let result = expr'. [/tmp/breakbench/discarded_pure_result/main/bb.fsproj] bb -> /tmp/breakbench/discarded_pure_result/main/out/bb.dll\n/tmp/breakbench/discarded_pure_result/main/Program.fs(4,5): warning FS0020: The result of this expression has type 'string' and is implicitly ignored. Consider using 'ignore' to discard this value explicitly, e.g. 'expr |> ignore', or 'let' to bind the result to a name, e.g. 'let result = expr'. [/tmp/breakbench/discarded_pure_result/main/bb.fsproj]",
+   "must_use": true
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.main(String[] argv) in /tmp/breakbench/negative_index_wraps/release/Program.fs:line 3\nAborted (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.main(String[] argv) in /tmp/breakbench/negative_index_wraps/main/Program.fs:line 5\nAborted (core dumped)"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/unrelated_type_lookup/main/bb.fsproj (in 133 ms).\n/tmp/breakbench/unrelated_type_lookup/main/Program.fs(5,39): error FS0001: Type mismatch. Expecting a\u001d    'string list'    \u001dbut given a\u001d    'int list'    \u001dThe type 'string' does not match the type 'int' [/tmp/breakbench/unrelated_type_lookup/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/unrelated_type_lookup/main/Program.fs(5,39): error FS0001: Type mismatch. Expecting a\u001d    'string list'    \u001dbut given a\u001d    'int list'    \u001dThe type 'string' does not match the type 'int' [/tmp/breakbench/unrelated_type_lookup/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.92"
+  },
+  "use_after_close": {
+   "outcome": "TRAPPED",
+   "runs": 50,
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.ObjectDisposedException: Cannot write to a closed TextWriter.\nObject name: 'StreamWriter'.\n   at System.IO.StreamWriter.<ThrowIfDisposed>g__ThrowObjectDisposedException|83_0()\n   at System.IO.StreamWriter.Write(String value)\n   at Program.main(String[] _arg1) in /tmp/breakbench/use_after_close/release/Program.fs:line 8\nAborted (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.ObjectDisposedException: Cannot write to a closed TextWriter.\nObject name: 'StreamWriter'.\n   at System.IO.StreamWriter.<ThrowIfDisposed>g__ThrowObjectDisposedException|83_0()\n   at System.IO.StreamWriter.Write(String value)\n   at Program.main(String[] _arg1) in /tmp/breakbench/use_after_close/main/Program.fs:line 8\nAborted (core dumped)"
+  },
+  "dead_store": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/dead_store/main/Program.fs(4,9): warning FS1182: The value 'total' is unused [/tmp/breakbench/dead_store/main/bb.fsproj] bb -> /tmp/breakbench/dead_store/main/out/bb.dll\n/tmp/breakbench/dead_store/main/Program.fs(4,9): warning FS1182: The value 'total' is unused [/tmp/breakbench/dead_store/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "warnings": "/tmp/breakbench/dead_store/main/Program.fs(4,9): warning FS1182: The value 'total' is unused [/tmp/breakbench/dead_store/main/bb.fsproj] bb -> /tmp/breakbench/dead_store/main/out/bb.dll\n/tmp/breakbench/dead_store/main/Program.fs(4,9): warning FS1182: The value 'total' is unused [/tmp/breakbench/dead_store/main/bb.fsproj]",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/panic_under_lock/main/Program.fs(18,38): warning FS3261: Nullness warning: Possible dereference of a null value when accessing member 'Message' on a nullable expression of type 'exn | null'. [/tmp/breakbench/panic_under_lock/main/bb.fsproj]\n/tmp/breakbench/panic_under_lock/main/Program.fs(18,38): warning FS3261: Nullness warning: Possible dereference of a null value when accessing member 'Message' on a nullable expression of type 'exn | null'. [/tmp/breakbench/panic_under_lock/main/bb.fsproj] bb -> /tmp/breakbench/panic_under_lock/main/out/bb.dll\n2 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "unbalanced",
+   "stderr": "worker failed: crash mid-update"
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.main(String[] argv) in /tmp/breakbench/oob_write/release/Program.fs:line 5\nAborted (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.17,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.main(String[] argv) in /tmp/breakbench/oob_write/main/Program.fs:line 6\nAborted (core dumped)"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.main(String[] argv) in /tmp/breakbench/oob_read/release/Program.fs:line 5\nAborted (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.17,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.main(String[] argv) in /tmp/breakbench/oob_read/main/Program.fs:line 6\nAborted (core dumped)"
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/use_after_free/main/Program.fs(4,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/use_after_free/main/bb.fsproj]\n/tmp/breakbench/use_after_free/main/Program.fs(8,9): warning FS1182: The value 'c' is unused [/tmp/breakbench/use_after_free/main/bb.fsproj] bb -> /tmp/breakbench/use_after_free/main/out/bb.dll\n/tmp/breakbench/use_after_free/main/Program.fs(8,9): warning FS1182: The value 'c' is unused [/tmp/breakbench/use_after_free/main/bb.fsproj]\n2 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/double_free/main/Program.fs(4,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/double_free/main/bb.fsproj]\n/tmp/breakbench/double_free/main/Program.fs(9,9): warning FS1182: The value 'y' is unused [/tmp/breakbench/double_free/main/bb.fsproj] bb -> /tmp/breakbench/double_free/main/out/bb.dll\n/tmp/breakbench/double_free/main/Program.fs(9,9): warning FS1182: The value 'y' is unused [/tmp/breakbench/double_free/main/bb.fsproj]\n2 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/dangling_stack_ref/main/Program.fs(10,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/dangling_stack_ref/main/bb.fsproj] bb -> /tmp/breakbench/dangling_stack_ref/main/out/bb.dll\n/tmp/breakbench/dangling_stack_ref/main/Program.fs(10,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/dangling_stack_ref/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/container_realloc_dangling/main/Program.fs(4,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/container_realloc_dangling/main/bb.fsproj] bb -> /tmp/breakbench/container_realloc_dangling/main/out/bb.dll\n/tmp/breakbench/container_realloc_dangling/main/Program.fs(4,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/container_realloc_dangling/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/uninit_heap_read/main/Program.fs(5,16): warning FS3261: Nullness warning: The type 'byte array' does not support 'null'. [/tmp/breakbench/uninit_heap_read/main/bb.fsproj]\n/tmp/breakbench/uninit_heap_read/main/Program.fs(2,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/uninit_heap_read/main/bb.fsproj] bb -> /tmp/breakbench/uninit_heap_read/main/out/bb.dll\n/tmp/breakbench/uninit_heap_read/main/Program.fs(2,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/uninit_heap_read/main/bb.fsproj]\n2 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Stack overflow.\nRepeated 174650 times:\n--------------------------------\n   at Program.walk(Int64)\n--------------------------------\n   at Program.main(System.String[])\nAborted (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.19,
+   "stdout": "",
+   "stderr": "Stack overflow.\nRepeated 261787 times:\n--------------------------------\n   at Program.walk(Int64)\n--------------------------------\n   at Program.main(System.String[])\nAborted (core dumped)"
+  },
+  "concurrent_map_write": {
+   "outcome": "TRAPPED",
+   "runs": 50,
+   "release": "SILENT",
+   "release_stdout": "575431",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/concurrent_map_write/main/Program.fs(5,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/concurrent_map_write/main/bb.fsproj] bb -> /tmp/breakbench/concurrent_map_write/main/out/bb.dll\n/tmp/breakbench/concurrent_map_write/main/Program.fs(5,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/concurrent_map_write/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.21,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.ArgumentException: Destination array was not long enough. Check the destination index, length, and the array's lower bounds. (Parameter 'destinationArray')\n   at System.Array.CopyImpl(Array sourceArray, Int32 sourceIndex, Array destinationArray, Int32 destinationIndex, Int32 length, Boolean reliable)\n   at System.Collections.Generic.Dictionary`2.Resize(Int32 newSize, Boolean forceNewHashCodes)\n   at System.Collections.Generic.Dictionary`2.Resize()\n   at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\n   at System.Collections.Generic.Dictionary`2.set_Item(TKey key, TValue value)\n   at Program.threads@9.Invoke() in /tmp/breakbench/concurrent_map_write/main/Progr\n...\n /tmp/breakbench/concurrent_map_write/main/Program.fs:line 11\n   at System.Threading.Thread.StartCallback(Thread* pThread)Unhandled exception. System.InvalidOperationException: Operations that change non-concurrent collections must have exclusive access. A concurrent update was performed on this collection and corrupted its state. The collection's state is no longer correct.\n   at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\n   at System.Collections.Generic.Dictionary`2.set_Item(TKey key, TValue value)\n   at Program.threads@9.Invoke() in /tmp/breakbench/concurrent_map_write/main/Program.fs:line 11\n   at System.Threading.Thread.StartCallback(Thread* pThread)\n\n\n\n\n\n\nAborted (core dumped)"
+  },
+  "racy_counter": {
+   "outcome": "SILENT",
+   "runs": 5,
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/racy_counter/main/Program.fs(4,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/racy_counter/main/bb.fsproj] bb -> /tmp/breakbench/racy_counter/main/out/bb.dll\n/tmp/breakbench/racy_counter/main/Program.fs(4,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/racy_counter/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.08,
+   "stdout": "1479786",
+   "stderr": ""
+  },
+  "huge_allocation": {
+   "outcome": "TRAPPED",
+   "release": "SILENT",
+   "release_stdout": "1316134912",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.15,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.main(String[] argv) in /tmp/breakbench/huge_allocation/main/Program.fs:line 4\nAborted (core dumped)"
+  },
+  "fd_leak": {
+   "outcome": "LEAK",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.21,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IO.IOException: Too many open files : '/tmp/bb_fd.txt'\n   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)\n   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, Nullable`1 unixCreateMode)\n   at System.IO.File.OpenRead(String path)\n   at Program.main(String[] argv)\nAborted (core dumped)"
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. Microsoft.FSharp.Core.MatchFailureException: The match cases were incomplete\n   at Program.main(String[] argv) in /tmp/breakbench/wrong_variant_access/release/Program.fs:line 8\nAborted (core dumped)",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/wrong_variant_access/main/Program.fs(8,9): warning FS0025: Incomplete pattern matches on this expression. For example, the value 'IntValue (_)' may indicate a case not covered by the pattern(s). [/tmp/breakbench/wrong_variant_access/main/bb.fsproj]\n/tmp/breakbench/wrong_variant_access/main/Program.fs(6,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/wrong_variant_access/main/bb.fsproj] bb -> /tmp/breakbench/wrong_variant_access/main/out/bb.dll\n/tmp/breakbench/wrong_variant_access/main/Program.fs(6,10): warning FS1182: The value 'argv' is unused [/tmp/breakbench/wrong_variant_access/main/bb.fsproj]\n2 Warning(s) 0 Error(s)",
+   "warnings": "/tmp/breakbench/wrong_variant_access/main/Program.fs(8,9): warning FS0025: Incomplete pattern matches on this expression. For example, the value 'IntValue (_)' may indicate a case not covered by the pattern(s). [/tmp/breakbench/wrong_variant_access/main/bb.fsproj]",
+   "exit": 134,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "Unhandled exception. Microsoft.FSharp.Core.MatchFailureException: The match cases were incomplete\n   at Program.main(String[] argv) in /tmp/breakbench/wrong_variant_access/main/Program.fs:line 10\nAborted (core dumped)"
+  },
+  "format_string": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/format_string/main/bb.fsproj (in 127 ms).\n/tmp/breakbench/format_string/main/Program.fs(3,13): error FS0001: The type 'string' is not compatible with the type 'Printf.TextWriterFormat<'a>' [/tmp/breakbench/format_string/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/format_string/main/Program.fs(3,13): error FS0001: The type 'string' is not compatible with the type 'Printf.TextWriterFormat<'a>' [/tmp/breakbench/format_string/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.91"
+  },
+  "trojan_source": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "admin",
+   "stderr": ""
+  },
+  "unsafe_deserialization": {
+   "outcome": "SAFE_BY_DESIGN",
+   "message": "BinaryFormatter is gone from .NET; System.Text.Json builds only the types the program declares"
+  },
+  "null_byte_path": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "admin\nadmin",
+   "stderr": ""
+  },
+  "deep_structure_release": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/string_literal_write/main/bb.fsproj (in 143 ms).\n/tmp/breakbench/string_literal_write/main/Program.fs(4,5): error FS0810: Property 'Chars' cannot be set [/tmp/breakbench/string_literal_write/main/bb.fsproj]\n/tmp/breakbench/string_literal_write/main/Program.fs(4,5): error FS0257: Invalid mutation of a constant expression. Consider copying the expression to a mutable local, e.g. 'let mutable x = ...'. [/tmp/breakbench/string_literal_write/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/string_literal_write/main/Program.fs(4,5): error FS0810: Property 'Chars' cannot be set [/tmp/breakbench/string_literal_write/main/bb.fsproj]\n/tmp/breakbench/string_literal_write/main/Program.fs(4,5): error FS0257: Invalid mutation of a constant expression. Consider copying the expression to a mutable local, e.g. 'let mutable x = ...'. [/tmp/breakbench/string_literal_write/main/bb.fsproj]\n    0 Warning(s)\n    2 Error(s)\n\nTime Elapsed 00:00:01.03"
+  },
+  "reference_cycle": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 2.92,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "complete_init": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/complete_init/main/bb.fsproj (in 123 ms).\n/tmp/breakbench/complete_init/main/Program.fs(6,19): error FS0764: No assignment given for field 'Retries' of type 'Program.Config' [/tmp/breakbench/complete_init/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/complete_init/main/Program.fs(6,19): error FS0764: No assignment given for field 'Retries' of type 'Program.Config' [/tmp/breakbench/complete_init/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.89"
+  },
+  "newtype": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/newtype/main/bb.fsproj (in 133 ms).\n/tmp/breakbench/newtype/main/Program.fs(7,26): error FS0001: The unit of measure 's' does not match the unit of measure 'm' [/tmp/breakbench/newtype/main/bb.fsproj]\n/tmp/breakbench/newtype/main/Program.fs(7,24): error FS0043: The unit of measure 's' does not match the unit of measure 'm' [/tmp/breakbench/newtype/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/newtype/main/Program.fs(7,26): error FS0001: The unit of measure 's' does not match the unit of measure 'm' [/tmp/breakbench/newtype/main/bb.fsproj]\n/tmp/breakbench/newtype/main/Program.fs(7,24): error FS0043: The unit of measure 's' does not match the unit of measure 'm' [/tmp/breakbench/newtype/main/bb.fsproj]\n    0 Warning(s)\n    2 Error(s)\n\nTime Elapsed 00:00:00.91"
+  },
+  "strong_enum": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/strong_enum/main/bb.fsproj (in 120 ms).\n/tmp/breakbench/strong_enum/main/Program.fs(15,24): error FS0001: This expression was expected to have type\u001d    'Color'    \u001dbut here has type\u001d    'int' [/tmp/breakbench/strong_enum/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/strong_enum/main/Program.fs(15,24): error FS0001: This expression was expected to have type\u001d    'Color'    \u001dbut here has type\u001d    'int' [/tmp/breakbench/strong_enum/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.90"
+  },
+  "override_check": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/override_check/main/bb.fsproj (in 116 ms).\n/tmp/breakbench/override_check/main/Program.fs(8,16): error FS0855: No abstract or interface member was found that corresponds to this override [/tmp/breakbench/override_check/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/override_check/main/Program.fs(8,16): error FS0855: No abstract or interface member was found that corresponds to this override [/tmp/breakbench/override_check/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.87"
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "before",
+   "release_stderr": "Unhandled exception. System.ArgumentException: The option value was None (Parameter 'option')\n   at Microsoft.FSharp.Core.OptionModule.GetValue[T](FSharpOption`1 option) in /__w/1/s/src/fsharp/src/FSharp.Core/option.fs:line 13\n   at Program.main(String[] _arg1) in /tmp/breakbench/forced_unwrap/release/Program.fs:line 6\nAborted (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.19,
+   "stdout": "before",
+   "stderr": "Unhandled exception. System.ArgumentException: The option value was None (Parameter 'option')\n   at Microsoft.FSharp.Core.OptionModule.GetValue[T](FSharpOption`1 option) in /__w/1/s/src/fsharp/src/FSharp.Core/option.fs:line 13\n   at Program.main(String[] _arg1) in /tmp/breakbench/forced_unwrap/main/Program.fs:line 6\nAborted (core dumped)"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "hello,",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.ArgumentException: The input array was empty. (Parameter 'array')\n   at Program.main(String[] argv) in /tmp/breakbench/empty_max/release/Program.fs:line 4\nAborted (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.21,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.ArgumentException: The input array was empty. (Parameter 'array')\n   at Microsoft.FSharp.Collections.ArrayModule.Max[T](T[] array) in /__w/1/s/src/fsharp/src/FSharp.Core/array.fs:line 1717\n   at Program.main(String[] argv) in /tmp/breakbench/empty_max/main/Program.fs:line 4\nAborted (core dumped)"
+  },
+  "readonly_param": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/readonly_param/main/bb.fsproj (in 142 ms).\n/tmp/breakbench/readonly_param/main/Program.fs(2,5): error FS0810: Property 'Item' cannot be set [/tmp/breakbench/readonly_param/main/bb.fsproj]\n/tmp/breakbench/readonly_param/main/Program.fs(2,5): error FS0257: Invalid mutation of a constant expression. Consider copying the expression to a mutable local, e.g. 'let mutable x = ...'. [/tmp/breakbench/readonly_param/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/readonly_param/main/Program.fs(2,5): error FS0810: Property 'Item' cannot be set [/tmp/breakbench/readonly_param/main/bb.fsproj]\n/tmp/breakbench/readonly_param/main/Program.fs(2,5): error FS0257: Invalid mutation of a constant expression. Consider copying the expression to a mutable local, e.g. 'let mutable x = ...'. [/tmp/breakbench/readonly_param/main/bb.fsproj]\n    0 Warning(s)\n    2 Error(s)\n\nTime Elapsed 00:00:00.97"
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/literal_range/main/bb.fsproj (in 124 ms).\n/tmp/breakbench/literal_range/main/Program.fs(4,18): error FS1144: This number is outside the allowable range for 8-bit unsigned integers [/tmp/breakbench/literal_range/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/literal_range/main/Program.fs(4,18): error FS1144: This number is outside the allowable range for 8-bit unsigned integers [/tmp/breakbench/literal_range/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.80"
+  },
+  "no_implicit_conversion": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/no_implicit_conversion/main/bb.fsproj (in 126 ms).\n/tmp/breakbench/no_implicit_conversion/main/Program.fs(5,24): error FS0001: This expression was expected to have type\u001d    'int32'    \u001dbut here has type\u001d    'int64' [/tmp/breakbench/no_implicit_conversion/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/no_implicit_conversion/main/Program.fs(5,24): error FS0001: This expression was expected to have type\u001d    'int32'    \u001dbut here has type\u001d    'int64' [/tmp/breakbench/no_implicit_conversion/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.94"
+  },
+  "generic_constraint": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/generic_constraint/main/bb.fsproj (in 131 ms).\n/tmp/breakbench/generic_constraint/main/Program.fs(7,31): error FS0001: The type 'Point' does not support the 'comparison' constraint because it has the 'NoComparison' attribute [/tmp/breakbench/generic_constraint/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/generic_constraint/main/Program.fs(7,31): error FS0001: The type 'Point' does not support the 'comparison' constraint because it has the 'NoComparison' attribute [/tmp/breakbench/generic_constraint/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.91"
+  },
+  "lossy_int_to_float": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/lossy_int_to_float/main/bb.fsproj (in 120 ms).\n/tmp/breakbench/lossy_int_to_float/main/Program.fs(7,10): error FS0001: This expression was expected to have type\u001d    'float'    \u001dbut here has type\u001d    'int64' [/tmp/breakbench/lossy_int_to_float/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/lossy_int_to_float/main/Program.fs(7,10): error FS0001: This expression was expected to have type\u001d    'float'    \u001dbut here has type\u001d    'int64' [/tmp/breakbench/lossy_int_to_float/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.91"
+  },
+  "const_index_bounds": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.main(String[] _arg1) in /tmp/breakbench/const_index_bounds/release/Program.fs:line 3\nAborted (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.15,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.main(String[] _arg1) in /tmp/breakbench/const_index_bounds/main/Program.fs:line 4\nAborted (core dumped)"
+  },
+  "lazy_accumulator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/lazy_accumulator/main/Program.fs(10,28): warning FS3388: This expression implicitly converts type 'byte array' to type 'System.Span<byte>'. See https://aka.ms/fsharp-implicit-convs. [/tmp/breakbench/lazy_accumulator/main/bb.fsproj] bb -> /tmp/breakbench/lazy_accumulator/main/out/bb.dll\n/tmp/breakbench/lazy_accumulator/main/Program.fs(10,28): warning FS3388: This expression implicitly converts type 'byte array' to type 'System.Span<byte>'. See https://aka.ms/fsharp-implicit-convs. [/tmp/breakbench/lazy_accumulator/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.69,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.main(String[] argv) in /tmp/breakbench/size_overflow_alloc/release/Program.fs:line 3\nAborted (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.main(String[] argv) in /tmp/breakbench/size_overflow_alloc/main/Program.fs:line 4\nAborted (core dumped)"
+  },
+  "const_overflow": {
+   "outcome": "TRAPPED",
+   "release": "SILENT",
+   "release_stdout": "-8985944073709551616",
+   "release_stderr": "",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.18,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.main(String[] _arg1) in /tmp/breakbench/const_overflow/main/Program.fs:line 3\nAborted (core dumped)"
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "blocking_in_async": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 1.02,
+   "stdout": "serial",
+   "stderr": ""
+  },
+  "unreachable_code": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "ok\nchecked",
+   "stderr": ""
+  },
+  "checked_interpolation": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/checked_interpolation/main/bb.fsproj (in 120 ms).\n/tmp/breakbench/checked_interpolation/main/Program.fs(5,22): error FS0039: The value or constructor 'nmae' is not defined. Maybe you want one of the following:\u001d   name\u001d   nan\u001d   Map\u001d   max\u001d   Map [/tmp/breakbench/checked_interpolation/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/checked_interpolation/main/Program.fs(5,22): error FS0039: The value or constructor 'nmae' is not defined. Maybe you want one of the following:\u001d   name\u001d   nan\u001d   Map\u001d   max\u001d   Map [/tmp/breakbench/checked_interpolation/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.89"
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/dominated_case/main/Program.fs(8,7): warning FS0026: This rule will never be matched [/tmp/breakbench/dominated_case/main/bb.fsproj] bb -> /tmp/breakbench/dominated_case/main/out/bb.dll\n/tmp/breakbench/dominated_case/main/Program.fs(8,7): warning FS0026: This rule will never be matched [/tmp/breakbench/dominated_case/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "warnings": "/tmp/breakbench/dominated_case/main/Program.fs(8,7): warning FS0026: This rule will never be matched [/tmp/breakbench/dominated_case/main/bb.fsproj] bb -> /tmp/breakbench/dominated_case/main/out/bb.dll\n/tmp/breakbench/dominated_case/main/Program.fs(8,7): warning FS0026: This rule will never be matched [/tmp/breakbench/dominated_case/main/bb.fsproj]",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "other",
+   "stderr": ""
+  },
+  "duplicate_key": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "char_arithmetic": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/char_arithmetic/main/bb.fsproj (in 136 ms).\n/tmp/breakbench/char_arithmetic/main/Program.fs(6,22): error FS0001: The type 'int' does not match the type 'char' [/tmp/breakbench/char_arithmetic/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/char_arithmetic/main/Program.fs(6,22): error FS0001: The type 'int' does not match the type 'char' [/tmp/breakbench/char_arithmetic/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.91"
+  },
+  "json_big_integer": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/json_big_integer/main/Program.fs(6,18): warning FS3261: Nullness warning: Possible dereference of a null value when accessing member 'Item' on the nullable value 'event' of type 'JsonNode | null'. [/tmp/breakbench/json_big_integer/main/bb.fsproj]\n/tmp/breakbench/json_big_integer/main/Program.fs(6,18): warning FS3261: Nullness warning: Possible dereference of a null value when accessing member 'Item' on the nullable value 'event' of type 'JsonNode | null'. [/tmp/breakbench/json_big_integer/main/bb.fsproj] bb -> /tmp/breakbench/json_big_integer/main/out/bb.dll\n2 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "9007199254740993",
+   "stderr": ""
+  },
+  "comparison_statement": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/comparison_statement/main/Program.fs(5,5): warning FS0020: The result of this equality expression has type 'bool' and is implicitly discarded. Consider using 'let' to bind the result to a name, e.g. 'let result = expression'. If you intended to mutate a value, then use the '<-' operator e.g. 'count <- expression'. [/tmp/breakbench/comparison_statement/main/bb.fsproj] bb -> /tmp/breakbench/comparison_statement/main/out/bb.dll\n/tmp/breakbench/comparison_statement/main/Program.fs(5,5): warning FS0020: The result of this equality expression has type 'bool' and is implicitly discarded. Consider using 'let' to bind the result to a name, e.g. 'let result = expression'. If you intended to mutate a value, then use the '<-' operator e.g. 'count <- expression'. [/tmp/breakbench/comparison_statement/main/bb.fsproj]",
+   "must_use": true
+  },
+  "structural_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "hash_matches_equality": {
+   "outcome": "SILENT",
+   "runs": 20,
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/hash_matches_equality/main/Program.fs(2,6): warning FS0346: The struct, record or union type 'Point' has an explicit implementation of 'Object.Equals'. Consider implementing a matching override for 'Object.GetHashCode()' [/tmp/breakbench/hash_matches_equality/main/bb.fsproj] bb -> /tmp/breakbench/hash_matches_equality/main/out/bb.dll\n/tmp/breakbench/hash_matches_equality/main/Program.fs(2,6): warning FS0346: The struct, record or union type 'Point' has an explicit implementation of 'Object.Equals'. Consider implementing a matching override for 'Object.GetHashCode()' [/tmp/breakbench/hash_matches_equality/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "warnings": "/tmp/breakbench/hash_matches_equality/main/Program.fs(2,6): warning FS0346: The struct, record or union type 'Point' has an explicit implementation of 'Object.Equals'. Consider implementing a matching override for 'Object.GetHashCode()' [/tmp/breakbench/hash_matches_equality/main/bb.fsproj] bb -> /tmp/breakbench/hash_matches_equality/main/out/bb.dll\n/tmp/breakbench/hash_matches_equality/main/Program.fs(2,6): warning FS0346: The struct, record or union type 'Point' has an explicit implementation of 'Object.Equals'. Consider implementing a matching override for 'Object.GetHashCode()' [/tmp/breakbench/hash_matches_equality/main/bb.fsproj]",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.main(String[] _arg1) in /tmp/breakbench/array_literal_length/release/Program.fs:line 3\nAborted (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.17,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.main(String[] _arg1) in /tmp/breakbench/array_literal_length/main/Program.fs:line 4\nAborted (core dumped)"
+  },
+  "enum_from_int": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "before\ninvalid",
+   "stderr": ""
+  },
+  "bitwise_on_bool": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/bitwise_on_bool/main/bb.fsproj (in 117 ms).\n/tmp/breakbench/bitwise_on_bool/main/Program.fs(5,8): error FS0001: The type 'bool' does not support the operator '&&&' [/tmp/breakbench/bitwise_on_bool/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/bitwise_on_bool/main/Program.fs(5,8): error FS0001: The type 'bool' does not support the operator '&&&' [/tmp/breakbench/bitwise_on_bool/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.84"
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/readonly_field/main/bb.fsproj (in 115 ms).\n/tmp/breakbench/readonly_field/main/Program.fs(6,7): error FS0005: This field is not mutable [/tmp/breakbench/readonly_field/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/readonly_field/main/Program.fs(6,7): error FS0005: This field is not mutable [/tmp/breakbench/readonly_field/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.83"
+  },
+  "bool_condition": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/bool_condition/main/bb.fsproj (in 116 ms).\n/tmp/breakbench/bool_condition/main/Program.fs(4,8): error FS0001: This expression was expected to have type\u001d    'bool'    \u001dbut here has type\u001d    'int' [/tmp/breakbench/bool_condition/main/bb.fsproj]\n/tmp/breakbench/bool_condition/main/Program.fs(4,8): error FS0001: This expression was expected to have type\u001d    'bool'    \u001dbut here has type\u001d    'int' [/tmp/breakbench/bool_condition/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/bool_condition/main/Program.fs(4,8): error FS0001: This expression was expected to have type\u001d    'bool'    \u001dbut here has type\u001d    'int' [/tmp/breakbench/bool_condition/main/bb.fsproj]\n/tmp/breakbench/bool_condition/main/Program.fs(4,8): error FS0001: This expression was expected to have type\u001d    'bool'    \u001dbut here has type\u001d    'int' [/tmp/breakbench/bool_condition/main/bb.fsproj]\n    0 Warning(s)\n    2 Error(s)\n\nTime Elapsed 00:00:00.82"
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.IO.IOException: No space left on device : '/dev/full'\n   at System.IO.RandomAccess.WriteAtOffset(SafeFileHandle handle, ReadOnlySpan`1 buffer, Int64& fileOffset)\n   at System.IO.Strategies.BufferedFileStreamStrategy.Flush(Boolean flushToDisk)\n   at System.IO.StreamWriter.\n...\nstem.IO.StreamWriter.Dispose(Boolean disposing)\n   at System.IO.TextWriter.Dispose()\n   at Program.main(String[] _arg1) in /tmp/breakbench/lost_write_error/release/Program.fs:line 7\n   at Program.main(String[] _arg1) in /tmp/breakbench/lost_write_error/release/Program.fs:line 6\nAborted (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IO.IOException: No space left on device : '/dev/full'\n   at System.IO.RandomAccess.WriteAtOffset(SafeFileHandle handle, ReadOnlySpan`1 buffer, Int64& fileOffset)\n   at System.IO.Strategies.BufferedFileStreamStrategy.Flush(Boolean flushToDisk)\n   at System.IO.StreamWriter.Flush(Boolean flushStream, Boolean flushEncoder)\n   at System.IO.StreamWriter.Dispose(Boolean disposing)\n   at System.IO.TextWriter.Dispose()\n   at Program.main(String[] _arg1) in /tmp/breakbench/lost_write_error/main/Program.fs:line 7\n   at Program.main(String[] _arg1) in /tmp/breakbench/lost_write_error/main/Program.fs:line 6\nAborted (core dumped)"
+  },
+  "short_read": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/short_read/main/Program.fs(9,5): warning FS3261: Nullness warning: Possible dereference of a null value when accessing member 'StandardOutput' on the nullable value 'child' of type 'Process | null'. [/tmp/breakbench/short_read/main/bb.fsproj]\n/tmp/breakbench/short_read/main/Program.fs(10,5): warning FS3261: Nullness warning: Possible dereference of a null value when accessing member 'WaitForExit' on the nullable value 'child' of type 'Process | null'. [/tmp/breakbench/short_read/main/bb.fsproj]\n/tmp/breakbench/short_read/main/Program.fs(10,5): warning FS3261: Nullness warning: Possible dereference of a null value when accessing member 'WaitForExit' on the nullable value 'child' of type 'Process | null'. [/tmp/breakbench/short_read/main/bb.fsproj] bb -> /tmp/breakbench/short_read/main/out/bb.dll\n4 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.23,
+   "stdout": "HELLO-WO\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "close failed",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "backed up",
+   "stderr": ""
+  },
+  "nullable_field": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/nullable_field/main/bb.fsproj (in 128 ms).\n/tmp/breakbench/nullable_field/main/Program.fs(6,31): error FS0039: The type 'Option<_>' does not define a field, constructor, or member named 'Length'. [/tmp/breakbench/nullable_field/main/bb.fsproj]\n\nBuild FAILED.\n\n/tmp/breakbench/nullable_field/main/Program.fs(6,31): error FS0039: The type 'Option<_>' does not define a field, constructor, or member named 'Length'. [/tmp/breakbench/nullable_field/main/bb.fsproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.00"
+  },
+  "stale_null_check": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "empty_slot": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.\n   at Program.main(String[] _arg1) in /tmp/breakbench/empty_slot/release/Program.fs:line 8\nAborted (core dumped)",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 134,
+   "secs": 0.18,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.\n   at Program.main(String[] _arg1) in /tmp/breakbench/empty_slot/main/Program.fs:line 8\nAborted (core dumped)"
+  },
+  "typed_nil": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "check_then_act": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "/tmp/breakbench/check_then_act/main/Program.fs(4,13): warning FS0760: It is recommended that objects supporting the IDisposable interface are created using the syntax 'new Type(args)', rather than 'Type(args)' or 'Type' as a function value representing the constructor, to indicate that resources may be owned by the generated value [/tmp/breakbench/check_then_act/main/bb.fsproj] bb -> /tmp/breakbench/check_then_act/main/out/bb.dll\n/tmp/breakbench/check_then_act/main/Program.fs(4,13): warning FS0760: It is recommended that objects supporting the IDisposable interface are created using the syntax 'new Type(args)', rather than 'Type(args)' or 'Type' as a function value representing the constructor, to indicate that resources may be owned by the generated value [/tmp/breakbench/check_then_act/main/bb.fsproj]\n1 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "async_reentrancy": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "-60",
+   "stderr": ""
+  },
+  "lock_skipped_on_return": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "0 Warning(s) 0 Error(s)",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "70",
+   "stderr": ""
+  }
+ }
+}

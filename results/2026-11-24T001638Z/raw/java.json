@@ -1,0 +1,1096 @@
+{
+ "lang": "java",
+ "mode": "strict",
+ "version": "openjdk version \"27.0.1.1\" 2026-11-17",
+ "results": {
+  "null_deref": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.NullPointerException: Cannot invoke \"Main$User.name()\" because \"<local1>\" is null\n\tat Main.main(Main.java:10)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.NullPointerException: Cannot invoke \"Main$User.name()\" because \"<local1>\" is null\n\tat Main.main(Main.java:10)"
+  },
+  "int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.ArithmeticException: / by zero\n\tat Main.main(Main.java:4)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArithmeticException: / by zero\n\tat Main.main(Main.java:4)"
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "9223372036854775807",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "Main.java:8: error: incompatible types: String cannot be converted to long\n        System.out.println(add(raw, 3)); // BREAK!\n                               ^\nNote: Some messages have been simplified; recompile with -Xdiags:verbose to get full output\n1 error"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "Main.java:6: error: missing return statement\n    }\n    ^\n1 error"
+  },
+  "non_exhaustive_match": {
+   "outcome": "REJECTED",
+   "message": "Main.java:5: error: the switch expression does not cover all possible input values\n        return switch (c) {\n               ^\n  missing patterns:\n      Color.BLUE\n1 error"
+  },
+  "uninitialized_variable": {
+   "outcome": "REJECTED",
+   "message": "Main.java:6: error: variable x might not have been initialized\n        System.out.println(x); // BREAK!\n                           ^\n1 error"
+  },
+  "missing_argument": {
+   "outcome": "REJECTED",
+   "message": "Main.java:7: error: method area in class Main cannot be applied to given types;\n        System.out.println(area(3)); // BREAK!\n                           ^\n  required: int,int\n  found:    int\n  reason: actual and formal argument lists differ in length\n1 error"
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "Main.java:8: error: cannot find symbol\n        cfg.colour = \"red\"; // BREAK!\n           ^\n  symbol:   variable colour\n  location: variable cfg of type Config\n1 error"
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "Main.java:5: error: incompatible types: int cannot be converted to boolean\n        if (x = 1) label = \"one\"; // BREAK!\n              ^\n1 error"
+  },
+  "switch_fallthrough": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "Main.java:8: warning: [fallthrough] possible fall-through into case\n1 warning",
+   "warnings": "Main.java:8: warning: [fallthrough] possible fall-through into case",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "two",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "REJECTED",
+   "message": "Main.java:5: error: incompatible types: Integer cannot be converted to boolean\n        if (qty) present = true; // BREAK!\n            ^\n1 error"
+  },
+  "string_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "different",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.NumberFormatException: For input string: \"12abc\"\n\tat java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)\n\tat java.base/java.lang.Integer.parseInt(Integer.java:529)\n\tat java.base/java.lang.Integer.parseInt(Integer.java:626)\n\tat Main.main(Main.java:3)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.NumberFormatException: For input string: \"12abc\"\n\tat java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)\n\tat java.base/java.lang.Integer.parseInt(Integer.java:529)\n\tat java.base/java.lang.Integer.parseInt(Integer.java:626)\n\tat Main.main(Main.java:3)"
+  },
+  "covariant_array_write": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.ArrayStoreException: Main$Cat\n\tat Main.main(Main.java:9)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayStoreException: Main$Cat\n\tat Main.main(Main.java:9)"
+  },
+  "mutate_while_iterating": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.util.ConcurrentModificationException\n\tat java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1104)\n\tat java.base/java.util.ArrayList$Itr.next(ArrayList.java:1058)\n\tat Main.main(Main.java:8)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.util.ConcurrentModificationException\n\tat java.base/java.util.ArrayList$Itr.checkForComodification(ArrayList.java:1104)\n\tat java.base/java.util.ArrayList$Itr.next(ArrayList.java:1058)\n\tat Main.main(Main.java:8)"
+  },
+  "self_deadlock": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "REJECTED",
+   "message": "Main.java:10: error: local variables referenced from a lambda expression must be final or effectively final\n            fs.add(() -> i); // BREAK!\n                         ^\n1 error"
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "REJECTED",
+   "message": "Main.java:11: error: unreported exception IOException; must be caught or declared to be thrown\n        save(\"/nonexistent/dir/out.txt\"); // BREAK!\n            ^\n1 error"
+  },
+  "sort_with_nan": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "ordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "3.0",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "668",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.IllegalStateException: stream has already been operated upon or closed\n\tat java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:260)\n\tat java.base/java.util.stream.ReferencePipeline.count(ReferencePipeline.java:750)\n\tat Main.main(Main.java:9)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.IllegalStateException: stream has already been operated upon or closed\n\tat java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:260)\n\tat java.base/java.util.stream.ReferencePipeline.count(ReferencePipeline.java:750)\n\tat Main.main(Main.java:9)"
+  },
+  "bitwise_precedence": {
+   "outcome": "REJECTED",
+   "message": "Main.java:4: error: bad operand types for binary operator '&'\n        boolean even = x & 1 == 0; // BREAK!\n                         ^\n  first type:  int\n  second type: boolean\n1 error"
+  },
+  "dangling_else": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "unset",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "Main.java:4: error: bad operand types for binary operator '<'\n        boolean inside = 1 < x < 3; // BREAK!\n                               ^\n  first type:  boolean\n  second type: int\n1 error"
+  },
+  "lost_update_on_copy": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "150",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "Main.java:6: warning: [deprecation] exec(String) in Runtime has been deprecated\n1 warning",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "path_join_escape": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "escaped",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "no match",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "Main.java:6: error: ')' or ',' expected\n            \"bob\" // CONTROL! \"bob\",\n                 ^\n1 error"
+  },
+  "return_in_finally": {
+   "outcome": "SILENT",
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "Main.java:16: warning: [finally] finally clause cannot complete normally\n1 warning",
+   "warnings": "Main.java:16: warning: [finally] finally clause cannot complete normally",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "total 3",
+   "stderr": "Exception in thread \"Thread-0\" java.lang.NumberFormatException: For input string: \"x\"\n\tat java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)\n\tat java.base/java.lang.Long.parseLong(Long.java:556)\n\tat java.base/java.lang.Long.parseLong(Long.java:660)\n\tat Main.lambda$main$0(Main.java:7)\n\tat java.base/java.lang.Thread.run(Thread.java:1527)"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.util.MissingFormatArgumentException: Format specifier '%d'\n\tat java.base/java.util.Formatter.format(Formatter.java:2760)\n\tat java.base/java.util.Formatter.format(Formatter.java:2698)\n\tat java.base/java.lang.String.format(String.java:4830)\n\tat Main.main(Main.java:6)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.util.MissingFormatArgumentException: Format specifier '%d'\n\tat java.base/java.util.Formatter.format(Formatter.java:2760)\n\tat java.base/java.util.Formatter.format(Formatter.java:2698)\n\tat java.base/java.lang.String.format(String.java:4830)\n\tat Main.main(Main.java:6)"
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.NullPointerException: Cannot invoke \"java.lang.Integer.intValue()\" because the return value of \"java.util.Map.get(Object)\" is null\n\tat Main.main(Main.java:8)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.NullPointerException: Cannot invoke \"java.lang.Integer.intValue()\" because the return value of \"java.util.Map.get(Object)\" is null\n\tat Main.main(Main.java:8)"
+  },
+  "mutable_hash_key": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "lost",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "REJECTED",
+   "message": "Main.java:6: error: variable status is already defined in method main(String[])\n            String status = \"done\"; // CONTROL! status = \"done\";\n                   ^\n1 error"
+  },
+  "discarded_pure_result": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 3\n\tat Main.main(Main.java:6)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 3\n\tat Main.main(Main.java:6)"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "missing",
+   "stderr": ""
+  },
+  "use_after_close": {
+   "outcome": "TRAPPED",
+   "runs": 50,
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.io.IOException: Stream closed\n\tat java.base/sun.nio.cs.StreamEncoder.ensureOpen(StreamEncoder.java:50)\n\tat java.base/sun.nio.cs.StreamEncoder.write(StreamEncoder.java:115)\n\tat java.base/sun.nio.cs.StreamEncoder.write(StreamEncoder.java:132)\n\tat java.base/java.io.OutputStreamWriter.write(OutputStreamWriter.java:224)\n\tat java.base/java.io.Writer.write(Writer.java:248)\n\tat Main.main(Main.java:9)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.io.IOException: Stream closed\n\tat java.base/sun.nio.cs.StreamEncoder.ensureOpen(StreamEncoder.java:50)\n\tat java.base/sun.nio.cs.StreamEncoder.write(StreamEncoder.java:115)\n\tat java.base/sun.nio.cs.StreamEncoder.write(StreamEncoder.java:132)\n\tat java.base/java.io.OutputStreamWriter.write(OutputStreamWriter.java:224)\n\tat java.base/java.io.Writer.write(Writer.java:248)\n\tat Main.main(Main.java:9)"
+  },
+  "dead_store": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "unbalanced",
+   "stderr": "Exception in thread \"Thread-0\" java.lang.IllegalStateException: crash mid-update\n\tat Main.post(Main.java:12)\n\tat java.base/java.lang.Thread.run(Thread.java:1527)"
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "a?",
+   "stderr": ""
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4\n\tat Main.main(Main.java:10)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4\n\tat Main.main(Main.java:10)"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4\n\tat Main.main(Main.java:10)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4\n\tat Main.main(Main.java:10)"
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.StackOverflowError\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\t\n...\n:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.StackOverflowError\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.\n...\nain.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)"
+  },
+  "concurrent_map_write": {
+   "outcome": "SILENT",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "6524",
+   "stderr": "Exception in thread \"Thread-1\" java.lang.ClassCastException: class java.util.HashMap$Node cannot be cast to class java.util.HashMap$TreeNode (java.util.HashMap$Node and java.util.HashMap$TreeNode are in module java.base of loader 'bootstrap')\n\tat java.base/java.util.HashMap$TreeNode.moveRootToFront(HashMap.java:2020)\n\tat java.base/java.util.HashMap$TreeNode.treeify(HashMap.java:2136)\n\tat java.base/java.util.HashMap.treeifyBin(HashMap.java:804)\n\tat java.base/java.util.HashMap.putVal(HashMap.java:676)\n\tat java.base/java.util.HashMap.put(HashMap.java:644)\n\tat Main.lambda$main$0(Main.java:11)\n\tat java.base/java.lang.Thread.run(Thread.java:1527)\nException in thread \"Thread-7\" Exception in thread \"Thread-6\" java.lang.ClassCastException: class jav\n...\nase/java.util.HashMap.putVal(HashMap.java:676)\n\tat java.base/java.util.HashMap.put(HashMap.java:644)\n\tat Main.lambda$main$0(Main.java:11)\n\tat java.base/java.lang.Thread.run(Thread.java:1527)\njava.lang.ClassCastException: class java.util.HashMap$Node cannot be cast to class java.util.HashMap$TreeNode (java.util.HashMap$Node and java.util.HashMap$TreeNode are in module java.base of loader 'bootstrap')\n\tat java.base/java.util.HashMap$TreeNode.moveRootToFront(HashMap.java:2020)\n\tat java.base/java.util.HashMap$TreeNode.putTreeVal(HashMap.java:2199)\n\tat java.base/java.util.HashMap.putVal(HashMap.java:670)\n\tat java.base/java.util.HashMap.put(HashMap.java:644)\n\tat Main.lambda$main$0(Main.java:11)\n\tat java.base/java.lang.Thread.run(Thread.java:1527)"
+  },
+  "racy_counter": {
+   "outcome": "SILENT",
+   "runs": 5,
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.08,
+   "stdout": "1186508",
+   "stderr": ""
+  },
+  "huge_allocation": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.OutOfMemoryError: Java heap space\n\tat Main.main(Main.java:4)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.OutOfMemoryError: Java heap space\n\tat Main.main(Main.java:4)"
+  },
+  "fd_leak": {
+   "outcome": "LEAK",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.06,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.io.FileNotFoundException: /tmp/bb_fd.txt (Too many open files)\n\tat java.base/java.io.FileInputStream.open0(Native Method)\n\tat java.base/java.io.FileInputStream.open(FileInputStream.java:185)\n\tat java.base/java.io.FileInputStream.<init>(FileInputStream.java:139)\n\tat java.base/java.io.FileInputStream.<init>(FileInputStream.java:109)\n\tat Main.main(Main.java:10)"
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.ClassCastException: class java.lang.Integer cannot be cast to class java.lang.String (java.lang.Integer and java.lang.String are in module java.base of loader 'bootstrap')\n\tat Main.main(Main.java:4)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ClassCastException: class java.lang.Integer cannot be cast to class java.lang.String (java.lang.Integer and java.lang.String are in module java.base of loader 'bootstrap')\n\tat Main.main(Main.java:4)"
+  },
+  "format_string": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.util.MissingFormatArgumentException: Format specifier '%s'\n\tat java.base/java.util.Formatter.format(Formatter.java:2760)\n\tat java.base/java.io.PrintStream.format(PrintStream.java:1163)\n\tat java.base/java.io.PrintStream.printf(PrintStream.java:1061)\n\tat Main.main(Main.java:3)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.util.MissingFormatArgumentException: Format specifier '%s'\n\tat java.base/java.util.Formatter.format(Formatter.java:2760)\n\tat java.base/java.io.PrintStream.format(PrintStream.java:1163)\n\tat java.base/java.io.PrintStream.printf(PrintStream.java:1061)\n\tat Main.main(Main.java:3)"
+  },
+  "trojan_source": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "admin",
+   "stderr": ""
+  },
+  "unsafe_deserialization": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "null_byte_path": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "admin\nadmin",
+   "stderr": ""
+  },
+  "deep_structure_release": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.08,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "Main.java:5: error: array required, but String found\n        greeting[0] = 'j'; // CONTROL! greeting = \"j\" + greeting.substring(1);\n                ^\n1 error"
+  },
+  "reference_cycle": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.92,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "complete_init": {
+   "outcome": "REJECTED",
+   "message": "Main.java:6: error: constructor Config in record Config cannot be applied to given types;\n        var partial = new Config(5); // BREAK!\n                      ^\n  required: int,int\n  found:    int\n  reason: actual and formal argument lists differ in length\n1 error"
+  },
+  "newtype": {
+   "outcome": "REJECTED",
+   "message": "Main.java:10: error: incompatible types: Seconds cannot be converted to Meters\n        Meters wrong = new Meters(2).plus(new Seconds(3)); // BREAK!\n                                          ^\nNote: Some messages have been simplified; recompile with -Xdiags:verbose to get full output\n1 error"
+  },
+  "strong_enum": {
+   "outcome": "REJECTED",
+   "message": "Main.java:14: error: incompatible types: int cannot be converted to Color\n        System.out.println(name(7)); // BREAK!\n                                ^\nNote: Some messages have been simplified; recompile with -Xdiags:verbose to get full output\n1 error"
+  },
+  "override_check": {
+   "outcome": "REJECTED",
+   "message": "Main.java:10: error: descibe() in Circle does not override or implement a method from a supertype\n        @Override String descibe() { return \"circle\"; } // BREAK!\n        ^\n1 error"
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "before",
+   "release_stderr": "Exception in thread \"main\" java.util.NoSuchElementException: No value present\n\tat java.base/java.util.Optional.get(Optional.java:147)\n\tat Main.main(Main.java:10)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "before",
+   "stderr": "Exception in thread \"main\" java.util.NoSuchElementException: No value present\n\tat java.base/java.util.Optional.get(Optional.java:147)\n\tat Main.main(Main.java:10)"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "hello, null",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.util.NoSuchElementException\n\tat java.base/java.util.ArrayList$Itr.next(ArrayList.java:1061)\n\tat java.base/java.util.Collections.max(Collections.java:700)\n\tat Main.main(Main.java:9)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.util.NoSuchElementException\n\tat java.base/java.util.ArrayList$Itr.next(ArrayList.java:1061)\n\tat java.base/java.util.Collections.max(Collections.java:700)\n\tat Main.main(Main.java:9)"
+  },
+  "readonly_param": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "REJECTED",
+   "message": "Main.java:4: error: incompatible types: possible lossy conversion from int to byte\n        byte tooBig = 300; // BREAK!\n                      ^\n1 error"
+  },
+  "no_implicit_conversion": {
+   "outcome": "REJECTED",
+   "message": "Main.java:5: error: incompatible types: possible lossy conversion from long to int\n        int wrong = big; // BREAK!\n                    ^\n1 error"
+  },
+  "generic_constraint": {
+   "outcome": "REJECTED",
+   "message": "Main.java:11: error: no suitable method found for sort(List<Point>)\n        List<Point> ps = new ArrayList<>(List.of(new Point(1, 2))); Collections.sort(ps); // BREAK!\n                                                                               ^\n    method Collections.<T#1>sort(List<T#1>) is not applicable\n      (inference variable T#1 has incompatible bounds\n        equality constraints: Point\n        upper bounds: Comparable<? super T#1>)\n    method Collections.<T#2>sort(List<T#2>,Comparator<? super T#2>) is not applicable\n      (cannot infer type-variable(s) T#2\n        (actual and formal argument lists differ in length))\n  where T#1,T#2 are type-variables:\n    T#1 extends Comparable<? super T#1> declared in method <T#1>sort(List<T#1>)\n    T#2 extends Object declared in method <T#2>sort(List<T#2>,Comparator<? super T#2>)\n1 error"
+  },
+  "lossy_int_to_float": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "9007199254740992",
+   "stderr": ""
+  },
+  "const_index_bounds": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 3\n\tat Main.main(Main.java:4)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 3\n\tat Main.main(Main.java:4)"
+  },
+  "lazy_accumulator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.9,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 8 out of bounds for length 8\n\tat Main.main(Main.java:6)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 8 out of bounds for length 8\n\tat Main.main(Main.java:6)"
+  },
+  "const_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "-8985944073709551616",
+   "stderr": ""
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": "Exception in thread \"Thread-0\" java.lang.NumberFormatException: For input string: \"x\"\n\tat java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)\n\tat java.base/java.lang.Long.parseLong(Long.java:556)\n\tat java.base/java.lang.Long.parseLong(Long.java:660)\n\tat Main.lambda$main$0(Main.java:7)\n\tat java.base/java.lang.Thread.run(Thread.java:1527)"
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.52,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "unreachable_code": {
+   "outcome": "REJECTED",
+   "message": "Main.java:9: error: unreachable statement\n        System.out.println(\"checked\"); // BREAK!\n        ^\n1 error"
+  },
+  "checked_interpolation": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no string interpolation"
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "REJECTED",
+   "message": "Main.java:13: error: this case label is dominated by a preceding case label\n    static String bad(Shape s) { return switch (s) { case Shape x -> \"other\"; case Circle c -> \"circle\"; }; } // BREAK!\n                                                                                   ^\n1 error"
+  },
+  "duplicate_key": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.IllegalArgumentException: duplicate key: a\n\tat java.base/java.util.ImmutableCollections$MapN.<init>(ImmutableCollections.java:1269)\n\tat java.base/java.util.Map.of(Map.java:1388)\n\tat Main.main(Main.java:5)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.IllegalArgumentException: duplicate key: a\n\tat java.base/java.util.ImmutableCollections$MapN.<init>(ImmutableCollections.java:1269)\n\tat java.base/java.util.Map.of(Map.java:1388)\n\tat Main.main(Main.java:5)"
+  },
+  "char_arithmetic": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "98",
+   "stderr": ""
+  },
+  "json_big_integer": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no JSON parser in the standard library"
+  },
+  "comparison_statement": {
+   "outcome": "REJECTED",
+   "message": "Main.java:5: error: not a statement\n        count == 5; // BREAK!\n              ^\n1 error"
+  },
+  "structural_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "different",
+   "stderr": ""
+  },
+  "hash_matches_equality": {
+   "outcome": "SILENT",
+   "runs": 20,
+   "warned": true,
+   "run_warned": false,
+   "all_warnings": "Main.java:5: warning: [overrides] Class Point overrides equals, but neither it nor any superclass overrides hashCode method\n1 warning",
+   "warnings": "Main.java:5: warning: [overrides] Class Point overrides equals, but neither it nor any superclass overrides hashCode method",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 3\n\tat Main.main(Main.java:4)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 3\n\tat Main.main(Main.java:4)"
+  },
+  "enum_from_int": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "before",
+   "release_stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 7 out of bounds for length 3\n\tat Main.main(Main.java:6)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "before",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 7 out of bounds for length 3\n\tat Main.main(Main.java:6)"
+  },
+  "bitwise_on_bool": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0\n\tat java.base/jdk.internal.util.Preconditions$1.apply(Preconditions.java:55)\n\tat java.base/jdk.internal.util.Preconditions$1.apply(Preconditions.java:52)\n\tat java.base/jdk.internal.util.Precondit\n...\n.java:106)\n\tat java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:302)\n\tat java.base/java.lang.String.checkIndex(String.java:5279)\n\tat java.base/java.lang.StringLatin1.charAt(StringLatin1.java:58)\n\tat java.base/java.lang.String.charAt(String.java:1843)\n\tat Main.main(Main.java:4)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0\n\tat java.base/jdk.internal.util.Preconditions$1.apply(Preconditions.java:55)\n\tat java.base/jdk.internal.util.Preconditions$1.apply(Preconditions.java:52)\n\tat java.base/jdk.internal.util.Preconditions$4.apply(Preconditions.java:213)\n\tat java.base/jdk.internal.util.Preconditions$4.apply(Preconditions.java:210)\n\tat java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:98)\n\tat java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:106)\n\tat java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:302)\n\tat java.base/java.lang.String.checkIndex(String.java:5279)\n\tat java.base/java.lang.StringLatin1.charAt(StringLatin1.java:58)\n\tat java.base/java.lang.String.charAt(String.java:1843)\n\tat Main.main(Main.java:4)"
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "Main.java:6: error: cannot assign a value to final variable port\n        c.port = 1; // BREAK!\n         ^\n1 error"
+  },
+  "bool_condition": {
+   "outcome": "REJECTED",
+   "message": "Main.java:4: error: incompatible types: int cannot be converted to boolean\n        if (\"x\".compareTo(\"x\")) System.out.println(\"different\"); // BREAK!\n                         ^\n1 error"
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.io.IOException: No space left on device\n\tat java.base/java.io.FileOutputStream.writeBytes(Native Method)\n\tat java.base/java.io.FileOutputStream.write(FileOutputStream.java:352)\n\tat java.base/sun.nio.cs.StreamEncoder.writeBytes(StreamEncoder.java:220)\n\tat java.base/sun.nio.cs.StreamEncoder.implClose(StreamEncoder.java:340)\n\tat java.base/sun.nio.cs.StreamEncoder.close(StreamEncoder.java:159)\n\tat java.base/java.io.OutputStreamWriter.close(OutputStreamWriter.java:253)\n\tat java.base/java.io.BufferedWriter.close(BufferedWriter.java:318)\n\tat Main.main(Main.java:9)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.io.IOException: No space left on device\n\tat java.base/java.io.FileOutputStream.writeBytes(Native Method)\n\tat java.base/java.io.FileOutputStream.write(FileOutputStream.java:352)\n\tat java.base/sun.nio.cs.StreamEncoder.writeBytes(StreamEncoder.java:220)\n\tat java.base/sun.nio.cs.StreamEncoder.implClose(StreamEncoder.java:340)\n\tat java.base/sun.nio.cs.StreamEncoder.close(StreamEncoder.java:159)\n\tat java.base/java.io.OutputStreamWriter.close(OutputStreamWriter.java:253)\n\tat java.base/java.io.BufferedWriter.close(BufferedWriter.java:318)\n\tat Main.main(Main.java:9)"
+  },
+  "short_read": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "HELLO-WO\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "disk full",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "backed up",
+   "stderr": ""
+  },
+  "nullable_field": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.NullPointerException: Cannot invoke \"String.length()\" because the return value of \"Main$User.name()\" is null\n\tat Main.main(Main.java:5)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.NullPointerException: Cannot invoke \"String.length()\" because the return value of \"Main$User.name()\" is null\n\tat Main.main(Main.java:5)"
+  },
+  "stale_null_check": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.NullPointerException: Cannot invoke \"Main$User.name()\" because \"<local1>.user\" is null\n\tat Main.main(Main.java:17)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.NullPointerException: Cannot invoke \"Main$User.name()\" because \"<local1>.user\" is null\n\tat Main.main(Main.java:17)"
+  },
+  "empty_slot": {
+   "outcome": "TRAPPED",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.NullPointerException: Cannot invoke \"Main$User.name()\" because \"<local1>[0]\" is null\n\tat Main.main(Main.java:8)",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.NullPointerException: Cannot invoke \"Main$User.name()\" because \"<local1>[0]\" is null\n\tat Main.main(Main.java:8)"
+  },
+  "typed_nil": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "all_warnings": "Main.java:2: warning: [serial] serializable class ValidationError has no definition of serialVersionUID\n1 warning",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "check_then_act": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "99",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "async_reentrancy": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no asynchronous tasks in the standard library, only threads; the threaded form of this race is check_then_act"
+  },
+  "lock_skipped_on_return": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  }
+ }
+}

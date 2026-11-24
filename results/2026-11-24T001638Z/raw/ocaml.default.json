@@ -1,0 +1,954 @@
+{
+ "lang": "ocaml",
+ "mode": "default",
+ "version": "The OCaml toplevel, version 5.5.2",
+ "results": {
+  "null_deref": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 7, characters 27-28:\n7 |   print_int (String.length u.name); (* BREAK! *)\n                               ^\nError: This expression has type user option which is not a record type."
+  },
+  "int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Division_by_zero"
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Invalid_argument(\"Char.chr\")"
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 5, characters 17-20:\n5 |   print_int (add raw 3); (* BREAK! *)\n                     ^^^\nError: The value raw has type string but an expression was expected of type\n         int"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 3, characters 26-32:\n3 |   else if score < 50 then \"fail\"\n                              ^^^^^^\nError: This constant has type string but an expression was expected of type\n         unit\n       because it is in the result of a conditional with no else branch"
+  },
+  "non_exhaustive_match": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", lines 4-6, characters 2-20:\n4 | ..match c with\n5 |   | Red -> \"red\"\n6 |   | Green -> \"green\"\nError (warning 8 [partial-match]): this pattern-matching is not exhaustive.\n  Here is an example of a case that is not matched: Blue"
+  },
+  "uninitialized_variable": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 3, characters 18-20:\n3 |   let x : int ref in (* BREAK! *)\n                      ^^\nError: Syntax error"
+  },
+  "missing_argument": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 4, characters 12-20:\n4 |   print_int (area 3); (* BREAK! *)\n                ^^^^^^^^\nError: This expression has type int -> int\n       but an expression was expected of type int\nHint: This function application is partial, maybe some arguments are missing."
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 5, characters 6-12:\n5 |   cfg.colour <- \"red\"; (* BREAK! *)\n          ^^^^^^\nError: This expression has type config\n       There is no field colour within type config\nHint:       Did you mean color?"
+  },
+  "assign_in_condition": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not one",
+   "stderr": ""
+  },
+  "switch_fallthrough": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 3, characters 19-22:\n3 |   let present = if qty then true else false in (* BREAK! *)\n                       ^^^\nError: The value qty has type int option\n       but an expression was expected of type bool\n       because it is in the condition of an if-statement"
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Failure(\"int_of_string\")"
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 10, characters 16-38:\n10 |   let animals = (dogs :> animal array) in (* BREAK! *)\n                     ^^^^^^^^^^^^^^^^^^^^^^\nError: Type dog array is not a subtype of animal array\n       The second object type has no method fetch"
+  },
+  "mutate_while_iterating": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1,3",
+   "stderr": ""
+  },
+  "self_deadlock": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Sys_error(\"Mutex.lock: Resource deadlock avoided\")"
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Sys_error(\"/nonexistent/dir/out.txt: No such file or directory\")"
+  },
+  "sort_with_nan": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 3, characters 20-31:\n3 |   let avg : float = sum / count in (* BREAK! *)\n                        ^^^^^^^^^^^\nError: This expression has type int but an expression was expected of type\n         float"
+  },
+  "leading_zero_literal": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unset",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 3, characters 23-24:\n3 |   let inside = 1 < x < 3 in (* BREAK! *)\n                           ^\nError: The constant 3 has type int but an expression was expected of type\n         bool"
+  },
+  "lost_update_on_copy": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "150",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hi\ninjected",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "path_join_escape": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "inside",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 4, characters 4-9:\n4 |     \"bob\" (* BREAK! *)\n        ^^^^^\nError: This expression has type string\n       This is not a function; it cannot be applied."
+  },
+  "return_in_finally": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Failure(\"int_of_string\")"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 3, characters 2-38:\n3 |   Printf.printf \"%d of %d\\n\" completed; (* BREAK! *)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nError: This expression has type int -> unit\n       but an expression was expected of type unit\n       because it is in the left-hand side of a sequence\nHint: This function application is partial, maybe some arguments are missing."
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Not_found"
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pending",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 3, characters 2-29:\n3 |   String.uppercase_ascii name; (* BREAK! *)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nError: This expression has type string but an expression was expected of type\n         unit\n       because it is in the left-hand side of a sequence"
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Invalid_argument(\"index out of bounds\")"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 4, characters 32-35:\n4 |   print_endline (if List.mem id ids then \"found\" else \"missing\") (* CONTROL! print_endline (if List.mem (int_of_string id) ids then \"found\" else \"missing\") *)\n                                    ^^^\nError: The value ids has type int list but an expression was expected of type\n         string list\n       Type int is not compatible with type string"
+  },
+  "use_after_close": {
+   "outcome": "TRAPPED",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Sys_error(\"Bad file descriptor\")"
+  },
+  "dead_store": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 3, characters 6-11:\n3 |   let total = price + 2 in\n          ^^^^^\nError (warning 26 [unused-var]): unused variable total."
+  },
+  "panic_under_lock": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unbalanced",
+   "stderr": "worker failed: crash mid-update"
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Invalid_argument(\"index out of bounds\")"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Invalid_argument(\"index out of bounds\")"
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.52,
+   "stdout": "",
+   "stderr": "Fatal error: exception Stack overflow"
+  },
+  "concurrent_map_write": {
+   "outcome": "HANG",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "racy_counter": {
+   "outcome": "SILENT",
+   "runs": 5,
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1981613",
+   "stderr": ""
+  },
+  "huge_allocation": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Out of memory"
+  },
+  "fd_leak": {
+   "outcome": "LEAK",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Sys_error(\"/tmp/bb_fd.txt: Too many open files\")"
+  },
+  "wrong_variant_access": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", lines 5-8, characters 2-18:\n5 | ..let (Text s) = v in (* BREAK! *)\n6 |   (* CONTROL! let s = match v with Text s -> s | Int_value _ -> \"\" in *)\n7 |   print_int (String.length s);\n8 |   print_newline ()\nError (warning 8 [partial-match]): this pattern-matching is not exhaustive.\n  Here is an example of a case that is not matched: Int_value _"
+  },
+  "format_string": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 2, characters 16-28:\n2 |   Printf.printf Sys.argv.(1) (* BREAK! *)\n                    ^^^^^^^^^^^^\nError: This expression has type string but an expression was expected of type\n         ('a, out_channel, unit) format =\n           ('a, out_channel, unit, unit, unit, unit) format6"
+  },
+  "trojan_source": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "admin",
+   "stderr": ""
+  },
+  "unsafe_deserialization": {
+   "outcome": "CRASH",
+   "warned": false,
+   "run_warned": false,
+   "exit": 139,
+   "secs": 0.09,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "null_byte_path": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 2, characters 4-13:\n2 | let is_\u0430dmin _user = true (* BREAK! *)\n        ^^^^^^^^^\nError: Invalid character U+0430 in identifier"
+  },
+  "deep_structure_release": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.05,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 3, characters 2-21:\n3 |   greeting.[0] <- 'j'; (* BREAK! *)\n      ^^^^^^^^^^^^^^^^^^^\nError: Syntax error: strings are immutable, there is no assignment syntax for\n       them.\nHint: Mutable sequences of bytes are available in the Bytes module.\nHint: Did you mean to use Bytes.set?"
+  },
+  "reference_cycle": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.25,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "complete_init": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 5, characters 17-32:\n5 |   let _partial = { timeout = 5 } in (* BREAK! *)\n                     ^^^^^^^^^^^^^^^\nError: Some record fields are undefined: retries"
+  },
+  "newtype": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 9, characters 34-41:\n9 |   let wrong = add_m (Meters 2.0) (Seconds 3.0) in (* BREAK! *)\n                                      ^^^^^^^\nError: This variant expression is expected to have type meters\n       There is no constructor Seconds within type meters"
+  },
+  "strong_enum": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 8, characters 22-23:\n8 |   print_endline (name 7); (* BREAK! *)\n                          ^\nError: The constant 7 has type int but an expression was expected of type\n         color"
+  },
+  "override_check": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 10, characters 4-30:\n10 |     method! descibe = \"circle\" (* BREAK! *)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^\nError: The method descibe has no previous definition"
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "Fatal error: exception Invalid_argument(\"option is None\")"
+  },
+  "null_in_text": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 5, characters 29-33:\n5 |   print_endline (\"hello, \" ^ name) (* CONTROL! print_endline (\"hello, \" ^ Option.value name ~default:\"nobody\") *)\n                                 ^^^^\nError: The value name has type string option\n       but an expression was expected of type string"
+  },
+  "not_found_sentinel": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Not_found"
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Failure(\"hd\")"
+  },
+  "readonly_param": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 2, characters 2-4:\n2 |   xs.(0) <- 9; (* BREAK! *)\n      ^^\nError: The value xs has type int list but an expression was expected of type\n         'a array"
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Invalid_argument(\"Char.chr\")"
+  },
+  "no_implicit_conversion": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 4, characters 25-28:\n4 |   let (_wrong : int32) = big in (* BREAK! *)\n                             ^^^\nError: The value big has type int64 but an expression was expected of type\n         int32"
+  },
+  "generic_constraint": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "lossy_int_to_float": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 6, characters 7-8:\n6 |   show n (* BREAK! *)\n           ^\nError: The value n has type int but an expression was expected of type float"
+  },
+  "const_index_bounds": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Invalid_argument(\"index out of bounds\")"
+  },
+  "lazy_accumulator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.45,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Invalid_argument(\"index out of bounds\")"
+  },
+  "const_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "237427963145224192",
+   "stderr": ""
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": "Thread 1 killed on uncaught exception Failure(\"int_of_string\")"
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "unreachable_code": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ok\nchecked",
+   "stderr": ""
+  },
+  "checked_interpolation": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no string interpolation"
+  },
+  "evaluation_order": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2 1",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 5, characters 34-40:\n5 | let bad = function _ -> \"other\" | Circle -> \"circle\" (* BREAK! *)\n                                      ^^^^^^\nError (warning 11 [redundant-case]): this match case is unused."
+  },
+  "duplicate_key": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "char_arithmetic": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 5, characters 13-14:\n5 |   print_int (c + 1) (* BREAK! *)\n                 ^\nError: The value c has type char but an expression was expected of type int"
+  },
+  "json_big_integer": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no JSON parser in the standard library"
+  },
+  "comparison_statement": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 4, characters 2-12:\n4 |   !count = 5; (* BREAK! *)\n      ^^^^^^^^^^\nError: This expression has type bool but an expression was expected of type\n         unit\n       because it is in the left-hand side of a sequence"
+  },
+  "structural_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "hash_matches_equality": {
+   "outcome": "SILENT",
+   "runs": 20,
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Invalid_argument(\"index out of bounds\")"
+  },
+  "enum_from_int": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "before\ninvalid",
+   "stderr": ""
+  },
+  "bitwise_on_bool": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 4, characters 5-26:\n4 |   if (String.length s > 0) land (s.[0] = 'a') then print_endline \"both\" (* BREAK! *)\n         ^^^^^^^^^^^^^^^^^^^^^\nError: This expression has type bool but an expression was expected of type\n         int"
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 5, characters 2-13:\n5 |   c.port <- 1; (* BREAK! *)\n      ^^^^^^^^^^^\nError: The record field port is not mutable"
+  },
+  "bool_condition": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 3, characters 5-20:\n3 |   if compare \"x\" \"x\" then print_endline \"different\" (* BREAK! *)\n         ^^^^^^^^^^^^^^^\nError: This expression has type int but an expression was expected of type\n         bool\n       because it is in the condition of an if-statement"
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "Fatal error: exception Sys_error(\"No space left on device\")"
+  },
+  "short_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.2,
+   "stdout": "HELLO-WORLD-1234",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "Fun.Finally_raised: Dune__exe__Main.Disk_error(\"close failed\")",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "total=42",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 2, characters 2-30:\n2 |   Sys.command \"sh -c 'exit 3'\"; (* CONTROL! ignore (Sys.command \"sh -c 'exit 3'\"); *)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nError: This expression has type int but an expression was expected of type\n         unit\n       because it is in the left-hand side of a sequence"
+  },
+  "nullable_field": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 5, characters 27-39:\n5 |   print_int (String.length decoded.name); (* BREAK! *)\n                               ^^^^^^^^^^^^\nError: The field access decoded.name has type string option\n       but an expression was expected of type string"
+  },
+  "stale_null_check": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "empty_slot": {
+   "outcome": "REJECTED",
+   "message": "File \"main.ml\", line 7, characters 27-36:\n7 |   print_int (String.length users.(0).name); (* BREAK! *)\n                               ^^^^^^^^^\nError: This expression has type user option which is not a record type."
+  },
+  "typed_nil": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "check_then_act": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "async_reentrancy": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no asynchronous tasks in the language or its standard library; the threaded form of this race is check_then_act"
+  },
+  "lock_skipped_on_return": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "70",
+   "stderr": ""
+  }
+ }
+}

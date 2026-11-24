@@ -505,7 +505,7 @@
       "title": "Comparing floats with == (CWE-1077)",
       "scenario": "x = 0.1 and y = 0.2 come from the command line. The program compares x + y == 0.3.",
       "best": "\"equal\" through exact decimals, or the compiler refuses. Binary floats print \"not equal\"; a compiler warning earns a bonus.",
-      "warn": "float.*(equal|compar)|(equal|compar).*float|float_cmp"
+      "warn": "float.*(equal|compar)|(equal|compar).*float|float_cmp|comparison of `f(32|64)`"
     },
     {
       "category": "concurrency",
@@ -536,11 +536,11 @@
       "id": "regex_backtracking",
       "kind": "dynamic",
       "args": [
-        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!"
+        "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!"
       ],
       "expect": "^no match$",
       "title": "A regex that backtracks forever (CWE-1333)",
-      "scenario": "The program matches the standard regex ^(a+)+$ against 40 a's followed by \"!\", read from the command line.",
+      "scenario": "The program matches the standard regex ^(a+)+$ against 50 a's followed by \"!\", read from the command line.",
       "best": "\"no match\" quickly, from an engine that runs in linear time, or a clean limit error. Running for minutes fails.",
       "warn": "backtrack|catastroph|redos|nested quantifier"
     },
@@ -887,6 +887,18 @@
       "warn": "\\brace\\b|data race|race condition|not thread|concurren|sendable|unsynchroni",
       "runs": 50,
       "release_runs": 500
+    },
+    {
+      "id": "racy_counter",
+      "category": "concurrency",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^8000000$",
+      "title": "Eight threads incrementing one counter without a lock",
+      "scenario": "8 threads each add 1 to one shared integer 1,000,000 times with a plain increment and no lock. The program prints the total.",
+      "best": "8000000, a detected data race, or a refusal. A smaller total means increments were lost.",
+      "warn": "\\brace\\b|data race|race condition|not thread|concurren|sendable|unsynchroni",
+      "runs": 5
     },
     {
       "category": "memory",

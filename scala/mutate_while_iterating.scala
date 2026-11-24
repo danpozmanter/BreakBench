@@ -1,10 +1,8 @@
-import scala.collection.mutable.ArrayBuffer
-
+// Scala's default List is immutable: removing items builds a new list.
 object Main {
   def main(args: Array[String]): Unit = {
-    val xs = ArrayBuffer(1, 2, 2, 3)
-    for x <- xs do
-      if x == 2 then xs -= x
-    println(xs.mkString(","))
+    val xs = List(1, 2, 2, 3)
+    val kept = xs.filter(_ != 2)
+    println(kept.mkString(","))
   }
 }

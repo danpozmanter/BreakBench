@@ -1,0 +1,954 @@
+{
+ "lang": "typescript",
+ "mode": "strict",
+ "version": "tsc Version 7.0.2 / node v26.13.1",
+ "results": {
+  "null_deref": {
+   "outcome": "REJECTED",
+   "message": "main.ts(10,13): error TS18047: 'u' is possibly 'null'."
+  },
+  "int_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "9223372036854776000",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "Infinity",
+   "stderr": ""
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "100000000000000000000",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "main.ts(6,17): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'number'.\n  Type 'undefined' is not assignable to type 'number'."
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "main.ts(1,32): error TS2366: Function lacks ending return statement and return type does not include 'undefined'."
+  },
+  "non_exhaustive_match": {
+   "outcome": "REJECTED",
+   "message": "main.ts(7,26): error TS2366: Function lacks ending return statement and return type does not include 'undefined'."
+  },
+  "uninitialized_variable": {
+   "outcome": "REJECTED",
+   "message": "main.ts(4,13): error TS2454: Variable 'x' is used before being assigned."
+  },
+  "missing_argument": {
+   "outcome": "REJECTED",
+   "message": "main.ts(5,13): error TS2554: Expected 2 arguments, but got 1."
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "main.ts(6,5): error TS2551: Property 'colour' does not exist on type 'Config'. Did you mean 'color'?"
+  },
+  "assign_in_condition": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "one",
+   "stderr": "x is 1"
+  },
+  "switch_fallthrough": {
+   "outcome": "REJECTED",
+   "message": "main.ts(4,3): error TS7029: Fallthrough case in switch."
+  },
+  "zero_is_falsy": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "missing",
+   "stderr": ""
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "13",
+   "stderr": ""
+  },
+  "covariant_array_write": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "meow",
+   "stderr": ""
+  },
+  "mutate_while_iterating": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1,2,3",
+   "stderr": ""
+  },
+  "self_deadlock": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no mutex in the language or its standard library"
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "node:fs:3028\n    return binding.writeFileUtf8(\n                   ^\n\nError: ENOENT: no such file or directory, open '/nonexistent/dir/out.txt'\n    at Object.writeFileSync (node:fs:3028:20)\n    at save (/tmp/breakbench/ignored_error_result/main/out/main.js:38:8)\n    at Object.<anonymous> (/tmp/breakbench/ignored_error_result/main/out/main.js:40:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  errno: -2,\n  code: 'ENOENT',\n  syscall: 'open',\n  path: '/nonexistent/dir/out.txt'\n}\n\nNode.js v26.13.1"
+  },
+  "sort_with_nan": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "unordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "3.5",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "outcome": "REJECTED",
+   "message": "main.ts(1,13): error TS1121: Octal literals are not allowed. Use the syntax '0o1234'."
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "12 0",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "REJECTED",
+   "message": "main.ts(2,18): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.\nmain.ts(2,18): error TS2367: This comparison appears to be unintentional because the types '1' and '0' have no overlap."
+  },
+  "dangling_else": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "unset",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "main.ts(2,16): error TS2365: Operator '<' cannot be applied to types 'boolean' and 'number'."
+  },
+  "lost_update_on_copy": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "150",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no mutex in the language or its standard library"
+  },
+  "path_join_escape": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "inside",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "HANG",
+   "warned": false,
+   "run_warned": false,
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "main.ts(4,3): error TS1005: ',' expected."
+  },
+  "return_in_finally": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "REJECTED",
+   "message": "main.ts(2,3): error TS2322: Type 'undefined' is not assignable to type 'number'.\nmain.ts(3,5): error TS7027: Unreachable code detected."
+  },
+  "worker_failure_lost": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/worker_failure_lost/main/out/main.js:8\n            throw new Error(`bad number: ${item}`);\n                  ^\n\nError: bad number: x\n    at sum (/tmp/breakbench/worker_failure_lost/main/out/main.js:8:19)\n    at main (/tmp/breakbench/worker_failure_lost/main/out/main.js:14:20)\n    at Object.<anonymous> (/tmp/breakbench/worker_failure_lost/main/out/main.js:18:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "3 of %d",
+   "stderr": ""
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "REJECTED",
+   "message": "main.ts(3,13): error TS2532: Object is possibly 'undefined'."
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "pending",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "REJECTED",
+   "message": "main.ts(3,13): error TS2532: Object is possibly 'undefined'.\nmain.ts(3,27): error TS2532: Object is possibly 'undefined'."
+  },
+  "default_numeric_sort": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1 10 9",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "main.ts(3,26): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number'."
+  },
+  "use_after_close": {
+   "outcome": "TRAPPED",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "node:internal/fs/utils:437\n    throw err;\n    ^\n\nError: EBADF: bad file descriptor, write\n    at Object.writeSync (node:fs:1237:3)\n    at Object.<anonymous> (/tmp/breakbench/use_after_close/main/out/main.js:40:4)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  errno: -9,\n  syscall: 'write',\n  code: 'EBADF'\n}\n\nNode.js v26.13.1"
+  },
+  "dead_store": {
+   "outcome": "REJECTED",
+   "message": "main.ts(2,7): error TS6133: 'total' is declared but its value is never read."
+  },
+  "panic_under_lock": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no mutex in the language or its standard library"
+  },
+  "split_character": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "a\ufffd",
+   "stderr": ""
+  },
+  "oob_write": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "undefined",
+   "stderr": ""
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/stack_overflow/main/out/main.js:4\n    if (n === 0)\n    ^\n\nRangeError: Maximum call stack size exceeded\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:4:5)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n    at walk (/tmp/breakbench/stack_overflow/main/out/main.js:6:13)\n\nNode.js v26.13.1"
+  },
+  "concurrent_map_write": {
+   "outcome": "CORRECT",
+   "runs": 50,
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.11,
+   "stdout": "800000",
+   "stderr": ""
+  },
+  "racy_counter": {
+   "outcome": "CORRECT",
+   "runs": 5,
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "8000000",
+   "stderr": ""
+  },
+  "huge_allocation": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/huge_allocation/main/out/main.js:4\nconst buf = new Uint8Array(n);\n            ^\n\nRangeError: Array buffer allocation failed\n    at new ArrayBuffer (<anonymous>)\n    at new Uint8Array (<anonymous>)\n    at Object.<anonymous> (/tmp/breakbench/huge_allocation/main/out/main.js:4:13)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1"
+  },
+  "fd_leak": {
+   "outcome": "LEAK",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.07,
+   "stdout": "",
+   "stderr": "node:fs:782\n  return binding.open(\n                 ^\n\nError: EMFILE: too many open files, open '/tmp/bb_fd.txt'\n    at Object.openSync (node:fs:782:18)\n    at Object.<anonymous> (/tmp/breakbench/fd_leak/main/out/main.js:40:19)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  errno: -24,\n  code: 'EMFILE',\n  syscall: 'open',\n  path: '/tmp/bb_fd.txt'\n}\n\nNode.js v26.13.1"
+  },
+  "wrong_variant_access": {
+   "outcome": "REJECTED",
+   "message": "main.ts(4,15): error TS2339: Property 'text' does not exist on type 'Value'.\n  Property 'text' does not exist on type '{ kind: \"int\"; value: number; }'."
+  },
+  "format_string": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "%s%s%n{}{0}",
+   "stderr": ""
+  },
+  "trojan_source": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "admin",
+   "stderr": ""
+  },
+  "unsafe_deserialization": {
+   "outcome": "SAFE_BY_DESIGN",
+   "message": "JSON.parse builds only plain data; nothing in the standard library rebuilds a named class"
+  },
+  "null_byte_path": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "admin\nadmin",
+   "stderr": ""
+  },
+  "deep_structure_release": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.05,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "main.ts(2,1): error TS2542: Index signature in type 'String' only permits reading."
+  },
+  "reference_cycle": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 2.43,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "complete_init": {
+   "outcome": "REJECTED",
+   "message": "main.ts(4,7): error TS2741: Property 'retries' is missing in type '{ timeout: number; }' but required in type 'Config'.\nmain.ts(4,7): error TS6133: 'partial' is declared but its value is never read."
+  },
+  "newtype": {
+   "outcome": "REJECTED",
+   "message": "main.ts(6,76): error TS2345: Argument of type 'Seconds' is not assignable to parameter of type 'Meters'.\n  Type 'Seconds' is not assignable to type '{ readonly unit: \"m\"; }'.\n    Types of property 'unit' are incompatible.\n      Type '\"s\"' is not assignable to type '\"m\"'."
+  },
+  "strong_enum": {
+   "outcome": "REJECTED",
+   "message": "main.ts(19,18): error TS2345: Argument of type '7' is not assignable to parameter of type 'Color'."
+  },
+  "override_check": {
+   "outcome": "REJECTED",
+   "message": "main.ts(11,12): error TS4117: This member cannot have an 'override' modifier because it is not declared in the base class 'Shape'. Did you mean 'describe'?"
+  },
+  "forced_unwrap": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "before\nNaN",
+   "stderr": ""
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "hello, null",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "-Infinity",
+   "stderr": ""
+  },
+  "readonly_param": {
+   "outcome": "REJECTED",
+   "message": "main.ts(2,3): error TS2542: Index signature in type 'readonly number[]' only permits reading."
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "no_implicit_conversion": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "3000000000",
+   "stderr": ""
+  },
+  "generic_constraint": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "lossy_int_to_float": {
+   "outcome": "REJECTED",
+   "message": "main.ts(7,6): error TS2345: Argument of type 'bigint' is not assignable to parameter of type 'number'."
+  },
+  "const_index_bounds": {
+   "outcome": "REJECTED",
+   "message": "main.ts(3,19): error TS2493: Tuple type 'readonly [number, number, number]' of length '3' has no element at index '5'."
+  },
+  "lazy_accumulator": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 3.29,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/size_overflow_alloc/main/out/main.js:5\nconst records = new Uint8Array(size);\n                ^\n\nRangeError: Invalid typed array length: 18446744073709552000\n    at new Uint8Array (<anonymous>)\n    at Object.<anonymous> (/tmp/breakbench/size_overflow_alloc/main/out/main.js:5:17)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1"
+  },
+  "const_overflow": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "9460800000000000000",
+   "stderr": ""
+  },
+  "orphaned_receive": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/orphaned_receive/main/out/main.js:9\n            throw new Error(\"not a number: x\");\n                  ^\n\nError: not a number: x\n    at /tmp/breakbench/orphaned_receive/main/out/main.js:9:19\n    at main (/tmp/breakbench/orphaned_receive/main/out/main.js:11:7)\n    at Object.<anonymous> (/tmp/breakbench/orphaned_receive/main/out/main.js:14:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1"
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.53,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "unreachable_code": {
+   "outcome": "REJECTED",
+   "message": "main.ts(8,3): error TS7027: Unreachable code detected."
+  },
+  "checked_interpolation": {
+   "outcome": "REJECTED",
+   "message": "main.ts(3,22): error TS2304: Cannot find name 'nmae'."
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "REJECTED",
+   "message": "main.ts(6,7): error TS2358: The left-hand side of an 'instanceof' expression must be of type 'any', an object type or a type parameter."
+  },
+  "duplicate_key": {
+   "outcome": "REJECTED",
+   "message": "main.ts(3,33): error TS1117: An object literal cannot have multiple properties with the same name."
+  },
+  "char_arithmetic": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "a1",
+   "stderr": ""
+  },
+  "json_big_integer": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "9007199254740993",
+   "stderr": ""
+  },
+  "comparison_statement": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "structural_equality": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "different",
+   "stderr": ""
+  },
+  "hash_matches_equality": {
+   "outcome": "SILENT",
+   "runs": 20,
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "REJECTED",
+   "message": "main.ts(3,7): error TS2322: Type '[number, number, number]' is not assignable to type 'readonly [number, number, number, number]'.\n  Source has 3 element(s) but target requires 4."
+  },
+  "enum_from_int": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "before\n7",
+   "stderr": ""
+  },
+  "bitwise_on_bool": {
+   "outcome": "REJECTED",
+   "message": "main.ts(3,20): error TS2447: The '&' operator is not allowed for boolean types. Consider using '&&' instead."
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "main.ts(6,3): error TS2540: Cannot assign to 'port' because it is a read-only property."
+  },
+  "bool_condition": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "different",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "node:fs:3028\n    return binding.writeFileUtf8(\n                   ^\n\nError: ENOSPC: no space left on device, write\n    at writeFileSync (node:fs:3028:20)\n    at Object.<anonymous> (/tmp/breakbench/lost_write_error/main/out/main.js:4:29)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  errno: -28,\n  code: 'ENOSPC',\n  syscall: 'write'\n}\n\nNode.js v26.13.1"
+  },
+  "short_read": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "HELLO-WORLD-1234",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "close failed",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "total=42",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "node:child_process:1029\n    throw err;\n    ^\n\nError: Command failed: sh -c exit 3\n    at genericNodeError (node:internal/errors:999:15)\n    at wrappedFn (node:internal/errors:544:14)\n    at checkExecSyncError (node:child_process:990:11)\n    at execFileSync (node:child_process:1026:15)\n    at Object.<anonymous> (/tmp/breakbench/child_exit_status/main/out/main.js:4:39)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19) {\n  status: 3,\n  signal: null,\n  output: [ null, Buffer(0) [Uint8Array] [], Buffer(0) [Uint8Array] [] ],\n  pid: 7636,\n  stdout: Buffer(0) [Uint8Array] [],\n  stderr: Buffer(0) [Uint8Array] []\n}\n\nNode.js v26.13.1"
+  },
+  "nullable_field": {
+   "outcome": "REJECTED",
+   "message": "main.ts(3,13): error TS18047: 'decoded.name' is possibly 'null'."
+  },
+  "stale_null_check": {
+   "outcome": "TRAPPED",
+   "warned": false,
+   "run_warned": false,
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/stale_null_check/main/out/main.js:9\n    console.log(session.user.name.length);\n                             ^\n\nTypeError: Cannot read properties of null (reading 'name')\n    at Object.<anonymous> (/tmp/breakbench/stale_null_check/main/out/main.js:9:30)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1"
+  },
+  "empty_slot": {
+   "outcome": "REJECTED",
+   "message": "main.ts(8,13): error TS2532: Object is possibly 'undefined'."
+  },
+  "typed_nil": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "check_then_act": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "outcome": "CORRECT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "async_reentrancy": {
+   "outcome": "SILENT",
+   "warned": false,
+   "run_warned": false,
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "-60",
+   "stderr": ""
+  },
+  "lock_skipped_on_return": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no mutex in the language or its standard library"
+  }
+ }
+}

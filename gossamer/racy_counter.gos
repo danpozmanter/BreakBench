@@ -1,0 +1,15 @@
+fn main() {
+    let mut counter = 0
+    let mut handles = #[]
+    for _ in 0..8 {
+        handles.push(spawn(|| {
+            for _ in 0..1000000 {
+                counter += 1 // BREAK!
+            }
+        }))
+    }
+    for h in handles {
+        h.join().unwrap()
+    }
+    println(f"{counter}")
+}

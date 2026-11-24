@@ -2,6 +2,9 @@
 
 Usage: python3 harness/driver.py LANG [PROBLEM ...]
 
+BB_MODE=default runs the language's bare build instead of its strictest one and
+writes RUN/raw/LANG.default.json.
+
 Each problem is compiled (or syntax-checked) and run; the outcome is
 classified and written to RUN/raw/LANG.json, where the BB_RUN environment
 variable names the run folder under results/. A compile failure counts as
@@ -333,9 +336,13 @@ def main():
     langs = load_json(os.path.join(ROOT, "harness", "langs.json"))
     spec = load_json(os.path.join(ROOT, "harness", "problems.json"))
     lang = langs[lang_id]
+    # The default mode is the bare toolchain: the build a language gives with no extra checks.
+    mode = os.environ.get("BB_MODE", "strict")
+    if mode == "default":
+        lang = {**lang, **lang.get("default", {})}
 
     raw_dir = raw_folder()
-    raw_path = os.path.join(raw_dir, lang_id + ".json")
+    raw_path = os.path.join(raw_dir, lang_id + (".default" if mode == "default" else "") + ".json")
     previous = load_json(raw_path) if os.path.exists(raw_path) and only else {}
     results = previous.get("results", {})
 
@@ -443,7 +450,7 @@ def main():
         print(f"{lang_id:12} {pid:28} {record['outcome']} (exit {status})", flush=True)
 
     with open(raw_path, "w", encoding="utf-8") as f:
-        json.dump({"lang": lang_id, "version": version, "results": results}, f, indent=1)
+        json.dump({"lang": lang_id, "mode": mode, "version": version, "results": results}, f, indent=1)
     owner = os.stat(ROOT)
     os.chown(raw_path, owner.st_uid, owner.st_gid)
 
