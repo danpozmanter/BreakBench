@@ -27,14 +27,14 @@
    "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/int_overflow/main/Program.cs:line 2\nAborted (core dumped)"
   },
   "div_by_zero": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/div_by_zero/main/bb.csproj (in 42 ms).\n  bb -> /tmp/breakbench/div_by_zero/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.20",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/div_by_zero/main/bb.csproj (in 40 ms).\n  bb -> /tmp/breakbench/div_by_zero/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.21",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
    "release_stderr": "Unhandled exception. System.DivideByZeroException: Attempted to divide by zero.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/div_by_zero/release/Program.cs:line 2\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.24,
+   "secs": 0.19,
    "stdout": "",
    "stderr": "Unhandled exception. System.DivideByZeroException: Attempted to divide by zero.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/div_by_zero/main/Program.cs:line 2\nAborted (core dumped)"
   },
@@ -48,14 +48,14 @@
    "stderr": ""
   },
   "narrowing_cast": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/narrowing_cast/main/bb.csproj (in 43 ms).\n  bb -> /tmp/breakbench/narrowing_cast/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.28",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/narrowing_cast/main/bb.csproj (in 39 ms).\n  bb -> /tmp/breakbench/narrowing_cast/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.09",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "SILENT",
    "release_stdout": "44",
    "release_stderr": "",
    "exit": 134,
-   "secs": 0.23,
+   "secs": 0.16,
    "stdout": "",
    "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/narrowing_cast/main/Program.cs:line 3\nAborted (core dumped)"
   },
@@ -197,14 +197,14 @@
    "stderr": ""
   },
   "ignored_error_result": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/ignored_error_result/main/bb.csproj (in 43 ms).\n  bb -> /tmp/breakbench/ignored_error_result/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.22",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/ignored_error_result/main/bb.csproj (in 38 ms).\n  bb -> /tmp/breakbench/ignored_error_result/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.07",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
    "release_stderr": "Unhandled exception. System.IO.DirectoryNotFoundException: Could not find a part of the path '/dev/null/out.txt'.\nDirectory path: '/dev/null/out.txt'\n   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(Str\n...\nh, FileMode mode, ReadOnlySpan`1 contents, Encoding encoding)\n   at Program.<<Main>$>g__Save|0_0(String path) in /tmp/breakbench/ignored_error_result/release/Program.cs:line 1\n   at Program.<Main>$(String[] args) in /tmp/breakbench/ignored_error_result/release/Program.cs:line 3\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.18,
+   "secs": 0.27,
    "stdout": "",
    "stderr": "Unhandled exception. System.IO.DirectoryNotFoundException: Could not find a part of the path '/dev/null/out.txt'.\nDirectory path: '/dev/null/out.txt'\n   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)\n   at System.IO.File.OpenHandle(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)\n   at System.IO.File.WriteToFile(String path, FileMode mode, ReadOnlySpan`1 contents, Encoding encoding)\n   at Program.<<Main>$>g__Save|0_0(String path) in /tmp/breakbench/ignored_error_result/main/Program.cs:line 1\n   at Program.<Main>$(String[] args) in /tmp/breakbench/ignored_error_result/main/Program.cs:line 3\nAborted (core dumped)"
   },
@@ -294,7 +294,7 @@
    "stderr": ""
   },
   "lock_order_deadlock": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/lock_order_deadlock/main/bb.csproj (in 42 ms).\n  bb -> /tmp/breakbench/lock_order_deadlock/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.15",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/lock_order_deadlock/main/bb.csproj (in 39 ms).\n  bb -> /tmp/breakbench/lock_order_deadlock/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.17",
    "outcome": "HANG",
    "control": "verified",
    "exit": -9,
@@ -423,14 +423,14 @@
    "stderr": ""
   },
   "negative_index_wraps": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/negative_index_wraps/main/bb.csproj (in 41 ms).\n  bb -> /tmp/breakbench/negative_index_wraps/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.27",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/negative_index_wraps/main/bb.csproj (in 41 ms).\n  bb -> /tmp/breakbench/negative_index_wraps/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.23",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
    "release_stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/negative_index_wraps/release/Program.cs:line 1\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.19,
+   "secs": 0.18,
    "stdout": "",
    "stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/negative_index_wraps/main/Program.cs:line 3\nAborted (core dumped)"
   },
@@ -487,7 +487,7 @@
    "stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/oob_write/main/Program.cs:line 2\nAborted (core dumped)"
   },
   "oob_read": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/oob_read/main/bb.csproj (in 46 ms).\n  bb -> /tmp/breakbench/oob_read/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.30",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/oob_read/main/bb.csproj (in 43 ms).\n  bb -> /tmp/breakbench/oob_read/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.26",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
@@ -539,38 +539,38 @@
    "stderr": ""
   },
   "stack_overflow": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/stack_overflow/main/bb.csproj (in 44 ms).\n  bb -> /tmp/breakbench/stack_overflow/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.35",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/stack_overflow/main/bb.csproj (in 41 ms).\n  bb -> /tmp/breakbench/stack_overflow/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.20",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "Stack overflow.\nRepeated 174610 times:\n--------------------------------\n   at Program.<<Main>$>g__Walk|0_0(Int64)\n--------------------------------\n   at Program.<Main>$(System.String[])\nAborted (core dumped)",
+   "release_stderr": "Stack overflow.\nRepeated 174604 times:\n--------------------------------\n   at Program.<<Main>$>g__Walk|0_0(Int64)\n--------------------------------\n   at Program.<Main>$(System.String[])\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.24,
+   "secs": 0.21,
    "stdout": "",
-   "stderr": "Stack overflow.\nRepeated 174520 times:\n--------------------------------\n   at Program.<<Main>$>g__Walk|0_0(Int64)\n--------------------------------\n   at Program.<Main>$(System.String[])\nAborted (core dumped)"
+   "stderr": "Stack overflow.\nRepeated 174565 times:\n--------------------------------\n   at Program.<<Main>$>g__Walk|0_0(Int64)\n--------------------------------\n   at Program.<Main>$(System.String[])\nAborted (core dumped)"
   },
   "huge_allocation": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/huge_allocation/main/bb.csproj (in 50 ms).\n  bb -> /tmp/breakbench/huge_allocation/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.37",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/huge_allocation/main/bb.csproj (in 41 ms).\n  bb -> /tmp/breakbench/huge_allocation/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.20",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
    "release_stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/huge_allocation/release/Program.cs:line 3\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.2,
+   "secs": 0.18,
    "stdout": "",
    "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/huge_allocation/main/Program.cs:line 3\nAborted (core dumped)"
   },
   "wrong_variant_access": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/wrong_variant_access/main/bb.csproj (in 47 ms).\n  bb -> /tmp/breakbench/wrong_variant_access/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.36",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/wrong_variant_access/main/bb.csproj (in 41 ms).\n  bb -> /tmp/breakbench/wrong_variant_access/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.11",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
    "release_stderr": "Unhandled exception. System.InvalidCastException: Unable to cast object of type 'System.Int32' to type 'System.String'.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/wrong_variant_access/release/Program.cs:line 1\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.2,
+   "secs": 0.24,
    "stdout": "",
    "stderr": "Unhandled exception. System.InvalidCastException: Unable to cast object of type 'System.Int32' to type 'System.String'.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/wrong_variant_access/main/Program.cs:line 2\nAborted (core dumped)"
   },
@@ -650,14 +650,14 @@
    "control": "builds"
   },
   "forced_unwrap": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/forced_unwrap/main/bb.csproj (in 41 ms).\n  bb -> /tmp/breakbench/forced_unwrap/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.31",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/forced_unwrap/main/bb.csproj (in 42 ms).\n  bb -> /tmp/breakbench/forced_unwrap/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.09",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "before",
    "release_stderr": "Unhandled exception. System.InvalidOperationException: Cannot read the Value property of a Nullable object that has no value. Check HasValue before reading Value.\n   at System.Nullable`1.get_Value()\n   at Program.<Main>$(String[] args) in /tmp/breakbench/forced_unwrap/release/Program.cs:line 2\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.2,
+   "secs": 0.18,
    "stdout": "before",
    "stderr": "Unhandled exception. System.InvalidOperationException: Cannot read the Value property of a Nullable object that has no value. Check HasValue before reading Value.\n   at System.Nullable`1.get_Value()\n   at Program.<Main>$(String[] args) in /tmp/breakbench/forced_unwrap/main/Program.cs:line 2\nAborted (core dumped)"
   },
@@ -680,14 +680,14 @@
    "stderr": ""
   },
   "empty_max": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/empty_max/main/bb.csproj (in 49 ms).\n  bb -> /tmp/breakbench/empty_max/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.27",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/empty_max/main/bb.csproj (in 40 ms).\n  bb -> /tmp/breakbench/empty_max/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.15",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
    "release_stderr": "Unhandled exception. System.InvalidOperationException: Sequence contains no elements.\n   at System.MemoryExtensions.MinMaxInteger[T,TMinMax](ReadOnlySpan`1 span)\n   at System.MemoryExtensions.MinMaxInteger[TOuter,TInner,TMinMax](ReadOnlySpan`1 span)\n   at System.MemoryExtensions.Max[T](ReadOnlySpan`1 span)\n   at System.MemoryExtensions.Max[T](ReadOnlySpan`1 span, IComparer`1 comparer)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/empty_max/release/Program.cs:line 1\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.2,
+   "secs": 0.18,
    "stdout": "",
    "stderr": "Unhandled exception. System.InvalidOperationException: Sequence contains no elements.\n   at System.MemoryExtensions.MinMaxInteger[T,TMinMax](ReadOnlySpan`1 span)\n   at System.MemoryExtensions.MinMaxInteger[TOuter,TInner,TMinMax](ReadOnlySpan`1 span)\n   at System.MemoryExtensions.Max[T](ReadOnlySpan`1 span)\n   at System.MemoryExtensions.Max[T](ReadOnlySpan`1 span, IComparer`1 comparer)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/empty_max/main/Program.cs:line 2\nAborted (core dumped)"
   },
@@ -750,14 +750,14 @@
    "stderr": ""
   },
   "size_overflow_alloc": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/size_overflow_alloc/main/bb.csproj (in 46 ms).\n  bb -> /tmp/breakbench/size_overflow_alloc/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.35",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/size_overflow_alloc/main/bb.csproj (in 38 ms).\n  bb -> /tmp/breakbench/size_overflow_alloc/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.05",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
    "release_stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/size_overflow_alloc/release/Program.cs:line 1\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.22,
+   "secs": 0.18,
    "stdout": "",
    "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/size_overflow_alloc/main/Program.cs:line 3\nAborted (core dumped)"
   },
@@ -897,7 +897,7 @@
    "control": "builds"
   },
   "lost_write_error": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/lost_write_error/main/bb.csproj (in 44 ms).\n  bb -> /tmp/breakbench/lost_write_error/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.10",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/lost_write_error/main/bb.csproj (in 39 ms).\n  bb -> /tmp/breakbench/lost_write_error/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.07",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
@@ -936,7 +936,7 @@
    "stderr": ""
   },
   "child_exit_status": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/child_exit_status/main/bb.csproj (in 38 ms).\n  bb -> /tmp/breakbench/child_exit_status/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.12",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/child_exit_status/main/bb.csproj (in 46 ms).\n  bb -> /tmp/breakbench/child_exit_status/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.12",
    "outcome": "SILENT",
    "control": "verified",
    "exit": 0,

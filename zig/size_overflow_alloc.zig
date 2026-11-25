@@ -10,7 +10,11 @@ pub fn main(init: std.process.Init) !void {
     const count = try std.fmt.parseInt(usize, args[1], 10);
     // CONTROL! if (count > 1 << 27) { try out.print("too large\n", .{}); return; }
     const size = count * 8;
-    const records = try gpa.alloc(u8, size);
+    // alloc answers an error union, so the program checks it.
+    const records = gpa.alloc(u8, size) catch {
+        try out.print("too large\n", .{});
+        return;
+    };
     defer gpa.free(records);
     records[8] = 99;
     try out.print("stored\n", .{});

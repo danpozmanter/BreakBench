@@ -167,7 +167,7 @@
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.04,
+   "secs": 0.03,
    "stdout": "",
    "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/ignored_error_result/main/main.py\", line 6, in <module>\n    save(\"/dev/null/out.txt\") # BREAK!\n    ~~~~^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/breakbench/ignored_error_result/main/main.py\", line 2, in save\n    with open(path, \"w\") as f:\n         ~~~~^^^^^^^^^^^\nNotADirectoryError: [Errno 20] Not a directory: '/dev/null/out.txt'"
   },
@@ -265,7 +265,7 @@
    "outcome": "HANG",
    "control": "verified",
    "exit": -9,
-   "secs": 20.0,
+   "secs": 20.01,
    "stdout": "",
    "stderr": ""
   },
@@ -491,7 +491,7 @@
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.06,
+   "secs": 0.08,
    "stdout": "",
    "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/stack_overflow/main/main.py\", line 10, in <module>\n    print(walk(int(sys.argv[1]))) # CONTROL! n = int(sys.argv[1]); M = 1_000_000_007; print((pow(31, n + 1, M) - 31 * (n + 1) + n) * pow(900, -1, M) % M)\n          ~~~~^^^^^^^^^^^^^^^^^^\n  File \"/tmp/breakbench/stack_overflow/main/main.py\", line 7, in walk\n    return (walk(n - 1) * 31 + n) % 1_000_000_007\n            ~~~~^^^^^^^\n  File \"/tmp/breakbench/stack_overflow/main/main.py\", line 7, in walk\n    return (walk(n - 1) * 31 + n) % 1_000_000_007\n            ~~~~^^^^^^^\n  File \"/tmp/breakbench/stack_overflow/main/main.py\", line 7, in walk\n    return (walk(n - 1) * 31 + n) % 1_000_000_007\n            ~~~~^^^^^^^\n  [Previous line repeated 996 more times]\nRecursionError: maximum recursion depth exceeded"
   },

@@ -378,7 +378,7 @@
    "release_stdout": "",
    "release_stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 3\n\tat Main.main(Main.java:6)",
    "exit": 1,
-   "secs": 0.01,
+   "secs": 0.02,
    "stdout": "",
    "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 3\n\tat Main.main(Main.java:6)"
   },
@@ -439,7 +439,7 @@
    "release_stdout": "",
    "release_stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4\n\tat Main.main(Main.java:10)",
    "exit": 1,
-   "secs": 0.02,
+   "secs": 0.01,
    "stdout": "",
    "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4\n\tat Main.main(Main.java:10)"
   },
@@ -485,7 +485,7 @@
    "release_stdout": "",
    "release_stderr": "Exception in thread \"main\" java.lang.StackOverflowError\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\t\n...\n:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)",
    "exit": 1,
-   "secs": 0.02,
+   "secs": 0.03,
    "stdout": "",
    "stderr": "Exception in thread \"main\" java.lang.StackOverflowError\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.\n...\nain.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)\n\tat Main.walk(Main.java:4)"
   },
@@ -618,7 +618,7 @@
    "release_stdout": "",
    "release_stderr": "Exception in thread \"main\" java.util.NoSuchElementException\n\tat java.base/java.util.ArrayList$Itr.next(ArrayList.java:1061)\n\tat java.base/java.util.Collections.max(Collections.java:700)\n\tat Main.main(Main.java:9)",
    "exit": 1,
-   "secs": 0.01,
+   "secs": 0.02,
    "stdout": "",
    "stderr": "Exception in thread \"main\" java.util.NoSuchElementException\n\tat java.base/java.util.ArrayList$Itr.next(ArrayList.java:1061)\n\tat java.base/java.util.Collections.max(Collections.java:700)\n\tat Main.main(Main.java:9)"
   },
@@ -686,7 +686,7 @@
    "release_stdout": "",
    "release_stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 8 out of bounds for length 8\n\tat Main.main(Main.java:7)",
    "exit": 1,
-   "secs": 0.02,
+   "secs": 0.01,
    "stdout": "",
    "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 8 out of bounds for length 8\n\tat Main.main(Main.java:7)"
   },
@@ -814,15 +814,11 @@
    "control": "builds"
   },
   "lost_write_error": {
-   "outcome": "TRAPPED",
-   "control": "verified",
-   "release": "TRAPPED",
-   "release_stdout": "",
-   "release_stderr": "Exception in thread \"main\" java.io.IOException: No space left on device\n\tat java.base/java.io.FileOutputStream.writeBytes(Native Method)\n\tat java.base/java.io.FileOutputStream.write(FileOutputStream.java:352)\n\tat java.base/sun.nio.cs.StreamEncoder.writeBytes(StreamEncoder.java:220)\n\tat java.base/sun.nio.cs.StreamEncoder.implClose(StreamEncoder.java:340)\n\tat java.base/sun.nio.cs.StreamEncoder.close(StreamEncoder.java:159)\n\tat java.base/java.io.OutputStreamWriter.close(OutputStreamWriter.java:253)\n\tat java.base/java.io.BufferedWriter.close(BufferedWriter.java:318)\n\tat Main.main(Main.java:9)",
-   "exit": 1,
-   "secs": 0.02,
-   "stdout": "",
-   "stderr": "Exception in thread \"main\" java.io.IOException: No space left on device\n\tat java.base/java.io.FileOutputStream.writeBytes(Native Method)\n\tat java.base/java.io.FileOutputStream.write(FileOutputStream.java:352)\n\tat java.base/sun.nio.cs.StreamEncoder.writeBytes(StreamEncoder.java:220)\n\tat java.base/sun.nio.cs.StreamEncoder.implClose(StreamEncoder.java:340)\n\tat java.base/sun.nio.cs.StreamEncoder.close(StreamEncoder.java:159)\n\tat java.base/java.io.OutputStreamWriter.close(OutputStreamWriter.java:253)\n\tat java.base/java.io.BufferedWriter.close(BufferedWriter.java:318)\n\tat Main.main(Main.java:9)"
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "failed",
+   "stderr": ""
   },
   "short_read": {
    "outcome": "SILENT",

@@ -23,11 +23,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "thread 268 panic: division by zero\n/tmp/breakbench/div_by_zero/release/main.zig:11:30: 0x10290ed in main (main)\n    try out.print(\"{d}\\n\", .{@divTrunc(100, d)}); // CONTROL! if (d == 0) try out.print(\"cannot divide\\n\", .{}) else try out.print(\"{d}\\n\", .{@divTrunc(100, d)});\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x102775d in _start (main)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)",
+   "release_stderr": "thread 112 panic: division by zero\n/tmp/breakbench/div_by_zero/release/main.zig:11:30: 0x10290ed in main (main)\n    try out.print(\"{d}\\n\", .{@divTrunc(100, d)}); // CONTROL! if (d == 0) try out.print(\"cannot divide\\n\", .{}) else try out.print(\"{d}\\n\", .{@divTrunc(100, d)});\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x102775d in _start (main)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)",
    "exit": 134,
    "secs": 0.19,
    "stdout": "",
-   "stderr": "thread 193 panic: division by zero\n/tmp/breakbench/div_by_zero/main/main.zig:11:30: 0x11e34c7 in main (main.zig)\n    try out.print(\"{d}\\n\", .{@divTrunc(100, d)}); // CONTROL! if (d == 0) try out.print(\"cannot divide\\n\", .{}) else try out.print(\"{d}\\n\", .{@divTrunc(100, d)});\n                             ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4128 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+   "stderr": "thread 37 panic: division by zero\n/tmp/breakbench/div_by_zero/main/main.zig:11:30: 0x11e34c7 in main (main.zig)\n    try out.print(\"{d}\\n\", .{@divTrunc(100, d)}); // CONTROL! if (d == 0) try out.print(\"cannot divide\\n\", .{}) else try out.print(\"{d}\\n\", .{@divTrunc(100, d)});\n                             ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4128 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
   },
   "shift_overflow": {
    "outcome": "TRAPPED",
@@ -45,11 +45,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "thread 476 panic: integer does not fit in destination type\n/opt/zig/lib/std/start.zig:850:5: 0x1029019 in callMain (main)\n    const unwrapped_result = result catch |err| {\n    ^\n/opt/zig/lib/std/start.zig:248:5: 0x102779d in _start (main)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)",
+   "release_stderr": "thread 216 panic: integer does not fit in destination type\n/opt/zig/lib/std/start.zig:850:5: 0x1029019 in callMain (main)\n    const unwrapped_result = result catch |err| {\n    ^\n/opt/zig/lib/std/start.zig:248:5: 0x102779d in _start (main)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)",
    "exit": 134,
    "secs": 0.16,
    "stdout": "",
-   "stderr": "thread 401 panic: integer does not fit in destination type\n/tmp/breakbench/narrowing_cast/main/main.zig:11:19: 0x11e34e1 in main (main.zig)\n    const b: u8 = @intCast(v); // CONTROL! const b: u8 = std.math.cast(u8, v) orelse { try out.print(\"out of range\\n\", .{}); return; };\n                  ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4148 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+   "stderr": "thread 141 panic: integer does not fit in destination type\n/tmp/breakbench/narrowing_cast/main/main.zig:11:19: 0x11e34e1 in main (main.zig)\n    const b: u8 = @intCast(v); // CONTROL! const b: u8 = std.math.cast(u8, v) orelse { try out.print(\"out of range\\n\", .{}); return; };\n                  ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4148 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
   },
   "float_to_int_overflow": {
    "outcome": "TRAPPED",
@@ -341,11 +341,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "thread 2826 panic: integer overflow\n/opt/zig/lib/std/multi_array_list.zig:246:35: 0x1028eb3 in posixCallMainAndExit (main)\n                ptr += field_size * self.capacity;\n                                  ^\n/opt/zig/lib/std/start.zig:248:5: 0x102777d in _start (main)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)",
+   "release_stderr": "thread 434 panic: integer overflow\n/opt/zig/lib/std/multi_array_list.zig:246:35: 0x1028eb3 in posixCallMainAndExit (main)\n                ptr += field_size * self.capacity;\n                                  ^\n/opt/zig/lib/std/start.zig:248:5: 0x102777d in _start (main)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.16,
+   "secs": 0.17,
    "stdout": "",
-   "stderr": "thread 2751 panic: integer overflow\n/tmp/breakbench/negative_index_wraps/main/main.zig:12:55: 0x11e354c in main (main.zig)\n    try out.print(\"{d}\\n\", .{readings[i] - readings[i - 1]}); // CONTROL! if (i > 0) try out.print(\"{d}\\n\", .{readings[i] - readings[i - 1]}) else try out.print(\"no previous\\n\", .{});\n                                                      ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4268 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+   "stderr": "thread 359 panic: integer overflow\n/tmp/breakbench/negative_index_wraps/main/main.zig:12:55: 0x11e354c in main (main.zig)\n    try out.print(\"{d}\\n\", .{readings[i] - readings[i - 1]}); // CONTROL! if (i > 0) try out.print(\"{d}\\n\", .{readings[i] - readings[i - 1]}) else try out.print(\"no previous\\n\", .{});\n                                                      ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4268 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
   },
   "default_numeric_sort": {
    "outcome": "CORRECT",
@@ -396,11 +396,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "thread 3285 panic: index out of bounds: index 4, len 4\n/tmp/breakbench/oob_read/release/main.zig:13:35: 0x10290be in main (main)\n    try out.print(\"{d}\\n\", .{f.buf[idx]}); // CONTROL! if (idx < f.buf.len) try out.print(\"{d}\\n\", .{f.buf[idx]}) else try out.print(\"out of range\\n\", .{});\n                                  ^\n/opt/zig/lib/std/start.zig:248:5: 0x102775d in _start (main)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)",
+   "release_stderr": "thread 538 panic: index out of bounds: index 4, len 4\n/tmp/breakbench/oob_read/release/main.zig:13:35: 0x10290be in main (main)\n    try out.print(\"{d}\\n\", .{f.buf[idx]}); // CONTROL! if (idx < f.buf.len) try out.print(\"{d}\\n\", .{f.buf[idx]}) else try out.print(\"out of range\\n\", .{});\n                                  ^\n/opt/zig/lib/std/start.zig:248:5: 0x102775d in _start (main)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)",
    "exit": 134,
    "secs": 0.16,
    "stdout": "",
-   "stderr": "thread 3210 panic: index out of bounds: index 4, len 4\n/tmp/breakbench/oob_read/main/main.zig:13:35: 0x11e34f8 in main (main.zig)\n    try out.print(\"{d}\\n\", .{f.buf[idx]}); // CONTROL! if (idx < f.buf.len) try out.print(\"{d}\\n\", .{f.buf[idx]}) else try out.print(\"out of range\\n\", .{});\n                                  ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4158 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+   "stderr": "thread 463 panic: index out of bounds: index 4, len 4\n/tmp/breakbench/oob_read/main/main.zig:13:35: 0x11e34f8 in main (main.zig)\n    try out.print(\"{d}\\n\", .{f.buf[idx]}); // CONTROL! if (idx < f.buf.len) try out.print(\"{d}\\n\", .{f.buf[idx]}) else try out.print(\"out of range\\n\", .{});\n                                  ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4158 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
   },
   "use_after_free": {
    "outcome": "CORRUPT",
@@ -446,31 +446,27 @@
    "outcome": "CRASH",
    "control": "verified",
    "exit": 134,
-   "secs": 0.53,
+   "secs": 0.58,
    "stdout": "",
-   "stderr": "Segmentation fault at address 0x7ffcaafb2f80\n/tmp/breakbench/stack_overflow/main/main.zig:1:21: 0x11f0ecb in walk (main.zig)\nfn walk(n: i64) i64 {\n                    ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 + n, 1_000_000_007);\n                    ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 + n, 1_000_000_007);\n                    ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 + n, 1_000_000_007);\n                    ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 \n...\n                  ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 + n, 1_000_000_007);\n                    ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 + n, 1_000_000_007);\n                    ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 + n, 1_000_000_007);\n                    ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 + n, 1_000_000_007);\n                    ^\nStopping trace after 10001 frames (large frame count may indicate broken debug info)\nAborted (core dumped)"
+   "stderr": "Segmentation fault at address 0x7ffe09b6efa0\n/tmp/breakbench/stack_overflow/main/main.zig:1:21: 0x11f0ecb in walk (main.zig)\nfn walk(n: i64) i64 {\n                    ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 + n, 1_000_000_007);\n                    ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 + n, 1_000_000_007);\n                    ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 + n, 1_000_000_007);\n                    ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 \n...\n                  ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 + n, 1_000_000_007);\n                    ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 + n, 1_000_000_007);\n                    ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 + n, 1_000_000_007);\n                    ^\n/tmp/breakbench/stack_overflow/main/main.zig:3:21: 0x11f0f2f in walk (main.zig)\n    return @mod(walk(n - 1) * 31 + n, 1_000_000_007);\n                    ^\nStopping trace after 10001 frames (large frame count may indicate broken debug info)\nAborted (core dumped)"
   },
   "huge_allocation": {
-   "outcome": "TRAPPED",
-   "control": "verified",
-   "release": "TRAPPED",
-   "release_stdout": "",
-   "release_stderr": "error: OutOfMemory",
-   "exit": 1,
-   "secs": 0.07,
-   "stdout": "",
-   "stderr": "error: OutOfMemory\n/opt/zig/lib/std/mem/Allocator.zig:325:82: 0x1053403 in allocBytesAligned__func_113 (std.zig)\n    const byte_ptr = self.rawAlloc(byte_count, alignment, return_address) orelse return error.OutOfMemory;\n                                                                                 ^\n/opt/zig/lib/std/mem/Allocator.zig:311:5: 0x105326e in allocWithSizeAndAlignment__func_112 (std.zig)\n    return self.allocBytesAligned(alignment, byte_count, return_address);\n    ^\n/opt/zig/lib/std/mem/Allocator.zig:299:55: 0x1052dc4 in allocAdvancedWithRetAddr (std.zig)\n    const ptr: [*]align(a.toByteUnits()) T = @ptrCast(try self.allocWithSizeAndAlignment(@sizeOf(T), a, n, return_address));\n                                                      ^\n/opt/zig/lib/std/mem/Allocator.zig:223:5: 0x1052ec1 in alloc__func_110 (std.zig)\n    return self.allocAdvancedWithRetAddr(T, null, n, @returnAddress());\n    ^\n/tmp/breakbench/huge_allocation/main/main.zig:12:17: 0x11e3577 in main (main.zig)\n    const buf = try init.gpa.alloc(u8, n);\n                ^"
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "too large",
+   "stderr": ""
   },
   "wrong_variant_access": {
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "thread 3881 panic: access of union field 'text' while field 'int' is active\n/tmp/breakbench/wrong_variant_access/release/main.zig:14:31: 0x10277c1 in main (main)\n    try out.print(\"{d}\\n\", .{v.text.len}); // CONTROL! switch (v) { .text => |t| try out.print(\"{d}\\n\", .{t.len}), .int => try out.print(\"\n...\nn\", .{}) }\n                              ^\n/opt/zig/lib/std/start.zig:827:30: 0x10282f3 in callMain (main)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x102770d in _start (main)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)",
+   "release_stderr": "thread 729 panic: access of union field 'text' while field 'int' is active\n/tmp/breakbench/wrong_variant_access/release/main.zig:14:31: 0x10277c1 in main (main)\n    try out.print(\"{d}\\n\", .{v.text.len}); // CONTROL! switch (v) { .text => |t| try out.print(\"{d}\\n\", .{t.len}), .int => try out.print(\"n\n...\nn\", .{}) }\n                              ^\n/opt/zig/lib/std/start.zig:827:30: 0x10282f3 in callMain (main)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x102770d in _start (main)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.16,
+   "secs": 0.19,
    "stdout": "",
-   "stderr": "thread 3806 panic: access of union field 'text' while field 'int' is active\n/tmp/breakbench/wrong_variant_access/main/main.zig:14:31: 0x11e43cc in main (main.zig)\n    try out.print(\"{d}\\n\", .{v.text.len}); // CONTROL! switch (v) { .text => |t| try out.print(\"{d}\\n\", .{t.len}), .int => try out.print(\"not text\\n\", .{}) }\n                              ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4fb8 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e4121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+   "stderr": "thread 654 panic: access of union field 'text' while field 'int' is active\n/tmp/breakbench/wrong_variant_access/main/main.zig:14:31: 0x11e43cc in main (main.zig)\n    try out.print(\"{d}\\n\", .{v.text.len}); // CONTROL! switch (v) { .text => |t| try out.print(\"{d}\\n\", .{t.len}), .int => try out.print(\"not text\\n\", .{}) }\n                              ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4fb8 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e4121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
   },
   "format_string": {
    "outcome": "REJECTED",
@@ -534,11 +530,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "before",
-   "release_stderr": "thread 4384 panic: attempt to use null value\n/tmp/breakbench/forced_unwrap/release/main.zig:18:38: 0x1028315 in main (main)\n    try out.print(\"{d}\\n\", .{find(id).? + 1}); // CONTROL! if (find(id)) |a| try out.print(\"{d}\\n\", .{a + 1}) else try out.print(\"missing\\n\", .{});\n                                     ^\n/opt/zig/lib/std/start.zig:248:5: 0x10276ed in _start (main)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)",
+   "release_stderr": "thread 833 panic: attempt to use null value\n/tmp/breakbench/forced_unwrap/release/main.zig:18:38: 0x1028315 in main (main)\n    try out.print(\"{d}\\n\", .{find(id).? + 1}); // CONTROL! if (find(id)) |a| try out.print(\"{d}\\n\", .{a + 1}) else try out.print(\"missing\\n\", .{});\n                                     ^\n/opt/zig/lib/std/start.zig:248:5: 0x10276ed in _start (main)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.17,
+   "secs": 0.18,
    "stdout": "before",
-   "stderr": "thread 4309 panic: attempt to use null value\n/tmp/breakbench/forced_unwrap/main/main.zig:18:38: 0x11e456b in main (main.zig)\n    try out.print(\"{d}\\n\", .{find(id).? + 1}); // CONTROL! if (find(id)) |a| try out.print(\"{d}\\n\", .{a + 1}) else try out.print(\"missing\\n\", .{});\n                                     ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e5238 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e4121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+   "stderr": "thread 757 panic: attempt to use null value\n/tmp/breakbench/forced_unwrap/main/main.zig:18:38: 0x11e456b in main (main.zig)\n    try out.print(\"{d}\\n\", .{find(id).? + 1}); // CONTROL! if (find(id)) |a| try out.print(\"{d}\\n\", .{a + 1}) else try out.print(\"missing\\n\", .{});\n                                     ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e5238 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e4121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
   },
   "null_in_text": {
    "outcome": "REJECTED",
@@ -555,11 +551,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "thread 4592 panic: reached unreachable code\n/opt/zig/lib/std/multi_array_list.zig:246:35: 0x10293a4 in posixCallMainAndExit (main)\n                ptr += field_size * self.capacity;\n                                  ^\n/opt/zig/lib/std/start.zig:248:5: 0x102775d in _start (main)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)",
+   "release_stderr": "thread 937 panic: reached unreachable code\n/opt/zig/lib/std/multi_array_list.zig:246:35: 0x10293a4 in posixCallMainAndExit (main)\n                ptr += field_size * self.capacity;\n                                  ^\n/opt/zig/lib/std/start.zig:248:5: 0x102775d in _start (main)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.25,
+   "secs": 0.17,
    "stdout": "",
-   "stderr": "thread 4517 panic: reached unreachable code\n/opt/zig/lib/std/debug.zig:442:14: 0x1029ea9 in assert (std.zig)\n    if (!ok) unreachable; // assertion failure\n             ^\n/opt/zig/lib/std/mem.zig:3806:11: 0x11f01e1 in max__func_792 (std.zig)\n    assert(slice.len > 0);\n          ^\n/tmp/breakbench/empty_max/main/main.zig:12:41: 0x11e36b8 in main (main.zig)\n    try out.print(\"{d}\\n\", .{std.mem.max(i64, xs.items) + 1}); // CONTROL! if (xs.items.len == 0) try out.print(\"no readings\\n\", .{}) else try out.print(\"{d}\\n\", .{std.mem.max(i64, xs.items) + 1});\n                                        ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e43e8 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+   "stderr": "thread 862 panic: reached unreachable code\n/opt/zig/lib/std/debug.zig:442:14: 0x1029ea9 in assert (std.zig)\n    if (!ok) unreachable; // assertion failure\n             ^\n/opt/zig/lib/std/mem.zig:3806:11: 0x11f01e1 in max__func_792 (std.zig)\n    assert(slice.len > 0);\n          ^\n/tmp/breakbench/empty_max/main/main.zig:12:41: 0x11e36b8 in main (main.zig)\n    try out.print(\"{d}\\n\", .{std.mem.max(i64, xs.items) + 1}); // CONTROL! if (xs.items.len == 0) try out.print(\"no readings\\n\", .{}) else try out.print(\"{d}\\n\", .{std.mem.max(i64, xs.items) + 1});\n                                        ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e43e8 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
   },
   "readonly_param": {
    "outcome": "REJECTED",
@@ -611,11 +607,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "thread 5095 panic: integer overflow\n/opt/zig/lib/std/multi_array_list.zig:246:35: 0x1029025 in posixCallMainAndExit (main)\n                ptr += field_size * self.capacity;\n                                  ^\n/opt/zig/lib/std/start.zig:248:5: 0x10276cd in _start (main)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)",
+   "release_stderr": "thread 1041 panic: integer overflow\n/opt/zig/lib/std/multi_array_list.zig:246:35: 0x1029085 in posixCallMainAndExit (main)\n                ptr += field_size * self.capacity;\n                                  ^\n/opt/zig/lib/std/start.zig:248:5: 0x10276dd in _start (main)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.17,
+   "secs": 0.15,
    "stdout": "",
-   "stderr": "thread 5020 panic: integer overflow\n/tmp/breakbench/size_overflow_alloc/main/main.zig:12:24: 0x11e352d in main (main.zig)\n    const size = count * 8;\n                       ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4408 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
+   "stderr": "thread 966 panic: integer overflow\n/tmp/breakbench/size_overflow_alloc/main/main.zig:12:24: 0x11e352d in main (main.zig)\n    const size = count * 8;\n                       ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e44f8 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
   },
   "const_overflow": {
    "outcome": "REJECTED",
@@ -728,15 +724,11 @@
    "control": "builds"
   },
   "lost_write_error": {
-   "outcome": "TRAPPED",
-   "control": "verified",
-   "release": "TRAPPED",
-   "release_stdout": "",
-   "release_stderr": "error: WriteFailed",
-   "exit": 1,
-   "secs": 0.07,
-   "stdout": "",
-   "stderr": "error: WriteFailed\n/opt/zig/lib/std/Io/File.zig:611:5: 0x11f15fa in writeStreaming (std.zig)\n    return (try io.operate(.{ .file_write_streaming = .{\n    ^\n/opt/zig/lib/std/Io/File/Writer.zig:128:9: 0x11f0d70 in drainStreaming (std.zig)\n        return error.WriteFailed;\n        ^\n/opt/zig/lib/std/Io/File/Writer.zig:93:42: 0x11f07d2 in drain (std.zig)\n        .streaming, .streaming_simple => return drainStreaming(w, data, splat),\n                                         ^\n/opt/zig/lib/std/Io/Writer.zig:394:28: 0x103a883 in defaultFlush (std.zig)\n    while (w.end != 0) _ = try drainFn(w, &.{\"\"}, 1);\n                           ^\n/opt/zig/lib/std/Io/Writer.zig:388:5: 0x1132c53 in flush (std.zig)\n    return w.vtable.flush(w);\n    ^\n/tmp/breakbench/lost_write_error/main/main.zig:15:5: 0x11e378d in main (main.zig)\n    try fw.interface.flush(); // CONTROL! fw.interface.flush() catch { try out.print(\"failed\\n\", .{}); return; };\n    ^"
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "failed",
+   "stderr": ""
   },
   "short_read": {
    "outcome": "CORRECT",

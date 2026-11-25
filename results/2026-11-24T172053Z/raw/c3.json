@@ -511,7 +511,7 @@
    "outcome": "CRASH",
    "control": "verified",
    "exit": 139,
-   "secs": 0.5,
+   "secs": 0.69,
    "stdout": "",
    "stderr": "ERROR: 'Out of bounds memory access.'\n  in __sigaction (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in main.walk (/tmp/breakbench/stack_overflow/main/main.c3:6) [./main] [inline]\n  ... (249 repetitions of main.walk)\n  in main.walk (/tmp/breakbench/stack_overflow/main/main.c3:6) [./main] [inline]"
   },
@@ -523,7 +523,7 @@
    "release_stdout": "",
    "release_stderr": "ERROR: 'Unexpected fault 'mem::OUT_OF_MEMORY' was unwrapped!'\n  in new_array (/opt/c3/lib/std/core/alloc.c3:435) [./main]\n  in new_array (/opt/c3/lib/std/core/mem.c3:1110) [./main]\n  in main.main (/tmp/breakbench/huge_allocation/release/main.c3:7) [./main] [inline]",
    "exit": 132,
-   "secs": 0.02,
+   "secs": 0.03,
    "stdout": "",
    "stderr": "ERROR: 'Unexpected fault 'mem::OUT_OF_MEMORY' was unwrapped!'\n  in new_array (/opt/c3/lib/std/core/alloc.c3:435) [./main]\n  in new_array (/opt/c3/lib/std/core/mem.c3:1110) [./main]\n  in main.main (/tmp/breakbench/huge_allocation/main/main.c3:7) [./main] [inline]"
   },
@@ -532,7 +532,7 @@
    "outcome": "CRASH",
    "control": "verified",
    "exit": 139,
-   "secs": 0.02,
+   "secs": 0.03,
    "stdout": "",
    "stderr": "ERROR: 'Out of bounds memory access.'\n  in __sigaction (source unavailable) [/usr/lib/x86_64-linux-gnu/libc.so.6] [inline]\n  in std.core.string.ZString.len (source unavailable) [./main] [inline]\n  in main.main (/tmp/breakbench/wrong_variant_access/main/main.c3:22) [./main] [inline]"
   },
@@ -635,7 +635,7 @@
    "release_stdout": "",
    "release_stderr": "ERROR: 'Array index out of bounds (array had size 0, index was 0)'\n  in main.main (/tmp/breakbench/empty_max/release/main.c3:9) [./main] [inline]",
    "exit": 132,
-   "secs": 0.03,
+   "secs": 0.02,
    "stdout": "",
    "stderr": "ERROR: 'Array index out of bounds (array had size 0, index was 0)'\n  in main.main (/tmp/breakbench/empty_max/main/main.c3:9) [./main] [inline]"
   },
@@ -698,7 +698,7 @@
    "release_stdout": "",
    "release_stderr": "ERROR: 'Array index out of bounds (array had size 8, index was 8)'\n  in main.main (/tmp/breakbench/size_overflow_alloc/release/main.c3:9) [./main] [inline]",
    "exit": 132,
-   "secs": 0.02,
+   "secs": 0.03,
    "stdout": "",
    "stderr": "ERROR: 'Array index out of bounds (array had size 8, index was 8)'\n  in main.main (/tmp/breakbench/size_overflow_alloc/main/main.c3:9) [./main] [inline]"
   },

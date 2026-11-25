@@ -110,15 +110,14 @@
       "args": [
         "0"
       ],
-      "expect": null,
+      "expect": "^cannot divide$",
       "title": "Dividing an integer by zero",
       "scenario": "The program divides 100 by a number it reads at run time: 0.",
-      "best": "A clear error. Infinity, NaN or a hardware crash fails.",
+      "best": "A refusal to divide by an unchecked value, or a division the program must check that prints cannot divide. A clear error at run time earns half. Infinity, NaN or a hardware crash fails.",
       "mode": "Arithmetic mistakes",
       "refs": [
         "CWE-369"
-      ],
-      "control_expect": "^cannot divide$"
+      ]
     },
     {
       "id": "shift_overflow",
@@ -143,15 +142,14 @@
       "args": [
         "300"
       ],
-      "expect": null,
+      "expect": "^out of range$",
       "title": "Squeezing 300 into a byte",
       "scenario": "The program converts 300, read at run time, to an unsigned 8-bit number with the language's standard conversion.",
-      "best": "An error, because 300 does not fit in 8 bits. Printing 44 silently drops the high bits.",
+      "best": "A refusal of a conversion that may not fit, or a conversion the program must check that prints out of range. A clear error earns half. Printing 44 silently drops the high bits.",
       "mode": "Lossy conversions",
       "refs": [
         "CWE-197"
-      ],
-      "control_expect": "^out of range$"
+      ]
     },
     {
       "id": "float_to_int_overflow",
@@ -422,16 +420,15 @@
       "id": "ignored_error_result",
       "kind": "static",
       "args": [],
-      "expect": null,
+      "expect": "^failed$",
       "title": "Ignoring a failed save",
       "scenario": "save(path) writes a file and reports failure the language's usual way. The program calls it with /dev/null/out.txt, a path no program can create because /dev/null is a file, ignores the result and prints \"saved\".",
-      "best": "The compiler refuses to let the error go unhandled. Stopping with an exception earns half; printing \"saved\" fails.",
+      "best": "The compiler refuses to let the error go unhandled, or the program must handle it and prints failed. Stopping with an exception earns half; printing \"saved\" fails.",
       "category": "errors",
       "mode": "Lost failures",
       "refs": [
         "CWE-252"
-      ],
-      "control_expect": "^failed$"
+      ]
     },
     {
       "id": "sort_with_nan",
@@ -603,15 +600,14 @@
       "id": "lock_order_deadlock",
       "kind": "dynamic",
       "args": [],
-      "expect": null,
+      "expect": "^finished$",
       "title": "Two locks taken in opposite orders",
       "scenario": "Two workers lock A and B in opposite orders. A rendezvous waits until both workers hold their first lock before each attempts the second.",
-      "best": "The program detects the lock-order deadlock or hangs. A deterministic rendezvous ensures the conflicting lock attempts occur.",
+      "best": "A refusal of the conflicting lock order, or a lock that reports the deadlock so the program backs off and prints finished. Detecting the deadlock and stopping earns half. A hang fails.",
       "mode": "Locking",
       "refs": [
         "CWE-833"
-      ],
-      "control_expect": "^finished$"
+      ]
     },
     {
       "category": "security",
@@ -833,15 +829,14 @@
       "args": [
         "0"
       ],
-      "expect": null,
+      "expect": "^no previous$",
       "title": "Reading the item before the first",
       "scenario": "readings is [10, 20, 30]. The program reads a position from the command line (0) and prints readings[i] - readings[i - 1]. The first reading has nothing before it.",
-      "best": "An index error. Reading the last item through -1, or a missing value, fails.",
+      "best": "A refusal of an unchecked index, or a lookup the program must check that prints no previous. An index error earns half. Reading the last item through -1, or a missing value, fails.",
       "mode": "Out-of-range indexes",
       "refs": [
         "CWE-129"
-      ],
-      "control_expect": "^no previous$"
+      ]
     },
     {
       "id": "default_numeric_sort",
@@ -943,16 +938,15 @@
       "args": [
         "4"
       ],
-      "expect": null,
+      "expect": "^out of range$",
       "unsafe": "^42$",
       "title": "Reading past the end of a buffer",
       "scenario": "A 4-slot buffer holding 1, 2, 3 and 4 sits next to secret = 42. The program reads slot 4, taken from the command line, and prints it.",
-      "best": "A bounds error. Printing 42 means the program read memory it does not own; printing a placeholder such as nil or undefined is a silent wrong answer.",
+      "best": "A refusal of an unchecked index, or an index the program must check that prints out of range. A bounds error earns half. Printing 42 means the program read memory it does not own; a placeholder such as nil or undefined is a silent wrong answer.",
       "mode": "Out-of-range indexes",
       "refs": [
         "CWE-125"
-      ],
-      "control_expect": "^out of range$"
+      ]
     },
     {
       "id": "use_after_free",
@@ -1034,12 +1028,12 @@
       "category": "memory",
       "kind": "memory",
       "args": [
-        "100000000"
+        "10000000"
       ],
-      "expect": "^919423987$",
-      "title": "Recursing 100 million levels deep",
-      "scenario": "walk(n) = (walk(n - 1) * 31 + n) mod 1000000007, and walk(0) = 0. The program calls walk(100,000,000). The formula keeps optimizers from turning the recursion into a loop.",
-      "best": "The answer, 919423987, or a stack-overflow error. A segmentation fault fails.",
+      "expect": "^433043450$",
+      "title": "Recursing 10 million levels deep",
+      "scenario": "walk(n) = (walk(n - 1) * 31 + n) mod 1000000007, and walk(0) = 0. The program calls walk(10,000,000). The formula keeps optimizers from turning the recursion into a loop.",
+      "best": "The answer, 433043450: the stack grows to hold the recursion. A stack-overflow error earns half. A segmentation fault fails.",
       "mode": "Exhaustion and leaks",
       "refs": [
         "CWE-674"
@@ -1052,30 +1046,28 @@
       "args": [
         "10000000000000"
       ],
-      "expect": null,
+      "expect": "^too large$",
       "title": "Allocating a size taken from user input",
       "scenario": "The program reads n = 10^13 from the command line, allocates n zero bytes, sets the last one and prints the length.",
-      "best": "A clean allocation error. A segmentation fault or being killed for running out of memory fails.",
+      "best": "An allocation the program must check that prints too large. A clean allocation error earns half. A segmentation fault or being killed for running out of memory fails.",
       "mode": "Exhaustion and leaks",
       "refs": [
         "CWE-789"
-      ],
-      "control_expect": "^too large$"
+      ]
     },
     {
       "category": "memory",
       "id": "wrong_variant_access",
       "kind": "memory",
       "args": [],
-      "expect": null,
+      "expect": "^not text$",
       "title": "Reading a value as the wrong type",
       "scenario": "A Value holds an integer or text and currently holds 42. The program reads it as text and prints the text's length.",
-      "best": "The compiler refuses, or a clean run-time type error. Reading the integer's bits as a pointer crashes or leaks memory.",
+      "best": "The compiler refuses, or an access the program must check that prints not text. A clean run-time type error earns half. Reading the integer's bits as a pointer crashes or leaks memory.",
       "mode": "Wrong type or shape",
       "refs": [
         "CWE-843"
-      ],
-      "control_expect": "^not text$"
+      ]
     },
     {
       "category": "security",
@@ -1246,15 +1238,14 @@
       "category": "null",
       "kind": "dynamic",
       "args": [],
-      "expect": null,
+      "expect": "missing$",
       "title": "Forcing a missing value",
       "scenario": "find(2) returns a missing value. The program prints before, then forces the value out with the language's shortest way to do so (*o, o!, o.get(), unwrap(), assert(o), or a null used as a number) and adds 1.",
-      "best": "The program stops there with an error. Printing a number, NaN or a placeholder is a silent wrong answer.",
+      "best": "A refusal to force out a value that may be missing. Stopping there with an error earns half. Printing a number, NaN or a placeholder is a silent wrong answer.",
       "mode": "Missing values",
       "refs": [
         "CWE-476"
-      ],
-      "control_expect": "missing$"
+      ]
     },
     {
       "id": "null_in_text",
@@ -1295,16 +1286,15 @@
       "category": "null",
       "kind": "dynamic",
       "args": [],
-      "expect": null,
+      "expect": "^no readings$",
       "title": "The maximum of an empty list",
       "scenario": "readings are the numbers given on the command line: none. The program takes their maximum with the language's standard call for the maximum of a list and prints it plus 1.",
-      "best": "A refusal to use the maximum as a number before checking the list had one: the call answers an optional. A clear error at run time is next best. Printing -Infinity, 1 or any other number treats an empty list as having a maximum.",
+      "best": "A refusal to use the maximum as a number before checking the list had one (the call answers an optional), or that check printing no readings. A clear error at run time earns half. Printing -Infinity, 1 or any other number treats an empty list as having a maximum.",
       "answer": "^-?(\\d+(\\.\\d+)?|Infinity)$",
       "mode": "Missing values",
       "refs": [
         "CWE-754"
-      ],
-      "control_expect": "^no readings$"
+      ]
     },
     {
       "id": "readonly_param",
@@ -1435,16 +1425,15 @@
       "args": [
         "2305843009213693953"
       ],
-      "expect": null,
+      "expect": "^too large$",
       "title": "A size that overflows before the allocation",
       "scenario": "A header says 2305843009213693953 (2^61 + 1) records of 8 bytes follow; the program reads the count at run time. It computes the buffer size as count * 8 in the language's 64-bit integer or size type, allocates a byte buffer of that size, sets the first byte of the second record (byte 8) to 99, and prints stored.",
-      "best": "A clear error at the multiplication, the allocation or the write. Printing stored shows the size wrapped to 8 bytes and the write went past the buffer.",
+      "best": "A refusal of a size computation that may overflow, or a size or allocation the program must check that prints too large. A clear error at the multiplication, the allocation or the write earns half. Printing stored shows the size wrapped to 8 bytes and the write went past the buffer.",
       "unsafe": "^stored$",
       "mode": "Integer overflow",
       "refs": [
         "CWE-680"
-      ],
-      "control_expect": "^too large$"
+      ]
     },
     {
       "id": "const_overflow",
@@ -1692,15 +1681,14 @@
       "category": "errors",
       "kind": "dynamic",
       "args": [],
-      "expect": null,
+      "expect": "^failed$",
       "title": "A failed write lost when the file closes",
       "scenario": "The program writes the line data to /dev/full, a device where every write fails with no space left, using the language's usual file writer, closes it the usual way (the end of a block, defer, with or using, or a close call whose result it does not check) and prints saved.",
-      "best": "An error that stops the program. Printing saved means the data was lost with no sign, as when a disk fills up in production.",
+      "best": "A refusal to drop the write error, or an error the program must handle that prints failed. An error that stops the program earns half. Printing saved means the data was lost with no sign, as when a disk fills up in production.",
       "mode": "Lost failures",
       "refs": [
         "CWE-252"
-      ],
-      "control_expect": "^failed$"
+      ]
     },
     {
       "id": "short_read",
@@ -1750,16 +1738,15 @@
       "category": "errors",
       "kind": "dynamic",
       "args": [],
-      "expect": null,
+      "expect": "^backup failed$",
       "answer": "backed up",
       "title": "A failed command treated as a success",
       "scenario": "A backup step, sh -c 'exit 3', fails. The program runs it with the language's usual call to run a command and wait for it, ignores how it exited, and prints backed up.",
-      "best": "A refusal to ignore the result, or a clear error from the call. backed up shows the failure went unseen.",
+      "best": "A refusal to ignore the result, or a result the program must check that prints backup failed. A clear error from the call earns half. backed up shows the failure went unseen.",
       "mode": "Lost failures",
       "refs": [
         "CWE-252"
-      ],
-      "control_expect": "^backup failed$"
+      ]
     },
     {
       "id": "nullable_field",

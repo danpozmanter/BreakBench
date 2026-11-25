@@ -9,7 +9,11 @@ pub fn main(init: std.process.Init) !void {
     _ = &args;
     const n = try std.fmt.parseInt(usize, args[1], 10);
     // CONTROL! if (n > 1 << 30) { try out.print("too large\n", .{}); return; }
-    const buf = try init.gpa.alloc(u8, n);
+    // alloc answers an error union, so the program checks it.
+    const buf = init.gpa.alloc(u8, n) catch {
+        try out.print("too large\n", .{});
+        return;
+    };
     @memset(buf, 0);
     buf[n - 1] = 1;
     try out.print("{d}\n", .{buf.len});

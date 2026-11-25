@@ -520,12 +520,11 @@
   },
   "stack_overflow": {
    "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:11:22: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n   |\n11 |   print (walk (read (head args))) -- CONTROL! print (let n = read (head args) :: Integer; m = 1000000007 in ((powMod 31 (n + 1) - 31 * (n + 1) + n) * powMod 900 (m - 2)) `mod` m)\n   |                      ^^^^",
-   "outcome": "CRASH",
-   "control": "verified",
-   "exit": 137,
-   "secs": 3.27,
-   "stdout": "",
-   "stderr": "Killed"
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 2.57,
+   "stdout": "433043450",
+   "stderr": ""
   },
   "huge_allocation": {
    "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:7:17: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n7 |   let n = read (head args) :: Int\n  |                 ^^^^",

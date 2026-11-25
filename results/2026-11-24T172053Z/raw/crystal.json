@@ -487,11 +487,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "Stack overflow (e.g., infinite or very deep recursion)\n[0x6179dcfd2c09] ?? +107176026516489 in ./main\n[0x6179dcfd29b4] ?? +107176026515892 in ./main\n[0x7dd3c3ae6cb0] ?? +138348474559664 in /usr/lib/x86_64-linux-gnu/libc.so.6\n[0x6179dcfd90ae] ?? +107176026542254 in ./main\n[0x6179dcfd90b3] ?? +1071760\n...\n (523904 times)\n[0x6179dcfdcc3b] ?? +107176026557499 in ./main\n[0x6179dcfcfb06] main +6 in ./main\n[0x7dd3c3acb601] ?? +138348474447361 in /usr/lib/x86_64-linux-gnu/libc.so.6\n[0x7dd3c3acb718] __libc_start_main +136 in /usr/lib/x86_64-linux-gnu/libc.so.6\n[0x6179dcfa0835] _start +37 in ./main\n[0x0] ???",
+   "release_stderr": "Stack overflow (e.g., infinite or very deep recursion)\n[0x5596ccc3dc09] ?? +94106168843273 in ./main\n[0x5596ccc3d9b4] ?? +94106168842676 in ./main\n[0x7adc493e9cb0] ?? +135086540233904 in /usr/lib/x86_64-linux-gnu/libc.so.6\n[0x5596ccc440ae] ?? +94106168869038 in ./main\n[0x5596ccc440b3] ?? +9410616886\n...\nn (523720 times)\n[0x5596ccc47c3b] ?? +94106168884283 in ./main\n[0x5596ccc3ab06] main +6 in ./main\n[0x7adc493ce601] ?? +135086540121601 in /usr/lib/x86_64-linux-gnu/libc.so.6\n[0x7adc493ce718] __libc_start_main +136 in /usr/lib/x86_64-linux-gnu/libc.so.6\n[0x5596ccc0b835] _start +37 in ./main\n[0x0] ???",
    "exit": 11,
-   "secs": 0.01,
+   "secs": 0.03,
    "stdout": "",
-   "stderr": "Stack overflow (e.g., infinite or very deep recursion)\n[0x560f26e3731a] *Exception::CallStack::print_backtrace:Nil +122 in ./main\n[0x560f26e15646] ~procProc(Int32, Pointer(LibC::SiginfoT), Pointer(Void), Nil) +278 in ./main\n[0x75793f1a7cb0] ?? +129163610193072 in /usr/lib/x86_64-linux-gnu/libc.so.6\n[0x560f26e1610e] *walk<Int64>:Int64 +30 in ./main\n[0x560f26e1612b] *walk<Int64>:Int64 +59 in ./main (174733 times)\n[0x560f26e0ed2e] __crystal_main +1086 in ./main\n[0x560f26e58236] *Crystal::main_user_code<Int32, Pointer(Pointer(UInt8))>:Nil +6 in ./main\n[0x560f26e58076] *Crystal::main<Int32, Pointer(Pointer(UInt8))>:Int32 +70 in ./main\n[0x560f26e151db] main +27 in ./main\n[0x75793f18c601] ?? +129163610080769 in /usr/lib/x86_64-linux-gnu/libc.so.6\n[0x75793f18c718] __libc_start_main +136 in /usr/lib/x86_64-linux-gnu/libc.so.6\n[0x560f26e0e825] _start +37 in ./main\n[0x0] ???"
+   "stderr": "Stack overflow (e.g., infinite or very deep recursion)\n[0x5885b73ca31a] *Exception::CallStack::print_backtrace:Nil +122 in ./main\n[0x5885b73a8646] ~procProc(Int32, Pointer(LibC::SiginfoT), Pointer(Void), Nil) +278 in ./main\n[0x77f6a3152cb0] ?? +131901181734064 in /usr/lib/x86_64-linux-gnu/libc.so.6\n[0x5885b73a910e] *walk<Int64>:Int64 +30 in ./main\n[0x5885b73a912b] *walk<Int64>:Int64 +59 in ./main (174590 times)\n[0x5885b73a1d2e] __crystal_main +1086 in ./main\n[0x5885b73eb236] *Crystal::main_user_code<Int32, Pointer(Pointer(UInt8))>:Nil +6 in ./main\n[0x5885b73eb076] *Crystal::main<Int32, Pointer(Pointer(UInt8))>:Int32 +70 in ./main\n[0x5885b73a81db] main +27 in ./main\n[0x77f6a3137601] ?? +131901181621761 in /usr/lib/x86_64-linux-gnu/libc.so.6\n[0x77f6a3137718] __libc_start_main +136 in /usr/lib/x86_64-linux-gnu/libc.so.6\n[0x5885b73a1825] _start +37 in ./main\n[0x0] ???"
   },
   "huge_allocation": {
    "outcome": "TRAPPED",
@@ -619,7 +619,7 @@
    "release_stdout": "",
    "release_stderr": "Unhandled exception: Empty enumerable (Enumerable::EmptyError)\n  from ?? in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
    "exit": 1,
-   "secs": 0.02,
+   "secs": 0.01,
    "stdout": "",
    "stderr": "Unhandled exception: Empty enumerable (Enumerable::EmptyError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/enumerable.cr:1139:5 in 'max'\n  from main.cr:2:6 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
   },

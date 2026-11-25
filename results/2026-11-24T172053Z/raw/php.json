@@ -526,12 +526,11 @@
   },
   "stack_overflow": {
    "build_output": "No syntax errors detected in main.php",
-   "outcome": "CRASH",
-   "control": "verified",
-   "exit": 137,
-   "secs": 0.89,
-   "stdout": "",
-   "stderr": "Killed"
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.57,
+   "stdout": "433043450",
+   "stderr": ""
   },
   "huge_allocation": {
    "build_output": "No syntax errors detected in main.php",

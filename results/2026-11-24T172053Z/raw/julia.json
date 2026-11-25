@@ -28,7 +28,7 @@
    "release_stdout": "",
    "release_stderr": "ERROR: LoadError: DivideError: integer division error\nStacktrace:\n [1] div\n   @ ./int.jl:346 [inlined]\n [2] main()\n   @ Main /tmp/breakbench/div_by_zero/release/main.jl:3\n [3] top-level scope\n   @ /tmp/breakbench/div_by_zero/release/main.jl:6\n [4] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [5] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [6] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/div_by_zero/release/main.jl:6",
    "exit": 1,
-   "secs": 0.91,
+   "secs": 0.92,
    "stdout": "",
    "stderr": "ERROR: LoadError: DivideError: integer division error\nStacktrace:\n [1] div\n   @ ./int.jl:346 [inlined]\n [2] main()\n   @ Main /tmp/breakbench/div_by_zero/main/main.jl:3\n [3] top-level scope\n   @ /tmp/breakbench/div_by_zero/main/main.jl:6\n [4] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [5] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [6] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/div_by_zero/main/main.jl:6"
   },
@@ -47,7 +47,7 @@
    "release_stdout": "",
    "release_stderr": "ERROR: LoadError: InexactError: trunc(UInt8, 300)\nStacktrace:\n [1] throw_inexacterror(func::Symbol, to::Type, val::Int64)\n   @ Core ./boot.jl:868\n [2] checked_trunc_uint\n   @ ./boot.jl:890 [inlined]\n [3] toUInt8\n   @ ./boot.jl:952 [inlined]\n [4] UInt8\n   @ ./boot.jl:1012 [inlined]\n [5] main()\n   @ M\n...\n\n   @ /tmp/breakbench/narrowing_cast/release/main.jl:7\n [7] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [8] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [9] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/narrowing_cast/release/main.jl:7",
    "exit": 1,
-   "secs": 0.96,
+   "secs": 0.98,
    "stdout": "",
    "stderr": "ERROR: LoadError: InexactError: trunc(UInt8, 300)\nStacktrace:\n [1] throw_inexacterror(func::Symbol, to::Type, val::Int64)\n   @ Core ./boot.jl:868\n [2] checked_trunc_uint\n   @ ./boot.jl:890 [inlined]\n [3] toUInt8\n   @ ./boot.jl:952 [inlined]\n [4] UInt8\n   @ ./boot.jl:1012 [inlined]\n [5] main()\n   @ Main /tmp/breakbench/narrowing_cast/main/main.jl:3\n [6] top-level scope\n   @ /tmp/breakbench/narrowing_cast/main/main.jl:7\n [7] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [8] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [9] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/narrowing_cast/main/main.jl:7"
   },
@@ -213,7 +213,7 @@
    "release_stdout": "",
    "release_stderr": "ERROR: LoadError: SystemError: opening file \"/dev/null/out.txt\": Not a directory\nStacktrace:\n  [1] systemerror(p::String, errno::Int32; extrainfo::Nothing)\n    @ Base ./error.jl:186\n  [2] open(fname::String; lock::Bool, read::Nothing, write::Nothing, create::Nothing, truncate::Bool, append::Nothing)\n...\nnch/ignored_error_result/release/main.jl:3\n [11] include(mod::Module, _path::String)\n    @ Base ./Base.jl:309\n [12] exec_options(opts::Base.JLOptions)\n    @ Base ./client.jl:344\n [13] _start()\n    @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/ignored_error_result/release/main.jl:3",
    "exit": 1,
-   "secs": 0.92,
+   "secs": 0.97,
    "stdout": "",
    "stderr": "ERROR: LoadError: SystemError: opening file \"/dev/null/out.txt\": Not a directory\nStacktrace:\n  [1] systemerror(p::String, errno::Int32; extrainfo::Nothing)\n    @ Base ./error.jl:186\n  [2] open(fname::String; lock::Bool, read::Nothing, write::Nothing, create::Nothing, truncate::Bool, append::Nothing)\n    @ Base ./iostream.jl:327\n  [3] open\n    @ ./iostream.jl:306 [inlined]\n  [4] open(fname::String, mode::String; lock::Bool)\n    @ Base ./iostream.jl:390\n  [5] open\n    @ ./iostream.jl:389 [inlined]\n  [6] #open#324\n    @ ./io.jl:427 [inlined]\n  [7] open\n    @ ./io.jl:426 [inlined]\n  [8] write(::String, ::String)\n    @ Base ./io.jl:508\n  [9] save(path::String)\n    @ Main /tmp/breakbench/ignored_error_result/main/main.jl:1\n [10] top-level scope\n    @ /tmp/breakbench/ignored_error_result/main/main.jl:3\n [11] include(mod::Module, _path::String)\n    @ Base ./Base.jl:309\n [12] exec_options(opts::Base.JLOptions)\n    @ Base ./client.jl:344\n [13] _start()\n    @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/ignored_error_result/main/main.jl:3"
   },
@@ -433,7 +433,7 @@
    "release_stdout": "",
    "release_stderr": "ERROR: LoadError: BoundsError: attempt to access 3-element Vector{Int64} at index [0]\nStacktrace:\n [1] throw_boundserror(A::Vector{Int64}, I::Tuple{Int64})\n   @ Base ./essentials.jl:14\n [2] checkbounds\n   @ ./essentials.jl:389 [inlined]\n [3] getindex(A::Vector{Int64}, i::Int64)\n   @ Base ./essential\n...\nreakbench/negative_index_wraps/release/main.jl:3\n [5] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [6] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [7] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/negative_index_wraps/release/main.jl:3",
    "exit": 1,
-   "secs": 0.98,
+   "secs": 1.07,
    "stdout": "",
    "stderr": "ERROR: LoadError: BoundsError: attempt to access 3-element Vector{Int64} at index [0]\nStacktrace:\n [1] throw_boundserror(A::Vector{Int64}, I::Tuple{Int64})\n   @ Base ./essentials.jl:14\n [2] checkbounds\n   @ ./essentials.jl:389 [inlined]\n [3] getindex(A::Vector{Int64}, i::Int64)\n   @ Base ./essentials.jl:974\n [4] top-level scope\n   @ /tmp/breakbench/negative_index_wraps/main/main.jl:3\n [5] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [6] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [7] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/negative_index_wraps/main/main.jl:3"
   },
@@ -493,7 +493,7 @@
    "release_stdout": "",
    "release_stderr": "ERROR: LoadError: BoundsError: attempt to access 4-element Vector{Int64} at index [5]\nStacktrace:\n [1] throw_boundserror(A::Vector{Int64}, I::Tuple{Int64})\n   @ Base ./essentials.jl:14\n [2] checkbounds\n   @ ./essentials.jl:389 [inlined]\n [3] getindex\n   @ ./essentials.jl:974 [inlined]\n [4] main()\n  \n...\nevel scope\n   @ /tmp/breakbench/oob_read/release/main.jl:12\n [6] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [7] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [8] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/oob_read/release/main.jl:12",
    "exit": 1,
-   "secs": 0.95,
+   "secs": 1.17,
    "stdout": "",
    "stderr": "ERROR: LoadError: BoundsError: attempt to access 4-element Vector{Int64} at index [5]\nStacktrace:\n [1] throw_boundserror(A::Vector{Int64}, I::Tuple{Int64})\n   @ Base ./essentials.jl:14\n [2] checkbounds\n   @ ./essentials.jl:389 [inlined]\n [3] getindex\n   @ ./essentials.jl:974 [inlined]\n [4] main()\n   @ Main /tmp/breakbench/oob_read/main/main.jl:9\n [5] top-level scope\n   @ /tmp/breakbench/oob_read/main/main.jl:12\n [6] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [7] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [8] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/oob_read/main/main.jl:12"
   },
@@ -539,7 +539,7 @@
    "release_stdout": "",
    "release_stderr": "Warning: detected a stack overflow; program state may be corrupted, so further execution might be unreliable.\nERROR: LoadError: StackOverflowError:\nStacktrace:\n \u250c    [1] walk(n::Int64)\n \u2502      @ Main /tmp/breakbench/stack_overflow/release/main.jl:3\n \u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500 repeated 79984 times\nin expression starting at /tmp/breakbench/stack_overflow/release/main.jl:6",
    "exit": 1,
-   "secs": 0.92,
+   "secs": 1.06,
    "stdout": "",
    "stderr": "Warning: detected a stack overflow; program state may be corrupted, so further execution might be unreliable.\nERROR: LoadError: StackOverflowError:\nStacktrace:\n      [1] walk(n::Int64)\n        @ Main /tmp/breakbench/stack_overflow/main/main.jl:1\n \u250c    [2] walk(n::Int64)\n \u2502      @ Main /tmp/breakbench/stack_overflow/main/main.jl:3\n \u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500 repeated 79983 times\nin expression starting at /tmp/breakbench/stack_overflow/main/main.jl:6"
   },
@@ -550,7 +550,7 @@
    "release_stdout": "",
    "release_stderr": "ERROR: LoadError: OutOfMemoryError()\nStacktrace:\n [1] GenericMemory\n   @ ./boot.jl:588 [inlined]\n [2] Array\n   @ ./boot.jl:648 [inlined]\n [3] Array\n   @ ./boot.jl:661 [inlined]\n [4] zeros\n   @ ./array.jl:626 [inlined]\n [5] zeros(::Type{UInt8}, dims::Int64)\n   @ Base ./array.jl:622\n [6] top-level sco\n...\n  @ /tmp/breakbench/huge_allocation/release/main.jl:3\n [7] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [8] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [9] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/huge_allocation/release/main.jl:3",
    "exit": 1,
-   "secs": 0.84,
+   "secs": 1.06,
    "stdout": "",
    "stderr": "ERROR: LoadError: OutOfMemoryError()\nStacktrace:\n [1] GenericMemory\n   @ ./boot.jl:588 [inlined]\n [2] Array\n   @ ./boot.jl:648 [inlined]\n [3] Array\n   @ ./boot.jl:661 [inlined]\n [4] zeros\n   @ ./array.jl:626 [inlined]\n [5] zeros(::Type{UInt8}, dims::Int64)\n   @ Base ./array.jl:622\n [6] top-level scope\n   @ /tmp/breakbench/huge_allocation/main/main.jl:3\n [7] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [8] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [9] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/huge_allocation/main/main.jl:3"
   },
@@ -561,7 +561,7 @@
    "release_stdout": "",
    "release_stderr": "ERROR: LoadError: MethodError: Cannot `convert` an object of type Int64 to an object of type String\nThe function `convert` exists, but no method is defined for this combination of argument types.\n\nClosest candidates are:\n  convert(::Type{String}, !Matched::String)\n   @ Base essentials.jl:478\n  conve\n...\nreakbench/wrong_variant_access/release/main.jl:7\n [3] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [4] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [5] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/wrong_variant_access/release/main.jl:7",
    "exit": 1,
-   "secs": 1.22,
+   "secs": 1.33,
    "stdout": "",
    "stderr": "ERROR: LoadError: MethodError: Cannot `convert` an object of type Int64 to an object of type String\nThe function `convert` exists, but no method is defined for this combination of argument types.\n\nClosest candidates are:\n  convert(::Type{String}, !Matched::String)\n   @ Base essentials.jl:478\n  convert(::Type{T}, !Matched::T) where T<:AbstractString\n   @ Base strings/basic.jl:227\n  convert(::Type{T}, !Matched::AbstractString) where T<:AbstractString\n   @ Base strings/basic.jl:228\n  ...\n\nStacktrace:\n [1] main()\n   @ Main /tmp/breakbench/wrong_variant_access/main/main.jl:3\n [2] top-level scope\n   @ /tmp/breakbench/wrong_variant_access/main/main.jl:7\n [3] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [4] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [5] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/wrong_variant_access/main/main.jl:7"
   },
@@ -670,7 +670,7 @@
    "release_stdout": "before",
    "release_stderr": "ERROR: LoadError: MethodError: no method matching +(::Nothing, ::Int64)\nThe function `+` exists, but no method is defined for this combination of argument types.\n\nClosest candidates are:\n  +(::Any, ::Any, !Matched::Any, !Matched::Any...)\n   @ Base operators.jl:653\n  +(!Matched::Base.CoreLogging.LogL\n...\npe\n   @ /tmp/breakbench/forced_unwrap/release/main.jl:9\n [3] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [4] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [5] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/forced_unwrap/release/main.jl:9",
    "exit": 1,
-   "secs": 1.25,
+   "secs": 1.07,
    "stdout": "before",
    "stderr": "ERROR: LoadError: MethodError: no method matching +(::Nothing, ::Int64)\nThe function `+` exists, but no method is defined for this combination of argument types.\n\nClosest candidates are:\n  +(::Any, ::Any, !Matched::Any, !Matched::Any...)\n   @ Base operators.jl:653\n  +(!Matched::Base.CoreLogging.LogLevel, ::Integer)\n   @ Base logging/logging.jl:134\n  +(!Matched::BigInt, ::Union{Int16, Int32, Int64, Int8})\n   @ Base gmp.jl:559\n  ...\n\nStacktrace:\n [1] main()\n   @ Main /tmp/breakbench/forced_unwrap/main/main.jl:6\n [2] top-level scope\n   @ /tmp/breakbench/forced_unwrap/main/main.jl:9\n [3] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [4] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [5] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/forced_unwrap/main/main.jl:9"
   },
@@ -700,7 +700,7 @@
    "release_stdout": "",
    "release_stderr": "ERROR: LoadError: ArgumentError: reducing over an empty collection is not allowed; consider supplying `init` to the reducer\nStacktrace:\n  [1] _empty_reduce_error()\n    @ Base ./reduce.jl:318\n  [2] reduce_empty(f::Function, T::Type)\n    @ Base ./reduce.jl:319\n  [3] mapreduce_empty(::typeof(identity),\n...\nope\n    @ /tmp/breakbench/empty_max/release/main.jl:6\n [15] include(mod::Module, _path::String)\n    @ Base ./Base.jl:309\n [16] exec_options(opts::Base.JLOptions)\n    @ Base ./client.jl:344\n [17] _start()\n    @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/empty_max/release/main.jl:6",
    "exit": 1,
-   "secs": 0.95,
+   "secs": 0.89,
    "stdout": "",
    "stderr": "ERROR: LoadError: ArgumentError: reducing over an empty collection is not allowed; consider supplying `init` to the reducer\nStacktrace:\n  [1] _empty_reduce_error()\n    @ Base ./reduce.jl:318\n  [2] reduce_empty(f::Function, T::Type)\n    @ Base ./reduce.jl:319\n  [3] mapreduce_empty(::typeof(identity), op::Function, T::Type)\n    @ Base ./reduce.jl:370\n  [4] reduce_empty(op::Base.MappingRF{typeof(identity), typeof(max)}, ::Type{Int64})\n    @ Base ./reduce.jl:359\n  [5] reduce_empty_iter\n    @ ./reduce.jl:382 [inlined]\n  [6] mapreduce_empty_iter(f::typeof(identity), op::typeof(max), itr::Vector{Int64}, ItrEltype::Base.HasEltype)\n    @ Base ./reduce.jl:378\n  [7] _mapreduce\n    @ ./reduce.jl:432 [inlined]\n  [8] _mapreduce_dim\n    @ ./reducedim.jl:347 [inlined]\n  [9] mapreduce\n    @ ./reducedim.jl:330 [inlined]\n [10] _maximum\n    @ ./reducedim.jl:1003 [inlined]\n [11] _maximum\n    @ ./reducedim.jl:1002 [inlined]\n [12] maximum\n    @ ./reducedim.jl:998 [inlined]\n [13] main()\n    @ Main /tmp/breakbench/empty_max/main/main.jl:3\n [14] top-level scope\n    @ /tmp/breakbench/empty_max/main/main.jl:6\n [15] include(mod::Module, _path::String)\n    @ Base ./Base.jl:309\n [16] exec_options(opts::Base.JLOptions)\n    @ Base ./client.jl:344\n [17] _start()\n    @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/empty_max/main/main.jl:6"
   },
@@ -789,7 +789,7 @@
    "release_stdout": "",
    "release_stderr": "ERROR: LoadError: BoundsError: attempt to access 8-element Vector{UInt8} at index [9]\nStacktrace:\n [1] throw_boundserror(A::Vector{UInt8}, I::Tuple{Int64})\n   @ Base ./essentials.jl:14\n [2] _setindex!\n   @ ./array.jl:1024 [inlined]\n [3] setindex!(A::Vector{UInt8}, x::Int64, i::Int64)\n   @ Base ./arr\n...\n/breakbench/size_overflow_alloc/release/main.jl:5\n [5] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [6] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [7] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/size_overflow_alloc/release/main.jl:5",
    "exit": 1,
-   "secs": 0.93,
+   "secs": 0.83,
    "stdout": "",
    "stderr": "ERROR: LoadError: BoundsError: attempt to access 8-element Vector{UInt8} at index [9]\nStacktrace:\n [1] throw_boundserror(A::Vector{UInt8}, I::Tuple{Int64})\n   @ Base ./essentials.jl:14\n [2] _setindex!\n   @ ./array.jl:1024 [inlined]\n [3] setindex!(A::Vector{UInt8}, x::Int64, i::Int64)\n   @ Base ./array.jl:1020\n [4] top-level scope\n   @ /tmp/breakbench/size_overflow_alloc/main/main.jl:5\n [5] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [6] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [7] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/size_overflow_alloc/main/main.jl:5"
   },
@@ -946,7 +946,7 @@
    "release_stdout": "",
    "release_stderr": "ERROR: LoadError: SystemError: close: No space left on device\nStacktrace:\n  [1] systemerror(p::String, errno::Int32; extrainfo::Nothing)\n    @ Base ./error.jl:186\n  [2] systemerror\n    @ ./error.jl:185 [inlined]\n  [3] close(s::IOStream)\n    @ Base ./iostream.jl:92\n  [4] #open#324\n    @ ./io.jl:431 [\n...\n/breakbench/lost_write_error/release/main.jl:8\n  [8] include(mod::Module, _path::String)\n    @ Base ./Base.jl:309\n  [9] exec_options(opts::Base.JLOptions)\n    @ Base ./client.jl:344\n [10] _start()\n    @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/lost_write_error/release/main.jl:8",
    "exit": 1,
-   "secs": 0.83,
+   "secs": 0.9,
    "stdout": "",
    "stderr": "ERROR: LoadError: SystemError: close: No space left on device\nStacktrace:\n  [1] systemerror(p::String, errno::Int32; extrainfo::Nothing)\n    @ Base ./error.jl:186\n  [2] systemerror\n    @ ./error.jl:185 [inlined]\n  [3] close(s::IOStream)\n    @ Base ./iostream.jl:92\n  [4] #open#324\n    @ ./io.jl:431 [inlined]\n  [5] open\n    @ ./io.jl:426 [inlined]\n  [6] main()\n    @ Main /tmp/breakbench/lost_write_error/main/main.jl:2\n  [7] top-level scope\n    @ /tmp/breakbench/lost_write_error/main/main.jl:8\n  [8] include(mod::Module, _path::String)\n    @ Base ./Base.jl:309\n  [9] exec_options(opts::Base.JLOptions)\n    @ Base ./client.jl:344\n [10] _start()\n    @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/lost_write_error/main/main.jl:8"
   },
@@ -979,7 +979,7 @@
    "release_stdout": "",
    "release_stderr": "ERROR: LoadError: failed process: Process(`sh -c 'exit 3'`, ProcessExited(3)) [3]\n\nStacktrace:\n [1] pipeline_error\n   @ ./process.jl:610 [inlined]\n [2] run(::Cmd; wait::Bool)\n   @ Base ./process.jl:525\n [3] run(::Cmd)\n   @ Base ./process.jl:522\n [4] top-level scope\n   @ /tmp/breakbench/child_exit_status/release/main.jl:1\n [5] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [6] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [7] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/child_exit_status/release/main.jl:1",
    "exit": 1,
-   "secs": 0.87,
+   "secs": 1.04,
    "stdout": "",
    "stderr": "ERROR: LoadError: failed process: Process(`sh -c 'exit 3'`, ProcessExited(3)) [3]\n\nStacktrace:\n [1] pipeline_error\n   @ ./process.jl:610 [inlined]\n [2] run(::Cmd; wait::Bool)\n   @ Base ./process.jl:525\n [3] run(::Cmd)\n   @ Base ./process.jl:522\n [4] top-level scope\n   @ /tmp/breakbench/child_exit_status/main/main.jl:1\n [5] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [6] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [7] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/child_exit_status/main/main.jl:1"
   },

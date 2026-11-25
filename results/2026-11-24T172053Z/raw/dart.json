@@ -24,7 +24,7 @@
    "release_stdout": "",
    "release_stderr": "Unhandled exception:\nIntegerDivisionByZeroException\n#0      main (file:///tmp/breakbench/div_by_zero/release/main.dart)\n#1      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311)\n#2      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192)",
    "exit": 255,
-   "secs": 0.05,
+   "secs": 0.04,
    "stdout": "",
    "stderr": "Unhandled exception:\nIntegerDivisionByZeroException\n#0      int.~/ (dart:core-patch/integers.dart:27:7)\n#1      main (file:///tmp/breakbench/div_by_zero/main/main.dart:3:13)\n#2      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)\n#3      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
   },
@@ -179,7 +179,7 @@
    "release_stdout": "",
    "release_stderr": "Unhandled exception:\nFileSystemException: Cannot open file, path = '/dev/null/out.txt' (OS Error: Not a directory, errno = 20)\n#0      _File.throwIfError (dart:io/file_impl.dart:779)\n#1      _File.openSync (dart:io/file_impl.dart:572)\n#2      _File.writeAsBytesSync (dart:io/file_impl.dart:744)\n#3   \n...\nnored_error_result/release/main.dart:4)\n#5      main (file:///tmp/breakbench/ignored_error_result/release/main.dart:8)\n#6      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:313)\n#7      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192)",
    "exit": 255,
-   "secs": 0.06,
+   "secs": 0.05,
    "stdout": "",
    "stderr": "Unhandled exception:\nFileSystemException: Cannot open file, path = '/dev/null/out.txt' (OS Error: Not a directory, errno = 20)\n#0      _File.throwIfError (dart:io/file_impl.dart:779:7)\n#1      _File.openSync (dart:io/file_impl.dart:572:5)\n#2      _File.writeAsBytesSync (dart:io/file_impl.dart:744:31)\n#3      _File.writeAsStringSync (dart:io/file_impl.dart:772:5)\n#4      save (file:///tmp/breakbench/ignored_error_result/main/main.dart:4:14)\n#5      main (file:///tmp/breakbench/ignored_error_result/main/main.dart:8:3)\n#6      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:313:19)\n#7      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
   },
@@ -468,7 +468,7 @@
    "release_stdout": "",
    "release_stderr": "Unhandled exception:\nRangeError (length): Invalid value: Not in inclusive range 0..3: 4\n#0      main (file:///tmp/breakbench/oob_read/release/main.dart)\n#1      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311)\n#2      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192)",
    "exit": 255,
-   "secs": 0.06,
+   "secs": 0.05,
    "stdout": "",
    "stderr": "Unhandled exception:\nRangeError (length): Invalid value: Not in inclusive range 0..3: 4\n#0      List.[] (dart:core-patch/growable_array.dart)\n#1      main (file:///tmp/breakbench/oob_read/main/main.dart:8:14)\n#2      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)\n#3      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
   },
@@ -520,7 +520,7 @@
    "release_stdout": "",
    "release_stderr": "Unhandled exception:\nStack Overflow\n#0      walk (file:///tmp/breakbench/stack_overflow/release/main.dart)\n#1      walk (file:///tmp/breakbench/stack_overflow/release/main.dart)\n#2      walk (file:///tmp/breakbench/stack_overflow/release/main.dart)\n#3      walk (file:///tmp/breakbench/stack_overflow\n...\nile:///tmp/breakbench/stack_overflow/release/main.dart)\n#37933  main (file:///tmp/breakbench/stack_overflow/release/main.dart)\n#37934  _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart)\n#37935  _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart)",
    "exit": 255,
-   "secs": 0.08,
+   "secs": 0.07,
    "stdout": "",
    "stderr": "Unhandled exception:\nStack Overflow\n#0      walk (file:///tmp/breakbench/stack_overflow/main/main.dart:1:1)\n#1      walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#2      walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#3      walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#4      walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#5      walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#6      walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#7      walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#8      walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#9      walk (file:///tmp/breakbench/stack_overflow/main/m\n...\n//tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#18958  walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#18959  walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#18960  walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#18961  walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#18962  walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#18963  walk (file:///tmp/breakbench/stack_overflow/main/main.dart:3:11)\n#18964  main (file:///tmp/breakbench/stack_overflow/main/main.dart:7:9)\n#18965  _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)\n#18966  _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
   },
@@ -544,7 +544,7 @@
    "release_stdout": "",
    "release_stderr": "Unhandled exception:\ntype 'IntValue' is not a subtype of type 'Text' in type cast\n#0      main (file:///tmp/breakbench/wrong_variant_access/release/main.dart:15)\n#1      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:313)\n#2      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192)",
    "exit": 255,
-   "secs": 0.04,
+   "secs": 0.05,
    "stdout": "",
    "stderr": "Unhandled exception:\ntype 'IntValue' is not a subtype of type 'Text' in type cast\n#0      main (file:///tmp/breakbench/wrong_variant_access/main/main.dart:15:12)\n#1      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:313:19)\n#2      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
   },
@@ -658,7 +658,7 @@
    "release_stdout": "",
    "release_stderr": "Unhandled exception:\nBad state: No element\n#0      ListBase.reduce (dart:collection/list.dart:187)\n#1      main (file:///tmp/breakbench/empty_max/release/main.dart:5)\n#2      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311)\n#3      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192)",
    "exit": 255,
-   "secs": 0.05,
+   "secs": 0.04,
    "stdout": "",
    "stderr": "Unhandled exception:\nBad state: No element\n#0      ListBase.reduce (dart:collection/list.dart:187:22)\n#1      main (file:///tmp/breakbench/empty_max/main/main.dart:5:12)\n#2      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)\n#3      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
   },
@@ -900,7 +900,7 @@
    "release_stdout": "",
    "release_stderr": "Unhandled exception:\nFileSystemException: writeFrom failed, path = '/dev/full' (OS Error: No space left on device, errno = 28)\n#0      _RandomAccessFile.writeFromSync (dart:io/file_impl.dart:999)\n#1      _File.writeAsBytesSync (dart:io/file_impl.dart:746)\n#2      _File.writeAsStringSync (dart:io/file_impl.dart:772)\n#3      main (file:///tmp/breakbench/lost_write_error/release/main.dart:4)\n#4      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:313)\n#5      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192)",
    "exit": 255,
-   "secs": 0.05,
+   "secs": 0.04,
    "stdout": "",
    "stderr": "Unhandled exception:\nFileSystemException: writeFrom failed, path = '/dev/full' (OS Error: No space left on device, errno = 28)\n#0      _RandomAccessFile.writeFromSync (dart:io/file_impl.dart:999:7)\n#1      _File.writeAsBytesSync (dart:io/file_impl.dart:746:14)\n#2      _File.writeAsStringSync (dart:io/file_impl.dart:772:5)\n#3      main (file:///tmp/breakbench/lost_write_error/main/main.dart:4:21)\n#4      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:313:19)\n#5      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
   },
@@ -934,7 +934,7 @@
    "outcome": "SILENT",
    "control": "verified",
    "exit": 0,
-   "secs": 0.05,
+   "secs": 0.06,
    "stdout": "backed up",
    "stderr": ""
   },

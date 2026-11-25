@@ -23,11 +23,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "thread 'main' (297) panicked at main.rs:3:20:\nattempt to divide by zero\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+   "release_stderr": "thread 'main' (134) panicked at main.rs:3:20:\nattempt to divide by zero\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
    "exit": 101,
    "secs": 0.0,
    "stdout": "",
-   "stderr": "thread 'main' (219) panicked at main.rs:3:20:\nattempt to divide by zero\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+   "stderr": "thread 'main' (56) panicked at main.rs:3:20:\nattempt to divide by zero\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
   },
   "shift_overflow": {
    "outcome": "TRAPPED",
@@ -352,11 +352,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "thread 'main' (3159) panicked at main.rs:4:34:\nindex out of bounds: the len is 3 but the index is 18446744073709551615\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+   "release_stderr": "thread 'main' (482) panicked at main.rs:4:34:\nindex out of bounds: the len is 3 but the index is 18446744073709551615\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
    "exit": 101,
    "secs": 0.0,
    "stdout": "",
-   "stderr": "thread 'main' (3081) panicked at main.rs:4:43:\nattempt to subtract with overflow\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+   "stderr": "thread 'main' (404) panicked at main.rs:4:43:\nattempt to subtract with overflow\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
   },
   "default_numeric_sort": {
    "outcome": "CORRECT",
@@ -418,11 +418,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "thread 'main' (3788) panicked at main.rs:9:20:\nindex out of bounds: the len is 4 but the index is 4\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+   "release_stderr": "thread 'main' (598) panicked at main.rs:9:20:\nindex out of bounds: the len is 4 but the index is 4\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
    "exit": 101,
    "secs": 0.0,
    "stdout": "",
-   "stderr": "thread 'main' (3710) panicked at main.rs:9:20:\nindex out of bounds: the len is 4 but the index is 4\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+   "stderr": "thread 'main' (520) panicked at main.rs:9:20:\nindex out of bounds: the len is 4 but the index is 4\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
   },
   "use_after_free": {
    "outcome": "REJECTED",
@@ -456,11 +456,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "thread 'main' (4134) has overflowed its stack\nfatal runtime error: stack overflow, aborting\nAborted (core dumped)",
+   "release_stderr": "thread 'main' (714) has overflowed its stack\nfatal runtime error: stack overflow, aborting\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.1,
+   "secs": 0.12,
    "stdout": "",
-   "stderr": "thread 'main' (4056) has overflowed its stack\nfatal runtime error: stack overflow, aborting\nAborted (core dumped)"
+   "stderr": "thread 'main' (636) has overflowed its stack\nfatal runtime error: stack overflow, aborting\nAborted (core dumped)"
   },
   "huge_allocation": {
    "outcome": "TRAPPED",
@@ -469,7 +469,7 @@
    "release_stdout": "",
    "release_stderr": "memory allocation of 10000000000000 bytes failed\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.11,
+   "secs": 0.07,
    "stdout": "",
    "stderr": "memory allocation of 10000000000000 bytes failed\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\nAborted (core dumped)"
   },
@@ -546,11 +546,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "before",
-   "release_stderr": "thread 'main' (4940) panicked at main.rs:7:28:\ncalled `Option::unwrap()` on a `None` value\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+   "release_stderr": "thread 'main' (994) panicked at main.rs:7:28:\ncalled `Option::unwrap()` on a `None` value\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
    "exit": 101,
    "secs": 0.0,
    "stdout": "before",
-   "stderr": "thread 'main' (4862) panicked at main.rs:7:28:\ncalled `Option::unwrap()` on a `None` value\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+   "stderr": "thread 'main' (916) panicked at main.rs:7:28:\ncalled `Option::unwrap()` on a `None` value\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
   },
   "null_in_text": {
    "outcome": "REJECTED",
@@ -614,11 +614,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "thread 'main' (5574) panicked at main.rs:8:12:\nindex out of bounds: the len is 8 but the index is 8\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+   "release_stderr": "thread 'main' (1158) panicked at main.rs:8:12:\nindex out of bounds: the len is 8 but the index is 8\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
    "exit": 101,
    "secs": 0.0,
    "stdout": "",
-   "stderr": "thread 'main' (5496) panicked at main.rs:6:16:\nattempt to multiply with overflow\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+   "stderr": "thread 'main' (1080) panicked at main.rs:6:16:\nattempt to multiply with overflow\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
   },
   "const_overflow": {
    "outcome": "REJECTED",
@@ -768,7 +768,7 @@
    "outcome": "SILENT",
    "control": "verified",
    "exit": 0,
-   "secs": 0.01,
+   "secs": 0.0,
    "stdout": "backed up",
    "stderr": ""
   },

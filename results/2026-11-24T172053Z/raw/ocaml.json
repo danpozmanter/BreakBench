@@ -461,15 +461,11 @@
    "stderr": ""
   },
   "stack_overflow": {
-   "outcome": "TRAPPED",
-   "control": "verified",
-   "release": "TRAPPED",
-   "release_stdout": "",
-   "release_stderr": "Fatal error: exception Stack overflow",
-   "exit": 2,
-   "secs": 0.48,
-   "stdout": "",
-   "stderr": "Fatal error: exception Stack overflow"
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "433043450",
+   "stderr": ""
   },
   "huge_allocation": {
    "outcome": "TRAPPED",

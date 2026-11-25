@@ -24,7 +24,7 @@
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.03,
+   "secs": 0.04,
    "stdout": "",
    "stderr": "main.rb:2:in 'Integer#/': divided by 0 (ZeroDivisionError)\n\tfrom main.rb:2:in '<main>'"
   },
@@ -301,7 +301,7 @@
    "exit": 1,
    "secs": 0.03,
    "stdout": "",
-   "stderr": "main.rb:34:in 'Thread#join': No live threads left. Deadlock? (fatal)\n3 threads, 3 sleeps current:0x00005dbb0b49b6c0 main thread:0x00005dbb0b2d20b0\n* #<Thread:0x00007d5410977f20 sleep_forever>\n   rb_thread_t:0x00005dbb0b2d20b0 native:0x00007d5410b65800 int:0\n   main.rb:34:in 'Thread#join'\n   main.rb:34:in '<main>'\n* #<Thread:0x00007d53f56da800 main.rb:32 sleep_forever>\n   rb_thread_t:0x00005dbb0b49b6c0 native:0x00007d53f55be6c0 int:0\n    depended by: tb_thread_id:0x00005dbb0b2d20b0\n   main.rb:28:in 'Thread::Mutex#synchronize'\n   main.rb:28:in 'block in Object#transfer'\n   main.rb:26:in 'Thread::Mutex#synchronize'\n   main.rb:26:in 'Object#transfer'\n   main.rb:32:in 'block in <main>'\n* #<Thread:0x00007d53f56da6e8 main.rb:33 sleep_forever>\n   rb_thread_t:0x00005dbb0b5d0f00 native:0x00007d53f53bc6c0 int:0 mutex:2 cond:1\n   main.rb:28:in 'Thread::Mutex#synchronize'\n   main.rb:28:in 'block in Object#transfer'\n   main.rb:26:in 'Thread::Mutex#synchronize'\n   main.rb:26:in 'Object#transfer'\n   main.rb:33:in 'block in <main>'\n\n\tfrom main.rb:34:in '<main>'"
+   "stderr": "main.rb:34:in 'Thread#join': No live threads left. Deadlock? (fatal)\n3 threads, 3 sleeps current:0x0000600f3bbb3280 main thread:0x0000600f3b8b40b0\n* #<Thread:0x0000720638b57f60 sleep_forever>\n   rb_thread_t:0x0000600f3b8b40b0 native:0x0000720638d4a800 int:0\n   main.rb:34:in 'Thread#join'\n   main.rb:34:in '<main>'\n* #<Thread:0x000072061d8da8e8 main.rb:32 sleep_forever>\n   rb_thread_t:0x0000600f3bbb3280 native:0x000072061d7be6c0 int:0\n    depended by: tb_thread_id:0x0000600f3b8b40b0\n   main.rb:28:in 'Thread::Mutex#synchronize'\n   main.rb:28:in 'block in Object#transfer'\n   main.rb:26:in 'Thread::Mutex#synchronize'\n   main.rb:26:in 'Object#transfer'\n   main.rb:32:in 'block in <main>'\n* #<Thread:0x000072061d8da7d0 main.rb:33 sleep_forever>\n   rb_thread_t:0x0000600f3bbb2de0 native:0x000072061d5bc6c0 int:0 mutex:2 cond:1\n   main.rb:28:in 'Thread::Mutex#synchronize'\n   main.rb:28:in 'block in Object#transfer'\n   main.rb:26:in 'Thread::Mutex#synchronize'\n   main.rb:26:in 'Object#transfer'\n   main.rb:33:in 'block in <main>'\n\n\tfrom main.rb:34:in '<main>'"
   },
   "path_join_escape": {
    "build_output": "Syntax OK",
@@ -552,7 +552,7 @@
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.05,
+   "secs": 0.06,
    "stdout": "",
    "stderr": "main.rb:2:in '<main>': undefined method 'length' for an instance of Integer (NoMethodError)\n\nputs v.length # CONTROL! puts(v.is_a?(String) ? v.length : \"not text\")\n      ^^^^^^^"
   },

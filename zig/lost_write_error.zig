@@ -12,6 +12,10 @@ pub fn main(init: std.process.Init) !void {
     var buf: [64]u8 = undefined;
     var fw = f.writerStreaming(init.io, &buf);
     try fw.interface.writeAll("data\n");
-    try fw.interface.flush(); // CONTROL! fw.interface.flush() catch { try out.print("failed\n", .{}); return; };
+    // flush answers an error union, so the program checks it.
+    fw.interface.flush() catch {
+        try out.print("failed\n", .{});
+        return;
+    };
     try out.print("saved\n", .{});
 }

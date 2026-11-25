@@ -262,6 +262,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     <p class="muted">How BreakBench builds, runs and scores.</p>
     <h3>What the score measures</h3>
     <p class="muted" id="mode-note">The score measures the language itself: compiler or interpreter, runtime, and the switches that make either refuse more or stop more (checked arithmetic, debug builds, assertions, strict typing). Linters, sanitizers and third-party checkers are left out, even when the language project ships them, since that would measure tooling. Python with mypy is one unranked example.</p>
+    <p class="muted">Every test can be passed for full marks by some language design: a compiler that refuses the mistake, or a run that ends correctly because the language made the program handle the failure (a check it requires, a stack that grows). A clean stop at run time earns half.</p>
     <h3>Builds</h3>
     <div class="scroll"><table class="notes-table"><thead><tr><th>Language</th><th>Build</th></tr></thead><tbody>
       <tr><td>C</td><td>debug build, <code>clang -O0 -g</code></td></tr>
@@ -312,7 +313,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     <p class="muted">Each test covers one mistake, with its CWE, CERT, CVE or pitfall source. Related tests share a failure mode but differ in which check can catch them. <code>missing_argument</code> was removed: it scored like <code>type_confusion</code> in every language.</p>
     <div class="scroll"><table class="notes-table" id="modes"></table></div>
     <h3>Tests no language passes</h3>
-    <p class="muted">Every language scores 0 on these. They stay, labelled, as hazards no language here guards against.</p>
+    <p class="muted">Every language here scores 0 on these. A language could pass each one; none of these does yet.</p>
     <ul class="notes muted" id="unsolved-list"></ul>
     <h3>Warnings do not score</h3>
     <p class="muted">Telling whether a warning is about the bug takes a pattern per test, and no pattern is reliable, so warnings never score. Some languages warn far better than others (C and C++ with <code>-Weverything</code>, Scala, C#, Rust, Dart); each result shows the compiler's output, unscored.</p>
@@ -341,7 +342,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     <p class="muted">The one design marker left is <code>unsafe_deserialization</code>: standard decoders build only the declared type. A language with no standard decoder is N/A there. Kotlin uses kotlinx.coroutines for <code>blocking_in_async</code>.</p>
     <h3>One scenario per test</h3>
     <p class="muted">Each test is one program and one input, written the way the language teaches first. A right answer shows the language handled this program, not every input or idiom. The paths that cost points are listed below.</p>
-    <p class="muted">A forced unwrap is counted once, in <code>forced_unwrap</code>. Where a standard call answers an Option, a Result or an error union, the other tests check it the way the language requires instead of forcing the value out (<code>parse_invalid_number</code>, <code>orphaned_receive</code>). A check the language does not require, such as Go's discarded <code>err</code>, stays out.</p>
+    <p class="muted">A forced unwrap is counted once, in <code>forced_unwrap</code>. Where the language makes the program check a failure (an Option, a Result, an error union, a checked exception, a call marked <code>try</code>), the other tests handle it there instead of forcing the value out or passing the failure out of <code>main</code>, and the handled program runs correctly. A check the language does not require, such as Go's discarded <code>err</code>, stays out.</p>
     <h3>A stop after the answer</h3>
     <p class="muted">A stop after the result is printed scores as a wrong answer: the wrong value already got out. Examples: Nim <code>empty_max</code> prints 1 before its <code>IndexDefect</code>; <code>unsafe_deserialization</code>, <code>null_byte_path</code> and <code>child_exit_status</code> do harm before any stop.</p>
     <h3>Release builds</h3>

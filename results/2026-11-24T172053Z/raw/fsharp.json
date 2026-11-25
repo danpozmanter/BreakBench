@@ -20,14 +20,14 @@
    "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.main(String[] argv) in /tmp/breakbench/int_overflow/main/Program.fs:line 4\nAborted (core dumped)"
   },
   "div_by_zero": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/div_by_zero/main/bb.fsproj (in 137 ms).\n  bb -> /tmp/breakbench/div_by_zero/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.25",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/div_by_zero/main/bb.fsproj (in 311 ms).\n  bb -> /tmp/breakbench/div_by_zero/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.34",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
    "release_stderr": "Unhandled exception. System.DivideByZeroException: Attempted to divide by zero.\n   at Program.main(String[] argv) in /tmp/breakbench/div_by_zero/release/Program.fs:line 4\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.26,
+   "secs": 0.21,
    "stdout": "",
    "stderr": "Unhandled exception. System.DivideByZeroException: Attempted to divide by zero.\n   at Program.main(String[] argv) in /tmp/breakbench/div_by_zero/main/Program.fs:line 4\nAborted (core dumped)"
   },
@@ -41,14 +41,14 @@
    "stderr": ""
   },
   "narrowing_cast": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/narrowing_cast/main/bb.fsproj (in 181 ms).\n  bb -> /tmp/breakbench/narrowing_cast/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.43",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/narrowing_cast/main/bb.fsproj (in 147 ms).\n  bb -> /tmp/breakbench/narrowing_cast/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.25",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "SILENT",
    "release_stdout": "44",
    "release_stderr": "",
    "exit": 134,
-   "secs": 0.21,
+   "secs": 0.17,
    "stdout": "",
    "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.main(String[] argv) in /tmp/breakbench/narrowing_cast/main/Program.fs:line 4\nAborted (core dumped)"
   },
@@ -184,14 +184,14 @@
    "stderr": ""
   },
   "ignored_error_result": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/ignored_error_result/main/bb.fsproj (in 174 ms).\n  bb -> /tmp/breakbench/ignored_error_result/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.32",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/ignored_error_result/main/bb.fsproj (in 134 ms).\n  bb -> /tmp/breakbench/ignored_error_result/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.14",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
    "release_stderr": "Unhandled exception. System.IO.DirectoryNotFoundException: Could not find a part of the path '/dev/null/out.txt'.\nDirectory path: '/dev/null/out.txt'\n   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(Str\n...\nss access, FileShare share, FileOptions options, Int64 preallocationSize)\n   at System.IO.File.WriteToFile(String path, FileMode mode, ReadOnlySpan`1 contents, Encoding encoding)\n   at Program.main(String[] argv) in /tmp/breakbench/ignored_error_result/release/Program.fs:line 5\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.22,
+   "secs": 0.18,
    "stdout": "",
    "stderr": "Unhandled exception. System.IO.DirectoryNotFoundException: Could not find a part of the path '/dev/null/out.txt'.\nDirectory path: '/dev/null/out.txt'\n   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)\n   at System.IO.File.OpenHandle(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)\n   at System.IO.File.WriteToFile(String path, FileMode mode, ReadOnlySpan`1 contents, Encoding encoding)\n   at Program.save(String path) in /tmp/breakbench/ignored_error_result/main/Program.fs:line 1\n   at Program.main(String[] argv) in /tmp/breakbench/ignored_error_result/main/Program.fs:line 5\nAborted (core dumped)"
   },
@@ -279,7 +279,7 @@
    "stderr": ""
   },
   "lock_order_deadlock": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/lock_order_deadlock/main/bb.fsproj (in 145 ms).\n/tmp/breakbench/lock_order_deadlock/main/Program.fs(12,17): warning FS0760: It is recommended that objects supporting the IDisposable interface are created using the syntax 'new Type(args)', rather than 'Type(args)' or 'Type' as a function value representing the constructor, to indicate that resources may be owned by the generated value [/tmp/breakbench/lock_order_deadlock/main/bb.fsproj]\n  bb -> /tmp/breakbench/lock_order_deadlock/main/out/bb.dll\n\nBuild succeeded.\n\n/tmp/breakbench/lock_order_deadlock/main/Program.fs(12,17): warning FS0760: It is recommended that objects supporting the IDisposable interface are created using the syntax 'new Type(args)', rather than 'Type(args)' or 'Type' as a function value representing the constructor, to indicate that resources may be owned by the generated value [/tmp/breakbench/lock_order_deadlock/main/bb.fsproj]\n    1 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.39",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/lock_order_deadlock/main/bb.fsproj (in 143 ms).\n/tmp/breakbench/lock_order_deadlock/main/Program.fs(12,17): warning FS0760: It is recommended that objects supporting the IDisposable interface are created using the syntax 'new Type(args)', rather than 'Type(args)' or 'Type' as a function value representing the constructor, to indicate that resources may be owned by the generated value [/tmp/breakbench/lock_order_deadlock/main/bb.fsproj]\n  bb -> /tmp/breakbench/lock_order_deadlock/main/out/bb.dll\n\nBuild succeeded.\n\n/tmp/breakbench/lock_order_deadlock/main/Program.fs(12,17): warning FS0760: It is recommended that objects supporting the IDisposable interface are created using the syntax 'new Type(args)', rather than 'Type(args)' or 'Type' as a function value representing the constructor, to indicate that resources may be owned by the generated value [/tmp/breakbench/lock_order_deadlock/main/bb.fsproj]\n    1 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.27",
    "outcome": "HANG",
    "control": "verified",
    "exit": -9,
@@ -412,14 +412,14 @@
    "stderr": ""
   },
   "negative_index_wraps": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/negative_index_wraps/main/bb.fsproj (in 150 ms).\n  bb -> /tmp/breakbench/negative_index_wraps/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.29",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/negative_index_wraps/main/bb.fsproj (in 141 ms).\n  bb -> /tmp/breakbench/negative_index_wraps/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.39",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
    "release_stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.main(String[] argv) in /tmp/breakbench/negative_index_wraps/release/Program.fs:line 3\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.21,
+   "secs": 0.23,
    "stdout": "",
    "stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.main(String[] argv) in /tmp/breakbench/negative_index_wraps/main/Program.fs:line 5\nAborted (core dumped)"
   },
@@ -476,7 +476,7 @@
    "stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.main(String[] argv) in /tmp/breakbench/oob_write/main/Program.fs:line 6\nAborted (core dumped)"
   },
   "oob_read": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/oob_read/main/bb.fsproj (in 164 ms).\n  bb -> /tmp/breakbench/oob_read/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.47",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/oob_read/main/bb.fsproj (in 159 ms).\n  bb -> /tmp/breakbench/oob_read/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.33",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
@@ -528,19 +528,19 @@
    "stderr": ""
   },
   "stack_overflow": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/stack_overflow/main/bb.fsproj (in 156 ms).\n  bb -> /tmp/breakbench/stack_overflow/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.37",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/stack_overflow/main/bb.fsproj (in 147 ms).\n  bb -> /tmp/breakbench/stack_overflow/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.19",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "Stack overflow.\nRepeated 174538 times:\n--------------------------------\n   at Program.walk(Int64)\n--------------------------------\n   at Program.main(System.String[])\nAborted (core dumped)",
+   "release_stderr": "Stack overflow.\nRepeated 174582 times:\n--------------------------------\n   at Program.walk(Int64)\n--------------------------------\n   at Program.main(System.String[])\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.25,
+   "secs": 0.27,
    "stdout": "",
-   "stderr": "Stack overflow.\nRepeated 261756 times:\n--------------------------------\n   at Program.walk(Int64)\n--------------------------------\n   at Program.main(System.String[])\nAborted (core dumped)"
+   "stderr": "Stack overflow.\nRepeated 261747 times:\n--------------------------------\n   at Program.walk(Int64)\n--------------------------------\n   at Program.main(System.String[])\nAborted (core dumped)"
   },
   "huge_allocation": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/huge_allocation/main/bb.fsproj (in 150 ms).\n  bb -> /tmp/breakbench/huge_allocation/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.29",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/huge_allocation/main/bb.fsproj (in 140 ms).\n  bb -> /tmp/breakbench/huge_allocation/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.16",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "SILENT",
@@ -552,14 +552,14 @@
    "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.main(String[] argv) in /tmp/breakbench/huge_allocation/main/Program.fs:line 4\nAborted (core dumped)"
   },
   "wrong_variant_access": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/wrong_variant_access/main/bb.fsproj (in 145 ms).\n/tmp/breakbench/wrong_variant_access/main/Program.fs(8,9): warning FS0025: Incomplete pattern matches on this expression. For example, the value 'IntValue (_)' may indicate a case not covered by the pattern(s). [/tmp/breakbench/wrong_variant_access/main/bb.fsproj]\n  bb -> /tmp/breakbench/wrong_variant_access/main/out/bb.dll\n\nBuild succeeded.\n\n/tmp/breakbench/wrong_variant_access/main/Program.fs(8,9): warning FS0025: Incomplete pattern matches on this expression. For example, the value 'IntValue (_)' may indicate a case not covered by the pattern(s). [/tmp/breakbench/wrong_variant_access/main/bb.fsproj]\n    1 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.32",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/wrong_variant_access/main/bb.fsproj (in 135 ms).\n/tmp/breakbench/wrong_variant_access/main/Program.fs(8,9): warning FS0025: Incomplete pattern matches on this expression. For example, the value 'IntValue (_)' may indicate a case not covered by the pattern(s). [/tmp/breakbench/wrong_variant_access/main/bb.fsproj]\n  bb -> /tmp/breakbench/wrong_variant_access/main/out/bb.dll\n\nBuild succeeded.\n\n/tmp/breakbench/wrong_variant_access/main/Program.fs(8,9): warning FS0025: Incomplete pattern matches on this expression. For example, the value 'IntValue (_)' may indicate a case not covered by the pattern(s). [/tmp/breakbench/wrong_variant_access/main/bb.fsproj]\n    1 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.28",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
    "release_stderr": "Unhandled exception. Microsoft.FSharp.Core.MatchFailureException: The match cases were incomplete\n   at Program.main(String[] argv) in /tmp/breakbench/wrong_variant_access/release/Program.fs:line 8\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.18,
+   "secs": 0.21,
    "stdout": "",
    "stderr": "Unhandled exception. Microsoft.FSharp.Core.MatchFailureException: The match cases were incomplete\n   at Program.main(String[] argv) in /tmp/breakbench/wrong_variant_access/main/Program.fs:line 10\nAborted (core dumped)"
   },
@@ -632,14 +632,14 @@
    "control": "builds"
   },
   "forced_unwrap": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/forced_unwrap/main/bb.fsproj (in 137 ms).\n  bb -> /tmp/breakbench/forced_unwrap/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.11",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/forced_unwrap/main/bb.fsproj (in 139 ms).\n  bb -> /tmp/breakbench/forced_unwrap/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.14",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "before",
    "release_stderr": "Unhandled exception. System.ArgumentException: The option value was None (Parameter 'option')\n   at Microsoft.FSharp.Core.OptionModule.GetValue[T](FSharpOption`1 option) in /__w/1/s/src/fsharp/src/FSharp.Core/option.fs:line 13\n   at Program.main(String[] _arg1) in /tmp/breakbench/forced_unwrap/release/Program.fs:line 6\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.2,
+   "secs": 0.19,
    "stdout": "before",
    "stderr": "Unhandled exception. System.ArgumentException: The option value was None (Parameter 'option')\n   at Microsoft.FSharp.Core.OptionModule.GetValue[T](FSharpOption`1 option) in /__w/1/s/src/fsharp/src/FSharp.Core/option.fs:line 13\n   at Program.main(String[] _arg1) in /tmp/breakbench/forced_unwrap/main/Program.fs:line 6\nAborted (core dumped)"
   },
@@ -662,14 +662,14 @@
    "stderr": ""
   },
   "empty_max": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/empty_max/main/bb.fsproj (in 131 ms).\n  bb -> /tmp/breakbench/empty_max/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.09",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/empty_max/main/bb.fsproj (in 133 ms).\n  bb -> /tmp/breakbench/empty_max/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.09",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
    "release_stderr": "Unhandled exception. System.ArgumentException: The input array was empty. (Parameter 'array')\n   at Program.main(String[] argv) in /tmp/breakbench/empty_max/release/Program.fs:line 4\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.2,
+   "secs": 0.19,
    "stdout": "",
    "stderr": "Unhandled exception. System.ArgumentException: The input array was empty. (Parameter 'array')\n   at Microsoft.FSharp.Collections.ArrayModule.Max[T](T[] array) in /__w/1/s/src/fsharp/src/FSharp.Core/array.fs:line 1717\n   at Program.main(String[] argv) in /tmp/breakbench/empty_max/main/Program.fs:line 4\nAborted (core dumped)"
   },
@@ -728,14 +728,14 @@
    "stderr": ""
   },
   "size_overflow_alloc": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/size_overflow_alloc/main/bb.fsproj (in 125 ms).\n  bb -> /tmp/breakbench/size_overflow_alloc/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.02",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/size_overflow_alloc/main/bb.fsproj (in 146 ms).\n  bb -> /tmp/breakbench/size_overflow_alloc/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.21",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
    "release_stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.main(String[] argv) in /tmp/breakbench/size_overflow_alloc/release/Program.fs:line 3\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.17,
+   "secs": 0.19,
    "stdout": "",
    "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.main(String[] argv) in /tmp/breakbench/size_overflow_alloc/main/Program.fs:line 4\nAborted (core dumped)"
   },
@@ -873,14 +873,14 @@
    "control": "builds"
   },
   "lost_write_error": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/lost_write_error/main/bb.fsproj (in 132 ms).\n  bb -> /tmp/breakbench/lost_write_error/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.15",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/lost_write_error/main/bb.fsproj (in 132 ms).\n  bb -> /tmp/breakbench/lost_write_error/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.17",
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
    "release_stderr": "Unhandled exception. System.IO.IOException: No space left on device : '/dev/full'\n   at System.IO.RandomAccess.WriteAtOffset(SafeFileHandle handle, ReadOnlySpan`1 buffer, Int64& fileOffset)\n   at System.IO.Strategies.BufferedFileStreamStrategy.Flush(Boolean flushToDisk)\n   at System.IO.StreamWriter.\n...\nstem.IO.StreamWriter.Dispose(Boolean disposing)\n   at System.IO.TextWriter.Dispose()\n   at Program.main(String[] _arg1) in /tmp/breakbench/lost_write_error/release/Program.fs:line 7\n   at Program.main(String[] _arg1) in /tmp/breakbench/lost_write_error/release/Program.fs:line 6\nAborted (core dumped)",
    "exit": 134,
-   "secs": 0.19,
+   "secs": 0.17,
    "stdout": "",
    "stderr": "Unhandled exception. System.IO.IOException: No space left on device : '/dev/full'\n   at System.IO.RandomAccess.WriteAtOffset(SafeFileHandle handle, ReadOnlySpan`1 buffer, Int64& fileOffset)\n   at System.IO.Strategies.BufferedFileStreamStrategy.Flush(Boolean flushToDisk)\n   at System.IO.StreamWriter.Flush(Boolean flushStream, Boolean flushEncoder)\n   at System.IO.StreamWriter.Dispose(Boolean disposing)\n   at System.IO.TextWriter.Dispose()\n   at Program.main(String[] _arg1) in /tmp/breakbench/lost_write_error/main/Program.fs:line 7\n   at Program.main(String[] _arg1) in /tmp/breakbench/lost_write_error/main/Program.fs:line 6\nAborted (core dumped)"
   },
@@ -912,7 +912,7 @@
    "stderr": ""
   },
   "child_exit_status": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/child_exit_status/main/bb.fsproj (in 132 ms).\n  bb -> /tmp/breakbench/child_exit_status/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.12",
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/child_exit_status/main/bb.fsproj (in 148 ms).\n  bb -> /tmp/breakbench/child_exit_status/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.34",
    "outcome": "SILENT",
    "control": "verified",
    "exit": 0,

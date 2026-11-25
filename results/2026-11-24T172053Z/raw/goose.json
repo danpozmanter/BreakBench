@@ -459,7 +459,7 @@
    "release_stdout": "",
    "release_stderr": "goose runtime error: data stack overflow: a value on main's data stacks grew past the 2 GB reserved for it; --stack-reserve or -DGS_STACK_RESERVE raises the reservation, up to 256 TB",
    "exit": 1,
-   "secs": 0.48,
+   "secs": 0.46,
    "stdout": "",
    "stderr": "goose runtime error: data stack overflow: a value on main's data stacks grew past the 2 GB reserved for it; --stack-reserve or -DGS_STACK_RESERVE raises the reservation, up to 256 TB"
   },

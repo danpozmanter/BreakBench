@@ -424,7 +424,7 @@
    "outcome": "SILENT",
    "control": "verified",
    "exit": 0,
-   "secs": 0.01,
+   "secs": 0.02,
    "stdout": "undefined",
    "stderr": ""
   },
@@ -475,7 +475,7 @@
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.02,
+   "secs": 0.03,
    "stdout": "",
    "stderr": "/tmp/breakbench/huge_allocation/main/main.js:5\nconst buf = new Uint8Array(n);\n            ^\n\nRangeError: Array buffer allocation failed\n    at new ArrayBuffer (<anonymous>)\n    at new Uint8Array (<anonymous>)\n    at Object.<anonymous> (/tmp/breakbench/huge_allocation/main/main.js:5:13)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1"
   },
@@ -572,7 +572,7 @@
    "outcome": "SILENT",
    "control": "verified",
    "exit": 0,
-   "secs": 0.02,
+   "secs": 0.01,
    "stdout": "before\nNaN",
    "stderr": ""
   },
@@ -833,7 +833,7 @@
    "exit": 1,
    "secs": 0.02,
    "stdout": "",
-   "stderr": "node:child_process:1029\n    throw err;\n    ^\n\nError: Command failed: sh -c exit 3\n    at genericNodeError (node:internal/errors:999:15)\n    at wrappedFn (node:internal/errors:544:14)\n    at checkExecSyncError (node:child_process:990:11)\n    at execFileSync (node:child_process:1026:15)\n    at Object.<anonymous> (/tmp/breakbench/child_exit_status/main/main.js:5:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19) {\n  status: 3,\n  signal: null,\n  output: [ null, Buffer(0) [Uint8Array] [], Buffer(0) [Uint8Array] [] ],\n  pid: 3256,\n  stdout: Buffer(0) [Uint8Array] [],\n  stderr: Buffer(0) [Uint8Array] []\n}\n\nNode.js v26.13.1"
+   "stderr": "node:child_process:1029\n    throw err;\n    ^\n\nError: Command failed: sh -c exit 3\n    at genericNodeError (node:internal/errors:999:15)\n    at wrappedFn (node:internal/errors:544:14)\n    at checkExecSyncError (node:child_process:990:11)\n    at execFileSync (node:child_process:1026:15)\n    at Object.<anonymous> (/tmp/breakbench/child_exit_status/main/main.js:5:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19) {\n  status: 3,\n  signal: null,\n  output: [ null, Buffer(0) [Uint8Array] [], Buffer(0) [Uint8Array] [] ],\n  pid: 459,\n  stdout: Buffer(0) [Uint8Array] [],\n  stderr: Buffer(0) [Uint8Array] []\n}\n\nNode.js v26.13.1"
   },
   "nullable_field": {
    "outcome": "TRAPPED",

@@ -20,11 +20,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "V panic: division by zero\n v hash: 7647ce1\n    pid: 0x19e\n    tid: 0x19e\n                                                        | 0x78f18fdd4601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x78f18fdd4718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x5d1552b37985 | ./main(+0x6985)",
+   "release_stderr": "V panic: division by zero\n v hash: 7647ce1\n    pid: 0xda\n    tid: 0xda\n                                                        | 0x7721305b5601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x7721305b5718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x561ca82b6985 | ./main(+0x6985)",
    "exit": 1,
    "secs": 0.01,
    "stdout": "",
-   "stderr": "V panic: division by zero\n v hash: 7647ce1\n    pid: 0x106\n    tid: 0x106\n                                                        | 0x6111c9c04959 | ./main(+0x1b959) \n                                                        | 0x6111c9c06087 | ./main(+0x1d087) \n                                                        | 0x6111c9c0632c | ./main(+0x1d32c) \n                                                        | 0x78ebeaa12601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x78ebeaa12718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x6111c9bf96b5 | ./main(+0x106b5)"
+   "stderr": "V panic: division by zero\n v hash: 7647ce1\n    pid: 0x42\n    tid: 0x42\n                                                        | 0x5b468419e959 | ./main(+0x1b959) \n                                                        | 0x5b46841a0087 | ./main(+0x1d087) \n                                                        | 0x5b46841a032c | ./main(+0x1d32c) \n                                                        | 0x7633051c1601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x7633051c1718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x5b46841936b5 | ./main(+0x106b5)"
   },
   "shift_overflow": {
    "outcome": "SILENT",
@@ -349,11 +349,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "V panic: array.get: index out of range (i,a.len):-1, 3\n v hash: 7647ce1\n    pid: 0x12f4\n    tid: 0x12f4\n                                                        | 0x5f2e979eac72 | ./main(+0x1fc72) \n                                                        | 0x75f9a0dbc601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x75f9a0dbc718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x5f2e979d1995 | ./main(+0x6995)",
+   "release_stderr": "V panic: array.get: index out of range (i,a.len):-1, 3\n v hash: 7647ce1\n    pid: 0x300\n    tid: 0x300\n                                                        | 0x5dac6c250c72 | ./main(+0x1fc72) \n                                                        | 0x7396d6cca601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x7396d6cca718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x5dac6c237995 | ./main(+0x6995)",
    "exit": 1,
    "secs": 0.01,
    "stdout": "",
-   "stderr": "V panic: array.get: index out of range (i,a.len):-1, 3\n v hash: 7647ce1\n    pid: 0x125c\n    tid: 0x125c\n                                                        | 0x5683c790a8b6 | ./main(+0x148b6) \n                                                        | 0x5683c790ae67 | ./main(+0x14e67) \n                                                        | 0x5683c791310c | ./main(+0x1d10c) \n                                                        | 0x5683c79133bc | ./main(+0x1d3bc) \n                                                        | 0x7854c92d8601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x7854c92d8718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x5683c79066b5 | ./main(+0x106b5)"
+   "stderr": "V panic: array.get: index out of range (i,a.len):-1, 3\n v hash: 7647ce1\n    pid: 0x268\n    tid: 0x268\n                                                        | 0x5c00206348b6 | ./main(+0x148b6) \n                                                        | 0x5c0020634e67 | ./main(+0x14e67) \n                                                        | 0x5c002063d10c | ./main(+0x1d10c) \n                                                        | 0x5c002063d3bc | ./main(+0x1d3bc) \n                                                        | 0x7ff5e2fb4601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x7ff5e2fb4718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x5c00206306b5 | ./main(+0x106b5)"
   },
   "default_numeric_sort": {
    "outcome": "CORRECT",
@@ -411,11 +411,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "V panic: fixed array index out of range (index: 4, len: 4)\n v hash: 7647ce1\n    pid: 0x1708\n    tid: 0x1708\n                                                        | 0x765a1fafd601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x765a1fafd718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x60eda63359e5 | ./main(+0x69e5)",
+   "release_stderr": "V panic: fixed array index out of range (index: 4, len: 4)\n v hash: 7647ce1\n    pid: 0x3d4\n    tid: 0x3d4\n                                                        | 0x73f2858c4601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x73f2858c4718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x647608c6f9e5 | ./main(+0x69e5)",
    "exit": 1,
    "secs": 0.01,
    "stdout": "",
-   "stderr": "V panic: fixed array index out of range (index: 4, len: 4)\n v hash: 7647ce1\n    pid: 0x1672\n    tid: 0x1672\n                                                        | 0x62ba6ff3b710 | ./main(+0x17710) \n                                                        | 0x62ba6ff410c6 | ./main(+0x1d0c6) \n                                                        | 0x62ba6ff4136c | ./main(+0x1d36c) \n                                                        | 0x79abd5415601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x79abd5415718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x62ba6ff346d5 | ./main(+0x106d5)"
+   "stderr": "V panic: fixed array index out of range (index: 4, len: 4)\n v hash: 7647ce1\n    pid: 0x33e\n    tid: 0x33e\n                                                        | 0x56a2e0c4f710 | ./main(+0x17710) \n                                                        | 0x56a2e0c550c6 | ./main(+0x1d0c6) \n                                                        | 0x56a2e0c5536c | ./main(+0x1d36c) \n                                                        | 0x72e1204f9601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x72e1204f9718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x56a2e0c486d5 | ./main(+0x106d5)"
   },
   "use_after_free": {
    "outcome": "CORRECT",
@@ -454,7 +454,7 @@
    "outcome": "CRASH",
    "control": "verified",
    "exit": 139,
-   "secs": 0.21,
+   "secs": 0.22,
    "stdout": "",
    "stderr": "Segmentation fault (core dumped)"
   },
@@ -462,7 +462,7 @@
    "outcome": "SILENT",
    "control": "verified",
    "exit": 0,
-   "secs": 0.28,
+   "secs": 0.27,
    "stdout": "1316134912",
    "stderr": ""
   },
@@ -471,11 +471,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "V panic: as cast: cannot cast `int` to `string`\n v hash: 7647ce1\n    pid: 0x1a3c\n    tid: 0x1a3c\n                                                        | 0x70145cdb1601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x70145cdb1718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x5e7f2b43d5d5 | ./main(+0x65d5)",
+   "release_stderr": "V panic: as cast: cannot cast `int` to `string`\n v hash: 7647ce1\n    pid: 0x5ba\n    tid: 0x5ba\n                                                        | 0x7e633922a601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x7e633922a718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x5c5cd277c5d5 | ./main(+0x65d5)",
    "exit": 1,
    "secs": 0.01,
    "stdout": "",
-   "stderr": "V panic: as cast: cannot cast `int` to `string`\n v hash: 7647ce1\n    pid: 0x19a6\n    tid: 0x19a6\n                                                        | 0x59a2cb1e444a | ./main(+0x1744a) \n                                                        | 0x59a2cb1e6542 | ./main(+0x19542) \n                                                        | 0x59a2cb1e684c | ./main(+0x1984c) \n                                                        | 0x76725c1c5601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x76725c1c5718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x59a2cb1dc725 | ./main(+0xf725)"
+   "stderr": "V panic: as cast: cannot cast `int` to `string`\n v hash: 7647ce1\n    pid: 0x524\n    tid: 0x524\n                                                        | 0x5b3e82d5a44a | ./main(+0x1744a) \n                                                        | 0x5b3e82d5c542 | ./main(+0x19542) \n                                                        | 0x5b3e82d5c84c | ./main(+0x1984c) \n                                                        | 0x71345a7ca601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x71345a7ca718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x5b3e82d52725 | ./main(+0xf725)"
   },
   "format_string": {
    "outcome": "CORRECT",
@@ -549,11 +549,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "before",
-   "release_stderr": "V panic: option not set ()\n v hash: 7647ce1\n    pid: 0x1e58\n    tid: 0x1e58\n                                                        | 0x653e0621e28a | ./main(+0x1f28a) \n                                                        | 0x7784310a6601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x7784310a6718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x653e062056b5 | ./main(+0x66b5)",
+   "release_stderr": "V panic: option not set ()\n v hash: 7647ce1\n    pid: 0x68c\n    tid: 0x68c\n                                                        | 0x58f4c47d128a | ./main(+0x1f28a) \n                                                        | 0x7df84bb5a601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x7df84bb5a718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x58f4c47b86b5 | ./main(+0x66b5)",
    "exit": 1,
-   "secs": 0.02,
+   "secs": 0.01,
    "stdout": "before",
-   "stderr": "V panic: option not set ()\n v hash: 7647ce1\n    pid: 0x1dc2\n    tid: 0x1dc2\n                                                        | 0x572105fc2365 | ./main(+0x18365) \n                                                        | 0x572105fc33d7 | ./main(+0x193d7) \n                                                        | 0x572105fc363c | ./main(+0x1963c) \n                                                        | 0x7df5982b5601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x7df5982b5718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x572105fb9695 | ./main(+0xf695)"
+   "stderr": "V panic: option not set ()\n v hash: 7647ce1\n    pid: 0x5f6\n    tid: 0x5f6\n                                                        | 0x5ded39d90365 | ./main(+0x18365) \n                                                        | 0x5ded39d913d7 | ./main(+0x193d7) \n                                                        | 0x5ded39d9163c | ./main(+0x1963c) \n                                                        | 0x76b773610601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x76b773610718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x5ded39d87695 | ./main(+0xf695)"
   },
   "null_in_text": {
    "outcome": "SILENT",
@@ -623,11 +623,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "V panic: array.set: index out of range (i,a.len):8, 8\n v hash: 7647ce1\n    pid: 0x2257\n    tid: 0x2257\n                                                        | 0x621f3ee31afb | ./main(+0x1fafb) \n                                                        | 0x77aa76d75601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x77aa76d75718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x621f3ee189b5 | ./main(+0x69b5)",
+   "release_stderr": "V panic: array.set: index out of range (i,a.len):8, 8\n v hash: 7647ce1\n    pid: 0x79c\n    tid: 0x79c\n                                                        | 0x64a3da5d6afb | ./main(+0x1fafb) \n                                                        | 0x77fe51b7c601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x77fe51b7c718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x64a3da5bd9b5 | ./main(+0x69b5)",
    "exit": 1,
    "secs": 0.01,
    "stdout": "",
-   "stderr": "V panic: array.set: index out of range (i,a.len):8, 8\n v hash: 7647ce1\n    pid: 0x21bf\n    tid: 0x21bf\n                                                        | 0x574a951318c6 | ./main(+0x148c6) \n                                                        | 0x574a95132ad7 | ./main(+0x15ad7) \n                                                        | 0x574a9513a0c8 | ./main(+0x1d0c8) \n                                                        | 0x574a9513a37c | ./main(+0x1d37c) \n                                                        | 0x73a929db7601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x73a929db7718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x574a9512d6c5 | ./main(+0x106c5)"
+   "stderr": "V panic: array.set: index out of range (i,a.len):8, 8\n v hash: 7647ce1\n    pid: 0x704\n    tid: 0x704\n                                                        | 0x5e6745cb68c6 | ./main(+0x148c6) \n                                                        | 0x5e6745cb7ad7 | ./main(+0x15ad7) \n                                                        | 0x5e6745cbf0c8 | ./main(+0x1d0c8) \n                                                        | 0x5e6745cbf37c | ./main(+0x1d37c) \n                                                        | 0x766935cf3601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x766935cf3718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x5e6745cb26c5 | ./main(+0x106c5)"
   },
   "const_overflow": {
    "outcome": "SILENT",

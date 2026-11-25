@@ -21,7 +21,7 @@
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.03,
+   "secs": 0.06,
    "stdout": "",
    "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/div_by_zero/main/main.py\", line 4, in <module>\n    print(100 // d) # CONTROL! print(\"cannot divide\" if d == 0 else 100 // d)\n          ~~~~^^~~\nZeroDivisionError: division by zero"
   },
@@ -173,7 +173,7 @@
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.03,
+   "secs": 0.04,
    "stdout": "",
    "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/ignored_error_result/main/main.py\", line 6, in <module>\n    save(\"/dev/null/out.txt\") # BREAK!\n    ~~~~^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/breakbench/ignored_error_result/main/main.py\", line 2, in save\n    with open(path, \"w\") as f:\n         ~~~~^^^^^^^^^^^\nNotADirectoryError: [Errno 20] Not a directory: '/dev/null/out.txt'"
   },
@@ -432,7 +432,7 @@
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.02,
+   "secs": 0.03,
    "stdout": "",
    "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/oob_read/main/main.py\", line 11, in <module>\n    print(f.buf[int(sys.argv[1])]) # CONTROL! i = int(sys.argv[1])\n          ~~~~~^^^^^^^^^^^^^^^^^^\nIndexError: list index out of range"
   },
@@ -475,7 +475,7 @@
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.05,
+   "secs": 0.06,
    "stdout": "",
    "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/stack_overflow/main/main.py\", line 10, in <module>\n    print(walk(int(sys.argv[1]))) # CONTROL! n = int(sys.argv[1]); M = 1_000_000_007; print((pow(31, n + 1, M) - 31 * (n + 1) + n) * pow(900, -1, M) % M)\n          ~~~~^^^^^^^^^^^^^^^^^^\n  File \"/tmp/breakbench/stack_overflow/main/main.py\", line 7, in walk\n    return (walk(n - 1) * 31 + n) % 1_000_000_007\n            ~~~~^^^^^^^\n  File \"/tmp/breakbench/stack_overflow/main/main.py\", line 7, in walk\n    return (walk(n - 1) * 31 + n) % 1_000_000_007\n            ~~~~^^^^^^^\n  File \"/tmp/breakbench/stack_overflow/main/main.py\", line 7, in walk\n    return (walk(n - 1) * 31 + n) % 1_000_000_007\n            ~~~~^^^^^^^\n  [Previous line repeated 996 more times]\nRecursionError: maximum recursion depth exceeded"
   },
@@ -491,7 +491,7 @@
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.02,
+   "secs": 0.03,
    "stdout": "",
    "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/wrong_variant_access/main/main.py\", line 2, in <module>\n    print(len(v)) # CONTROL! print(len(v) if isinstance(v, str) else \"not text\")\n          ~~~^^^\nTypeError: object of type 'int' has no len()"
   },

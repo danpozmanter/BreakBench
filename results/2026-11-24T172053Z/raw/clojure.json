@@ -25,9 +25,9 @@
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.38,
+   "secs": 0.35,
    "stdout": "",
-   "stderr": "Execution error (ArithmeticException) at main/-main (main.clj:4).\nDivide by zero\n\nFull report at:\n/tmp/clojure-15715570069796509019.edn"
+   "stderr": "Execution error (ArithmeticException) at main/-main (main.clj:4).\nDivide by zero\n\nFull report at:\n/tmp/clojure-11088008391002242242.edn"
   },
   "shift_overflow": {
    "build_output": "main",
@@ -43,9 +43,9 @@
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.3,
+   "secs": 0.32,
    "stdout": "",
-   "stderr": "Execution error (IllegalArgumentException) at main/-main (main.clj:4).\nValue out of range for byte: 300\n\nFull report at:\n/tmp/clojure-8924162362141610254.edn"
+   "stderr": "Execution error (IllegalArgumentException) at main/-main (main.clj:4).\nValue out of range for byte: 300\n\nFull report at:\n/tmp/clojure-1053608641782554683.edn"
   },
   "float_to_int_overflow": {
    "build_output": "main",
@@ -191,9 +191,9 @@
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.3,
+   "secs": 0.41,
    "stdout": "",
-   "stderr": "Execution error (FileNotFoundException) at java.io.FileOutputStream/open0 (FileOutputStream.java:-2).\n/dev/null/out.txt (Not a directory)\n\nFull report at:\n/tmp/clojure-2546658403497169407.edn"
+   "stderr": "Execution error (FileNotFoundException) at java.io.FileOutputStream/open0 (FileOutputStream.java:-2).\n/dev/null/out.txt (Not a directory)\n\nFull report at:\n/tmp/clojure-994545976938671506.edn"
   },
   "sort_with_nan": {
    "build_output": "main",
@@ -419,9 +419,9 @@
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.29,
+   "secs": 0.32,
    "stdout": "",
-   "stderr": "Execution error (IndexOutOfBoundsException) at main/-main (main.clj:6).\nnull\n\nFull report at:\n/tmp/clojure-15468258078306675171.edn"
+   "stderr": "Execution error (IndexOutOfBoundsException) at main/-main (main.clj:6).\nnull\n\nFull report at:\n/tmp/clojure-762231833608927373.edn"
   },
   "default_numeric_sort": {
    "build_output": "main",
@@ -480,9 +480,9 @@
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.29,
+   "secs": 0.3,
    "stdout": "",
-   "stderr": "Execution error (ArrayIndexOutOfBoundsException) at main/-main (main.clj:5).\nIndex 4 out of bounds for length 4\n\nFull report at:\n/tmp/clojure-4903729790472670084.edn"
+   "stderr": "Execution error (ArrayIndexOutOfBoundsException) at main/-main (main.clj:5).\nIndex 4 out of bounds for length 4\n\nFull report at:\n/tmp/clojure-10773501346777526090.edn"
   },
   "use_after_free": {
    "build_output": "main",
@@ -529,27 +529,27 @@
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.45,
+   "secs": 0.42,
    "stdout": "",
-   "stderr": "Execution error (StackOverflowError) at main/walk (main.clj:4).\nnull\n\nFull report at:\n/tmp/clojure-3576408914433959909.edn"
+   "stderr": "Execution error (StackOverflowError) at main/walk (main.clj:4).\nnull\n\nFull report at:\n/tmp/clojure-8347184686438365097.edn"
   },
   "huge_allocation": {
    "build_output": "main",
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.29,
+   "secs": 0.32,
    "stdout": "",
-   "stderr": "Execution error (OutOfMemoryError) at main/-main (main.clj:5).\nJava heap space\n\nFull report at:\n/tmp/clojure-4255084962362269490.edn"
+   "stderr": "Execution error (OutOfMemoryError) at main/-main (main.clj:5).\nJava heap space\n\nFull report at:\n/tmp/clojure-13863348362461748121.edn"
   },
   "wrong_variant_access": {
    "build_output": "main",
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.29,
+   "secs": 0.32,
    "stdout": "",
-   "stderr": "Execution error (UnsupportedOperationException) at main/-main (main.clj:5).\ncount not supported on this type: Long\n\nFull report at:\n/tmp/clojure-10681580592094289612.edn"
+   "stderr": "Execution error (UnsupportedOperationException) at main/-main (main.clj:5).\ncount not supported on this type: Long\n\nFull report at:\n/tmp/clojure-15059412843537929525.edn"
   },
   "format_string": {
    "build_output": "main",
@@ -648,9 +648,9 @@
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.29,
+   "secs": 0.32,
    "stdout": "before",
-   "stderr": "Execution error (NullPointerException) at main/-main (main.clj:8).\nCannot invoke \"Object.getClass()\" because \"x\" is null\n\nFull report at:\n/tmp/clojure-2161918292950790472.edn"
+   "stderr": "Execution error (NullPointerException) at main/-main (main.clj:8).\nCannot invoke \"Object.getClass()\" because \"x\" is null\n\nFull report at:\n/tmp/clojure-6811047714263527085.edn"
   },
   "null_in_text": {
    "build_output": "main",
@@ -675,9 +675,9 @@
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.29,
+   "secs": 0.33,
    "stdout": "",
-   "stderr": "Execution error (ArityException) at main/-main (main.clj:5).\nWrong number of args (0) passed to: clojure.core/max\n\nFull report at:\n/tmp/clojure-15238676889369637624.edn"
+   "stderr": "Execution error (ArityException) at main/-main (main.clj:5).\nWrong number of args (0) passed to: clojure.core/max\n\nFull report at:\n/tmp/clojure-17005801344686574683.edn"
   },
   "readonly_param": {
    "build_output": "main",
@@ -755,7 +755,7 @@
    "exit": 1,
    "secs": 0.29,
    "stdout": "",
-   "stderr": "Execution error (ArithmeticException) at java.lang.Math/multiplyExact (Math.java:1036).\nlong overflow\n\nFull report at:\n/tmp/clojure-12774768759553617568.edn"
+   "stderr": "Execution error (ArithmeticException) at java.lang.Math/multiplyExact (Math.java:1036).\nlong overflow\n\nFull report at:\n/tmp/clojure-6735929111644263517.edn"
   },
   "const_overflow": {
    "outcome": "TRAPPED",
@@ -890,9 +890,9 @@
    "outcome": "TRAPPED",
    "control": "verified",
    "exit": 1,
-   "secs": 0.28,
+   "secs": 0.3,
    "stdout": "",
-   "stderr": "Execution error (IOException) at java.io.FileOutputStream/writeBytes (FileOutputStream.java:-2).\nNo space left on device\n\nFull report at:\n/tmp/clojure-4690072977465051892.edn"
+   "stderr": "Execution error (IOException) at java.io.FileOutputStream/writeBytes (FileOutputStream.java:-2).\nNo space left on device\n\nFull report at:\n/tmp/clojure-15926268060225919798.edn"
   },
   "short_read": {
    "build_output": "main",
@@ -926,7 +926,7 @@
    "outcome": "SILENT",
    "control": "verified",
    "exit": 0,
-   "secs": 0.22,
+   "secs": 0.25,
    "stdout": "backed up",
    "stderr": ""
   },

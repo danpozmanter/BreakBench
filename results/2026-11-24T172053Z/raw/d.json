@@ -22,7 +22,7 @@
    "outcome": "CRASH",
    "control": "verified",
    "exit": 136,
-   "secs": 0.1,
+   "secs": 0.09,
    "stdout": "",
    "stderr": "Floating point exception (core dumped)"
   },
@@ -162,11 +162,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "std.file.FileException@std/file.d(840): /dev/null/out.txt: Not a directory\n----------------\n??:? @trusted void std.file.writeImpl(scope const(char)[], scope const(char)*, scope const(void)[], bool) [0x62f7aa0e948f]\n??:? _Dmain [0x62f7aa0e59b4]",
+   "release_stderr": "std.file.FileException@std/file.d(840): /dev/null/out.txt: Not a directory\n----------------\n??:? @trusted void std.file.writeImpl(scope const(char)[], scope const(char)*, scope const(void)[], bool) [0x5c268f71448f]\n??:? _Dmain [0x5c268f7109b4]",
    "exit": 1,
    "secs": 0.0,
    "stdout": "",
-   "stderr": "std.file.FileException@std/file.d(840): /dev/null/out.txt: Not a directory\n----------------\n??:? @trusted void std.file.writeImpl(scope const(char)[], scope const(char)*, scope const(void)[], bool) [0x604294ca6d0f]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/file.d:745 @safe void std.file.write!(immutable(char)[]).write(immutable(char)[], const(void[])) [0x604294ca28e0]\nmain.d:3 void main.save(immutable(char)[]) [0x604294ca2868]\nmain.d:7 _Dmain [0x604294ca2954]"
+   "stderr": "std.file.FileException@std/file.d(840): /dev/null/out.txt: Not a directory\n----------------\n??:? @trusted void std.file.writeImpl(scope const(char)[], scope const(char)*, scope const(void)[], bool) [0x64386636dd0f]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/file.d:745 @safe void std.file.write!(immutable(char)[]).write(immutable(char)[], const(void[])) [0x6438663698e0]\nmain.d:3 void main.save(immutable(char)[]) [0x643866369868]\nmain.d:7 _Dmain [0x643866369954]"
   },
   "sort_with_nan": {
    "outcome": "SILENT",
@@ -366,7 +366,7 @@
    "exit": 1,
    "secs": 0.0,
    "stdout": "",
-   "stderr": "core.exception.ArrayIndexError@main.d(7): index [18446744073709551615] is out of bounds for array of length 3\n----------------\n??:? onArrayIndexError [0x56bf637a50ed]\n??:? _d_arraybounds_index [0x56bf637a534d]\nmain.d:7 _Dmain [0x56bf637a591f]"
+   "stderr": "core.exception.ArrayIndexError@main.d(7): index [18446744073709551615] is out of bounds for array of length 3\n----------------\n??:? onArrayIndexError [0x5a6d4c59a0ed]\n??:? _d_arraybounds_index [0x5a6d4c59a34d]\nmain.d:7 _Dmain [0x5a6d4c59a91f]"
   },
   "default_numeric_sort": {
    "outcome": "CORRECT",
@@ -427,7 +427,7 @@
    "exit": 1,
    "secs": 0.0,
    "stdout": "",
-   "stderr": "core.exception.ArrayIndexError@main.d(13): index [4] is out of bounds for array of length 4\n----------------\n??:? onArrayIndexError [0x5e84d4d0f0ed]\n??:? _d_arraybounds_index [0x5e84d4d0f34d]\nmain.d:13 _Dmain [0x5e84d4d0f8e0]"
+   "stderr": "core.exception.ArrayIndexError@main.d(13): index [4] is out of bounds for array of length 4\n----------------\n??:? onArrayIndexError [0x5b75238a40ed]\n??:? _d_arraybounds_index [0x5b75238a434d]\nmain.d:13 _Dmain [0x5b75238a48e0]"
   },
   "use_after_free": {
    "outcome": "CORRECT",
@@ -475,22 +475,22 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "core.exception.OutOfMemoryError@core/internal/gc/impl/conservative/gc.d(531): Memory allocation failed\n----------------\n??:? onOutOfMemoryError [0x60d2cb904156]\n??:? nothrow void* core.internal.gc.impl.conservative.gc.ConservativeGC.runLocked!(core.internal.gc.impl.conservative.gc.ConservativeGC.mal\n...\nmmutable(ulong), ref uint, ref ulong, ref const(TypeInfo)) [0x60d2cba89919]\n??:? nothrow void* core.internal.gc.impl.conservative.gc.ConservativeGC.malloc(ulong, uint, const(TypeInfo)) [0x60d2cba8976c]\n??:? _d_newarrayU [0x60d2cba69deb]\n??:? _d_newarrayT [0x60d2cba69e32]\n??:? _Dmain [0x60d2cb904865]",
+   "release_stderr": "core.exception.OutOfMemoryError@core/internal/gc/impl/conservative/gc.d(531): Memory allocation failed\n----------------\n??:? onOutOfMemoryError [0x625f8147a156]\n??:? nothrow void* core.internal.gc.impl.conservative.gc.ConservativeGC.runLocked!(core.internal.gc.impl.conservative.gc.ConservativeGC.mal\n...\nmmutable(ulong), ref uint, ref ulong, ref const(TypeInfo)) [0x625f815ff919]\n??:? nothrow void* core.internal.gc.impl.conservative.gc.ConservativeGC.malloc(ulong, uint, const(TypeInfo)) [0x625f815ff76c]\n??:? _d_newarrayU [0x625f815dfdeb]\n??:? _d_newarrayT [0x625f815dfe32]\n??:? _Dmain [0x625f8147a865]",
    "exit": 1,
    "secs": 0.0,
    "stdout": "",
-   "stderr": "core.exception.OutOfMemoryError@core/internal/gc/impl/conservative/gc.d(531): Memory allocation failed\n----------------\n??:? onOutOfMemoryError [0x62b437b1c156]\n??:? nothrow void* core.internal.gc.impl.conservative.gc.ConservativeGC.runLocked!(core.internal.gc.impl.conservative.gc.ConservativeGC.mallocNoSync(ulong, uint, ref ulong, const(TypeInfo)), core.internal.gc.impl.conservative.gc.mallocTime, core.internal.gc.impl.conservative.gc.numMallocs, immutable(ulong), uint, ulong, const(TypeInfo)).runLocked(ref immutable(ulong), ref uint, ref ulong, ref const(TypeInfo)) [0x62b437ca2b79]\n??:? nothrow void* core.internal.gc.impl.conservative.gc.ConservativeGC.malloc(ulong, uint, const(TypeInfo)) [0x62b437ca29cc]\n??:? _d_newarrayU [0x62b437c8304b]\n??:? _d_newarrayT [0x62b437c83092]\nmain.d:7 _Dmain [0x62b437b1c88e]"
+   "stderr": "core.exception.OutOfMemoryError@core/internal/gc/impl/conservative/gc.d(531): Memory allocation failed\n----------------\n??:? onOutOfMemoryError [0x64a56836a156]\n??:? nothrow void* core.internal.gc.impl.conservative.gc.ConservativeGC.runLocked!(core.internal.gc.impl.conservative.gc.ConservativeGC.mallocNoSync(ulong, uint, ref ulong, const(TypeInfo)), core.internal.gc.impl.conservative.gc.mallocTime, core.internal.gc.impl.conservative.gc.numMallocs, immutable(ulong), uint, ulong, const(TypeInfo)).runLocked(ref immutable(ulong), ref uint, ref ulong, ref const(TypeInfo)) [0x64a5684f0b79]\n??:? nothrow void* core.internal.gc.impl.conservative.gc.ConservativeGC.malloc(ulong, uint, const(TypeInfo)) [0x64a5684f09cc]\n??:? _d_newarrayU [0x64a5684d104b]\n??:? _d_newarrayT [0x64a5684d1092]\nmain.d:7 _Dmain [0x64a56836a88e]"
   },
   "wrong_variant_access": {
    "outcome": "TRAPPED",
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "std.variant.VariantException@std/variant.d(1908): Variant: attempting to use incompatible types int and immutable(char)[]\n----------------\n??:? _Dmain [0x595cefe8f9b4]",
+   "release_stderr": "std.variant.VariantException@std/variant.d(1908): Variant: attempting to use incompatible types int and immutable(char)[]\n----------------\n??:? _Dmain [0x5729eabfe9b4]",
    "exit": 1,
    "secs": 0.0,
    "stdout": "",
-   "stderr": "std.variant.VariantException@std/variant.d(1908): Variant: attempting to use incompatible types int and immutable(char)[]\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/variant.d:937 inout @property inout(immutable(char)[]) std.variant.VariantN!(32uL).VariantN.get!(immutable(char)[]).get() [0x5bf8a3941a3f]\nmain.d:6 _Dmain [0x5bf8a3941880]"
+   "stderr": "std.variant.VariantException@std/variant.d(1908): Variant: attempting to use incompatible types int and immutable(char)[]\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/variant.d:937 inout @property inout(immutable(char)[]) std.variant.VariantN!(32uL).VariantN.get!(immutable(char)[]).get() [0x55bff9be7a3f]\nmain.d:6 _Dmain [0x55bff9be7880]"
   },
   "format_string": {
    "outcome": "TRAPPED",
@@ -572,7 +572,7 @@
    "exit": 1,
    "secs": 0.0,
    "stdout": "before",
-   "stderr": "core.exception.AssertError@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/typecons.d(4128): Called `get' on null Nullable!int.\n----------------\n??:? _d_assert_msg [0x645886db3203]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/typecons.d:4128 inout pure nothrow ref @property @nogc @safe inout(int) std.typecons.Nullable!(int).Nullable.get() [0x645886c63ad5]\nmain.d:9 _Dmain [0x645886c6393c]"
+   "stderr": "core.exception.AssertError@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/typecons.d(4128): Called `get' on null Nullable!int.\n----------------\n??:? _d_assert_msg [0x56dabae36203]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/typecons.d:4128 inout pure nothrow ref @property @nogc @safe inout(int) std.typecons.Nullable!(int).Nullable.get() [0x56dabace6ad5]\nmain.d:9 _Dmain [0x56dabace693c]"
   },
   "null_in_text": {
    "outcome": "SILENT",
@@ -595,11 +595,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "core.exception.ArrayIndexError@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/range/primitives.d(2610): index [0] is out of bounds for array of length 0\n----------------\n??:? onArrayIndexError [0x5e94764cc0ed]\n??:? _d_arraybounds_index [0x5e94764cc34d]\n??:? _Dmain [0x5e94764cca2d]",
+   "release_stderr": "core.exception.ArrayIndexError@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/range/primitives.d(2610): index [0] is out of bounds for array of length 0\n----------------\n??:? onArrayIndexError [0x59db20b480ed]\n??:? _d_arraybounds_index [0x59db20b4834d]\n??:? _Dmain [0x59db20b48a2d]",
    "exit": 1,
    "secs": 0.0,
    "stdout": "",
-   "stderr": "core.exception.AssertError@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/algorithm/searching.d(1451): r is an empty range\n----------------\n??:? _d_assert_msg [0x5d110fc87a33]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/algorithm/searching.d:1451 pure nothrow @nogc @safe long std.algorithm.searching.extremum!(std.algorithm.searching.__lambda_L3919_C30, \"a > b\", long[]).extremum(long[]) [0x5d110fb39c6c]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/algorithm/searching.d:3922 pure nothrow @nogc @safe long std.algorithm.searching.maxElement!(std.algorithm.searching.__lambda_L3919_C30, long[]).maxElement(long[]) [0x5d110fb36c4c]\nmain.d:6 _Dmain [0x5d110fb368a7]"
+   "stderr": "core.exception.AssertError@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/algorithm/searching.d(1451): r is an empty range\n----------------\n??:? _d_assert_msg [0x573d4079fa33]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/algorithm/searching.d:1451 pure nothrow @nogc @safe long std.algorithm.searching.extremum!(std.algorithm.searching.__lambda_L3919_C30, \"a > b\", long[]).extremum(long[]) [0x573d40651c6c]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/algorithm/searching.d:3922 pure nothrow @nogc @safe long std.algorithm.searching.maxElement!(std.algorithm.searching.__lambda_L3919_C30, long[]).maxElement(long[]) [0x573d4064ec4c]\nmain.d:6 _Dmain [0x573d4064e8a7]"
   },
   "readonly_param": {
    "outcome": "REJECTED",
@@ -658,7 +658,7 @@
    "exit": 1,
    "secs": 0.0,
    "stdout": "",
-   "stderr": "core.exception.ArrayIndexError@main.d(9): index [8] is out of bounds for array of length 8\n----------------\n??:? onArrayIndexError [0x55734e8c80ed]\n??:? _d_arraybounds_index [0x55734e8c834d]\nmain.d:9 _Dmain [0x55734e8c88f8]"
+   "stderr": "core.exception.ArrayIndexError@main.d(9): index [8] is out of bounds for array of length 8\n----------------\n??:? onArrayIndexError [0x5d9c935ce0ed]\n??:? _d_arraybounds_index [0x5d9c935ce34d]\nmain.d:9 _Dmain [0x5d9c935ce8f8]"
   },
   "const_overflow": {
    "outcome": "SILENT",
@@ -784,11 +784,11 @@
    "control": "verified",
    "release": "TRAPPED",
    "release_stdout": "",
-   "release_stderr": "std.exception.ErrnoException@std/stdio.d(711): Could not close file `/dev/full' (No space left on device)\n----------------\n??:? @safe noreturn std.exception.bailOut!(std.exception.ErrnoException).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x574eb07cbf2e]\n??:? @safe bool std.exception.enforce!(std.exception.ErrnoException).enforce!(bool).enforce(bool, lazy const(char)[], immutable(char)[], ulong) [0x574eb07ccebd]\n??:? @trusted void std.stdio.File.detach() [0x574eb0801301]\n??:? _Dmain [0x574eb07cb898]",
+   "release_stderr": "std.exception.ErrnoException@std/stdio.d(711): Could not close file `/dev/full' (No space left on device)\n----------------\n??:? @safe noreturn std.exception.bailOut!(std.exception.ErrnoException).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x5ead0d428f2e]\n??:? @safe bool std.exception.enforce!(std.exception.ErrnoException).enforce!(bool).enforce(bool, lazy const(char)[], immutable(char)[], ulong) [0x5ead0d429ebd]\n??:? @trusted void std.stdio.File.detach() [0x5ead0d45e301]\n??:? _Dmain [0x5ead0d428898]",
    "exit": 1,
    "secs": 0.0,
    "stdout": "",
-   "stderr": "std.exception.ErrnoException@std/stdio.d(711): Could not close file `/dev/full' (No space left on device)\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/exception.d:522 @safe noreturn std.exception.bailOut!(std.exception.ErrnoException).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x56c2968ba090]\n??:? @safe bool std.exception.enforce!(std.exception.ErrnoException).enforce!(bool).enforce(bool, lazy const(char)[], immutable(char)[], ulong) [0x56c2968bb58d]\n??:? @trusted void std.stdio.File.detach() [0x56c2968ef9d1]\nmain.d:6 _Dmain [0x56c2968b98a2]"
+   "stderr": "std.exception.ErrnoException@std/stdio.d(711): Could not close file `/dev/full' (No space left on device)\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/exception.d:522 @safe noreturn std.exception.bailOut!(std.exception.ErrnoException).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x5937011e6090]\n??:? @safe bool std.exception.enforce!(std.exception.ErrnoException).enforce!(bool).enforce(bool, lazy const(char)[], immutable(char)[], ulong) [0x5937011e758d]\n??:? @trusted void std.stdio.File.detach() [0x59370121b9d1]\nmain.d:6 _Dmain [0x5937011e58a2]"
   },
   "short_read": {
    "outcome": "CORRECT",

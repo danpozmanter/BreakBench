@@ -25,7 +25,7 @@
    "release_stdout": "",
    "release_stderr": "Illegal instruction (core dumped)",
    "exit": 132,
-   "secs": 0.09,
+   "secs": 0.08,
    "stdout": "",
    "stderr": "Illegal instruction (core dumped)"
   },
@@ -347,7 +347,7 @@
    "release_stdout": "",
    "release_stderr": "/tmp/breakbench/negative_index_wraps/release/main.odin(10:37) Bounds check failed: -1 is out of range 0..<3\nIllegal instruction (core dumped)",
    "exit": 132,
-   "secs": 0.11,
+   "secs": 0.09,
    "stdout": "",
    "stderr": "/tmp/breakbench/negative_index_wraps/main/main.odin(10:37) Bounds check failed: -1 is out of range 0..<3\nIllegal instruction (core dumped)"
   },
@@ -402,7 +402,7 @@
    "release_stdout": "",
    "release_stderr": "/tmp/breakbench/oob_read/release/main.odin(15:20) Bounds check failed: 4 is out of range 0..<4\nIllegal instruction (core dumped)",
    "exit": 132,
-   "secs": 0.11,
+   "secs": 0.08,
    "stdout": "",
    "stderr": "/tmp/breakbench/oob_read/main/main.odin(15:20) Bounds check failed: 4 is out of range 0..<4\nIllegal instruction (core dumped)"
   },
@@ -446,7 +446,7 @@
    "outcome": "CRASH",
    "control": "verified",
    "exit": 139,
-   "secs": 0.11,
+   "secs": 0.12,
    "stdout": "",
    "stderr": "Segmentation fault (core dumped)"
   },
@@ -457,7 +457,7 @@
    "release_stdout": "",
    "release_stderr": "/tmp/breakbench/huge_allocation/release/main.odin(11:6) Bounds check failed: 9999999999999 is out of range 0..<0\nIllegal instruction (core dumped)",
    "exit": 132,
-   "secs": 0.09,
+   "secs": 0.1,
    "stdout": "",
    "stderr": "/tmp/breakbench/huge_allocation/main/main.odin(11:6) Bounds check failed: 9999999999999 is out of range 0..<0\nIllegal instruction (core dumped)"
   },
@@ -468,7 +468,7 @@
    "release_stdout": "",
    "release_stderr": "/tmp/breakbench/wrong_variant_access/release/main.odin(12:7) type assertion: Invalid type assertion from Value to string, actual type: int\nIllegal instruction (core dumped)",
    "exit": 132,
-   "secs": 0.1,
+   "secs": 0.08,
    "stdout": "",
    "stderr": "/tmp/breakbench/wrong_variant_access/main/main.odin(12:7) type assertion: Invalid type assertion from Value to string, actual type: int\nIllegal instruction (core dumped)"
   },
@@ -546,7 +546,7 @@
    "release_stdout": "before",
    "release_stderr": "/tmp/breakbench/forced_unwrap/release/main.odin(12:14) type assertion: Invalid type assertion from Maybe($T=int) to int, actual type: nil\nIllegal instruction (core dumped)",
    "exit": 132,
-   "secs": 0.08,
+   "secs": 0.11,
    "stdout": "before",
    "stderr": "/tmp/breakbench/forced_unwrap/main/main.odin(12:14) type assertion: Invalid type assertion from Maybe($T=int) to int, actual type: nil\nIllegal instruction (core dumped)"
   },
@@ -629,7 +629,7 @@
    "release_stdout": "",
    "release_stderr": "/tmp/breakbench/size_overflow_alloc/release/main.odin(13:10) Bounds check failed: 8 is out of range 0..<8\nIllegal instruction (core dumped)",
    "exit": 132,
-   "secs": 0.09,
+   "secs": 0.1,
    "stdout": "",
    "stderr": "/tmp/breakbench/size_overflow_alloc/main/main.odin(13:10) Bounds check failed: 8 is out of range 0..<8\nIllegal instruction (core dumped)"
   },
