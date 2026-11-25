@@ -1,0 +1,12 @@
+fn parse_order(line: String) -> Option<i64> {
+    let parts = line.split(",")
+    parts[2].to_i64() // BREAK!
+    // CONTROL! parts[1].to_i64()
+}
+
+fn main() {
+    match parse_order("widget,5") {
+        Some(qty) => println(f"{qty}"),
+        None => println("invalid order"),
+    }
+}

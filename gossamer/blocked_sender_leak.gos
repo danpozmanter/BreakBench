@@ -1,0 +1,18 @@
+use std::sync::channel
+
+fn first_answer() -> i64 {
+    let tx, rx = channel::<i64>()
+    let mut answer = 0
+    let _ = cohort {
+        spawn(|| tx.send(42))
+        spawn(|| tx.send(42))
+        answer = rx.recv().unwrap_or(0)
+    }
+    answer
+}
+
+fn main() {
+    let answer = first_answer()
+    println(f"{answer}")
+    println("done")
+}

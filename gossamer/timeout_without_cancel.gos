@@ -1,0 +1,19 @@
+use std::sync
+use std::sync::{channel, Receiver, Shared}
+
+fn charge(gate: Receiver<bool>, balance: Shared<i64>) -> () {
+    let Some(_) = gate.recv() else { return }
+    balance.update(|b| b - 30)
+}
+
+fn main() {
+    let balance = Shared::new(100)
+    let open_gate, gate = channel::<bool>(2)
+    let attempt = sync::with_timeout(|| charge(gate, balance), 100)
+    if attempt.is_err() {
+        open_gate.send(true)
+        open_gate.send(true)
+        charge(gate, balance) // BREAK!
+    }
+    println(f"{balance.get()}")
+}

@@ -1847,6 +1847,127 @@
       "refs": [
         "CWE-667"
       ]
+    },
+    {
+      "id": "cleanup_on_error_path",
+      "category": "cleanup",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^cleaned$",
+      "scratch_dir": "/tmp/bb_scratch",
+      "title": "A failure that skips the cleanup",
+      "scenario": "export(rows) creates the scratch file /tmp/bb_scratch/export.csv, writes a header, fails on the invalid row x the language's usual way (an exception, an error value, a Result or an error union), and deletes the scratch file at its end. It creates the file with the standard library's temporary-file type where that type deletes itself when released, and the usual call to create a file otherwise. main handles the failure, prints export failed, and exits normally. The test reads /tmp/bb_scratch after the program ends.",
+      "best": "cleaned: the scratch file goes on every way out of the function, or the compiler refuses the path that skips the delete. A file left in /tmp/bb_scratch shows the failure skipped the cleanup.",
+      "mode": "Skipped cleanup",
+      "refs": [
+        "CWE-459"
+      ]
+    },
+    {
+      "id": "exit_skips_cleanup",
+      "category": "cleanup",
+      "kind": "dynamic",
+      "args": [
+        "--version"
+      ],
+      "expect": "^cleaned$",
+      "scratch_dir": "/tmp/bb_scratch",
+      "title": "An exit call that skips pending cleanup",
+      "scenario": "main creates the lock file /tmp/bb_scratch/run.lock and schedules its removal the language's usual way to clean up when a scope ends (defer, finally, ensure, using, with, scope(exit), a destructor; an explicit call at the end of main where the language has none). It then calls check_args, which sees --version, prints 1.0 and ends the program with the standard library's exit call and status 0. The test reads /tmp/bb_scratch after the program ends.",
+      "best": "cleaned: the exit call unwinds the stack like an exception, so pending cleanups run. A lock file left behind shows the exit call skipped them.",
+      "mode": "Skipped cleanup",
+      "refs": [
+        "CERT ERR04-C",
+        "CWE-459"
+      ]
+    },
+    {
+      "id": "generator_break_cleanup",
+      "category": "cleanup",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^cleaned$",
+      "scratch_dir": "/tmp/bb_scratch",
+      "title": "Breaking out of a sequence that holds a resource",
+      "scenario": "rows() is a lazy sequence over three lines, built with the language's usual construct for one (a generator, an iterator type, a sequence, a stream or a method that yields to a block). It creates /tmp/bb_scratch/reader.lock when it starts and deletes it when it finishes, in the place the language gives a sequence for cleanup (a finally block in a generator, a destructor or close of the iterator, the code after its last element where there is no other place). The program loops over rows(), breaks at the first line, prints it, and exits. The test reads /tmp/bb_scratch after the program ends.",
+      "best": "cleaned: leaving the loop early releases the sequence and runs its cleanup. A lock file left behind shows the early break skipped it.",
+      "mode": "Skipped cleanup",
+      "refs": [
+        "CWE-772"
+      ]
+    },
+    {
+      "id": "main_error_exit_code",
+      "category": "errors",
+      "kind": "dynamic",
+      "args": [],
+      "expect": null,
+      "expect_status": "failure",
+      "title": "A failed run that exits with success",
+      "scenario": "main reads /nonexistent/bb.conf with the usual call to read a file. When the read fails, main prints config missing to stderr and returns. main has the shape the language teaches for a program that can fail: it answers an error or an exit status where the language's main can. The test reads the exit status.",
+      "best": "A non-zero exit status: the compiler refuses a bare return from a main that must answer one, or the failure leaves main as an error. Status 0 tells every script and scheduler that the failed run succeeded.",
+      "mode": "Lost failures",
+      "refs": [
+        "CWE-393"
+      ]
+    },
+    {
+      "id": "catch_all_hides_bug",
+      "category": "errors",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^5$",
+      "title": "A catch-all that turns a bug into bad input",
+      "scenario": "parse_order(line) splits widget,5 at the comma and parses the quantity from the third field instead of the second, an index past the end. The caller handles a failed order with the language's broadest ordinary handler (except Exception, catch (Exception e), rescue => e, catch e, or a check of the returned error, Option or Result) and prints invalid order; otherwise it prints the quantity.",
+      "best": "A refusal of the index. The index error stopping the program, because the handler for bad input cannot catch a bug, earns half. invalid order shows the handler swallowed a programming error.",
+      "mode": "Lost failures",
+      "refs": [
+        "CWE-396",
+        "CERT ERR08-J"
+      ]
+    },
+    {
+      "id": "narrow_counter_loop",
+      "category": "numbers",
+      "kind": "static",
+      "args": [],
+      "expect": "^300$",
+      "title": "A loop counter too small for its limit",
+      "scenario": "The program counts loop passes with a counter of the language's 8-bit unsigned integer type (its 8-bit signed type where it has no unsigned one). The loop starts at 0, runs while the counter is below 300, and the program prints how many passes ran.",
+      "best": "A refusal of the limit the counter can never reach. An overflow error when the counter passes its largest value earns half. Running forever shows the counter wrapped.",
+      "mode": "Integer overflow",
+      "refs": [
+        "CWE-835",
+        "CWE-197"
+      ]
+    },
+    {
+      "id": "timeout_without_cancel",
+      "category": "concurrency",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^70$",
+      "title": "A timed-out task that keeps running",
+      "scenario": "charge() waits for a gate the main thread opens, then takes 30 from a balance of 100. The program starts charge as a task and waits for it with the language's usual wait with a timeout, 100 ms. The gate is shut, so the wait times out. The program opens the gate, retries with a direct call to charge(), waits for every task it started to end, and prints the balance.",
+      "best": "70: the timeout cancels the attempt it gave up on. 40 shows the abandoned attempt ran on and charged twice.",
+      "mode": "Lost tasks",
+      "refs": [
+        "CWE-404"
+      ]
+    },
+    {
+      "id": "blocked_sender_leak",
+      "category": "concurrency",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "(?s)^42\\s+done$",
+      "title": "A worker stuck sending an answer nobody takes",
+      "scenario": "first_answer() makes a channel of the language's standard kind at its default capacity (unbuffered where the language has no default), starts two workers that each send 42 on it, takes the first answer and returns it. main prints the answer, waits for both workers to end, and prints done.",
+      "best": "42 then done: the second send completes because the channel buffers it or nobody can receive it any more. A deadlock error earns half. Waiting forever shows a worker stuck in its send.",
+      "mode": "Lost tasks",
+      "refs": [
+        "CWE-772"
+      ]
     }
   ],
   "modes": [
@@ -1861,6 +1982,7 @@
     "Incomplete control flow",
     "Memory reuse",
     "Exhaustion and leaks",
+    "Skipped cleanup",
     "Lost failures",
     "Locking",
     "Races and lost signals",

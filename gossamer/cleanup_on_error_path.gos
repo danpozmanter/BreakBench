@@ -1,0 +1,22 @@
+use std::{errors, fs}
+
+const SCRATCH: String = "/tmp/bb_scratch/export.csv"
+
+fn export(rows: [String]) -> Result<(), errors::Error> {
+    let mut text = "qty\n"
+    fs::write(SCRATCH, text.bytes())?
+    for row in rows {
+        let Some(qty) = row.to_i64() else { return Err(errors::new(f"invalid row {row}")) } // BREAK!
+        // CONTROL! let Some(qty) = row.to_i64() else { fs::remove_file(SCRATCH)?; return Err(errors::new(f"invalid row {row}")) }
+        text += f"{qty}\n"
+        fs::write(SCRATCH, text.bytes())?
+    }
+    fs::remove_file(SCRATCH)?
+    Ok(())
+}
+
+fn main() {
+    if export(#["3", "x", "5"]).is_err() {
+        println("export failed")
+    }
+}

@@ -1,0 +1,14 @@
+use std::{errors, fs}
+
+fn main() -> Result<(), errors::Error> {
+    let text = match fs::read_to_string("/nonexistent/bb.conf") {
+        Ok(text) => text,
+        Err(error) => {
+            eprintln(f"config missing: {error}")
+            return // BREAK!
+            // CONTROL! return Err(error)
+        }
+    }
+    println(f"{text.len()}")
+    Ok(())
+}

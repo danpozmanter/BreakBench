@@ -38,7 +38,7 @@ leaderboard as one unranked example of how much a checker adds.
 
 ## Tests
 
-118 tests in twelve categories. Each has a CWE or CERT entry, a CVE, or appears in a language's
+126 tests in thirteen categories. Each has a CWE or CERT entry, a CVE, or appears in a language's
 pitfall list, and covers a mistake no other test covers; `harness/problems.json` gives each test's
 reference and failure mode, and the site's Notes tab maps the failure modes to their tests. Each test is one scenario: the same steps, inputs and
 expected answer in every language, written the way that language teaches first. The code follows the
@@ -48,18 +48,19 @@ rules the mistake out, and where its documentation sent a program to another cal
 
 | Category | Tests | The bug |
 |---|---|---|
-| Numbers | 17 | Arithmetic or a conversion gives the wrong value: overflow, a narrowing cast, a negative remainder, float equality, a large integer read from JSON, ... |
+| Numbers | 18 | Arithmetic or a conversion gives the wrong value: overflow, a loop counter too small for its limit, a narrowing cast, a negative remainder, float equality, a large integer read from JSON, ... |
 | Types and API misuse | 14 | A value or call does not fit what it is used with: text passed as a number, a misspelled field, meters added to seconds, an integer passed as an enum, a string cut mid-character, ... |
 | Aliasing and mutation | 11 | Shared or copied state changes when it should not, or does not when it should: a list changed while looping over it, a snapshot that is an alias, a closure that captures the loop variable, a copy updated instead of the original, ... |
 | Incomplete code | 3 | A path that ends without a result, a match missing a case, a variable read before it is set |
 | Operators | 8 | An operator that means something other than it looks: an assignment in a condition, & next to ==, 1 < x < 3, == on built strings or records, ... |
 | Control flow | 6 | Code that runs in a different order or path than it reads: a dangling else, a case without break, a return with its value on the next line, an unreachable statement, ... |
 | Names and literals | 7 | A name or literal that silently means something else: a new variable instead of an assignment, a missing comma, a repeated map key, a leading-zero number, ... |
-| Error handling | 7 | A failure goes unseen: an ignored result, a return in a cleanup block, a cleanup failure that hides the original error, a read that returns part of a message, a buffered file never flushed, a failed command treated as a success, ... |
+| Error handling | 9 | A failure goes unseen: an ignored result, a catch-all that turns a bug into bad input, a failed run that exits with success, a return in a cleanup block, a cleanup failure that hides the original error, a read that returns part of a message, a buffered file never flushed, a failed command treated as a success, ... |
+| Resource cleanup | 3 | A file or lock outlives the code that should remove it: a failure that skips the cleanup, an exit call that skips it, a loop that breaks out of a sequence holding it |
 | Security | 9 | Input from outside takes control: command injection, a path that escapes its folder, a NUL byte that cuts a file name short, user text as a format string, an object restored from untrusted bytes, hidden or look-alike characters in source, ... |
 | Null safety | 11 | The program uses a value that may be missing as if it were there: a lookup that found nothing, a search that returned -1, a missing name printed as text, a check a later call undoes, an empty pointer passed on as an error, ... |
 | Memory safety | 15 | The program reads or writes memory it does not own, or keeps memory it dropped: use after free, out-of-bounds writes, records that keep each other alive, a size that overflows before the allocation, a running total that keeps every message alive, ... |
-| Concurrency | 12 | Threads or tasks interfere: a deadlock, a check-then-act race, a balance checked before an await and spent after it, an early return that skips the unlock, a wake-up sent before anyone waits, ... |
+| Concurrency | 12 | Threads or tasks interfere: a deadlock, a check-then-act race, a balance checked before an await and spent after it, an early return that skips the unlock, a wake-up sent before anyone waits, a timed-out task that keeps running, a worker stuck sending an answer nobody takes, ... |
 
 Any test whose result changes between runs, in any language, is removed (the bench runs three
 times). Gap: bugs that show only on some runs are not measured. Tests every language fails stay,

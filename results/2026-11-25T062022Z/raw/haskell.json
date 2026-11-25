@@ -1,0 +1,1040 @@
+{
+ "lang": "haskell",
+ "version": "The Glorious Glasgow Haskell Compilation System, version 9.14.1",
+ "results": {
+  "null_deref": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:12:23: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018User\u2019 with actual type \u2018Maybe User\u2019\n    \u2022 In the first argument of \u2018name\u2019, namely \u2018u\u2019\n      In the first argument of \u2018length\u2019, namely \u2018(name u)\u2019\n      In the first argument of \u2018print\u2019, namely \u2018(length (name u))\u2019\n   |\n12 |   print (length (name u)) -- BREAK!\n   |                       ^",
+   "control": "builds"
+  },
+  "int_overflow": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:7:17: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n7 |   let n = read (head args) :: Int64\n  |                 ^^^^",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:6:17: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n6 |   let d = read (head args) :: Int\n  |                 ^^^^",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.Type.ArithException:\n\ndivide by zero",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.Type.ArithException:\n\ndivide by zero"
+  },
+  "shift_overflow": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:8:17: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n8 |   let s = read (head args) :: Int\n  |                 ^^^^",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:7:17: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n7 |   let v = read (head args) :: Int\n  |                 ^^^^",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:7:17: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n7 |   let x = read (head args) :: Double\n  |                 ^^^^",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7766279631452241920",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:6:17: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n6 |   let i = read (head args) :: Int\n  |                 ^^^^",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:10:14: error: [GHC-83865]\n    \u2022 Couldn't match type \u2018[Char]\u2019 with \u2018Int\u2019\n      Expected: Int\n        Actual: String\n    \u2022 In the first argument of \u2018add\u2019, namely \u2018raw\u2019\n      In the first argument of \u2018print\u2019, namely \u2018(add raw 3)\u2019\n      In a stmt of a 'do' block: print (add raw 3)\n   |\n10 |   print (add raw 3) -- BREAK!\n   |              ^^^",
+   "control": "builds"
+  },
+  "missing_return": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:12:26: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n   |\n12 |   putStrLn (grade (read (head args)))\n   |                          ^^^^",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Control.Exception.Base.PatternMatchFail:\n\nmain.hs:(4,1)-(6,23): Non-exhaustive patterns in function grade\n\n\nHasCallStack backtrace:\n  collectExceptionAnnotation, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:170:37 in ghc-internal:G\n...\nC.Internal.Exception\n  toExceptionWithBacktrace, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:90:42 in ghc-internal:GHC.Internal.Exception\n  throw, called at libraries/ghc-internal/src/GHC/Internal/Control/Exception/Base.hs:434:30 in ghc-internal:GHC.Internal.Control.Exception.Base",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Control.Exception.Base.PatternMatchFail:\n\nmain.hs:(4,1)-(6,23): Non-exhaustive patterns in function grade\n\n\nHasCallStack backtrace:\n  collectExceptionAnnotation, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:170:37 in ghc-internal:GHC.Internal.Exception\n  toExceptionWithBacktrace, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:90:42 in ghc-internal:GHC.Internal.Exception\n  throw, called at libraries/ghc-internal/src/GHC/Internal/Control/Exception/Base.hs:434:30 in ghc-internal:GHC.Internal.Control.Exception.Base"
+  },
+  "non_exhaustive_match": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:14:47: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n   |\n14 |   putStrLn (name ([Red, Green, Blue] !! read (head args)))\n   |                                               ^^^^",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Control.Exception.Base.PatternMatchFail:\n\nmain.hs:(6,10)-(8,18): Non-exhaustive patterns in case\n\n\nHasCallStack backtrace:\n  collectExceptionAnnotation, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:170:37 in ghc-internal:GHC.Internal.Exception\n  toExceptionWithBacktrace, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:90:42 in ghc-internal:GHC.Internal.Exception\n  throw, called at libraries/ghc-internal/src/GHC/Internal/Control/Exception/Base.hs:434:30 in ghc-internal:GHC.Internal.Control.Exception.Base",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Control.Exception.Base.PatternMatchFail:\n\nmain.hs:(6,10)-(8,18): Non-exhaustive patterns in case\n\n\nHasCallStack backtrace:\n  collectExceptionAnnotation, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:170:37 in ghc-internal:GHC.Internal.Exception\n  toExceptionWithBacktrace, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:90:42 in ghc-internal:GHC.Internal.Exception\n  throw, called at libraries/ghc-internal/src/GHC/Internal/Control/Exception/Base.hs:434:30 in ghc-internal:GHC.Internal.Control.Exception.Base"
+  },
+  "uninitialized_variable": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:7:7: error: [GHC-44432]\n    The type signature for \u2018x\u2019 lacks an accompanying binding\n  |\n7 |   let x :: Int -- BREAK!\n  |       ^",
+   "control": "builds"
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:8:20: error: [GHC-22385]\n    Not in scope: record field \u2018colour\u2019\n    Suggested fix: Perhaps use record field of Config \u2018color\u2019 (line 3)\n  |\n8 |   let cfg' = cfg { colour = \"red\" } -- BREAK!\n  |                    ^^^^^^",
+   "control": "builds"
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:7:18: error: [GHC-58481]\n    parse error on input \u2018=\u2019\n    Suggested fix:\n      Perhaps you need a 'let' in a 'do' block?\n      e.g. 'let x = 5' instead of 'x = 5'\n  |\n7 |   putStrLn (if x = 1 then \"one\" else \"not one\") -- BREAK!\n  |                  ^",
+   "control": "builds"
+  },
+  "switch_fallthrough": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:6:17: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n6 |   let n = read (head args) :: Int\n  |                 ^^^^",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:8:20: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Bool\u2019 with actual type \u2018Maybe Int\u2019\n    \u2022 In the expression: qty\n      In the expression: if qty then True else False\n      In an equation for \u2018present\u2019: present = if qty then True else False\n  |\n8 |   let present = if qty then True else False -- BREAK!\n  |                    ^^^",
+   "control": "builds"
+  },
+  "string_equality": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:6:19: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n6 |   let s = \"ab\" ++ head args\n  |                   ^^^^",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:7:17: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n7 |   let n = read (head args) :: Int -- CONTROL! let n = readMaybe (head args) :: Maybe Int\n  |                 ^^^^",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.read: no parse",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.read: no parse"
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:13:17: error: [GHC-83865]\n    \u2022 Couldn't match type \u2018Dog\u2019 with \u2018Animal\u2019\n      Expected: [Animal]\n        Actual: [Dog]\n    \u2022 In the expression: dogs :: [Animal]\n      In an equation for \u2018animals\u2019: animals = dogs :: [Animal]\n      In a stmt of a 'do' block: let animals = dogs :: [Animal]\n   |\n13 |   let animals = dogs :: [Animal] -- BREAK!\n   |                 ^^^^",
+   "control": "builds"
+  },
+  "mutate_while_iterating": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1,3",
+   "stderr": ""
+  },
+  "self_deadlock": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.BlockedIndefinitelyOnMVar:\n\nthread blocked indefinitely in an MVar operation",
+   "exit": 1,
+   "secs": 0.32,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.BlockedIndefinitelyOnMVar:\n\nthread blocked indefinitely in an MVar operation"
+  },
+  "loop_closure_capture": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.IOException:\n\n/dev/null/out.txt: withFile: inappropriate type (Not a directory)\n\nHasCallStack backtrace:\n  ioError, called at libraries/ghc-internal/src/GHC/Internal/Foreign/C/Error.hs:291:5 in ghc-internal:GHC.Internal.Foreign.C.Error",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.IOException:\n\n/dev/null/out.txt: withFile: inappropriate type (Not a directory)\n\nHasCallStack backtrace:\n  ioError, called at libraries/ghc-internal/src/GHC/Internal/Foreign/C/Error.hs:291:5 in ghc-internal:GHC.Internal.Foreign.C.Error"
+  },
+  "sort_with_nan": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:7:13: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Double\u2019 with actual type \u2018Int\u2019\n    \u2022 In the first argument of \u2018(/)\u2019, namely \u2018total\u2019\n      In the expression: total / count :: Double\n      In an equation for \u2018avg\u2019: avg = total / count :: Double\n  |\n7 |   let avg = total / count :: Double -- BREAK!\n  |             ^^^^^\n\nmain.hs:7:21: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Double\u2019 with actual type \u2018Int\u2019\n    \u2022 In the second argument of \u2018(/)\u2019, namely \u2018count\u2019\n      In the expression: total / count :: Double\n      In an equation for \u2018avg\u2019: avg = total / count :: Double\n  |\n7 |   let avg = total / count :: Double -- BREAK!\n  |                     ^^^^^",
+   "control": "builds"
+  },
+  "leading_zero_literal": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:7:17: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n7 |   let x = read (head args) :: Int\n  |                 ^^^^",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:10:3: error: [GHC-58481]\n    parse error (possibly incorrect indentation or mismatched brackets)\n   |\n10 |   putStrLn r\n   |   ^",
+   "control": "builds"
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:7:16: error: [GHC-88747]\n    Precedence parsing error\n        cannot mix \u2018<\u2019 [infix 4] and \u2018<\u2019 [infix 4] in the same infix expression\n  |\n7 |   let inside = 1 < x < 3 -- BREAK!\n  |                ^^^^^^^^^",
+   "control": "builds"
+  },
+  "lost_update_on_copy": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:7:19: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n7 |   print (balance (head accounts'))\n  |                   ^^^^",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "150",
+   "stderr": ""
+  },
+  "command_injection": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:10:27: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n   |\n10 |   callCommand (\"echo \" ++ head args) -- CONTROL! callProcess \"echo\" [head args]\n   |                           ^^^^",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "hi\ninjected",
+   "stderr": ""
+  },
+  "float_equality": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.BlockedIndefinitelyOnMVar:\n\nthread blocked indefinitely in an MVar operation",
+   "exit": 1,
+   "secs": 0.32,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.BlockedIndefinitelyOnMVar:\n\nthread blocked indefinitely in an MVar operation"
+  },
+  "path_join_escape": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:8:39: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n8 |   let joined = \"/srv/app/uploads\" </> head args -- CONTROL! let joined = \"/srv/app/uploads\" </> dropWhile (== '/') (head args)\n  |                                       ^^^^",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "escaped",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no regular expressions in base or the libraries that ship with GHC"
+  },
+  "negative_remainder": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:9:29: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n9 |   putStrLn (if isOdd (read (head args)) then \"odd\" else \"even\")\n  |                             ^^^^",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "odd",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:5:11: error: [GHC-83865]\n    \u2022 Couldn't match expected type: String -> String\n                  with actual type: [Char]\n    \u2022 The function \u2018\"bob\"\u2019 is applied to one visible argument,\n        but its type \u2018String\u2019 has none\n      In the expression: \"bob\" \"carol\"\n      In the expression: [\"alice\", \"bob\" \"carol\"]\n  |\n5 |         , \"bob\" -- BREAK!\n  |           ^^^^^^^^^^^^^^^...",
+   "control": "builds"
+  },
+  "return_in_finally": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.read: no parse\nmain: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.BlockedIndefinitelyOnMVar:\n\nthread blocked indefinitely in an MVar operation",
+   "exit": 1,
+   "secs": 0.33,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.read: no parse\nmain: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.BlockedIndefinitelyOnMVar:\n\nthread blocked indefinitely in an MVar operation"
+  },
+  "unawaited_task": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nprintf: argument list ended prematurely",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nprintf: argument list ended prematurely"
+  },
+  "unsigned_subtraction": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:9:25: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n9 |   let payload = length (head args) - header\n  |                         ^^^^",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:8:20: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n8 |   print (stock M.! head args + 5) -- CONTROL! putStrLn (maybe \"unknown\" (show . (+ 5)) (M.lookup (head args) stock))\n  |                    ^^^^",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nMap.!: given key is not an element in the map\n\nHasCallStack backtrace:\n  error, called at libraries/containers/containers/src/Data/Map/Internal.hs:629:17 in containers-0.8-9e90:Data.Map.Internal",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nMap.!: given key is not an element in the map\n\nHasCallStack backtrace:\n  error, called at libraries/containers/containers/src/Data/Map/Internal.hs:629:17 in containers-0.8-9e90:Data.Map.Internal"
+  },
+  "mutable_hash_key": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:8:18: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018tail\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Replace it with 'drop' 1, or use pattern matching or 'GHC.Internal.Data.List.uncons' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n8 |   let key' = 9 : tail key\n  |                  ^^^^",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": "[9,2]"
+  },
+  "shadowed_assignment": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:10:9: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n   |\n10 |   when (head args == \"ok\") $ do\n   |         ^^^^",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pending",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:6:3: error: [GHC-83865]\n    \u2022 Couldn't match type \u2018[]\u2019 with \u2018IO\u2019\n      Expected: IO Char\n        Actual: [Char]\n    \u2022 In a stmt of a 'do' block: map toUpper name\n      In the expression:\n        do let name = \"ada\"\n           map toUpper name\n           putStrLn name\n      In an equation for \u2018main\u2019:\n          main\n            = do let name = ...\n                 map toUpper name\n                 putStrLn name\n  |\n6 |   map toUpper name -- BREAK!\n  |   ^^^^^^^^^^^^^^^^",
+   "control": "builds"
+  },
+  "negative_index_wraps": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:7:17: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n7 |   let i = read (head args)\n  |                 ^^^^",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.!!: negative index\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1630:12 in ghc-internal:GHC.Internal.List\n  negIndex, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1634:17 in ghc-internal:GHC.Internal.List\n  !!, called at main.hs:8:35 in main:Main",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.!!: negative index\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1630:12 in ghc-internal:GHC.Internal.List\n  negIndex, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1634:17 in ghc-internal:GHC.Internal.List\n  !!, called at main.hs:8:35 in main:Main"
+  },
+  "default_numeric_sort": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:8:25: error: [GHC-83865]\n    \u2022 Couldn't match type \u2018Int\u2019 with \u2018[Char]\u2019\n      Expected: [String]\n        Actual: [Int]\n    \u2022 In the second argument of \u2018elem\u2019, namely \u2018ids\u2019\n      In the expression: i `elem` ids\n      In the first argument of \u2018putStrLn\u2019, namely\n        \u2018(if i `elem` ids then \"found\" else \"missing\")\u2019\n  |\n8 |   putStrLn (if i `elem` ids then \"found\" else \"missing\") -- CONTROL! putStrLn (if read i `elem` ids then \"found\" else \"missing\")\n  |                         ^^^",
+   "control": "builds"
+  },
+  "dead_store": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:6:21: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n6 |   let price = read (head args) :: Int\n  |                     ^^^^",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "balanced",
+   "stderr": "worker failed: user error (crash mid-update)"
+  },
+  "split_character": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:7:17: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n7 |       n = read (head args) :: Int\n  |                 ^^^^",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "a\ud83d\udc4d",
+   "stderr": ""
+  },
+  "oob_write": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:10:25: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n   |\n10 |   writeArray buf (read (head args)) 99 -- CONTROL! let i = read (head args) in if i >= 0 && i <= 3 then writeArray buf i 99 else return ()\n   |                         ^^^^",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nIx{Int}.index: Index (4) out of range ((0,3))",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nIx{Int}.index: Index (4) out of range ((0,3))"
+  },
+  "oob_read": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:10:24: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n   |\n10 |   print (buf f ! read (head args)) -- CONTROL! let i = read (head args) :: Int in putStrLn (if i >= 0 && i <= 3 then show (buf f ! i) else \"out of range\")\n   |                        ^^^^",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nIx{Int}.index: Index (4) out of range ((0,3))",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nIx{Int}.index: Index (4) out of range ((0,3))"
+  },
+  "use_after_free": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:10:27: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n   |\n10 |   readIORef w >>= print . head\n   |                           ^^^^",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:11:22: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n   |\n11 |   print (walk (read (head args))) -- CONTROL! print (let n = read (head args) :: Integer; m = 1000000007 in ((powMod 31 (n + 1) - 31 * (n + 1) + n) * powMod 900 (m - 2)) `mod` m)\n   |                      ^^^^",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 3.3,
+   "stdout": "433043450",
+   "stderr": ""
+  },
+  "huge_allocation": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:7:17: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n7 |   let n = read (head args) :: Int\n  |                 ^^^^",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Out of memory",
+   "exit": 251,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Out of memory"
+  },
+  "wrong_variant_access": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:8:41: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n8 |   let v = if length args > 5 then Text (head args) else IntValue 42\n  |                                         ^^^^",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Control.Exception.Base.PatternMatchFail:\n\nmain.hs:9:7-16: Non-exhaustive patterns in Text s\n\n\nHasCallStack backtrace:\n  collectExceptionAnnotation, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:170:37 in ghc-internal:GHC.Internal.Exception\n  toExceptionWithBacktrace, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:90:42 in ghc-internal:GHC.Internal.Exception\n  throw, called at libraries/ghc-internal/src/GHC/Internal/Control/Exception/Base.hs:434:30 in ghc-internal:GHC.Internal.Control.Exception.Base",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Control.Exception.Base.PatternMatchFail:\n\nmain.hs:9:7-16: Non-exhaustive patterns in Text s\n\n\nHasCallStack backtrace:\n  collectExceptionAnnotation, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:170:37 in ghc-internal:GHC.Internal.Exception\n  toExceptionWithBacktrace, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:90:42 in ghc-internal:GHC.Internal.Exception\n  throw, called at libraries/ghc-internal/src/GHC/Internal/Control/Exception/Base.hs:434:30 in ghc-internal:GHC.Internal.Control.Exception.Base"
+  },
+  "format_string": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:7:11: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n7 |   printf (head args) -- CONTROL! putStr (head args)\n  |           ^^^^",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nprintf: argument list ended prematurely",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nprintf: argument list ended prematurely"
+  },
+  "trojan_source": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:4:26: error: [GHC-21231] lexical error at character '\\8238'\n  |\n4 |   putStrLn (if access /= \"user\u202e \u2066// admins only\u2069 \u2066\" then \"admin\" else \"user\") -- CONTROL! putStrLn (if access /= \"user\" then \"admin\" else \"user\")\n  |                          ^^^^^",
+   "control": "builds"
+  },
+  "unsafe_deserialization": {
+   "outcome": "SAFE_BY_DESIGN",
+   "message": "Data.Binary and Read decode only the type the program declares"
+  },
+  "null_byte_path": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "admin\nadmin",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:6:14: error: [GHC-83865]\n    \u2022 Couldn't match type \u2018[]\u2019 with \u2018a0 i0\u2019\n      Expected: a0 i0 Char\n        Actual: String\n    \u2022 In the first argument of \u2018writeArray\u2019, namely \u2018greeting\u2019\n      In a stmt of a 'do' block: writeArray greeting 0 'j'\n      In the expression:\n        do let greeting = \"hello\"\n           writeArray greeting 0 'j'\n           putStrLn greeting\n  |\n6 |   writeArray greeting 0 'j' -- BREAK!\n  |              ^^^^^^^^",
+   "control": "builds"
+  },
+  "reference_cycle": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.19,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "complete_init": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:5:11: warning: [GHC-20125] [-Wmissing-fields]\n    \u2022 Fields of \u2018Config\u2019 not initialised:\n        retries :: Int\n    \u2022 In the expression: Config {timeout = 30}\n      In an equation for \u2018c\u2019: c = Config {timeout = 30}\n      In a stmt of a 'do' block: let c = Config {timeout = 30}\n  |\n5 |   let c = Config {timeout = 30} -- CONTROL! let c = Config {timeout = 30, retries = 3}\n  |           ^^^^^^^^^^^^^^^^^^^^^",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Control.Exception.Base.RecConError:\n\nmain.hs:5:11-31: Missing field in record construction retries\n\n\nHasCallStack backtrace:\n  collectExceptionAnnotation, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:170:37 in ghc-internal:GHC.Internal.Exception\n  toExceptionWithBacktrace, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:90:42 in ghc-internal:GHC.Internal.Exception\n  throw, called at libraries/ghc-internal/src/GHC/Internal/Control/Exception/Base.hs:432:30 in ghc-internal:GHC.Internal.Control.Exception.Base",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Control.Exception.Base.RecConError:\n\nmain.hs:5:11-31: Missing field in record construction retries\n\n\nHasCallStack backtrace:\n  collectExceptionAnnotation, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:170:37 in ghc-internal:GHC.Internal.Exception\n  toExceptionWithBacktrace, called at libraries/ghc-internal/src/GHC/Internal/Exception.hs:90:42 in ghc-internal:GHC.Internal.Exception\n  throw, called at libraries/ghc-internal/src/GHC/Internal/Control/Exception/Base.hs:432:30 in ghc-internal:GHC.Internal.Control.Exception.Base"
+  },
+  "newtype": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:10:39: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Meters\u2019 with actual type \u2018Seconds\u2019\n    \u2022 In the second argument of \u2018addM\u2019, namely \u2018(Seconds 3)\u2019\n      In the expression: addM (Meters 2) (Seconds 3)\n      In a pattern binding: Meters wrong = addM (Meters 2) (Seconds 3)\n   |\n10 |   let Meters wrong = addM (Meters 2) (Seconds 3) -- BREAK!\n   |                                       ^^^^^^^^^",
+   "control": "builds"
+  },
+  "strong_enum": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:11:18: error: [GHC-39999]\n    \u2022 No instance for \u2018Num Color\u2019 arising from the literal \u20187\u2019\n    \u2022 In the first argument of \u2018name\u2019, namely \u20187\u2019\n      In the first argument of \u2018putStrLn\u2019, namely \u2018(name 7)\u2019\n      In a stmt of a 'do' block: putStrLn (name 7)\n   |\n11 |   putStrLn (name 7) -- BREAK!\n   |                  ^",
+   "control": "builds"
+  },
+  "override_check": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:9:3: error: [GHC-54721]\n    \u2018descibe\u2019 is not a (visible) method of class \u2018Shape\u2019\n  |\n9 |   descibe _ = \"circle\" -- BREAK!\n  |   ^^^^^^^",
+   "control": "builds"
+  },
+  "forced_unwrap": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "before",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nMaybe.fromJust: Nothing\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/Data/Maybe.hs:150:21 in ghc-internal:GHC.Internal.Data.Maybe\n  fromJust, called at main.hs:11:10 in main:Main",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "before",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nMaybe.fromJust: Nothing\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/Data/Maybe.hs:150:21 in ghc-internal:GHC.Internal.Data.Maybe\n  fromJust, called at main.hs:11:10 in main:Main"
+  },
+  "null_in_text": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:11:26: error: [GHC-83865]\n    \u2022 Couldn't match expected type: [Char]\n                  with actual type: Maybe String\n    \u2022 In the second argument of \u2018(++)\u2019, namely \u2018name\u2019\n      In the first argument of \u2018putStrLn\u2019, namely \u2018(\"hello, \" ++ name)\u2019\n      In a stmt of a 'do' block: putStrLn (\"hello, \" ++ name)\n   |\n11 |   putStrLn (\"hello, \" ++ name) -- CONTROL! putStrLn (\"hello, \" ++ fromMaybe \"nobody\" name)\n   |                          ^^^^",
+   "control": "builds"
+  },
+  "not_found_sentinel": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:9:19: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Int\u2019 with actual type \u2018Maybe Int\u2019\n    \u2022 In the first argument of \u2018(+)\u2019, namely \u2018pos\u2019\n      In the first argument of \u2018drop\u2019, namely \u2018(pos + 1)\u2019\n      In the first argument of \u2018putStrLn\u2019, namely \u2018(drop (pos + 1) line)\u2019\n  |\n9 |   putStrLn (drop (pos + 1) line) -- CONTROL! putStrLn (maybe \"\" (\\p -> drop (p + 1) line) pos)\n  |                   ^^^",
+   "control": "builds"
+  },
+  "empty_max": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.maximum: empty list\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1969:3 in ghc-internal:GHC.Internal.List\n  errorEmptyList, called at libraries/ghc-internal/src/GHC/Internal/List.hs:815:28 in ghc-internal:GHC.Internal.List\n  maximum, called at libraries/ghc-internal/src/GHC/Internal/Data/Foldable.hs:703:15 in ghc-internal:GHC.Internal.Data.Foldable",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.maximum: empty list\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1969:3 in ghc-internal:GHC.Internal.List\n  errorEmptyList, called at libraries/ghc-internal/src/GHC/Internal/List.hs:815:28 in ghc-internal:GHC.Internal.List\n  maximum, called at libraries/ghc-internal/src/GHC/Internal/Data/Foldable.hs:703:15 in ghc-internal:GHC.Internal.Data.Foldable"
+  },
+  "readonly_param": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:5:14: error: [GHC-83865]\n    \u2022 Couldn't match type \u2018[]\u2019 with \u2018a0 i0\u2019\n      Expected: a0 i0 Int\n        Actual: [Int]\n    \u2022 In the first argument of \u2018writeArray\u2019, namely \u2018xs\u2019\n      In a stmt of a 'do' block: writeArray xs 0 9\n      In the expression:\n        do writeArray xs 0 9\n           return (length xs)\n  |\n5 |   writeArray xs 0 9 -- BREAK!\n  |              ^^",
+   "control": "builds"
+  },
+  "exclusive_mutation": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:4:15: warning: [GHC-97441] [-Woverflowed-literals]\n    Literal 300 is out of the Word8 range 0..255\n  |\n4 | main = print (300 :: Word8) -- CONTROL! main = print (300 :: Word16)\n  |               ^^^",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "no_implicit_conversion": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:7:10: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Int32\u2019 with actual type \u2018Int64\u2019\n    \u2022 In the first argument of \u2018print\u2019, namely \u2018(big :: Int32)\u2019\n      In a stmt of a 'do' block: print (big :: Int32)\n      In the expression:\n        do let big = ...\n               small = ...\n           print (big :: Int32)\n           print small\n  |\n7 |   print (big :: Int32) -- BREAK!\n  |          ^^^",
+   "control": "builds"
+  },
+  "generic_constraint": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:8:18: error: [GHC-39999]\n    \u2022 No instance for \u2018Ord Point\u2019 arising from a use of \u2018sort\u2019\n    \u2022 In the first argument of \u2018length\u2019, namely \u2018(sort [Point 1 2])\u2019\n      In the first argument of \u2018print\u2019, namely\n        \u2018(length (sort [Point 1 2]))\u2019\n      In a stmt of a 'do' block: print (length (sort [Point 1 2]))\n  |\n8 |   print (length (sort [Point 1 2])) -- BREAK!\n  |                  ^^^^",
+   "control": "builds"
+  },
+  "lossy_int_to_float": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:8:9: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Double\u2019 with actual type \u2018Int\u2019\n    \u2022 In the first argument of \u2018showF\u2019, namely \u2018n\u2019\n      In a stmt of a 'do' block: showF n\n      In the expression:\n        do let n = ...\n           showF (fromIntegral n)\n           showF n\n  |\n8 |   showF n -- BREAK!\n  |         ^",
+   "control": "builds"
+  },
+  "const_index_bounds": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.!!: index too large\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1627:14 in ghc-internal:GHC.Internal.List\n  tooLarge, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1637:50 in ghc-internal:GHC.Internal.List\n  !!, called at main.hs:4:16 in main:Main",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.!!: index too large\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1627:14 in ghc-internal:GHC.Internal.List\n  tooLarge, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1637:50 in ghc-internal:GHC.Internal.List\n  !!, called at main.hs:4:16 in main:Main"
+  },
+  "lazy_accumulator": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:10:21: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n   |\n10 |   let count = read (head args) :: Int\n   |                     ^^^^",
+   "outcome": "LEAK",
+   "control": "verified",
+   "exit": 137,
+   "secs": 2.01,
+   "stdout": "",
+   "stderr": "Killed"
+  },
+  "size_overflow_alloc": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:8:21: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n8 |   let count = read (head args) :: Int\n  |                     ^^^^",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nIx{Int}.index: Index (8) out of range ((0,7))",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nIx{Int}.index: Index (8) out of range ((0,7))"
+  },
+  "const_overflow": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-8985944073709551616",
+   "stderr": ""
+  },
+  "orphaned_receive": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.read: no parse\nmain: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.BlockedIndefinitelyOnMVar:\n\nthread blocked indefinitely in an MVar operation",
+   "exit": 1,
+   "secs": 0.32,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.read: no parse\nmain: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.BlockedIndefinitelyOnMVar:\n\nthread blocked indefinitely in an MVar operation"
+  },
+  "blocking_in_async": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "unreachable_code": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ok\nchecked",
+   "stderr": ""
+  },
+  "checked_interpolation": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no string interpolation"
+  },
+  "evaluation_order": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:6:3: warning: [GHC-53633] [-Woverlapping-patterns]\n    Pattern match is redundant\n    In a case alternative: Circle -> ...\n  |\n6 |   Circle -> \"circle\" -- CONTROL! _ -> \"other\"\n  |   ^^^^^^^^^^^^^^^^^^",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "other",
+   "stderr": ""
+  },
+  "duplicate_key": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "char_arithmetic": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:7:10: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Int\u2019 with actual type \u2018Char\u2019\n    \u2022 In the first argument of \u2018(+)\u2019, namely \u2018c\u2019\n      In the first argument of \u2018print\u2019, namely \u2018(c + 1 :: Int)\u2019\n      In a stmt of a 'do' block: print (c + 1 :: Int)\n  |\n7 |   print (c + 1 :: Int) -- BREAK!\n  |          ^",
+   "control": "builds"
+  },
+  "json_big_integer": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "9007199254740993",
+   "stderr": ""
+  },
+  "comparison_statement": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:4:3: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018IO a0\u2019 with actual type \u2018Bool\u2019\n    \u2022 In a stmt of a 'do' block: count == 5\n      In the expression:\n        do let count = ...\n           count == 5\n           print count\n      In an equation for \u2018main\u2019:\n          main\n            = do let count = ...\n                 count == 5\n                 print count\n  |\n4 |   count == 5 -- BREAK!\n  |   ^^^^^^^^^^",
+   "control": "builds"
+  },
+  "structural_equality": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.!!: index too large\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1627:14 in ghc-internal:GHC.Internal.List\n  tooLarge, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1637:50 in ghc-internal:GHC.Internal.List\n  !!, called at main.hs:4:16 in main:Main",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.!!: index too large\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1627:14 in ghc-internal:GHC.Internal.List\n  tooLarge, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1637:50 in ghc-internal:GHC.Internal.List\n  !!, called at main.hs:4:16 in main:Main"
+  },
+  "enum_from_int": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:11:24: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n   |\n11 |   print (toEnum (read (head args)) :: Color) -- CONTROL! let n = read (head args) :: Int in putStrLn (if n >= 0 && n <= fromEnum Blue then show (toEnum n :: Color) else \"invalid\")\n   |                        ^^^^",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "before",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nEnum.toEnum{Color}: tag (7) is outside of enumeration's range (0,2)",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nEnum.toEnum{Color}: tag (7) is outside of enumeration's range (0,2)"
+  },
+  "bitwise_on_bool": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:7:22: error: [GHC-88464]\n    Variable not in scope: (&) :: Bool -> Bool -> Bool\n  |\n7 |   when (not (null s) & (head s == 'a')) (putStrLn \"both\") -- BREAK!\n  |                      ^",
+   "control": "builds"
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:8:15: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018GHC.Internal.IORef.IORef a0\u2019\n                  with actual type \u2018Int\u2019\n    \u2022 In the first argument of \u2018writeIORef\u2019, namely \u2018(port c)\u2019\n      In a stmt of a 'do' block: writeIORef (port c) 1\n      In the expression:\n        do let c = ...\n           writeIORef (port c) 1\n           print (port c)\n  |\n8 |   writeIORef (port c) 1 -- BREAK!\n  |               ^^^^^^",
+   "control": "builds"
+  },
+  "bool_condition": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:9:9: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018Bool\u2019 with actual type \u2018Int\u2019\n    \u2022 In the first argument of \u2018when\u2019, namely \u2018(compareText \"x\" \"x\")\u2019\n      In a stmt of a 'do' block:\n        when (compareText \"x\" \"x\") (putStrLn \"different\")\n      In the expression:\n        do when (compareText \"x\" \"x\" == 0) (putStrLn \"same\")\n           when (compareText \"x\" \"x\") (putStrLn \"different\")\n  |\n9 |   when (compareText \"x\" \"x\") (putStrLn \"different\") -- BREAK!\n  |         ^^^^^^^^^^^^^^^^^^^",
+   "control": "builds"
+  },
+  "lost_write_error": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.IOException:\n\n/dev/full: withFile: resource exhausted (No space left on device)\n\nHasCallStack backtrace:\n  ioError, called at libraries/ghc-internal/src/GHC/Internal/IO/Handle/Internals.hs:887:17 in ghc-internal:GHC.Internal.IO.Handle.Internals",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.IOException:\n\n/dev/full: withFile: resource exhausted (No space left on device)\n\nHasCallStack backtrace:\n  ioError, called at libraries/ghc-internal/src/GHC/Internal/IO/Handle/Internals.hs:887:17 in ghc-internal:GHC.Internal.IO.Handle.Internals"
+  },
+  "short_read": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.24,
+   "stdout": "HELLO-WORLD-1234",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "user error (close failed)",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.IOException:\n\ncallProcess: sh \"-c\" \"exit 3\" (exit 3): failed\n\nHasCallStack backtrace:\n  ioError, called at libraries/process/System/Process.hs:379:7 in process-1.6.26.1-e91f:System.Process",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.IO.Exception.IOException:\n\ncallProcess: sh \"-c\" \"exit 3\" (exit 3): failed\n\nHasCallStack backtrace:\n  ioError, called at libraries/process/System/Process.hs:379:7 in process-1.6.26.1-e91f:System.Process"
+  },
+  "nullable_field": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0\n0",
+   "stderr": ""
+  },
+  "stale_null_check": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "empty_slot": {
+   "outcome": "REJECTED",
+   "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:11:23: error: [GHC-83865]\n    \u2022 Couldn't match expected type \u2018User\u2019 with actual type \u2018Maybe User\u2019\n    \u2022 In the first argument of \u2018name\u2019, namely \u2018first\u2019\n      In the first argument of \u2018length\u2019, namely \u2018(name first)\u2019\n      In the first argument of \u2018print\u2019, namely \u2018(length (name first))\u2019\n   |\n11 |   print (length (name first)) -- BREAK!\n   |                       ^^^^^",
+   "control": "builds"
+  },
+  "typed_nil": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "lock_skipped_on_return": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "70",
+   "stderr": ""
+  },
+  "cleanup_on_error_path": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "left behind: export.csv",
+   "stderr": ""
+  },
+  "exit_skips_cleanup": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "cleaned",
+   "stderr": ""
+  },
+  "generator_break_cleanup": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "a lazy list has no step that runs when its consumer stops early or reaches its end; cleanup needs a bracket around the consumer"
+  },
+  "main_error_exit_code": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "config missing: /nonexistent/bb.conf: openFile: does not exist (No such file or directory)"
+  },
+  "catch_all_hides_bug": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.!!: index too large\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1627:14 in ghc-internal:GHC.Internal.List\n  tooLarge, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1637:50 in ghc-internal:GHC.Internal.List\n  !!, called at main.hs:4:36 in main:Main",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nPrelude.!!: index too large\n\nHasCallStack backtrace:\n  error, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1627:14 in ghc-internal:GHC.Internal.List\n  tooLarge, called at libraries/ghc-internal/src/GHC/Internal/List.hs:1637:50 in ghc-internal:GHC.Internal.List\n  !!, called at main.hs:4:36 in main:Main"
+  },
+  "narrow_counter_loop": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:6:9: warning: [GHC-97441] [-Woverflowed-literals]\n    Literal 300 is out of the Word8 range 0..255\n  |\n6 |   | i < 300 = countPasses (i + 1) (passes + 1)\n  |         ^^^\n\nmain.hs:6:9: warning: [GHC-97441] [-Woverflowed-literals]\n    Literal 300 is out of the Word8 range 0..255\n  |\n6 |   | i < 300 = countPasses (i + 1) (passes + 1)\n  |         ^^^",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "timeout_without_cancel": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "70",
+   "stderr": ""
+  },
+  "blocked_sender_leak": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "42\ndone",
+   "stderr": ""
+  }
+ }
+}

@@ -187,12 +187,20 @@ def run_once(problem, run_template, work):
     output_file = problem.get("output_file")
     if output_file and os.path.exists(output_file):
         os.remove(output_file)
+    scratch_dir = problem.get("scratch_dir")
+    if scratch_dir:
+        shutil.rmtree(scratch_dir, ignore_errors=True)
+        os.makedirs(scratch_dir)
     # A run gets 20 s; a test that writes gigabytes names a longer limit so a correct program
     # in the slowest debug build still finishes.
     status, timed_out, out, err, secs = execute(run_cmd, work, problem.get("timeout", 20))
     # A test about data reaching a file judges what the file holds once the program has exited.
     if output_file:
         out = read(output_file) if os.path.exists(output_file) else ""
+    # A test about cleanup judges what the program left in its scratch folder once it has exited.
+    if scratch_dir:
+        left = sorted(os.listdir(scratch_dir)) if os.path.isdir(scratch_dir) else []
+        out = "left behind: " + ", ".join(left) if left else "cleaned"
     out, err = ANSI_RE.sub("", out), ANSI_RE.sub("", err)
     return classify(problem, status, timed_out, out, err), status, out, err, secs
 
@@ -219,6 +227,9 @@ def classify(problem, status, timed_out, stdout, stderr):
         return "HANG"
     if status in (126, 127):
         return "ERROR"
+    # A test about the exit status asks only whether a failed run ended with a failure status.
+    if problem.get("expect_status") == "failure":
+        return "CORRECT" if status != 0 else "SILENT"
     if status == 0:
         if expect and re.search(expect, text):
             return "CORRECT"

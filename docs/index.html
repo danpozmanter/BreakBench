@@ -10,63 +10,52 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="What 30 languages do with broken programs, and what they let you write safely.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&family=Instrument+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root {
-  --bg: #f6f7f9;
+  --bg: #fbfaf6;
   --surface: #ffffff;
-  --fg: #16191f;
-  --muted: #5b6372;
-  --line: #dde1e8;
-  --accent: #3247c9;
-  --o-rejected: #1f7a4d;
-  --o-correct: #3aa36b;
+  --fg: #1a1a18;
+  --muted: #5f5d56;
+  --line: #e2ded3;
+  --rule: #1a1a18;
+  --accent: #1d4e89;
+  --o-rejected: #1f6b45;
+  --o-correct: #3d9a61;
   --o-trapped: #c9a227;
-  --o-silent: #d03b33;
+  --o-silent: #c8382f;
   --o-chance: #c2671c;
-  --o-corrupt: #9b1c1c;
-  --o-crash: #5e1430;
-  --o-ice: #6b4a35;
-  --o-cant: #4a5160;
-  --o-hang: #7b4bc4;
-  --o-leak: #b23a8a;
-  --o-error: #8a919e;
+  --o-corrupt: #8e1f1f;
+  --o-crash: #4a1d16;
+  --o-ice: #7a5a3f;
+  --o-cant: #6b7078;
+  --o-hang: #2f5d8a;
+  --o-leak: #2a7f7a;
+  --o-error: #9aa0a8;
   --cell-fg: #ffffff;
-  --font-display: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Newsreader", Georgia, "Times New Roman", serif;
   --font-body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
   --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0f1218; --surface: #171b23; --fg: #e8ebf1; --muted: #9aa3b2; --line: #2a303b; --accent: #8c9cff;
-    --o-rejected: #2f9a66; --o-correct: #4cba7e; --o-trapped: #c9a227; --o-silent: #e5534b; --o-chance: #d9803a;
-    --o-corrupt: #b8302a; --o-crash: #8a2a4f; --o-ice: #8a6650; --o-cant: #5d6575; --o-hang: #9268d6; --o-leak: #c8509f; --o-error: #6b7280;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0f1218; --surface: #171b23; --fg: #e8ebf1; --muted: #9aa3b2; --line: #2a303b; --accent: #8c9cff;
-  --o-rejected: #2f9a66; --o-correct: #4cba7e; --o-trapped: #c9a227; --o-silent: #e5534b; --o-chance: #d9803a;
-  --o-corrupt: #b8302a; --o-crash: #8a2a4f; --o-ice: #8a6650; --o-cant: #5d6575; --o-hang: #9268d6; --o-leak: #c8509f; --o-error: #6b7280;
-  color-scheme: dark;
+  color-scheme: light;
 }
 body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
 .wrap { max-width: 1760px; margin: 0 auto; padding-block: 28px 64px;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
   display: grid; gap: 40px; }
-h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; }
-h1 { font-size: clamp(30px, 5vw, 44px); letter-spacing: -0.02em; }
-h2 { font-size: 22px; letter-spacing: -0.01em; }
-h3 { font-size: 18px; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; font-weight: 600; }
+h1 { font-size: clamp(34px, 6vw, 52px); letter-spacing: -0.015em; line-height: 1.05; font-weight: 700; }
+h2 { font-size: 24px; letter-spacing: -0.005em; }
+h3 { font-size: 19px; }
 p { margin: 0; max-width: 68ch; }
 .muted { color: var(--muted); }
 .mono, code, pre { font-family: var(--font-mono); font-size: 12.5px; }
-header { display: grid; gap: 12px; }
-.meta { display: flex; flex-wrap: wrap; gap: 8px 20px; color: var(--muted); font-size: 13px; }
+header { display: grid; gap: 12px; padding: 14px 0 16px; border-top: 1px solid var(--rule); border-bottom: 3px double var(--rule); }
+header > p { font-family: var(--font-display); font-size: 19px; line-height: 1.45; max-width: 62ch; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 20px; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; padding-top: 10px; border-top: 1px solid var(--line); }
 .meta b { color: var(--fg); font-variant-numeric: tabular-nums; }
 section { display: grid; gap: 14px; min-width: 0; }
 .eyebrow { text-transform: uppercase; letter-spacing: 0.08em; font-size: 12px; color: var(--muted); font-weight: 600; }
-.scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.scroll { overflow-x: auto; border: 1px solid var(--line); border-top: 2px solid var(--rule); border-radius: 2px; background: var(--surface); }
 table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
 th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
 th { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); font-weight: 600; white-space: nowrap; vertical-align: bottom; }
@@ -85,8 +74,8 @@ td.lang a:hover, td.lang a:focus-visible { color: var(--accent); text-decoration
 .bar.m i { background: var(--o-rejected); }
 .breakdown { color: var(--muted); text-align: right; font-size: 13px; }
 .missing-list { display: grid; gap: 12px; }
-.missing-card { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
-.missing-card h3 { margin: 0 0 8px; font-size: 15px; }
+.missing-card { background: var(--surface); border: 1px solid var(--line); border-radius: 2px; padding: 12px 14px; }
+.missing-card h3 { margin: 0 0 8px; font-size: 17px; }
 .missing-card h3 span { font-weight: 400; color: var(--muted); font-size: 13px; }
 .missing-card ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 14px; line-height: 1.45; }
 .missing-card .why { display: block; color: var(--muted); font-size: 12.5px; }
@@ -128,7 +117,7 @@ td.chipcell > .chip { display: flex; width: 100%; box-sizing: border-box; height
 .o-INEXPRESSIBLE { background: var(--o-cant); }
 .o-ERROR, .o-MISSING { background: var(--o-error); }
 .scoring { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
-.scoring div { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; align-content: start; gap: 6px; font-size: 13px; }
+.scoring div { background: var(--surface); border: 1px solid var(--line); border-radius: 2px; padding: 12px 14px; display: grid; align-content: start; gap: 6px; font-size: 13px; }
 .by-design { box-shadow: inset 0 0 0 2px var(--fg); }
 /* The result grids are wider than the text column, so they use the whole window. */
 .grids { display: grid; gap: 20px; width: calc(100vw - 48px); margin-left: calc(50% - 50vw + 24px); }
@@ -157,17 +146,18 @@ pre.wout { color: var(--muted); }
 .facts { display: grid; grid-template-columns: max-content minmax(0, 1fr); gap: 6px 16px; font-size: 14px; }
 .facts dt { color: var(--muted); }
 .facts dd { margin: 0; }
-.note { border-left: 3px solid var(--o-silent); padding: 8px 12px; background: var(--surface); border-radius: 0 6px 6px 0; font-size: 14px; }
+.note { border-left: 3px solid var(--o-silent); padding: 8px 12px; background: var(--surface); border-radius: 0 2px 2px 0; font-size: 14px; }
 pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5em; overflow: auto; color: var(--muted); }
 .out { color: var(--fg); }
-.cmpbar { display: grid; gap: 10px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.cmpbar { display: grid; gap: 10px; padding: 10px 14px; border: 1px solid var(--line); border-radius: 2px; background: var(--surface); }
 .cmpbar .cmp-tools > button:first-child { font-weight: 600; }
-.tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--line); overflow-x: auto; scrollbar-width: none; }
+.tabs { display: flex; gap: 2px; border-bottom: 1px solid var(--rule); overflow-x: auto; scrollbar-width: none; }
 .tabs button { font: inherit; font-size: 15px; padding: 10px 14px; border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; background: none; color: var(--muted); cursor: pointer; white-space: nowrap; }
-.tabs button[aria-selected="true"] { color: var(--fg); border-bottom-color: var(--accent); font-weight: 600; }
+.tabs button { font-family: var(--font-display); font-size: 17px; }
+.tabs button[aria-selected="true"] { color: var(--fg); border-bottom-color: var(--rule); border-bottom-width: 3px; font-weight: 600; }
 .tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 .grid tr.sel th.pname { box-shadow: inset 3px 0 0 var(--accent); }
-.case:not([hidden]) { border-top: 1px solid var(--line); padding-top: 18px; }
+.case:not([hidden]) { border-top: 2px solid var(--rule); padding-top: 18px; }
 .picker { display: flex; flex-wrap: wrap; gap: 6px; }
 .picker button { font: inherit; font-size: 13px; padding: 4px 11px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--fg); cursor: pointer; }
 .picker button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
@@ -197,7 +187,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   table.evidence, table.evidence tbody { display: block; }
   table.evidence thead { display: none; }
   table.evidence tr { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 6px 10px; align-items: center;
-    padding: 10px 12px; margin-bottom: 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+    padding: 10px 12px; margin-bottom: 8px; border: 1px solid var(--line); border-radius: 2px; background: var(--surface); }
   table.evidence tr.hl { background: color-mix(in srgb, var(--accent) 9%, var(--surface)); }
   table.evidence td { display: block; padding: 0; border: 0; background: none; }
   table.evidence td.chipcell { width: auto; min-width: 0; }
@@ -400,6 +390,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
       <tr><td>OCaml</td><td><code>short_read</code></td><td><a href="https://ocaml.org/manual/latest/api/Stdlib.html#VALinput" target="_blank" rel="noopener"><code>input</code>: see <code>really_input</code> for reading exactly len characters</a></td><td><code>really_input</code></td><td><code>input</code> returns half the message</td></tr>
       <tr><td>PHP</td><td><code>short_read</code></td><td><a href="https://www.php.net/manual/en/function.fread.php" target="_blank" rel="noopener"><code>fread</code>: on pipes reading stops after a packet; collect the data in chunks</a></td><td><code>stream_get_contents</code></td><td><code>fread</code> returns half the message</td></tr>
       <tr><td>JavaScript, TypeScript</td><td><code>json_big_integer</code></td><td><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse" target="_blank" rel="noopener"><code>JSON.parse</code>: numbers may lose precision; read <code>context.source</code></a></td><td>A reviver that reads <code>context.source</code> into a <code>BigInt</code></td><td><code>JSON.parse</code> rounds the id to 9007199254740992</td></tr>
+      <tr><td>Java</td><td><code>generator_break_cleanup</code></td><td><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/stream/BaseStream.html" target="_blank" rel="noopener"><code>BaseStream</code>: “If a stream does require closing, it must be opened as a resource within a try-with-resources statement”</a></td><td>The stream in <code>try</code>-with-resources</td><td>A stream with a close handler, never closed</td></tr>
       <tr><td>C</td><td><code>parse_invalid_number</code></td><td><a href="https://man7.org/linux/man-pages/man3/atoi.3.html" target="_blank" rel="noopener"><code>atoi</code>: use <code>strtol</code> in new programs</a></td><td><code>strtol</code> with its end-pointer check</td><td><code>atoi</code> reads 12 and prints 13</td></tr>
     </tbody></table></div>
     <h3>Paths that cost points</h3>
@@ -439,6 +430,11 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
       <li><code>blocking_in_async</code> uses async/await where the standard libraries can run it, otherwise threads; JavaScript has no blocking sleep, so it runs correctly.</li>
       <li>OCaml, F#, Haskell and Clojure have no early return, so <code>lock_skipped_on_return</code> unlocks after the conditional and cannot skip it.</li>
       <li><code>short_read</code> uses the language's usual process call, so a language whose usual call returns the whole output reads all of it. <code>unflushed_writer</code> is judged by what the file holds after the program exits.</li>
+      <li>The three cleanup tests are judged by what the program leaves in <code>/tmp/bb_scratch</code> once it exits. Python, Ruby and Julia create the export file with their standard temporary-file type, which deletes itself; the other languages have none that does.</li>
+      <li><code>main_error_exit_code</code> is judged by the exit status. <code>main</code> takes the shape the language gives a program that can fail: <code>int main</code> in C, C++ and C3, a <code>Result</code> in Rust and Gossamer, an <code>int</code> entry point in F#, and a <code>main</code> an exception can leave elsewhere.</li>
+      <li><code>blocked_sender_leak</code> uses each language's standard channel at its default size. Zig and C3 make the program choose a size, so they use an unbuffered one, the most common default. Clojure, JavaScript and TypeScript answer through a promise, Haskell through an <code>MVar</code>.</li>
+      <li>Scala, Clojure, OCaml and F# have no <code>break</code>, so <code>generator_break_cleanup</code> takes the first element (<code>take(1)</code>, <code>first</code>, <code>Seq.take 1</code>, <code>Seq.head</code>).</li>
+      <li><code>timeout_without_cancel</code> uses the language's usual wait with a timeout: Python <code>asyncio.wait_for</code>, Kotlin <code>withTimeoutOrNull</code>, Ruby <code>Timeout.timeout</code>, Haskell <code>timeout</code> and Gossamer <code>sync::with_timeout</code> cancel the work they gave up on; the others only stop waiting.</li>
       <li>PHP runs 8.5, the newest packaged release. Mojo includes MAX for <code>parallelize</code>.</li>
     </ul>
   </section>

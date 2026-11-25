@@ -1,0 +1,1 @@
+-- CANNOT-EXPRESS: a lazy list has no step that runs when its consumer stops early or reaches its end; cleanup needs a bracket around the consumer

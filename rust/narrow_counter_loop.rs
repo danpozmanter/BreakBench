@@ -1,0 +1,10 @@
+fn main() {
+    let mut passes = 0;
+    let mut i: u8 = 0; // BREAK!
+    // CONTROL! let mut i: u16 = 0;
+    while i < 300 {
+        passes += 1;
+        i += 1;
+    }
+    println!("{passes}");
+}

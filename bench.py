@@ -97,6 +97,7 @@ CATEGORIES = {
     "control_flow": "Control flow",
     "names": "Names and literals",
     "errors": "Error handling",
+    "cleanup": "Resource cleanup",
     "security": "Security",
     "null": "Null safety",
     "memory": "Memory safety",

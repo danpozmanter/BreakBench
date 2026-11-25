@@ -1,0 +1,896 @@
+{
+ "lang": "mojo",
+ "version": "Mojo 1.2.0 (2016d0cd)",
+ "results": {
+  "null_deref": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/null_deref/main/main.mojo:17:16: error: 'Optional[User]' value has no attribute 'name'\n    print(len(u.name))  # BREAK!\n              ~^\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "int_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/type_confusion/main/main.mojo:10:15: error: invalid call to 'add': value passed to 'a' cannot be converted from 'String' to 'Int'\n    print(add(raw, 3))  # BREAK!\n          ~~~ ^~~\n/tmp/breakbench/type_confusion/main/main.mojo:4:5: note: function declared here\ndef add(a: Int, b: Int) -> Int:\n    ^\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/missing_return/main/main.mojo:4:5: error: return expected at end of function with results\ndef grade(score: Int) -> String:\n    ^\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to run the pass manager",
+   "control": "builds"
+  },
+  "non_exhaustive_match": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/non_exhaustive_match/main/main.mojo:15:5: error: return expected at end of function with results\ndef name(c: Color) -> String:\n    ^\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to run the pass manager",
+   "control": "builds"
+  },
+  "uninitialized_variable": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/uninitialized_variable/main/main.mojo:9:10: error: use of uninitialized value 'x'\n    print(x)  # BREAK!\n         ^\n/tmp/breakbench/uninitialized_variable/main/main.mojo:6:9: note: 'x' declared here\n    var x: Int\n        ^\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to run the pass manager",
+   "control": "builds"
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/misspelled_field/main/main.mojo:8:8: error: 'Config' value has no attribute 'colour'\n    cfg.colour = \"red\"  # BREAK!\n    ~~~^\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/assign_in_condition/main/main.mojo:7:10: error: expected ':' after 'if' condition\n    if x = 1:  # BREAK!\n         ^\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "switch_fallthrough": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "have 0",
+   "stderr": ""
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "stack trace was not collected. Enable stack trace collection with environment variable `MODULAR_DEBUG=stack-trace-on-error`\nUnhandled exception caught during execution: String is not convertible to integer with base 10: '12abc'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "stack trace was not collected. Enable stack trace collection with environment variable `MODULAR_DEBUG=stack-trace-on-error`\nUnhandled exception caught during execution: String is not convertible to integer with base 10: '12abc'"
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/covariant_array_write/main/main.mojo:22:44: error: cannot implicitly convert 'Array[Dog, Int(1)]' value to 'List[Variant[Dog, Cat]]'\n    var animals: List[Variant[Dog, Cat]] = dogs  # BREAK!\n                                           ^~~~\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "mutate_while_iterating": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1,2,3",
+   "stderr": ""
+  },
+  "self_deadlock": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/snapshot_aliasing/main/main.mojo:8:18: error: value of type 'List[Int]' cannot be implicitly copied, it does not conform to 'ImplicitlyCopyable'\n    var before = weights  # BREAK!\n                 ^~~~~~~\n/tmp/breakbench/snapshot_aliasing/main/main.mojo:8:18: note: consider transferring the value with '^'\n    var before = weights  # BREAK!\n                 ^\n                        ^\n/tmp/breakbench/snapshot_aliasing/main/main.mojo:8:18: note: you can copy it explicitly with '.copy()'\n    var before = weights  # BREAK!\n                 ^\n                        .copy()\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "ignored_error_result": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "stack trace was not collected. Enable stack trace collection with environment variable `MODULAR_DEBUG=stack-trace-on-error`\nUnhandled exception caught during execution: unable to create directories '/dev/null': path not created: /dev/null\nCan not create directory: /dev/null Err: File exists",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "stack trace was not collected. Enable stack trace collection with environment variable `MODULAR_DEBUG=stack-trace-on-error`\nUnhandled exception caught during execution: unable to create directories '/dev/null': path not created: /dev/null\nCan not create directory: /dev/null Err: File exists"
+  },
+  "sort_with_nan": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "unordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/integer_average/main/main.mojo:5:28: error: cannot implicitly convert 'Int' value to 'Float64'\n    var avg: Float64 = sum / count  # BREAK!\n                       ~~~~^~~~~~~\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "leading_zero_literal": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/leading_zero_literal/main/main.mojo:2:16: error: decimal integer literals must not use leading zeros; add '0o' for octal literals\n    var zip = 01234  # BREAK!\n               ^\n/tmp/breakbench/leading_zero_literal/main/main.mojo:2:16: error: decimal integer literals must not use leading zeros; add '0o' for octal literals\n    var zip = 01234  # BREAK!\n               ^\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "not a",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "outside",
+   "stderr": ""
+  },
+  "lost_update_on_copy": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/lost_update_on_copy/main/main.mojo:9:13: error: expression must be mutable for in-place operator destination\n        acct.balance += 50  # BREAK!\n        ~~~~^~~~~~~~\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "command_injection": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "injected",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "build_output": "/tmp/breakbench/lock_order_deadlock/main/main.mojo:23:21: warning: 'Bool' value is unused; assign to '_' to discard the result\n            b.unlock(0)\n            ~~~~~~~~^~~\n            _ = \n/tmp/breakbench/lock_order_deadlock/main/main.mojo:24:21: warning: 'Bool' value is unused; assign to '_' to discard the result\n            a.unlock(0)\n            ~~~~~~~~^~~\n            _ = \n/tmp/breakbench/lock_order_deadlock/main/main.mojo:29:21: warning: 'Bool' value is unused; assign to '_' to discard the result\n            a.unlock(1) # CONTROL! b.unlock(1)\n            ~~~~~~~~^~~\n            _ = \n/tmp/breakbench/lock_order_deadlock/main/main.mojo:30:21: warning: 'Bool' value is unused; assign to '_' to discard the result\n            b.unlock(1) # CONTROL! a.unlock(1)\n            ~~~~~~~~^~~\n            _ =",
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.01,
+   "stdout": "",
+   "stderr": ""
+  },
+  "path_join_escape": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "escaped",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no regular expressions in the standard library"
+  },
+  "negative_remainder": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "odd",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "return_in_finally": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/return_line_break/main/main.mojo:2:5: error: cannot implicitly convert 'None' value to 'Int'\n    return  # CONTROL! return a + b\n    ^~~~~~\n/tmp/breakbench/return_line_break/main/main.mojo:3:7: warning: 'Int' value is unused; assign to '_' to discard the result\n    a + b  # BREAK!\n    ~~^~~\n    _ = \n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "worker_failure_lost": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/worker_failure_lost/main/main.mojo:13:26: error: cannot call function that may raise in a context that cannot raise\n            total += atol(item)  # CONTROL! total += item.byte_length()\n                     ~~~~^~~~~~\n/tmp/breakbench/worker_failure_lost/main/main.mojo:13:26: note: try surrounding the call in a 'try' block\n            total += atol(item)  # CONTROL! total += item.byte_length()\n                         ^\n/tmp/breakbench/worker_failure_lost/main/main.mojo:11:9: note: or mark surrounding function as 'raises'\n    def worker(t: Int) {mut total, imm items}:\n        ^\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "unawaited_task": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/format_arg_mismatch/main/main.mojo:3:17: warning: assignment to 'total' was never used; assign to '_' instead?\n    var total = 5\n                ^\n/tmp/breakbench/format_arg_mismatch/main/main.mojo:1:5: error: function instantiation failed\ndef main() raises:\n    ^\n/tmp/breakbench/format_arg_mismatch/main/main.mojo:4:28: note: call expansion failed with parameter value(s): (\"value\": {} of {}, ...)\n    print(\"{} of {}\".format(done))  # CONTROL! print(\"{} of {}\".format(done, total))\n                           ^\nMojo/stdlib/std/builtin/string_literal.mojo:771:9: note: function instantiation failed\nMojo/stdlib/std/builtin/string_literal.mojo:801:62: note: call expansion failed with parameter value(s): (..., ..., ...)\nMojo/stdlib/std/collections/string/format.mojo:238:9: note: function instantiation failed\nMojo/stdlib/std/collections/string/format.mojo:269:13: note: constraint failed: Automatic indexing require more args in *args\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to run the pass manager",
+   "control": "builds"
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "stack trace was not collected. Enable stack trace collection with environment variable `MODULAR_DEBUG=stack-trace-on-error`\nUnhandled exception caught during execution: DictKeyError[String]()",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "stack trace was not collected. Enable stack trace collection with environment variable `MODULAR_DEBUG=stack-trace-on-error`\nUnhandled exception caught during execution: DictKeyError[String]()"
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "pending",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "build_output": "/tmp/breakbench/discarded_pure_result/main/main.mojo:3:15: warning: 'String' value is unused; assign to '_' to discard the result\n    name.upper() # BREAK!\n    ~~~~~~~~~~^~\n    _ =",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "At: /tmp/breakbench/negative_index_wraps/release/main.mojo:7:33: Assert Error: index -1 is out of bounds, valid range is 0 to 2",
+   "release_stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x000079119b764d1e\n1  libKGENCompilerRTShared.so 0x000079119b761e46\n2  libKGENCompilerRTShared.so 0x000079119b7658e0\n3  libc.\n...\n main                       0x0000599a25b1d210\n6  main                       0x0000599a25b1e57b\n7  libc.so.6                  0x000079119b454601\n8  libc.so.6                  0x000079119b454718 __libc_start_main + 136\n9  main                       0x0000599a25b1d265\nIllegal instruction (core dumped)",
+   "exit": 132,
+   "secs": 0.36,
+   "stdout": "At: /tmp/breakbench/negative_index_wraps/main/main.mojo:7:33: Assert Error: index -1 is out of bounds, valid range is 0 to 2",
+   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x00007841ee75dd1e\n1  libKGENCompilerRTShared.so 0x00007841ee75ae46\n2  libKGENCompilerRTShared.so 0x00007841ee75e8e0\n3  libc.so.6                  0x00007841ee468cb0\n4  main                       0x00005bc5caeb8aa5\n5  main                       0x00005bc5caeb85e6\n6  main                       0x00005bc5caea3831\n7  main                       0x00005bc5caeb7cb3\n8  main                       0x00005bc5caea4936\n9  libc.so.6                  0x00007841ee44d601\n10 libc.so.6                  0x00007841ee44d718 __libc_start_main + 136\n11 main                       0x00005bc5caea0175\nIllegal instruction (core dumped)"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/unrelated_type_lookup/main/main.mojo:7:22: error: invalid call to '__contains__': value passed to 'value' cannot be converted from 'String' to 'Int'\n    print(\"found\" if id in ids else \"missing\") # CONTROL! print(\"found\" if atol(id) in ids else \"missing\")\n                     ^~~~~~~~~\nImported from /tmp/breakbench/unrelated_type_lookup/main/main.mojo:1:\nMojo/stdlib/std/collections/list.mojo:621:1: note: function declared here\ndef __contains__(self, value: T, /) -> Bool where conforms_to(T, Equatable)    # note - synthetic signature\n^\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "dead_store": {
+   "build_output": "/tmp/breakbench/dead_store/main/main.mojo:6:23: warning: assignment to 'total' was never used; assign to '_' instead?\n    var total = price + 2\n                      ^",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/panic_under_lock/main/main.mojo:13:24: error: 'raise' requires a surrounding 'try' block or the enclosing function to declare 'raises'\n        if debits > 0: raise Error(\"crash mid-update\")  # BREAK!\n                       ^~~~~~~~~~\n/tmp/breakbench/panic_under_lock/main/main.mojo:15:20: warning: 'Bool' value is unused; assign to '_' to discard the result\n        lock.unlock(t)\n        ~~~~~~~~~~~^~~\n        _ = \n/tmp/breakbench/panic_under_lock/main/main.mojo:20:16: warning: 'Bool' value is unused; assign to '_' to discard the result\n    lock.unlock(0)\n    ~~~~~~~~~~~^~~\n    _ = \n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "split_character": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/split_character/main/main.mojo:7:15: error: String does not support direct positional slicing like `s[a:b]` because Mojo strings are UTF-8 encoded, and the same range can mean different things. Use `s[byte=a:b]` to slice by raw UTF-8 byte positions, or `s[codepoint=a:b]` to slice by Unicode code points.\n    print(name[0:n]) # CONTROL! print(name[codepoint=0:n])\n          ~~~~^~~~~\n<unknown>:0: note: '__getitem__' declared here\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "At: /tmp/breakbench/oob_write/release/main.mojo:14:10: Assert Error: index 4 is out of bounds, valid range is 0 to 3",
+   "release_stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x000075fd0ac0ed1e\n1  libKGENCompilerRTShared.so 0x000075fd0ac0be46\n2  libKGENCompilerRTShared.so 0x000075fd0ac0f8e0\n3  libc.\n...\n main                       0x00005816f1436210\n6  main                       0x00005816f143746d\n7  libc.so.6                  0x000075fd0a8fe601\n8  libc.so.6                  0x000075fd0a8fe718 __libc_start_main + 136\n9  main                       0x00005816f1436265\nIllegal instruction (core dumped)",
+   "exit": 132,
+   "secs": 0.32,
+   "stdout": "At: /tmp/breakbench/oob_write/main/main.mojo:14:10: Assert Error: index 4 is out of bounds, valid range is 0 to 3",
+   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x00007fb6d6d8fd1e\n1  libKGENCompilerRTShared.so 0x00007fb6d6d8ce46\n2  libKGENCompilerRTShared.so 0x00007fb6d6d908e0\n3  libc.so.6                  0x00007fb6d6a9acb0\n4  main                       0x0000577aa31b4d05\n5  main                       0x0000577aa31b4846\n6  main                       0x0000577aa31a0c18\n7  main                       0x0000577aa31b3f13\n8  main                       0x0000577aa31a0f26\n9  libc.so.6                  0x00007fb6d6a7f601\n10 libc.so.6                  0x00007fb6d6a7f718 __libc_start_main + 136\n11 main                       0x0000577aa319f175\nIllegal instruction (core dumped)"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "At: /tmp/breakbench/oob_read/release/main.mojo:14:16: Assert Error: index 4 is out of bounds, valid range is 0 to 3",
+   "release_stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x00007ff1bbcaad1e\n1  libKGENCompilerRTShared.so 0x00007ff1bbca7e46\n2  libKGENCompilerRTShared.so 0x00007ff1bbcab8e0\n3  libc.\n...\n main                       0x00005ba912e00210\n6  main                       0x00005ba912e014c6\n7  libc.so.6                  0x00007ff1bb99a601\n8  libc.so.6                  0x00007ff1bb99a718 __libc_start_main + 136\n9  main                       0x00005ba912e00265\nIllegal instruction (core dumped)",
+   "exit": 132,
+   "secs": 0.35,
+   "stdout": "At: /tmp/breakbench/oob_read/main/main.mojo:14:16: Assert Error: index 4 is out of bounds, valid range is 0 to 3",
+   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x00007ba8d963bd1e\n1  libKGENCompilerRTShared.so 0x00007ba8d9638e46\n2  libKGENCompilerRTShared.so 0x00007ba8d963c8e0\n3  libc.so.6                  0x00007ba8d9346cb0\n4  main                       0x00005d69264b8ce5\n5  main                       0x00005d69264b8826\n6  main                       0x00005d69264a4c06\n7  main                       0x00005d69264b7ef3\n8  main                       0x00005d69264a4f0e\n9  libc.so.6                  0x00007ba8d932b601\n10 libc.so.6                  0x00007ba8d932b718 __libc_start_main + 136\n11 main                       0x00005d69264a3175\nIllegal instruction (core dumped)"
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/container_realloc_dangling/main/main.mojo:12:5: error: use of invalidated interior reference 'v[\"element\"]'\n    r.val = 99  # BREAK!\n    ^\n/tmp/breakbench/container_realloc_dangling/main/main.mojo:10:17: note: origin was invalidated here\n        v.append(Item(i))\n                ^\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to run the pass manager",
+   "control": "builds"
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "stack_overflow": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.39,
+   "stdout": "",
+   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x00007bdf71318d1e\n1  libKGENCompilerRTShared.so 0x00007bdf71315e46\n2  libKGENCompilerRTShared.so 0x00007bdf713198e0\n3  libc.so.6                  0x00007bdf71023cb0\n4  main                       0x00005e72d50e8261\n5  main                       0x00005e72d50e8266\n6  main                       0x00005e72d50e8266\n7  main                       0x00005e72d50e8266\n8  main                       0x00005e72d50e8266\n9  main                       0x00005e72d50e8266\n10 main                       0x00005e72d50e8266\n11 main                       0x00005e72d50e8266\n12 main          \n...\nx00005e72d50e8266\n242 main                       0x00005e72d50e8266\n243 main                       0x00005e72d50e8266\n244 main                       0x00005e72d50e8266\n245 main                       0x00005e72d50e8266\n246 main                       0x00005e72d50e8266\n247 main                       0x00005e72d50e8266\n248 main                       0x00005e72d50e8266\n249 main                       0x00005e72d50e8266\n250 main                       0x00005e72d50e8266\n251 main                       0x00005e72d50e8266\n252 main                       0x00005e72d50e8266\n253 main                       0x00005e72d50e8266\n254 main                       0x00005e72d50e8266\n255 main                       0x00005e72d50e8266\nSegmentation fault (core dumped)"
+  },
+  "huge_allocation": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "ABORT: Mojo/stdlib/std/memory/alloc.mojo:761:14: alloc failed: returned a null pointer",
+   "release_stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x000077de176d2d1e\n1  libKGENCompilerRTShared.so 0x000077de176cfe46\n2  libKGENCompilerRTShared.so 0x000077de176d38e0\n3  libc.\n...\n main                       0x000060d8cb328acc\n5  main                       0x000060d8cb327d05\n6  libc.so.6                  0x000077de173c2601\n7  libc.so.6                  0x000077de173c2718 __libc_start_main + 136\n8  main                       0x000060d8cb327275\nIllegal instruction (core dumped)",
+   "exit": 132,
+   "secs": 0.35,
+   "stdout": "ABORT: Mojo/stdlib/std/memory/alloc.mojo:761:14: alloc failed: returned a null pointer",
+   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x0000754149123d1e\n1  libKGENCompilerRTShared.so 0x0000754149120e46\n2  libKGENCompilerRTShared.so 0x00007541491248e0\n3  libc.so.6                  0x0000754148e2ecb0\n4  main                       0x0000564189c09180\n5  main                       0x0000564189c0a5f4\n6  main                       0x0000564189bdb047\n7  main                       0x0000564189bdbe67\n8  main                       0x0000564189bd6066\n9  main                       0x0000564189bec113\n10 main                       0x0000564189bd7c76\n11 libc.so.6                  0x0000754148e13601\n12 libc.so.6                  0x0000754148e13718 __libc_start_main + 136\n13 main                       0x0000564189bd5175\nIllegal instruction (core dumped)"
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "ABORT: /tmp/breakbench/wrong_variant_access/release/main.mojo:6:12: get: wrong variant type",
+   "release_stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x000075029c48ad1e\n1  libKGENCompilerRTShared.so 0x000075029c487e46\n2  libKGENCompilerRTShared.so 0x000075029c48b8e0\n3  libc.so.6                  0x000075029c195cb0\n4  main                       0x000060c6ac8eb184\n5  libc.so.6                  0x000075029c17a601\n6  libc.so.6                  0x000075029c17a718 __libc_start_main + 136\n7  main                       0x000060c6ac8eb1b5\nIllegal instruction (core dumped)",
+   "exit": 132,
+   "secs": 0.33,
+   "stdout": "ABORT: /tmp/breakbench/wrong_variant_access/main/main.mojo:6:12: get: wrong variant type",
+   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x0000747c54ae6d1e\n1  libKGENCompilerRTShared.so 0x0000747c54ae3e46\n2  libKGENCompilerRTShared.so 0x0000747c54ae78e0\n3  libc.so.6                  0x0000747c547f1cb0\n4  main                       0x0000651ad2e5684b\n5  main                       0x0000651ad2e58f89\n6  main                       0x0000651ad2e56906\n7  libc.so.6                  0x0000747c547d6601\n8  libc.so.6                  0x0000747c547d6718 __libc_start_main + 136\n9  main                       0x0000651ad2e56145\nIllegal instruction (core dumped)"
+  },
+  "format_string": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "%s%s%n{}{0}",
+   "stderr": ""
+  },
+  "trojan_source": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "admin",
+   "stderr": ""
+  },
+  "unsafe_deserialization": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no serialization in the standard library"
+  },
+  "null_byte_path": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "secret",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/homoglyph_identifier/main/main.mojo:5:8: error: unexpected character\ndef is_\u0430dmin(user: String) -> Bool: return True # BREAK!\n/tmp/breakbench/homoglyph_identifier/main/main.mojo:5:9: error: unexpected character\ndef is_\u0430dmin(user: String) -> Bool: return True # BREAK!\n/tmp/breakbench/homoglyph_identifier/main/main.mojo:11:25: error: unexpected character\n    print(\"admin\" if is_\u0430dmin(user) else \"guest\") # CONTROL! print(\"admin\" if is_admin(user) else \"guest\")\n/tmp/breakbench/homoglyph_identifier/main/main.mojo:11:26: error: unexpected character\n    print(\"admin\" if is_\u0430dmin(user) else \"guest\") # CONTROL! print(\"admin\" if is_admin(user) else \"guest\")\n/tmp/breakbench/homoglyph_identifier/main/main.mojo:5:8: error: unexpected character\ndef is_\u0430dmin(user: String) -> Bool: return True # BREAK!\n/tmp/breakbench/homoglyph_identifier/main/main.mojo:11:25: error: unexpected character\n    print(\"admin\" if is_\u0430dmin(user) else \"guest\") # CONTROL! print(\"admin\" if is_admin(user) else \"guest\")\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/string_literal_write/main/main.mojo:3:13: error: String does not support direct positional indexing like `s[i]` because Mojo strings are UTF-8 encoded, and the same position can mean three different things. Use one of: `s[byte=i]` for a raw UTF-8 byte, `s[codepoint=i]` for a Unicode code point, or `s[grapheme=i]` for a user-visible character (grapheme cluster).\n    greeting[0] = \"j\"  # CONTROL! greeting = \"jello\"\n    ~~~~~~~~^~~\n<unknown>:0: note: '__getitem__' declared here\n/tmp/breakbench/string_literal_write/main/main.mojo:3:13: error: expression must be mutable in assignment\n    greeting[0] = \"j\"  # CONTROL! greeting = \"jello\"\n    ~~~~~~~~^~~\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "reference_cycle": {
+   "outcome": "LEAK",
+   "control": "verified",
+   "exit": 137,
+   "secs": 20.67,
+   "stdout": "",
+   "stderr": "Killed"
+  },
+  "complete_init": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/complete_init/main/main.mojo:9:25: error: no matching function in initialization\n    var partial = Config(5)  # BREAK!\n                  ~~~~~~^~~\n/tmp/breakbench/complete_init/main/main.mojo:2:1: note: candidate not viable: missing required argument: 'move'\ndef __init__(out self, *, deinit move: Self)    # note - generated function\n^\n/tmp/breakbench/complete_init/main/main.mojo:2:1: note: candidate not viable: missing required argument: 'copy'\ndef __init__(out self, *, copy: Self)    # note - generated function\n^\n/tmp/breakbench/complete_init/main/main.mojo:2:1: note: candidate not viable: missing required argument: 'retries'\ndef __init__(out self, timeout: Int, retries: Int)    # note - generated function\n^\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "newtype": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/newtype/main/main.mojo:16:36: error: invalid call to '__add__': value passed to 'o' cannot be converted from 'Seconds' to 'Meters'\n    var wrong = Meters(2) + Seconds(3) # BREAK!\n                ~~~~~~~~~~~~~~~~~~~^~~\n/tmp/breakbench/newtype/main/main.mojo:5:9: note: function declared here\n    def __add__(self, o: Meters) -> Meters:\n        ^\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "strong_enum": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/strong_enum/main/main.mojo:16:16: error: invalid call to 'name': value passed to 'c' cannot be converted from 'IntLiteral[7]' to 'Color'\n    print(name(7)) # BREAK!\n          ~~~~ ^\n/tmp/breakbench/strong_enum/main/main.mojo:6:5: note: function declared here\ndef name(c: Color) -> String:\n    ^\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "override_check": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "shape",
+   "stderr": ""
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "before\nABORT: /tmp/breakbench/forced_unwrap/release/main.mojo:9:24: `Optional.value()` called on empty `Optional`. Consider using `if optional:` to check whether the `Optional` is empty before calling `.value()`, or use `.or_else()` to provide a default value.",
+   "release_stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x0000701a3207ad1e\n1  libKGENCompilerRTShared.so 0x0000701a32077e46\n2  libKGENCompilerRTShared.so 0x0000701a3207b8e0\n3  libc.so.6                  0x0000701a31d85cb0\n4  main                       0x00005c0658b822f0\n5  libc.so.6                  0x0000701a31d6a601\n6  libc.so.6                  0x0000701a31d6a718 __libc_start_main + 136\n7  main                       0x00005c0658b82135\nIllegal instruction (core dumped)",
+   "exit": 132,
+   "secs": 0.35,
+   "stdout": "before\nABORT: /tmp/breakbench/forced_unwrap/main/main.mojo:9:24: `Optional.value()` called on empty `Optional`. Consider using `if optional:` to check whether the `Optional` is empty before calling `.value()`, or use `.or_else()` to provide a default value.",
+   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x000070d3ac890d1e\n1  libKGENCompilerRTShared.so 0x000070d3ac88de46\n2  libKGENCompilerRTShared.so 0x000070d3ac8918e0\n3  libc.so.6                  0x000070d3ac59bcb0\n4  main                       0x00005e4f01d8aace\n5  main                       0x00005e4f01d8d129\n6  main                       0x00005e4f01d8ab86\n7  libc.so.6                  0x000070d3ac580601\n8  libc.so.6                  0x000070d3ac580718 __libc_start_main + 136\n9  main                       0x00005e4f01d8a145\nIllegal instruction (core dumped)"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "hello, None",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "At: /tmp/breakbench/empty_max/release/main.mojo:10:15: Assert Error: index 0 is out of bounds, valid range is 0 to -1",
+   "release_stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x000070aa95660d1e\n1  libKGENCompilerRTShared.so 0x000070aa9565de46\n2  libKGENCompilerRTShared.so 0x000070aa956618e0\n3  libc.\n...\n main                       0x000056cf4f3b3210\n6  main                       0x000056cf4f3b462f\n7  libc.so.6                  0x000070aa95350601\n8  libc.so.6                  0x000070aa95350718 __libc_start_main + 136\n9  main                       0x000056cf4f3b3265\nIllegal instruction (core dumped)",
+   "exit": 132,
+   "secs": 0.38,
+   "stdout": "At: /tmp/breakbench/empty_max/main/main.mojo:10:15: Assert Error: index 0 is out of bounds, valid range is 0 to -1",
+   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x000074b1931c9d1e\n1  libKGENCompilerRTShared.so 0x000074b1931c6e46\n2  libKGENCompilerRTShared.so 0x000074b1931ca8e0\n3  libc.so.6                  0x000074b192ed4cb0\n4  main                       0x000062ff44a8ce95\n5  main                       0x000062ff44a8c9d6\n6  main                       0x000062ff44a76d8e\n7  main                       0x000062ff44a8c0a3\n8  main                       0x000062ff44a77f7e\n9  libc.so.6                  0x000074b192eb9601\n10 libc.so.6                  0x000074b192eb9718 __libc_start_main + 136\n11 main                       0x000062ff44a75175\nIllegal instruction (core dumped)"
+  },
+  "readonly_param": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/readonly_param/main/main.mojo:2:7: error: expression must be mutable in assignment\n    xs[0] = 9  # BREAK!\n    ~~^~~\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "exclusive_mutation": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/exclusive_mutation/main/main.mojo:10:13: error: aliasing values passed mutably to 'source' argument and passed mutably to 'target' argument in 'transfer' call\n    transfer(a, a, 10)  # BREAK!\n            ^~  ~\n/tmp/breakbench/exclusive_mutation/main/main.mojo:10:13: note: 'origin_of(a)' value is passed through aliasing 'mut' argument 'target'\n    transfer(a, a, 10)  # BREAK!\n            ^   ~\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "literal_range": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "no_implicit_conversion": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/no_implicit_conversion/main/main.mojo:4:24: error: cannot implicitly convert 'Int64' value to 'Int32'\n    var wrong: Int32 = big  # BREAK!\n                       ^~~\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "generic_constraint": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/generic_constraint/main/main.mojo:11:5: error: no matching function in call to 'sort'\n    sort(ps) # BREAK!\n    ^~~~\nMojo/stdlib/std/builtin/sort.mojo:485:1: note: candidate not viable: missing required argument: 'cmp_fn'\ndef sort[T: Copyable, origin: MutOrigin, //, *, stable: Bool = False](span: Span[T, origin], cmp_fn: T)    # note - synthetic signature\n^\nMojo/stdlib/std/builtin/sort.mojo:508:1: note: candidate not viable: value passed to 'span' cannot be converted from 'Array[Point, Int(1)]' to 'Span[T, origin]', it depends on an unresolved parameter 'origin_of(origin)'\ndef sort[T: Comparable & Copyable, origin: MutOrigin, //, *, stable: Bool = False](span: Span[T, origin])    # note - synthetic signature\n^\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "lossy_int_to_float": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/lossy_int_to_float/main/main.mojo:8:10: error: invalid call to 'show': value passed to 'f' cannot be converted from 'Int64' to 'Float64'\n    show(n) # BREAK!\n    ~~~~ ^\n/tmp/breakbench/lossy_int_to_float/main/main.mojo:1:5: note: function declared here\ndef show(f: Float64):\n    ^\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "const_index_bounds": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/const_index_bounds/main/main.mojo:1:5: error: function instantiation failed\ndef main():\n    ^\n/tmp/breakbench/const_index_bounds/main/main.mojo:4:16: note: call expansion failed with parameter value(s): (..., \"length\": 3, \"idx\": 5, \"self_is_mut`2x\": True)\n    print(table[5]) # BREAK!\n               ^\nMojo/stdlib/std/collections/array.mojo:755:9: note: function instantiation failed\nMojo/stdlib/std/collections/array.mojo:781:9: note: constraint failed: index is out of bounds\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to run the pass manager",
+   "control": "builds"
+  },
+  "lazy_accumulator": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.78,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "At: /tmp/breakbench/size_overflow_alloc/release/main.mojo:9:12: Assert Error: index 8 is out of bounds, valid range is 0 to 7",
+   "release_stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x0000759767380d1e\n1  libKGENCompilerRTShared.so 0x000075976737de46\n2  libKGENCompilerRTShared.so 0x00007597673818e0\n3  libc.\n...\n main                       0x00006265fa189220\n6  main                       0x00006265fa18a5d2\n7  libc.so.6                  0x0000759767070601\n8  libc.so.6                  0x0000759767070718 __libc_start_main + 136\n9  main                       0x00006265fa189275\nIllegal instruction (core dumped)",
+   "exit": 132,
+   "secs": 0.45,
+   "stdout": "At: /tmp/breakbench/size_overflow_alloc/main/main.mojo:9:12: Assert Error: index 8 is out of bounds, valid range is 0 to 7",
+   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x000077beb4509d1e\n1  libKGENCompilerRTShared.so 0x000077beb4506e46\n2  libKGENCompilerRTShared.so 0x000077beb450a8e0\n3  libc.so.6                  0x000077beb4214cb0\n4  main                       0x00005e0297beb015\n5  main                       0x00005e0297beab56\n6  main                       0x00005e0297bd4b78\n7  main                       0x00005e0297bea223\n8  main                       0x00005e0297bd5e0e\n9  libc.so.6                  0x000077beb41f9601\n10 libc.so.6                  0x000077beb41f9718 __libc_start_main + 136\n11 main                       0x00005e0297bd3175\nIllegal instruction (core dumped)"
+  },
+  "const_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "-8985944073709551616",
+   "stderr": ""
+  },
+  "orphaned_receive": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no channel or queue between threads in the standard library; the standard library's parallelize only runs a function per index"
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.54,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "unreachable_code": {
+   "build_output": "/tmp/breakbench/unreachable_code/main/main.mojo:4:11: warning: unreachable code after return statement\n    print(\"checked\")\n          ^",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "ok",
+   "stderr": ""
+  },
+  "checked_interpolation": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no string interpolation"
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "build_output": "/tmp/breakbench/dominated_case/main/main.mojo:5:14: warning: case is unreachable; previous cases cover every value of the match subject\n        case \"circle\": # CONTROL! case _:\n             ^~~~~~~~",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "other",
+   "stderr": ""
+  },
+  "duplicate_key": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "char_arithmetic": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/char_arithmetic/main/main.mojo:4:20: error: 'Codepoint' does not implement the '__add__' method\n    var m: Int = c + 1 # BREAK!\n                 ~ ^\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "json_big_integer": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no JSON parser in the standard library"
+  },
+  "comparison_statement": {
+   "build_output": "/tmp/breakbench/comparison_statement/main/main.mojo:4:11: warning: 'Bool' value is unused; assign to '_' to discard the result\n    count == 5 # BREAK!\n    ~~~~~~^~~~\n    _ = \n/tmp/breakbench/comparison_statement/main/main.mojo:2:17: warning: assignment to 'count' was never used; assign to '_' instead?\n    var count = 0\n                ^",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "structural_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/array_literal_length/main/main.mojo:4:32: error: no matching function in initialization\n    var short: Array[Int, 4] = [10, 20, 30] # BREAK!\n                               ^~~~~~~~~~~~\nImported from /tmp/breakbench/array_literal_length/main/main.mojo:1:\nMojo/stdlib/std/collections/array.mojo:362:1: note: candidate not viable: missing required argument: 'uninitialized'\ndef __init__(out self, *, uninitialized: Bool)    # note - synthetic signature\n^\nImported from /tmp/breakbench/array_literal_length/main/main.mojo:1:\nMojo/stdlib/std/collections/array.mojo:384:1: note: candidate not viable: missing required argument: 'unsafe_assume_initialized'\ndef __init__(out self, *, var unsafe_assume_initialized: Array[MaybeUninit[T], lengt\n...\nst_literal__: NoneType) where conforms_to(T, Movable)    # note - synthetic signature\n^\nImported from /tmp/breakbench/array_literal_length/main/main.mojo:1:\nMojo/stdlib/std/collections/array.mojo:601:1: note: candidate not viable: missing required argument: 'copy'\ndef __init__(out self, *, copy: Self) where conforms_to(T, Copyable)    # note - synthetic signature\n^\nImported from /tmp/breakbench/array_literal_length/main/main.mojo:1:\nMojo/stdlib/std/collections/array.mojo:625:1: note: candidate not viable: missing required argument: 'move'\ndef __init__(out self, *, deinit move: Self) where conforms_to(T, Movable)    # note - synthetic signature\n^\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "enum_from_int": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no enum type"
+  },
+  "bitwise_on_bool": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "At: /tmp/breakbench/bitwise_on_bool/release/main.mojo:3:52: Assert Error: index 0 is out of bounds, valid range is 0 to -1",
+   "release_stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x0000727710fb7d1e\n1  libKGENCompilerRTShared.so 0x0000727710fb4e46\n2  libKGENCompilerRTShared.so 0x0000727710fb88e0\n3  libc.\n...\n main                       0x00005b232771115d\n7  main                       0x00005b23277111a5\n8  libc.so.6                  0x0000727710ca7601\n9  libc.so.6                  0x0000727710ca7718 __libc_start_main + 136\n10 main                       0x00005b23277112b5\nIllegal instruction (core dumped)",
+   "exit": 132,
+   "secs": 0.35,
+   "stdout": "At: /tmp/breakbench/bitwise_on_bool/main/main.mojo:3:52: Assert Error: index 0 is out of bounds, valid range is 0 to -1",
+   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x00007f5c837a5d1e\n1  libKGENCompilerRTShared.so 0x00007f5c837a2e46\n2  libKGENCompilerRTShared.so 0x00007f5c837a68e0\n3  libc.so.6                  0x00007f5c834b0cb0\n4  main                       0x00005bdb825447e5\n5  main                       0x00005bdb82544486\n6  main                       0x00005bdb8253dd9c\n7  main                       0x00005bdb825442c9\n8  main                       0x00005bdb8253e436\n9  libc.so.6                  0x00007f5c83495601\n10 libc.so.6                  0x00007f5c83495718 __libc_start_main + 136\n11 main                       0x00005bdb8253d145\nIllegal instruction (core dumped)"
+  },
+  "readonly_field": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "bool_condition": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "different",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "control": "none",
+   "release": "SILENT",
+   "release_stdout": "saved",
+   "release_stderr": "",
+   "exit": 132,
+   "secs": 0.32,
+   "stdout": "At: Mojo/stdlib/std/io/file_descriptor.mojo:81:24: Assert Error: expected amount of bytes not written",
+   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x000072e6ecdefd1e\n1  libKGENCompilerRTShared.so 0x000072e6ecdece46\n2  libKGENCompilerRTShared.so 0x000072e6ecdf08e0\n3  libc.so.6                  0x000072e6ecafacb0\n4  main                       0x000058bdf435bf15\n5  main                       0x000058bdf4359785\n6  main                       0x000058bdf4357782\n7  main                       0x000058bdf43595c0\n8  main                       0x000058bdf433a588\n9  main                       0x000058bdf435b483\n10 main                       0x000058bdf433a8d6\n11 libc.so.6                  0x000072e6ecadf601\n12 libc.so.6                  0x000072e6ecadf718 __libc_start_main + 136\n13 main                       0x000058bdf433a1d5\nIllegal instruction (core dumped)"
+  },
+  "short_read": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "HELLO-WORLD-1234",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "close failed",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "total=42",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "build_output": "/tmp/breakbench/child_exit_status/main/main.mojo:5:8: warning: 'String' value is unused; assign to '_' to discard the result\n    run(\"sh -c 'exit 3'\") # CONTROL! var status = run(\"sh -c 'exit 3'; echo $?\")\n    ~~~^~~~~~~~~~~~~~~~~~\n    _ =",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "backed up",
+   "stderr": ""
+  },
+  "nullable_field": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/nullable_field/main/main.mojo:8:23: error: 'Optional[String]' value has no attribute 'byte_length'\n    print(decoded.name.byte_length()) # BREAK!\n          ~~~~~~~~~~~~^\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "stale_null_check": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "ABORT: /tmp/breakbench/stale_null_check/release/main.mojo:19:33: `Optional.value()` called on empty `Optional`. Consider using `if optional:` to check whether the `Optional` is empty before calling `.value()`, or use `.or_else()` to provide a default value.",
+   "release_stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x0000773f42f40d1e\n1  libKGENCompilerRTShared.so 0x0000773f42f3de46\n2  libKGENCompilerRTShared.so 0x0000773f42f418e0\n3  libc.so.6                  0x0000773f42c4bcb0\n4  main                       0x000055883ea61184\n5  libc.so.6                  0x0000773f42c30601\n6  libc.so.6                  0x0000773f42c30718 __libc_start_main + 136\n7  main                       0x000055883ea611b5\nIllegal instruction (core dumped)",
+   "exit": 132,
+   "secs": 0.31,
+   "stdout": "ABORT: /tmp/breakbench/stale_null_check/main/main.mojo:19:33: `Optional.value()` called on empty `Optional`. Consider using `if optional:` to check whether the `Optional` is empty before calling `.value()`, or use `.or_else()` to provide a default value.",
+   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x00007df985d2dd1e\n1  libKGENCompilerRTShared.so 0x00007df985d2ae46\n2  libKGENCompilerRTShared.so 0x00007df985d2e8e0\n3  libc.so.6                  0x00007df985a38cb0\n4  main                       0x0000564c2f69ea30\n5  main                       0x0000564c2f6a1209\n6  main                       0x0000564c2f69eb06\n7  libc.so.6                  0x00007df985a1d601\n8  libc.so.6                  0x00007df985a1d718 __libc_start_main + 136\n9  main                       0x0000564c2f69e145\nIllegal instruction (core dumped)"
+  },
+  "empty_slot": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/empty_slot/main/main.mojo:10:19: error: 'Optional[User]' value has no attribute 'name'\n    print(users[0].name.byte_length()) # BREAK!\n          ~~~~~~~~^\n/opt/mojo-ws/.pixi/envs/default/bin/mojo: error: failed to parse the provided Mojo source module",
+   "control": "builds"
+  },
+  "typed_nil": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no channel or queue between threads in the standard library; the standard library's parallelize only runs a function per index"
+  },
+  "lost_wakeup": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no condition variable, channel or queue between threads in the standard library; the standard library's parallelize only runs a function per index"
+  },
+  "lock_skipped_on_return": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "cleanup_on_error_path": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "left behind: export.csv",
+   "stderr": ""
+  },
+  "exit_skips_cleanup": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "left behind: run.lock",
+   "stderr": ""
+  },
+  "generator_break_cleanup": {
+   "build_output": "/tmp/breakbench/generator_break_cleanup/main/main.mojo:14:9: warning: '__del__' is deprecated; use '__deinit__'\n    def __del__(deinit self):\n        ^~~~~~~\n        __deinit__",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "cleaned",
+   "stderr": ""
+  },
+  "main_error_exit_code": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.08,
+   "stdout": "config missing: Failed to open file '/nonexistent/bb.conf': No such file or directory",
+   "stderr": ""
+  },
+  "catch_all_hides_bug": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "At: /tmp/breakbench/catch_all_hides_bug/release/main.mojo:3:22: Assert Error: index 2 is out of bounds, valid range is 0 to 1",
+   "release_stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x00007f06cdc52d1e\n1  libKGENCompilerRTShared.so 0x00007f06cdc4fe46\n2  libKGENCompilerRTShared.so 0x00007f06cdc538e0\n3  libc.\n...\n main                       0x00005e3ca8c94200\n6  main                       0x00005e3ca8c95246\n7  libc.so.6                  0x00007f06cd942601\n8  libc.so.6                  0x00007f06cd942718 __libc_start_main + 136\n9  main                       0x00005e3ca8c94255\nIllegal instruction (core dumped)",
+   "exit": 132,
+   "secs": 0.31,
+   "stdout": "At: /tmp/breakbench/catch_all_hides_bug/main/main.mojo:3:22: Assert Error: index 2 is out of bounds, valid range is 0 to 1",
+   "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x000078aa3fbf9d1e\n1  libKGENCompilerRTShared.so 0x000078aa3fbf6e46\n2  libKGENCompilerRTShared.so 0x000078aa3fbfa8e0\n3  libc.so.6                  0x000078aa3f904cb0\n4  main                       0x0000629ec0585375\n5  main                       0x0000629ec0584eb6\n6  main                       0x0000629ec0566d98\n7  main                       0x0000629ec0567ebf\n8  main                       0x0000629ec0584c59\n9  main                       0x0000629ec0568436\n10 libc.so.6                  0x000078aa3f8e9601\n11 libc.so.6                  0x000078aa3f8e9718 __libc_start_main + 136\n12 main                       0x0000629ec0566165\nIllegal instruction (core dumped)"
+  },
+  "narrow_counter_loop": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "timeout_without_cancel": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no task or thread the standard library can wait for with a timeout; the standard library's parallelize only runs a function per index"
+  },
+  "blocked_sender_leak": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no channel or queue between threads in the standard library; the standard library's parallelize only runs a function per index"
+  }
+ }
+}
