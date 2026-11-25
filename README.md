@@ -38,7 +38,7 @@ leaderboard as one unranked example of how much a checker adds.
 
 ## Tests
 
-124 tests in thirteen categories. Each has a CWE or CERT entry, a CVE, or appears in a language's
+125 tests in thirteen categories. Each has a CWE or CERT entry, a CVE, or appears in a language's
 pitfall list, and covers a mistake no other test covers; `harness/problems.json` gives each test's
 reference and failure mode, and the site's Notes tab maps the failure modes to their tests. Each test is one scenario: the same steps, inputs and
 expected answer in every language, written the way that language teaches first. The code follows the
@@ -53,7 +53,7 @@ rules the mistake out, and where its documentation sent a program to another cal
 | Aliasing and mutation | 12 | Shared or copied state changes when it should not, or does not when it should: a list changed while looping over it, a snapshot that is an alias, a grid whose rows are one list, a closure that captures the loop variable, a copy updated instead of the original, ... |
 | Incomplete code | 3 | A path that ends without a result, a match missing a case, a variable read before it is set |
 | Operators | 10 | An operator that means something other than it looks: an assignment in a condition, & next to ==, 1 < x < 3, == on built strings or records, == between text and a number, a word-form and that binds looser than =, ... |
-| Control flow | 6 | Code that runs in a different order or path than it reads: a dangling else, a semicolon that ends an if, a case without break, a return with its value on the next line, ... |
+| Control flow | 7 | Code that runs in a different order or path than it reads: a dangling else, a semicolon that ends an if, a case without break, a break that leaves the switch instead of the loop, a return with its value on the next line, ... |
 | Names and literals | 6 | A name or literal that silently means something else: a new variable instead of an assignment, a missing comma, a repeated map key, a leading-zero number, ... |
 | Error handling | 9 | A failure goes unseen: an ignored result, a catch-all that turns a bug into bad input, a failed run that exits with success, a return in a cleanup block, a cleanup failure that hides the original error, a read that returns part of a message, a buffered file never flushed, a failed command treated as a success, ... |
 | Resource cleanup | 2 | A file or lock outlives the code that should remove it: a failure that skips the cleanup, a loop that breaks out of a sequence holding it |

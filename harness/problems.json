@@ -299,6 +299,25 @@
       ]
     },
     {
+      "id": "break_in_switch",
+      "category": "control_flow",
+      "kind": "static",
+      "args": [
+        "1",
+        "1",
+        "0",
+        "1"
+      ],
+      "expect": "^2$",
+      "title": "A break meant for the loop that leaves the switch",
+      "scenario": "total_until_stop adds up the codes 1 1 0 1, read from the command line, and stops at the first 0. The 0 case says break, meant to end the loop, inside a switch, the shape of the 1990 AT&T long-distance outage. The program prints the total.",
+      "best": "2: break leaves the loop, or the compiler refuses. 3 shows the break left only the switch and the loop went on.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "CWE-670"
+      ]
+    },
+    {
       "id": "zero_is_falsy",
       "category": "null",
       "kind": "static",

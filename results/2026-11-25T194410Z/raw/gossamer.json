@@ -1,0 +1,899 @@
+{
+ "lang": "gossamer",
+ "version": "gos 0.85.0",
+ "results": {
+  "null_deref": {
+   "outcome": "REJECTED",
+   "message": "error[GT0006]: type `Option<User>` has no field `name`\n  --> main.gos:14:16\n    14 |     println(f\"{u.name.len()}\") // BREAK!\n       |                ^^^^^^\n  = help: `Option<User>` has no named struct fields exposed to the language; read it through the type's methods, for example `value.get(\"name\")` on a `json::Value`\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "int_overflow": {
+   "build_output": "build: 862344B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "error[GX0005]: panic: attempt to add with overflow\n  call stack (outermost first):\n    at main",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "error[GX0005]: panic: attempt to add with overflow\n  call stack (outermost first):\n    at main (main.gos:5:16)"
+  },
+  "div_by_zero": {
+   "build_output": "build: 862344B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "error[GX0005]: panic: divide by zero\n  call stack (outermost first):\n    at main",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "error[GX0005]: panic: divide by zero\n  call stack (outermost first):\n    at main (main.gos:5:16)"
+  },
+  "shift_overflow": {
+   "build_output": "build: 862344B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "error[GX0005]: panic: attempt to shift left with overflow\n  call stack (outermost first):\n    at main",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "error[GX0005]: panic: attempt to shift left with overflow\n  call stack (outermost first):\n    at main (main.gos:6:16)"
+  },
+  "narrowing_cast": {
+   "build_output": "build: 862392B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nwarning[GL0062]: this `as` panics when the `i64` value does not fit `u8`\n  --> main.gos:6:13\n     6 |     let b = v as u8\n       |             ^^^^^^^\n  = note: lint: lossy_cast\n  = help: say what a value that does not fit becomes: `v.try_into()` answers `Err`, `v as% u8` keeps its low bits, `v.clamp(0, 255) as u8` saturates\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "error[GX0005]: panic: cast overflow: 300 does not fit u8\n  call stack (outermost first):\n    at main",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "error[GX0005]: panic: cast overflow: 300 does not fit u8\n  call stack (outermost first):\n    at main (main.gos:6:13)"
+  },
+  "float_to_int_overflow": {
+   "build_output": "build: 903400B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nwarning[GL0062]: this `as` panics when the `f64` value is NaN or past the range of `i64`\n  --> main.gos:5:13\n     5 |     let v = x as i64 // BREAK!\n       |             ^^^^^^^^\n  = note: lint: lossy_cast\n  = help: say what such a value becomes: `x as% i64` saturates and reads NaN as 0, `x.round().clamp(-9223372036854775808.0, 9223372036854775807.0) as i64` rounds and saturates\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "error[GX0005]: panic: cast overflow: 1e20 does not fit i64\n  call stack (outermost first):\n    at main",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "error[GX0005]: panic: cast overflow: 1e20 does not fit i64\n  call stack (outermost first):\n    at main (main.gos:5:13)"
+  },
+  "signed_unsigned_compare": {
+   "build_output": "build: 862440B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "error[GT0001]: type mismatch: expected `i64`, found `String`\n  --> main.gos:7:20\n     7 |     println(f\"{add(raw, 3)}\") // BREAK!\n       |                    ^^^\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "error[GT0001]: type mismatch: expected `String`, found `()`\n  --> main.gos:7:5\n     7 |     if score < 50 {\n       |     ^^^^^^^^^^^^^^^\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "non_exhaustive_match": {
+   "outcome": "REJECTED",
+   "message": "error[GM0001]: non-exhaustive patterns: `Blue` not covered\n  --> main.gos:10:5\n    10 |     match c {\n       |     ^^^^^^^^^\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "uninitialized_variable": {
+   "outcome": "REJECTED",
+   "message": "error[GT0129]: `x` is read before it is assigned on every path\n  --> main.gos:9:16\n     9 |     println(f\"{x}\") // BREAK!\n       |                ^\n     error: a path reaches this read without assigning `x`\n  = help: give `x` a value where it is declared, or assign it on every path before this read\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "error[GT0006]: type `Config` has no field `colour`\n  --> main.gos:7:5\n     7 |     cfg.colour = \"red\" // BREAK!\n       |     ^^^^^^^^^^\n  = help: did you mean `color`?\n  = help: declared fields are `color`\n  = suggestion: replace `colour` with `color`\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "error[GP0001]: unexpected `=`, expected `{` to open `if` branch\n  --> main.gos:5:22\n     5 |     let label = if x = 1 { \"one\" } else { \"not one\" } // BREAK!\n       |                      ^\n\nerror[GP0001]: unexpected `=`, expected an expression\n  --> main.gos:5:22\n     5 |     let label = if x = 1 { \"one\" } else { \"not one\" } // BREAK!\n       |                      ^\n\nerror[GP0001]: unexpected `{`, expected `;` or a newline between statements\n  --> main.gos:5:26\n     5 |     let label = if x = 1 { \"one\" } else { \"not one\" } // BREAK!\n       |                          ^\n\nerror[GP0001]: unexpected keyword `else`, expected an expression\n  --> main.gos:5:36\n     5 |     let label = if x = 1 { \"one\" } else { \"not one\" } // BREAK!\n       |                                    ^^^^\n\nerror[GP0001]: unexpected <end of input>, expected `}` to close block\n  --> main.gos:11:1\n\nerror: 5 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "switch_fallthrough": {
+   "build_output": "build: 862352B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "break_in_switch": {
+   "build_output": "build: 862384B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "REJECTED",
+   "message": "error[GT0001]: type mismatch: expected `bool`, found `Option<i64>`\n  --> main.gos:5:22\n     5 |     let present = if qty { true } else { false } // BREAK!\n       |                      ^^^\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "string_equality": {
+   "build_output": "build: 862352B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "loose_equality": {
+   "outcome": "REJECTED",
+   "message": "error[GT0001]: type mismatch: expected `String`, found `i64`\n  --> main.gos:5:16\n     5 |     println(if code == 0 { \"same\" } else { \"different\" }) // CONTROL! println(if code == \"0\" { \"same\" } else { \"different\" })\n       |                ^^^^^^^^^\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "parse_invalid_number": {
+   "build_output": "build: 862344B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": ""
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "error[GT0001]: type mismatch: expected `Vec<Animal>`, found `Vec<Dog>`\n  --> main.gos:11:36\n    11 |     let mut animals: Vec<Animal> = dogs // BREAK!\n       |                                    ^^^^\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "mutate_while_iterating": {
+   "build_output": "build: 969648B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1,3",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "build_output": "build: 870848B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "build_output": "build: 866528B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "repeated_row_alias": {
+   "build_output": "build: 866560B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "REJECTED",
+   "message": "error[GT0007]: unused `Result` value - the `Err` variant may go unhandled\n  --> main.gos:9:5\n     9 |     save(\"/dev/null/out.txt\") // BREAK!\n       |     ^^^^^^^^^^^^^^^^^^^^^^^^^\n  = note: every `Result` value must be handled\n  = help: propagate the error with `?`, handle it with `match` / `if let`, or explicitly discard with `let _ = <expr>`\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "sort_with_nan": {
+   "build_output": "build: 874736B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "REJECTED",
+   "message": "error[GT0001]: type mismatch: expected `f64`, found `i64`\n  --> main.gos:5:20\n     5 |     let avg: f64 = sum / count // BREAK!\n       |                    ^^^^^^^^^^^\n  = help: write an integer literal as a float (`1.0`), or cast with `<expr> as f64`\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "leading_zero_literal": {
+   "build_output": "build: 862184B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "build_output": "build: 862344B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "REJECTED",
+   "message": "error[GT0042]: iterator `evens` was already consumed by `iter::sum`\n  --> main.gos:5:17\n     5 |     let count = evens.count() // BREAK!\n       |                 ^^^^^\n  = note: `iter::sum` takes ownership of `evens`\n  = help: create a new iterator pipeline for another traversal\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "bitwise_precedence": {
+   "build_output": "build: 862352B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "word_and_precedence": {
+   "build_output": "build: 858208B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "wait",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "build_output": "build: 862352B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not a",
+   "stderr": ""
+  },
+  "stray_semicolon": {
+   "outcome": "REJECTED",
+   "message": "error[GP0001]: unexpected `;`, expected `{` to open `if` branch\n  --> main.gos:5:13\n     5 |     if n > 5; { // CONTROL! if n > 5 {\n       |             ^\n\nerror[GP0001]: unexpected `;`, expected an expression\n  --> main.gos:5:13\n     5 |     if n > 5; { // CONTROL! if n > 5 {\n       |             ^\n\nerror[GP0001]: unexpected <end of input>, expected `}` to close block\n  --> main.gos:16:1\n\nerror: 3 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "error[GT0001]: type mismatch: expected `bool`, found `i64`\n  --> main.gos:5:18\n     5 |     let inside = 1 < x < 3 // BREAK!\n       |                  ^^^^^^^^^\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "lost_update_on_copy": {
+   "outcome": "REJECTED",
+   "message": "error[GT0030]: cannot assign to immutable binding `acct`\n  --> main.gos:8:9\n     8 |         acct.balance += 50 // BREAK!\n       |         ^^^^^^^^^^^^\n  = note: bindings are immutable by default; only a `mut` place can be assigned\n  = help: declare it mutable: `let mut acct = ...` (or `mut acct` in the parameter list)\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "command_injection": {
+   "build_output": "build: 1023056B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "REJECTED",
+   "message": "error[GT0142]: `==` compares a computed `f64` with `0.3`, which a `f64` cannot hold exactly\n  --> main.gos:7:16\n     7 |     println(if a == 0.3 { \"equal\" } else { \"not equal\" }) // CONTROL! println(if (a - 0.3).abs() < 1e-9 { \"equal\" } else { \"not equal\" })\n       |                ^^^^^^^^\n  = note: a `f64` holds binary fractions, so arithmetic that should reach the decimal rounds to a neighbour of it and the comparison is false\n  = help: compare within a tolerance: `(a - b).abs() < 1e-9`, or compare with a value the type holds exactly (`0.5`, `0.25`, a whole number)\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "lock_order_deadlock": {
+   "build_output": "build: 1159768B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "error[GX0005]: panic: all goroutines are asleep - deadlock! (cohort join can never complete)\nerror[GX0005]: panic: all goroutines are asleep - deadlock! (cohort join can never complete)",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "error[GX0005]: panic: all goroutines are asleep - deadlock! (cohort join can never complete)\nerror[GX0005]: panic: all goroutines are asleep - deadlock! (cohort join can never complete)"
+  },
+  "regex_backtracking": {
+   "build_output": "build: 2144560B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "no match",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "REJECTED",
+   "message": "error[GL0064]: `n % 2 == 1` is false for every negative `n`: `%` keeps the sign of the value it divides, so the remainder of a negative `n` is never positive\n  --> main.gos:4:5\n     4 |     n % 2 == 1 // BREAK!\n       |     ^^^^^^^^^^\n  = note: lint: signed_remainder\n  = help: `n % 2 != 0` tests oddness for every sign; `n.rem_euclid(2) == 1` answers the remainder in `0..2`\n  = suggestion: compare a remainder that holds for every sign \u2192 `n % 2 != 0`\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "missing_comma_concat": {
+   "build_output": "build: 862360B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "return_in_finally": {
+   "build_output": "build: 866968B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "REJECTED",
+   "message": "error[GT0001]: type mismatch: expected `i64`, found `()`\n  --> main.gos:2:5\n     2 |     return // CONTROL! return a + b\n       |     ^^^^^^\n\nerror[GT0135]: unreachable code: the statement before this one never completes\n  --> main.gos:3:9\n     3 |         a + b // BREAK!\n       |         ^^^^^\n  = help: delete the code, or move it before the statement that leaves the block\n\nerror: 2 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "worker_failure_lost": {
+   "build_output": "build: 1151024B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "error[GX0005]: panic: called `Result::unwrap()` on an `Err` value: called `Option::unwrap()` on a `None` value\n  call stack (outermost first):\n    at main",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "error[GX0005]: panic: called `Result::unwrap()` on an `Err` value: called `Option::unwrap()` on a `None` value\n  call stack (outermost first):\n    at main (main.gos:21:5)"
+  },
+  "unawaited_task": {
+   "outcome": "REJECTED",
+   "message": "error[GL0065]: `task` is never joined: nothing waits for its task, so the program goes on, and can finish, before the task's work is done\n  --> main.gos:11:9\n    11 |     let task = spawn(|| save(saved)) // CONTROL! let task = spawn(|| save(saved)); task.join().unwrap()\n       |         ^^^^\n  = note: lint: unjoined_task\n  = help: call `task.join()` where the task's work must be done; a task meant to run on its own is spawned without a binding: `spawn(..)`\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "format_arg_mismatch": {
+   "outcome": "REJECTED",
+   "message": "error[GP0023]: format string requires 2 positional argument(s), but 1 were supplied\n  --> main.gos:4:20\n     4 |     println(format(\"{} of {}\", done)) // CONTROL! println(format(\"{} of {}\", done, total))\n       |                    ^^^^^^^^^^\n  = help: add or remove `{}` placeholders so every positional argument is used exactly once\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "unsigned_subtraction": {
+   "build_output": "build: 862432B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "build_output": "build: 1006488B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "error[GX0005]: panic: key \"pear\" is not in the map\n  call stack (outermost first):\n    at main",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "error[GX0005]: panic: key \"pear\" is not in the map\n  call stack (outermost first):\n    at main (main.gos:6:13)"
+  },
+  "mutable_hash_key": {
+   "build_output": "build: 936496B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "REJECTED",
+   "message": "error[GT0139]: this `let status` hides `let mut status`, which nothing ever assigns\n  --> main.gos:6:13\n     6 |         let status = \"done\" // CONTROL! status = \"done\"\n       |             ^^^^^^\n     error: declares a second `status`; the outer one keeps its value\n  ::> main.gos:4:9\n     4 |     let mut status = \"pending\"\n       |         ^^^^^^^^^^\n     note: declared `mut` here\n  = help: to change the outer `status`, assign it: `status = ..`; otherwise drop its `mut` and give this binding a name of its own\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "discarded_pure_result": {
+   "outcome": "REJECTED",
+   "message": "error[GT0140]: `to_uppercase` answers a new value and changes nothing, and that value is dropped\n  --> main.gos:3:5\n     3 |     name.to_uppercase() // BREAK!\n       |     ^^^^^^^^^^^^^^^^^^^\n  = help: use what `to_uppercase` answers: bind it (`let value = name.to_uppercase(..)`), assign it back to a `let mut name` (`name = name.to_uppercase(..)`), or pass it where it is needed\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "negative_index_wraps": {
+   "build_output": "build: 862344B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "error[GX0005]: panic: array index out of bounds: the len is 3 but the index is -1\n  call stack (outermost first):\n    at main",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "error[GX0005]: panic: array index out of bounds: the len is 3 but the index is -1\n  call stack (outermost first):\n    at main (main.gos:6:27)"
+  },
+  "default_numeric_sort": {
+   "build_output": "build: 899480B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "error[GT0001]: type mismatch: expected `i64`, found `String`\n  --> main.gos:6:16\n     6 |     println(if ids.contains(id) { \"found\" } else { \"missing\" }) // CONTROL! println(if ids.contains(id.to_i64().unwrap()) { \"found\" } else { \"missing\" })\n       |                ^^^\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "panic_under_lock": {
+   "build_output": "build: 1135152B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "worker failed\nerror[GX0005]: panic: Mutex poisoned: a goroutine panicked while holding it: crash mid-update\n  call stack (outermost first):\n    at main",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "worker failed\nerror[GX0005]: panic: Mutex poisoned: a goroutine panicked while holding it: crash mid-update\n  call stack (outermost first):\n    at main (main.gos:16:17)\n    at __gos_sync_mutex_guard (<generated>:0)"
+  },
+  "oob_write": {
+   "build_output": "build: 862384B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "error[GX0005]: panic: array index out of bounds: the len is 4 but the index is 4\n  call stack (outermost first):\n    at main",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "error[GX0005]: panic: array index out of bounds: the len is 4 but the index is 4\n  call stack (outermost first):\n    at main (main.gos:11:5)"
+  },
+  "oob_read": {
+   "build_output": "build: 862384B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "error[GX0005]: panic: array index out of bounds: the len is 4 but the index is 4\n  call stack (outermost first):\n    at main",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "error[GX0005]: panic: array index out of bounds: the len is 4 but the index is 4\n  call stack (outermost first):\n    at main (main.gos:11:16)"
+  },
+  "use_after_free": {
+   "build_output": "build: 981584B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "build_output": "build: 981544B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "outcome": "REJECTED",
+   "message": "error[GT0052]: reference cannot escape through a function return\n  --> main.gos:1:14\n     1 | fn make() -> &mut i64 { // BREAK!\n       |              ^^^^^^^^\n  = note: references are non-owning views; storing or returning one could outlive its referent\n  = help: keep the reference call-scoped or bind it directly to a named local place\n\nerror[GT0052]: reference cannot be copied into a local or borrow a temporary\n  --> main.gos:14:13\n    14 |     let r = make()\n       |             ^^^^^^\n  = note: references are non-owning views; storing or returning one could outlive its referent\n  = help: keep the reference call-scoped or bind it directly to a named local place\n\nerror: 2 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "container_realloc_dangling": {
+   "outcome": "REJECTED",
+   "message": "error[GT0053]: cannot read `v` while reference `r` is active\n  --> main.gos:9:9\n     9 |         v.push(Item { val: i })\n       |         ^\n  = note: a mutable reference is exclusive; any live reference prevents mutation of its source\n  = help: access the value through `r`, or narrow that reference's lexical scope\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "uninit_heap_read": {
+   "build_output": "build: 874888B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "wrong_variant_access": {
+   "outcome": "REJECTED",
+   "message": "error[GT0047]: this `let` pattern might not match its value\n  --> main.gos:8:9\n     8 |     let Value::Text(s) = v // BREAK!\n       |         ^^^^^^^^^^^^^^\n  = note: a plain `let` must accept every possible initializer value\n  = help: use a name or `_` to bind every value, or use `if let`, `match`, or `let ... else` to test the pattern\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "format_string": {
+   "build_output": "build: 858176B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "%s%s%n{}{0}",
+   "stderr": ""
+  },
+  "trojan_source": {
+   "outcome": "REJECTED",
+   "message": "error[GP0070]: bidirectional control character U+202E in source text\n  --> main.gos:3:23\n     3 |     if access != \"user\u202e \u2066// admins only\u2069 \u2066\" { // CONTROL! if access != \"user\" {\n       |                       ^^^\n  = help: the character reorders how the line displays, so the code a reader sees is not the code that compiles; write it as the escape `\\u{202E}` inside a string or char literal\n\nerror[GP0070]: bidirectional control character U+2066 in source text\n  --> main.gos:3:25\n     3 |     if access != \"user\u202e \u2066// admins only\u2069 \u2066\" { // CONTROL! if access != \"user\" {\n       |                         ^^^\n  = help: the character reorders how the line displays, so the code a reader sees is not the code that compiles; write it as the escape `\\u{20\n...\ner\u202e \u2066// admins only\u2069 \u2066\" { // CONTROL! if access != \"user\" {\n       |                                        ^^^\n  = help: the character reorders how the line displays, so the code a reader sees is not the code that compiles; write it as the escape `\\u{2069}` inside a string or char literal\n\nerror[GP0070]: bidirectional control character U+2066 in source text\n  --> main.gos:3:42\n     3 |     if access != \"user\u202e \u2066// admins only\u2069 \u2066\" { // CONTROL! if access != \"user\" {\n       |                                          ^^^\n  = help: the character reorders how the line displays, so the code a reader sees is not the code that compiles; write it as the escape `\\u{2066}` inside a string or char literal\n\nerror: 4 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "unsafe_deserialization": {
+   "outcome": "SAFE_BY_DESIGN",
+   "message": "the standard decoders build only the type the program declares and run no code the data names"
+  },
+  "null_byte_path": {
+   "build_output": "build: 891352B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "outcome": "REJECTED",
+   "message": "error[GP0071]: identifier `is_\u0430dmin` looks like `is_admin`, a different name in this file\n  --> main.gos:5:4\n     5 | fn is_\u0430dmin(user: String) -> bool { true } // BREAK!\n       |    ^^^^^^^^^\n  = help: the two render alike but name different things; spell it `is_admin` if that name is meant, or choose a name that reads differently\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "error[GT0130]: a `String` cannot be written by index\n  --> main.gos:3:5\n     3 |     greeting[0] = 'j' // CONTROL! greeting = \"jello\"\n       |     ^^^^^^^^^^^\n  = help: build the new text: `greeting = greeting.replacen(old, new, 1)`, or edit a `Vec<char>` and join it back: `let mut cs: Vec<char> = greeting.chars().collect()`, then `greeting = cs.map(|c| c.to_string()).join(\"\")`\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "reference_cycle": {
+   "build_output": "build: 981896B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "forgotten_free": {
+   "build_output": "build: 862448B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "complete_init": {
+   "outcome": "REJECTED",
+   "message": "error[GT0035]: missing field `retries` in initializer of `Config`\n  --> main.gos:8:19\n     8 |     let partial = Config { timeout: 5 } // BREAK!\n       |                   ^^^^^^^^^^^^^^^^^^^^^\n  = help: add `retries: ...` to the `Config` initializer\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "newtype": {
+   "outcome": "REJECTED",
+   "message": "error[GT0001]: type mismatch: expected `Meters`, found `Seconds`\n  --> main.gos:10:31\n    10 |     let wrong = Meters(2.0) + Seconds(3.0) // BREAK!\n       |                               ^^^^^^^^^^^^\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "strong_enum": {
+   "outcome": "REJECTED",
+   "message": "error[GT0001]: type mismatch: expected `Color`, found `i64`\n  --> main.gos:17:18\n    17 |     println(name(7)) // BREAK!\n       |                  ^\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "override_check": {
+   "outcome": "REJECTED",
+   "message": "error[GT0072]: `descibe` is not a member of trait `Shape`\n  --> main.gos:7:1\n     7 | impl Shape for Circle {\n       | ^^^^^^^^^^^^^^^^^^^^^^^\n  = note: `Shape` declares: `describe`\n  = help: move it to an inherent `impl Circle { fn descibe .. }` block, or declare `fn descibe` in `trait Shape`\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "missing_virtual": {
+   "build_output": "build: 862256B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "area 4",
+   "stderr": ""
+  },
+  "unbound_method": {
+   "outcome": "REJECTED",
+   "message": "error[GT0006]: type `Counter` has no field `increment`\n  --> main.gos:14:15\n    14 |     run_twice(counter.increment) // CONTROL! run_twice(|| counter.increment())\n       |               ^^^^^^^^^^^^^^^^^\n  = help: `increment` is a method of `Counter`, not a field: call it as `value.increment()`\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "forced_unwrap": {
+   "build_output": "build: 862248B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "before",
+   "release_stderr": "error[GX0005]: panic: called `Option::unwrap()` on a `None` value\n  call stack (outermost first):\n    at main",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "error[GX0005]: panic: called `Option::unwrap()` on a `None` value\n  call stack (outermost first):\n    at main (main.gos:7:16)"
+  },
+  "null_in_text": {
+   "build_output": "build: 1006128B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nwarning[GL0067]: an `Option<String>` is rendered with `{}` among other text; when it is `None`, the output contains `None`\n  --> main.gos:10:23\n    10 |     println(f\"hello, {name}\") // CONTROL! println(f\"hello, {name.unwrap_or(\"nobody\")}\")\n       |                       ^^^^\n  = note: lint: option_rendered\n  = help: choose the text to show when the value is missing: use `v.unwrap_or(..)`, `if let Some(x) = v`, or `match v`; use `{v:?}` to print the explicit `Some(...)` or `None` form\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hello, None",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "REJECTED",
+   "message": "error[GT0003]: cannot apply `+` to `Option<i64>`\n  --> main.gos:6:28\n     6 |     println(line.substring(pos + 1, line.byte_len())) // CONTROL! println(match pos { Some(p) => line.substring(p + 1, line.byte_len()), None => \"\" })\n       |                            ^^^^^^^\n  = note: user types support `+` through an `impl Add<i64>`, dispatched on the left operand\n  = help: implement `impl Add<i64> for Option<i64> { fn add(..) -> .. }`\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "empty_max": {
+   "outcome": "REJECTED",
+   "message": "error[GT0003]: cannot apply `+` to `Option<i64>`\n  --> main.gos:6:16\n     6 |     println(f\"{m + 1}\") // CONTROL! println(f\"{m.unwrap_or(-1) + 1}\")\n       |                ^^^^^\n  = note: user types support `+` through an `impl Add<i64>`, dispatched on the left operand\n  = help: implement `impl Add<i64> for Option<i64> { fn add(..) -> .. }`\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "readonly_param": {
+   "outcome": "REJECTED",
+   "message": "error[GT0030]: cannot assign to immutable binding `xs`\n  --> main.gos:2:5\n     2 |     xs[0] = 9 // BREAK!\n       |     ^^^^^\n  = note: bindings are immutable by default; only a `mut` place can be assigned\n  = help: declare it mutable: `let mut xs = ...` (or `mut xs` in the parameter list)\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "exclusive_mutation": {
+   "outcome": "REJECTED",
+   "message": "error[GT0043]: cannot take mutable reference to `a` while `an earlier call argument` is active\n  --> main.gos:10:22\n    10 |     transfer(&mut a, &mut a, 10) // BREAK!\n       |                      ^^^^^^\n  = note: named mutable references are exclusive for their lexical scope\n  = help: end or narrow `an earlier call argument` before borrowing `a` mutably again\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "literal_range": {
+   "outcome": "REJECTED",
+   "message": "error[GT0009]: integer literal `300` does not fit in `u8`\n  --> main.gos:3:23\n     3 |     let too_big: u8 = 300 // BREAK!\n       |                       ^^^\n  = help: `300` exceeds the range of `u8`\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "no_implicit_conversion": {
+   "outcome": "REJECTED",
+   "message": "warning[GL0062]: this `as` panics when the `i64` value does not fit `i32`\n  --> main.gos:3:17\n     3 |     let small = big as i32\n       |                 ^^^^^^^^^^\n  = note: lint: lossy_cast\n  = help: say what a value that does not fit becomes: `v.try_into()` answers `Err`, `v as% i32` keeps its low bits, `v.clamp(-2147483648, 2147483647) as i32` saturates\n\nerror[GT0001]: type mismatch: expected `i32`, found `i64`\n  --> main.gos:4:22\n     4 |     let wrong: i32 = big // BREAK!\n       |                      ^^^\n  = help: `<expr> as i32` keeps only the low bits of a `i64` outside `i32`'s range, so check the value fits before casting\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "generic_constraint": {
+   "outcome": "REJECTED",
+   "message": "error[GT0143]: `Point` has no order: `sort` needs `Point` to be ordered\n  --> main.gos:8:5\n     8 |     ps.sort() // CONTROL! ps.sort_by_key(|p| p.x)\n       |     ^^\n  = help: declare the order: `#[derive(PartialOrd, Ord)]` on `Point` compares its fields in declaration order, or write `impl Ord for Point`; to order by one field, sort by a key: `sort_by_key(|v| v.field)`\n  = suggestion: derive an order \u2192 `#[derive(PartialOrd, Ord)]`\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "lossy_int_to_float": {
+   "outcome": "REJECTED",
+   "message": "error[GT0001]: type mismatch: expected `f64`, found `i64`\n  --> main.gos:8:10\n     8 |     show(n) // BREAK!\n       |          ^\n  = help: write an integer literal as a float (`1.0`), or cast with `<expr> as f64`\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "const_index_bounds": {
+   "outcome": "REJECTED",
+   "message": "error[GT0133]: index 5 is out of bounds for an array of 3 element(s)\n  --> main.gos:3:22\n     3 |     println(f\"{table[5]}\") // CONTROL! println(f\"{table[1]}\")\n       |                      ^\n  = help: an index of this array is in 0..3\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "lazy_accumulator": {
+   "build_output": "build: 1018880B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.6,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "build_output": "build: 862400B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "error[GX0005]: panic: attempt to multiply with overflow\n  call stack (outermost first):\n    at main",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "error[GX0005]: panic: attempt to multiply with overflow\n  call stack (outermost first):\n    at main (main.gos:6:16)"
+  },
+  "const_overflow": {
+   "outcome": "REJECTED",
+   "message": "error[GT0134]: constant arithmetic fails: 31536000000000000 * 300 overflows `i64`\n  --> main.gos:1:19\n     1 | const SPAN: i64 = 1_000_000_000 * 60 * 60 * 24 * 365 * 300 // CONTROL! const SPAN: u64 = 1_000_000_000 * 60 * 60 * 24 * 365 * 300\n       |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  = help: a constant's value must fit its declared type at every step: widen the type, change the operands, or use a wrapping operator (`+%`, `*%`) where wrapping is meant\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "orphaned_receive": {
+   "build_output": "build: 1113560B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "blocking_in_async": {
+   "build_output": "build: 1126168B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "checked_interpolation": {
+   "outcome": "REJECTED",
+   "message": "error[GR0001]: cannot find `nmae` in this scope\n  --> main.gos:4:22\n     4 |     println(f\"hello {nmae}\") // BREAK!\n       |                      ^^^^\n  = suggestion: did you mean `max`?\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "evaluation_order": {
+   "build_output": "build: 895320B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "REJECTED",
+   "message": "error[GM0002]: unreachable pattern: earlier arm already matches this value\n  --> main.gos:9:9\n     9 |         Shape::Circle => \"circle\",\n       |         ^^^^^^^^^^^^^\n  = help: delete the arm, or move it above the earlier arm that already matches its values\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "duplicate_key": {
+   "outcome": "REJECTED",
+   "message": "error[GT0137]: the key \"a\" appears more than once in this map literal\n  --> main.gos:2:22\n     2 |     let m = {\"a\": 1, \"a\": 2} // CONTROL! let m = {\"a\": 1, \"b\": 2}\n       |                      ^^^\n  = help: a map holds one value per key, so the later entry would replace the earlier one: keep one entry for the key\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "json_big_integer": {
+   "build_output": "build: 1079504B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "9007199254740993",
+   "stderr": ""
+  },
+  "comparison_statement": {
+   "outcome": "REJECTED",
+   "message": "error[GT0136]: a comparison is used as a statement and its answer is dropped\n  --> main.gos:3:5\n     3 |     count == 5 // CONTROL! count = 5\n       |     ^^^^^^^^^^\n  = help: write `=` to assign, `assert(..)` to check, or use the comparison as a condition (`if a == b { .. }`)\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "structural_equality": {
+   "build_output": "build: 858120B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "REJECTED",
+   "message": "error[GT0001]: type mismatch: expected `[i64; 4]`, found `[i64; 3]`\n  --> main.gos:4:27\n     4 |     let short: [i64; 4] = [10, 20, 30] // BREAK!\n       |                           ^^^^^^^^^^^^\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "enum_from_int": {
+   "build_output": "build: 862424B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "before\ninvalid",
+   "stderr": ""
+  },
+  "bitwise_on_bool": {
+   "outcome": "REJECTED",
+   "message": "error[GT0141]: `&` on `bool` operands evaluates both sides\n  --> main.gos:3:15\n     3 |     let yes = (s.len() > 0) & (s[0] == 'a') // CONTROL! let yes = s.len() > 0 && s[0] == 'a'\n       |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  = help: write `&&`, which evaluates its right side only when the left does not decide the answer\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "error[GT0030]: cannot assign to immutable binding `c`\n  --> main.gos:7:5\n     7 |     c.port = 1 // BREAK!\n       |     ^^^^^^\n  = note: bindings are immutable by default; only a `mut` place can be assigned\n  = help: declare it mutable: `let mut c = ...` (or `mut c` in the parameter list)\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "bool_condition": {
+   "outcome": "REJECTED",
+   "message": "error[GT0001]: type mismatch: expected `bool`, found `i64`\n  --> main.gos:7:8\n     7 |     if compare(\"x\", \"x\") { println(\"different\") } // BREAK!\n       |        ^^^^^^^^^^^^^^^^^\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "lost_write_error": {
+   "build_output": "build: 1019096B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "io: File::write: No space left on device (os error 28)",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "io: File::write: No space left on device (os error 28)"
+  },
+  "short_read": {
+   "build_output": "build: 1022904B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.2,
+   "stdout": "HELLO-WORLD-1234",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "build_output": "build: 866864B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "disk full",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "build_output": "build: 1018816B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "total=42",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "outcome": "REJECTED",
+   "message": "error[GT0007]: unused `Result` value - the `Err` variant may go unhandled\n  --> main.gos:4:5\n     4 |     process::run(\"sh\", #[\"-c\", \"exit 3\"]) // CONTROL! let _ = process::run(\"sh\", #[\"-c\", \"exit 3\"])\n       |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  = note: every `Result` value must be handled\n  = help: propagate the error with `?`, handle it with `match` / `if let`, or explicitly discard with `let _ = <expr>`\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "nullable_field": {
+   "outcome": "REJECTED",
+   "message": "error[GT0002]: no method named `len` found for type `Option`\n  --> main.gos:5:29\n     5 |     println(f\"{decoded.name.len()}\") // BREAK!\n       |                             ^^^\n  = help: `Option` has `is_some`, `is_none`, `unwrap`, ...\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "stale_null_check": {
+   "build_output": "build: 981664B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "empty_slot": {
+   "outcome": "REJECTED",
+   "message": "error[GT0006]: type `Option<User>` has no field `name`\n  --> main.gos:9:16\n     9 |     println(f\"{users[0].name.len()}\") // BREAK!\n       |                ^^^^^^^^^^^^^\n  = help: `Option<User>` has no named struct fields exposed to the language; read it through the type's methods, for example `value.get(\"name\")` on a `json::Value`\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "typed_nil": {
+   "build_output": "build: 961376B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "build_output": "build: 1126176B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "build_output": "build: 1117680B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "error[GX0005]: panic: all goroutines are asleep - deadlock! (send can never complete)\n  call stack (outermost first):\n    at main",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "error[GX0005]: panic: all goroutines are asleep - deadlock! (send can never complete)\n  call stack (outermost first):\n    at main (main.gos:5:5)"
+  },
+  "lock_skipped_on_return": {
+   "build_output": "build: 1130760B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "70",
+   "stderr": ""
+  },
+  "cleanup_on_error_path": {
+   "build_output": "build: 887600B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "left behind: export.csv",
+   "stderr": ""
+  },
+  "generator_break_cleanup": {
+   "build_output": "build: 879216B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "left behind: reader.lock",
+   "stderr": ""
+  },
+  "main_error_exit_code": {
+   "outcome": "REJECTED",
+   "message": "error[GT0001]: type mismatch: expected `Result<(), errors::Error>`, found `()`\n  --> main.gos:8:13\n     8 |             return // BREAK!\n       |             ^^^^^^\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "catch_all_hides_bug": {
+   "build_output": "build: 874728B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "error[GX0005]: panic: vec index out of bounds: the len is 2 but the index is 2\n  call stack (outermost first):\n    at main",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "error[GX0005]: panic: vec index out of bounds: the len is 2 but the index is 2\n  call stack (outermost first):\n    at main (main.gos:8:11)\n    at parse_order (main.gos:3:5)"
+  },
+  "narrow_counter_loop": {
+   "outcome": "REJECTED",
+   "message": "error[GT0009]: integer literal `300` does not fit in `u8`\n  --> main.gos:5:15\n     5 |     while i < 300 {\n       |               ^^^\n  = help: `300` exceeds the range of `u8`\n\nerror: 1 front-end error(s); refusing to build",
+   "control": "builds"
+  },
+  "timeout_without_cancel": {
+   "build_output": "build: 1159800B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "70",
+   "stderr": ""
+  },
+  "blocked_sender_leak": {
+   "build_output": "build: 1146928B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "42\ndone",
+   "stderr": ""
+  }
+ }
+}

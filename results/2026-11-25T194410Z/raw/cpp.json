@@ -1,0 +1,954 @@
+{
+ "lang": "cpp",
+ "version": "clang version 23.1.6 (https://github.com/llvm/llvm-project 5b10d2d74929eae78912771222c9855af97496f4)",
+ "results": {
+  "null_deref": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "int_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 136,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "Floating point exception (core dumped)"
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:6:18: error: no matching function for call to 'add'\n    6 |     std::cout << add(argv[1], 3) << \"\\n\"; // BREAK!\n      |                  ^~~\nmain.cpp:3:13: note: candidate function not viable: no known conversion from 'char *' to 'long' for 1st argument; dereference the argument with *\n    3 | static long add(long a, long b) { return a + b; }\n      |             ^   ~~~~~~\n    4 | \n    5 | int main(int, char **argv) {\n    6 |     std::cout << add(argv[1], 3) << \"\\n\"; // BREAK!\n      |                      \n      |                      *\n1 error generated.",
+   "control": "builds"
+  },
+  "missing_return": {
+   "build_output": "main.cpp:8:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]\n    8 | }\n      | ^\n1 warning generated.",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "SILENT",
+   "release_stdout": "fail",
+   "release_stderr": "",
+   "exit": 132,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "Illegal instruction (core dumped)"
+  },
+  "non_exhaustive_match": {
+   "build_output": "main.cpp:8:13: warning: enumeration value 'Blue' not handled in switch [-Wswitch]\n    8 |     switch (c) {\n      |             ^\n1 warning generated.",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "uninitialized_variable": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "73744",
+   "stderr": ""
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:8:9: error: no member named 'colour' in 'Config'\n    8 |     cfg.colour = \"red\"; // BREAK!\n      |     ~~~ ^\n1 error generated.",
+   "control": "builds"
+  },
+  "assign_in_condition": {
+   "build_output": "main.cpp:6:11: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]\n    6 |     if (x = 1) { // CONTROL! if (x == 1) {\n      |         ~~^~~\nmain.cpp:6:11: note: place parentheses around the assignment to silence this warning\n    6 |     if (x = 1) { // CONTROL! if (x == 1) {\n      |           ^  \n      |         (    )\nmain.cpp:6:11: note: use '==' to turn this assignment into an equality comparison\n    6 |     if (x = 1) { // CONTROL! if (x == 1) {\n      |           ^\n      |           ==\n1 warning generated.",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "switch_fallthrough": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "two",
+   "stderr": ""
+  },
+  "break_in_switch": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "have 0",
+   "stderr": ""
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "loose_equality": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:6:24: error: invalid operands to binary expression ('std::string' (aka 'basic_string<char>') and 'int')\n    6 |     std::cout << (code == 0 ? \"same\" : \"different\") << \"\\n\"; // CONTROL! std::cout << (code == \"0\" ? \"same\" : \"different\") << \"\\n\";\n      |                   ~~~~ ^  ~\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/allocator.h:221:7: note: candidate function not viable: no known conversion from 'std::string' (aka 'basic_string<char>') to 'const allocator<char>' for 1st argument\n  221 |       operator==(const allocator&, const allocator&) _GLIBCXX_NOTHROW\n      |       ^          ~~~~~~~~~~~~~~~~\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/system_error:451:3: note: candidate function not v\n...\nonst optional<_Tp>& __lhs, nullopt_t) noexcept\n      |     ^\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/optional:1518:5: note: candidate template ignored: could not match 'optional<_Tp>' against 'int'\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/optional:1596:5: note: candidate template ignored: could not match 'optional' against 'basic_string'\n 1596 |     operator== [[nodiscard]] (const optional<_Tp>& __lhs, const _Up& __rhs)\n      |     ^\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/optional:1603:5: note: candidate template ignored: could not match 'optional<_Up>' against 'int'\n 1603 |     operator== [[nodiscard]] (const _Tp& __lhs, const optional<_Up>& __rhs)\n      |     ^\n1 error generated.",
+   "control": "builds"
+  },
+  "parse_invalid_number": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "13",
+   "stderr": ""
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:12:28: error: non-const lvalue reference to type 'vector<Animal *>' cannot bind to a value of unrelated type 'vector<Dog *>'\n   12 |     std::vector<Animal *> &animals = dogs; // BREAK!\n      |                            ^         ~~~~\n1 error generated.",
+   "control": "builds"
+  },
+  "mutate_while_iterating": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1,2,3",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "repeated_row_alias": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "sort_with_nan": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3.0",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "668",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "build_output": "main.cpp:6:19: warning: & has lower precedence than ==; == will be evaluated first [-Wparentheses]\n    6 |     bool even = x & 1 == 0; // BREAK!\n      |                   ^~~~~~~~\nmain.cpp:6:19: note: place parentheses around the '==' expression to silence this warning\n    6 |     bool even = x & 1 == 0; // BREAK!\n      |                   ^       \n      |                     (     )\nmain.cpp:6:19: note: place parentheses around the & expression to evaluate it first\n    6 |     bool even = x & 1 == 0; // BREAK!\n      |                   ^\n      |                 (    )\n1 warning generated.",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "odd",
+   "stderr": ""
+  },
+  "word_and_precedence": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "wait",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "build_output": "main.cpp:10:5: warning: add explicit braces to avoid dangling else [-Wdangling-else]\n   10 |     else // CONTROL! } else\n      |     ^\n1 warning generated.",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unset",
+   "stderr": ""
+  },
+  "stray_semicolon": {
+   "build_output": "main.cpp:6:15: warning: if statement has empty body [-Wempty-body]\n    6 |     if (n > 5); // CONTROL! if (n > 5)\n      |               ^\nmain.cpp:6:15: note: put the semicolon on a separate line to silence this warning\n1 warning generated.",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "big\nbig",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:6:25: error: chained comparison 'X < Y < Z' does not behave the same as a mathematical expression [-Wparentheses]\n    6 |     bool inside = 1 < x < 3; // BREAK!\n      |                         ^\nmain.cpp:6:25: warning: result of comparison of constant 3 with expression of type 'bool' is always true [-Wtautological-constant-out-of-range-compare]\n    6 |     bool inside = 1 < x < 3; // BREAK!\n      |                   ~~~~~ ^ ~\n1 warning and 1 error generated.",
+   "control": "builds"
+  },
+  "lost_update_on_copy": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hi\ninjected",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 10.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "return_in_finally": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "terminate called after throwing an instance of 'std::invalid_argument'\n  what():  stol\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "terminate called after throwing an instance of 'std::invalid_argument'\n  what():  stol\nAborted (core dumped)"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.05,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:7:30: error: call to consteval function 'std::basic_format_string<char, int &>::basic_format_string<char[9]>' is not a constant expression\n    7 |     std::cout << std::format(\"{} of {}\", done) << \"\\n\"; // CONTROL! std::cout << std::format(\"{} of {}\", done, total) << \"\\n\";\n      |                              ^\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/format:313:6: note: non-constexpr function '__invalid_arg_id_in_format_string' cannot be used in a constant expression\n  313 |             __format::__invalid_arg_id_in_format_string();\n      |             ^\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/format:4537:11: note: in call to 'this->_M_pc.next_arg_id()'\n 4537 |           __id = _M_pc.next_arg\n...\nM_on_replacement_field()'\n 4504 |                     _M_on_replacement_field();\n      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/format:4810:2: note: in call to '__scanner._M_scan()'\n 4810 |         __scanner._M_scan();\n      |         ^~~~~~~~~~~~~~~~~~~\nmain.cpp:7:30: note: in call to 'basic_format_string<char[9]>(\"{} of {}\")'\n    7 |     std::cout << std::format(\"{} of {}\", done) << \"\\n\"; // CONTROL! std::cout << std::format(\"{} of {}\", done, total) << \"\\n\";\n      |                              ^~~~~~~~~~\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/format:259:3: note: declared here\n  259 |   __invalid_arg_id_in_format_string()\n      |   ^\n1 error generated.",
+   "control": "builds"
+  },
+  "unsigned_subtraction": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "18446744073709551614",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "mutable_hash_key": {
+   "outcome": "REJECTED",
+   "message": "In file included from main.cpp:3:\nIn file included from /usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/unordered_set:43:\nIn file included from /usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/unordered_set.h:33:\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/hashtable.h:210:21: error: static assertion failed due to requirement 'std::is_copy_constructible<std::hash<std::vector<int, std::allocator<int>>>>::value': hash function must be copy constructible\n  210 |       static_assert(is_copy_constructible<_Hash>::value,\n      |                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/unordered_set.h:110:18: note: in instantiation of te\n...\nd::__detail::_Default_ranged_hash, std::__detail::_Prime_rehash_policy, std::__detail::_Hashtable_traits<true, true, true>>'\n  139 |       using insert_return_type = typename _Hashtable::insert_return_type;\n      |                                  ~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/unordered_set.h:599:7: error: multiple overloads of 'erase' instantiate to the same signature 'iterator (iterator)' (aka 'int (int)')\n  599 |       erase(iterator __position)\n      |       ^\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/unordered_set.h:594:7: note: previous declaration is here\n  594 |       erase(const_iterator __position)\n      |       ^\n13 errors generated.",
+   "control": "builds"
+  },
+  "shadowed_assignment": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pending",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ADA",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "SILENT",
+   "release_stdout": "10",
+   "release_stderr": "",
+   "exit": 134,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/stl_vector.h:1263: reference std::vector<int>::operator[](size_type) [_Tp = int, _Alloc = std::allocator<int>]: Assertion '__n < this->size()' failed.\nAborted (core dumped)"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:10:19: error: no matching function for call to object of type 'const __contains_fn'\n   10 |     std::cout << (std::ranges::contains(ids, id) ? \"found\" : \"missing\") << \"\\n\"; // CONTROL! std::cout << (std::ranges::contains(ids, std::stoi(id)) ? \"found\" : \"missing\") << \"\\n\";\n      |                   ^~~~~~~~~~~~~~~~~~~~~\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/ranges_algo.h:3550:7: note: candidate template ignored: constraints not satisfied [with _Range = const std::vector<int> &, _Proj = identity, _Tp = std::string]\n 3550 |       operator()(_Range&& __r, const _Tp& __value, _Proj __proj = {}) const\n      |       ^\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/ranges_algo.h:3547:16: note: b\n...\nble = invocable<_Fn, _Args...>;\n      |                                 ^\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/concepts:362:25: note: because 'is_invocable_v<std::ranges::equal_to &, int &, std::basic_string<char> &>' evaluated to false\n  362 |     concept invocable = is_invocable_v<_Fn, _Args...>;\n      |                         ^\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/ranges_algo.h:3540:7: note: candidate function template not viable: requires at least 3 arguments, but 2 were provided\n 3540 |       operator()(_Iter __first, _Sent __last, const _Tp& __value, _Proj __proj = {}) const\n      |       ^          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n1 error generated.",
+   "control": "builds"
+  },
+  "panic_under_lock": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "terminate called after throwing an instance of 'std::runtime_error'\n  what():  crash mid-update\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.09,
+   "stdout": "",
+   "stderr": "terminate called after throwing an instance of 'std::runtime_error'\n  what():  crash mid-update\nAborted (core dumped)"
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "CORRUPT",
+   "release_stdout": "99",
+   "release_stderr": "",
+   "exit": 134,
+   "secs": 0.07,
+   "stdout": "",
+   "stderr": "/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/array:210: reference std::array<int, 4>::operator[](size_type) [_Tp = int, _Nm = 4]: Assertion '__n < this->size()' failed.\nAborted (core dumped)"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "CORRUPT",
+   "release_stdout": "42",
+   "release_stderr": "",
+   "exit": 134,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/array:210: reference std::array<int, 4>::operator[](size_type) [_Tp = int, _Nm = 4]: Assertion '__n < this->size()' failed.\nAborted (core dumped)"
+  },
+  "use_after_free": {
+   "outcome": "CORRUPT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "6666",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 134,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "free(): double free detected in tcache 2\nAborted (core dumped)"
+  },
+  "dangling_stack_ref": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:5:12: error: non-const lvalue reference to type 'int' cannot bind to a temporary of type 'int'\n    5 |     return local; // BREAK!\n      |            ^~~~~\n1 error generated.",
+   "control": "builds"
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRUPT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "99",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "terminate called after throwing an instance of 'std::bad_variant_access'\n  what():  std::get: wrong index for variant\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "terminate called after throwing an instance of 'std::bad_variant_access'\n  what():  std::get: wrong index for variant\nAborted (core dumped)"
+  },
+  "format_string": {
+   "build_output": "main.cpp:4:17: warning: format string is not a string literal (potentially insecure) [-Wformat-security]\n    4 |     std::printf(argv[1]); // CONTROL! std::printf(\"%s\", argv[1]);\n      |                 ^~~~~~~\nmain.cpp:4:17: note: treat the string as an argument to avoid this\n    4 |     std::printf(argv[1]); // CONTROL! std::printf(\"%s\", argv[1]);\n      |                 ^\n      |                 \"%s\", \n1 warning generated.",
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.07,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "trojan_source": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "admin",
+   "stderr": ""
+  },
+  "unsafe_deserialization": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no serialization in the standard library"
+  },
+  "null_byte_path": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "secret",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "admin\nadmin",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "jello",
+   "stderr": ""
+  },
+  "reference_cycle": {
+   "outcome": "LEAK",
+   "control": "verified",
+   "exit": 137,
+   "secs": 0.85,
+   "stdout": "",
+   "stderr": "Killed"
+  },
+  "forgotten_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "complete_init": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "newtype": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:9:28: error: invalid operands to binary expression ('Meters' and 'Seconds')\n    9 |     auto wrong = Meters{2} + Seconds{3}; // BREAK!\n      |                  ~~~~~~~~~ ^ ~~~~~~~~~~\nmain.cpp:5:8: note: candidate function not viable: no known conversion from 'Seconds' to 'Meters' for 2nd argument\n    5 | Meters operator+(Meters a, Meters b) { return {a.v + b.v}; }\n      |        ^                   ~~~~~~~~\n1 error generated.",
+   "control": "builds"
+  },
+  "strong_enum": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:16:18: error: no matching function for call to 'name'\n   16 |     std::cout << name(7) << \"\\n\"; // BREAK!\n      |                  ^~~~\nmain.cpp:5:20: note: candidate function not viable: no known conversion from 'int' to 'Color' for 1st argument\n    5 | static const char *name(Color c) {\n      |                    ^    ~~~~~~~\n1 error generated.",
+   "control": "builds"
+  },
+  "override_check": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:12:33: error: only virtual member functions can be marked 'override'\n   12 |     std::string descibe() const override { return \"circle\"; } // BREAK!\n      |                                 ^~~~~~~~\n1 error generated.",
+   "control": "builds"
+  },
+  "missing_virtual": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "area 0",
+   "stderr": ""
+  },
+  "unbound_method": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:16:23: error: reference to non-static member function must be called; did you mean to call it with no arguments?\n   16 |     run_twice(counter.increment); // CONTROL! run_twice([&] { counter.increment(); });\n      |               ~~~~~~~~^~~~~~~~~\n      |                                ()\nmain.cpp:16:5: error: no matching function for call to 'run_twice'\n   16 |     run_twice(counter.increment); // CONTROL! run_twice([&] { counter.increment(); });\n      |     ^~~~~~~~~\nmain.cpp:9:13: note: candidate function not viable: cannot convert argument of incomplete type 'void' to 'const std::function<void ()>' for 1st argument\n    9 | static void run_twice(const std::function<void()> &f) {\n      |             ^         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n2 errors generated.",
+   "control": "builds"
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "SILENT",
+   "release_stdout": "before\n1",
+   "release_stderr": "",
+   "exit": 134,
+   "secs": 0.08,
+   "stdout": "before",
+   "stderr": "/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/optional:1193: _Tp &&std::optional<int>::operator*() && [_Tp = int]: Assertion 'this->_M_is_engaged()' failed.\nAborted (core dumped)"
+  },
+  "null_in_text": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:13:28: error: invalid operands to binary expression ('basic_ostream<char, std::char_traits<char>>' and 'std::optional<std::string>' (aka 'std::optional<basic_string<char>>'))\n   13 |     std::cout << \"hello, \" << name << \"\\n\"; // CONTROL! std::cout << \"hello, \" << name.value_or(\"nobody\") << \"\\n\";\n      |     ~~~~~~~~~~~~~~~~~~~~~~ ^  ~~~~\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/system_error:341:5: note: candidate function template not viable: no known conversion from 'std::optional<std::string>' (aka 'std::optional<basic_string<char>>') to 'const error_code' for 2nd argument\n  341 |     operator<<(basic_ostream<_CharT, _Traits>& __os, const error_code& __e)\n      |     ^                                          \n...\n7: note: candidate function not viable: no known conversion from 'std::optional<std::string>' (aka 'std::optional<basic_string<char>>') to 'const volatile void *' for 1st argument; take the address of the argument with &\n  313 |       operator<<(const volatile void* __p)\n      |       ^          ~~~~~~~~~~~~~~~~~~~~~~~~\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/ostream.h:339:7: note: candidate function not viable: no known conversion from 'std::optional<std::string>' (aka 'std::optional<basic_string<char>>') to '__streambuf_type *' (aka 'basic_streambuf<char, std::char_traits<char>> *') for 1st argument\n  339 |       operator<<(__streambuf_type* __sb);\n      |       ^          ~~~~~~~~~~~~~~~~~~~~~~\n1 error generated.",
+   "control": "builds"
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "CRASH",
+   "release_stdout": "",
+   "release_stderr": "Segmentation fault (core dumped)",
+   "exit": 134,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/ranges_algo.h:2960: range_value_t<_Range> std::ranges::__max_fn::operator()(_Range &&, _Comp, _Proj) const [_Range = std::vector<long> &, _Proj = std::identity, _Comp = std::ranges::less]: Assertion '__first != __last' failed.\nAborted (core dumped)"
+  },
+  "readonly_param": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:5:11: error: cannot assign to return value because function 'operator[]' returns a const value\n    5 |     xs[0] = 9; // BREAK!\n      |     ~~~~~ ^\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/stl_vector.h:1279:7: note: function 'operator[]' which returns const-qualified type 'const_reference' (aka 'const int &') declared here\n 1279 |       const_reference\n      |       ^~~~~~~~~~~~~~~\n1 error generated.",
+   "control": "builds"
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:6:26: error: constant expression evaluates to 300 which cannot be narrowed to type 'std::uint8_t' (aka 'unsigned char') [-Wc++11-narrowing]\n    6 |     std::uint8_t too_big{300}; // BREAK!\n      |                          ^~~\nmain.cpp:6:26: note: insert an explicit cast to silence this issue\n    6 |     std::uint8_t too_big{300}; // BREAK!\n      |                          ^~~\n      |                          static_cast<uint8_t>( )\nmain.cpp:6:26: warning: implicit conversion from 'int' to 'std::uint8_t' (aka 'unsigned char') changes value from 300 to 44 [-Wconstant-conversion]\n    6 |     std::uint8_t too_big{300}; // BREAK!\n      |                         ~^~~\n1 warning and 1 error generated.",
+   "control": "builds"
+  },
+  "no_implicit_conversion": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-1294967296",
+   "stderr": ""
+  },
+  "generic_constraint": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:10:36: error: no matching function for call to object of type 'const __sort_fn'\n   10 |     std::vector<Point> ps{{1, 2}}; std::ranges::sort(ps); // BREAK!\n      |                                    ^~~~~~~~~~~~~~~~~\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/ranges_algo.h:1831:7: note: candidate template ignored: constraints not satisfied [with _Range = std::vector<Point> &, _Comp = ranges::less, _Proj = identity]\n 1831 |       operator()(_Range&& __r, _Comp __comp = {}, _Proj __proj = {}) const\n      |       ^\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/ranges_algo.h:1829:16: note: because 'sortable<iterator_t<std::vector<Point, std::allocator<Point> > &>, std::ranges::less, std::identit\n...\n..>;\n      |                                 ^\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/concepts:362:25: note: because 'is_invocable_v<std::ranges::less &, Point &, Point &>' evaluated to false\n  362 |     concept invocable = is_invocable_v<_Fn, _Args...>;\n      |                         ^\n/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/ranges_algo.h:1818:7: note: candidate function template not viable: requires at least 2 arguments, but 1 was provided\n 1818 |       operator()(_Iter __first, _Sent __last,\n      |       ^          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n 1819 |                  _Comp __comp = {}, _Proj __proj = {}) const\n      |                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n1 error generated.",
+   "control": "builds"
+  },
+  "lossy_int_to_float": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "9007199254740992",
+   "stderr": ""
+  },
+  "const_index_bounds": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "SILENT",
+   "release_stdout": "659481096",
+   "release_stderr": "",
+   "exit": 134,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/array:210: reference std::array<int, 3>::operator[](size_type) [_Tp = int, _Nm = 3]: Assertion '__n < this->size()' failed.\nAborted (core dumped)"
+  },
+  "lazy_accumulator": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.39,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "CORRUPT",
+   "release_stdout": "stored",
+   "release_stderr": "",
+   "exit": 134,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/stl_vector.h:1263: reference std::vector<unsigned char>::operator[](size_type) [_Tp = unsigned char, _Alloc = std::allocator<unsigned char>]: Assertion '__n < this->size()' failed.\nAborted (core dumped)"
+  },
+  "const_overflow": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:6:28: error: constexpr variable 'span' must be initialized by a constant expression\n    6 |     constexpr std::int64_t span = std::int64_t{1000000000} * 60 * 60 * 24 * 365 * 300; // BREAK!\n      |                            ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\nmain.cpp:6:81: note: value 9460800000000000000 is outside the range of representable values of type 'std::int64_t' (aka 'long')\n    6 |     constexpr std::int64_t span = std::int64_t{1000000000} * 60 * 60 * 24 * 365 * 300; // BREAK!\n      |                                                                                 ^\n1 error generated.",
+   "control": "builds"
+  },
+  "orphaned_receive": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "terminate called after throwing an instance of 'std::invalid_argument'\n  what():  stol\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.1,
+   "stdout": "",
+   "stderr": "terminate called after throwing an instance of 'std::invalid_argument'\n  what():  stol\nAborted (core dumped)"
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "checked_interpolation": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no string interpolation; C++'s std::format takes its values by position"
+  },
+  "evaluation_order": {
+   "outcome": "CHANCE",
+   "message": "C++ leaves the order of a call's arguments unspecified; clang happens to run them left to right",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:12:88: error: duplicate case value 'CIRCLE'\n   12 | static const char *bad(enum Shape s) { switch (s) { case CIRCLE: return \"circle\"; case CIRCLE: return \"again\"; default: return \"other\"; } } // BREAK!\n      |                                                                                        ^\nmain.cpp:12:58: note: previous case defined here\n   12 | static const char *bad(enum Shape s) { switch (s) { case CIRCLE: return \"circle\"; case CIRCLE: return \"again\"; default: return \"other\"; } } // BREAK!\n      |                                                          ^\n1 error generated.",
+   "control": "builds"
+  },
+  "duplicate_key": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "json_big_integer": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no JSON parser in the standard library"
+  },
+  "comparison_statement": {
+   "build_output": "main.cpp:5:11: warning: equality comparison result unused [-Wunused-comparison]\n    5 |     count == 5; // CONTROL! count = 5;\n      |     ~~~~~~^~~~\nmain.cpp:5:11: note: use '=' to turn this equality comparison into an assignment\n    5 |     count == 5; // CONTROL! count = 5;\n      |           ^~\n      |           =\n1 warning generated.",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "structural_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "enum_from_int": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "before\n7",
+   "stderr": ""
+  },
+  "bitwise_on_bool": {
+   "build_output": "main.cpp:6:48: warning: operator '?:' has lower precedence than '&'; '&' will be evaluated first [-Wbitwise-conditional-parentheses]\n    6 |     std::cout << ((!s.empty()) & (s[0] == 'a') ? \"yes\" : \"no\") << \"\\n\"; // CONTROL! std::cout << (!s.empty() && s[0] == 'a' ? \"yes\" : \"no\") << \"\\n\";\n      |                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^\nmain.cpp:6:48: note: place parentheses around the '&' expression to silence this warning\n    6 |     std::cout << ((!s.empty()) & (s[0] == 'a') ? \"yes\" : \"no\") << \"\\n\"; // CONTROL! std::cout << (!s.empty() && s[0] == 'a' ? \"yes\" : \"no\") << \"\\n\";\n      |                                                ^\n      |                   (                           )\nmain.cpp:6:48: note: place parentheses around the '?:' expression to evaluate it first\n    6 |     std::cout << ((!s.empty()) & (s[0] == 'a') ? \"yes\" : \"no\") << \"\\n\"; // CONTROL! std::cout << (!s.empty() && s[0] == 'a' ? \"yes\" : \"no\") << \"\\n\";\n      |                                                ^             \n      |                                  (                           )\n1 warning generated.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "no",
+   "stderr": ""
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:7:12: error: cannot assign to non-static data member 'port' with const-qualified type 'const int'\n    7 |     c.port = 1; // BREAK!\n      |     ~~~~~~ ^\nmain.cpp:3:27: note: non-static data member 'port' declared const here\n    3 | struct Config { const int port; };\n      |                 ~~~~~~~~~~^~~~\n1 error generated.",
+   "control": "builds"
+  },
+  "bool_condition": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "different",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "short_read": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.2,
+   "stdout": "HELLO-WORLD-1234",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "disk full",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "total=42",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "backed up",
+   "stderr": ""
+  },
+  "nullable_field": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "terminate called after throwing an instance of 'std::bad_optional_access'\n  what():  bad optional access\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "terminate called after throwing an instance of 'std::bad_optional_access'\n  what():  bad optional access\nAborted (core dumped)"
+  },
+  "stale_null_check": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.09,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "empty_slot": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "typed_nil": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "lock_skipped_on_return": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "cleanup_on_error_path": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "left behind: export.csv",
+   "stderr": ""
+  },
+  "generator_break_cleanup": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "cleaned",
+   "stderr": ""
+  },
+  "main_error_exit_code": {
+   "outcome": "REJECTED",
+   "message": "main.cpp:9:9: error: non-void function 'main' should return a value [-Wreturn-mismatch]\n    9 |         return; // BREAK!\n      |         ^\n1 error generated.",
+   "control": "builds"
+  },
+  "catch_all_hides_bug": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "CRASH",
+   "release_stdout": "",
+   "release_stderr": "Segmentation fault (core dumped)",
+   "exit": 134,
+   "secs": 0.16,
+   "stdout": "",
+   "stderr": "/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/bits/stl_vector.h:1263: reference std::vector<std::basic_string<char>>::operator[](size_type) [_Tp = std::basic_string<char>, _Alloc = std::allocator<std::basic_string<char>>]: Assertion '__n < this->size()' failed.\nAborted (core dumped)"
+  },
+  "narrow_counter_loop": {
+   "build_output": "main.cpp:8:14: warning: result of comparison of constant 300 with expression of type 'std::uint8_t' (aka 'unsigned char') is always true [-Wtautological-constant-out-of-range-compare]\n    8 |     while (i < 300) {\n      |            ~ ^ ~~~\n1 warning generated.",
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "timeout_without_cancel": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "blocked_sender_leak": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no channel or queue between threads in the standard library"
+  }
+ }
+}

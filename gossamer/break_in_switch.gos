@@ -1,0 +1,17 @@
+use std::env
+
+fn total_until_stop(codes: [String]) -> i64 {
+    let mut total = 0
+    for c in codes {
+        let code = c.to_i64().unwrap()
+        match code {
+            0 => break,
+            _ => total += code,
+        }
+    }
+    total
+}
+
+fn main() {
+    println(total_until_stop(env::args()))
+}
