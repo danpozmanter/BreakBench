@@ -391,20 +391,6 @@
       ]
     },
     {
-      "id": "self_deadlock",
-      "category": "concurrency",
-      "kind": "dynamic",
-      "args": [],
-      "expect": "^done$",
-      "title": "Locking a mutex twice",
-      "scenario": "The program locks a mutex, then calls a helper that locks the same mutex.",
-      "best": "\"done\" because the lock is re-entrant, or a deadlock error. Hanging forever fails.",
-      "mode": "Locking",
-      "refs": [
-        "CWE-764"
-      ]
-    },
-    {
       "id": "loop_closure_capture",
       "category": "aliasing",
       "kind": "static",
@@ -681,9 +667,10 @@
         "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!"
       ],
       "expect": "^no match$",
+      "timeout": 10,
       "title": "A regex that backtracks forever",
       "scenario": "The program matches the standard regex ^(a+)+$ against 50 a's followed by \"!\", read from the command line.",
-      "best": "\"no match\" quickly, from an engine that runs in linear time, or a clean limit error. Running for minutes fails.",
+      "best": "\"no match\" quickly, from an engine that runs in linear time, or a clean limit error. Running past 10 seconds fails.",
       "mode": "Untrusted input",
       "refs": [
         "CWE-1333"
@@ -914,22 +901,6 @@
       "mode": "Wrong type or shape",
       "refs": [
         "CWE-1024"
-      ]
-    },
-    {
-      "id": "dead_store",
-      "category": "names",
-      "kind": "static",
-      "args": [
-        "40"
-      ],
-      "expect": "^42$",
-      "title": "Computing a value and printing the wrong one",
-      "scenario": "price is 40, from the command line. The program computes total = price + 2 but prints price.",
-      "best": "The compiler refuses the unused total; printing 40 fails.",
-      "mode": "Code that reads one way and runs another",
-      "refs": [
-        "CWE-563"
       ]
     },
     {
@@ -1521,20 +1492,6 @@
       "mode": "Lost tasks",
       "refs": [
         "Pitfall: a blocking call stalls the event loop (Node.js, Python asyncio docs)"
-      ]
-    },
-    {
-      "id": "unreachable_code",
-      "category": "control_flow",
-      "kind": "static",
-      "args": [],
-      "expect": "^ok\\nchecked$",
-      "title": "A statement after an early return",
-      "scenario": "check() is meant to print ok and then checked, but a stray return sits between them, the shape of Apple's goto fail bug. The program calls check().",
-      "best": "A refusal of the code after the return. Printing only ok is a silent wrong answer.",
-      "mode": "Code that reads one way and runs another",
-      "refs": [
-        "CWE-561"
       ]
     },
     {

@@ -38,7 +38,7 @@ leaderboard as one unranked example of how much a checker adds.
 
 ## Tests
 
-127 tests in thirteen categories. Each has a CWE or CERT entry, a CVE, or appears in a language's
+124 tests in thirteen categories. Each has a CWE or CERT entry, a CVE, or appears in a language's
 pitfall list, and covers a mistake no other test covers; `harness/problems.json` gives each test's
 reference and failure mode, and the site's Notes tab maps the failure modes to their tests. Each test is one scenario: the same steps, inputs and
 expected answer in every language, written the way that language teaches first. The code follows the
@@ -53,14 +53,14 @@ rules the mistake out, and where its documentation sent a program to another cal
 | Aliasing and mutation | 12 | Shared or copied state changes when it should not, or does not when it should: a list changed while looping over it, a snapshot that is an alias, a grid whose rows are one list, a closure that captures the loop variable, a copy updated instead of the original, ... |
 | Incomplete code | 3 | A path that ends without a result, a match missing a case, a variable read before it is set |
 | Operators | 10 | An operator that means something other than it looks: an assignment in a condition, & next to ==, 1 < x < 3, == on built strings or records, == between text and a number, a word-form and that binds looser than =, ... |
-| Control flow | 7 | Code that runs in a different order or path than it reads: a dangling else, a semicolon that ends an if, a case without break, a return with its value on the next line, an unreachable statement, ... |
-| Names and literals | 7 | A name or literal that silently means something else: a new variable instead of an assignment, a missing comma, a repeated map key, a leading-zero number, ... |
+| Control flow | 6 | Code that runs in a different order or path than it reads: a dangling else, a semicolon that ends an if, a case without break, a return with its value on the next line, ... |
+| Names and literals | 6 | A name or literal that silently means something else: a new variable instead of an assignment, a missing comma, a repeated map key, a leading-zero number, ... |
 | Error handling | 9 | A failure goes unseen: an ignored result, a catch-all that turns a bug into bad input, a failed run that exits with success, a return in a cleanup block, a cleanup failure that hides the original error, a read that returns part of a message, a buffered file never flushed, a failed command treated as a success, ... |
 | Resource cleanup | 2 | A file or lock outlives the code that should remove it: a failure that skips the cleanup, a loop that breaks out of a sequence holding it |
 | Security | 8 | Input from outside takes control: command injection, a NUL byte that cuts a file name short, user text as a format string, an object restored from untrusted bytes, hidden or look-alike characters in source, ... |
 | Null safety | 11 | The program uses a value that may be missing as if it were there: a lookup that found nothing, a search that returned -1, a missing name printed as text, a check a later call undoes, an empty pointer passed on as an error, ... |
 | Memory safety | 14 | The program reads or writes memory it does not own, or keeps memory it dropped: use after free, out-of-bounds writes, records never freed, records that keep each other alive, a size that overflows before the allocation, a running total that keeps every message alive, ... |
-| Concurrency | 12 | Threads or tasks interfere: a deadlock, a check-then-act race, a balance checked before an await and spent after it, an early return that skips the unlock, a wake-up sent before anyone waits, a timed-out task that keeps running, a worker stuck sending an answer nobody takes, ... |
+| Concurrency | 11 | Threads or tasks interfere: a deadlock, an early return that skips the unlock, a failure in the middle of a locked update, a wake-up sent before anyone waits, a timed-out task that keeps running, a worker stuck sending an answer nobody takes, ... |
 
 The bench runs each test once, so it keeps only tests with a stable result: tests whose result
 changed across three full runs, in any language, were removed. Gap: bugs that show only on some runs are not measured. Tests every language fails stay,

@@ -119,9 +119,10 @@ td.chipcell > .chip { display: flex; width: 100%; box-sizing: border-box; height
 .scoring { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
 .scoring div { background: var(--surface); border: 1px solid var(--line); border-radius: 2px; padding: 12px 14px; display: grid; align-content: start; gap: 6px; font-size: 13px; }
 .by-design { box-shadow: inset 0 0 0 2px var(--fg); }
-/* The result grids are wider than the text column, so they use the whole window. */
-.grids { display: grid; gap: 20px; width: calc(100vw - 48px); margin-left: calc(50% - 50vw + 24px); }
-.grid-wrap { max-height: calc(100vh - 32px); overflow: auto; }
+/* The result grids are wider than the text column: they start at its left edge and run to the window's right edge. */
+.grids { display: grid; gap: 20px; width: calc(50vw + 50% - 24px); justify-items: start; }
+.grid-wrap { max-height: calc(100vh - 32px); overflow: auto; max-width: 100%; box-sizing: border-box; }
+.grid tbody th, .grid tbody td, .grid tfoot th, .grid tfoot td { vertical-align: middle; }
 .grid { border-collapse: separate; border-spacing: 0; width: max-content; }
 .grid th, .grid td { padding: 3px; border-bottom: 1px solid var(--line); }
 .grid thead th { position: sticky; top: 0; z-index: 2; background: var(--surface); }
@@ -325,6 +326,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
       <li><code>fd_leak</code>: files never closed. Haskell closes handles from a finalizer thread: ran out in 8 of 20.</li>
     </ul>
     <p class="muted"><code>check_then_act</code> and <code>async_reentrancy</code> were removed too: a program checks shared state, gives up control (a lock release or an <code>await</code>), then acts on the stale check. Nothing in the program says the two steps belong together, so no compiler or runtime can catch it, and no language could pass.</p>
+    <p class="muted">Tests that measured a convention rather than a mistake were removed: <code>path_join_escape</code>, <code>split_character</code>, <code>stack_overflow</code>, <code>exit_skips_cleanup</code>, <code>char_arithmetic</code>, <code>huge_allocation</code>, <code>dead_store</code>, <code>unreachable_code</code> and <code>self_deadlock</code>. Each language's behavior there is a legitimate design choice, or the result turned on the input. <code>dead_store</code> and <code>unreachable_code</code> only asked whether a compiler makes a warning an error; <code>self_deadlock</code> gave full marks to re-entrant locks, which many languages leave out on purpose.</p>
     <p class="muted">Races stay tested by <code>lock_order_deadlock</code> and <code>lost_wakeup</code>, which force one interleaving. Gap: bugs that show only on some runs (unsynchronized writes, per-run hash seeds) are not measured.</p>
     <h3>Right by chance</h3>
     <p class="muted">A right answer counts only where the language defines the behavior. Where it is undefined or unspecified, the program marks the line and a right answer scores 0 as right by chance.</p>
@@ -424,10 +426,10 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
       <li>A compiler crash records ICE and scores 0.</li>
       <li>Without a sanitizer, C's null dereference and the C-family memory tests run into the hardware or the allocator: a crash, corrupted memory or a wrong answer. C++'s <code>*</code> on an empty <code>std::optional</code> stops through a libstdc++ assertion.</li>
       <li>A regex engine that gives up at a backtracking limit and reports no match counts as correct. PHP's <code>preg_match</code> returns <code>false</code>, which reads as no match.</li>
-      <li>V treats the line after a bare <code>return</code> as its value, so it refuses <code>unreachable_code</code>, though not through a reachability check.</li>
       <li>Ruby, Crystal, Julia and Haskell read a semicolon after an <code>if</code> condition as a separator, so <code>stray_semicolon</code> runs as written. Kotlin has no block statement, so the braces after its semicolon make an unused lambda and the block never runs.</li>
       <li><code>word_and_precedence</code> uses the word form of logical and where the language has one (Ruby, PHP, Python, Mojo, Nim, Zig, Kotlin, C++ and C's <code>iso646.h</code>); the others write <code>&amp;&amp;</code>.</li>
       <li><code>forgotten_free</code> allocates the way each language teaches: <code>malloc</code> in C, <code>std::make_unique</code> in C++, an allocator's <code>create</code> or <code>new</code> in Zig, Odin and C3, and an ordinary object or value elsewhere.</li>
+      <li><code>regex_backtracking</code> stops each run at 10 seconds. Dart's engine gives up backtracking after about 20 seconds on any long input and then answers; a 20-second stall per input is the denial of service the test looks for, and every engine that passes answers in under a second.</li>
       <li><code>blocking_in_async</code> uses async/await where the standard libraries can run it, otherwise threads; JavaScript has no blocking sleep, so it runs correctly.</li>
       <li>OCaml, F#, Haskell and Clojure have no early return, so <code>lock_skipped_on_return</code> unlocks after the conditional and cannot skip it.</li>
       <li><code>short_read</code> uses the language's usual process call, so a language whose usual call returns the whole output reads all of it. <code>unflushed_writer</code> is judged by what the file holds after the program exits.</li>
