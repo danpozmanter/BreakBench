@@ -1,10 +1,9 @@
 use std::sync::{Mutex, Shared}
 
-fn post(lock: Mutex, debits: Shared<i64>, credits: Shared<i64>) {
-    lock.lock()
-    defer lock.unlock()
+fn post(lock: Mutex, debits: Shared<i64>, credits: Shared<i64>) -> () {
+    let guard = lock.lock()
     debits.update(|d| d + 50)
-    if debits.get() > 0 { panic("crash mid-update") } // CONTROL! if debits.get() > 0 { debits.update(|d| d - 50); panic("crash mid-update") }
+    if debits.get() > 0 { panic("crash mid-update") } // CONTROL! if debits.get() > 0 { debits.update(|d| d - 50); guard.unlock(); panic("crash mid-update") }
     credits.update(|c| c + 50)
 }
 
@@ -14,7 +13,6 @@ fn main() {
     let credits = Shared::new(0)
     let worker = spawn(|| post(lock, debits, credits))
     if worker.join().is_err() { eprintln("worker failed") }
-    lock.lock()
-    defer lock.unlock()
+    let guard = lock.lock()
     println(if debits.get() == credits.get() { "balanced" } else { "unbalanced" })
 }

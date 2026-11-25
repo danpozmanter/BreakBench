@@ -1,5 +1,5 @@
 {
- "generated": "2026-11-25 19:16 UTC",
+ "generated": "2026-11-25 19:17 UTC",
  "date": "2026-11-25",
  "kinds": {
   "static": {
@@ -1978,9 +1978,7 @@
    ]
   }
  ],
- "unsolved": [
-  "float_equality"
- ],
+ "unsolved": [],
  "languages": [
   {
    "id": "gossamer",
@@ -1990,18 +1988,18 @@
    "repository": "https://github.com/gossamer-lang/gossamer",
    "dir": "gossamer",
    "ext": "gos",
-   "version": "gos 0.84.4",
+   "version": "gos 0.85.0",
    "categories": {
     "numbers": [
-     13.5,
+     14.5,
      17
     ],
     "api": [
-     13.5,
+     14.5,
      15
     ],
     "aliasing": [
-     11,
+     12,
      12
     ],
     "incomplete": [
@@ -2009,7 +2007,7 @@
      3
     ],
     "operators": [
-     9.5,
+     10,
      10
     ],
     "control_flow": [
@@ -2029,7 +2027,7 @@
      2
     ],
     "security": [
-     7.0,
+     8.0,
      8
     ],
     "null": [
@@ -2041,12 +2039,12 @@
      14
     ],
     "concurrency": [
-     7.0,
+     9.0,
      11
     ]
    },
-   "caught": 53,
-   "safe": 115,
+   "caught": 59,
+   "safe": 121,
    "scored": 124,
    "missing": 0,
    "results": {
@@ -2057,7 +2055,7 @@
      "score": 1
     },
     "int_overflow": {
-     "build_output": "build: 854088B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862344B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "TRAPPED",
      "control": "verified",
      "release": "TRAPPED",
@@ -2070,7 +2068,7 @@
      "score": 0.5
     },
     "div_by_zero": {
-     "build_output": "build: 854088B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862344B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "TRAPPED",
      "control": "verified",
      "release": "TRAPPED",
@@ -2083,7 +2081,7 @@
      "score": 0.5
     },
     "shift_overflow": {
-     "build_output": "build: 854088B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862344B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "TRAPPED",
      "control": "verified",
      "release": "TRAPPED",
@@ -2096,7 +2094,7 @@
      "score": 0.5
     },
     "narrowing_cast": {
-     "build_output": "build: 854136B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nwarning[GL0062]: this `as` panics when the `i64` value does not fit `u8`\n  --> main.gos:6:13\n     6 |     let b = v as u8\n       |             ^^^^^^^\n  = note: lint: lossy_cast\n  = help: say what a value that does not fit becomes: `v.try_into()` answers `Err`, `v as% u8` keeps its low bits, `v.clamp(0, 255) as u8` saturates\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862392B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nwarning[GL0062]: this `as` panics when the `i64` value does not fit `u8`\n  --> main.gos:6:13\n     6 |     let b = v as u8\n       |             ^^^^^^^\n  = note: lint: lossy_cast\n  = help: say what a value that does not fit becomes: `v.try_into()` answers `Err`, `v as% u8` keeps its low bits, `v.clamp(0, 255) as u8` saturates\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "TRAPPED",
      "control": "verified",
      "release": "TRAPPED",
@@ -2109,7 +2107,7 @@
      "score": 0.5
     },
     "float_to_int_overflow": {
-     "build_output": "build: 895144B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nwarning[GL0062]: this `as` panics when the `f64` value is NaN or past the range of `i64`\n  --> main.gos:5:13\n     5 |     let v = x as i64 // BREAK!\n       |             ^^^^^^^^\n  = note: lint: lossy_cast\n  = help: say what such a value becomes: `x as% i64` saturates and reads NaN as 0, `x.round().clamp(-9223372036854775808.0, 9223372036854775807.0) as i64` rounds and saturates\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 903400B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nwarning[GL0062]: this `as` panics when the `f64` value is NaN or past the range of `i64`\n  --> main.gos:5:13\n     5 |     let v = x as i64 // BREAK!\n       |             ^^^^^^^^\n  = note: lint: lossy_cast\n  = help: say what such a value becomes: `x as% i64` saturates and reads NaN as 0, `x.round().clamp(-9223372036854775808.0, 9223372036854775807.0) as i64` rounds and saturates\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "TRAPPED",
      "control": "verified",
      "release": "TRAPPED",
@@ -2122,7 +2120,7 @@
      "score": 0.5
     },
     "signed_unsigned_compare": {
-     "build_output": "build: 854184B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862440B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2167,7 +2165,7 @@
      "score": 1
     },
     "switch_fallthrough": {
-     "build_output": "build: 854096B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862352B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2182,7 +2180,7 @@
      "score": 1
     },
     "string_equality": {
-     "build_output": "build: 854096B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862352B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2197,7 +2195,7 @@
      "score": 1
     },
     "parse_invalid_number": {
-     "build_output": "build: 854088B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862344B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2212,7 +2210,7 @@
      "score": 1
     },
     "mutate_while_iterating": {
-     "build_output": "build: 961392B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 969648B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2221,7 +2219,7 @@
      "score": 1
     },
     "loop_closure_capture": {
-     "build_output": "build: 862592B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 870848B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2230,7 +2228,7 @@
      "score": 1
     },
     "snapshot_aliasing": {
-     "build_output": "build: 854176B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 866528B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2239,7 +2237,7 @@
      "score": 1
     },
     "repeated_row_alias": {
-     "build_output": "build: 858304B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 866560B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2254,7 +2252,7 @@
      "score": 1
     },
     "sort_with_nan": {
-     "build_output": "build: 866480B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 874736B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2269,7 +2267,7 @@
      "score": 1
     },
     "leading_zero_literal": {
-     "build_output": "build: 853928B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862184B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2278,7 +2276,7 @@
      "score": 1
     },
     "shared_default_argument": {
-     "build_output": "build: 854088B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862344B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2293,7 +2291,7 @@
      "score": 1
     },
     "bitwise_precedence": {
-     "build_output": "build: 854096B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862352B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2302,7 +2300,7 @@
      "score": 1
     },
     "word_and_precedence": {
-     "build_output": "build: 845856B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 858208B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2311,7 +2309,7 @@
      "score": 1
     },
     "dangling_else": {
-     "build_output": "build: 854096B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862352B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2338,7 +2336,7 @@
      "score": 1
     },
     "command_injection": {
-     "build_output": "build: 1014864B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 1023056B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2347,22 +2345,18 @@
      "score": 1
     },
     "float_equality": {
-     "build_output": "build: 870480B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "not equal",
-     "stderr": "",
-     "score": 0
+     "outcome": "REJECTED",
+     "message": "error[GT0142]: `==` compares a computed `f64` with `0.3`, which a `f64` cannot hold exactly\n  --> main.gos:7:16\n     7 |     println(if a == 0.3 { \"equal\" } else { \"not equal\" }) // CONTROL! println(if (a - 0.3).abs() < 1e-9 { \"equal\" } else { \"not equal\" })\n       |                ^^^^^^^^\n  = note: a `f64` holds binary fractions, so arithmetic that should reach the decimal rounds to a neighbour of it and the comparison is false\n  = help: compare within a tolerance: `(a - b).abs() < 1e-9`, or compare with a value the type holds exactly (`0.5`, `0.25`, a whole number)\n\nerror: 1 front-end error(s); refusing to build",
+     "control": "builds",
+     "score": 1
     },
     "lock_order_deadlock": {
-     "build_output": "build: 1143040B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 1159768B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "TRAPPED",
      "control": "verified",
      "release": "TRAPPED",
      "release_stdout": "",
-     "release_stderr": "error[GX0005]: panic: all goroutines are asleep - deadlock! (cohort join can never complete)",
+     "release_stderr": "error[GX0005]: panic: all goroutines are asleep - deadlock! (cohort join can never complete)\nerror[GX0005]: panic: all goroutines are asleep - deadlock! (cohort join can never complete)",
      "exit": 101,
      "secs": 0.0,
      "stdout": "",
@@ -2370,7 +2364,7 @@
      "score": 0.5
     },
     "regex_backtracking": {
-     "build_output": "build: 2136304B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 2144560B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2385,7 +2379,7 @@
      "score": 1
     },
     "missing_comma_concat": {
-     "build_output": "build: 854104B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862360B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2394,7 +2388,7 @@
      "score": 1
     },
     "return_in_finally": {
-     "build_output": "build: 858712B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 866968B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2409,7 +2403,7 @@
      "score": 1
     },
     "worker_failure_lost": {
-     "build_output": "build: 1142768B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 1151024B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "TRAPPED",
      "control": "verified",
      "release": "TRAPPED",
@@ -2422,14 +2416,10 @@
      "score": 0.5
     },
     "unawaited_task": {
-     "build_output": "build: 1134184B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.05,
-     "stdout": "0",
-     "stderr": "",
-     "score": 0
+     "outcome": "REJECTED",
+     "message": "error[GL0065]: `task` is never joined: nothing waits for its task, so the program goes on, and can finish, before the task's work is done\n  --> main.gos:11:9\n    11 |     let task = spawn(|| save(saved)) // CONTROL! let task = spawn(|| save(saved)); task.join().unwrap()\n       |         ^^^^\n  = note: lint: unjoined_task\n  = help: call `task.join()` where the task's work must be done; a task meant to run on its own is spawned without a binding: `spawn(..)`\n\nerror: 1 front-end error(s); refusing to build",
+     "control": "builds",
+     "score": 1
     },
     "format_arg_mismatch": {
      "outcome": "REJECTED",
@@ -2438,7 +2428,7 @@
      "score": 1
     },
     "unsigned_subtraction": {
-     "build_output": "build: 854176B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862432B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2447,7 +2437,7 @@
      "score": 1
     },
     "missing_key_default": {
-     "build_output": "build: 994136B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 1006488B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "TRAPPED",
      "control": "verified",
      "release": "TRAPPED",
@@ -2460,7 +2450,7 @@
      "score": 0.5
     },
     "mutable_hash_key": {
-     "build_output": "build: 924144B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 936496B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2475,17 +2465,13 @@
      "score": 1
     },
     "discarded_pure_result": {
-     "build_output": "build: 866264B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "ada",
-     "stderr": "",
-     "score": 0
+     "outcome": "REJECTED",
+     "message": "error[GT0140]: `to_uppercase` answers a new value and changes nothing, and that value is dropped\n  --> main.gos:3:5\n     3 |     name.to_uppercase() // BREAK!\n       |     ^^^^^^^^^^^^^^^^^^^\n  = help: use what `to_uppercase` answers: bind it (`let value = name.to_uppercase(..)`), assign it back to a `let mut name` (`name = name.to_uppercase(..)`), or pass it where it is needed\n\nerror: 1 front-end error(s); refusing to build",
+     "control": "builds",
+     "score": 1
     },
     "negative_index_wraps": {
-     "build_output": "build: 854088B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862344B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "TRAPPED",
      "control": "verified",
      "release": "TRAPPED",
@@ -2498,7 +2484,7 @@
      "score": 0.5
     },
     "default_numeric_sort": {
-     "build_output": "build: 887128B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 899480B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2513,17 +2499,20 @@
      "score": 1
     },
     "panic_under_lock": {
-     "build_output": "build: 1122688B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nwarning[GL0055]: the tail value of `post` is discarded; it declares no return type\n  --> main.gos:8:5\n     8 |     credits.update(|c| c + 50)\n       |     ^^^^^^^^^^^^^^^^^^^^^^^^^^\n  = note: lint: undeclared_return_value\n  = help: return it: `fn post(..) -> i64`, or say the discard is deliberate: `fn post(..) -> ()`\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
-     "outcome": "SILENT",
+     "build_output": "build: 1135152B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "outcome": "TRAPPED",
      "control": "verified",
-     "exit": 0,
+     "release": "TRAPPED",
+     "release_stdout": "",
+     "release_stderr": "worker failed\nerror[GX0005]: panic: Mutex poisoned: a goroutine panicked while holding it: crash mid-update\n  call stack (outermost first):\n    at main",
+     "exit": 101,
      "secs": 0.0,
-     "stdout": "unbalanced",
-     "stderr": "worker failed",
-     "score": 0
+     "stdout": "",
+     "stderr": "worker failed\nerror[GX0005]: panic: Mutex poisoned: a goroutine panicked while holding it: crash mid-update\n  call stack (outermost first):\n    at main (main.gos:16:17)\n    at __gos_sync_mutex_guard (<generated>:0)",
+     "score": 0.5
     },
     "oob_write": {
-     "build_output": "build: 854128B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862384B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "TRAPPED",
      "control": "verified",
      "release": "TRAPPED",
@@ -2536,7 +2525,7 @@
      "score": 0.5
     },
     "oob_read": {
-     "build_output": "build: 854128B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862384B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "TRAPPED",
      "control": "verified",
      "release": "TRAPPED",
@@ -2549,7 +2538,7 @@
      "score": 0.5
     },
     "use_after_free": {
-     "build_output": "build: 973392B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 981584B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2558,7 +2547,7 @@
      "score": 1
     },
     "double_free": {
-     "build_output": "build: 973352B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 981544B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2579,7 +2568,7 @@
      "score": 1
     },
     "uninit_heap_read": {
-     "build_output": "build: 866632B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 874888B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2594,7 +2583,7 @@
      "score": 1
     },
     "format_string": {
-     "build_output": "build: 845824B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 858176B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2614,7 +2603,7 @@
      "score": 1.0
     },
     "null_byte_path": {
-     "build_output": "build: 883096B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 891352B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2623,14 +2612,10 @@
      "score": 1
     },
     "homoglyph_identifier": {
-     "build_output": "build: 845848B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "admin\nadmin",
-     "stderr": "",
-     "score": 0
+     "outcome": "REJECTED",
+     "message": "error[GP0071]: identifier `is_аdmin` looks like `is_admin`, a different name in this file\n  --> main.gos:5:4\n     5 | fn is_аdmin(user: String) -> bool { true } // BREAK!\n       |    ^^^^^^^^^\n  = help: the two render alike but name different things; spell it `is_admin` if that name is meant, or choose a name that reads differently\n\nerror: 1 front-end error(s); refusing to build",
+     "control": "builds",
+     "score": 1
     },
     "string_literal_write": {
      "outcome": "REJECTED",
@@ -2639,7 +2624,7 @@
      "score": 1
     },
     "reference_cycle": {
-     "build_output": "build: 973704B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 981896B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.1,
@@ -2648,7 +2633,7 @@
      "score": 1
     },
     "forgotten_free": {
-     "build_output": "build: 854192B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862448B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.07,
@@ -2681,7 +2666,7 @@
      "score": 1
     },
     "missing_virtual": {
-     "build_output": "build: 854000B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862256B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2696,7 +2681,7 @@
      "score": 1
     },
     "forced_unwrap": {
-     "build_output": "build: 853992B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862248B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "TRAPPED",
      "control": "verified",
      "release": "TRAPPED",
@@ -2709,7 +2694,7 @@
      "score": 0.5
     },
     "null_in_text": {
-     "build_output": "build: 997872B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nwarning[GL0067]: an `Option<String>` is rendered with `{}` among other text; when it is `None`, the output contains `None`\n  --> main.gos:10:23\n    10 |     println(f\"hello, {name}\") // CONTROL! println(f\"hello, {name.unwrap_or(\"nobody\")}\")\n       |                       ^^^^\n  = note: lint: option_rendered\n  = help: choose the text to show when the value is missing: use `v.unwrap_or(..)`, `if let Some(x) = v`, or `match v`; use `{v:?}` to print the explicit `Some(...)` or `None` form\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 1006128B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nwarning[GL0067]: an `Option<String>` is rendered with `{}` among other text; when it is `None`, the output contains `None`\n  --> main.gos:10:23\n    10 |     println(f\"hello, {name}\") // CONTROL! println(f\"hello, {name.unwrap_or(\"nobody\")}\")\n       |                       ^^^^\n  = note: lint: option_rendered\n  = help: choose the text to show when the value is missing: use `v.unwrap_or(..)`, `if let Some(x) = v`, or `match v`; use `{v:?}` to print the explicit `Some(...)` or `None` form\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "SILENT",
      "control": "verified",
      "exit": 0,
@@ -2755,14 +2740,10 @@
      "score": 1
     },
     "generic_constraint": {
-     "build_output": "build: 903344B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
-     "outcome": "SILENT",
-     "control": "verified",
-     "exit": 0,
-     "secs": 0.0,
-     "stdout": "1",
-     "stderr": "",
-     "score": 0
+     "outcome": "REJECTED",
+     "message": "error[GT0143]: `Point` has no order: `sort` needs `Point` to be ordered\n  --> main.gos:8:5\n     8 |     ps.sort() // CONTROL! ps.sort_by_key(|p| p.x)\n       |     ^^\n  = help: declare the order: `#[derive(PartialOrd, Ord)]` on `Point` compares its fields in declaration order, or write `impl Ord for Point`; to order by one field, sort by a key: `sort_by_key(|v| v.field)`\n  = suggestion: derive an order → `#[derive(PartialOrd, Ord)]`\n\nerror: 1 front-end error(s); refusing to build",
+     "control": "builds",
+     "score": 1
     },
     "lossy_int_to_float": {
      "outcome": "REJECTED",
@@ -2777,7 +2758,7 @@
      "score": 1
     },
     "lazy_accumulator": {
-     "build_output": "build: 1010624B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 1018880B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.58,
@@ -2786,7 +2767,7 @@
      "score": 1
     },
     "size_overflow_alloc": {
-     "build_output": "build: 854144B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862400B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "TRAPPED",
      "control": "verified",
      "release": "TRAPPED",
@@ -2805,7 +2786,7 @@
      "score": 1
     },
     "orphaned_receive": {
-     "build_output": "build: 1105304B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 1113560B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2814,7 +2795,7 @@
      "score": 1
     },
     "blocking_in_async": {
-     "build_output": "build: 1117912B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 1126168B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.5,
@@ -2829,7 +2810,7 @@
      "score": 1
     },
     "evaluation_order": {
-     "build_output": "build: 882968B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 895320B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2850,7 +2831,7 @@
      "score": 1
     },
     "json_big_integer": {
-     "build_output": "build: 1071248B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 1079504B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2865,7 +2846,7 @@
      "score": 1
     },
     "structural_equality": {
-     "build_output": "build: 845768B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 858120B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2880,7 +2861,7 @@
      "score": 1
     },
     "enum_from_int": {
-     "build_output": "build: 854168B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 862424B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2889,17 +2870,10 @@
      "score": 1
     },
     "bitwise_on_bool": {
-     "build_output": "build: 849880B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
-     "outcome": "TRAPPED",
-     "control": "verified",
-     "release": "TRAPPED",
-     "release_stdout": "",
-     "release_stderr": "error[GX0005]: panic: vec index out of bounds: the len is 0 but the index is 0\n  call stack (outermost first):\n    at main",
-     "exit": 101,
-     "secs": 0.0,
-     "stdout": "",
-     "stderr": "error[GX0005]: panic: vec index out of bounds: the len is 0 but the index is 0\n  call stack (outermost first):\n    at main (main.gos:3:32)",
-     "score": 0.5
+     "outcome": "REJECTED",
+     "message": "error[GT0141]: `&` on `bool` operands evaluates both sides\n  --> main.gos:3:15\n     3 |     let yes = (s.len() > 0) & (s[0] == 'a') // CONTROL! let yes = s.len() > 0 && s[0] == 'a'\n       |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  = help: write `&&`, which evaluates its right side only when the left does not decide the answer\n\nerror: 1 front-end error(s); refusing to build",
+     "control": "builds",
+     "score": 1
     },
     "readonly_field": {
      "outcome": "REJECTED",
@@ -2914,7 +2888,7 @@
      "score": 1
     },
     "lost_write_error": {
-     "build_output": "build: 1010840B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 1019096B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "TRAPPED",
      "control": "verified",
      "release": "TRAPPED",
@@ -2927,7 +2901,7 @@
      "score": 0.5
     },
     "short_read": {
-     "build_output": "build: 1010616B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 1022904B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.2,
@@ -2936,7 +2910,7 @@
      "score": 1
     },
     "masked_cleanup_error": {
-     "build_output": "build: 858608B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 866864B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2945,7 +2919,7 @@
      "score": 1
     },
     "unflushed_writer": {
-     "build_output": "build: 1006464B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 1018816B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2966,7 +2940,7 @@
      "score": 1
     },
     "stale_null_check": {
-     "build_output": "build: 973472B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 981664B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2981,7 +2955,7 @@
      "score": 1
     },
     "typed_nil": {
-     "build_output": "build: 953184B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 961376B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2990,7 +2964,7 @@
      "score": 1
     },
     "mutate_after_send": {
-     "build_output": "build: 1117920B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 1126176B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -2999,7 +2973,7 @@
      "score": 1
     },
     "lost_wakeup": {
-     "build_output": "build: 1109424B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 1117680B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "TRAPPED",
      "control": "verified",
      "release": "TRAPPED",
@@ -3012,20 +2986,16 @@
      "score": 0.5
     },
     "lock_skipped_on_return": {
-     "build_output": "build: 1113904B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
-     "outcome": "TRAPPED",
-     "control": "verified",
-     "release": "TRAPPED",
-     "release_stdout": "",
-     "release_stderr": "error[GX0005]: panic: all goroutines are asleep - deadlock! (receive can never complete)",
-     "exit": 101,
+     "build_output": "build: 1130760B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "outcome": "CORRECT",
+     "exit": 0,
      "secs": 0.0,
-     "stdout": "",
-     "stderr": "error[GX0005]: panic: all goroutines are asleep - deadlock! (receive can never complete)",
-     "score": 0.5
+     "stdout": "70",
+     "stderr": "",
+     "score": 1
     },
     "cleanup_on_error_path": {
-     "build_output": "build: 879344B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 887600B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "SILENT",
      "control": "verified",
      "exit": 0,
@@ -3035,7 +3005,7 @@
      "score": 0
     },
     "generator_break_cleanup": {
-     "build_output": "build: 866864B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 879216B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "SILENT",
      "control": "verified",
      "exit": 0,
@@ -3051,7 +3021,7 @@
      "score": 1
     },
     "catch_all_hides_bug": {
-     "build_output": "build: 866472B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 874728B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "TRAPPED",
      "control": "verified",
      "release": "TRAPPED",
@@ -3070,7 +3040,7 @@
      "score": 1
     },
     "timeout_without_cancel": {
-     "build_output": "build: 1147448B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 1159800B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.1,
@@ -3079,7 +3049,7 @@
      "score": 1
     },
     "blocked_sender_leak": {
-     "build_output": "build: 1138672B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
+     "build_output": "build: 1146928B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
      "outcome": "CORRECT",
      "exit": 0,
      "secs": 0.0,
@@ -3088,7 +3058,7 @@
      "score": 1
     }
    },
-   "score": 85.5,
+   "score": 90.7,
    "rank": 1
   },
   {
