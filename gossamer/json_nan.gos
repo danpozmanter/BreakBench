@@ -1,0 +1,17 @@
+use std::env
+use std::encoding::json
+
+struct Report {
+    mean: f64
+}
+
+fn main() {
+    let count = env::args()[0].to_i64().unwrap()
+    let mean = 0.0 / count as f64
+    // CONTROL! if mean.is_nan() { println("refused"); return }
+    // encode answers a Result, so the text is reached only through a check.
+    match json::encode(Report { mean }) {
+        Ok(text) => println(text),
+        Err(_) => println("refused"),
+    }
+}

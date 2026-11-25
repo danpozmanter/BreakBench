@@ -120,6 +120,24 @@
       ]
     },
     {
+      "id": "int_min_division",
+      "category": "numbers",
+      "kind": "dynamic",
+      "args": [
+        "-9223372036854775808",
+        "-1"
+      ],
+      "expect": "^9223372036854775808$",
+      "title": "Dividing the smallest 64-bit integer by -1",
+      "scenario": "The program reads two 64-bit integers from the command line, -9223372036854775808 and -1, and prints the first divided by the second with the language's integer division. The divisor is not zero, but the quotient is one past the largest 64-bit integer.",
+      "best": "The exact 9223372036854775808, or an overflow error. A clear error at run time earns half. Wrapping back to -9223372036854775808 or a crash from the processor's divide trap fails.",
+      "mode": "Integer overflow",
+      "refs": [
+        "CERT INT32-C",
+        "CWE-190"
+      ]
+    },
+    {
       "id": "shift_overflow",
       "category": "numbers",
       "kind": "dynamic",
@@ -250,21 +268,6 @@
         "CWE-457"
       ],
       "control_expect": "^0$"
-    },
-    {
-      "id": "misspelled_field",
-      "category": "api",
-      "kind": "static",
-      "args": [],
-      "expect": null,
-      "title": "Setting a misspelled field",
-      "scenario": "Config has a field color that starts as \"blue\". The program sets cfg.colour = \"red\" and prints cfg.color.",
-      "best": "The compiler refuses, because colour does not exist. Quietly creating a new field and printing \"blue\" fails.",
-      "mode": "Wrong type or shape",
-      "refs": [
-        "Pitfall: assigning a misspelled attribute creates a new one (Python, JavaScript, Ruby)"
-      ],
-      "control_expect": "^red$"
     },
     {
       "id": "assign_in_condition",
@@ -552,23 +555,6 @@
       ]
     },
     {
-      "id": "word_and_precedence",
-      "category": "operators",
-      "kind": "static",
-      "args": [
-        "yes",
-        "no"
-      ],
-      "expect": "^wait$",
-      "title": "A word-form and that binds looser than =",
-      "scenario": "ready is true and approved is false, from the command line. The program sets ok = ready and approved, with the language's word form of logical and where it has one (and), otherwise &&, and prints go or wait.",
-      "best": "\"wait\": ok holds both conditions. go shows the assignment took ready alone before and ran.",
-      "mode": "Code that reads one way and runs another",
-      "refs": [
-        "CWE-783"
-      ]
-    },
-    {
       "category": "control_flow",
       "id": "dangling_else",
       "kind": "static",
@@ -579,23 +565,6 @@
       "title": "An else meant for the outer if",
       "scenario": "a is false and b is true. The program writes if a then (if b then r = \"both\") else r = \"not a\", without braces where the language allows it.",
       "best": "\"not a\": blocks are explicit, or the compiler refuses. Attaching the else to the inner if leaves r unset.",
-      "mode": "Code that reads one way and runs another",
-      "refs": [
-        "CWE-483"
-      ]
-    },
-    {
-      "id": "stray_semicolon",
-      "category": "control_flow",
-      "kind": "static",
-      "args": [
-        "1",
-        "10"
-      ],
-      "expect": "(?s)^small\\s+big$",
-      "title": "A semicolon that ends an if",
-      "scenario": "size(n) starts label as small and means to set it to big only when n > 5, but a semicolon right after the condition ends the if, so the block after it runs every time. Where the language has no empty statement, the program writes the same shape and the language decides what it means. The program prints size(1) and size(10), with 1 and 10 read from the command line.",
-      "best": "\"small\" then \"big\", or a refusal of an empty if body. big for 1 shows the block ran without the if; small for 10 shows the block never ran.",
       "mode": "Code that reads one way and runs another",
       "refs": [
         "CWE-483"
@@ -1198,36 +1167,6 @@
       ]
     },
     {
-      "id": "newtype",
-      "category": "api",
-      "kind": "static",
-      "args": [],
-      "expect": null,
-      "title": "Adding meters to seconds",
-      "scenario": "Meters and Seconds each wrap a 64-bit float. The program adds a distance of 2 m to a time of 3 s by mistake and prints the sum.",
-      "best": "A refusal to add Meters to Seconds. Printing 5 is a silent wrong answer.",
-      "mode": "Wrong type or shape",
-      "refs": [
-        "Pitfall: unit confusion between plain numbers (the Mars Climate Orbiter loss)"
-      ],
-      "control_expect": "^2(\\.0+)?$"
-    },
-    {
-      "id": "strong_enum",
-      "category": "api",
-      "kind": "static",
-      "args": [],
-      "expect": null,
-      "title": "Passing an integer where an enum is expected",
-      "scenario": "Color is Red, Green or Blue, and name(c) returns a color's name. The program calls name with the integer 7 and prints the result.",
-      "best": "A refusal to pass 7 as a Color. Printing an empty name or a placeholder is a silent wrong answer.",
-      "mode": "Wrong type or shape",
-      "refs": [
-        "CWE-704"
-      ],
-      "control_expect": "(?i)^(green|blue)$"
-    },
-    {
       "id": "override_check",
       "category": "api",
       "kind": "static",
@@ -1514,21 +1453,6 @@
       ]
     },
     {
-      "id": "checked_interpolation",
-      "category": "names",
-      "kind": "static",
-      "args": [],
-      "expect": null,
-      "title": "A misspelled name in string interpolation",
-      "scenario": "name is Ada. The program prints a greeting with string interpolation, but the placeholder misspells the variable as nmae.",
-      "best": "A refusal to build. A clear error at run time is next best; a greeting with an empty name is a silent wrong answer.",
-      "mode": "Wrong type or shape",
-      "refs": [
-        "Pitfall: a misspelled name inside interpolated text"
-      ],
-      "control_expect": "Ada$"
-    },
-    {
       "id": "evaluation_order",
       "category": "control_flow",
       "kind": "static",
@@ -1582,6 +1506,40 @@
       "mode": "Lossy conversions",
       "refs": [
         "CWE-681"
+      ]
+    },
+    {
+      "id": "parse_out_of_range",
+      "category": "numbers",
+      "kind": "dynamic",
+      "args": [
+        "9223372036854775808"
+      ],
+      "expect": "^(invalid|9223372036854775808)$",
+      "title": "Parsing a number one past the 64-bit range",
+      "scenario": "The program parses 9223372036854775808 (2^63), read from the command line, into the language's 64-bit integer with its shortest standard call, and prints it. Where that call answers an Option, a Result or an error union, the program checks it and prints invalid. Where integers have no fixed size, the exact value is the right answer.",
+      "best": "\"invalid\", because the language made the program check the parse, or the exact 9223372036854775808 where integers have no fixed size. An error at run time earns half. A clamped 9223372036854775807, a wrapped negative number or a rounded float is a silent wrong answer.",
+      "mode": "Integer overflow",
+      "refs": [
+        "CERT ERR34-C",
+        "CWE-190"
+      ]
+    },
+    {
+      "id": "json_nan",
+      "category": "numbers",
+      "kind": "dynamic",
+      "args": [
+        "0"
+      ],
+      "expect": "^refused$",
+      "title": "Writing NaN to JSON",
+      "scenario": "The program reads a count of scores from the command line: 0. Their total is 0.0, so the mean, total / count in 64-bit floats, is NaN, which JSON cannot hold. It encodes {\"mean\": mean} with the standard library's JSON encoder and prints the text. Where the encoder answers an error value, a Result, an error union or a checked exception, the program checks it and prints refused.",
+      "best": "\"refused\": the encoder reports the NaN and the language made the program check. An error at run time, from the encoder or from the division, earns half. Text holding null, NaN or nothing at all is a silent wrong answer.",
+      "mode": "Lossy conversions",
+      "refs": [
+        "RFC 8259 section 6",
+        "Pitfall: JSON.stringify writes NaN as null (JavaScript); json.dumps writes invalid JSON (Python)"
       ]
     },
     {

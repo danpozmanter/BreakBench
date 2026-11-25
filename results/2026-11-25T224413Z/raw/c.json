@@ -1,0 +1,918 @@
+{
+ "lang": "c",
+ "version": "clang version 23.1.6 (https://github.com/llvm/llvm-project 5b10d2d74929eae78912771222c9855af97496f4)",
+ "results": {
+  "null_deref": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.1,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "int_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 136,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "Floating point exception (core dumped)"
+  },
+  "int_min_division": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 136,
+   "secs": 0.09,
+   "stdout": "",
+   "stderr": "Floating point exception (core dumped)"
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "main.c:7:25: error: incompatible pointer to integer conversion passing 'char *' to parameter of type 'long' [-Wint-conversion]\n    7 |     printf(\"%ld\\n\", add(argv[1], 3)); // BREAK!\n      |                         ^~~~~~~\nmain.c:3:22: note: passing argument to parameter 'a' here\n    3 | static long add(long a, long b) { return a + b; }\n      |                      ^\n1 error generated.",
+   "control": "builds"
+  },
+  "missing_return": {
+   "build_output": "main.c:8:1: warning: non-void function does not return a value in all control paths [-Wreturn-type]\n    8 | }\n      | ^\n1 warning generated.",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "]\ufffdf.\u000f\u001f\ufffd",
+   "stderr": ""
+  },
+  "non_exhaustive_match": {
+   "build_output": "main.c:8:13: warning: enumeration value 'BLUE' not handled in switch [-Wswitch]\n    8 |     switch (c) {\n      |             ^\n1 warning generated.",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "(null)",
+   "stderr": ""
+  },
+  "uninitialized_variable": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "assign_in_condition": {
+   "build_output": "main.c:7:11: warning: using the result of an assignment as a condition without parentheses [-Wparentheses]\n    7 |     if (x = 1) { // CONTROL! if (x == 1) {\n      |         ~~^~~\nmain.c:7:11: note: place parentheses around the assignment to silence this warning\n    7 |     if (x = 1) { // CONTROL! if (x == 1) {\n      |           ^  \n      |         (    )\nmain.c:7:11: note: use '==' to turn this assignment into an equality comparison\n    7 |     if (x = 1) { // CONTROL! if (x == 1) {\n      |           ^\n      |           ==\n1 warning generated.",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "switch_fallthrough": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "two",
+   "stderr": ""
+  },
+  "break_in_switch": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "have 0",
+   "stderr": ""
+  },
+  "string_equality": {
+   "build_output": "main.c:8:18: warning: result of comparison against a string literal is unspecified (use an explicit string comparison function instead) [-Wstring-compare]\n    8 |     int same = s == \"abc\"; // BREAK!\n      |                  ^  ~~~~~\n1 warning generated.",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "different",
+   "stderr": ""
+  },
+  "loose_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "different",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "invalid number: 12abc",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "invalid number: 12abc"
+  },
+  "covariant_array_write": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "meow",
+   "stderr": ""
+  },
+  "mutate_while_iterating": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1,2,3",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "repeated_row_alias": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "sort_with_nan": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3.0",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "668",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "build_output": "main.c:7:18: warning: & has lower precedence than ==; == will be evaluated first [-Wparentheses]\n    7 |     int even = x & 1 == 0; // BREAK!\n      |                  ^~~~~~~~\nmain.c:7:18: note: place parentheses around the '==' expression to silence this warning\n    7 |     int even = x & 1 == 0; // BREAK!\n      |                  ^       \n      |                    (     )\nmain.c:7:18: note: place parentheses around the & expression to evaluate it first\n    7 |     int even = x & 1 == 0; // BREAK!\n      |                  ^\n      |                (    )\n1 warning generated.",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "odd",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "build_output": "main.c:11:5: warning: add explicit braces to avoid dangling else [-Wdangling-else]\n   11 |     else // CONTROL! } else\n      |     ^\n1 warning generated.",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unset",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "main.c:7:24: error: chained comparison 'X < Y < Z' does not behave the same as a mathematical expression [-Wparentheses]\n    7 |     int inside = 1 < x < 3; // BREAK!\n      |                        ^\nmain.c:7:24: warning: result of comparison of constant 3 with boolean expression is always true [-Wtautological-constant-out-of-range-compare]\n    7 |     int inside = 1 < x < 3; // BREAK!\n      |                  ~~~~~ ^ ~\n1 warning and 1 error generated.",
+   "control": "builds"
+  },
+  "lost_update_on_copy": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "150",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hi\ninjected",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "no match",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "return_in_finally": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "total 3",
+   "stderr": ""
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "build_output": "main.c:6:20: warning: more '%' conversions than data arguments [-Wformat-insufficient-args]\n    6 |     printf(\"%d of %d\\n\", done); // CONTROL! printf(\"%d of %d\\n\", done, total);\n      |                   ~^\n1 warning generated.",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3 of 920883960",
+   "stderr": ""
+  },
+  "unsigned_subtraction": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "18446744073709551614",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.12,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pending",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ADA",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "10",
+   "stderr": ""
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "main.c:16:27: error: incompatible pointer to integer conversion passing 'const char *' to parameter of type 'int' [-Wint-conversion]\n   16 |     puts(contains(ids, 3, id) ? \"found\" : \"missing\"); // CONTROL! puts(contains(ids, 3, atoi(id)) ? \"found\" : \"missing\");\n      |                           ^~\nmain.c:5:51: note: passing argument to parameter 'v' here\n    5 | static bool contains(const int *xs, size_t n, int v) {\n      |                                                   ^\n1 error generated.",
+   "control": "builds"
+  },
+  "panic_under_lock": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unbalanced",
+   "stderr": "worker failed"
+  },
+  "oob_write": {
+   "outcome": "CORRUPT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "99",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "CORRUPT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "42",
+   "stderr": ""
+  },
+  "use_after_free": {
+   "outcome": "CORRUPT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "6666",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 134,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "free(): double free detected in tcache 2\nAborted (core dumped)"
+  },
+  "dangling_stack_ref": {
+   "build_output": "main.c:5:13: warning: address of stack memory associated with local variable 'local' returned [-Wreturn-stack-address]\n    5 |     return &local;\n      |             ^~~~~\n1 warning generated.",
+   "outcome": "CORRUPT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRUPT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "99",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRUPT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5345435245542d544f4b454e",
+   "stderr": ""
+  },
+  "wrong_variant_access": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.09,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "format_string": {
+   "build_output": "main.c:5:12: warning: format string is not a string literal (potentially insecure) [-Wformat-security]\n    5 |     printf(argv[1]); // CONTROL! printf(\"%s\", argv[1]);\n      |            ^~~~~~~\nmain.c:5:12: note: treat the string as an argument to avoid this\n    5 |     printf(argv[1]); // CONTROL! printf(\"%s\", argv[1]);\n      |            ^\n      |            \"%s\", \n1 warning generated.",
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "trojan_source": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "admin",
+   "stderr": ""
+  },
+  "unsafe_deserialization": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no serialization in the standard library"
+  },
+  "null_byte_path": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "secret",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "admin\nadmin",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.09,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "reference_cycle": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no automatic memory management; a record is freed only by an explicit free, so dropping a reference never frees anything"
+  },
+  "forgotten_free": {
+   "outcome": "LEAK",
+   "control": "verified",
+   "exit": 137,
+   "secs": 0.61,
+   "stdout": "",
+   "stderr": "Killed"
+  },
+  "complete_init": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "override_check": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no methods or inheritance, so no method replaces another"
+  },
+  "missing_virtual": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no methods or inheritance, so no method replaces another"
+  },
+  "unbound_method": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no methods or closures, so a method cannot be passed with its object"
+  },
+  "forced_unwrap": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.08,
+   "stdout": "before",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hello, (null)",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.11,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "empty_max": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "readonly_param": {
+   "outcome": "REJECTED",
+   "message": "main.c:5:11: error: read-only variable is not assignable\n    5 |     xs[0] = 9; // BREAK!\n      |     ~~~~~ ^\n1 error generated.",
+   "control": "builds"
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "REJECTED",
+   "message": "main.c:5:39: error: constexpr initializer evaluates to 300 which is not exactly representable in type 'const unsigned char'\n    5 |     constexpr unsigned char too_big = 300; // BREAK!\n      |                                       ^\nmain.c:5:39: warning: implicit conversion from 'int' to 'unsigned char' changes value from 300 to 44 [-Wconstant-conversion]\n    5 |     constexpr unsigned char too_big = 300; // BREAK!\n      |                             ~~~~~~~   ^~~\n1 warning and 1 error generated.",
+   "control": "builds"
+  },
+  "no_implicit_conversion": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-1294967296",
+   "stderr": ""
+  },
+  "generic_constraint": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "the standard qsort takes any comparison function, so nothing ties sorting to an ordering"
+  },
+  "lossy_int_to_float": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "9007199254740992",
+   "stderr": ""
+  },
+  "const_index_bounds": {
+   "build_output": "main.c:5:20: warning: array index 5 is past the end of the array (that has type 'int[3]') [-Warray-bounds]\n    5 |     printf(\"%d\\n\", table[5]); // CONTROL! printf(\"%d\\n\", table[1]);\n      |                    ^     ~\nmain.c:4:5: note: array 'table' declared here\n    4 |     int table[3] = {10, 20, 30};\n      |     ^\n1 warning generated.",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "32765",
+   "stderr": ""
+  },
+  "lazy_accumulator": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.31,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "outcome": "CORRUPT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "stored",
+   "stderr": ""
+  },
+  "const_overflow": {
+   "build_output": "main.c:5:67: warning: overflow in expression; result is -8'985'944'073'709'551'616 with type 'long' [-Winteger-overflow]\n    5 |     const int64_t span = INT64_C(1000000000) * 60 * 60 * 24 * 365 * 300; // CONTROL! const uint64_t span = UINT64_C(1000000000) * 60 * 60 * 24 * 365 * 300;\n      |                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~\n1 warning generated.",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-8985944073709551616",
+   "stderr": ""
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "evaluation_order": {
+   "outcome": "CHANCE",
+   "message": "C leaves the order of a call's arguments unspecified; clang happens to run them left to right",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "REJECTED",
+   "message": "main.c:12:88: error: duplicate case value 'CIRCLE'\n   12 | static const char *bad(enum Shape s) { switch (s) { case CIRCLE: return \"circle\"; case CIRCLE: return \"again\"; default: return \"other\"; } } // BREAK!\n      |                                                                                        ^\nmain.c:12:58: note: previous case defined here\n   12 | static const char *bad(enum Shape s) { switch (s) { case CIRCLE: return \"circle\"; case CIRCLE: return \"again\"; default: return \"other\"; } } // BREAK!\n      |                                                          ^\n1 error generated.",
+   "control": "builds"
+  },
+  "duplicate_key": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no map type"
+  },
+  "json_big_integer": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no JSON parser in the standard library"
+  },
+  "parse_out_of_range": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "invalid number: 9223372036854775808",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "invalid number: 9223372036854775808"
+  },
+  "json_nan": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no JSON encoder in the standard library"
+  },
+  "comparison_statement": {
+   "build_output": "main.c:5:11: warning: equality comparison result unused [-Wunused-comparison]\n    5 |     count == 5; // CONTROL! count = 5;\n      |     ~~~~~~^~~~\nmain.c:5:11: note: use '=' to turn this equality comparison into an assignment\n    5 |     count == 5; // CONTROL! count = 5;\n      |           ^~\n      |           =\n1 warning generated.",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "structural_equality": {
+   "outcome": "REJECTED",
+   "message": "main.c:8:12: error: invalid operands to binary expression ('struct P' and 'struct P')\n    8 |     puts(a == b ? \"equal\" : \"different\"); // CONTROL! puts(a.x == b.x && a.y == b.y ? \"equal\" : \"different\");\n      |          ~ ^  ~\n1 error generated.",
+   "control": "builds"
+  },
+  "array_literal_length": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "enum_from_int": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "before\n7",
+   "stderr": ""
+  },
+  "bitwise_on_bool": {
+   "build_output": "main.c:6:42: warning: operator '?:' has lower precedence than '&'; '&' will be evaluated first [-Wbitwise-conditional-parentheses]\n    6 |     puts((strlen(s) > 0) & (s[0] == 'a') ? \"yes\" : \"no\"); // CONTROL! puts(strlen(s) > 0 && s[0] == 'a' ? \"yes\" : \"no\");\n      |          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ^\nmain.c:6:42: note: place parentheses around the '&' expression to silence this warning\n    6 |     puts((strlen(s) > 0) & (s[0] == 'a') ? \"yes\" : \"no\"); // CONTROL! puts(strlen(s) > 0 && s[0] == 'a' ? \"yes\" : \"no\");\n      |                                          ^\n      |          (                              )\nmain.c:6:42: note: place parentheses around the '?:' expression to evaluate it first\n    6 |     puts((strlen(s) > 0) & (s[0] == 'a') ? \"yes\" : \"no\"); // CONTROL! puts(strlen(s) > 0 && s[0] == 'a' ? \"yes\" : \"no\");\n      |                                          ^             \n      |                            (                           )\n1 warning generated.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "no",
+   "stderr": ""
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "main.c:7:12: error: cannot assign to non-static data member 'port' with const-qualified type 'const int'\n    7 |     c.port = 1; // BREAK!\n      |     ~~~~~~ ^\nmain.c:3:27: note: non-static data member 'port' declared const here\n    3 | struct Config { const int port; };\n      |                 ~~~~~~~~~~^~~~\n1 error generated.",
+   "control": "builds"
+  },
+  "bool_condition": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "different",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "short_read": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.2,
+   "stdout": "HELLO-WORLD-1234",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "disk full",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "total=42",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "backed up",
+   "stderr": ""
+  },
+  "nullable_field": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.12,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "stale_null_check": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "empty_slot": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "typed_nil": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "99",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "lock_skipped_on_return": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "cleanup_on_error_path": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "left behind: export.csv",
+   "stderr": ""
+  },
+  "generator_break_cleanup": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "left behind: reader.lock",
+   "stderr": ""
+  },
+  "main_error_exit_code": {
+   "outcome": "REJECTED",
+   "message": "main.c:7:9: error: non-void function 'main' should return a value [-Wreturn-mismatch]\n    7 |         return; // BREAK!\n      |         ^\n1 error generated.",
+   "control": "builds"
+  },
+  "catch_all_hides_bug": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.09,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "narrow_counter_loop": {
+   "build_output": "main.c:8:14: warning: result of comparison of constant 300 with expression of type 'uint8_t' (aka 'unsigned char') is always true [-Wtautological-constant-out-of-range-compare]\n    8 |     while (i < 300) {\n      |            ~ ^ ~~~\n1 warning generated.",
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "timeout_without_cancel": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "blocked_sender_leak": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "42\ndone",
+   "stderr": ""
+  }
+ }
+}

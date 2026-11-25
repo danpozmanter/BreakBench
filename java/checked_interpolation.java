@@ -1,1 +1,0 @@
-// CANNOT-EXPRESS: no string interpolation

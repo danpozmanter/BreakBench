@@ -1,0 +1,7 @@
+use std::env
+
+fn main() {
+    let a = env::args()[0].to_i64().unwrap()
+    let b = env::args()[1].to_i64().unwrap()
+    println(f"{a / b}") // CONTROL! println(f"{a.abs_diff(0) / b.abs_diff(0)}")
+}

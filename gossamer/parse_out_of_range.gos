@@ -1,0 +1,9 @@
+use std::env
+
+fn main() {
+    // to_i64 answers an Option, so the number is reached only through a check.
+    match env::args()[0].to_i64() {
+        Some(n) => println(f"{n}"),
+        None => println("invalid"),
+    }
+}
