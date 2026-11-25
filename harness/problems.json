@@ -331,6 +331,22 @@
       ]
     },
     {
+      "id": "loose_equality",
+      "category": "operators",
+      "kind": "static",
+      "args": [
+        "0.0"
+      ],
+      "expect": "^different$",
+      "title": "Comparing text with a number using ==",
+      "scenario": "code is the command-line text \"0.0\". The program compares it with the integer 0 using == and prints same or different.",
+      "best": "\"different\", or a refusal to compare text with a number. same shows == turned the text into a number.",
+      "mode": "Wrong type or shape",
+      "refs": [
+        "CWE-1024"
+      ]
+    },
+    {
       "id": "parse_invalid_number",
       "category": "security",
       "kind": "dynamic",
@@ -414,6 +430,20 @@
       "mode": "Unintended sharing or copying",
       "refs": [
         "Pitfall: assignment shares a mutable collection (Python, JavaScript, Java)"
+      ]
+    },
+    {
+      "id": "repeated_row_alias",
+      "category": "aliasing",
+      "kind": "static",
+      "args": [],
+      "expect": "^1$",
+      "title": "A grid built by repeating one row",
+      "scenario": "The program makes a 3 by 3 grid of zeros as a list of rows, repeating one row of three zeros with the language's form that repeats a value into a list (* on lists, fill, filled, Array.new(n, value), Array.make, repeating:, vec!, replicate), or its usual nested-list construction where it has no such form. It sets grid[0][0] to 1 and prints how many cells hold 1.",
+      "best": "\"1\": each row is its own list. 3 shows all three rows are one shared list.",
+      "mode": "Unintended sharing or copying",
+      "refs": [
+        "Pitfall: Python FAQ, \"How do I create a multidimensional list?\""
       ]
     },
     {
@@ -517,6 +547,23 @@
       ]
     },
     {
+      "id": "word_and_precedence",
+      "category": "operators",
+      "kind": "static",
+      "args": [
+        "yes",
+        "no"
+      ],
+      "expect": "^wait$",
+      "title": "A word-form and that binds looser than =",
+      "scenario": "ready is true and approved is false, from the command line. The program sets ok = ready and approved, with the language's word form of logical and where it has one (and), otherwise &&, and prints go or wait.",
+      "best": "\"wait\": ok holds both conditions. go shows the assignment took ready alone before and ran.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "CWE-783"
+      ]
+    },
+    {
       "category": "control_flow",
       "id": "dangling_else",
       "kind": "static",
@@ -527,6 +574,23 @@
       "title": "An else meant for the outer if",
       "scenario": "a is false and b is true. The program writes if a then (if b then r = \"both\") else r = \"not a\", without braces where the language allows it.",
       "best": "\"not a\": blocks are explicit, or the compiler refuses. Attaching the else to the inner if leaves r unset.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "CWE-483"
+      ]
+    },
+    {
+      "id": "stray_semicolon",
+      "category": "control_flow",
+      "kind": "static",
+      "args": [
+        "1",
+        "10"
+      ],
+      "expect": "(?s)^small\\s+big$",
+      "title": "A semicolon that ends an if",
+      "scenario": "size(n) starts label as small and means to set it to big only when n > 5, but a semicolon right after the condition ends the if, so the block after it runs every time. Where the language has no empty statement, the program writes the same shape and the language decides what it means. The program prints size(1) and size(10), with 1 and 10 read from the command line.",
+      "best": "\"small\" then \"big\", or a refusal of an empty if body. big for 1 shows the block ran without the if; small for 10 shows the block never ran.",
       "mode": "Code that reads one way and runs another",
       "refs": [
         "CWE-483"
@@ -607,22 +671,6 @@
       "mode": "Locking",
       "refs": [
         "CWE-833"
-      ]
-    },
-    {
-      "category": "security",
-      "id": "path_join_escape",
-      "kind": "static",
-      "args": [
-        "/etc/passwd"
-      ],
-      "expect": "^inside$",
-      "title": "Joining a folder with an absolute path",
-      "scenario": "The program joins /srv/app/uploads with a file name from the command line, /etc/passwd, using the standard path join, and checks that the result is still inside /srv/app/uploads.",
-      "best": "\"inside\", or an error. A join that drops the folder and returns /etc/passwd fails.",
-      "mode": "Untrusted input",
-      "refs": [
-        "CWE-22"
       ]
     },
     {
@@ -899,22 +947,6 @@
       ]
     },
     {
-      "id": "split_character",
-      "category": "api",
-      "kind": "dynamic",
-      "args": [
-        "2"
-      ],
-      "expect": "^a👍$",
-      "title": "Cutting a string in the middle of a character",
-      "scenario": "name is \"a👍b\". The program keeps the first n characters of name, with n = 2 read from the command line, using the language's usual slice or substring call, and prints them.",
-      "best": "a👍, or an error. Half a character, a replacement mark or a question mark is a silent wrong answer.",
-      "mode": "Wrong type or shape",
-      "refs": [
-        "CWE-135"
-      ]
-    },
-    {
       "id": "oob_write",
       "category": "memory",
       "kind": "memory",
@@ -1021,38 +1053,6 @@
       "mode": "Memory reuse",
       "refs": [
         "CWE-908"
-      ]
-    },
-    {
-      "id": "stack_overflow",
-      "category": "memory",
-      "kind": "memory",
-      "args": [
-        "10000000"
-      ],
-      "expect": "^433043450$",
-      "title": "Recursing 10 million levels deep",
-      "scenario": "walk(n) = (walk(n - 1) * 31 + n) mod 1000000007, and walk(0) = 0. The program calls walk(10,000,000). The formula keeps optimizers from turning the recursion into a loop.",
-      "best": "The answer, 433043450: the stack grows to hold the recursion. A stack-overflow error earns half. A segmentation fault fails.",
-      "mode": "Exhaustion and leaks",
-      "refs": [
-        "CWE-674"
-      ]
-    },
-    {
-      "category": "memory",
-      "id": "huge_allocation",
-      "kind": "memory",
-      "args": [
-        "10000000000000"
-      ],
-      "expect": "^too large$",
-      "title": "Allocating a size taken from user input",
-      "scenario": "The program reads n = 10^13 from the command line, allocates n zero bytes, sets the last one and prints the length.",
-      "best": "An allocation the program must check that prints too large. A clean allocation error earns half. A segmentation fault or being killed for running out of memory fails.",
-      "mode": "Exhaustion and leaks",
-      "refs": [
-        "CWE-789"
       ]
     },
     {
@@ -1176,6 +1176,24 @@
       "timeout": 60
     },
     {
+      "id": "forgotten_free",
+      "category": "memory",
+      "kind": "leak",
+      "args": [
+        "1000000"
+      ],
+      "expect": "^done$",
+      "memory_leak": true,
+      "title": "Records allocated in a loop and never freed",
+      "scenario": "Each pass of a loop allocates a 4 KB record on the heap the language's usual way, fills it, and drops it without an explicit free. The program makes 1,000,000 records (4 GB) in a container with 3 GB of memory and prints \"done\".",
+      "best": "\"done\": the language frees each record once nothing points at it. Running out of memory shows every record stayed allocated.",
+      "mode": "Exhaustion and leaks",
+      "refs": [
+        "CWE-401"
+      ],
+      "timeout": 60
+    },
+    {
       "id": "complete_init",
       "category": "api",
       "kind": "static",
@@ -1231,6 +1249,34 @@
       "mode": "Wrong type or shape",
       "refs": [
         "Pitfall: a misspelled override silently adds a method (Java @Override, C++ override)"
+      ]
+    },
+    {
+      "id": "missing_virtual",
+      "category": "api",
+      "kind": "static",
+      "args": [],
+      "expect": "^area 4$",
+      "title": "A replaced method the base never calls",
+      "scenario": "Shape has area(), which returns 0, and describe(), which returns \"area \" followed by area(). Square inherits from Shape (or embeds it, where that is how the language reuses a type) and defines its own area(), which returns 4. The base's area() is written the plain way, not marked overridable where the language makes that a separate choice, and Square's area() carries an override marker only where the language requires one. The program prints describe() of a Square.",
+      "best": "\"area 4\", or a refusal of a method that hides the base's instead of replacing it. \"area 0\" shows describe() still called Shape's area().",
+      "mode": "Wrong type or shape",
+      "refs": [
+        "Pitfall: a non-virtual method is hidden, not overridden (C++ virtual, C# CS0108, Go embedding)"
+      ]
+    },
+    {
+      "id": "unbound_method",
+      "category": "api",
+      "kind": "static",
+      "args": [],
+      "expect": "^2$",
+      "title": "A method passed on without its object",
+      "scenario": "Counter holds count = 0 and has a method increment() that adds 1 to its own count. The program passes counter's increment, named as a method of counter without calling it and without a wrapper (counter.increment, or the language's bound method reference such as counter::increment), to run_twice(f), which calls f twice. It prints counter's count.",
+      "best": "\"2\": the method stays tied to counter, or a refusal to name a method without its object. A method that runs without counter and stops earns half.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "Pitfall: a method passed as a callback loses this (MDN, \"this\": callbacks)"
       ]
     },
     {
@@ -1549,20 +1595,6 @@
       ]
     },
     {
-      "id": "char_arithmetic",
-      "category": "numbers",
-      "kind": "static",
-      "args": [],
-      "expect": "^b$",
-      "title": "A character used as a number",
-      "scenario": "c is the letter a. The program works out the next letter as c + 1 and prints it.",
-      "best": "b, or a refusal to add a number to a character without a conversion. Printing 98 or a1 is a silent wrong answer.",
-      "mode": "Lossy conversions",
-      "refs": [
-        "Pitfall: a character silently used as its code number (Java, C, C#)"
-      ]
-    },
-    {
       "id": "json_big_integer",
       "category": "numbers",
       "kind": "dynamic",
@@ -1860,24 +1892,6 @@
       "best": "cleaned: the scratch file goes on every way out of the function, or the compiler refuses the path that skips the delete. A file left in /tmp/bb_scratch shows the failure skipped the cleanup.",
       "mode": "Skipped cleanup",
       "refs": [
-        "CWE-459"
-      ]
-    },
-    {
-      "id": "exit_skips_cleanup",
-      "category": "cleanup",
-      "kind": "dynamic",
-      "args": [
-        "--version"
-      ],
-      "expect": "^cleaned$",
-      "scratch_dir": "/tmp/bb_scratch",
-      "title": "An exit call that skips pending cleanup",
-      "scenario": "main creates the lock file /tmp/bb_scratch/run.lock and schedules its removal the language's usual way to clean up when a scope ends (defer, finally, ensure, using, with, scope(exit), a destructor; an explicit call at the end of main where the language has none). It then calls check_args, which sees --version, prints 1.0 and ends the program with the standard library's exit call and status 0. The test reads /tmp/bb_scratch after the program ends.",
-      "best": "cleaned: the exit call unwinds the stack like an exception, so pending cleanups run. A lock file left behind shows the exit call skipped them.",
-      "mode": "Skipped cleanup",
-      "refs": [
-        "CERT ERR04-C",
         "CWE-459"
       ]
     },

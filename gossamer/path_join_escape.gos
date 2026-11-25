@@ -1,7 +1,0 @@
-use std::{env, path}
-
-fn main() {
-    let base = "/srv/app/uploads"
-    let joined = path::join(base, env::args()[0]) // CONTROL! let user = env::args()[0]; let rel = if user.starts_with("/") { user.substring(1, user.byte_len()) } else { user }; let joined = path::join(base, rel)
-    println(if joined.starts_with(base + "/") { "inside" } else { "escaped" })
-}

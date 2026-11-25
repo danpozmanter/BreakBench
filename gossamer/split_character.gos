@@ -1,7 +1,0 @@
-use std::env
-
-fn main() {
-    let name = "a👍b"
-    let n = env::args()[0].to_i64().unwrap()
-    println(name[..n])
-}

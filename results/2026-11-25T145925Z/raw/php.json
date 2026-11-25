@@ -1,0 +1,1087 @@
+{
+ "lang": "php",
+ "version": "PHP 8.5.4 (cli) (built: Nov 19 2026 00:22:49) (NTS)",
+ "results": {
+  "null_deref": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "PHP Warning:  Attempt to read property \"name\" on null in /tmp/breakbench/null_deref/release/main.php on line 14\nWarning: Attempt to read property \"name\" on null in /tmp/breakbench/null_deref/release/main.php on line 14\nPHP Fatal error:  Uncaught TypeError: strlen(): Argument #1 ($string) must be of \n...\nwn in /tmp/breakbench/null_deref/release/main.php on line 14\nFatal error: Uncaught TypeError: strlen(): Argument #1 ($string) must be of type string, null given in /tmp/breakbench/null_deref/release/main.php:14\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/null_deref/release/main.php on line 14",
+   "exit": 255,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "PHP Warning:  Attempt to read property \"name\" on null in /tmp/breakbench/null_deref/main/main.php on line 14\nWarning: Attempt to read property \"name\" on null in /tmp/breakbench/null_deref/main/main.php on line 14\nPHP Fatal error:  Uncaught TypeError: strlen(): Argument #1 ($string) must be of type string, null given in /tmp/breakbench/null_deref/main/main.php:14\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/null_deref/main/main.php on line 14\nFatal error: Uncaught TypeError: strlen(): Argument #1 ($string) must be of type string, null given in /tmp/breakbench/null_deref/main/main.php:14\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/null_deref/main/main.php on line 14"
+  },
+  "int_overflow": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "9.2233720368548E+18",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "PHP Fatal error:  Uncaught DivisionByZeroError: Division by zero in /tmp/breakbench/div_by_zero/release/main.php:4\nStack trace:\n#0 /tmp/breakbench/div_by_zero/release/main.php(4): intdiv()\n#1 {main}\n  thrown in /tmp/breakbench/div_by_zero/release/main.php on line 4\nFatal error: Uncaught DivisionByZeroError: Division by zero in /tmp/breakbench/div_by_zero/release/main.php:4\nStack trace:\n#0 /tmp/breakbench/div_by_zero/release/main.php(4): intdiv()\n#1 {main}\n  thrown in /tmp/breakbench/div_by_zero/release/main.php on line 4",
+   "exit": 255,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "PHP Fatal error:  Uncaught DivisionByZeroError: Division by zero in /tmp/breakbench/div_by_zero/main/main.php:4\nStack trace:\n#0 /tmp/breakbench/div_by_zero/main/main.php(4): intdiv()\n#1 {main}\n  thrown in /tmp/breakbench/div_by_zero/main/main.php on line 4\nFatal error: Uncaught DivisionByZeroError: Division by zero in /tmp/breakbench/div_by_zero/main/main.php:4\nStack trace:\n#0 /tmp/breakbench/div_by_zero/main/main.php(4): intdiv()\n#1 {main}\n  thrown in /tmp/breakbench/div_by_zero/main/main.php on line 4"
+  },
+  "shift_overflow": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "7766279631452241920",
+   "stderr": "PHP Warning:  The float 1.0E+20 is not representable as an int, cast occurred in /tmp/breakbench/float_to_int_overflow/main/main.php on line 5\nWarning: The float 1.0E+20 is not representable as an int, cast occurred in /tmp/breakbench/float_to_int_overflow/main/main.php on line 5"
+  },
+  "signed_unsigned_compare": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "PHP Fatal error:  Uncaught TypeError: add(): Argument #1 ($a) must be of type int, string given, called in /tmp/breakbench/type_confusion/release/main.php on line 9 and defined in /tmp/breakbench/type_confusion/release/main.php:3\nStack trace:\n#0 /tmp/breakbench/type_confusion/release/main.php(9): ad\n...\nstring given, called in /tmp/breakbench/type_confusion/release/main.php on line 9 and defined in /tmp/breakbench/type_confusion/release/main.php:3\nStack trace:\n#0 /tmp/breakbench/type_confusion/release/main.php(9): add()\n#1 {main}\n  thrown in /tmp/breakbench/type_confusion/release/main.php on line 3",
+   "exit": 255,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "PHP Fatal error:  Uncaught TypeError: add(): Argument #1 ($a) must be of type int, string given, called in /tmp/breakbench/type_confusion/main/main.php on line 9 and defined in /tmp/breakbench/type_confusion/main/main.php:3\nStack trace:\n#0 /tmp/breakbench/type_confusion/main/main.php(9): add()\n#1 {main}\n  thrown in /tmp/breakbench/type_confusion/main/main.php on line 3\nFatal error: Uncaught TypeError: add(): Argument #1 ($a) must be of type int, string given, called in /tmp/breakbench/type_confusion/main/main.php on line 9 and defined in /tmp/breakbench/type_confusion/main/main.php:3\nStack trace:\n#0 /tmp/breakbench/type_confusion/main/main.php(9): add()\n#1 {main}\n  thrown in /tmp/breakbench/type_confusion/main/main.php on line 3"
+  },
+  "missing_return": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "PHP Fatal error:  Uncaught TypeError: grade(): Return value must be of type string, none returned in /tmp/breakbench/missing_return/release/main.php:8\nStack trace:\n#0 /tmp/breakbench/missing_return/release/main.php(10): grade()\n#1 {main}\n  thrown in /tmp/breakbench/missing_return/release/main.php on\n...\ntal error: Uncaught TypeError: grade(): Return value must be of type string, none returned in /tmp/breakbench/missing_return/release/main.php:8\nStack trace:\n#0 /tmp/breakbench/missing_return/release/main.php(10): grade()\n#1 {main}\n  thrown in /tmp/breakbench/missing_return/release/main.php on line 8",
+   "exit": 255,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "PHP Fatal error:  Uncaught TypeError: grade(): Return value must be of type string, none returned in /tmp/breakbench/missing_return/main/main.php:8\nStack trace:\n#0 /tmp/breakbench/missing_return/main/main.php(10): grade()\n#1 {main}\n  thrown in /tmp/breakbench/missing_return/main/main.php on line 8\nFatal error: Uncaught TypeError: grade(): Return value must be of type string, none returned in /tmp/breakbench/missing_return/main/main.php:8\nStack trace:\n#0 /tmp/breakbench/missing_return/main/main.php(10): grade()\n#1 {main}\n  thrown in /tmp/breakbench/missing_return/main/main.php on line 8"
+  },
+  "non_exhaustive_match": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "PHP Fatal error:  Uncaught UnhandledMatchError: Unhandled match case of type Color in /tmp/breakbench/non_exhaustive_match/release/main.php:14\nStack trace:\n#0 /tmp/breakbench/non_exhaustive_match/release/main.php(19): name()\n#1 {main}\n  thrown in /tmp/breakbench/non_exhaustive_match/release/main.php\n...\nerror: Uncaught UnhandledMatchError: Unhandled match case of type Color in /tmp/breakbench/non_exhaustive_match/release/main.php:14\nStack trace:\n#0 /tmp/breakbench/non_exhaustive_match/release/main.php(19): name()\n#1 {main}\n  thrown in /tmp/breakbench/non_exhaustive_match/release/main.php on line 14",
+   "exit": 255,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "PHP Fatal error:  Uncaught UnhandledMatchError: Unhandled match case of type Color in /tmp/breakbench/non_exhaustive_match/main/main.php:14\nStack trace:\n#0 /tmp/breakbench/non_exhaustive_match/main/main.php(19): name()\n#1 {main}\n  thrown in /tmp/breakbench/non_exhaustive_match/main/main.php on line 14\nFatal error: Uncaught UnhandledMatchError: Unhandled match case of type Color in /tmp/breakbench/non_exhaustive_match/main/main.php:14\nStack trace:\n#0 /tmp/breakbench/non_exhaustive_match/main/main.php(19): name()\n#1 {main}\n  thrown in /tmp/breakbench/non_exhaustive_match/main/main.php on line 14"
+  },
+  "uninitialized_variable": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "NULL",
+   "stderr": "PHP Warning:  Undefined variable $x in /tmp/breakbench/uninitialized_variable/main/main.php on line 6\nWarning: Undefined variable $x in /tmp/breakbench/uninitialized_variable/main/main.php on line 6"
+  },
+  "misspelled_field": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "blue",
+   "stderr": "PHP Deprecated:  Creation of dynamic property Config::$colour is deprecated in /tmp/breakbench/misspelled_field/main/main.php on line 9\nDeprecated: Creation of dynamic property Config::$colour is deprecated in /tmp/breakbench/misspelled_field/main/main.php on line 9"
+  },
+  "assign_in_condition": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "switch_fallthrough": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "two",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "missing",
+   "stderr": ""
+  },
+  "string_equality": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "loose_equality": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "same",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "13",
+   "stderr": ""
+  },
+  "covariant_array_write": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "woof",
+   "stderr": ""
+  },
+  "mutate_while_iterating": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1,3",
+   "stderr": ""
+  },
+  "self_deadlock": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no mutex in the language or its standard library"
+  },
+  "loop_closure_capture": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "repeated_row_alias": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "saved",
+   "stderr": "PHP Warning:  file_put_contents(/dev/null/out.txt): Failed to open stream: No such file or directory in /tmp/breakbench/ignored_error_result/main/main.php on line 5\nWarning: file_put_contents(/dev/null/out.txt): Failed to open stream: No such file or directory in /tmp/breakbench/ignored_error_result/main/main.php on line 5"
+  },
+  "sort_with_nan": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "ordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "3.5",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "668",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "PHP Fatal error:  Uncaught Exception: Cannot traverse an already closed generator in /tmp/breakbench/reused_iterator/release/main.php:13\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/reused_iterator/release/main.php on line 13\nFatal error: Uncaught Exception: Cannot traverse an already closed generator in /tmp/breakbench/reused_iterator/release/main.php:13\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/reused_iterator/release/main.php on line 13",
+   "exit": 255,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "PHP Fatal error:  Uncaught Exception: Cannot traverse an already closed generator in /tmp/breakbench/reused_iterator/main/main.php:13\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/reused_iterator/main/main.php on line 13\nFatal error: Uncaught Exception: Cannot traverse an already closed generator in /tmp/breakbench/reused_iterator/main/main.php:13\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/reused_iterator/main/main.php on line 13"
+  },
+  "bitwise_precedence": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "odd",
+   "stderr": ""
+  },
+  "word_and_precedence": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "go",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unset",
+   "stderr": ""
+  },
+  "stray_semicolon": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "big\nbig",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "Errors parsing main.php\n\nPHP Parse error:  syntax error, unexpected token \"<\" in main.php on line 4",
+   "control": "builds"
+  },
+  "lost_update_on_copy": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "150",
+   "stderr": ""
+  },
+  "command_injection": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "injected",
+   "stderr": ""
+  },
+  "float_equality": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no mutex in the language or its standard library"
+  },
+  "regex_backtracking": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "no match",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "Errors parsing main.php\n\nPHP Parse error:  syntax error, unexpected double-quoted string \"carol\", expecting \"]\" in main.php on line 6",
+   "control": "builds"
+  },
+  "return_in_finally": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no threads or asynchronous tasks in the language or its standard library"
+  },
+  "unawaited_task": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no threads or asynchronous tasks in the language or its standard library"
+  },
+  "format_arg_mismatch": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "PHP Fatal error:  Uncaught ArgumentCountError: 3 arguments are required, 2 given in /tmp/breakbench/format_arg_mismatch/release/main.php:5\nStack trace:\n#0 /tmp/breakbench/format_arg_mismatch/release/main.php(5): sprintf()\n#1 {main}\n  thrown in /tmp/breakbench/format_arg_mismatch/release/main.php on \n...\natal error: Uncaught ArgumentCountError: 3 arguments are required, 2 given in /tmp/breakbench/format_arg_mismatch/release/main.php:5\nStack trace:\n#0 /tmp/breakbench/format_arg_mismatch/release/main.php(5): sprintf()\n#1 {main}\n  thrown in /tmp/breakbench/format_arg_mismatch/release/main.php on line 5",
+   "exit": 255,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "PHP Fatal error:  Uncaught ArgumentCountError: 3 arguments are required, 2 given in /tmp/breakbench/format_arg_mismatch/main/main.php:5\nStack trace:\n#0 /tmp/breakbench/format_arg_mismatch/main/main.php(5): sprintf()\n#1 {main}\n  thrown in /tmp/breakbench/format_arg_mismatch/main/main.php on line 5\nFatal error: Uncaught ArgumentCountError: 3 arguments are required, 2 given in /tmp/breakbench/format_arg_mismatch/main/main.php:5\nStack trace:\n#0 /tmp/breakbench/format_arg_mismatch/main/main.php(5): sprintf()\n#1 {main}\n  thrown in /tmp/breakbench/format_arg_mismatch/main/main.php on line 5"
+  },
+  "unsigned_subtraction": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "5",
+   "stderr": "PHP Warning:  Undefined array key \"pear\" in /tmp/breakbench/missing_key_default/main/main.php on line 5\nWarning: Undefined array key \"pear\" in /tmp/breakbench/missing_key_default/main/main.php on line 5"
+  },
+  "mutable_hash_key": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "done",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "10",
+   "stderr": "PHP Warning:  Undefined array key -1 in /tmp/breakbench/negative_index_wraps/main/main.php on line 5\nWarning: Undefined array key -1 in /tmp/breakbench/negative_index_wraps/main/main.php on line 5"
+  },
+  "default_numeric_sort": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "dead_store": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no mutex in the language or its standard library"
+  },
+  "oob_write": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "oob_read": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "PHP Warning:  Undefined array key 4 in /tmp/breakbench/oob_read/main/main.php on line 11\nWarning: Undefined array key 4 in /tmp/breakbench/oob_read/main/main.php on line 11"
+  },
+  "use_after_free": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "wrong_variant_access": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "PHP Fatal error:  Uncaught TypeError: strlen(): Argument #1 ($string) must be of type string, int given in /tmp/breakbench/wrong_variant_access/release/main.php:4\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/wrong_variant_access/release/main.php on line 4\nFatal error: Uncaught TypeError: strlen(): Argument #1 ($string) must be of type string, int given in /tmp/breakbench/wrong_variant_access/release/main.php:4\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/wrong_variant_access/release/main.php on line 4",
+   "exit": 255,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "PHP Fatal error:  Uncaught TypeError: strlen(): Argument #1 ($string) must be of type string, int given in /tmp/breakbench/wrong_variant_access/main/main.php:4\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/wrong_variant_access/main/main.php on line 4\nFatal error: Uncaught TypeError: strlen(): Argument #1 ($string) must be of type string, int given in /tmp/breakbench/wrong_variant_access/main/main.php:4\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/wrong_variant_access/main/main.php on line 4"
+  },
+  "format_string": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "PHP Fatal error:  Uncaught ArgumentCountError: 4 arguments are required, 1 given in /tmp/breakbench/format_string/release/main.php:3\nStack trace:\n#0 /tmp/breakbench/format_string/release/main.php(3): printf()\n#1 {main}\n  thrown in /tmp/breakbench/format_string/release/main.php on line 3\nFatal error: Uncaught ArgumentCountError: 4 arguments are required, 1 given in /tmp/breakbench/format_string/release/main.php:3\nStack trace:\n#0 /tmp/breakbench/format_string/release/main.php(3): printf()\n#1 {main}\n  thrown in /tmp/breakbench/format_string/release/main.php on line 3",
+   "exit": 255,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "PHP Fatal error:  Uncaught ArgumentCountError: 4 arguments are required, 1 given in /tmp/breakbench/format_string/main/main.php:3\nStack trace:\n#0 /tmp/breakbench/format_string/main/main.php(3): printf()\n#1 {main}\n  thrown in /tmp/breakbench/format_string/main/main.php on line 3\nFatal error: Uncaught ArgumentCountError: 4 arguments are required, 1 given in /tmp/breakbench/format_string/main/main.php:3\nStack trace:\n#0 /tmp/breakbench/format_string/main/main.php(3): printf()\n#1 {main}\n  thrown in /tmp/breakbench/format_string/main/main.php on line 3"
+  },
+  "trojan_source": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "admin",
+   "stderr": ""
+  },
+  "unsafe_deserialization": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "null_byte_path": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "admin\nadmin",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "jello",
+   "stderr": ""
+  },
+  "reference_cycle": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.31,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "forgotten_free": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.08,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "complete_init": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function Config::__construct(), 1 passed in /tmp/breakbench/complete_init/release/main.php on line 11 and exactly 2 expected in /tmp/breakbench/complete_init/release/main.php:6\nStack trace:\n#0 /tmp/breakbench/complete_init/release/m\n...\ntmp/breakbench/complete_init/release/main.php on line 11 and exactly 2 expected in /tmp/breakbench/complete_init/release/main.php:6\nStack trace:\n#0 /tmp/breakbench/complete_init/release/main.php(11): Config->__construct()\n#1 {main}\n  thrown in /tmp/breakbench/complete_init/release/main.php on line 6",
+   "exit": 255,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function Config::__construct(), 1 passed in /tmp/breakbench/complete_init/main/main.php on line 11 and exactly 2 expected in /tmp/breakbench/complete_init/main/main.php:6\nStack trace:\n#0 /tmp/breakbench/complete_init/main/main.php(11): Config->__construct()\n#1 {main}\n  thrown in /tmp/breakbench/complete_init/main/main.php on line 6\nFatal error: Uncaught ArgumentCountError: Too few arguments to function Config::__construct(), 1 passed in /tmp/breakbench/complete_init/main/main.php on line 11 and exactly 2 expected in /tmp/breakbench/complete_init/main/main.php:6\nStack trace:\n#0 /tmp/breakbench/complete_init/main/main.php(11): Config->__construct()\n#1 {main}\n  thrown in /tmp/breakbench/complete_init/main/main.php on line 6"
+  },
+  "newtype": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "PHP Fatal error:  Uncaught TypeError: Meters::add(): Argument #1 ($o) must be of type Meters, Seconds given, called in /tmp/breakbench/newtype/release/main.php on line 23 and defined in /tmp/breakbench/newtype/release/main.php:10\nStack trace:\n#0 /tmp/breakbench/newtype/release/main.php(23): Meters->\n...\nf type Meters, Seconds given, called in /tmp/breakbench/newtype/release/main.php on line 23 and defined in /tmp/breakbench/newtype/release/main.php:10\nStack trace:\n#0 /tmp/breakbench/newtype/release/main.php(23): Meters->add()\n#1 {main}\n  thrown in /tmp/breakbench/newtype/release/main.php on line 10",
+   "exit": 255,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "PHP Fatal error:  Uncaught TypeError: Meters::add(): Argument #1 ($o) must be of type Meters, Seconds given, called in /tmp/breakbench/newtype/main/main.php on line 23 and defined in /tmp/breakbench/newtype/main/main.php:10\nStack trace:\n#0 /tmp/breakbench/newtype/main/main.php(23): Meters->add()\n#1 {main}\n  thrown in /tmp/breakbench/newtype/main/main.php on line 10\nFatal error: Uncaught TypeError: Meters::add(): Argument #1 ($o) must be of type Meters, Seconds given, called in /tmp/breakbench/newtype/main/main.php on line 23 and defined in /tmp/breakbench/newtype/main/main.php:10\nStack trace:\n#0 /tmp/breakbench/newtype/main/main.php(23): Meters->add()\n#1 {main}\n  thrown in /tmp/breakbench/newtype/main/main.php on line 10"
+  },
+  "strong_enum": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "PHP Fatal error:  Uncaught TypeError: name(): Argument #1 ($c) must be of type Color, int given, called in /tmp/breakbench/strong_enum/release/main.php on line 20 and defined in /tmp/breakbench/strong_enum/release/main.php:11\nStack trace:\n#0 /tmp/breakbench/strong_enum/release/main.php(20): name()\n#\n...\npe Color, int given, called in /tmp/breakbench/strong_enum/release/main.php on line 20 and defined in /tmp/breakbench/strong_enum/release/main.php:11\nStack trace:\n#0 /tmp/breakbench/strong_enum/release/main.php(20): name()\n#1 {main}\n  thrown in /tmp/breakbench/strong_enum/release/main.php on line 11",
+   "exit": 255,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "PHP Fatal error:  Uncaught TypeError: name(): Argument #1 ($c) must be of type Color, int given, called in /tmp/breakbench/strong_enum/main/main.php on line 20 and defined in /tmp/breakbench/strong_enum/main/main.php:11\nStack trace:\n#0 /tmp/breakbench/strong_enum/main/main.php(20): name()\n#1 {main}\n  thrown in /tmp/breakbench/strong_enum/main/main.php on line 11\nFatal error: Uncaught TypeError: name(): Argument #1 ($c) must be of type Color, int given, called in /tmp/breakbench/strong_enum/main/main.php on line 20 and defined in /tmp/breakbench/strong_enum/main/main.php:11\nStack trace:\n#0 /tmp/breakbench/strong_enum/main/main.php(20): name()\n#1 {main}\n  thrown in /tmp/breakbench/strong_enum/main/main.php on line 11"
+  },
+  "override_check": {
+   "outcome": "REJECTED",
+   "message": "Errors parsing main.php\n\nPHP Fatal error:  Circle::descibe() has #[\\Override] attribute, but no matching parent method exists in main.php on line 19\nStack trace:\n#0 {main}",
+   "control": "builds"
+  },
+  "missing_virtual": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "area 4",
+   "stderr": ""
+  },
+  "unbound_method": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "forced_unwrap": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "before\n1",
+   "stderr": ""
+  },
+  "null_in_text": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "hello,",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "ser",
+   "stderr": ""
+  },
+  "empty_max": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "PHP Fatal error:  Uncaught ValueError: max(): Argument #1 ($value) must contain at least one element in /tmp/breakbench/empty_max/release/main.php:5\nStack trace:\n#0 /tmp/breakbench/empty_max/release/main.php(5): max()\n#1 {main}\n  thrown in /tmp/breakbench/empty_max/release/main.php on line 5\nFatal error: Uncaught ValueError: max(): Argument #1 ($value) must contain at least one element in /tmp/breakbench/empty_max/release/main.php:5\nStack trace:\n#0 /tmp/breakbench/empty_max/release/main.php(5): max()\n#1 {main}\n  thrown in /tmp/breakbench/empty_max/release/main.php on line 5",
+   "exit": 255,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "PHP Fatal error:  Uncaught ValueError: max(): Argument #1 ($value) must contain at least one element in /tmp/breakbench/empty_max/main/main.php:5\nStack trace:\n#0 /tmp/breakbench/empty_max/main/main.php(5): max()\n#1 {main}\n  thrown in /tmp/breakbench/empty_max/main/main.php on line 5\nFatal error: Uncaught ValueError: max(): Argument #1 ($value) must contain at least one element in /tmp/breakbench/empty_max/main/main.php:5\nStack trace:\n#0 /tmp/breakbench/empty_max/main/main.php(5): max()\n#1 {main}\n  thrown in /tmp/breakbench/empty_max/main/main.php on line 5"
+  },
+  "readonly_param": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "exclusive_mutation": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "no_implicit_conversion": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3000000000",
+   "stderr": ""
+  },
+  "generic_constraint": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "lossy_int_to_float": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "9007199254740992",
+   "stderr": ""
+  },
+  "const_index_bounds": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "PHP Warning:  Undefined array key 5 in /tmp/breakbench/const_index_bounds/main/main.php on line 5\nWarning: Undefined array key 5 in /tmp/breakbench/const_index_bounds/main/main.php on line 5"
+  },
+  "lazy_accumulator": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.26,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "PHP Fatal error:  Uncaught TypeError: str_repeat(): Argument #2 ($times) must be of type int, float given in /tmp/breakbench/size_overflow_alloc/release/main.php:7\nStack trace:\n#0 /tmp/breakbench/size_overflow_alloc/release/main.php(7): str_repeat()\n#1 {main}\n  thrown in /tmp/breakbench/size_overflo\n...\nor: str_repeat(): Argument #2 ($times) must be of type int, float given in /tmp/breakbench/size_overflow_alloc/release/main.php:7\nStack trace:\n#0 /tmp/breakbench/size_overflow_alloc/release/main.php(7): str_repeat()\n#1 {main}\n  thrown in /tmp/breakbench/size_overflow_alloc/release/main.php on line 7",
+   "exit": 255,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "PHP Fatal error:  Uncaught TypeError: str_repeat(): Argument #2 ($times) must be of type int, float given in /tmp/breakbench/size_overflow_alloc/main/main.php:7\nStack trace:\n#0 /tmp/breakbench/size_overflow_alloc/main/main.php(7): str_repeat()\n#1 {main}\n  thrown in /tmp/breakbench/size_overflow_alloc/main/main.php on line 7\nFatal error: Uncaught TypeError: str_repeat(): Argument #2 ($times) must be of type int, float given in /tmp/breakbench/size_overflow_alloc/main/main.php:7\nStack trace:\n#0 /tmp/breakbench/size_overflow_alloc/main/main.php(7): str_repeat()\n#1 {main}\n  thrown in /tmp/breakbench/size_overflow_alloc/main/main.php on line 7"
+  },
+  "const_overflow": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "9.4608E+18",
+   "stderr": ""
+  },
+  "orphaned_receive": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no threads or asynchronous tasks in the language or its standard library"
+  },
+  "blocking_in_async": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no threads or asynchronous tasks in the language or its standard library"
+  },
+  "unreachable_code": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "ok",
+   "stderr": ""
+  },
+  "checked_interpolation": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hello",
+   "stderr": "PHP Warning:  Undefined variable $nmae in /tmp/breakbench/checked_interpolation/main/main.php on line 5\nWarning: Undefined variable $nmae in /tmp/breakbench/checked_interpolation/main/main.php on line 5"
+  },
+  "evaluation_order": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "other",
+   "stderr": ""
+  },
+  "duplicate_key": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "json_big_integer": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "9007199254740993",
+   "stderr": ""
+  },
+  "comparison_statement": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "structural_equality": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "PHP Warning:  Undefined array key 3 in /tmp/breakbench/array_literal_length/main/main.php on line 5\nWarning: Undefined array key 3 in /tmp/breakbench/array_literal_length/main/main.php on line 5"
+  },
+  "enum_from_int": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "before",
+   "release_stderr": "PHP Fatal error:  Uncaught ValueError: 7 is not a valid backing value for enum Color in /tmp/breakbench/enum_from_int/release/main.php:12\nStack trace:\n#0 /tmp/breakbench/enum_from_int/release/main.php(12): Color::from()\n#1 {main}\n  thrown in /tmp/breakbench/enum_from_int/release/main.php on line 12\nFatal error: Uncaught ValueError: 7 is not a valid backing value for enum Color in /tmp/breakbench/enum_from_int/release/main.php:12\nStack trace:\n#0 /tmp/breakbench/enum_from_int/release/main.php(12): Color::from()\n#1 {main}\n  thrown in /tmp/breakbench/enum_from_int/release/main.php on line 12",
+   "exit": 255,
+   "secs": 0.01,
+   "stdout": "before",
+   "stderr": "PHP Fatal error:  Uncaught ValueError: 7 is not a valid backing value for enum Color in /tmp/breakbench/enum_from_int/main/main.php:12\nStack trace:\n#0 /tmp/breakbench/enum_from_int/main/main.php(12): Color::from()\n#1 {main}\n  thrown in /tmp/breakbench/enum_from_int/main/main.php on line 12\nFatal error: Uncaught ValueError: 7 is not a valid backing value for enum Color in /tmp/breakbench/enum_from_int/main/main.php:12\nStack trace:\n#0 /tmp/breakbench/enum_from_int/main/main.php(12): Color::from()\n#1 {main}\n  thrown in /tmp/breakbench/enum_from_int/main/main.php on line 12"
+  },
+  "bitwise_on_bool": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "no",
+   "stderr": "PHP Warning:  Uninitialized string offset 0 in /tmp/breakbench/bitwise_on_bool/main/main.php on line 5\nWarning: Uninitialized string offset 0 in /tmp/breakbench/bitwise_on_bool/main/main.php on line 5"
+  },
+  "readonly_field": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "PHP Fatal error:  Uncaught Error: Cannot modify readonly property Config::$port in /tmp/breakbench/readonly_field/release/main.php:12\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/readonly_field/release/main.php on line 12\nFatal error: Uncaught Error: Cannot modify readonly property Config::$port in /tmp/breakbench/readonly_field/release/main.php:12\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/readonly_field/release/main.php on line 12",
+   "exit": 255,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "PHP Fatal error:  Uncaught Error: Cannot modify readonly property Config::$port in /tmp/breakbench/readonly_field/main/main.php:12\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/readonly_field/main/main.php on line 12\nFatal error: Uncaught Error: Cannot modify readonly property Config::$port in /tmp/breakbench/readonly_field/main/main.php:12\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/readonly_field/main/main.php on line 12"
+  },
+  "bool_condition": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "different",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "saved",
+   "stderr": "PHP Notice:  file_put_contents(): Write of 5 bytes failed with errno=28 No space left on device in /tmp/breakbench/lost_write_error/main/main.php on line 4\nNotice: file_put_contents(): Write of 5 bytes failed with errno=28 No space left on device in /tmp/breakbench/lost_write_error/main/main.php on line 4"
+  },
+  "short_read": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "HELLO-WORLD-1234",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "close failed",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "total=42",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "backed up",
+   "stderr": ""
+  },
+  "nullable_field": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "PHP Fatal error:  Uncaught TypeError: strlen(): Argument #1 ($string) must be of type string, null given in /tmp/breakbench/nullable_field/release/main.php:5\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/nullable_field/release/main.php on line 5\nFatal error: Uncaught TypeError: strlen(): Argument #1 ($string) must be of type string, null given in /tmp/breakbench/nullable_field/release/main.php:5\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/nullable_field/release/main.php on line 5",
+   "exit": 255,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "PHP Fatal error:  Uncaught TypeError: strlen(): Argument #1 ($string) must be of type string, null given in /tmp/breakbench/nullable_field/main/main.php:5\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/nullable_field/main/main.php on line 5\nFatal error: Uncaught TypeError: strlen(): Argument #1 ($string) must be of type string, null given in /tmp/breakbench/nullable_field/main/main.php:5\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/nullable_field/main/main.php on line 5"
+  },
+  "stale_null_check": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "PHP Warning:  Attempt to read property \"name\" on null in /tmp/breakbench/stale_null_check/release/main.php on line 22\nWarning: Attempt to read property \"name\" on null in /tmp/breakbench/stale_null_check/release/main.php on line 22\nPHP Fatal error:  Uncaught TypeError: strlen(): Argument #1 ($string)\n...\nnch/stale_null_check/release/main.php on line 22\nFatal error: Uncaught TypeError: strlen(): Argument #1 ($string) must be of type string, null given in /tmp/breakbench/stale_null_check/release/main.php:22\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/stale_null_check/release/main.php on line 22",
+   "exit": 255,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "PHP Warning:  Attempt to read property \"name\" on null in /tmp/breakbench/stale_null_check/main/main.php on line 22\nWarning: Attempt to read property \"name\" on null in /tmp/breakbench/stale_null_check/main/main.php on line 22\nPHP Fatal error:  Uncaught TypeError: strlen(): Argument #1 ($string) must be of type string, null given in /tmp/breakbench/stale_null_check/main/main.php:22\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/stale_null_check/main/main.php on line 22\nFatal error: Uncaught TypeError: strlen(): Argument #1 ($string) must be of type string, null given in /tmp/breakbench/stale_null_check/main/main.php:22\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/stale_null_check/main/main.php on line 22"
+  },
+  "empty_slot": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "PHP Warning:  Attempt to read property \"name\" on null in /tmp/breakbench/empty_slot/release/main.php on line 12\nWarning: Attempt to read property \"name\" on null in /tmp/breakbench/empty_slot/release/main.php on line 12\nPHP Fatal error:  Uncaught TypeError: strlen(): Argument #1 ($string) must be of \n...\nwn in /tmp/breakbench/empty_slot/release/main.php on line 12\nFatal error: Uncaught TypeError: strlen(): Argument #1 ($string) must be of type string, null given in /tmp/breakbench/empty_slot/release/main.php:12\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/empty_slot/release/main.php on line 12",
+   "exit": 255,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "PHP Warning:  Attempt to read property \"name\" on null in /tmp/breakbench/empty_slot/main/main.php on line 12\nWarning: Attempt to read property \"name\" on null in /tmp/breakbench/empty_slot/main/main.php on line 12\nPHP Fatal error:  Uncaught TypeError: strlen(): Argument #1 ($string) must be of type string, null given in /tmp/breakbench/empty_slot/main/main.php:12\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/empty_slot/main/main.php on line 12\nFatal error: Uncaught TypeError: strlen(): Argument #1 ($string) must be of type string, null given in /tmp/breakbench/empty_slot/main/main.php:12\nStack trace:\n#0 {main}\n  thrown in /tmp/breakbench/empty_slot/main/main.php on line 12"
+  },
+  "typed_nil": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no threads or asynchronous tasks in the language or its standard library"
+  },
+  "lost_wakeup": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no threads or asynchronous tasks in the language or its standard library"
+  },
+  "lock_skipped_on_return": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no mutex in the language or its standard library"
+  },
+  "cleanup_on_error_path": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "left behind: export.csv",
+   "stderr": ""
+  },
+  "generator_break_cleanup": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "cleaned",
+   "stderr": ""
+  },
+  "main_error_exit_code": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "config missing"
+  },
+  "catch_all_hides_bug": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid order",
+   "stderr": "PHP Warning:  Undefined array key 2 in /tmp/breakbench/catch_all_hides_bug/main/main.php on line 6\nWarning: Undefined array key 2 in /tmp/breakbench/catch_all_hides_bug/main/main.php on line 6"
+  },
+  "narrow_counter_loop": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no 8-bit integer type; int has the platform's width"
+  },
+  "timeout_without_cancel": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no threads or asynchronous tasks in the language or its standard library"
+  },
+  "blocked_sender_leak": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no threads or asynchronous tasks in the language or its standard library"
+  }
+ }
+}

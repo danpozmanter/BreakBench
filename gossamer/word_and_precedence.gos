@@ -1,0 +1,8 @@
+use std::env
+
+fn main() {
+    let ready = env::args()[0] == "yes"
+    let approved = env::args()[1] == "yes"
+    let ok = ready && approved
+    println(if ok { "go" } else { "wait" })
+}

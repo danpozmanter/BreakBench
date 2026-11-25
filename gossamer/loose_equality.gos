@@ -1,0 +1,6 @@
+use std::env
+
+fn main() {
+    let code = env::args()[0]
+    println(if code == 0 { "same" } else { "different" }) // CONTROL! println(if code == "0" { "same" } else { "different" })
+}

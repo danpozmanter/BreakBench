@@ -1,0 +1,962 @@
+{
+ "lang": "scala",
+ "version": "Scala compiler version 3.10.1 -- Copyright 2002-2026, LAMP/EPFL",
+ "results": {
+  "null_deref": {
+   "outcome": "REJECTED",
+   "message": "-- [E008] Not Found Error: main.scala:8:14 -------------------------------------\n8 |    println(u.name.length) // BREAK!\n  |            ^^^^^^\n  |            value name is not a member of Option[User]\n1 error found",
+   "control": "builds"
+  },
+  "int_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.ArithmeticException: / by zero\n\tat Main$.main(main.scala:4)\n\tat Main.main(main.scala)",
+   "exit": 1,
+   "secs": 0.07,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArithmeticException: / by zero\n\tat Main$.main(main.scala:4)\n\tat Main.main(main.scala)"
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "9223372036854775807",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "-- [E007] Type Mismatch Error: main.scala:6:16 ---------------------------------\n6 |    println(add(raw, 3)) // BREAK!\n  |                ^^^\n  |                Found:    (raw : String)\n  |                Required: Long\n  |\n  | longer explanation available when compiling with `-explain`\n1 error found",
+   "control": "builds"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "-- [E007] Type Mismatch Error: main.scala:3:4 ----------------------------------\n3 |    if score > 50 then \"pass\"\n  |    ^\n  |    Found:    Unit\n  |    Required: String\n  |\n4 |    else if score < 50 then \"fail\"\n  |\n  | longer explanation available when compiling with `-explain`\n1 error found",
+   "control": "builds"
+  },
+  "non_exhaustive_match": {
+   "build_output": "-- [E029] Pattern Match Exhaustivity Warning: main.scala:6:31 ------------------\n6 |  def name(c: Color): String = c match {\n  |                               ^\n  |                               match may not be exhaustive.\n  |\n  |                               It would fail on pattern case: Blue\n  |\n  | longer explanation available when compiling with `-explain`\n1 warning found",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" scala.MatchError: Blue (of class Color$$anon$1)\n\tat Main$.name(main.scala:8)\n\tat Main$.main(main.scala:13)\n\tat Main.main(main.scala)",
+   "exit": 1,
+   "secs": 0.07,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" scala.MatchError: Blue (of class Color$$anon$1)\n\tat Main$.name(main.scala:8)\n\tat Main$.main(main.scala:13)\n\tat Main.main(main.scala)"
+  },
+  "uninitialized_variable": {
+   "outcome": "REJECTED",
+   "message": "-- [E067] Syntax Error: main.scala:4:8 -----------------------------------------\n4 |    var x: Int // BREAK!\n  |        ^\n  |Declaration of variable x not allowed here: only classes can have declared but undefined members\n  |\n  | longer explanation available when compiling with `-explain`\n1 error found",
+   "control": "builds"
+  },
+  "misspelled_field": {
+   "outcome": "REJECTED",
+   "message": "-- [E008] Not Found Error: main.scala:8:8 --------------------------------------\n8 |    cfg.colour = \"red\" // BREAK!\n  |    ^^^^^^^^^^\n  |    value colour is not a member of Config - did you mean cfg.color?\n1 error found",
+   "control": "builds"
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "-- [E007] Type Mismatch Error: main.scala:5:10 ---------------------------------\n5 |    if (x = 1) then label = \"one\" // BREAK!\n  |        ^^^^^\n  |        Found:    Unit\n  |        Required: Boolean\n  |\n  | longer explanation available when compiling with `-explain`\n1 error found",
+   "control": "builds"
+  },
+  "switch_fallthrough": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "REJECTED",
+   "message": "-- [E007] Type Mismatch Error: main.scala:5:7 ----------------------------------\n5 |    if qty then present = true // BREAK!\n  |       ^^^\n  |       Found:    (qty : Option[Int])\n  |       Required: Boolean\n  |\n  | longer explanation available when compiling with `-explain`\n1 error found",
+   "control": "builds"
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.08,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "loose_equality": {
+   "outcome": "REJECTED",
+   "message": "-- [E172] Type Error: main.scala:4:15 ------------------------------------------\n4 |    println(if code == 0 then \"same\" else \"different\") // CONTROL! println(if code == \"0\" then \"same\" else \"different\")\n  |               ^^^^^^^^^\n  |           Values of types String and Int cannot be compared with == or !=\n1 error found",
+   "control": "builds"
+  },
+  "parse_invalid_number": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.NumberFormatException: For input string: \"12abc\"\n\tat java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)\n\tat java.base/java.lang.Integer.parseInt(Integer.java:529)\n\tat java.base/java.lang.Integer.parseInt(Integer.java:626)\n\tat scala.collection.StringOps$.toInt$extension(StringOps.scala:1045)\n\tat Main$.main(main.scala:3)\n\tat Main.main(main.scala)",
+   "exit": 1,
+   "secs": 0.11,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.NumberFormatException: For input string: \"12abc\"\n\tat java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)\n\tat java.base/java.lang.Integer.parseInt(Integer.java:529)\n\tat java.base/java.lang.Integer.parseInt(Integer.java:626)\n\tat scala.collection.StringOps$.toInt$extension(StringOps.scala:1045)\n\tat Main$.main(main.scala:3)\n\tat Main.main(main.scala)"
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "-- [E007] Type Mismatch Error: main.scala:8:33 ---------------------------------\n8 |    val animals: Array[Animal] = dogs // BREAK!\n  |                                 ^^^^\n  |                                 Found:    (dogs : Array[Dog])\n  |                                 Required: Array[Animal]\n  |\n  | longer explanation available when compiling with `-explain`\n1 error found",
+   "control": "builds"
+  },
+  "mutate_while_iterating": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "1,3",
+   "stderr": ""
+  },
+  "self_deadlock": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.08,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "repeated_row_alias": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.08,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.nio.file.FileSystemException: /dev/null/out.txt: Not a directory\n\tat java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:102)\n\tat java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:108)\n\tat java.base/sun.nio.fs.UnixExce\n...\ns.newOutputStream(Files.java:215)\n\tat java.base/java.nio.file.Files.write(Files.java:3178)\n\tat java.base/java.nio.file.Files.writeString(Files.java:3372)\n\tat java.base/java.nio.file.Files.writeString(Files.java:3319)\n\tat Main$.save(main.scala:4)\n\tat Main$.main(main.scala:7)\n\tat Main.main(main.scala)",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.nio.file.FileSystemException: /dev/null/out.txt: Not a directory\n\tat java.base/sun.nio.fs.UnixException.translateToIOException(UnixException.java:102)\n\tat java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:108)\n\tat java.base/sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:113)\n\tat java.base/sun.nio.fs.UnixFileSystemProvider.newFileChannel(UnixFileSystemProvider.java:214)\n\tat java.base/sun.nio.fs.UnixFileSystemProvider.newByteChannel(UnixFileSystemProvider.java:245)\n\tat java.base/java.nio.file.spi.FileSystemProvider.newOutputStream(FileSystemProvider.java:426)\n\tat java.base/java.nio.file.Files.newOutputStream(Files.java:215)\n\tat java.base/java.nio.file.Files.write(Files.java:3178)\n\tat java.base/java.nio.file.Files.writeString(Files.java:3372)\n\tat java.base/java.nio.file.Files.writeString(Files.java:3319)\n\tat Main$.save(main.scala:4)\n\tat Main$.main(main.scala:7)\n\tat Main.main(main.scala)"
+  },
+  "sort_with_nan": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "ordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "3.0",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "REJECTED",
+   "message": "-- [E134] Type Error: main.scala:4:17 ------------------------------------------\n4 |    val even = x & 1 == 0 // BREAK!\n  |               ^^^\n  |   None of the overloaded alternatives of method & in class Int with types\n  |    (x: Long): Long\n  |    (x: Int): Int\n  |    (x: Char): Int\n  |    (x: Short): Int\n  |    (x: Byte): Int\n  |   match arguments ((false : Boolean))\n1 error found",
+   "control": "builds"
+  },
+  "word_and_precedence": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.08,
+   "stdout": "wait",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.08,
+   "stdout": "not a",
+   "stderr": ""
+  },
+  "stray_semicolon": {
+   "outcome": "REJECTED",
+   "message": "-- [E040] Syntax Error: main.scala:4:14 ----------------------------------------\n4 |    if (n > 5); // CONTROL! if (n > 5)\n  |              ^\n  |              'then' expected, but ';' found\n1 error found",
+   "control": "builds"
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "-- [E007] Type Mismatch Error: main.scala:4:25 ---------------------------------\n4 |    val inside = 1 < x < 3 // BREAK!\n  |                         ^\n  |                         Found:    (3 : Int)\n  |                         Required: Boolean\n  |\n  | longer explanation available when compiling with `-explain`\n1 error found",
+   "control": "builds"
+  },
+  "lost_update_on_copy": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "150",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.16,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "no match",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "-- [E040] Syntax Error: main.scala:7:6 -----------------------------------------\n7 |      \"carol\",\n  |      ^\n  |      ',' or ')' expected, but string literal found\n1 error found",
+   "control": "builds"
+  },
+  "return_in_finally": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "total 3",
+   "stderr": "Exception in thread \"Thread-0\" java.lang.NumberFormatException: For input string: \"x\"\n\tat java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)\n\tat java.base/java.lang.Long.parseLong(Long.java:556)\n\tat java.base/java.lang.Long.parseLong(Long.java:660)\n\tat scala.collection.StringOps$.toLong$extension(StringOps.scala:1058)\n\tat Main$.$anonfun$1$$anonfun$1(main.scala:6)\n\tat scala.runtime.function.JProcedure1.apply(JProcedure1.java:15)\n\tat scala.runtime.function.JProcedure1.apply(JProcedure1.java:10)\n\tat scala.collection.ArrayOps$.foreach$extension(ArrayOps.scala:1324)\n\tat Main$.$anonfun$1(main.scala:6)\n\tat java.base/java.lang.Thread.run(Thread.java:1527)"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.util.MissingFormatArgumentException: Format specifier '%d'\n\tat java.base/java.util.Formatter.format(Formatter.java:2760)\n\tat java.base/java.util.Formatter.format(Formatter.java:2698)\n\tat java.base/java.lang.String.format(String.java:4830)\n\tat scala.collection.StringOps$.format$extension(StringOps.scala:1126)\n\tat Main$.main(main.scala:6)\n\tat Main.main(main.scala)",
+   "exit": 1,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.util.MissingFormatArgumentException: Format specifier '%d'\n\tat java.base/java.util.Formatter.format(Formatter.java:2760)\n\tat java.base/java.util.Formatter.format(Formatter.java:2698)\n\tat java.base/java.lang.String.format(String.java:4830)\n\tat scala.collection.StringOps$.format$extension(StringOps.scala:1126)\n\tat Main$.main(main.scala:6)\n\tat Main.main(main.scala)"
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.util.NoSuchElementException: key not found: pear\n\tat scala.collection.MapOps.default(Map.scala:330)\n\tat scala.collection.MapOps.default$(Map.scala:103)\n\tat scala.collection.AbstractMap.default(Map.scala:511)\n\tat scala.collection.mutable.HashMap.apply(HashMap.scala:459)\n\tat Main$.main(main.scala:7)\n\tat Main.main(main.scala)",
+   "exit": 1,
+   "secs": 0.07,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.util.NoSuchElementException: key not found: pear\n\tat scala.collection.MapOps.default(Map.scala:330)\n\tat scala.collection.MapOps.default$(Map.scala:103)\n\tat scala.collection.AbstractMap.default(Map.scala:511)\n\tat scala.collection.mutable.HashMap.apply(HashMap.scala:459)\n\tat Main$.main(main.scala:7)\n\tat Main.main(main.scala)"
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.08,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "pending",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 3\n\tat Main$.main(main.scala:6)\n\tat Main.main(main.scala)",
+   "exit": 1,
+   "secs": 0.07,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index -1 out of bounds for length 3\n\tat Main$.main(main.scala:6)\n\tat Main.main(main.scala)"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "missing",
+   "stderr": ""
+  },
+  "dead_store": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "unbalanced",
+   "stderr": "Exception in thread \"Thread-0\" java.lang.IllegalStateException: crash mid-update\n\tat Main$.post(main.scala:8)\n\tat Main$.$anonfun$1(main.scala:13)\n\tat java.base/java.lang.Thread.run(Thread.java:1527)"
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4\n\tat Main$.main(main.scala:9)\n\tat Main.main(main.scala)",
+   "exit": 1,
+   "secs": 0.06,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4\n\tat Main$.main(main.scala:9)\n\tat Main.main(main.scala)"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4\n\tat Main$.main(main.scala:9)\n\tat Main.main(main.scala)",
+   "exit": 1,
+   "secs": 0.06,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 4 out of bounds for length 4\n\tat Main$.main(main.scala:9)\n\tat Main.main(main.scala)"
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.08,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "wrong_variant_access": {
+   "build_output": "-- Warning: main.scala:9:24 ----------------------------------------------------\n9 |    val Value.Text(s) = v // CONTROL! v match { case Value.Text(s) => println(s.length); case _ => println(\"not text\") }\n  |                        ^\n  |pattern's type Value.Text is more specialized than the right hand side expression's type Value\n  |\n  |If the narrowing is intentional, this can be communicated by adding `.runtimeChecked` after the expression,\n  |which may result in a MatchError at runtime.\n  |This patch can be rewritten automatically under -rewrite -source 3.8-migration.\n1 warning found",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" scala.MatchError: IntValue(42) (of class Value$IntValue)\n\tat Main$.main(main.scala:9)\n\tat Main.main(main.scala)",
+   "exit": 1,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" scala.MatchError: IntValue(42) (of class Value$IntValue)\n\tat Main$.main(main.scala:9)\n\tat Main.main(main.scala)"
+  },
+  "format_string": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.util.MissingFormatArgumentException: Format specifier '%s'\n\tat java.base/java.util.Formatter.format(Formatter.java:2760)\n\tat java.base/java.util.Formatter.format(Formatter.java:2698)\n\tat java.base/java.lang.String.format(String.java:4830)\n\tat scala.collection.StringOps$.format$extension(StringOps.scala:1126)\n\tat Main$.main(main.scala:3)\n\tat Main.main(main.scala)",
+   "exit": 1,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.util.MissingFormatArgumentException: Format specifier '%s'\n\tat java.base/java.util.Formatter.format(Formatter.java:2760)\n\tat java.base/java.util.Formatter.format(Formatter.java:2698)\n\tat java.base/java.lang.String.format(String.java:4830)\n\tat scala.collection.StringOps$.format$extension(StringOps.scala:1126)\n\tat Main$.main(main.scala:3)\n\tat Main.main(main.scala)"
+  },
+  "trojan_source": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "admin",
+   "stderr": ""
+  },
+  "unsafe_deserialization": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.08,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "null_byte_path": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "admin\nadmin",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "-- [E008] Not Found Error: main.scala:5:4 --------------------------------------\n5 |    greeting(0) = 'j' // CONTROL! greeting = \"j\" + greeting.substring(1)\n  |    ^^^^^^^^\n  |    value update is not a member of String\n1 error found",
+   "control": "builds"
+  },
+  "reference_cycle": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.36,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "forgotten_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.37,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "complete_init": {
+   "outcome": "REJECTED",
+   "message": "-- [E171] Type Error: main.scala:6:24 ------------------------------------------\n6 |    val partial = Config(timeout = 5) // BREAK!\n  |                  ^^^^^^^^^^^^^^^^^^^\n  |missing argument for parameter retries of method apply in object Config: (timeout: Int, retries: Int): Config\n1 error found",
+   "control": "builds"
+  },
+  "newtype": {
+   "outcome": "REJECTED",
+   "message": "-- [E007] Type Mismatch Error: main.scala:17:38 --------------------------------\n17 |    val wrong = meters(2).plus(seconds(3)) // BREAK!\n   |                               ^^^^^^^^^^\n   |                               Found:    Units.Seconds\n   |                               Required: Units.Meters\n   |\n   | longer explanation available when compiling with `-explain`\n1 error found",
+   "control": "builds"
+  },
+  "strong_enum": {
+   "outcome": "REJECTED",
+   "message": "-- [E007] Type Mismatch Error: main.scala:12:17 --------------------------------\n12 |    println(name(7)) // BREAK!\n   |                 ^\n   |                 Found:    (7 : Int)\n   |                 Required: Color\n   |\n   | longer explanation available when compiling with `-explain`\n1 error found",
+   "control": "builds"
+  },
+  "override_check": {
+   "outcome": "REJECTED",
+   "message": "-- [E037] Declaration Error: main.scala:7:15 -----------------------------------\n7 |  override def descibe: String = \"circle\" // BREAK!\n  |               ^\n  |               method descibe overrides nothing\n  |\n  | longer explanation available when compiling with `-explain`\n1 error found",
+   "control": "builds"
+  },
+  "missing_virtual": {
+   "outcome": "REJECTED",
+   "message": "-- [E164] Declaration Error: main.scala:7:6 ------------------------------------\n7 |  def area: Int = 4 // CONTROL! override def area: Int = 4\n  |      ^\n  |      error overriding method area in class Shape of type => Int;\n  |        method area of type => Int needs `override` modifier\n1 error found",
+   "control": "builds"
+  },
+  "unbound_method": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "before",
+   "release_stderr": "Exception in thread \"main\" java.util.NoSuchElementException: None.get\n\tat scala.None$.get(Option.scala:705)\n\tat scala.None$.get(Option.scala:705)\n\tat Main$.main(main.scala:6)\n\tat Main.main(main.scala)",
+   "exit": 1,
+   "secs": 0.06,
+   "stdout": "before",
+   "stderr": "Exception in thread \"main\" java.util.NoSuchElementException: None.get\n\tat scala.None$.get(Option.scala:705)\n\tat scala.None$.get(Option.scala:705)\n\tat Main$.main(main.scala:6)\n\tat Main.main(main.scala)"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "hello, None",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.UnsupportedOperationException: empty.max\n\tat scala.collection.IterableOnceOps.max$(IterableOnce.scala:1164)\n\tat scala.collection.AbstractIterable.max(Iterable.scala:980)\n\tat Main$.main(main.scala:4)\n\tat Main.main(main.scala)",
+   "exit": 1,
+   "secs": 0.07,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.UnsupportedOperationException: empty.max\n\tat scala.collection.IterableOnceOps.max$(IterableOnce.scala:1164)\n\tat scala.collection.AbstractIterable.max(Iterable.scala:980)\n\tat Main$.main(main.scala:4)\n\tat Main.main(main.scala)"
+  },
+  "readonly_param": {
+   "outcome": "REJECTED",
+   "message": "-- [E008] Not Found Error: main.scala:3:4 --------------------------------------\n3 |    xs(0) = 9 // BREAK!\n  |    ^^\n  |    value update is not a member of Seq[Int] - did you mean xs.updated?\n1 error found",
+   "control": "builds"
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "REJECTED",
+   "message": "-- [E007] Type Mismatch Error: main.scala:4:23 ---------------------------------\n4 |    val tooBig: Byte = 300 // BREAK!\n  |                       ^^^\n  |                       Found:    (300 : Int)\n  |                       Required: Byte\n  |\n  | longer explanation available when compiling with `-explain`\n1 error found",
+   "control": "builds"
+  },
+  "no_implicit_conversion": {
+   "outcome": "REJECTED",
+   "message": "-- [E007] Type Mismatch Error: main.scala:5:21 ---------------------------------\n5 |    val wrong: Int = big // BREAK!\n  |                     ^^^\n  |                     Found:    (big : Long)\n  |                     Required: Int\n  |\n  | longer explanation available when compiling with `-explain`\n1 error found",
+   "control": "builds"
+  },
+  "generic_constraint": {
+   "outcome": "REJECTED",
+   "message": "-- [E172] Type Error: main.scala:6:36 ------------------------------------------\n6 |    println(List(Point(1, 2)).sorted) // BREAK!\n  |                                    ^\n  |No given instance of type Ordering[B] was found for parameter ord of method sorted in trait StrictOptimizedSeqOps.\n  |I found:\n  |\n  |    scala.math.Ordering.ordered[B](using\n  |      /* missing */summon[scala.math.Ordering.AsComparable[B]])\n  |\n  |But no implicit values were found that match type scala.math.Ordering.AsComparable[B]\n  |\n  |where:    B is a type variable with constraint >: Point\n  |.\n  |\n  |The following import might make progress towards fixing the problem:\n  |\n  |  import scala.math.Ordered.orderingToOrdered\n  |\n1 error found",
+   "control": "builds"
+  },
+  "lossy_int_to_float": {
+   "build_output": "there was 1 deprecation warning; re-run with -deprecation for details\n1 warning found",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "9007199254740992",
+   "stderr": ""
+  },
+  "const_index_bounds": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 3\n\tat Main$.main(main.scala:4)\n\tat Main.main(main.scala)",
+   "exit": 1,
+   "secs": 0.07,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 5 out of bounds for length 3\n\tat Main$.main(main.scala:4)\n\tat Main.main(main.scala)"
+  },
+  "lazy_accumulator": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.82,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 8 out of bounds for length 8\n\tat Main$.main(main.scala:7)\n\tat Main.main(main.scala)",
+   "exit": 1,
+   "secs": 0.06,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 8 out of bounds for length 8\n\tat Main$.main(main.scala:7)\n\tat Main.main(main.scala)"
+  },
+  "const_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "-8985944073709551616",
+   "stderr": ""
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": "Exception in thread \"Thread-0\" java.lang.NumberFormatException: For input string: \"x\"\n\tat java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:67)\n\tat java.base/java.lang.Long.parseLong(Long.java:556)\n\tat java.base/java.lang.Long.parseLong(Long.java:660)\n\tat scala.collection.StringOps$.toLong$extension(StringOps.scala:1058)\n\tat Main$.$anonfun$1(main.scala:6)\n\tat java.base/java.lang.Thread.run(Thread.java:1527)"
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.6,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "unreachable_code": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "ok",
+   "stderr": ""
+  },
+  "checked_interpolation": {
+   "outcome": "REJECTED",
+   "message": "-- [E006] Not Found Error: main.scala:5:21 -------------------------------------\n5 |    println(s\"hello $nmae\") // BREAK!\n  |                     ^^^^\n  |                     Not found: nmae - did you mean name?\n  |\n  | longer explanation available when compiling with `-explain`\n1 error found",
+   "control": "builds"
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "build_output": "-- [E030] Match case Unreachable Warning: main.scala:6:13 ----------------------\n6 |  case Shape.Circle => \"circle\" // CONTROL! case _ => \"other\"\n  |       ^^^^^^^^^^^^\n  |       Unreachable case\n1 warning found",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "other",
+   "stderr": ""
+  },
+  "duplicate_key": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.11,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "json_big_integer": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no JSON parser in the standard library"
+  },
+  "comparison_statement": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "structural_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 3\n\tat Main$.main(main.scala:4)\n\tat Main.main(main.scala)",
+   "exit": 1,
+   "secs": 0.06,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 3 out of bounds for length 3\n\tat Main$.main(main.scala:4)\n\tat Main.main(main.scala)"
+  },
+  "enum_from_int": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "before",
+   "release_stderr": "Exception in thread \"main\" java.util.NoSuchElementException: enum Color has no case with ordinal: 7\n\tat Color$.fromOrdinal(main.scala:2)\n\tat Main$.main(main.scala:7)\n\tat Main.main(main.scala)",
+   "exit": 1,
+   "secs": 0.07,
+   "stdout": "before",
+   "stderr": "Exception in thread \"main\" java.util.NoSuchElementException: enum Color has no case with ordinal: 7\n\tat Color$.fromOrdinal(main.scala:2)\n\tat Main$.main(main.scala:7)\n\tat Main.main(main.scala)"
+  },
+  "bitwise_on_bool": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0\n\tat java.base/jdk.internal.util.Preconditions$1.apply(Preconditions.java:55)\n\tat java.base/jdk.internal.util.Preconditions$1.apply(Preconditions.java:52)\n\tat java.base/jdk.internal.util.Precondit\n...\nava.base/java.lang.String.checkIndex(String.java:5279)\n\tat java.base/java.lang.StringLatin1.charAt(StringLatin1.java:58)\n\tat java.base/java.lang.String.charAt(String.java:1843)\n\tat scala.collection.StringOps$.apply$extension(StringOps.scala:210)\n\tat Main$.main(main.scala:4)\n\tat Main.main(main.scala)",
+   "exit": 1,
+   "secs": 0.07,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.StringIndexOutOfBoundsException: Index 0 out of bounds for length 0\n\tat java.base/jdk.internal.util.Preconditions$1.apply(Preconditions.java:55)\n\tat java.base/jdk.internal.util.Preconditions$1.apply(Preconditions.java:52)\n\tat java.base/jdk.internal.util.Preconditions$4.apply(Preconditions.java:213)\n\tat java.base/jdk.internal.util.Preconditions$4.apply(Preconditions.java:210)\n\tat java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:98)\n\tat java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:106)\n\tat java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:302)\n\tat java.base/java.lang.String.checkIndex(String.java:5279)\n\tat java.base/java.lang.StringLatin1.charAt(StringLatin1.java:58)\n\tat java.base/java.lang.String.charAt(String.java:1843)\n\tat scala.collection.StringOps$.apply$extension(StringOps.scala:210)\n\tat Main$.main(main.scala:4)\n\tat Main.main(main.scala)"
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "-- [E052] Type Error: main.scala:6:11 ------------------------------------------\n6 |    c.port = 1 // BREAK!\n  |    ^^^^^^^^^^\n  |    Reassignment to val port\n  |\n  | longer explanation available when compiling with `-explain`\n1 error found",
+   "control": "builds"
+  },
+  "bool_condition": {
+   "outcome": "REJECTED",
+   "message": "-- [E007] Type Mismatch Error: main.scala:4:21 ---------------------------------\n4 |    if (\"x\".compareTo(\"x\")) println(\"different\") // BREAK!\n  |        ^^^^^^^^^^^^^^^^^^\n  |        Found:    Int\n  |        Required: Boolean\n  |\n  | longer explanation available when compiling with `-explain`\n1 error found",
+   "control": "builds"
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.io.IOException: No space left on device\n\tat java.base/sun.nio.ch.UnixFileDispatcherImpl.write0(Native Method)\n\tat java.base/sun.nio.ch.UnixFileDispatcherImpl.write(UnixFileDispatcherImpl.java:65)\n\tat java.base/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:137)\n\t\n...\nlose(BufferedWriter.java:318)\n\tat scala.util.Using$Releasable$AutoCloseableIsReleasable$.release(Using.scala:453)\n\tat scala.util.Using$Releasable$AutoCloseableIsReleasable$.release(Using.scala:453)\n\tat scala.util.Using$.resource(Using.scala:324)\n\tat Main$.main(main.scala:6)\n\tat Main.main(main.scala)",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.io.IOException: No space left on device\n\tat java.base/sun.nio.ch.UnixFileDispatcherImpl.write0(Native Method)\n\tat java.base/sun.nio.ch.UnixFileDispatcherImpl.write(UnixFileDispatcherImpl.java:65)\n\tat java.base/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:137)\n\tat java.base/sun.nio.ch.IOUtil.write(IOUtil.java:102)\n\tat java.base/sun.nio.ch.IOUtil.write(IOUtil.java:72)\n\tat java.base/sun.nio.ch.FileChannelImpl.implWrite(FileChannelImpl.java:359)\n\tat java.base/sun.nio.ch.FileChannelImpl.write(FileChannelImpl.java:339)\n\tat java.base/sun.nio.ch.ChannelOutputStream.writeFully(ChannelOutputStream.java:71)\n\tat java.base/sun.nio.ch.ChannelOutputStream.write(ChannelOutputStream.java:110)\n\tat java.base/sun.nio.cs.StreamEncoder.writeBytes(StreamEncoder.java:220)\n\tat java.base/sun.nio.cs.StreamEncoder.implClose(StreamEncoder.java:340)\n\tat java.base/sun.nio.cs.StreamEncoder.close(StreamEncoder.java:159)\n\tat java.base/java.io.OutputStreamWriter.close(OutputStreamWriter.java:253)\n\tat java.base/java.io.BufferedWriter.close(BufferedWriter.java:318)\n\tat scala.util.Using$Releasable$AutoCloseableIsReleasable$.release(Using.scala:453)\n\tat scala.util.Using$Releasable$AutoCloseableIsReleasable$.release(Using.scala:453)\n\tat scala.util.Using$.resource(Using.scala:324)\n\tat Main$.main(main.scala:6)\n\tat Main.main(main.scala)"
+  },
+  "short_read": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.26,
+   "stdout": "HELLO-WO\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "disk full",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.09,
+   "stdout": "backed up",
+   "stderr": ""
+  },
+  "nullable_field": {
+   "outcome": "REJECTED",
+   "message": "-- [E008] Not Found Error: main.scala:6:25 -------------------------------------\n6 |    println(decoded.name.length) // BREAK!\n  |            ^^^^^^^^^^^^^^^^^^^\n  |            value length is not a member of Option[String]\n1 error found",
+   "control": "builds"
+  },
+  "stale_null_check": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "empty_slot": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.NullPointerException: Cannot invoke \"User.name()\" because \"users[0]\" is null\n\tat Main$.main(main.scala:8)\n\tat Main.main(main.scala)",
+   "exit": 1,
+   "secs": 0.06,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.NullPointerException: Cannot invoke \"User.name()\" because \"users[0]\" is null\n\tat Main$.main(main.scala:8)\n\tat Main.main(main.scala)"
+  },
+  "typed_nil": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "lock_skipped_on_return": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "cleanup_on_error_path": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "left behind: export.csv",
+   "stderr": ""
+  },
+  "generator_break_cleanup": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "left behind: reader.lock",
+   "stderr": ""
+  },
+  "main_error_exit_code": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "config missing: java.nio.file.NoSuchFileException: /nonexistent/bb.conf"
+  },
+  "catch_all_hides_bug": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "invalid order",
+   "stderr": ""
+  },
+  "narrow_counter_loop": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "timeout_without_cancel": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.2,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "blocked_sender_leak": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "42\ndone",
+   "stderr": ""
+  }
+ }
+}

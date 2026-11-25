@@ -1,0 +1,14 @@
+use std::env
+
+fn size(n: i64) -> String {
+    let mut label = "small"
+    if n > 5; { // CONTROL! if n > 5 {
+        label = "big"
+    }
+    label
+}
+
+fn main() {
+    println(size(env::args()[0].to_i64().unwrap()))
+    println(size(env::args()[1].to_i64().unwrap()))
+}

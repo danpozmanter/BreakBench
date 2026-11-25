@@ -1,6 +1,0 @@
-fn main() {
-    let c = 'a'
-    let n = c as i64 + 1
-    println(f"{n}")
-    let m: i64 = c + 1 // BREAK!
-}

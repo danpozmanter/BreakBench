@@ -1,0 +1,1 @@
+-- CANNOT-EXPRESS: no objects with methods; functions take their data as arguments

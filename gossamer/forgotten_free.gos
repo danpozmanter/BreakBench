@@ -1,0 +1,15 @@
+use std::env
+
+struct Rec {
+    data: Vec<u8>
+}
+
+fn main() {
+    let n = env::args()[0].to_i64().unwrap()
+    let mut seen = 0
+    for _ in 0..n {
+        let rec = Rec { data: #[1; 4096] }
+        seen += rec.data[0] as i64
+    }
+    println(if seen == n { "done" } else { "lost" })
+}
