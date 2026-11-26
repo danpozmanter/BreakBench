@@ -193,7 +193,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
 <div class="wrap">
   <header>
     <h1>BreakBench</h1>
-    <p>How much does a language help the programmer avoid production bugs? Each test is a program with one common bug, run in 30 languages.</p>
+    <p>How languages handle bugs. Each test is a program with one bug, run in each language.</p>
     <div class="meta" id="meta"></div>
   </header>
 
@@ -217,7 +217,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   </div>
 
   <section role="tabpanel" id="leaderboard" aria-labelledby="tab-leaderboard">
-    <p class="muted">Score: mean over the tests a language can attempt; every test counts once. It covers the compiler and runtime with their own checks on; no linters, sanitizers or third-party checkers. Python (mypy) is an unranked example of a checker. Language gaps: tests a language cannot attempt for lack of a feature, left out of its score (see Missing features). Details breaks the score down by category.</p>
+    <p class="muted">Score: mean over the tests that can be expressed in that language. It covers the compiler and runtime with their own checks on; no linters, sanitizers or third-party checkers. Python (mypy) is an unranked example of a third party checker. Language gaps: tests a language cannot attempt for lack of a feature, left out of its score (see Missing features). Details breaks the score down by category.</p>
     <div class="scroll"><table id="ranking"></table></div>
   </section>
 
