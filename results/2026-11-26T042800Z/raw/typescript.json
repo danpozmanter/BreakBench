@@ -225,14 +225,6 @@
    "message": "main.ts(2,18): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.\nmain.ts(2,18): error TS2367: This comparison appears to be unintentional because the types '1' and '0' have no overlap.",
    "control": "builds"
   },
-  "default_operator_precedence": {
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.02,
-   "stdout": "4",
-   "stderr": ""
-  },
   "dangling_else": {
    "outcome": "SILENT",
    "control": "verified",
@@ -383,13 +375,6 @@
    "exit": 0,
    "secs": 0.02,
    "stdout": "1 10 9",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.02,
-   "stdout": "kept",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -724,14 +709,6 @@
    "exit": 0,
    "secs": 0.02,
    "stdout": "before\n7",
-   "stderr": ""
-  },
-  "invalid_date": {
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.02,
-   "stdout": "2023-03-02",
    "stderr": ""
   },
   "bitwise_on_bool": {

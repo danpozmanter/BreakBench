@@ -220,13 +220,6 @@
    "stdout": "even",
    "stderr": ""
   },
-  "default_operator_precedence": {
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "5",
-   "stderr": ""
-  },
   "dangling_else": {
    "outcome": "CORRECT",
    "exit": 0,
@@ -389,14 +382,6 @@
    "exit": 0,
    "secs": 0.0,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "outcome": "CHANCE",
-   "message": "sort_with_compare leaves the order of equal elements unspecified",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "kept",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -740,17 +725,6 @@
    "secs": 0.0,
    "stdout": "before\ninvalid",
    "stderr": ""
-  },
-  "invalid_date": {
-   "outcome": "TRAPPED",
-   "control": "verified",
-   "release": "TRAPPED",
-   "release_stdout": "",
-   "release_stderr": "V panic: invalid time: day must be between 1 and 28 for year 2023, month 2\n v hash: 7647ce1\n    pid: 0x2883\n    tid: 0x2883\n                                                        | 0x72677f61c601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x72677f61c718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x596528269985 | ./main(+0xf985)",
-   "exit": 1,
-   "secs": 0.02,
-   "stdout": "",
-   "stderr": "V panic: invalid time: day must be between 1 and 28 for year 2023, month 2\n v hash: 7647ce1\n    pid: 0x27e8\n    tid: 0x27e8\n                                                        | 0x626e0dde7e06 | ./main(+0x31e06) \n                                                        | 0x626e0dde8056 | ./main(+0x32056) \n                                                        | 0x626e0dde80c1 | ./main(+0x320c1) \n                                                        | 0x626e0dde9612 | ./main(+0x33612) \n                                                        | 0x626e0dde9a9c | ./main(+0x33a9c) \n                                                        | 0x725507957601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x725507957718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x626e0ddccfe5 | ./main(+0x16fe5)"
   },
   "bitwise_on_bool": {
    "outcome": "REJECTED",

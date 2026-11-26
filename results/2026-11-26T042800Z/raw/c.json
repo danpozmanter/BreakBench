@@ -253,14 +253,6 @@
    "stdout": "odd",
    "stderr": ""
   },
-  "default_operator_precedence": {
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "4",
-   "stderr": ""
-  },
   "dangling_else": {
    "build_output": "main.c:11:5: warning: add explicit braces to avoid dangling else [-Wdangling-else]\n   11 |     else // CONTROL! } else\n      |     ^\n1 warning generated.",
    "outcome": "SILENT",
@@ -426,14 +418,6 @@
    "exit": 0,
    "secs": 0.0,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "outcome": "CHANCE",
-   "message": "qsort leaves the order of equal elements unspecified",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "kept",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -782,14 +766,6 @@
    "exit": 0,
    "secs": 0.0,
    "stdout": "before\n7",
-   "stderr": ""
-  },
-  "invalid_date": {
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "2023-03-02",
    "stderr": ""
   },
   "bitwise_on_bool": {

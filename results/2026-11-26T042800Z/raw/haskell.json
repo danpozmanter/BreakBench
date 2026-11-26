@@ -259,14 +259,6 @@
    "stdout": "even",
    "stderr": ""
   },
-  "default_operator_precedence": {
-   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:10:29: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n   |\n10 |   let cached = cachedCount (head args)\n   |                             ^^^^",
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "5",
-   "stderr": ""
-  },
   "dangling_else": {
    "outcome": "REJECTED",
    "message": "[1 of 2] Compiling Main             ( main.hs, main.o )\n\nmain.hs:10:3: error: [GHC-58481]\n    parse error (possibly incorrect indentation or mismatched brackets)\n   |\n10 |   putStrLn r\n   |   ^",
@@ -445,14 +437,6 @@
    "exit": 0,
    "secs": 0.0,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:9:87: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018tail\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Replace it with 'drop' 1, or use pattern matching or 'GHC.Internal.Data.List.uncons' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n  |\n9 |       kept = and (zipWith (\\a b -> customer a /= customer b || day a < day b) sorted (tail sorted))\n  |                                                                                       ^^^^",
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "kept",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -858,15 +842,6 @@
    "secs": 0.0,
    "stdout": "before",
    "stderr": "main: Uncaught exception ghc-internal:GHC.Internal.Exception.ErrorCall:\n\nEnum.toEnum{Color}: tag (7) is outside of enumeration's range (0,2)"
-  },
-  "invalid_date": {
-   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main",
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "2023-02-28",
-   "stderr": ""
   },
   "bitwise_on_bool": {
    "outcome": "REJECTED",

@@ -241,14 +241,6 @@
    "stdout": "even",
    "stderr": ""
   },
-  "default_operator_precedence": {
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.01,
-   "stdout": "4",
-   "stderr": ""
-  },
   "dangling_else": {
    "outcome": "CORRECT",
    "exit": 0,
@@ -416,13 +408,6 @@
    "exit": 0,
    "secs": 0.01,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.01,
-   "stdout": "kept",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -795,14 +780,6 @@
    "secs": 0.03,
    "stdout": "before",
    "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/enum_from_int/main/main.py\", line 12, in <module>\n    print(Color(int(sys.argv[1]))) # CONTROL! n = int(sys.argv[1]); print(Color(n) if n in {c.value for c in Color} else \"invalid\")\n          ~~~~~^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.15/enum.py\", line 733, in __call__\n    return cls.__new__(cls, value)\n           ~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.15/enum.py\", line 1222, in __new__\n    raise ve_exc\nValueError: 7 is not a valid Color"
-  },
-  "invalid_date": {
-   "outcome": "TRAPPED",
-   "control": "verified",
-   "exit": 1,
-   "secs": 0.03,
-   "stdout": "",
-   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/invalid_date/main/main.py\", line 5, in <module>\n    day = date(y, m, d)  # BREAK!\nValueError: day 30 must be in range 1..28 for month 2 in year 2023"
   },
   "bitwise_on_bool": {
    "outcome": "TRAPPED",

@@ -223,14 +223,6 @@
    "stdout": "even",
    "stderr": ""
   },
-  "default_operator_precedence": {
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.02,
-   "stdout": "4",
-   "stderr": ""
-  },
   "dangling_else": {
    "outcome": "SILENT",
    "control": "verified",
@@ -393,13 +385,6 @@
    "exit": 0,
    "secs": 0.04,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.04,
-   "stdout": "kept",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -786,17 +771,6 @@
    "secs": 0.03,
    "stdout": "before",
    "stderr": "Exception in thread \"main\" java.lang.IndexOutOfBoundsException: index: 7, size: 3\n\tat kotlin.collections.AbstractList$Companion.checkElementIndex$kotlin_stdlib(AbstractList.kt:118)\n\tat kotlin.enums.EnumEntriesList.get(EnumEntries.kt:64)\n\tat kotlin.enums.EnumEntriesList.get(EnumEntries.kt:53)\n\tat MainKt.main(main.kt:5)"
-  },
-  "invalid_date": {
-   "outcome": "TRAPPED",
-   "control": "verified",
-   "release": "TRAPPED",
-   "release_stdout": "",
-   "release_stderr": "Exception in thread \"main\" java.time.DateTimeException: Invalid date 'FEBRUARY 30'\n\tat java.base/java.time.LocalDate.create(LocalDate.java:479)\n\tat java.base/java.time.LocalDate.of(LocalDate.java:295)\n\tat MainKt.main(main.kt:5)",
-   "exit": 1,
-   "secs": 0.02,
-   "stdout": "",
-   "stderr": "Exception in thread \"main\" java.time.DateTimeException: Invalid date 'FEBRUARY 30'\n\tat java.base/java.time.LocalDate.create(LocalDate.java:479)\n\tat java.base/java.time.LocalDate.of(LocalDate.java:295)\n\tat MainKt.main(main.kt:5)"
   },
   "bitwise_on_bool": {
    "outcome": "REJECTED",

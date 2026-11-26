@@ -249,13 +249,6 @@
    "stdout": "odd",
    "stderr": ""
   },
-  "default_operator_precedence": {
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "5",
-   "stderr": ""
-  },
   "dangling_else": {
    "build_output": "main.cpp:10:5: warning: add explicit braces to avoid dangling else [-Wdangling-else]\n   10 |     else // CONTROL! } else\n      |     ^\n1 warning generated.",
    "outcome": "SILENT",
@@ -423,14 +416,6 @@
    "exit": 0,
    "secs": 0.0,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "scrambled",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -808,14 +793,6 @@
    "exit": 0,
    "secs": 0.0,
    "stdout": "before\n7",
-   "stderr": ""
-  },
-  "invalid_date": {
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "2023-02-30 is not a valid date",
    "stderr": ""
   },
   "bitwise_on_bool": {

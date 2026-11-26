@@ -243,14 +243,6 @@
    "stdout": "even",
    "stderr": ""
   },
-  "default_operator_precedence": {
-   "build_output": "build: 862424B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "5",
-   "stderr": ""
-  },
   "dangling_else": {
    "build_output": "build: 862352B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
    "outcome": "CORRECT",
@@ -414,15 +406,6 @@
    "exit": 0,
    "secs": 0.0,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "build_output": "build: 883032B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
-   "outcome": "CHANCE",
-   "message": "sort_by_key does not document whether equal keys keep their order",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "kept",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -758,14 +741,6 @@
    "exit": 0,
    "secs": 0.0,
    "stdout": "before\ninvalid",
-   "stderr": ""
-  },
-  "invalid_date": {
-   "build_output": "build: 1363048B native executable at ./target/debug/main (target x86_64-unknown-linux-gnu)\n\nnote: building with LLVM 23 (opt), not the LLVM 22 this toolchain is built against. The program is the same; a timing or a codegen difference measured against a build made with LLVM 22 is not comparable.",
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "invalid",
    "stderr": ""
   },
   "bitwise_on_bool": {

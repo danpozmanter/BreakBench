@@ -570,22 +570,6 @@
       ]
     },
     {
-      "id": "default_operator_precedence",
-      "category": "operators",
-      "kind": "static",
-      "args": [
-        "ada"
-      ],
-      "expect": "^5$",
-      "title": "A default value next to +",
-      "scenario": "cached is a count that may be missing; for ada it holds 4. The program computes cached, or 0 when it is missing, plus 1, with no parentheses, and prints it. It writes the default with the language's default operator (??, ?:, ||, orelse, or_else), else its option type's default call (unwrap_or, getOrElse, fromMaybe), else the conditional expression.",
-      "best": "5: the default and the + group as written, or the language has no default operator to misgroup. 4 shows + 1 bound to the 0 and was dropped.",
-      "mode": "Code that reads one way and runs another",
-      "refs": [
-        "CWE-783"
-      ]
-    },
-    {
       "category": "control_flow",
       "id": "dangling_else",
       "kind": "static",
@@ -921,20 +905,6 @@
       "mode": "Wrong type or shape",
       "refs": [
         "Pitfall: the default sort compares numbers as text (JavaScript)"
-      ]
-    },
-    {
-      "id": "unstable_sort",
-      "category": "api",
-      "kind": "dynamic",
-      "args": [],
-      "expect": "^kept$",
-      "title": "Sorting on one key and expecting ties to keep their order",
-      "scenario": "orders holds 200 records in day order, each with a customer from 0 to 4. The program sorts them by customer with the language's standard sort and a key or comparator on the customer alone, then checks that each customer's orders are still in day order.",
-      "best": "\"kept\": the standard sort is documented to keep equal elements in their order. \"scrambled\" fails, and so does \"kept\" from a sort that does not promise it.",
-      "mode": "Wrong type or shape",
-      "refs": [
-        "Pitfall: relying on an unstable sort to keep ties in order (C qsort, C++ std::sort, Go slices.SortFunc)"
       ]
     },
     {
@@ -1674,25 +1644,6 @@
       "mode": "Wrong type or shape",
       "refs": [
         "CERT INT50-CPP"
-      ]
-    },
-    {
-      "id": "invalid_date",
-      "category": "api",
-      "kind": "dynamic",
-      "args": [
-        "2023",
-        "2",
-        "30"
-      ],
-      "expect": "^invalid$",
-      "title": "Building February 30",
-      "scenario": "The program builds the calendar date 2023-02-30, read from the command line as year, month and day, with the language's standard call for a date, and prints it as YYYY-MM-DD. Where that call answers an Option, a Result or an error union, the program checks it and prints invalid.",
-      "best": "\"invalid\", because the language made the program check the date. An error at run time earns half. A date that rolled over to March or was clipped to February 28 is a silent wrong answer.",
-      "mode": "Wrong type or shape",
-      "refs": [
-        "CWE-1284",
-        "CWE-20"
       ]
     },
     {

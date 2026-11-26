@@ -248,14 +248,6 @@
    "stdout": "even",
    "stderr": ""
   },
-  "default_operator_precedence": {
-   "build_output": "Program linked to executable './main'.",
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "5",
-   "stderr": ""
-  },
   "dangling_else": {
    "outcome": "REJECTED",
    "message": "6:     bool b = true;\n 7:     String r = \"unset\";\n 8:     if (a) // BREAK!\n 9:         if (b) r = \"both\"; // BREAK!\n            ^^\n/tmp/breakbench/dangling_else/main/main.c3:9:3: error: The 'then' part of a single line if-statement must start on the same line as the 'if' or use '{ }'",
@@ -426,15 +418,6 @@
    "exit": 0,
    "secs": 0.0,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "build_output": "Program linked to executable './main'.",
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "scrambled",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -816,15 +799,6 @@
    "secs": 0.02,
    "stdout": "before",
    "stderr": "ERROR: 'Attempting to convert 7 to enum 'Color' failed as the value exceeds the max ordinal (2).'\n  in main.main (/tmp/breakbench/enum_from_int/main/main.c3:14) [./main] [inline]"
-  },
-  "invalid_date": {
-   "build_output": "Program linked to executable './main'.",
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "2023-03-02",
-   "stderr": ""
   },
   "bitwise_on_bool": {
    "build_output": "Program linked to executable './main'.",

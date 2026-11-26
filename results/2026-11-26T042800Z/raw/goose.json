@@ -233,13 +233,6 @@
    "stdout": "even",
    "stderr": ""
   },
-  "default_operator_precedence": {
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "5",
-   "stderr": ""
-  },
   "dangling_else": {
    "outcome": "CORRECT",
    "exit": 0,
@@ -389,14 +382,6 @@
    "exit": 0,
    "secs": 0.0,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "scrambled",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -738,10 +723,6 @@
    "secs": 0.0,
    "stdout": "before\ninvalid",
    "stderr": ""
-  },
-  "invalid_date": {
-   "outcome": "INEXPRESSIBLE",
-   "message": "no calendar dates in the standard library"
   },
   "bitwise_on_bool": {
    "outcome": "REJECTED",

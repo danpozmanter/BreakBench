@@ -233,13 +233,6 @@
    "message": "-- [E134] Type Error: main.scala:4:17 ------------------------------------------\n4 |    val even = x & 1 == 0 // BREAK!\n  |               ^^^\n  |   None of the overloaded alternatives of method & in class Int with types\n  |    (x: Long): Long\n  |    (x: Int): Int\n  |    (x: Char): Int\n  |    (x: Short): Int\n  |    (x: Byte): Int\n  |   match arguments ((false : Boolean))\n1 error found",
    "control": "builds"
   },
-  "default_operator_precedence": {
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.12,
-   "stdout": "5",
-   "stderr": ""
-  },
   "dangling_else": {
    "outcome": "CORRECT",
    "exit": 0,
@@ -408,13 +401,6 @@
    "exit": 0,
    "secs": 0.11,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.11,
-   "stdout": "kept",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -795,17 +781,6 @@
    "secs": 0.09,
    "stdout": "before",
    "stderr": "Exception in thread \"main\" java.util.NoSuchElementException: enum Color has no case with ordinal: 7\n\tat Color$.fromOrdinal(main.scala:2)\n\tat Main$.main(main.scala:7)\n\tat Main.main(main.scala)"
-  },
-  "invalid_date": {
-   "outcome": "TRAPPED",
-   "control": "verified",
-   "release": "TRAPPED",
-   "release_stdout": "",
-   "release_stderr": "Exception in thread \"main\" java.time.DateTimeException: Invalid date 'FEBRUARY 30'\n\tat java.base/java.time.LocalDate.create(LocalDate.java:479)\n\tat java.base/java.time.LocalDate.of(LocalDate.java:295)\n\tat Main$.main(main.scala:5)\n\tat Main.main(main.scala)",
-   "exit": 1,
-   "secs": 0.11,
-   "stdout": "",
-   "stderr": "Exception in thread \"main\" java.time.DateTimeException: Invalid date 'FEBRUARY 30'\n\tat java.base/java.time.LocalDate.create(LocalDate.java:479)\n\tat java.base/java.time.LocalDate.of(LocalDate.java:295)\n\tat Main$.main(main.scala:5)\n\tat Main.main(main.scala)"
   },
   "bitwise_on_bool": {
    "outcome": "TRAPPED",

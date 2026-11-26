@@ -214,13 +214,6 @@
    "stdout": "even",
    "stderr": ""
   },
-  "default_operator_precedence": {
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.01,
-   "stdout": "5",
-   "stderr": ""
-  },
   "dangling_else": {
    "outcome": "CORRECT",
    "exit": 0,
@@ -376,14 +369,6 @@
    "exit": 0,
    "secs": 0.01,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.01,
-   "stdout": "scrambled",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -727,10 +712,6 @@
   "enum_from_int": {
    "outcome": "INEXPRESSIBLE",
    "message": "no enum type"
-  },
-  "invalid_date": {
-   "outcome": "INEXPRESSIBLE",
-   "message": "no calendar dates in the standard library"
   },
   "bitwise_on_bool": {
    "outcome": "TRAPPED",

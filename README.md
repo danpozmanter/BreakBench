@@ -38,7 +38,7 @@ leaderboard as one unranked example of how much a checker adds.
 
 ## Tests
 
-129 tests in thirteen categories. Each has a CWE or CERT entry, a CVE, or appears in a language's
+126 tests in thirteen categories. Each has a CWE or CERT entry, a CVE, or appears in a language's
 pitfall list, and covers a mistake no other test covers; `harness/problems.json` gives each test's
 reference and failure mode, and the site's Notes tab maps the failure modes to their tests. Each test is one scenario: the same steps, inputs and
 expected answer in every language, written the way that language teaches first. The code follows the

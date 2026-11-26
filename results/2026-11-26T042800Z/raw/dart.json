@@ -269,15 +269,6 @@
    "stdout": "even",
    "stderr": ""
   },
-  "default_operator_precedence": {
-   "build_output": "Compiling main.dart to kernel file main.dill.",
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.04,
-   "stdout": "4",
-   "stderr": ""
-  },
   "dangling_else": {
    "build_output": "Compiling main.dart to kernel file main.dill.",
    "outcome": "SILENT",
@@ -458,15 +449,6 @@
    "exit": 0,
    "secs": 0.05,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "build_output": "Compiling main.dart to kernel file main.dill.",
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.05,
-   "stdout": "scrambled",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -903,15 +885,6 @@
    "secs": 0.04,
    "stdout": "before",
    "stderr": "Unhandled exception:\nRangeError (length): Invalid value: Not in inclusive range 0..2: 7\n#0      _Array.[] (dart:core-patch/array.dart)\n#1      main (file:///tmp/breakbench/enum_from_int/main/main.dart:5:21)\n#2      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)\n#3      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
-  },
-  "invalid_date": {
-   "build_output": "Compiling main.dart to kernel file main.dill.",
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.04,
-   "stdout": "2023-03-02",
-   "stderr": ""
   },
   "bitwise_on_bool": {
    "build_output": "Compiling main.dart to kernel file main.dill.",

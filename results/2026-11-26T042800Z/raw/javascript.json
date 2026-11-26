@@ -249,14 +249,6 @@
    "stdout": "odd",
    "stderr": ""
   },
-  "default_operator_precedence": {
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.02,
-   "stdout": "4",
-   "stderr": ""
-  },
   "dangling_else": {
    "outcome": "SILENT",
    "control": "verified",
@@ -419,13 +411,6 @@
    "exit": 0,
    "secs": 0.02,
    "stdout": "1 10 9",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.02,
-   "stdout": "kept",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -790,14 +775,6 @@
   "enum_from_int": {
    "outcome": "INEXPRESSIBLE",
    "message": "no enum type"
-  },
-  "invalid_date": {
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.02,
-   "stdout": "2023-03-02",
-   "stderr": ""
   },
   "bitwise_on_bool": {
    "outcome": "CORRECT",

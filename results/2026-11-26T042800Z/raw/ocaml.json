@@ -225,13 +225,6 @@
    "stdout": "even",
    "stderr": ""
   },
-  "default_operator_precedence": {
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "5",
-   "stderr": ""
-  },
   "dangling_else": {
    "outcome": "SILENT",
    "control": "verified",
@@ -397,14 +390,6 @@
    "exit": 0,
    "secs": 0.0,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "outcome": "CHANCE",
-   "message": "List.sort does not promise to keep equal elements in order; List.stable_sort does",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "kept",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -762,14 +747,6 @@
    "exit": 0,
    "secs": 0.0,
    "stdout": "before\ninvalid",
-   "stderr": ""
-  },
-  "invalid_date": {
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "2023-03-02",
    "stderr": ""
   },
   "bitwise_on_bool": {

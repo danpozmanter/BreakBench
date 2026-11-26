@@ -265,14 +265,6 @@
    "stdout": "even",
    "stderr": ""
   },
-  "default_operator_precedence": {
-   "build_output": "main",
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.27,
-   "stdout": "5",
-   "stderr": ""
-  },
   "dangling_else": {
    "build_output": "main",
    "outcome": "CORRECT",
@@ -456,14 +448,6 @@
    "exit": 0,
    "secs": 0.24,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "build_output": "main",
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.23,
-   "stdout": "kept",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -860,15 +844,6 @@
   "enum_from_int": {
    "outcome": "INEXPRESSIBLE",
    "message": "no enum type"
-  },
-  "invalid_date": {
-   "build_output": "main",
-   "outcome": "TRAPPED",
-   "control": "verified",
-   "exit": 1,
-   "secs": 0.32,
-   "stdout": "",
-   "stderr": "Execution error (DateTimeException) at java.time.LocalDate/create (LocalDate.java:461).\nInvalid date 'FEBRUARY 30'\n\nFull report at:\n/tmp/clojure-6682658629623110081.edn"
   },
   "bitwise_on_bool": {
    "build_output": "main",

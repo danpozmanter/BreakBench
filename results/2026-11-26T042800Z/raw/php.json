@@ -304,15 +304,6 @@
    "stdout": "odd",
    "stderr": ""
   },
-  "default_operator_precedence": {
-   "build_output": "No syntax errors detected in main.php",
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.01,
-   "stdout": "4",
-   "stderr": ""
-  },
   "dangling_else": {
    "build_output": "No syntax errors detected in main.php",
    "outcome": "SILENT",
@@ -482,14 +473,6 @@
    "exit": 0,
    "secs": 0.01,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "build_output": "No syntax errors detected in main.php",
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.01,
-   "stdout": "kept",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -914,15 +897,6 @@
    "secs": 0.01,
    "stdout": "before",
    "stderr": "PHP Fatal error:  Uncaught ValueError: 7 is not a valid backing value for enum Color in /tmp/breakbench/enum_from_int/main/main.php:12\nStack trace:\n#0 /tmp/breakbench/enum_from_int/main/main.php(12): Color::from()\n#1 {main}\n  thrown in /tmp/breakbench/enum_from_int/main/main.php on line 12\nFatal error: Uncaught ValueError: 7 is not a valid backing value for enum Color in /tmp/breakbench/enum_from_int/main/main.php:12\nStack trace:\n#0 /tmp/breakbench/enum_from_int/main/main.php(12): Color::from()\n#1 {main}\n  thrown in /tmp/breakbench/enum_from_int/main/main.php on line 12"
-  },
-  "invalid_date": {
-   "build_output": "No syntax errors detected in main.php",
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.01,
-   "stdout": "2023-03-02",
-   "stderr": ""
   },
   "bitwise_on_bool": {
    "build_output": "No syntax errors detected in main.php",

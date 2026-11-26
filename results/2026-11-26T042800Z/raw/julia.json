@@ -282,13 +282,6 @@
    "stdout": "even",
    "stderr": ""
   },
-  "default_operator_precedence": {
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.1,
-   "stdout": "5",
-   "stderr": ""
-  },
   "dangling_else": {
    "outcome": "CORRECT",
    "exit": 0,
@@ -472,13 +465,6 @@
    "exit": 0,
    "secs": 0.11,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.29,
-   "stdout": "kept",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -898,17 +884,6 @@
    "secs": 1.03,
    "stdout": "before",
    "stderr": "ERROR: LoadError: ArgumentError: invalid value for Enum Color: 7\nStacktrace:\n [1] enum_argument_error(typename::Symbol, x::Int64)\n   @ Base.Enums ./Enums.jl:93\n [2] Color\n   @ /tmp/breakbench/enum_from_int/main/main.jl:1 [inlined]\n [3] main()\n   @ Main /tmp/breakbench/enum_from_int/main/main.jl:6\n [4] top-level scope\n   @ /tmp/breakbench/enum_from_int/main/main.jl:9\n [5] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [6] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [7] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/enum_from_int/main/main.jl:9"
-  },
-  "invalid_date": {
-   "outcome": "TRAPPED",
-   "control": "verified",
-   "release": "TRAPPED",
-   "release_stdout": "",
-   "release_stderr": "ERROR: LoadError: ArgumentError: Day: 30 out of range (1:28)\nStacktrace:\n [1] Date\n   @ ~/.julia/juliaup/julia-1.13.4+0.x64.linux.gnu/share/julia/stdlib/v1.13/Dates/src/types.jl:277 [inlined]\n [2] main()\n   @ Main /tmp/breakbench/invalid_date/release/main.jl:5\n [3] top-level scope\n   @ /tmp/breakbench/invalid_date/release/main.jl:8\n [4] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [5] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [6] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/invalid_date/release/main.jl:8",
-   "exit": 1,
-   "secs": 0.92,
-   "stdout": "",
-   "stderr": "ERROR: LoadError: ArgumentError: Day: 30 out of range (1:28)\nStacktrace:\n [1] Date\n   @ ~/.julia/juliaup/julia-1.13.4+0.x64.linux.gnu/share/julia/stdlib/v1.13/Dates/src/types.jl:277 [inlined]\n [2] main()\n   @ Main /tmp/breakbench/invalid_date/main/main.jl:5\n [3] top-level scope\n   @ /tmp/breakbench/invalid_date/main/main.jl:8\n [4] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [5] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [6] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/invalid_date/main/main.jl:8"
   },
   "bitwise_on_bool": {
    "outcome": "TRAPPED",

@@ -230,14 +230,6 @@
    "stdout": "even",
    "stderr": ""
   },
-  "default_operator_precedence": {
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "4",
-   "stderr": ""
-  },
   "dangling_else": {
    "outcome": "REJECTED",
    "message": "main.zig:14:9: error: invalid left-hand side to assignment\n        if (b) r = \"both\" // BREAK!\n        ^~~~~~~~",
@@ -381,13 +373,6 @@
    "exit": 0,
    "secs": 0.0,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "kept",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -719,10 +704,6 @@
    "secs": 0.18,
    "stdout": "before",
    "stderr": "thread 5557 panic: invalid enum value\n/tmp/breakbench/enum_from_int/main/main.zig:15:22: 0x11e46d8 in main (main.zig)\n    const c: Color = @enumFromInt(n); // CONTROL! if (n > @intFromEnum(Color.blue)) { try out.print(\"invalid\\n\", .{}); return; } const c: Color = @enumFromInt(n);\n                     ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e5408 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e4121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
-  },
-  "invalid_date": {
-   "outcome": "INEXPRESSIBLE",
-   "message": "no calendar date built from a year, month and day in the standard library"
   },
   "bitwise_on_bool": {
    "outcome": "TRAPPED",

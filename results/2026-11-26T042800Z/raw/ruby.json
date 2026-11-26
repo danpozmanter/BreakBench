@@ -276,15 +276,6 @@
    "stdout": "even",
    "stderr": ""
   },
-  "default_operator_precedence": {
-   "build_output": "Syntax OK",
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.03,
-   "stdout": "4",
-   "stderr": ""
-  },
   "dangling_else": {
    "build_output": "Syntax OK",
    "outcome": "CORRECT",
@@ -469,15 +460,6 @@
    "exit": 0,
    "secs": 0.03,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "build_output": "Syntax OK",
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.03,
-   "stdout": "scrambled",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -893,15 +875,6 @@
   "enum_from_int": {
    "outcome": "INEXPRESSIBLE",
    "message": "no enum type"
-  },
-  "invalid_date": {
-   "build_output": "Syntax OK",
-   "outcome": "TRAPPED",
-   "control": "verified",
-   "exit": 1,
-   "secs": 0.05,
-   "stdout": "",
-   "stderr": "main.rb:4:in 'Date#initialize': invalid date (Date::Error)\n\nputs Date.new(y, m, d).iso8601 # CONTROL! puts(Date.valid_date?(y, m, d) ? Date.new(y, m, d).iso8601 : \"invalid\")\n              ^^^^^^^\n\tfrom main.rb:4:in '<main>'"
   },
   "bitwise_on_bool": {
    "build_output": "Syntax OK",

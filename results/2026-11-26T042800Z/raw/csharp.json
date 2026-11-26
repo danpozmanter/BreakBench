@@ -284,15 +284,6 @@
    "message": "Determining projects to restore...\n  Restored /tmp/breakbench/bitwise_precedence/main/bb.csproj (in 38 ms).\n/tmp/breakbench/bitwise_precedence/main/Program.cs(2,13): error CS0019: Operator '&' cannot be applied to operands of type 'int' and 'bool' [/tmp/breakbench/bitwise_precedence/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/bitwise_precedence/main/Program.cs(2,13): error CS0019: Operator '&' cannot be applied to operands of type 'int' and 'bool' [/tmp/breakbench/bitwise_precedence/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.02",
    "control": "builds"
   },
-  "default_operator_precedence": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/default_operator_precedence/main/bb.csproj (in 45 ms).\n  bb -> /tmp/breakbench/default_operator_precedence/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.12",
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.02,
-   "stdout": "4",
-   "stderr": ""
-  },
   "dangling_else": {
    "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/dangling_else/main/bb.csproj (in 37 ms).\n  bb -> /tmp/breakbench/dangling_else/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.16",
    "outcome": "SILENT",
@@ -479,15 +470,6 @@
    "exit": 0,
    "secs": 0.02,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/unstable_sort/main/bb.csproj (in 56 ms).\n  bb -> /tmp/breakbench/unstable_sort/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.53",
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.02,
-   "stdout": "scrambled",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -904,18 +886,6 @@
    "secs": 0.01,
    "stdout": "before\n7",
    "stderr": ""
-  },
-  "invalid_date": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/invalid_date/main/bb.csproj (in 44 ms).\n  bb -> /tmp/breakbench/invalid_date/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.16",
-   "outcome": "TRAPPED",
-   "control": "verified",
-   "release": "TRAPPED",
-   "release_stdout": "",
-   "release_stderr": "Unhandled exception. System.ArgumentOutOfRangeException: Year, Month, and Day parameters describe an un-representable DateTime.\n   at System.DateOnly..ctor(Int32 year, Int32 month, Int32 day)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/invalid_date/release/Program.cs:line 1\nAborted (core dumped)",
-   "exit": 134,
-   "secs": 0.18,
-   "stdout": "",
-   "stderr": "Unhandled exception. System.ArgumentOutOfRangeException: Year, Month, and Day parameters describe an un-representable DateTime.\n   at System.DateOnly..ctor(Int32 year, Int32 month, Int32 day)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/invalid_date/main/Program.cs:line 1\nAborted (core dumped)"
   },
   "bitwise_on_bool": {
    "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/bitwise_on_bool/main/bb.csproj (in 45 ms).\n  bb -> /tmp/breakbench/bitwise_on_bool/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.16",

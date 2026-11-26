@@ -231,13 +231,6 @@
    "message": "main.d(6): Error: `1 == 0` must be surrounded by parentheses when next to operator `&`\n    bool even = x & 1 == 0; // BREAK!\n                      ^",
    "control": "builds"
   },
-  "default_operator_precedence": {
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "5",
-   "stderr": ""
-  },
   "dangling_else": {
    "outcome": "REJECTED",
    "message": "main.d(10): Error: else is dangling, add { } after condition at main.d(8)\n    else // BREAK!\n    ^",
@@ -402,14 +395,6 @@
    "exit": 0,
    "secs": 0.0,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "outcome": "SILENT",
-   "control": "verified",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "scrambled",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -776,17 +761,6 @@
    "secs": 0.0,
    "stdout": "before\ninvalid",
    "stderr": ""
-  },
-  "invalid_date": {
-   "outcome": "TRAPPED",
-   "control": "verified",
-   "release": "TRAPPED",
-   "release_stdout": "",
-   "release_stderr": "core.time.TimeException@std/datetime/date.d(3791): 30 is not a valid day in feb in 2023\n----------------\n??:? pure ref @safe std.datetime.date.Date std.datetime.date.Date.__ctor(int, int, int) [0x558b69eb6c1b]\n??:? _Dmain [0x558b69eaf897]",
-   "exit": 1,
-   "secs": 0.0,
-   "stdout": "",
-   "stderr": "core.time.TimeException@std/datetime/date.d(3791): 30 is not a valid day in feb in 2023\n----------------\n??:? pure ref @safe std.datetime.date.Date std.datetime.date.Date.__ctor(int, int, int) [0x59f01a8b1dbb]\nmain.d:7 _Dmain [0x59f01a8a98e3]"
   },
   "bitwise_on_bool": {
    "outcome": "TRAPPED",

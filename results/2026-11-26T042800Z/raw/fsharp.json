@@ -262,14 +262,6 @@
    "stdout": "even",
    "stderr": ""
   },
-  "default_operator_precedence": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/default_operator_precedence/main/bb.fsproj (in 177 ms).\n  bb -> /tmp/breakbench/default_operator_precedence/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.43",
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.03,
-   "stdout": "5",
-   "stderr": ""
-  },
   "dangling_else": {
    "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/dangling_else/main/bb.fsproj (in 167 ms).\n  bb -> /tmp/breakbench/dangling_else/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.37",
    "outcome": "CORRECT",
@@ -459,14 +451,6 @@
    "exit": 0,
    "secs": 0.03,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/unstable_sort/main/bb.fsproj (in 176 ms).\n  bb -> /tmp/breakbench/unstable_sort/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.49",
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.04,
-   "stdout": "kept",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -877,18 +861,6 @@
    "secs": 0.02,
    "stdout": "before\ninvalid",
    "stderr": ""
-  },
-  "invalid_date": {
-   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/invalid_date/main/bb.fsproj (in 124 ms).\n  bb -> /tmp/breakbench/invalid_date/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.04",
-   "outcome": "TRAPPED",
-   "control": "verified",
-   "release": "TRAPPED",
-   "release_stdout": "",
-   "release_stderr": "Unhandled exception. System.ArgumentOutOfRangeException: Year, Month, and Day parameters describe an un-representable DateTime.\n   at System.DateOnly..ctor(Int32 year, Int32 month, Int32 day)\n   at Program.main(String[] argv) in /tmp/breakbench/invalid_date/release/Program.fs:line 5\nAborted (core dumped)",
-   "exit": 134,
-   "secs": 0.17,
-   "stdout": "",
-   "stderr": "Unhandled exception. System.ArgumentOutOfRangeException: Year, Month, and Day parameters describe an un-representable DateTime.\n   at System.DateOnly..ctor(Int32 year, Int32 month, Int32 day)\n   at Program.main(String[] argv) in /tmp/breakbench/invalid_date/main/Program.fs:line 5\nAborted (core dumped)"
   },
   "bitwise_on_bool": {
    "outcome": "REJECTED",

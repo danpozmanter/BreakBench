@@ -245,13 +245,6 @@
    "message": "/tmp/breakbench/bitwise_precedence/main/main.nim(4, 14) Error: type mismatch\nExpression: x and false\n  [1] x: int\n  [2] false: bool\n\nExpected one of (first mismatch at [position]):\n[1] proc `and`(a, b: typedesc): typedesc\n[1] proc `and`(x, y: bool): bool\n[1] proc `and`(x, y: int16): int16\n[1] proc `and`(x, y: int32): int32\n[1] proc `and`(x, y: int8): int8\n[1] proc `and`(x, y: uint): uint\n[1] proc `and`(x, y: uint16): uint16\n[1] proc `and`(x, y: uint32): uint32\n[1] proc `and`(x, y: uint64): uint64\n[1] proc `and`(x, y: uint8): uint8\n[2] proc `and`(x, y: int): int\n[2] proc `and`(x, y: int64): int64",
    "control": "builds"
   },
-  "default_operator_precedence": {
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "5",
-   "stderr": ""
-  },
   "dangling_else": {
    "outcome": "CORRECT",
    "exit": 0,
@@ -420,13 +413,6 @@
    "exit": 0,
    "secs": 0.0,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.0,
-   "stdout": "kept",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -787,17 +773,6 @@
    "secs": 0.0,
    "stdout": "before",
    "stderr": "/tmp/breakbench/enum_from_int/main/main.nim(7) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/system/fatal.nim(62) sysFatal\nError: unhandled exception: value out of range: 7 notin 0 .. 2 [RangeDefect]"
-  },
-  "invalid_date": {
-   "outcome": "TRAPPED",
-   "control": "verified",
-   "release": "TRAPPED",
-   "release_stdout": "",
-   "release_stderr": "fatal.nim(62)            sysFatal\nError: unhandled exception: times.nim(486, 3) `monthday <= getDaysInMonth(month, year)` 2023-02-30 is not a valid date [AssertionDefect]",
-   "exit": 1,
-   "secs": 0.0,
-   "stdout": "",
-   "stderr": "/tmp/breakbench/invalid_date/main/main.nim(6) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/times.nim(1431) dateTime\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/times.nim(486) assertValidDate\n/root/.choosenim/toolchains/nim-2.4.2/lib/std/assertions.nim(45) failedAssertImpl\n/root/.choosenim/toolchains/nim-2.4.2/lib/std/assertions.nim(40) raiseAssert\n/root/.choosenim/toolchains/nim-2.4.2/lib/system/fatal.nim(62) sysFatal\nError: unhandled exception: /root/.choosenim/toolchains/nim-2.4.2/lib/pure/times.nim(486, 3) `monthday <= getDaysInMonth(month, year)` 2023-02-30 is not a valid date [AssertionDefect]"
   },
   "bitwise_on_bool": {
    "outcome": "REJECTED",

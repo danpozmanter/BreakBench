@@ -242,13 +242,6 @@
    "message": "Main.java:4: error: bad operand types for binary operator '&'\n        boolean even = x & 1 == 0; // BREAK!\n                         ^\n  first type:  int\n  second type: boolean\n1 error",
    "control": "builds"
   },
-  "default_operator_precedence": {
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.01,
-   "stdout": "5",
-   "stderr": ""
-  },
   "dangling_else": {
    "outcome": "SILENT",
    "control": "verified",
@@ -417,13 +410,6 @@
    "exit": 0,
    "secs": 0.02,
    "stdout": "1 9 10",
-   "stderr": ""
-  },
-  "unstable_sort": {
-   "outcome": "CORRECT",
-   "exit": 0,
-   "secs": 0.02,
-   "stdout": "kept",
    "stderr": ""
   },
   "unrelated_type_lookup": {
@@ -807,17 +793,6 @@
    "secs": 0.02,
    "stdout": "before",
    "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index 7 out of bounds for length 3\n\tat Main.main(Main.java:6)"
-  },
-  "invalid_date": {
-   "outcome": "TRAPPED",
-   "control": "verified",
-   "release": "TRAPPED",
-   "release_stdout": "",
-   "release_stderr": "Exception in thread \"main\" java.time.DateTimeException: Invalid date 'FEBRUARY 30'\n\tat java.base/java.time.LocalDate.create(LocalDate.java:479)\n\tat java.base/java.time.LocalDate.of(LocalDate.java:295)\n\tat Main.main(Main.java:6)",
-   "exit": 1,
-   "secs": 0.02,
-   "stdout": "",
-   "stderr": "Exception in thread \"main\" java.time.DateTimeException: Invalid date 'FEBRUARY 30'\n\tat java.base/java.time.LocalDate.create(LocalDate.java:479)\n\tat java.base/java.time.LocalDate.of(LocalDate.java:295)\n\tat Main.main(Main.java:6)"
   },
   "bitwise_on_bool": {
    "outcome": "TRAPPED",
