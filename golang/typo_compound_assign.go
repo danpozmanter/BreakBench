@@ -1,0 +1,9 @@
+package main
+
+import "fmt"
+
+func main() {
+	total := 10
+	total =+ 5 // CONTROL! total += 5
+	fmt.Println(total)
+}

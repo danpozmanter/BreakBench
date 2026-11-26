@@ -1,0 +1,5 @@
+fn main() {
+    let mut jobs = #[1, 2, 3]
+    assert(jobs.pop() == Some(3))
+    println(f"{jobs.len()}")
+}

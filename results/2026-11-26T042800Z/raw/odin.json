@@ -1,0 +1,928 @@
+{
+ "lang": "odin",
+ "version": "odin version dev-2026-11-nightly:9a69916",
+ "results": {
+  "null_deref": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "int_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Illegal instruction (core dumped)",
+   "exit": 132,
+   "secs": 0.11,
+   "stdout": "",
+   "stderr": "Illegal instruction (core dumped)"
+  },
+  "int_min_division": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/type_confusion/main/main.odin(12:18) Error: Cannot assign value 'raw' of type 'string' to 'i64' in a procedure argument \n\tfmt.println(add(raw, 3)) // BREAK! \n\t                ^~^",
+   "control": "builds"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/missing_return/main/main.odin(11:1) Error: Missing return statement at the end of the procedure 'grade' \n\t} \n\t^",
+   "control": "builds"
+  },
+  "non_exhaustive_match": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/non_exhaustive_match/main/main.odin(14:2) Unhandled switch case: Blue\tSuggestion: Was '#partial switch' wanted?",
+   "control": "builds"
+  },
+  "uninitialized_variable": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "global_init_order": {
+   "outcome": "SAFE_BY_DESIGN",
+   "message": "a global's initializer must be a constant expression, so no global runs code that could read another before it is set"
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/assign_in_condition/main/main.odin(10:11) Syntax Error: Expected 'boolean expression', found a simple statement. \n\tif x = 1 do label = \"one\" // BREAK! \n\t         ^^",
+   "control": "builds"
+  },
+  "switch_fallthrough": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "break_in_switch": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/zero_is_falsy/main/main.odin(11:5) Error: Non-boolean condition in 'if' statement \n\tif qty do present = true // BREAK! \n\t   ^~^",
+   "control": "builds"
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "loose_equality": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/loose_equality/main/main.odin(8:32) Error: Cannot convert '0' to 'string' from 'untyped integer', got 0 - Did you want '\"\"'? \n\t... code == 0 else \"different\") // CONTROL! fmt.println(\"same\" if c ... \n\t            ^",
+   "control": "builds"
+  },
+  "parse_invalid_number": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "13",
+   "stderr": ""
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/covariant_array_write/main/main.odin(15:29) Error: Cannot assign value 'dogs' of type '[dynamic]Dog' to '[dynamic]Animal' in a variable declaration \n\tanimals: [dynamic]Animal = dogs // BREAK! \n\t                           ^~~^",
+   "control": "builds"
+  },
+  "mutate_while_iterating": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1,2,3",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "repeated_row_alias": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "sort_with_nan": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/integer_average/main/main.odin(9:13) Error: Cannot assign value 'sum / count' of type 'int' to 'f64' in a variable declaration \n\tavg: f64 = sum / count // BREAK! \n\t           ^~~~~~~~~~^",
+   "control": "builds"
+  },
+  "leading_zero_literal": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "default_operator_precedence": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "4",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not a",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/chained_comparison/main/main.odin(9:12) Error: Cannot convert untyped value '1 < x' to 'untyped integer' from 'untyped bool' \n\tinside := 1 < x < 3 // BREAK! \n\t          ^~~~^",
+   "control": "builds"
+  },
+  "lost_update_on_copy": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/lost_update_on_copy/main/main.odin(12:3) Error: Cannot assign to 'acct.balance' \n\tacct.balance += 50 \n\t^~~~~~~~~~~^ \n\tfor acct in accounts { // CONTROL! for &acct in accounts { \n\t    ^~~^ \n\t   'acct' is immutable, declare it as '&acct' to make it mutable",
+   "control": "builds"
+  },
+  "command_injection": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "no match",
+   "stderr": ""
+  },
+  "regex_trailing_newline": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/missing_comma_concat/main/main.odin(8:8) Syntax Error: Expected a comma, got a newline \n\t\"bob\" // CONTROL! \"bob\", \n\t     ^",
+   "control": "builds"
+  },
+  "return_in_finally": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/return_line_break/main/main.odin(6:2) Error: Expected 1 return values, got 0 \n\treturn // CONTROL! return a + b \n\t^~~~~^ \n/tmp/breakbench/return_line_break/main/main.odin(7:3) Error: Expression is not used: 'a + b' \n\ta + b // BREAK! \n\t^~~~^ \n/tmp/breakbench/return_line_break/main/main.odin(8:1) Error: Missing return statement at the end of the procedure 'total' \n\t} \n\t^",
+   "control": "builds"
+  },
+  "worker_failure_lost": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "total 3",
+   "stderr": "bad number: x"
+  },
+  "unawaited_task": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/unawaited_task/main/main.odin(16:2) Error: 'task' declared but not used \n\ttask := thread.create_and_start(save) // CONTROL! task  ... \n\t^~~^",
+   "control": "builds"
+  },
+  "format_arg_mismatch": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3 of %!(MISSING ARGUMENT)",
+   "stderr": ""
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/shadowed_assignment/main/main.odin(9:3) Error: Declaration of 'status' shadows declaration at line 7 \n\tstatus := \"done\" // CONTROL! status = \"done\" \n\t^~~~~^",
+   "control": "builds"
+  },
+  "discarded_pure_result": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "/tmp/breakbench/negative_index_wraps/release/main.odin(10:37) Bounds check failed: -1 is out of range 0..<3\nIllegal instruction (core dumped)",
+   "exit": 132,
+   "secs": 0.1,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/negative_index_wraps/main/main.odin(10:37) Bounds check failed: -1 is out of range 0..<3\nIllegal instruction (core dumped)"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unstable_sort": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "scrambled",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/unrelated_type_lookup/main/main.odin(11:2) Error: 'n' declared but not used \n\tn, ok := strconv.parse_int(id) \n\t^ \n/tmp/breakbench/unrelated_type_lookup/main/main.odin(16:45) Error: Cannot assign value 'id' of type 'string' to 'int' in a procedure argument \n\t... ns(ids, id) else \"missing\") // CONTROL! fmt.println(\"found\" if  ... \n\t            ^^",
+   "control": "builds"
+  },
+  "panic_under_lock": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unbalanced",
+   "stderr": "crash mid-update"
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "/tmp/breakbench/oob_write/release/main.odin(15:8) Bounds check failed: 4 is out of range 0..<4\nIllegal instruction (core dumped)",
+   "exit": 132,
+   "secs": 0.11,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/oob_write/main/main.odin(15:8) Bounds check failed: 4 is out of range 0..<4\nIllegal instruction (core dumped)"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "/tmp/breakbench/oob_read/release/main.odin(15:20) Bounds check failed: 4 is out of range 0..<4\nIllegal instruction (core dumped)",
+   "exit": 132,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/oob_read/main/main.odin(15:20) Bounds check failed: 4 is out of range 0..<4\nIllegal instruction (core dumped)"
+  },
+  "use_after_free": {
+   "outcome": "CORRUPT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "6666",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 134,
+   "secs": 0.09,
+   "stdout": "",
+   "stderr": "free(): invalid pointer\nAborted (core dumped)"
+  },
+  "dangling_stack_ref": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/dangling_stack_ref/main/main.odin(7:9) Error: It is unsafe to return '&local' from a procedure, as it refers to the stack memory of the local variable 'local' \n\treturn &local // BREAK! \n\t       ^ \n\tSuggestion: If this is intended, make it explicit with a conversion to 'rawptr' or 'uintptr', or a 'transmute'",
+   "control": "builds"
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRUPT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "99",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "/tmp/breakbench/wrong_variant_access/release/main.odin(12:7) type assertion: Invalid type assertion from Value to string, actual type: int\nIllegal instruction (core dumped)",
+   "exit": 132,
+   "secs": 0.09,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/wrong_variant_access/main/main.odin(12:7) type assertion: Invalid type assertion from Value to string, actual type: int\nIllegal instruction (core dumped)"
+  },
+  "format_string": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "%!(MISSING ARGUMENT)%!(MISSING ARGUMENT)%!(MISSING ARGUMENT)%!(MISSING ARGUMENT)%!(BAD ARGUMENT NUMBER)",
+   "stderr": ""
+  },
+  "trojan_source": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "admin",
+   "stderr": ""
+  },
+  "unsafe_deserialization": {
+   "outcome": "SAFE_BY_DESIGN",
+   "message": "core:encoding/json builds only the type the program declares"
+  },
+  "null_byte_path": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "secret",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "admin\nadmin",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/string_literal_write/main/main.odin(7:2) Error: Cannot assign to 'greeting[0]' \n\tgreeting[0] = 'j' // CONTROL! greeting = \"jello\" \n\t^~~~~~~~~~^",
+   "control": "builds"
+  },
+  "reference_cycle": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no automatic memory management; a record is freed only by an explicit free, so dropping a reference never frees anything"
+  },
+  "forgotten_free": {
+   "outcome": "LEAK",
+   "control": "verified",
+   "exit": 137,
+   "secs": 2.24,
+   "stdout": "",
+   "stderr": "Killed"
+  },
+  "complete_init": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "override_check": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no methods or inheritance, so no method replaces another"
+  },
+  "missing_virtual": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no methods or inheritance, so no method replaces another"
+  },
+  "unbound_method": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no methods, so no method can be passed without its object"
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "before",
+   "release_stderr": "/tmp/breakbench/forced_unwrap/release/main.odin(12:14) type assertion: Invalid type assertion from Maybe($T=int) to int, actual type: nil\nIllegal instruction (core dumped)",
+   "exit": 132,
+   "secs": 0.09,
+   "stdout": "before",
+   "stderr": "/tmp/breakbench/forced_unwrap/main/main.odin(12:14) type assertion: Invalid type assertion from Maybe($T=int) to int, actual type: nil\nIllegal instruction (core dumped)"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hello, nil",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "readonly_param": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/literal_range/main/main.odin(7:16) Error: Cannot convert numeric value '300' from '300' to 'u8' from 'untyped integer' \n\ttoo_big: u8 = 300 // BREAK! \n\t              ^~^ \n\tThe maximum value that can be represented by 'u8' is '255'",
+   "control": "builds"
+  },
+  "no_implicit_conversion": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/no_implicit_conversion/main/main.odin(8:15) Error: Cannot assign value 'big' of type 'i64' to 'i32' in a variable declaration \n\twrong: i32 = big // BREAK! \n\t             ^~^",
+   "control": "builds"
+  },
+  "generic_constraint": {
+   "outcome": "REJECTED",
+   "message": "/opt/odin/core/slice/sort.odin(37:35) Error: 'where' clause evaluated to false: \n\tORD(E) \n\tsort :: proc(data: $T/[]$E) where ORD(E) { \n\t                                  ^~~~~^ \n \n\tWith the following definitions: \n\t\tE :: Point; \n\t\tT :: []Point; \n/tmp/breakbench/generic_constraint/main/main.odin(12:2) at caller location \n\t                                  ^~~~~^ \n \n\tWith the following definitions: \n\t\tE :: Point; \n\t\tT :: []Point; \n\t/tmp/breakbench/generic_constraint/main/main.odin(12:2) instantiated as 'sort($T=[]Point, $E=Point)'",
+   "control": "builds"
+  },
+  "lossy_int_to_float": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/lossy_int_to_float/main/main.odin(10:7) Error: Cannot assign value 'n' of type 'i64' to 'f64' in a procedure argument \n\tshow(n) // BREAK! \n\t     ^",
+   "control": "builds"
+  },
+  "const_index_bounds": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/const_index_bounds/main/main.odin(8:20) Error: Index '5' is out of bounds range 0..<3, got 5 \n\tfmt.println(table[5]) // BREAK! \n\t                  ^",
+   "control": "builds"
+  },
+  "lazy_accumulator": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.59,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "/tmp/breakbench/size_overflow_alloc/release/main.odin(13:10) Bounds check failed: 8 is out of range 0..<8\nIllegal instruction (core dumped)",
+   "exit": 132,
+   "secs": 0.09,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/size_overflow_alloc/main/main.odin(13:10) Bounds check failed: 8 is out of range 0..<8\nIllegal instruction (core dumped)"
+  },
+  "const_overflow": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/const_overflow/main/main.odin(6:9) Error: Numeric value '9460800000000000000' from 'i64(1_000_000_000) * 60 * 60 * 24 * 365 * 300' cannot be represented by 'i64' \n\tSPAN :: i64(1_000_000_000) * 60 * 60 * 24 * 365 * 300 // BREAK! \n\t        ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^ \n\tThe maximum value that can be represented by 'i64' is '9223372036854775807'",
+   "control": "builds"
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/dominated_case/main/main.odin(12:84) Error: Duplicate case '\"circle\"' \n\tprevious case at /tmp/breakbench/dominated_case/main/main.odin(12:52) \n\t... \"; case \"circle\": return \"again\"; case: return \"other\" } } // B ... \n\t            ^~~~~~~^",
+   "control": "builds"
+  },
+  "duplicate_key": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "json_big_integer": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "9.007199254740992e+15",
+   "stderr": ""
+  },
+  "parse_out_of_range": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "922337203685477580",
+   "stderr": ""
+  },
+  "json_nan": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "comparison_statement": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/comparison_statement/main/main.odin(8:2) Error: Expression is not used: 'count == 5' \n\tcount == 5 // BREAK! \n\t^~~~~~~~~^ \n\tSuggestion: Did you mean to do an assignment? \n\t            'count = 5;'",
+   "control": "builds"
+  },
+  "typo_compound_assign": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "structural_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/array_literal_length/main/main.odin(8:11) Error: Expected 4 values for this array literal, got 3 \n\tshort := [4]int{10, 20, 30}; fmt.println(short[0]) // BREAK! \n\t         ^~~~~~~~~~~~~~~~~^",
+   "control": "builds"
+  },
+  "enum_from_int": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "before\n7",
+   "stderr": ""
+  },
+  "invalid_date": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0000-00-00",
+   "stderr": ""
+  },
+  "bitwise_on_bool": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "/tmp/breakbench/bitwise_on_bool/release/main.odin(7:41) Bounds check failed: 0 is out of range 0..<0\nIllegal instruction (core dumped)",
+   "exit": 132,
+   "secs": 0.11,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/bitwise_on_bool/main/main.odin(7:41) Bounds check failed: 0 is out of range 0..<0\nIllegal instruction (core dumped)"
+  },
+  "readonly_field": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "bool_condition": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/bool_condition/main/main.odin(8:5) Error: Non-boolean condition in 'if' statement \n\tif strings.compare(\"x\", \"x\") { fmt.println(\"different\") }  ... \n\t   ^~~~~~~~~~~~~~~~~~~~~~~~^",
+   "control": "builds"
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "write: ENOSPC",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "write: ENOSPC"
+  },
+  "short_read": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.2,
+   "stdout": "HELLO-WORLD-1234",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "disk full",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/child_exit_status/main/main.odin(7:2) Error: 'os.process_exec' requires that its results must be handled \n\tos.process_exec({command = {\"sh\", \"-c\", \"exit 3\"}}, con ... \n\t^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ ...",
+   "control": "builds"
+  },
+  "nullable_field": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/nullable_field/main/main.odin(9:17) Error: 'len' is not supported for 'Maybe($T=string)' \n\tfmt.println(len(decoded.name)) // BREAK! \n\t            ^~~~~~~~~~~~~~~~^",
+   "control": "builds"
+  },
+  "stale_null_check": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.15,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "empty_slot": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "typed_nil": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "99",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "lock_skipped_on_return": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "cleanup_on_error_path": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "left behind: export.csv",
+   "stderr": ""
+  },
+  "generator_break_cleanup": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "left behind: reader.lock",
+   "stderr": ""
+  },
+  "main_error_exit_code": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "config missing"
+  },
+  "catch_all_hides_bug": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "/tmp/breakbench/catch_all_hides_bug/release/main.odin(10:33) Bounds check failed: 2 is out of range 0..<2\nIllegal instruction (core dumped)",
+   "exit": 132,
+   "secs": 0.1,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/catch_all_hides_bug/main/main.odin(10:33) Bounds check failed: 2 is out of range 0..<2\nIllegal instruction (core dumped)"
+  },
+  "assert_side_effect": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "narrow_counter_loop": {
+   "outcome": "REJECTED",
+   "message": "/tmp/breakbench/narrow_counter_loop/main/main.odin(9:10) Error: Cannot convert numeric value '300' from '300' to 'u8' from 'untyped integer' \n\tfor i < 300 { \n\t        ^~^ \n\tThe maximum value that can be represented by 'u8' is '255'",
+   "control": "builds"
+  },
+  "timeout_without_cancel": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "blocked_sender_leak": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "42",
+   "stderr": ""
+  }
+ }
+}

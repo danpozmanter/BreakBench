@@ -1,0 +1,1 @@
+-- CANNOT-MAKE: assert takes a pure condition, so the check cannot hold the step that takes the job

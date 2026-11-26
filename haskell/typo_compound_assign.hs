@@ -1,0 +1,1 @@
+-- CANNOT-EXPRESS: no assignment or compound assignment; values are bound once

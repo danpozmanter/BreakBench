@@ -1,0 +1,1005 @@
+{
+ "lang": "crystal",
+ "version": "Crystal 1.22.3 [3462c0774] (2026-11-13)",
+ "results": {
+  "null_deref": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:8:8\n\n 8 | puts u.name.size # BREAK!\n            ^---\nError: undefined method 'name' for Nil (compile-time type is (User | Nil))\n\nNil trace:\n\n  main.cr:8\n\n    puts u.name.size # BREAK!\n\n\n  main.cr:7\n\n    u = find_user(ARGV[0].to_i64)\n\n\n  main.cr:7\n\n    u = find_user(ARGV[0].to_i64)\n        ^~~~~~~~~\n\n  main.cr:3\n\n    def find_user(id : Int64) : User?\n        ^~~~~~~~~\n\n  main.cr:4\n\n      id == 1 ? User.new(\"alice\") : nil\n\n\n  main.cr:4\n\n      id == 1 ? User.new(\"alice\") : nil",
+   "control": "builds"
+  },
+  "int_overflow": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Arithmetic overflow (OverflowError)\n  from ?? in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Arithmetic overflow (OverflowError)\n  from main.cr:2:8 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Division by 0 (DivisionByZeroError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/int.cr:148:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Division by 0 (DivisionByZeroError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/int.cr:148:7 in 'check_div_argument'\n  from /opt/crystal-1.22.3-1/share/crystal/src/int.cr:112:5 in '//'\n  from main.cr:2:6 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "int_min_division": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Overflow: Int64::MIN / -1 (ArgumentError)\n  from ?? in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Overflow: Int64::MIN / -1 (ArgumentError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/int.cr:151:5 in 'check_div_argument'\n  from /opt/crystal-1.22.3-1/share/crystal/src/int.cr:112:5 in '//'\n  from main.cr:3:6 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Arithmetic overflow (OverflowError)\n  from ?? in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Arithmetic overflow (OverflowError)\n  from main.cr:2:7 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "float_to_int_overflow": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Arithmetic overflow (OverflowError)\n  from ?? in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Arithmetic overflow (OverflowError)\n  from main.cr:2:7 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:6:15\n\n 6 | puts add(raw, 3) # BREAK!\n                   ^\nError: expected argument #2 to 'add' to be Int64, not Int32\n\nOverloads are:\n - add(a : Int64, b : Int64)",
+   "control": "builds"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:7:6\n\n 7 | puts grade(ARGV[0].to_i)\n          ^----\nError: instantiating 'grade(Int32)'\n\n\nIn main.cr:1:28\n\n 1 | def grade(score : Int32) : String\n                                ^-----\nError: method ::grade must return String but it is returning (String | Nil)\n\nNil trace:\n\n  main.cr:2\n\n      return \"pass\" if score > 50\n\n\n  main.cr:3\n\n      return \"fail\" if score < 50",
+   "control": "builds"
+  },
+  "non_exhaustive_match": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:15:6\n\n 15 | puts name(Color.new(ARGV[0].to_i))\n           ^---\nError: instantiating 'name(Color)'\n\n\nIn main.cr:8:3\n\n 8 | case c\n     ^\nError: case is not exhaustive for enum Color.\n\nMissing members:\n - Blue",
+   "control": "builds"
+  },
+  "uninitialized_variable": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "nil",
+   "stderr": ""
+  },
+  "global_init_order": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "20",
+   "stderr": ""
+  },
+  "assign_in_condition": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "switch_fallthrough": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "break_in_switch": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "have 0",
+   "stderr": ""
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "loose_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "different",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Invalid Int32: \"12abc\" (ArgumentError)\n  from ?? in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Invalid Int32: \"12abc\" (ArgumentError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/string.cr:454:83 in 'to_i32'\n  from /opt/crystal-1.22.3-1/share/crystal/src/string.cr:365:5 in 'to_i'\n  from main.cr:1:5 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:18:1\n\n 18 | animals : Array(Animal) = dogs # BREAK!\n      ^------\nError: type must be Array(Animal), not Array(Dog)",
+   "control": "builds"
+  },
+  "mutate_while_iterating": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1,2,3",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "repeated_row_alias": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Error opening file with mode 'w': '/dev/null/out.txt': Not a directory (File::NotFoundError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/file.cr:13:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Error opening file with mode 'w': '/dev/null/out.txt': Not a directory (File::NotFoundError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/file.cr:13:7 in 'open'\n  from /opt/crystal-1.22.3-1/share/crystal/src/file.cr:176:20 in 'new_internal'\n  from /opt/crystal-1.22.3-1/share/crystal/src/file.cr:546:12 in 'write'\n  from /opt/crystal-1.22.3-1/share/crystal/src/file.cr:623:3 in 'write'\n  from main.cr:2:3 in 'save'\n  from main.cr:5:1 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "sort_with_nan": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Comparison of 2.0 and NaN failed (ArgumentError)\n  from ?? in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Comparison of 2.0 and NaN failed (ArgumentError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/slice/sort.cr:200:5 in 'cmp'\n  from /opt/crystal-1.22.3-1/share/crystal/src/slice/sort.cr:323:23 in 'insert_head!'\n  from /opt/crystal-1.22.3-1/share/crystal/src/slice/sort.cr:263:36 in 'merge_sort!'\n  from /opt/crystal-1.22.3-1/share/crystal/src/slice.cr:1022:5 in 'sort!'\n  from /opt/crystal-1.22.3-1/share/crystal/src/array.cr:1692:5 in 'sort!'\n  from /opt/crystal-1.22.3-1/share/crystal/src/array.cr:1627:5 in 'sort'\n  from main.cr:2:10 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "integer_average": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3.5",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:1:7\n\n 1 | zip = 01234 # BREAK!\n           ^\nError: octal constants should be prefixed with 0o",
+   "control": "builds"
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "12 0",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "default_operator_precedence": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "4",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not a",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "outside",
+   "stderr": ""
+  },
+  "lost_update_on_copy": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:4:37\n\n 4 | accounts.each { |acct| acct.balance += 50 } # BREAK!\n                                         ^------\nError: undefined method 'balance=' for Account\n\nAccount trace:\n\n  main.cr:4\n\n    accounts.each { |acct| acct.balance += 50 } # BREAK!\n\n\n  main.cr:4\n\n    accounts.each { |acct| acct.balance += 50 } # BREAK!",
+   "control": "builds"
+  },
+  "command_injection": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hi\ninjected",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Regex match error: match limit exceeded (Regex::Error)\n  from /opt/crystal-1.22.3-1/share/crystal/src/regex/pcre2.cr:281:9 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Unhandled exception: Regex match error: match limit exceeded (Regex::Error)\n  from /opt/crystal-1.22.3-1/share/crystal/src/regex/pcre2.cr:281:9 in 'match_data'\n  from /opt/crystal-1.22.3-1/share/crystal/src/regex/pcre2.cr:224:8 in 'matches_impl'\n  from /opt/crystal-1.22.3-1/share/crystal/src/regex.cr:774:5 in 'matches_at_byte_index?'\n  from /opt/crystal-1.22.3-1/share/crystal/src/regex.cr:747:7 in 'matches?'\n  from main.cr:1:6 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "regex_trailing_newline": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "accepted",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "odd",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:4:3\n\n 4 | \"carol\",\n     ^\nError: expecting token ']', not 'DELIMITER_START'",
+   "control": "builds"
+  },
+  "return_in_finally": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:16:3\n\n 16 | save_report\n      ^----------\nError: instantiating 'save_report()'\n\n\nIn main.cr:12:3\n\n 12 | return # BREAK!\n      ^\nError: can't return from ensure",
+   "control": "builds"
+  },
+  "return_line_break": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:6:6\n\n 6 | puts total(2_i64, 3_i64)\n          ^----\nError: instantiating 'total(Int64, Int64)'\n\n\nIn main.cr:1:35\n\n 1 | def total(a : Int64, b : Int64) : Int64\n                                       ^----\nError: method ::total must return Int64 but it is returning Nil\n\nNil trace:\n\n  main.cr:2\n\n      return # CONTROL! return a + b",
+   "control": "builds"
+  },
+  "worker_failure_lost": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "total 3",
+   "stderr": "Unhandled exception in spawn: Invalid Int64: \"x\" (ArgumentError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/string.cr:484:83 in 'to_i64'\n  from main.cr:7:31 in '->'\n  from /opt/crystal-1.22.3-1/share/crystal/src/wait_group.cr:68:13 in '->'\n  from /opt/crystal-1.22.3-1/share/crystal/src/fiber.cr:165:11 in 'run'\n  from /opt/crystal-1.22.3-1/share/crystal/src/fiber.cr:100:3 in '->'"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Too few arguments (ArgumentError)\n  from ?? in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Too few arguments (ArgumentError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/string/formatter.cr:610:37 in 'arg_at'\n  from /opt/crystal-1.22.3-1/share/crystal/src/string/formatter.cr:219:11 in 'consume_type'\n  from /opt/crystal-1.22.3-1/share/crystal/src/string/formatter.cr:64:7 in 'consume_percent'\n  from /opt/crystal-1.22.3-1/share/crystal/src/string/formatter.cr:44:9 in 'format'\n  from /opt/crystal-1.22.3-1/share/crystal/src/kernel.cr:443:5 in 'sprintf'\n  from /opt/crystal-1.22.3-1/share/crystal/src/kernel.cr:437:3 in 'sprintf'\n  from main.cr:3:6 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Missing hash key: \"pear\" (KeyError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/hash.cr:1202:9 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Missing hash key: \"pear\" (KeyError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/hash.cr:1202:9 in '[]'\n  from main.cr:3:6 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "done",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-20",
+   "stderr": ""
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unstable_sort": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "kept",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "missing",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unbalanced",
+   "stderr": "worker failed: crash mid-update"
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Index out of bounds (IndexError)\n  from ?? in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Index out of bounds (IndexError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/indexable.cr:998:40 in 'check_index_out_of_bounds'\n  from /opt/crystal-1.22.3-1/share/crystal/src/indexable/mutable.cr:38:13 in '[]='\n  from main.cr:7:1 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Index out of bounds (IndexError)\n  from ?? in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Index out of bounds (IndexError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/indexable.cr:89:20 in '[]'\n  from main.cr:7:6 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Cast from Int32 to String failed, at /tmp/breakbench/wrong_variant_access/release/main.cr:2:6 (TypeCastError)\n  from main.cr:2:6 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Cast from Int32 to String failed, at /tmp/breakbench/wrong_variant_access/main/main.cr:2:6 (TypeCastError)\n  from main.cr:2:6 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "format_string": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Too few arguments (ArgumentError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/string/formatter.cr:610:37 in 'arg_at'\n  from /opt/crystal-1.22.3-1/share/crystal/src/string/formatter.cr:219:11 in 'consume_type'\n  from /opt/crystal-1.22.3-1/share/crystal/src/string/formatter.cr:64:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Too few arguments (ArgumentError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/string/formatter.cr:610:37 in 'arg_at'\n  from /opt/crystal-1.22.3-1/share/crystal/src/string/formatter.cr:219:11 in 'consume_type'\n  from /opt/crystal-1.22.3-1/share/crystal/src/string/formatter.cr:64:7 in 'consume_percent'\n  from /opt/crystal-1.22.3-1/share/crystal/src/string/formatter.cr:44:9 in 'format'\n  from /opt/crystal-1.22.3-1/share/crystal/src/io.cr:275:5 in 'printf'\n  from /opt/crystal-1.22.3-1/share/crystal/src/kernel.cr:177:3 in 'printf'\n  from /opt/crystal-1.22.3-1/share/crystal/src/kernel.cr:172:3 in 'printf'\n  from main.cr:1:1 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "trojan_source": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "admin",
+   "stderr": ""
+  },
+  "unsafe_deserialization": {
+   "outcome": "SAFE_BY_DESIGN",
+   "message": "JSON::Serializable and YAML::Serializable build only the types the program declares"
+  },
+  "null_byte_path": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "admin\nadmin",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:2:9\n\n 2 | greeting[0] = 'j' # CONTROL! greeting = \"j\" + greeting[1..]\n             ^\nError: undefined method '[]=' for String\n\nString trace:\n\n  main.cr:2\n\n    greeting[0] = 'j' # CONTROL! greeting = \"j\" + greeting[1..]\n\n\n  main.cr:1\n\n    greeting = \"hello\"\n\n\n  main.cr:1\n\n    greeting = \"hello\"",
+   "control": "builds"
+  },
+  "reference_cycle": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.77,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "forgotten_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.81,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "complete_init": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:10:18\n\n 10 | partial = Config.new(timeout: 5) # BREAK!\n                       ^--\nError: missing argument: retries\n\nOverloads are:\n - Config.new(timeout : Int32, retries : Int32)",
+   "control": "builds"
+  },
+  "override_check": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "shape",
+   "stderr": ""
+  },
+  "missing_virtual": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "area 4",
+   "stderr": ""
+  },
+  "unbound_method": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "before",
+   "release_stderr": "Unhandled exception: Nil assertion failed (NilAssertionError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/nil.cr:113:7 in 'not_nil!'\n  from /opt/crystal-1.22.3-1/share/crystal/src/nil.cr:109:3 in 'not_nil!'\n  from ?? in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "before",
+   "stderr": "Unhandled exception: Nil assertion failed (NilAssertionError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/nil.cr:113:7 in 'not_nil!'\n  from /opt/crystal-1.22.3-1/share/crystal/src/nil.cr:109:3 in 'not_nil!'\n  from main.cr:7:6 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hello,",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:3:15\n\n 3 | puts line[pos + 1..] # CONTROL! puts pos ? line[pos + 1..] : \"\"\n                   ^\nError: undefined method '+' for Nil (compile-time type is (Int32 | Nil))\n\nNil trace:\n\n  main.cr:3\n\n    puts line[pos + 1..] # CONTROL! puts pos ? line[pos + 1..] : \"\"\n\n\n  main.cr:2\n\n    pos = line.index(':')\n\n\n  main.cr:2\n\n    pos = line.index(':')\n               ^~~~~\n\n  /opt/crystal-1.22.3-1/share/crystal/src/string.cr:3355\n\n      def index(search : Char, offset = 0) : Int32?\n\n\n  /opt/crystal-1.22.3-1/share/crystal/src/string.cr:3357\n\n        if single_byte_optimizable?\n\n\n  /opt/crystal-1.22.3-1/share/crystal/src/string.cr:3355\n\n      def index(search : Char, offset = 0) : Int32?\n\n\n  /opt/crystal-1.22.3-1/share/crystal/src/string.cr:3355\n\n      def index(search : Char, offset = 0) : Int32?\n          ^~~~~\n\n  /opt/crystal-1.22.3-1/share/crystal/src/string.cr:3357\n\n        if single_byte_optimizable?\n\n\n  /opt/crystal-1.22.3-1/share/crystal/src/string.cr:3384\n\n        nil",
+   "control": "builds"
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Empty enumerable (Enumerable::EmptyError)\n  from ?? in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Empty enumerable (Enumerable::EmptyError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/enumerable.cr:1139:5 in 'max'\n  from main.cr:2:6 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "readonly_param": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:2:1\n\n 2 | too_big : UInt8 = 300 # BREAK!\n     ^------\nError: type must be UInt8, not Int32",
+   "control": "builds"
+  },
+  "no_implicit_conversion": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:3:1\n\n 3 | wrong : Int32 = big # BREAK!\n     ^----\nError: type must be Int32, not Int64",
+   "control": "builds"
+  },
+  "generic_constraint": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:5:28\n\n 5 | ps = [Point.new(1, 2)]; ps.sort! # BREAK!\n                                ^----\nError: instantiating 'Array(Point)#sort!()'\n\n\nIn /opt/crystal-1.22.3-1/share/crystal/src/array.cr:1692:21\n\n 1692 | to_unsafe_slice.sort!\n                        ^----\nError: instantiating 'Slice(Point)#sort!()'\n\n\nIn /opt/crystal-1.22.3-1/share/crystal/src/slice.cr:1022:5\n\n 1022 | {% if T.union_types.size == 1 && (T <= Int::Primitive || T <= Char || T <= Enum || T <= Pointer || T <= Symbol || T <= Time::Span) %}\n        ^\nError: expanding macro\n\n\nThere was a problem expanding macro 'macro_127185387488960'\n\nCalled macro defined in /opt/crystal-1.22.3-1/share/crystal/src/slice.cr:1022:5\n\n 1022 | {% if T.union_types.size == 1 && (T <= Int::Prim\n...\n))'\n\n\nIn /opt/crystal-1.22.3-1/share/crystal/src/slice/sort.cr:263:36\n\n 263 | (size - 1).downto(0) { |i| insert_head!(v[i..]) }\n                                  ^-----------\nError: instantiating 'insert_head!(Slice(Point))'\n\n\nIn /opt/crystal-1.22.3-1/share/crystal/src/slice/sort.cr:323:23\n\n 323 | if v.size >= 2 && cmp(v[1], v[0]) < 0\n                         ^--\nError: instantiating 'cmp(Point, Point)'\n\n\nIn /opt/crystal-1.22.3-1/share/crystal/src/slice/sort.cr:199:12\n\n 199 | v = v1 <=> v2\n              ^--\nError: undefined method '<=>' for Point\n\nPoint trace:\n\n  /opt/crystal-1.22.3-1/share/crystal/src/slice/sort.cr:199\n\n        v = v1 <=> v2\n\n\n  /opt/crystal-1.22.3-1/share/crystal/src/slice/sort.cr:198\n\n      protected def self.cmp(v1, v2)",
+   "control": "builds"
+  },
+  "lossy_int_to_float": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:7:6\n\n 7 | show(n) # BREAK!\n          ^\nError: expected argument #1 to 'show' to be Float64, not Int64\n\nOverloads are:\n - show(f : Float64)",
+   "control": "builds"
+  },
+  "const_index_bounds": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Index out of bounds (IndexError)\n  from ?? in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Index out of bounds (IndexError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/indexable.cr:89:20 in '[]'\n  from main.cr:2:6 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "lazy_accumulator": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 2.72,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Arithmetic overflow (OverflowError)\n  from ?? in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "Unhandled exception: Arithmetic overflow (OverflowError)\n  from main.cr:3:14 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "const_overflow": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Arithmetic overflow (OverflowError)\n  from ?? in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Arithmetic overflow (OverflowError)\n  from main.cr:1:47 in '~SPAN:const_init'\n  from main.cr:1:1 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": "Unhandled exception in spawn: Invalid Int32: \"x\" (ArgumentError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/string.cr:454:83 in 'to_i32'\n  from /opt/crystal-1.22.3-1/share/crystal/src/string.cr:365:5 in 'to_i'\n  from main.cr:2:21 in '->'\n  from /opt/crystal-1.22.3-1/share/crystal/src/fiber.cr:165:11 in 'run'\n  from /opt/crystal-1.22.3-1/share/crystal/src/fiber.cr:100:3 in '->'"
+  },
+  "blocking_in_async": {
+   "build_output": "In main.cr:1:14\n\n 1 | start = Time.monotonic\n                  ^--------\nWarning: Deprecated Time.monotonic. Use `Time.instant` instead.\n\nIn main.cr:10:11\n\n 10 | puts Time.monotonic - start < 800.milliseconds ? \"concurrent\" : \"serial\"\n                ^--------\nWarning: Deprecated Time.monotonic. Use `Time.instant` instead.\n\nA total of 2 warnings were found.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "other",
+   "stderr": ""
+  },
+  "duplicate_key": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "json_big_integer": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "9007199254740993",
+   "stderr": ""
+  },
+  "parse_out_of_range": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Invalid Int64: \"9223372036854775808\" (ArgumentError)\n  from ?? in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Invalid Int64: \"9223372036854775808\" (ArgumentError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/string.cr:484:83 in 'to_i64'\n  from main.cr:1:5 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "json_nan": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: NaN not allowed in JSON (JSON::Error)\n  from ?? in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: NaN not allowed in JSON (JSON::Error)\n  from /opt/crystal-1.22.3-1/share/crystal/src/json/builder.cr:91:9 in 'number'\n  from /opt/crystal-1.22.3-1/share/crystal/src/json/to_json.cr:55:5 in 'to_json'\n  from /opt/crystal-1.22.3-1/share/crystal/src/json/to_json.cr:165:7 in 'to_json'\n  from /opt/crystal-1.22.3-1/share/crystal/src/json/to_json.cr:10:7 in 'to_json'\n  from /opt/crystal-1.22.3-1/share/crystal/src/json/to_json.cr:4:7 in 'to_json'\n  from main.cr:5:6 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "comparison_statement": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "typo_compound_assign": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "structural_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:3:1\n\n 3 | short : StaticArray(Int32, 4) = StaticArray[10, 20, 30] # BREAK!\n     ^----\nError: type must be StaticArray(Int32, 4), not StaticArray(Int32, 3)",
+   "control": "builds"
+  },
+  "enum_from_int": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "before\ninvalid",
+   "stderr": ""
+  },
+  "invalid_date": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Invalid time (ArgumentError)\n  from ?? in 'local:nanosecond:location'\n  from /opt/crystal-1.22.3-1/share/crystal/src/time.cr:470:5 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "Unhandled exception: Invalid time (ArgumentError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/time.cr:426:7 in 'local:nanosecond:location'\n  from /opt/crystal-1.22.3-1/share/crystal/src/time.cr:470:5 in 'utc'\n  from main.cr:1:8 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "bitwise_on_bool": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Index out of bounds (IndexError)\n  from ?? in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Index out of bounds (IndexError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/string.cr:807:22 in '[]'\n  from main.cr:2:21 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:9:3\n\n 9 | c.port = 1 # BREAK!\n       ^---\nError: undefined method 'port=' for Config\n\nConfig trace:\n\n  main.cr:9\n\n    c.port = 1 # BREAK!\n\n\n  main.cr:8\n\n    c = Config.new(8080)\n\n\n  main.cr:8\n\n    c = Config.new(8080)\n               ^~~\n\n  main.cr:4\n\n      def initialize(@port)\n\n\n  main.cr:4\n\n      def initialize(@port)\n\n\n  main.cr:4\n\n      def initialize(@port)",
+   "control": "builds"
+  },
+  "bool_condition": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "same",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: write (/dev/full): No space left on device (IO::Error)\n  from ?? in 'unbuffered_write'\n  from /opt/crystal-1.22.3-1/share/crystal/src/io/buffered.cr:250:5 in 'close'\n  from /opt/crystal-1.22.3-1/share/crystal/src/file.cr:550:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Unhandled exception: write (/dev/full): No space left on device (IO::Error)\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/event_loop/polling.cr:221:9 in 'write'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/file_descriptor.cr:44:5 in 'system_write'\n  from /opt/crystal-1.22.3-1/share/crystal/src/io/file_descriptor.cr:357:33 in 'unbuffered_write'\n  from /opt/crystal-1.22.3-1/share/crystal/src/io/buffered.cr:250:5 in 'flush'\n  from /opt/crystal-1.22.3-1/share/crystal/src/io/buffered.cr:258:5 in 'close'\n  from /opt/crystal-1.22.3-1/share/crystal/src/file.cr:550:7 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "short_read": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "HELLO-WO\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "close failed",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "backed up",
+   "stderr": ""
+  },
+  "nullable_field": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:4:19\n\n 4 | puts decoded.name.size # BREAK!\n                       ^---\nError: undefined method 'size' for Nil (compile-time type is (String | Nil))\n\nNil trace:\n\n  main.cr:4\n\n    puts decoded.name.size # BREAK!\n                 ^~~~\n\n  macro getter (in /opt/crystal-1.22.3-1/share/crystal/src/object/properties.cr:11):10\n\n          def name  : String | ::Nil \n              ^~~~\n\n  macro getter (in /opt/crystal-1.22.3-1/share/crystal/src/object/properties.cr:11):12\n\n              @name\n\n\n  macro getter (in /opt/crystal-1.22.3-1/share/crystal/src/object/properties.cr:11):6\n\n              @name : String | ::Nil\n\n\n  macro record (in /opt/crystal-1.22.3-1/share/crystal/src/macros.cr:64):13\n\n        def initialize(@name : String | ::Nil)\n\n\n  macro record (in /opt/crystal-1.22.3-1/share/crystal/src/macros.cr:64):13\n\n        def initialize(@name : String | ::Nil)",
+   "control": "builds"
+  },
+  "stale_null_check": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:17:21\n\n 17 | puts session.user.name.size # BREAK!\n                        ^---\nError: undefined method 'name' for Nil (compile-time type is (User | Nil))\n\nNil trace:\n\n  main.cr:17\n\n      puts session.user.name.size # BREAK!\n                   ^~~~\n\n  macro property (in /opt/crystal-1.22.3-1/share/crystal/src/object/properties.cr:186):10\n\n          def user  : User | ::Nil \n              ^~~~\n\n  macro property (in /opt/crystal-1.22.3-1/share/crystal/src/object/properties.cr:186):12\n\n              @user\n\n\n  macro property (in /opt/crystal-1.22.3-1/share/crystal/src/object/properties.cr:186):6\n\n              @user : User | ::Nil\n\n\n  macro property (in /opt/crystal-1.22.3-1/share/crystal/src/object/properties.cr:186):16\n\n          def user=(@user : User | ::Nil )\n\n\n  macro property (in /opt/crystal-1.22.3-1/share/crystal/src/object/properties.cr:186):16\n\n          def user=(@user : User | ::Nil )",
+   "control": "builds"
+  },
+  "empty_slot": {
+   "outcome": "REJECTED",
+   "message": "In main.cr:6:15\n\n 6 | puts users[0].name.size # BREAK!\n                   ^---\nError: undefined method 'name' for Nil (compile-time type is (User | Nil))\n\nNil trace:\n\n  main.cr:6\n\n    puts users[0].name.size # BREAK!\n              ^\n\n  /opt/crystal-1.22.3-1/share/crystal/src/indexable.cr:88\n\n      def [](index : Int)\n          ^~\n\n  /opt/crystal-1.22.3-1/share/crystal/src/indexable.cr:89\n\n        fetch(index) { raise IndexError.new }\n        ^~~~~\n\n  /opt/crystal-1.22.3-1/share/crystal/src/indexable.cr:53\n\n      def fetch(index : Int, &)\n          ^~~~~\n\n  /opt/crystal-1.22.3-1/share/crystal/src/indexable.cr:54\n\n        index = check_index_out_of_bounds(index) do\n\n\n  /opt/crystal-1.22.3-1/share/crystal/src/indexable.cr:57\n\n        unsafe_fetch(index)\n        ^~~~~~~~~~~~\n\n  /opt/crystal-1.22.3-1/share/crystal/src/array.cr:664\n\n      def unsafe_fetch(index : Int) : T\n          ^~~~~~~~~~~~\n\n  /opt/crystal-1.22.3-1/share/crystal/src/array.cr:665\n\n        @buffer[index]\n               ^\n\n  /opt/crystal-1.22.3-1/share/crystal/src/pointer.cr:132\n\n      def [](offset)\n          ^~\n\n  /opt/crystal-1.22.3-1/share/crystal/src/pointer.cr:133\n\n        (self + offset).value\n                        ^~~~~\n\n  /opt/crystal-1.22.3-1/share/crystal/src/primitives.cr:296\n\n      def value : T\n          ^~~~~\n\n  /opt/crystal-1.22.3-1/share/crystal/src/primitives.cr:296\n\n      def value : T",
+   "control": "builds"
+  },
+  "typed_nil": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "99",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "lock_skipped_on_return": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "cleanup_on_error_path": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "left behind: export.csv",
+   "stderr": ""
+  },
+  "generator_break_cleanup": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "cleaned",
+   "stderr": ""
+  },
+  "main_error_exit_code": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "config missing: Error opening file with mode 'r': '/nonexistent/bb.conf': No such file or directory"
+  },
+  "catch_all_hides_bug": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid order",
+   "stderr": ""
+  },
+  "assert_side_effect": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no assert outside the spec test framework"
+  },
+  "narrow_counter_loop": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Arithmetic overflow (OverflowError)\n  from ?? in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "Unhandled exception: Arithmetic overflow (OverflowError)\n  from main.cr:6:5 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "timeout_without_cancel": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "blocked_sender_leak": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "42",
+   "stderr": ""
+  }
+ }
+}

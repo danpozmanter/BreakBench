@@ -1,0 +1,1029 @@
+{
+ "lang": "python_mypy",
+ "version": "mypy 2.4.1 (compiled: yes)",
+ "results": {
+  "null_deref": {
+   "outcome": "REJECTED",
+   "message": "main.py:15: error: Item \"None\" of \"User | None\" has no attribute \"name\"  [union-attr]\nFound 1 error in 1 file (checked 1 source file)",
+   "control": "builds"
+  },
+  "int_overflow": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/div_by_zero/main/main.py\", line 4, in <module>\n    print(100 // d) # CONTROL! print(\"cannot divide\" if d == 0 else 100 // d)\n          ~~~~^^~~\nZeroDivisionError: division by zero"
+  },
+  "int_min_division": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "9223372036854775808",
+   "stderr": ""
+  },
+  "shift_overflow": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "18446744073709551616",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/narrowing_cast/main/main.py\", line 5, in <module>\n    b = bytes([v])[0]\n        ~~~~~^^^^^\nValueError: bytes must be in range(0, 256)"
+  },
+  "float_to_int_overflow": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "100000000000000000000",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "main.py:9: error: Argument 1 to \"add\" has incompatible type \"str\"; expected \"int\"  [arg-type]\nFound 1 error in 1 file (checked 1 source file)",
+   "control": "builds"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "main.py:4: error: Missing return statement  [return]\nFound 1 error in 1 file (checked 1 source file)",
+   "control": "builds"
+  },
+  "non_exhaustive_match": {
+   "outcome": "REJECTED",
+   "message": "main.py:11: error: Missing return statement  [return]\nmain.py:12: error: Match statement has unhandled case for values of type \"Literal[Color.BLUE]\"  [exhaustive-match]\nmain.py:12: note: If match statement is intended to be non-exhaustive, add `case _: pass`\nFound 2 errors in 1 file (checked 1 source file)",
+   "control": "builds"
+  },
+  "uninitialized_variable": {
+   "outcome": "REJECTED",
+   "message": "main.py:9: error: Name \"x\" may be undefined  [possibly-undefined]\nFound 1 error in 1 file (checked 1 source file)",
+   "control": "builds"
+  },
+  "global_init_order": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/global_init_order/main/main.py\", line 5, in <module>\n    LIMIT = base() * 2  # BREAK!\n            ~~~~^^\n  File \"/tmp/breakbench/global_init_order/main/main.py\", line 2, in base\n    return BASE\n           ^^^^\nNameError: name 'BASE' is not defined"
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "File \"main.py\", line 4\n    if x = 1:  # BREAK!\n       ^^^^^\nSyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?",
+   "control": "builds"
+  },
+  "switch_fallthrough": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "break_in_switch": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "missing",
+   "stderr": ""
+  },
+  "string_equality": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "loose_equality": {
+   "outcome": "REJECTED",
+   "message": "main.py:4: error: Non-overlapping equality check (left operand type: \"str\", right operand type: \"Literal[0]\")  [comparison-overlap]\nFound 1 error in 1 file (checked 1 source file)",
+   "control": "builds"
+  },
+  "parse_invalid_number": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/parse_invalid_number/main/main.py\", line 3, in <module>\n    n = int(sys.argv[1]) # CONTROL! n = int(sys.argv[1]) if sys.argv[1].lstrip(\"-\").isdigit() else None\nValueError: invalid literal for int() with base 10: '12abc'"
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "main.py:22: error: Incompatible types in assignment (expression has type \"list[Dog]\", variable has type \"list[Animal]\")  [assignment]\nmain.py:22: note: \"list\" is invariant -- see https://mypy.readthedocs.io/en/stable/common_issues.html#variance\nmain.py:22: note: Consider using \"Sequence\" instead, which is covariant\nFound 1 error in 1 file (checked 1 source file)",
+   "control": "builds"
+  },
+  "mutate_while_iterating": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1,2,3",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2,2,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "repeated_row_alias": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/ignored_error_result/main/main.py\", line 6, in <module>\n    save(\"/dev/null/out.txt\") # BREAK!\n    ~~~~^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/breakbench/ignored_error_result/main/main.py\", line 2, in save\n    with open(path, \"w\") as f:\n         ~~~~^^^^^^^^^^^\nNotADirectoryError: [Errno 20] Not a directory: '/dev/null/out.txt'"
+  },
+  "sort_with_nan": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "unordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "3.5",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "outcome": "REJECTED",
+   "message": "File \"main.py\", line 1\n    zip_code = 01234  # BREAK!\n               ^\nSyntaxError: leading zeros in decimal integer literals are not permitted; use an 0o prefix for octal integers",
+   "control": "builds"
+  },
+  "shared_default_argument": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "12 0",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "default_operator_precedence": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "4",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "not a",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "outside",
+   "stderr": ""
+  },
+  "lost_update_on_copy": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "150",
+   "stderr": ""
+  },
+  "command_injection": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 10.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "regex_trailing_newline": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "accepted",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "odd",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "return_in_finally": {
+   "build_output": "main.py:14: SyntaxWarning: 'return' in a 'finally' block\n  return  # BREAK!\n\nSuccess: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "saved",
+   "stderr": "/tmp/breakbench/return_in_finally/main/main.py:14: SyntaxWarning: 'return' in a 'finally' block\n  return  # BREAK!"
+  },
+  "return_line_break": {
+   "outcome": "REJECTED",
+   "message": "main.py:2: error: Return value expected  [return-value]\nmain.py:3: error: Statement is unreachable  [unreachable]\nFound 2 errors in 1 file (checked 1 source file)",
+   "control": "builds"
+  },
+  "worker_failure_lost": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "total 3",
+   "stderr": "Exception in thread Thread-1 (add_all):\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.15/threading.py\", line 1219, in _bootstrap_inner\n    self._context.run(self.run)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^\n  File \"/usr/local/lib/python3.15/threading.py\", line 1161, in run\n    self._target(*self._args, **self._kwargs)\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/breakbench/worker_failure_lost/main/main.py\", line 11, in add_all\n    total += int(item) # BREAK!\n             ~~~^^^^^^\nValueError: invalid literal for int() with base 10: 'x'"
+  },
+  "unawaited_task": {
+   "outcome": "REJECTED",
+   "message": "main.py:11: error: Value of type \"Coroutine[Any, Any, None]\" must be used  [unused-coroutine]\nmain.py:11: note: Are you missing an await?\nFound 1 error in 1 file (checked 1 source file)",
+   "control": "builds"
+  },
+  "format_arg_mismatch": {
+   "outcome": "REJECTED",
+   "message": "main.py:3: error: Cannot find replacement for positional format specifier 1  [str-format]\nFound 1 error in 1 file (checked 1 source file)",
+   "control": "builds"
+  },
+  "unsigned_subtraction": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.06,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/missing_key_default/main/main.py\", line 5, in <module>\n    print(stock[name] + 5) # CONTROL! print(stock[name] + 5 if name in stock else \"unknown\")\n          ~~~~~^^^^^^\nKeyError: 'pear'"
+  },
+  "mutable_hash_key": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/mutable_hash_key/main/main.py\", line 3, in <module>\n    seen.add(key)\n    ~~~~~~~~^^^^^\nTypeError: cannot use 'list' as a set element (unhashable type: 'list')"
+  },
+  "shadowed_assignment": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "done",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "-20",
+   "stderr": ""
+  },
+  "default_numeric_sort": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unstable_sort": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "kept",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "main.py:5: error: Non-overlapping container check (element type: \"str\", container item type: \"int\")  [comparison-overlap]\nFound 1 error in 1 file (checked 1 source file)",
+   "control": "builds"
+  },
+  "panic_under_lock": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "unbalanced",
+   "stderr": "Exception in thread Thread-1 (post):\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.15/threading.py\", line 1219, in _bootstrap_inner\n    self._context.run(self.run)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^\n  File \"/usr/local/lib/python3.15/threading.py\", line 1161, in run\n    self._target(*self._args, **self._kwargs)\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/breakbench/panic_under_lock/main/main.py\", line 11, in post\n    raise RuntimeError(\"crash mid-update\") # CONTROL! ledger[\"debits\"] -= 50; raise RuntimeError(\"crash mid-update\")\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: crash mid-update"
+  },
+  "oob_write": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/oob_write/main/main.py\", line 11, in <module>\n    f.buf[int(sys.argv[1])] = 99 # CONTROL! i = int(sys.argv[1])\n    ~~~~~^^^^^^^^^^^^^^^^^^\nIndexError: list assignment index out of range"
+  },
+  "oob_read": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/oob_read/main/main.py\", line 11, in <module>\n    print(f.buf[int(sys.argv[1])]) # CONTROL! i = int(sys.argv[1])\n          ~~~~~^^^^^^^^^^^^^^^^^^\nIndexError: list index out of range"
+  },
+  "use_after_free": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "wrong_variant_access": {
+   "outcome": "REJECTED",
+   "message": "main.py:2: error: Argument 1 to \"len\" has incompatible type \"int | str\"; expected \"Sized\"  [arg-type]\nFound 1 error in 1 file (checked 1 source file)",
+   "control": "builds"
+  },
+  "format_string": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/format_string/main/main.py\", line 3, in <module>\n    print(sys.argv[1] % ()) # CONTROL! print(sys.argv[1])\n          ~~~~~~~~~~~~^~~~\nTypeError: not enough arguments for format string (got 0)"
+  },
+  "trojan_source": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "admin",
+   "stderr": ""
+  },
+  "unsafe_deserialization": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "null_byte_path": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "admin\nadmin",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "main.py:2: error: Unsupported target for indexed assignment (\"str\")  [index]\nFound 1 error in 1 file (checked 1 source file)",
+   "control": "builds"
+  },
+  "reference_cycle": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.3,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "forgotten_free": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.27,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "complete_init": {
+   "outcome": "REJECTED",
+   "message": "main.py:10: error: Missing positional argument \"retries\" in call to \"Config\"  [call-arg]\nFound 1 error in 1 file (checked 1 source file)",
+   "control": "builds"
+  },
+  "override_check": {
+   "outcome": "REJECTED",
+   "message": "main.py:11: error: Method \"descibe\" is marked as an override, but no base method was found with this name  [misc]\nFound 1 error in 1 file (checked 1 source file)",
+   "control": "builds"
+  },
+  "missing_virtual": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "area 4",
+   "stderr": ""
+  },
+  "unbound_method": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "forced_unwrap": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "before",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/forced_unwrap/main/main.py\", line 7, in <module>\n    assert found is not None # CONTROL! if found is None: print(\"missing\")\n           ^^^^^^^^^^^^^^^^^\nAssertionError"
+  },
+  "null_in_text": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "hello, None",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/empty_max/main/main.py\", line 4, in <module>\n    print(max(xs) + 1) # CONTROL! print(max(xs) + 1 if xs else \"no readings\")\n          ~~~^^^^\nValueError: max() iterable argument is empty"
+  },
+  "readonly_param": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "exclusive_mutation": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/literal_range/main/main.py\", line 1, in <module>\n    b = bytes([300])[0] # CONTROL! b = int.from_bytes((300).to_bytes(2, \"big\"), \"big\")\n        ~~~~~^^^^^^^\nValueError: bytes must be in range(0, 256)"
+  },
+  "no_implicit_conversion": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "3000000000",
+   "stderr": ""
+  },
+  "generic_constraint": {
+   "outcome": "REJECTED",
+   "message": "main.py:10: error: Value of type variable \"SupportsRichComparisonT\" of \"sorted\" cannot be \"Point\"  [type-var]\nFound 1 error in 1 file (checked 1 source file)",
+   "control": "builds"
+  },
+  "lossy_int_to_float": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "9007199254740992",
+   "stderr": ""
+  },
+  "const_index_bounds": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/const_index_bounds/main/main.py\", line 2, in <module>\n    print(table[5]) # CONTROL! print(table[1])\n          ~~~~~^^^\nIndexError: list index out of range"
+  },
+  "lazy_accumulator": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.63,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/size_overflow_alloc/main/main.py\", line 6, in <module>\n    records = bytearray(size)\nOverflowError: cannot fit 'int' into an index-sized integer"
+  },
+  "const_overflow": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "9460800000000000000",
+   "stderr": ""
+  },
+  "orphaned_receive": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": "Exception in thread Thread-1 (<lambda>):\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.15/threading.py\", line 1219, in _bootstrap_inner\n    self._context.run(self.run)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^\n  File \"/usr/local/lib/python3.15/threading.py\", line 1161, in run\n    self._target(*self._args, **self._kwargs)\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/breakbench/orphaned_receive/main/main.py\", line 5, in <lambda>\n    threading.Thread(target=lambda: answer.put(int(\"x\"))).start() # CONTROL! threading.Thread(target=lambda: answer.put(int(\"x\") if \"x\".isdigit() else None)).start()\n                                               ~~~^^^^^\nValueError: invalid literal for int() with base 10: 'x'"
+  },
+  "blocking_in_async": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 1.1,
+   "stdout": "serial",
+   "stderr": ""
+  },
+  "evaluation_order": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "REJECTED",
+   "message": "File \"main.py\", line 11\n    case _:  # BREAK!\n         ^\nSyntaxError: wildcard makes remaining patterns unreachable",
+   "control": "builds"
+  },
+  "duplicate_key": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "json_big_integer": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "9007199254740993",
+   "stderr": ""
+  },
+  "parse_out_of_range": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "9223372036854775808",
+   "stderr": ""
+  },
+  "json_nan": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/json_nan/main/main.py\", line 5, in <module>\n    mean = 0.0 / count # CONTROL! mean = 0.0 / count if count else float(\"nan\")\n           ~~~~^~~~~~~\nZeroDivisionError: division by zero"
+  },
+  "comparison_statement": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "typo_compound_assign": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "structural_equality": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/array_literal_length/main/main.py\", line 2, in <module>\n    print(table[3])\n          ~~~~~^^^\nIndexError: list index out of range"
+  },
+  "enum_from_int": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.05,
+   "stdout": "before",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/enum_from_int/main/main.py\", line 12, in <module>\n    print(Color(int(sys.argv[1]))) # CONTROL! n = int(sys.argv[1]); print(Color(n) if n in {c.value for c in Color} else \"invalid\")\n          ~~~~~^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.15/enum.py\", line 733, in __call__\n    return cls.__new__(cls, value)\n           ~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.15/enum.py\", line 1222, in __new__\n    raise ve_exc\nValueError: 7 is not a valid Color"
+  },
+  "invalid_date": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/invalid_date/main/main.py\", line 5, in <module>\n    day = date(y, m, d)  # BREAK!\nValueError: day 30 must be in range 1..28 for month 2 in year 2023"
+  },
+  "bitwise_on_bool": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/bitwise_on_bool/main/main.py\", line 2, in <module>\n    print(\"yes\" if (len(s) > 0) & (s[0] == \"a\") else \"no\") # CONTROL! print(\"yes\" if (len(s) > 0) and (s[0] == \"a\") else \"no\")\n                                   ~^^^\nIndexError: string index out of range"
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "main.py:10: error: Property \"port\" defined in \"Config\" is read-only  [misc]\nFound 1 error in 1 file (checked 1 source file)",
+   "control": "builds"
+  },
+  "bool_condition": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "different",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "OSError: [Errno 28] No space left on device\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/tmp/breakbench/lost_write_error/main/main.py\", line 1, in <module>\n    with open(\"/dev/full\", \"w\") as f: # BREAK!\n         ~~~~^^^^^^^^^^^^^^^^^^\nOSError: [Errno 28] No space left on device"
+  },
+  "short_read": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "HELLO-WORLD-1234",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "close failed",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "total=42",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "backed up",
+   "stderr": ""
+  },
+  "nullable_field": {
+   "outcome": "REJECTED",
+   "message": "main.py:10: error: Argument 1 to \"len\" has incompatible type \"str | None\"; expected \"Sized\"  [arg-type]\nFound 1 error in 1 file (checked 1 source file)",
+   "control": "builds"
+  },
+  "stale_null_check": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/stale_null_check/main/main.py\", line 21, in <module>\n    print(len(session.user.name)) # CONTROL! logout(session)\n              ^^^^^^^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'name'"
+  },
+  "empty_slot": {
+   "outcome": "REJECTED",
+   "message": "main.py:12: error: Item \"None\" of \"User | None\" has no attribute \"name\"  [union-attr]\nFound 1 error in 1 file (checked 1 source file)",
+   "control": "builds"
+  },
+  "typed_nil": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "99",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "lock_skipped_on_return": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.06,
+   "stdout": "",
+   "stderr": ""
+  },
+  "cleanup_on_error_path": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "cleaned",
+   "stderr": ""
+  },
+  "generator_break_cleanup": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "cleaned",
+   "stderr": ""
+  },
+  "main_error_exit_code": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "config missing: [Errno 2] No such file or directory: '/nonexistent/bb.conf'"
+  },
+  "catch_all_hides_bug": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "invalid order",
+   "stderr": ""
+  },
+  "assert_side_effect": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "narrow_counter_loop": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no 8-bit integer type; int has no fixed width"
+  },
+  "timeout_without_cancel": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.14,
+   "stdout": "70",
+   "stderr": ""
+  },
+  "blocked_sender_leak": {
+   "build_output": "Success: no issues found in 1 source file",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "42\ndone",
+   "stderr": ""
+  }
+ }
+}

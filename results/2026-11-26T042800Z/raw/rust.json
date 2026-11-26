@@ -1,0 +1,881 @@
+{
+ "lang": "rust",
+ "version": "rustc 1.100.0 (0ef1bc386 2026-11-09)",
+ "results": {
+  "null_deref": {
+   "outcome": "REJECTED",
+   "message": "error[E0609]: no field `name` on type `Option<User>`\n  --> main.rs:12:22\n   |\n12 |     println!(\"{}\", u.name.len()); // BREAK!\n   |                      ^^^^ unknown field\n   |\nhelp: one of the expressions' fields has a field of the same name\n   |\n12 |     println!(\"{}\", u.unwrap().name.len()); // BREAK!\n   |                      +++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0609`.",
+   "control": "builds"
+  },
+  "int_overflow": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "SILENT",
+   "release_stdout": "-9223372036854775808",
+   "release_stderr": "",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "thread 'main' (103) panicked at main.rs:3:20:\nattempt to add with overflow\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "thread 'main' (297) panicked at main.rs:3:20:\nattempt to divide by zero\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "thread 'main' (219) panicked at main.rs:3:20:\nattempt to divide by zero\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+  },
+  "int_min_division": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "thread 'main' (413) panicked at main.rs:5:20:\nattempt to divide with overflow\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "thread 'main' (335) panicked at main.rs:5:20:\nattempt to divide with overflow\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+  },
+  "shift_overflow": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "SILENT",
+   "release_stdout": "1",
+   "release_stderr": "",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "thread 'main' (451) panicked at main.rs:4:20:\nattempt to shift left with overflow\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "9223372036854775807",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "REJECTED",
+   "message": "error[E0308]: mismatched types\n --> main.rs:4:20\n  |\n4 |     let less = i < xs.len(); // BREAK!\n  |                -   ^^^^^^^^ expected `i64`, found `usize`\n  |                |\n  |                expected because this is `i64`\n  |\nhelp: you can convert a `usize` to an `i64` and panic if the converted value doesn't fit\n  |\n4 |     let less = i < xs.len().try_into().unwrap(); // BREAK!\n  |                            ++++++++++++++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.",
+   "control": "builds"
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "error[E0308]: mismatched types\n --> main.rs:7:24\n  |\n7 |     println!(\"{}\", add(raw, 3)); // BREAK!\n  |                    --- ^^^ expected `i64`, found `String`\n  |                    |\n  |                    arguments to this function are incorrect\n  |\nnote: function defined here\n --> main.rs:1:4\n  |\n1 | fn add(a: i64, b: i64) -> i64 {\n  |    ^^^ ------\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.",
+   "control": "builds"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "error[E0317]: `if` may be missing an `else` clause\n --> main.rs:5:5\n  |\n1 |   fn grade(score: i64) -> &'static str {\n  |                           ------------ expected `&'static str` because of this return type\n...\n5 | /     if score < 50 {\n6 | |         return \"fail\";\n7 | |     }\n  | |_____^ expected `&str`, found `()`\n  |\n  = note: `if` expressions without `else` evaluate to `()`\n  = help: consider adding an `else` block that evaluates to the expected type\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0317`.",
+   "control": "builds"
+  },
+  "non_exhaustive_match": {
+   "outcome": "REJECTED",
+   "message": "error[E0004]: non-exhaustive patterns: `Color::Blue` not covered\n  --> main.rs:9:11\n   |\n 9 |     match c {\n   |           ^ pattern `Color::Blue` not covered\n   |\nnote: `Color` defined here\n  --> main.rs:2:6\n   |\n 2 | enum Color {\n   |      ^^^^^\n...\n 5 |     Blue,\n   |     ---- not covered\n   = note: the matched value is of type `Color`\nhelp: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern or an explicit pattern as shown\n   |\n11 ~         Color::Green => \"green\",\n12 ~         Color::Blue => todo!(),\n   |\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0004`.",
+   "control": "builds"
+  },
+  "uninitialized_variable": {
+   "outcome": "REJECTED",
+   "message": "error[E0381]: used binding `x` is possibly-uninitialized\n --> main.rs:7:20\n  |\n3 |     let x: i64;\n  |         - binding declared here but left uninitialized\n4 |     if n > 5 {\n  |        ----- if this `if` condition is `false`, `x` is not initialized\n5 |         x = 10;\n6 |     }\n  |      - an `else` arm might be missing here, initializing `x`\n7 |     println!(\"{}\", x); // BREAK!\n  |                    ^ `x` used here but it is possibly-uninitialized\n  |\n  = note: when checking initialization, the compiler describes possible control-flow paths without evaluating whether branch conditions can actually have the values shown\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0381`.",
+   "control": "builds"
+  },
+  "global_init_order": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "20",
+   "stderr": ""
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "error[E0308]: mismatched types\n --> main.rs:3:20\n  |\n3 |     let label = if x = 1 { \"one\" } else { \"not one\" }; // BREAK!\n  |                    ^^^^^ expected `bool`, found `()`\n  |\nhelp: you might have meant to compare for equality\n  |\n3 |     let label = if x == 1 { \"one\" } else { \"not one\" }; // BREAK!\n  |                       +\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.",
+   "control": "builds"
+  },
+  "switch_fallthrough": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "break_in_switch": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "REJECTED",
+   "message": "error[E0308]: mismatched types\n --> main.rs:3:22\n  |\n3 |     let present = if qty { true } else { false }; // BREAK!\n  |                      ^^^ expected `bool`, found `Option<i64>`\n  |\n  = note: expected type `bool`\n             found enum `Option<i64>`\nhelp: use `Option::is_some` to test if the `Option` has a value\n  |\n3 |     let present = if qty.is_some() { true } else { false }; // BREAK!\n  |                         ++++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.",
+   "control": "builds"
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "loose_equality": {
+   "outcome": "REJECTED",
+   "message": "error[E0277]: can't compare `String` with `{integer}`\n --> main.rs:3:28\n  |\n3 |     println!(\"{}\", if code == 0 { \"same\" } else { \"different\" }); // CONTROL! println!(\"{}\", if code == \"0\" { \"same\" } else { \"differ...\n  |                            ^^ no implementation for `String == {integer}`\n  |\n  = help: the trait `PartialEq<{integer}>` is not implemented for `String`\n  = help: `String` implements trait `PartialEq<Rhs>`:\n            PartialEq<&str>\n            PartialEq<ByteStr>\n            PartialEq<ByteString>\n            PartialEq<Cow<'_, str>>\n            PartialEq<Path>\n            PartialEq<PathBuf>\n            PartialEq<str>\n            PartialEq\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0277`.",
+   "control": "builds"
+  },
+  "parse_invalid_number": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": ""
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "error[E0308]: mismatched types\n  --> main.rs:18:46\n   |\n18 |     let animals: &mut Vec<Box<dyn Animal>> = &mut dogs; // BREAK!\n   |                  -------------------------   ^^^^^^^^^ expected `&mut Vec<Box<dyn Animal>>`, found `&mut Vec<Box<Dog>>`\n   |                  |\n   |                  expected due to this\n   |\n   = note: expected mutable reference `&mut Vec<Box<dyn Animal>>`\n              found mutable reference `&mut Vec<Box<Dog>>`\n   = help: `Dog` implements `Animal` so you could box the found value and coerce it to the trait object `Box<dyn Animal>`, you will have to change the expected type as well\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.",
+   "control": "builds"
+  },
+  "mutate_while_iterating": {
+   "outcome": "REJECTED",
+   "message": "error[E0502]: cannot borrow `xs` as mutable because it is also borrowed as immutable\n --> main.rs:6:13\n  |\n3 |       for x in &xs {\n  |       -        ---\n  |       |        |\n  |       |        immutable borrow occurs here\n  |  _____|        immutable borrow later used here\n  | |\n4 | |         if *x == 2 {\n5 | |             let pos = xs.iter().position(|y| y == x).unwrap(); // BREAK!\n6 | |             xs.remove(pos); // BREAK!\n  | |             ^^^^^^^^^^^^^^ mutable borrow occurs here\n7 | |         }\n8 | |     }\n  | |_____- this for loop borrows `xs` immutably, preventing mutation within its body\n  |\n  = help: consider using an index-based loop instead, or collecting modifications into a separate collection\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0502`.",
+   "control": "builds"
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "REJECTED",
+   "message": "error[E0382]: borrow of moved value: `weights`\n  --> main.rs:10:18\n   |\n 7 |     let mut weights = vec![3, 3, 3, 3];\n   |         ----------- move occurs because `weights` has type `Vec<i64>`, which does not implement the `Copy` trait\n 8 |     let before = weights; // BREAK!\n   |                  ------- value moved here\n 9 |     // CONTROL! let before = weights.clone();\n10 |     apply_update(&mut weights);\n   |                  ^^^^^^^^^^^^ value borrowed here after move\n   |\nhelp: consider cloning the value if the performance cost is acceptable\n   |\n 8 |     let before = weights.clone(); // BREAK!\n   |                         ++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0382`.",
+   "control": "builds"
+  },
+  "repeated_row_alias": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "build_output": "warning: unused `Result` that must be used\n --> main.rs:9:5\n  |\n9 |     save(\"/dev/null/out.txt\"); // CONTROL! match save(\"/dev/null/out.txt\") { Ok(()) => println!(\"saved\"), Err(_) => println!(\"failed\") }\n  |     ^^^^^^^^^^^^^^^^^^^^^^^^^\n  |\n  = note: this `Result` may be an `Err` variant, which should be handled\n  = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default\nhelp: use `let _ = ...` to ignore the resulting value\n  |\n9 |     let _ = save(\"/dev/null/out.txt\"); // CONTROL! match save(\"/dev/null/out.txt\") { Ok(()) => println!(\"saved\"), Err(_) => println!(\"failed\") }\n  |     +++++++\n\nwarning: 1 warning emitted",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "sort_with_nan": {
+   "outcome": "REJECTED",
+   "message": "error[E0277]: the trait bound `f64: Ord` is not satisfied\n --> main.rs:3:8\n  |\n3 |     xs.sort(); // BREAK!\n  |        ^^^^ the trait `Ord` is not implemented for `f64`\n  |\n  = help: the following other types implement trait `Ord`:\n            i128\n            i16\n            i32\n            i64\n            i8\n            isize\n            u128\n            u16\n          and 4 others\nnote: required by a bound in `slice::<impl [T]>::sort`\n --> /rustc/0ef1bc386059596dada8fb65b50425aab2ea637a/library/alloc/src/slice.rs:131:4\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0277`.",
+   "control": "builds"
+  },
+  "integer_average": {
+   "outcome": "REJECTED",
+   "message": "error[E0308]: mismatched types\n --> main.rs:5:20\n  |\n5 |     let avg: f64 = sum / count; // BREAK!\n  |              ---   ^^^^^^^^^^^ expected `f64`, found `i64`\n  |              |\n  |              expected due to this\n  |\nhelp: you can convert an `i64` to an `f64`, producing the floating point representation of the integer, rounded if necessary\n  |\n5 |     let avg: f64 = (sum / count) as f64; // BREAK!\n  |                    +           ++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.",
+   "control": "builds"
+  },
+  "leading_zero_literal": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "REJECTED",
+   "message": "error[E0382]: use of moved value: `evens`\n --> main.rs:5:17\n  |\n3 |     let evens = xs.iter().filter(|x| *x % 2 == 0);\n  |         ----- move occurs because `evens` has type `Filter<std::slice::Iter<'_, i32>, {closure@main.rs:3:34: 3:37}>`, which does not implement the `Copy` trait\n4 |     let total: i32 = evens.sum();\n  |                            ----- `evens` moved due to this method call\n5 |     let count = evens.count(); // BREAK!\n  |                 ^^^^^ value used here after move\n  |\nnote: `std::iter::Iterator::sum` takes ownership of the receiver `self`, which moves `evens`\n --> /rustc/0ef1bc386059596dada8fb65b50425aab2ea637a/library/core/src/iter/traits/iterator.rs:3689:14\nhelp: you can `clone` the value and consume it, but this might not be your desired behavior\n  |\n4 |     let total: i32 = evens.clone().sum();\n  |                           ++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0382`.",
+   "control": "builds"
+  },
+  "bitwise_precedence": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "default_operator_precedence": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not a",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "error: comparison operators cannot be chained\n --> main.rs:3:20\n  |\n3 |     let inside = 1 < x < 3; // BREAK!\n  |                    ^   ^\n  |\nhelp: split the comparison into two\n  |\n3 |     let inside = 1 < x && x < 3; // BREAK!\n  |                        ++++\n\nerror: aborting due to 1 previous error",
+   "control": "builds"
+  },
+  "lost_update_on_copy": {
+   "outcome": "REJECTED",
+   "message": "warning: variable does not need to be mutable\n --> main.rs:6:9\n  |\n6 |     let mut accounts = vec![Account { balance: 100 }];\n  |         ----^^^^^^^^\n  |         |\n  |         help: remove this `mut`\n  |\n  = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default\n\nerror[E0594]: cannot assign to `acct.balance`, as `acct` is not declared as mutable\n --> main.rs:7:28\n  |\n7 |     for acct in accounts { acct.balance += 50; } // BREAK!\n  |                            ^^^^^^^^^^^^^^^^^^ cannot assign\n  |\nhelp: consider changing this to be mutable\n  |\n7 |     for mut acct in accounts { acct.balance += 50; } // BREAK!\n  |         +++\n\nerror[E0382]: borrow of moved value: `accounts`\n --> main.rs:9:20\n  |\n6 |     let mut accounts = vec![\n...\n1bc386059596dada8fb65b50425aab2ea637a/library/core/src/iter/traits/collect.rs:312:17\nhelp: consider iterating over a slice of the `Vec<Account>`'s content to avoid moving into the `for` loop\n  |\n7 |     for acct in &accounts { acct.balance += 50; } // BREAK!\n  |                 +\n\nwarning: unused variable: `acct`\n --> main.rs:7:9\n  |\n7 |     for acct in accounts { acct.balance += 50; } // BREAK!\n  |         ^^^^ help: if this is intentional, prefix it with an underscore: `_acct`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nerror: aborting due to 2 previous errors; 2 warnings emitted\n\nSome errors have detailed explanations: E0382, E0594.\nFor more information about an error, try `rustc --explain E0382`.",
+   "control": "builds"
+  },
+  "command_injection": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "no match",
+   "stderr": ""
+  },
+  "regex_trailing_newline": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "error: no rules expected `\"carol\"`\n --> main.rs:5:9\n  |\n4 |         \"bob\" // CONTROL! \"bob\",\n  |              - help: missing comma here\n5 |         \"carol\",\n  |         ^^^^^^^ no rules expected this token in macro call\n  |\n  = note: while trying to match sequence start\n\nerror: aborting due to 1 previous error",
+   "control": "builds"
+  },
+  "return_in_finally": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "thread '<unnamed>' (2571) panicked at main.rs:5:77:\ncalled `Result::unwrap()` on an `Err` value: ParseIntError { kind: InvalidDigit }\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' (2570) panicked at main.rs:6:31:\ncalled `Result::unwrap()` on an `Err` value: Any { .. }",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "thread '<unnamed>' (2491) panicked at main.rs:5:77:\ncalled `Result::unwrap()` on an `Err` value: ParseIntError { kind: InvalidDigit }\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n\nthread 'main' (2490) panicked at main.rs:6:31:\ncalled `Result::unwrap()` on an `Err` value: Any { .. }"
+  },
+  "unawaited_task": {
+   "build_output": "warning: unused variable: `task`\n --> main.rs:9:9\n  |\n9 |     let task = thread::spawn(move || {\n  |         ^^^^ help: if this is intentional, prefix it with an underscore: `_task`\n  |\n  = note: `#[warn(unused_variables)]` (part of `#[warn(unused)]`) on by default\n\nwarning: 1 warning emitted",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "REJECTED",
+   "message": "error: 2 positional arguments in format string, but there is 1 argument\n --> main.rs:4:15\n  |\n4 |     println!(\"{} of {}\", done); // CONTROL! println!(\"{} of {}\", done, total);\n  |               ^^    ^^   ----\n\nerror: aborting due to 1 previous error",
+   "control": "builds"
+  },
+  "unsigned_subtraction": {
+   "build_output": "warning: comparison is useless due to type limits\n --> main.rs:6:8\n  |\n6 |     if payload < 0 {\n  |        ^^^^^^^^^^^\n  |\n  = note: `#[warn(unused_comparisons)]` on by default\n\nwarning: 1 warning emitted",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "SILENT",
+   "release_stdout": "18446744073709551614",
+   "release_stderr": "",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "thread 'main' (2734) panicked at main.rs:5:19:\nattempt to subtract with overflow\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+  },
+  "missing_key_default": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "thread 'main' (2929) panicked at main.rs:6:25:\nno entry found for key\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "thread 'main' (2851) panicked at main.rs:6:25:\nno entry found for key\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "build_output": "warning: variable does not need to be mutable\n --> main.rs:3:9\n  |\n3 |     let mut status = \"pending\";\n  |         ----^^^^^^\n  |         |\n  |         help: remove this `mut`\n  |\n  = note: `#[warn(unused_mut)]` (part of `#[warn(unused)]`) on by default\n\nwarning: 1 warning emitted",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pending",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "build_output": "warning: unused return value of `str::<impl str>::to_uppercase` that must be used\n --> main.rs:3:5\n  |\n3 |     name.to_uppercase(); // BREAK!\n  |     ^^^^^^^^^^^^^^^^^^^\n  |\n  = note: this returns the uppercase string as a new String, without modifying the original\n  = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default\nhelp: use `let _ = ...` to ignore the resulting value\n  |\n3 |     let _ = name.to_uppercase(); // BREAK!\n  |     +++++++\n\nwarning: 1 warning emitted",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "thread 'main' (3235) panicked at main.rs:4:34:\nindex out of bounds: the len is 3 but the index is 18446744073709551615\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "thread 'main' (3157) panicked at main.rs:4:43:\nattempt to subtract with overflow\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unstable_sort": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "kept",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "error[E0308]: mismatched types\n --> main.rs:4:36\n  |\n4 |     println!(\"{}\", if ids.contains(&id) { \"found\" } else { \"missing\" }); // CONTROL! println!(\"{}\", if ids.contains(&id.parse::<i64>(...\n  |                           -------- ^^^ expected `&i64`, found `&String`\n  |                           |\n  |                           arguments to this method are incorrect\n  |\n  = note: expected reference `&i64`\n             found reference `&String`\nnote: method defined here\n --> /rustc/0ef1bc386059596dada8fb65b50425aab2ea637a/library/core/src/slice/mod.rs:2602:11\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.",
+   "control": "builds"
+  },
+  "panic_under_lock": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "thread '<unnamed>' (3478) panicked at main.rs:15:17:\ncrash mid-update\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\nworker failed\n\nthread 'main' (3477) panicked at main.rs:23:27:\ncalled `Result::unwrap()` on an `Err` value: PoisonError { .. }",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "thread '<unnamed>' (3398) panicked at main.rs:15:17:\ncrash mid-update\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\nworker failed\n\nthread 'main' (3397) panicked at main.rs:23:27:\ncalled `Result::unwrap()` on an `Err` value: PoisonError { .. }"
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "thread 'main' (3594) panicked at main.rs:9:5:\nindex out of bounds: the len is 4 but the index is 4\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "thread 'main' (3516) panicked at main.rs:9:5:\nindex out of bounds: the len is 4 but the index is 4\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+  },
+  "oob_read": {
+   "build_output": "warning: field `secret` is never read\n --> main.rs:3:5\n  |\n1 | struct Frame {\n  |        ----- field in this struct\n2 |     buf: [i32; 4],\n3 |     secret: i32,\n  |     ^^^^^^\n  |\n  = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default\n\nwarning: 1 warning emitted",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "thread 'main' (3710) panicked at main.rs:9:20:\nindex out of bounds: the len is 4 but the index is 4\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "thread 'main' (3632) panicked at main.rs:9:20:\nindex out of bounds: the len is 4 but the index is 4\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+  },
+  "use_after_free": {
+   "outcome": "REJECTED",
+   "message": "error[E0505]: cannot move out of `a` because it is borrowed\n  --> main.rs:8:10\n   |\n 6 |     let a = Box::new(Rec { value: 1234 });\n   |         - binding `a` declared here\n 7 |     let b = &a;\n   |             -- borrow of `a` occurs here\n 8 |     drop(a);\n   |          ^ move out of `a` occurs here\n 9 |     let c = Box::new(Rec { value: 6666 });\n10 |     println!(\"{}\", b.value); // BREAK!\n   |                    ------- borrow later used here\n   |\nnote: if `Rec` implemented `Clone`, you could clone the value\n  --> main.rs:1:1\n   |\n 1 | struct Rec {\n   | ^^^^^^^^^^ consider implementing `Clone` for this type\n...\n 7 |     let b = &a;\n   |              - you could clone this value\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0505`.",
+   "control": "builds"
+  },
+  "double_free": {
+   "outcome": "REJECTED",
+   "message": "error[E0382]: use of moved value: `a`\n --> main.rs:8:10\n  |\n6 |     let a = Box::new(Rec { value: 0 });\n  |         - move occurs because `a` has type `Box<Rec>`, which does not implement the `Copy` trait\n7 |     drop(a);\n  |          - value moved here\n8 |     drop(a); // BREAK!\n  |          ^ value used here after move\n  |\nnote: if `Rec` implemented `Clone`, you could clone the value\n --> main.rs:1:1\n  |\n1 | struct Rec {\n  | ^^^^^^^^^^ consider implementing `Clone` for this type\n...\n7 |     drop(a);\n  |          - you could clone this value\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0382`.",
+   "control": "builds"
+  },
+  "dangling_stack_ref": {
+   "outcome": "REJECTED",
+   "message": "error[E0515]: cannot return reference to local variable `local`\n --> main.rs:3:5\n  |\n3 |     &local // BREAK!\n  |     ^^^^^^ returns a reference to data owned by the current function\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0515`.",
+   "control": "builds"
+  },
+  "container_realloc_dangling": {
+   "outcome": "REJECTED",
+   "message": "error[E0499]: cannot borrow `v` as mutable more than once at a time\n  --> main.rs:9:9\n   |\n 7 |     let r = &mut v[0];\n   |                  - first mutable borrow occurs here\n 8 |     for i in 0..1000 {\n 9 |         v.push(Item { val: i });\n   |         ^ second mutable borrow occurs here\n...\n12 |     r.val = 99; // BREAK!\n   |     ---------- first borrow later used here\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0499`.",
+   "control": "builds"
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "wrong_variant_access": {
+   "outcome": "REJECTED",
+   "message": "error[E0005]: refutable pattern in local binding\n --> main.rs:8:9\n  |\n8 |     let Value::Text(s) = v; // BREAK!\n  |         ^^^^^^^^^^^^^^ pattern `Value::Int(_)` not covered\n  |\n  = note: `let` bindings require an \"irrefutable pattern\", like a `struct` or an `enum` with only one variant\n  = note: for more information, visit https://doc.rust-lang.org/book/ch19-02-refutability.html\nnote: `Value` defined here\n --> main.rs:1:6\n  |\n1 | enum Value {\n  |      ^^^^^\n2 |     Int(i64),\n  |     --- not covered\n  = note: the matched value is of type `Value`\nhelp: you might want to use `let...else` to handle the variant that isn't matched\n  |\n8 |     let Value::Text(s) = v else { todo!() }; // BREAK!\n  |                            ++++++++++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0005`.",
+   "control": "builds"
+  },
+  "format_string": {
+   "outcome": "REJECTED",
+   "message": "error: format argument must be a string literal\n --> main.rs:3:14\n  |\n3 |     println!(msg); // BREAK!\n  |              ^^^\n  |\nhelp: you might be missing a string literal to format with\n  |\n3 |     println!(\"{}\", msg); // BREAK!\n  |              +++++\n\nerror: aborting due to 1 previous error",
+   "control": "builds"
+  },
+  "trojan_source": {
+   "outcome": "REJECTED",
+   "message": "error: unicode codepoint changing visible direction of text present in literal\n --> main.rs:3:18\n  |\n3 |     if access != \"user\ufffd \ufffd// admins only\ufffd \ufffd\" { // CONTROL! if access != \"user\" {\n  |                  ^^^^^-^-^^^^^^^^^^^^^^-^-^\n  |                  |    | |              | |\n  |                  |    | |              | '\\u{2066}'\n  |                  |    | |              '\\u{2069}'\n  |                  |    | '\\u{2066}'\n  |                  |    '\\u{202e}'\n  |                  this literal contains invisible unicode text flow control codepoints\n  |\n  = note: these kind of unicode codepoints change the way text flows on applications that support them, but can cause confusion because they change the order of characters on the screen\n  = note: `#[deny(text_direction_codepoint_in_literal)]` on by default\n  = help: if their presence wasn't intentional, you can remove them\nhelp: if you want to keep them but make them visible in your source code, you can escape them\n  |\n3 -     if access != \"user\ufffd \ufffd// admins only\ufffd \ufffd\" { // CONTROL! if access != \"user\" {\n3 +     if access != \"user\\u{202e} \\u{2066}// admins only\\u{2069} \\u{2066}\" { // CONTROL! if access != \"user\" {\n  |\n\nerror: aborting due to 1 previous error",
+   "control": "builds"
+  },
+  "unsafe_deserialization": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no serialization in the standard library"
+  },
+  "null_byte_path": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "build_output": "warning: found both `is_admin` and `is_\u0430dmin` as identifiers, which look alike\n --> main.rs:5:4\n  |\n1 | fn is_admin(user: &str) -> bool {\n  |    -------- other identifier used here\n...\n5 | fn is_\u0430dmin(_user: &str) -> bool { true } // BREAK!\n  |    ^^^^^^^^ this identifier can be confused with `is_admin`\n  |\n  = note: `#[warn(confusable_idents)]` on by default\n\nwarning: the usage of Script Group `Cyrillic` in this crate consists solely of mixed script confusables\n --> main.rs:5:4\n  |\n5 | fn is_\u0430dmin(_user: &str) -> bool { true } // BREAK!\n  |    ^^^^^^^^\n  |\n  = note: the usage includes '\u0430' (U+0430)\n  = note: please recheck to make sure their usages are indeed what you want\n  = note: `#[warn(mixed_script_confusables)]` on by default\n\nwarning: 2 warnings emitted",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "admin\nadmin",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "error[E0277]: the type `str` cannot be indexed by `{integer}`\n --> main.rs:3:14\n  |\n3 |     greeting[0] = 'j'; // CONTROL! let greeting = format!(\"j{}\", &greeting[1..]);\n  |              ^ string indices are ranges of `usize`\n  |\n  = help: the trait `SliceIndex<str>` is not implemented for `{integer}`\n  = note: you can use `.chars().nth()` or `.bytes().nth()`\n          for more information, see chapter 8 in The Book: <https://doc.rust-lang.org/book/ch08-02-strings.html#indexing-into-strings>\nhelp: `usize` implements trait `SliceIndex<T>`\n --> /rustc/0ef1bc386059596dada8fb65b50425aab2ea637a/library/core/src/slice/index.rs:179:0\n  |\n  = note: `SliceIndex<[T]>`\n --> /rustc/0ef1bc386059596dada8fb65b50425aab2ea637a/library/core/src/bstr/traits.rs:201:0\n  |\n  = note: `SliceIndex<ByteStr>`\n  = note: required for `str` to implement `Index<{integer}>`\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0277`.",
+   "control": "builds"
+  },
+  "reference_cycle": {
+   "outcome": "LEAK",
+   "control": "verified",
+   "exit": 137,
+   "secs": 0.81,
+   "stdout": "",
+   "stderr": "Killed"
+  },
+  "forgotten_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "complete_init": {
+   "outcome": "REJECTED",
+   "message": "error[E0063]: missing field `retries` in initializer of `Config`\n --> main.rs:8:20\n  |\n8 |     let _partial = Config { timeout: 5 }; // BREAK!\n  |                    ^^^^^^ missing `retries`\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0063`.",
+   "control": "builds"
+  },
+  "override_check": {
+   "outcome": "REJECTED",
+   "message": "error[E0407]: method `descibe` is not a member of trait `Shape`\n  --> main.rs:13:5\n   |\n13 |     fn descibe(&self) -> String { \"circle\".to_string() } // BREAK!\n   |     ^^^-------^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n   |     |  |\n   |     |  help: there is an associated function with a similar name: `describe`\n   |     not a member of trait `Shape`\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0407`.",
+   "control": "builds"
+  },
+  "missing_virtual": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "area 4",
+   "stderr": ""
+  },
+  "unbound_method": {
+   "outcome": "REJECTED",
+   "message": "error[E0615]: attempted to take value of method `increment` on type `Counter`\n  --> main.rs:18:23\n   |\n18 |     run_twice(counter.increment); // CONTROL! run_twice(|| counter.increment());\n   |                       ^^^^^^^^^ method, not a field\n   |\nhelp: use parentheses to call the method\n   |\n18 |     run_twice(counter.increment()); // CONTROL! run_twice(|| counter.increment());\n   |                                ++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0615`.",
+   "control": "builds"
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "before",
+   "release_stderr": "thread 'main' (4658) panicked at main.rs:7:28:\ncalled `Option::unwrap()` on a `None` value\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "thread 'main' (4580) panicked at main.rs:7:28:\ncalled `Option::unwrap()` on a `None` value\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+  },
+  "null_in_text": {
+   "outcome": "REJECTED",
+   "message": "error[E0277]: `Option<String>` doesn't implement `std::fmt::Display`\n --> main.rs:8:22\n  |\n8 |     println!(\"hello, {name}\"); // CONTROL! println!(\"hello, {}\", name.unwrap_or_else(|| \"nobody\".to_string()));\n  |                      ^^^^^^ `Option<String>` cannot be formatted with the default formatter\n  |\n  = help: the trait `std::fmt::Display` is not implemented for `Option<String>`\n  = note: in format strings you may be able to use `{:?}` (or `{:#?}` for pretty-print) instead\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0277`.",
+   "control": "builds"
+  },
+  "not_found_sentinel": {
+   "outcome": "REJECTED",
+   "message": "error[E0369]: cannot add `{integer}` to `Option<usize>`\n --> main.rs:4:30\n  |\n4 |     println!(\"{}\", &line[pos + 1..]); // CONTROL! println!(\"{}\", pos.map_or(\"\", |p| &line[p + 1..]));\n  |                          --- ^ - {integer}\n  |                          |\n  |                          Option<usize>\n  |\nnote: `Option<usize>` does not implement `Add<{integer}>`\n --> /rustc/0ef1bc386059596dada8fb65b50425aab2ea637a/library/core/src/option.rs:598:0\n  |\n  = note: `Option<usize>` is defined in another crate\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0369`.",
+   "control": "builds"
+  },
+  "empty_max": {
+   "outcome": "REJECTED",
+   "message": "error[E0369]: cannot add `{integer}` to `Option<&i64>`\n --> main.rs:4:22\n  |\n4 |     println!(\"{}\", m + 1); // CONTROL! println!(\"{}\", m.map_or(0, |v| v + 1));\n  |                    - ^ - {integer}\n  |                    |\n  |                    Option<&i64>\n  |\nnote: `Option<&i64>` does not implement `Add<{integer}>`\n --> /rustc/0ef1bc386059596dada8fb65b50425aab2ea637a/library/core/src/option.rs:598:0\n  |\n  = note: `Option<&i64>` is defined in another crate\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0369`.",
+   "control": "builds"
+  },
+  "readonly_param": {
+   "outcome": "REJECTED",
+   "message": "error[E0594]: cannot assign to `xs[_]`, which is behind a `&` reference\n --> main.rs:2:5\n  |\n2 |     xs[0] = 9; // BREAK!\n  |     ^^^^^^^^^ `xs` is a `&` reference, so it cannot be written to\n  |\nhelp: consider changing this to be a mutable reference\n  |\n1 | fn count(xs: &mut [i64]) -> usize {\n  |               +++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0594`.",
+   "control": "builds"
+  },
+  "exclusive_mutation": {
+   "outcome": "REJECTED",
+   "message": "error[E0499]: cannot borrow `a` as mutable more than once at a time\n  --> main.rs:10:22\n   |\n10 |     transfer(&mut a, &mut a, 10); // BREAK!\n   |     -------- ------  ^^^^^^ second mutable borrow occurs here\n   |     |        |\n   |     |        first mutable borrow occurs here\n   |     first borrow later used by call\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0499`.",
+   "control": "builds"
+  },
+  "literal_range": {
+   "outcome": "REJECTED",
+   "message": "error: literal out of range for `u8`\n --> main.rs:3:24\n  |\n3 |     let _too_big: u8 = 300; // BREAK!\n  |                        ^^^\n  |\n  = note: the literal `300` does not fit into the type `u8` whose range is `0..=255`\n  = note: `#[deny(overflowing_literals)]` on by default\n\nerror: aborting due to 1 previous error",
+   "control": "builds"
+  },
+  "no_implicit_conversion": {
+   "outcome": "REJECTED",
+   "message": "error[E0308]: mismatched types\n --> main.rs:4:23\n  |\n4 |     let _wrong: i32 = big; // BREAK!\n  |                 ---   ^^^ expected `i32`, found `i64`\n  |                 |\n  |                 expected due to this\n  |\nhelp: you can convert an `i64` to an `i32` and panic if the converted value doesn't fit\n  |\n4 |     let _wrong: i32 = big.try_into().unwrap(); // BREAK!\n  |                          ++++++++++++++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.",
+   "control": "builds"
+  },
+  "generic_constraint": {
+   "outcome": "REJECTED",
+   "message": "error[E0277]: the trait bound `Point: Ord` is not satisfied\n --> main.rs:9:49\n  |\n9 |     let mut ps = vec![Point { x: 1, y: 2 }]; ps.sort(); // BREAK!\n  |                                                 ^^^^ the trait `Ord` is not implemented for `Point`\n  |\nnote: required by a bound in `slice::<impl [T]>::sort`\n --> /rustc/0ef1bc386059596dada8fb65b50425aab2ea637a/library/alloc/src/slice.rs:131:4\nhelp: consider annotating `Point` with `#[derive(Ord)]`\n  |\n1 + #[derive(Ord)]\n2 | struct Point {\n  |\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0277`.",
+   "control": "builds"
+  },
+  "lossy_int_to_float": {
+   "outcome": "REJECTED",
+   "message": "error[E0308]: mismatched types\n --> main.rs:8:10\n  |\n8 |     show(n); // BREAK!\n  |     ---- ^ expected `f64`, found `i64`\n  |     |\n  |     arguments to this function are incorrect\n  |\nnote: function defined here\n --> main.rs:1:4\n  |\n1 | fn show(f: f64) {\n  |    ^^^^ ------\nhelp: you can convert an `i64` to an `f64`, producing the floating point representation of the integer, rounded if necessary\n  |\n8 |     show(n as f64); // BREAK!\n  |            ++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.",
+   "control": "builds"
+  },
+  "const_index_bounds": {
+   "outcome": "REJECTED",
+   "message": "error: this operation will panic at runtime\n --> main.rs:4:20\n  |\n4 |     println!(\"{}\", table[5]); // BREAK!\n  |                    ^^^^^^^^ index out of bounds: the length is 3 but the index is 5\n  |\n  = note: `#[deny(unconditional_panic)]` on by default\n\nerror: aborting due to 1 previous error",
+   "control": "builds"
+  },
+  "lazy_accumulator": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.36,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "thread 'main' (5330) panicked at main.rs:8:12:\nindex out of bounds: the len is 8 but the index is 8\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "thread 'main' (5252) panicked at main.rs:6:16:\nattempt to multiply with overflow\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+  },
+  "const_overflow": {
+   "outcome": "REJECTED",
+   "message": "error[E0080]: attempt to compute `31536000000000000_i64 * 300_i64`, which would overflow\n --> main.rs:2:19\n  |\n2 | const SPAN: i64 = 1_000_000_000 * 60 * 60 * 24 * 365 * 300; // BREAK!\n  |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ evaluation of `SPAN` failed here\n\nnote: erroneous constant encountered\n --> main.rs:6:16\n  |\n6 |     println!(\"{SPAN}\"); // BREAK!\n  |                ^^^^\n\nnote: erroneous constant encountered\n --> main.rs:6:16\n  |\n6 |     println!(\"{SPAN}\"); // BREAK!\n  |                ^^^^\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0080`.",
+   "control": "builds"
+  },
+  "orphaned_receive": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "build_output": "warning: unreachable pattern\n --> main.rs:9:9\n  |\n8 |         _ => \"other\", // CONTROL! Shape::Circle => \"circle\",\n  |         - matches any value\n9 |         Shape::Circle => \"circle\", // CONTROL! _ => \"other\",\n  |         ^^^^^^^^^^^^^ no value can reach this\n  |\n  = note: `#[warn(unreachable_patterns)]` (part of `#[warn(unused)]`) on by default\n\nwarning: 1 warning emitted",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "other",
+   "stderr": ""
+  },
+  "duplicate_key": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "json_big_integer": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no JSON parser in the standard library"
+  },
+  "parse_out_of_range": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": ""
+  },
+  "json_nan": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no JSON encoder in the standard library"
+  },
+  "comparison_statement": {
+   "build_output": "warning: unused comparison that must be used\n --> main.rs:3:5\n  |\n3 |     count == 5; // BREAK!\n  |     ^^^^^^^^^^ the comparison produces a value\n  |\n  = note: `#[warn(unused_must_use)]` (part of `#[warn(unused)]`) on by default\nhelp: use `let _ = ...` to ignore the resulting value\n  |\n3 |     let _ = count == 5; // BREAK!\n  |     +++++++\n\nwarning: 1 warning emitted",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "typo_compound_assign": {
+   "outcome": "REJECTED",
+   "message": "error: leading `+` is not supported\n --> main.rs:3:12\n  |\n3 |     total =+ 5; // CONTROL! total += 5;\n  |            ^ unexpected `+`\n  |\nhelp: try removing the `+`\n  |\n3 -     total =+ 5; // CONTROL! total += 5;\n3 +     total = 5; // CONTROL! total += 5;\n  |\n\nwarning: value assigned to `total` is never read\n --> main.rs:2:21\n  |\n2 |     let mut total = 10;\n  |                     ^^ this value is reassigned later and never used\n3 |     total =+ 5; // CONTROL! total += 5;\n  |     ---------- `total` is overwritten here before the previous value is read\n  |\n  = note: `#[warn(unused_assignments)]` (part of `#[warn(unused)]`) on by default\n\nerror: aborting due to 1 previous error; 1 warning emitted",
+   "control": "builds"
+  },
+  "structural_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "REJECTED",
+   "message": "error[E0308]: mismatched types\n --> main.rs:4:27\n  |\n4 |     let short: [i64; 4] = [10, 20, 30]; // BREAK!\n  |                --------   ^^^^^^^^^^^^ expected an array with a size of 4, found one with a size of 3\n  |                |\n  |                expected due to this\n  |\nhelp: consider specifying the actual array length\n  |\n4 -     let short: [i64; 4] = [10, 20, 30]; // BREAK!\n4 +     let short: [i64; 3] = [10, 20, 30]; // BREAK!\n  |\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.",
+   "control": "builds"
+  },
+  "enum_from_int": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "before\ninvalid",
+   "stderr": ""
+  },
+  "invalid_date": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no calendar dates in the standard library"
+  },
+  "bitwise_on_bool": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "thread 'main' (6012) panicked at main.rs:3:34:\nindex out of bounds: the len is 0 but the index is 0\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "thread 'main' (5934) panicked at main.rs:3:34:\nindex out of bounds: the len is 0 but the index is 0\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "error[E0594]: cannot assign to `c.port`, as `c` is not declared as mutable\n --> main.rs:7:5\n  |\n7 |     c.port = 1; // BREAK!\n  |     ^^^^^^^^^^ cannot assign\n  |\nhelp: consider changing this to be mutable\n  |\n6 |     let mut c = Config { port: 8080 };\n  |         +++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0594`.",
+   "control": "builds"
+  },
+  "bool_condition": {
+   "outcome": "REJECTED",
+   "message": "error[E0308]: mismatched types\n --> main.rs:9:8\n  |\n9 |     if compare(\"x\", \"x\") { println!(\"different\"); } // BREAK!\n  |        ^^^^^^^^^^^^^^^^^ expected `bool`, found `i32`\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0308`.",
+   "control": "builds"
+  },
+  "lost_write_error": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "short_read": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.2,
+   "stdout": "HELLO-WO\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "disk full",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "total=42",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "backed up",
+   "stderr": ""
+  },
+  "nullable_field": {
+   "outcome": "REJECTED",
+   "message": "error[E0624]: method `len` is private\n --> main.rs:7:33\n  |\n7 |     println!(\"{}\", decoded.name.len()); // BREAK!\n  |                                 ^^^ private method\n  |\n --> /rustc/0ef1bc386059596dada8fb65b50425aab2ea637a/library/core/src/option.rs:810:4\n  |\n  = note: private method defined here\nnote: the method `len` exists on the type `String`\n --> /rustc/0ef1bc386059596dada8fb65b50425aab2ea637a/library/alloc/src/string.rs:1906:4\nhelp: consider using `Option::expect` to unwrap the `String` value, panicking if the value is an `Option::None`\n  |\n7 |     println!(\"{}\", decoded.name.expect(\"REASON\").len()); // BREAK!\n  |                                +++++++++++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0624`.",
+   "control": "builds"
+  },
+  "stale_null_check": {
+   "outcome": "REJECTED",
+   "message": "error[E0502]: cannot borrow `session` as mutable because it is also borrowed as immutable\n  --> main.rs:18:16\n   |\n16 |     if let Some(user) = &session.user { // BREAK!\n   |                         ------------- immutable borrow occurs here\n17 |     // CONTROL! if let Some(user) = session.user.clone() {\n18 |         logout(&mut session);\n   |                ^^^^^^^^^^^^ mutable borrow occurs here\n19 |         println!(\"{}\", user.name.len());\n   |                        --------- immutable borrow later used here\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0502`.",
+   "control": "builds"
+  },
+  "empty_slot": {
+   "outcome": "REJECTED",
+   "message": "error[E0609]: no field `name` on type `Option<User>`\n  --> main.rs:10:29\n   |\n10 |     println!(\"{}\", users[0].name.len()); // BREAK!\n   |                             ^^^^ unknown field\n   |\nhelp: one of the expressions' fields has a field of the same name\n   |\n10 |     println!(\"{}\", users[0].unwrap().name.len()); // BREAK!\n   |                             +++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0609`.",
+   "control": "builds"
+  },
+  "typed_nil": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "outcome": "REJECTED",
+   "message": "error[E0382]: borrow of moved value: `list`\n  --> main.rs:14:5\n   |\n12 |     let mut list = vec![1, 2, 3];\n   |         -------- move occurs because `list` has type `Vec<i64>`, which does not implement the `Copy` trait\n13 |     list_tx.send(list).unwrap();\n   |                  ---- value moved here\n14 |     list[0] = 99; // BREAK!\n   |     ^^^^ value borrowed here after move\n   |\nhelp: consider cloning the value if the performance cost is acceptable\n   |\n13 |     list_tx.send(list.clone()).unwrap();\n   |                      ++++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0382`.",
+   "control": "builds"
+  },
+  "lost_wakeup": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "lock_skipped_on_return": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "70",
+   "stderr": ""
+  },
+  "cleanup_on_error_path": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "left behind: export.csv",
+   "stderr": ""
+  },
+  "generator_break_cleanup": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "cleaned",
+   "stderr": ""
+  },
+  "main_error_exit_code": {
+   "outcome": "REJECTED",
+   "message": "error[E0069]: `return;` in a function whose return type is not `()`\n --> main.rs:9:13\n  |\n4 | fn main() -> Result<(), Box<dyn Error>> {\n  |              -------------------------- expected `Result<(), Box<dyn Error>>` because of this return type\n...\n9 |             return; // BREAK!\n  |             ^^^^^^ return type is not `()`\n  |\nhelp: give the `return` a value of the expected type\n  |\n9 |             return Ok(()); // BREAK!\n  |                    ++++++\n\nerror: aborting due to 1 previous error\n\nFor more information about this error, try `rustc --explain E0069`.",
+   "control": "builds"
+  },
+  "catch_all_hides_bug": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "thread 'main' (7047) panicked at main.rs:5:10:\nindex out of bounds: the len is 2 but the index is 2\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "thread 'main' (6969) panicked at main.rs:5:10:\nindex out of bounds: the len is 2 but the index is 2\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+  },
+  "assert_side_effect": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "narrow_counter_loop": {
+   "outcome": "REJECTED",
+   "message": "warning: comparison is useless due to type limits\n --> main.rs:5:11\n  |\n5 |     while i < 300 {\n  |           ^^^^^^^\n  |\n  = note: `#[warn(unused_comparisons)]` on by default\n\nerror: literal out of range for `u8`\n --> main.rs:5:15\n  |\n5 |     while i < 300 {\n  |               ^^^\n  |\n  = note: the literal `300` does not fit into the type `u8` whose range is `0..=255`\n  = note: `#[deny(overflowing_literals)]` on by default\n\nerror: aborting due to 1 previous error; 1 warning emitted",
+   "control": "builds"
+  },
+  "timeout_without_cancel": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "blocked_sender_leak": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "42\ndone",
+   "stderr": ""
+  }
+ }
+}

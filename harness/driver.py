@@ -347,6 +347,15 @@ def check_control(lang, problem, pid, control):
                    f"{clip(cout, 200)!r}:\n{clip(cerr, 800)}")
 
 
+def shipped(lang):
+    """The language as it ships: its release build and run where it has one, with no second run."""
+    release = lang.get("release")
+    if not release:
+        return lang
+    rest = {k: v for k, v in lang.items() if k != "release"}
+    return {**rest, "build": release["build"], "run": release["run"]}
+
+
 CANNOT_RE = re.compile(r"CANNOT-(EXPRESS|MAKE|FIX):\s*(.+?)\s*(?:\*\))?$", re.M)
 # The language leaves the marked behavior undefined or unspecified, so a right answer is chance.
 UNDEFINED_RE = re.compile(r"UNDEFINED:\s*(.+?)\s*(?:\*\))?$", re.M)
@@ -391,18 +400,20 @@ def main():
             results[pid] = {"outcome": outcome, "message": reason.strip()}
             print(f"{lang_id:12} {pid:28} {outcome}", flush=True)
             continue
-        work = stage(lang, pid, source, "main")
-        ok, compile_out = build(lang, work)
+        # A test about a check only debug builds keep judges the build that ships.
+        built = shipped(lang) if problem.get("build") == "release" else lang
+        work = stage(built, pid, source, "main")
+        ok, compile_out = build(built, work)
         control = control_source(source)
         marked = control != source
         # A build step that loads the program (Clojure compiles by evaluating each form) can stop
         # on a run-time error; that is the program running, so it is judged as a run.
-        runs_code = lang.get("build_trap") and re.search(lang["build_trap"], compile_out, re.M)
+        runs_code = built.get("build_trap") and re.search(built["build_trap"], compile_out, re.M)
         if not ok and not runs_code:
             control_ok = False
             if marked:
-                cwork = stage(lang, pid, control, "control")
-                control_ok, control_out = build(lang, cwork)
+                cwork = stage(built, pid, control, "control")
+                control_ok, control_out = build(built, cwork)
                 if not control_ok:
                     record["control_error"] = clip(control_out, 1500)
             # A crash in the compiler or its code generator is not a refusal of the bug.
@@ -411,7 +422,7 @@ def main():
                 record["outcome"] = "ICE"
             elif not control_ok:
                 record["outcome"] = "ERROR"
-            elif tied_to_bug(compile_out, lang["file"], source):
+            elif tied_to_bug(compile_out, built["file"], source):
                 record["outcome"] = "REJECTED"
             else:
                 record["outcome"] = "UNTIED"
@@ -426,10 +437,10 @@ def main():
             if warnings:
                 record["build_output"] = clip(warnings, 1500)
 
-        record["outcome"], status, out, err, secs = run_once(problem, lang["run"], work)
+        record["outcome"], status, out, err, secs = run_once(problem, built["run"], work)
         if record["outcome"] not in ("CORRECT", "CHANCE"):
             if marked:
-                verified, detail = check_control(lang, problem, pid, control)
+                verified, detail = check_control(built, problem, pid, control)
                 record["control"] = "verified" if verified else "failed"
                 if not verified:
                     record["unverified_outcome"] = record["outcome"]
@@ -441,11 +452,11 @@ def main():
             record["outcome"] = "CHANCE"
             record["message"] = undefined.group(1).strip()
         # A stop that only the debug build makes is gone from the build that ships.
-        if record["outcome"] == "TRAPPED" and lang.get("release"):
-            rwork = stage(lang, pid, source, "release")
-            rok, rout = build(lang, rwork, lang["release"]["build"])
+        if record["outcome"] == "TRAPPED" and built.get("release"):
+            rwork = stage(built, pid, source, "release")
+            rok, rout = build(built, rwork, built["release"]["build"])
             if rok:
-                rel_outcome, _, rel_out, rel_err, _ = run_once(problem, lang["release"]["run"], rwork)
+                rel_outcome, _, rel_out, rel_err, _ = run_once(problem, built["release"]["run"], rwork)
                 record["release"] = rel_outcome
                 record["release_stdout"] = clip(rel_out, 400)
                 record["release_stderr"] = clip(rel_err, 600)

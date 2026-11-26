@@ -38,7 +38,7 @@ leaderboard as one unranked example of how much a checker adds.
 
 ## Tests
 
-122 tests in thirteen categories. Each has a CWE or CERT entry, a CVE, or appears in a language's
+129 tests in thirteen categories. Each has a CWE or CERT entry, a CVE, or appears in a language's
 pitfall list, and covers a mistake no other test covers; `harness/problems.json` gives each test's
 reference and failure mode, and the site's Notes tab maps the failure modes to their tests. Each test is one scenario: the same steps, inputs and
 expected answer in every language, written the way that language teaches first. The code follows the
@@ -105,7 +105,8 @@ points at the bug (a marked line, a line within three, an enclosing construct, o
 line names). A failed run counts only if that program gives the expected answer; otherwise ERROR.
 
 Release builds use the standard build tool's release profile with no extra switches; Zig and C3 take
-their safe release mode; C and C++ use CMake Release.
+their safe release mode; C and C++ use CMake Release. `assert_side_effect` runs only the release
+build, because its bug exists only there.
 
 Categories group results; they do not weight them. Warnings never score (no pattern reliably ties a
 warning to the bug); the site shows compiler output, unscored.

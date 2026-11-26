@@ -1,0 +1,6 @@
+use std::{env, regex}
+
+fn main() {
+    let re = regex::compile("^[a-z]+$")
+    println(if regex::is_match(re, env::args()[0]) { "accepted" } else { "rejected" })
+}

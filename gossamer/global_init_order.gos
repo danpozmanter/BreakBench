@@ -1,0 +1,8 @@
+static LIMIT: i64 = base() * 2
+static BASE: i64 = "10".to_i64().unwrap_or(0)
+
+fn base() -> i64 { BASE }
+
+fn main() {
+    println(f"{LIMIT}")
+}

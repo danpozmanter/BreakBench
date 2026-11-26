@@ -1,0 +1,1135 @@
+{
+ "lang": "csharp",
+ "version": "11.0.100",
+ "results": {
+  "null_deref": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/null_deref/main/bb.csproj (in 37 ms).\n/tmp/breakbench/null_deref/main/Program.cs(4,19): warning CS8602: Dereference of a possibly null reference. [/tmp/breakbench/null_deref/main/bb.csproj]\n  bb -> /tmp/breakbench/null_deref/main/out/bb.dll\n\nBuild succeeded.\n\n/tmp/breakbench/null_deref/main/Program.cs(4,19): warning CS8602: Dereference of a possibly null reference. [/tmp/breakbench/null_deref/main/bb.csproj]\n    1 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.35",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/null_deref/release/Program.cs:line 3\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.21,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/null_deref/main/Program.cs:line 4\nAborted (core dumped)"
+  },
+  "int_overflow": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/int_overflow/main/bb.csproj (in 42 ms).\n  bb -> /tmp/breakbench/int_overflow/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.21",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "SILENT",
+   "release_stdout": "-9223372036854775808",
+   "release_stderr": "",
+   "exit": 134,
+   "secs": 0.23,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/int_overflow/main/Program.cs:line 2\nAborted (core dumped)"
+  },
+  "div_by_zero": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/div_by_zero/main/bb.csproj (in 48 ms).\n  bb -> /tmp/breakbench/div_by_zero/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.27",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.DivideByZeroException: Attempted to divide by zero.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/div_by_zero/release/Program.cs:line 2\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.23,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.DivideByZeroException: Attempted to divide by zero.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/div_by_zero/main/Program.cs:line 2\nAborted (core dumped)"
+  },
+  "int_min_division": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/int_min_division/main/bb.csproj (in 48 ms).\n  bb -> /tmp/breakbench/int_min_division/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.33",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/int_min_division/release/Program.cs:line 1\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.17,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/int_min_division/main/Program.cs:line 3\nAborted (core dumped)"
+  },
+  "shift_overflow": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/shift_overflow/main/bb.csproj (in 56 ms).\n  bb -> /tmp/breakbench/shift_overflow/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.57",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/narrowing_cast/main/bb.csproj (in 45 ms).\n  bb -> /tmp/breakbench/narrowing_cast/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.34",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "SILENT",
+   "release_stdout": "44",
+   "release_stderr": "",
+   "exit": 134,
+   "secs": 0.23,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/narrowing_cast/main/Program.cs:line 3\nAborted (core dumped)"
+  },
+  "float_to_int_overflow": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/float_to_int_overflow/main/bb.csproj (in 49 ms).\n  bb -> /tmp/breakbench/float_to_int_overflow/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.39",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "SILENT",
+   "release_stdout": "9223372036854775807",
+   "release_stderr": "",
+   "exit": 134,
+   "secs": 0.22,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/float_to_int_overflow/main/Program.cs:line 2\nAborted (core dumped)"
+  },
+  "signed_unsigned_compare": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/signed_unsigned_compare/main/bb.csproj (in 65 ms).\n  bb -> /tmp/breakbench/signed_unsigned_compare/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.57",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/type_confusion/main/bb.csproj (in 42 ms).\n/tmp/breakbench/type_confusion/main/Program.cs(4,23): error CS1503: Argument 1: cannot convert from 'string' to 'long' [/tmp/breakbench/type_confusion/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/type_confusion/main/Program.cs(4,23): error CS1503: Argument 1: cannot convert from 'string' to 'long' [/tmp/breakbench/type_confusion/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.38",
+   "control": "builds"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/missing_return/main/bb.csproj (in 60 ms).\n/tmp/breakbench/missing_return/main/Program.cs(1,15): error CS0161: 'Grade(int)': not all code paths return a value [/tmp/breakbench/missing_return/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/missing_return/main/Program.cs(1,15): error CS0161: 'Grade(int)': not all code paths return a value [/tmp/breakbench/missing_return/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.47",
+   "control": "builds"
+  },
+  "non_exhaustive_match": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/non_exhaustive_match/main/bb.csproj (in 45 ms).\n/tmp/breakbench/non_exhaustive_match/main/Program.cs(1,34): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'Color.Blue' is not covered. [/tmp/breakbench/non_exhaustive_match/main/bb.csproj]\n  bb -> /tmp/breakbench/non_exhaustive_match/main/out/bb.dll\n\nBuild succeeded.\n\n/tmp/breakbench/non_exhaustive_match/main/Program.cs(1,34): warning CS8509: The switch expression does not handle all possible values of its input type (it is not exhaustive). For example, the pattern 'Color.Blue' is not covered. [/tmp/breakbench/non_exhaustive_match/main/bb.csproj]\n    1 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.49",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.Runtime.CompilerServices.SwitchExpressionException: Non-exhaustive switch expression failed to match its input.\nUnmatched value was Blue.\n   at <PrivateImplementationDetails>.ThrowSwitchExpressionException(Object unmatchedValue)\n   at Program.<<Main>$>g__Name|0_0(Color c) in /tmp/breakbench/non_exhaustive_match/release/Program.cs:line 4\n   at Program.<Main>$(String[] args) in /tmp/breakbench/non_exhaustive_match/release/Program.cs:line 8\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.21,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.Runtime.CompilerServices.SwitchExpressionException: Non-exhaustive switch expression failed to match its input.\nUnmatched value was Blue.\n   at <PrivateImplementationDetails>.ThrowSwitchExpressionException(Object unmatchedValue)\n   at Program.<<Main>$>g__Name|0_0(Color c) in /tmp/breakbench/non_exhaustive_match/main/Program.cs:line 1\n   at Program.<Main>$(String[] args) in /tmp/breakbench/non_exhaustive_match/main/Program.cs:line 8\nAborted (core dumped)"
+  },
+  "uninitialized_variable": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/uninitialized_variable/main/bb.csproj (in 46 ms).\n/tmp/breakbench/uninitialized_variable/main/Program.cs(4,19): error CS0165: Use of unassigned local variable 'x' [/tmp/breakbench/uninitialized_variable/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/uninitialized_variable/main/Program.cs(4,19): error CS0165: Use of unassigned local variable 'x' [/tmp/breakbench/uninitialized_variable/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.26",
+   "control": "builds"
+  },
+  "global_init_order": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/global_init_order/main/bb.csproj (in 48 ms).\n  bb -> /tmp/breakbench/global_init_order/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.30",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/assign_in_condition/main/bb.csproj (in 60 ms).\n/tmp/breakbench/assign_in_condition/main/Program.cs(3,5): error CS0029: Cannot implicitly convert type 'int' to 'bool' [/tmp/breakbench/assign_in_condition/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/assign_in_condition/main/Program.cs(3,5): error CS0029: Cannot implicitly convert type 'int' to 'bool' [/tmp/breakbench/assign_in_condition/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.16",
+   "control": "builds"
+  },
+  "switch_fallthrough": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/switch_fallthrough/main/bb.csproj (in 61 ms).\n/tmp/breakbench/switch_fallthrough/main/Program.cs(5,5): error CS0163: Control cannot fall through from one case label ('case 1:') to another [/tmp/breakbench/switch_fallthrough/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/switch_fallthrough/main/Program.cs(5,5): error CS0163: Control cannot fall through from one case label ('case 1:') to another [/tmp/breakbench/switch_fallthrough/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.24",
+   "control": "builds"
+  },
+  "break_in_switch": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/break_in_switch/main/bb.csproj (in 40 ms).\n  bb -> /tmp/breakbench/break_in_switch/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.30",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.05,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/zero_is_falsy/main/bb.csproj (in 39 ms).\n/tmp/breakbench/zero_is_falsy/main/Program.cs(3,5): error CS0029: Cannot implicitly convert type 'int?' to 'bool' [/tmp/breakbench/zero_is_falsy/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/zero_is_falsy/main/Program.cs(3,5): error CS0029: Cannot implicitly convert type 'int?' to 'bool' [/tmp/breakbench/zero_is_falsy/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.22",
+   "control": "builds"
+  },
+  "string_equality": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/string_equality/main/bb.csproj (in 54 ms).\n  bb -> /tmp/breakbench/string_equality/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.29",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "loose_equality": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/loose_equality/main/bb.csproj (in 61 ms).\n/tmp/breakbench/loose_equality/main/Program.cs(2,19): error CS0019: Operator '==' cannot be applied to operands of type 'string' and 'int' [/tmp/breakbench/loose_equality/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/loose_equality/main/Program.cs(2,19): error CS0019: Operator '==' cannot be applied to operands of type 'string' and 'int' [/tmp/breakbench/loose_equality/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.32",
+   "control": "builds"
+  },
+  "parse_invalid_number": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/parse_invalid_number/main/bb.csproj (in 46 ms).\n  bb -> /tmp/breakbench/parse_invalid_number/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.32",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.FormatException: The input string '12abc' was not in a correct format.\n   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)\n   at System.Int32.Parse(String s)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/parse_invalid_number/release/Program.cs:line 1\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.2,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.FormatException: The input string '12abc' was not in a correct format.\n   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)\n   at System.Int32.Parse(String s)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/parse_invalid_number/main/Program.cs:line 1\nAborted (core dumped)"
+  },
+  "covariant_array_write": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/covariant_array_write/main/bb.csproj (in 49 ms).\n  bb -> /tmp/breakbench/covariant_array_write/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.25",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.ArrayTypeMismatchException: Attempted to access an element as a type incompatible with the array.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/covariant_array_write/release/Program.cs:line 3\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.2,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.ArrayTypeMismatchException: Attempted to access an element as a type incompatible with the array.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/covariant_array_write/main/Program.cs:line 3\nAborted (core dumped)"
+  },
+  "mutate_while_iterating": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/mutate_while_iterating/main/bb.csproj (in 55 ms).\n  bb -> /tmp/breakbench/mutate_while_iterating/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.41",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.InvalidOperationException: Collection was modified; enumeration operation may not execute.\n   at System.Collections.Generic.List`1.Enumerator.MoveNext()\n   at Program.<Main>$(String[] args) in /tmp/breakbench/mutate_while_iterating/release/Program.cs:line 2\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.19,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.InvalidOperationException: Collection was modified; enumeration operation may not execute.\n   at System.Collections.Generic.List`1.Enumerator.MoveNext()\n   at Program.<Main>$(String[] args) in /tmp/breakbench/mutate_while_iterating/main/Program.cs:line 2\nAborted (core dumped)"
+  },
+  "loop_closure_capture": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/loop_closure_capture/main/bb.csproj (in 61 ms).\n  bb -> /tmp/breakbench/loop_closure_capture/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.47",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "3,3,3",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/snapshot_aliasing/main/bb.csproj (in 57 ms).\n  bb -> /tmp/breakbench/snapshot_aliasing/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.30",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "repeated_row_alias": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/repeated_row_alias/main/bb.csproj (in 57 ms).\n  bb -> /tmp/breakbench/repeated_row_alias/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.31",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/ignored_error_result/main/bb.csproj (in 39 ms).\n  bb -> /tmp/breakbench/ignored_error_result/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.20",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.IO.DirectoryNotFoundException: Could not find a part of the path '/dev/null/out.txt'.\nDirectory path: '/dev/null/out.txt'\n   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(Str\n...\nh, FileMode mode, ReadOnlySpan`1 contents, Encoding encoding)\n   at Program.<<Main>$>g__Save|0_0(String path) in /tmp/breakbench/ignored_error_result/release/Program.cs:line 1\n   at Program.<Main>$(String[] args) in /tmp/breakbench/ignored_error_result/release/Program.cs:line 3\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.17,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IO.DirectoryNotFoundException: Could not find a part of the path '/dev/null/out.txt'.\nDirectory path: '/dev/null/out.txt'\n   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)\n   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64& fileLength, UnixFileMode& filePermissions, Boolean failForSymlink, Boolean& wasSymlink, Func`4 createOpenException)\n   at System.IO.File.OpenHandle(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)\n   at System.IO.File.WriteToFile(String path, FileMode mode, ReadOnlySpan`1 contents, Encoding encoding)\n   at Program.<<Main>$>g__Save|0_0(String path) in /tmp/breakbench/ignored_error_result/main/Program.cs:line 1\n   at Program.<Main>$(String[] args) in /tmp/breakbench/ignored_error_result/main/Program.cs:line 3\nAborted (core dumped)"
+  },
+  "sort_with_nan": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/sort_with_nan/main/bb.csproj (in 38 ms).\n  bb -> /tmp/breakbench/sort_with_nan/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.23",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "ordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/integer_average/main/bb.csproj (in 52 ms).\n  bb -> /tmp/breakbench/integer_average/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.18",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "3.0",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/leading_zero_literal/main/bb.csproj (in 45 ms).\n  bb -> /tmp/breakbench/leading_zero_literal/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.19",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/shared_default_argument/main/bb.csproj (in 39 ms).\n  bb -> /tmp/breakbench/shared_default_argument/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.19",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/reused_iterator/main/bb.csproj (in 39 ms).\n  bb -> /tmp/breakbench/reused_iterator/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.22",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/bitwise_precedence/main/bb.csproj (in 38 ms).\n/tmp/breakbench/bitwise_precedence/main/Program.cs(2,13): error CS0019: Operator '&' cannot be applied to operands of type 'int' and 'bool' [/tmp/breakbench/bitwise_precedence/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/bitwise_precedence/main/Program.cs(2,13): error CS0019: Operator '&' cannot be applied to operands of type 'int' and 'bool' [/tmp/breakbench/bitwise_precedence/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.02",
+   "control": "builds"
+  },
+  "default_operator_precedence": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/default_operator_precedence/main/bb.csproj (in 45 ms).\n  bb -> /tmp/breakbench/default_operator_precedence/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.12",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "4",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/dangling_else/main/bb.csproj (in 37 ms).\n  bb -> /tmp/breakbench/dangling_else/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.16",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "unset",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/chained_comparison/main/bb.csproj (in 46 ms).\n/tmp/breakbench/chained_comparison/main/Program.cs(2,15): error CS0019: Operator '<' cannot be applied to operands of type 'bool' and 'int' [/tmp/breakbench/chained_comparison/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/chained_comparison/main/Program.cs(2,15): error CS0019: Operator '<' cannot be applied to operands of type 'bool' and 'int' [/tmp/breakbench/chained_comparison/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.14",
+   "control": "builds"
+  },
+  "lost_update_on_copy": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/lost_update_on_copy/main/bb.csproj (in 45 ms).\n  bb -> /tmp/breakbench/lost_update_on_copy/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.23",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "150",
+   "stderr": ""
+  },
+  "command_injection": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/command_injection/main/bb.csproj (in 43 ms).\n  bb -> /tmp/breakbench/command_injection/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.17",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/float_equality/main/bb.csproj (in 46 ms).\n  bb -> /tmp/breakbench/float_equality/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.25",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/lock_order_deadlock/main/bb.csproj (in 46 ms).\n  bb -> /tmp/breakbench/lock_order_deadlock/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.20",
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/regex_backtracking/main/bb.csproj (in 43 ms).\n  bb -> /tmp/breakbench/regex_backtracking/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.15",
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 10.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "regex_trailing_newline": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/regex_trailing_newline/main/bb.csproj (in 46 ms).\n  bb -> /tmp/breakbench/regex_trailing_newline/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.25",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "accepted",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/negative_remainder/main/bb.csproj (in 52 ms).\n  bb -> /tmp/breakbench/negative_remainder/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.36",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/missing_comma_concat/main/bb.csproj (in 42 ms).\n/tmp/breakbench/missing_comma_concat/main/Program.cs(4,10): error CS1003: Syntax error, ',' expected [/tmp/breakbench/missing_comma_concat/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/missing_comma_concat/main/Program.cs(4,10): error CS1003: Syntax error, ',' expected [/tmp/breakbench/missing_comma_concat/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:00.77",
+   "control": "builds"
+  },
+  "return_in_finally": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/return_in_finally/main/bb.csproj (in 41 ms).\n/tmp/breakbench/return_in_finally/main/Program.cs(14,9): error CS0157: Control cannot leave the body of a finally clause [/tmp/breakbench/return_in_finally/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/return_in_finally/main/Program.cs(14,9): error CS0157: Control cannot leave the body of a finally clause [/tmp/breakbench/return_in_finally/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.14",
+   "control": "builds"
+  },
+  "return_line_break": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/return_line_break/main/bb.csproj (in 53 ms).\n  bb -> /tmp/breakbench/return_line_break/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.22",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/worker_failure_lost/main/bb.csproj (in 47 ms).\n  bb -> /tmp/breakbench/worker_failure_lost/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.39",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.FormatException: The input string 'x' was not in a correct format.\n   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)\n   at System.Int64.Parse(String s)\n   at System.Linq.Enumerable.Sum[TSource,TResult,TAccumulator](IEnumerable`1 source, Func`2 selector\n...\nhreading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)\n--- End of stack trace from previous location ---\n   at Program.<Main>$(String[] args) in /tmp/breakbench/worker_failure_lost/release/Program.cs:line 2\n   at Program.<Main>(String[] args)\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.22,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.FormatException: The input string 'x' was not in a correct format.\n   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)\n   at System.Int64.Parse(String s)\n   at System.Linq.Enumerable.Sum[TSource,TResult,TAccumulator](IEnumerable`1 source, Func`2 selector)\n   at Program.<>c__DisplayClass0_0.<<Main>$>b__0() in /tmp/breakbench/worker_failure_lost/main/Program.cs:line 1\n   at System.Threading.Tasks.Task`1.InnerInvoke()\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\n--- End of stack trace from previous location ---\n   at System.Threading.ExecutionContext.RunFromThreadPoolDispatchLoop(Thread threadPoolThread, ExecutionContext executionContext, ContextCallback callback, Object state)\n   at System.Threading.Tasks.Task.ExecuteWithThreadLocal(Task& currentTaskSlot, Thread threadPoolThread)\n--- End of stack trace from previous location ---\n   at Program.<Main>$(String[] args) in /tmp/breakbench/worker_failure_lost/main/Program.cs:line 2\n   at Program.<Main>(String[] args)\nAborted (core dumped)"
+  },
+  "unawaited_task": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/unawaited_task/main/bb.csproj (in 45 ms).\n/tmp/breakbench/unawaited_task/main/Program.cs(9,1): warning CS4014: Because this call is not awaited, execution of the current method continues before the call is completed. Consider applying the 'await' operator to the result of the call. [/tmp/breakbench/unawaited_task/main/bb.csproj]\n  bb -> /tmp/breakbench/unawaited_task/main/out/bb.dll\n\nBuild succeeded.\n\n/tmp/breakbench/unawaited_task/main/Program.cs(9,1): warning CS4014: Because this call is not awaited, execution of the current method continues before the call is completed. Consider applying the 'await' operator to the result of the call. [/tmp/breakbench/unawaited_task/main/bb.csproj]\n    1 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.22",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/format_arg_mismatch/main/bb.csproj (in 53 ms).\n/tmp/breakbench/format_arg_mismatch/main/Program.cs(2,5): warning CS0219: The variable 'total' is assigned but its value is never used [/tmp/breakbench/format_arg_mismatch/main/bb.csproj]\n  bb -> /tmp/breakbench/format_arg_mismatch/main/out/bb.dll\n\nBuild succeeded.\n\n/tmp/breakbench/format_arg_mismatch/main/Program.cs(2,5): warning CS0219: The variable 'total' is assigned but its value is never used [/tmp/breakbench/format_arg_mismatch/main/bb.csproj]\n    1 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.23",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.FormatException: Index (zero based) must be greater than or equal to zero and less than the size of the argument list.\n   at System.Text.ValueStringBuilder.AppendFormatHelper(IFormatProvider provider, String format, ReadOnlySpan`1 args)\n   at System.String.FormatHelper(IFormatProvider provider, String format, ReadOnlySpan`1 args)\n   at System.String.Format(String format, Object arg0)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/format_arg_mismatch/release/Program.cs:line 3\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.23,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.FormatException: Index (zero based) must be greater than or equal to zero and less than the size of the argument list.\n   at System.Text.ValueStringBuilder.AppendFormatHelper(IFormatProvider provider, String format, ReadOnlySpan`1 args)\n   at System.String.FormatHelper(IFormatProvider provider, String format, ReadOnlySpan`1 args)\n   at System.String.Format(String format, Object arg0)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/format_arg_mismatch/main/Program.cs:line 3\nAborted (core dumped)"
+  },
+  "unsigned_subtraction": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/unsigned_subtraction/main/bb.csproj (in 42 ms).\n  bb -> /tmp/breakbench/unsigned_subtraction/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.19",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/missing_key_default/main/bb.csproj (in 57 ms).\n  bb -> /tmp/breakbench/missing_key_default/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.30",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'pear' was not present in the dictionary.\n   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/missing_key_default/release/Program.cs:line 2\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.18,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.Collections.Generic.KeyNotFoundException: The given key 'pear' was not present in the dictionary.\n   at System.Collections.Generic.Dictionary`2.get_Item(TKey key)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/missing_key_default/main/Program.cs:line 3\nAborted (core dumped)"
+  },
+  "mutable_hash_key": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/mutable_hash_key/main/bb.csproj (in 50 ms).\n  bb -> /tmp/breakbench/mutable_hash_key/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.33",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/shadowed_assignment/main/bb.csproj (in 43 ms).\n/tmp/breakbench/shadowed_assignment/main/Program.cs(4,9): error CS0136: A local or parameter named 'status' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter [/tmp/breakbench/shadowed_assignment/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/shadowed_assignment/main/Program.cs(4,9): error CS0136: A local or parameter named 'status' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter [/tmp/breakbench/shadowed_assignment/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.31",
+   "control": "builds"
+  },
+  "discarded_pure_result": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/discarded_pure_result/main/bb.csproj (in 54 ms).\n  bb -> /tmp/breakbench/discarded_pure_result/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.42",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/negative_index_wraps/main/bb.csproj (in 49 ms).\n  bb -> /tmp/breakbench/negative_index_wraps/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.51",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/negative_index_wraps/release/Program.cs:line 1\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.25,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/negative_index_wraps/main/Program.cs:line 3\nAborted (core dumped)"
+  },
+  "default_numeric_sort": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/default_numeric_sort/main/bb.csproj (in 62 ms).\n  bb -> /tmp/breakbench/default_numeric_sort/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.38",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unstable_sort": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/unstable_sort/main/bb.csproj (in 56 ms).\n  bb -> /tmp/breakbench/unstable_sort/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.53",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "scrambled",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/unrelated_type_lookup/main/bb.csproj (in 60 ms).\n/tmp/breakbench/unrelated_type_lookup/main/Program.cs(3,32): error CS1503: Argument 1: cannot convert from 'string' to 'int' [/tmp/breakbench/unrelated_type_lookup/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/unrelated_type_lookup/main/Program.cs(3,32): error CS1503: Argument 1: cannot convert from 'string' to 'int' [/tmp/breakbench/unrelated_type_lookup/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.40",
+   "control": "builds"
+  },
+  "panic_under_lock": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/panic_under_lock/main/bb.csproj (in 45 ms).\n  bb -> /tmp/breakbench/panic_under_lock/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.35",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "unbalanced",
+   "stderr": "worker failed: crash mid-update"
+  },
+  "oob_write": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/oob_write/main/bb.csproj (in 62 ms).\n  bb -> /tmp/breakbench/oob_write/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.35",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/oob_write/release/Program.cs:line 1\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.21,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/oob_write/main/Program.cs:line 2\nAborted (core dumped)"
+  },
+  "oob_read": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/oob_read/main/bb.csproj (in 55 ms).\n  bb -> /tmp/breakbench/oob_read/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.32",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/oob_read/release/Program.cs:line 1\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.21,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/oob_read/main/Program.cs:line 2\nAborted (core dumped)"
+  },
+  "use_after_free": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/use_after_free/main/bb.csproj (in 46 ms).\n  bb -> /tmp/breakbench/use_after_free/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.32",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/double_free/main/bb.csproj (in 55 ms).\n  bb -> /tmp/breakbench/double_free/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.38",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/dangling_stack_ref/main/bb.csproj (in 43 ms).\n  bb -> /tmp/breakbench/dangling_stack_ref/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.33",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/container_realloc_dangling/main/bb.csproj (in 44 ms).\n  bb -> /tmp/breakbench/container_realloc_dangling/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.38",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/uninit_heap_read/main/bb.csproj (in 46 ms).\n  bb -> /tmp/breakbench/uninit_heap_read/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.31",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "wrong_variant_access": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/wrong_variant_access/main/bb.csproj (in 44 ms).\n  bb -> /tmp/breakbench/wrong_variant_access/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.33",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.InvalidCastException: Unable to cast object of type 'System.Int32' to type 'System.String'.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/wrong_variant_access/release/Program.cs:line 1\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.21,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.InvalidCastException: Unable to cast object of type 'System.Int32' to type 'System.String'.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/wrong_variant_access/main/Program.cs:line 2\nAborted (core dumped)"
+  },
+  "format_string": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/format_string/main/bb.csproj (in 45 ms).\n  bb -> /tmp/breakbench/format_string/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.34",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.FormatException: Input string was not in a correct format. Failure to parse near offset 7. Expected an ASCII digit.\n   at System.Text.ValueStringBuilder.AppendFormatHelper(IFormatProvider provider, String format, ReadOnlySpan`1 args)\n   at System.String.FormatHelper(IFormatProvider provider, String format, ReadOnlySpan`1 args)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/format_string/release/Program.cs:line 1\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.2,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.FormatException: Input string was not in a correct format. Failure to parse near offset 7. Expected an ASCII digit.\n   at System.Text.ValueStringBuilder.AppendFormatHelper(IFormatProvider provider, String format, ReadOnlySpan`1 args)\n   at System.String.FormatHelper(IFormatProvider provider, String format, ReadOnlySpan`1 args)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/format_string/main/Program.cs:line 1\nAborted (core dumped)"
+  },
+  "trojan_source": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/trojan_source/main/bb.csproj (in 45 ms).\n  bb -> /tmp/breakbench/trojan_source/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.32",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "admin",
+   "stderr": ""
+  },
+  "unsafe_deserialization": {
+   "outcome": "SAFE_BY_DESIGN",
+   "message": "BinaryFormatter is gone from .NET; System.Text.Json builds only the types the program declares"
+  },
+  "null_byte_path": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/null_byte_path/main/bb.csproj (in 48 ms).\n  bb -> /tmp/breakbench/null_byte_path/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.39",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/homoglyph_identifier/main/bb.csproj (in 43 ms).\n  bb -> /tmp/breakbench/homoglyph_identifier/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.30",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "admin\nadmin",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/string_literal_write/main/bb.csproj (in 47 ms).\n/tmp/breakbench/string_literal_write/main/Program.cs(2,1): error CS0200: Property or indexer 'string.this[int]' cannot be assigned to -- it is read only [/tmp/breakbench/string_literal_write/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/string_literal_write/main/Program.cs(2,1): error CS0200: Property or indexer 'string.this[int]' cannot be assigned to -- it is read only [/tmp/breakbench/string_literal_write/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.25",
+   "control": "builds"
+  },
+  "reference_cycle": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/reference_cycle/main/bb.csproj (in 48 ms).\n  bb -> /tmp/breakbench/reference_cycle/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.36",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.18,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "forgotten_free": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/forgotten_free/main/bb.csproj (in 55 ms).\n  bb -> /tmp/breakbench/forgotten_free/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.27",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.23,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "complete_init": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/complete_init/main/bb.csproj (in 44 ms).\n/tmp/breakbench/complete_init/main/Program.cs(2,19): error CS7036: There is no argument given that corresponds to the required parameter 'Retries' of 'Config.Config(int, int)' [/tmp/breakbench/complete_init/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/complete_init/main/Program.cs(2,19): error CS7036: There is no argument given that corresponds to the required parameter 'Retries' of 'Config.Config(int, int)' [/tmp/breakbench/complete_init/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.26",
+   "control": "builds"
+  },
+  "override_check": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/override_check/main/bb.csproj (in 41 ms).\n/tmp/breakbench/override_check/main/Program.cs(12,28): error CS0115: 'Circle.Descibe()': no suitable method found to override [/tmp/breakbench/override_check/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/override_check/main/Program.cs(12,28): error CS0115: 'Circle.Descibe()': no suitable method found to override [/tmp/breakbench/override_check/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.02",
+   "control": "builds"
+  },
+  "missing_virtual": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/missing_virtual/main/bb.csproj (in 39 ms).\n/tmp/breakbench/missing_virtual/main/Program.cs(11,16): warning CS0108: 'Square.Area()' hides inherited member 'Shape.Area()'. Use the new keyword if hiding was intended. [/tmp/breakbench/missing_virtual/main/bb.csproj]\n  bb -> /tmp/breakbench/missing_virtual/main/out/bb.dll\n\nBuild succeeded.\n\n/tmp/breakbench/missing_virtual/main/Program.cs(11,16): warning CS0108: 'Square.Area()' hides inherited member 'Shape.Area()'. Use the new keyword if hiding was intended. [/tmp/breakbench/missing_virtual/main/bb.csproj]\n    1 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.18",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "area 0",
+   "stderr": ""
+  },
+  "unbound_method": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/unbound_method/main/bb.csproj (in 40 ms).\n  bb -> /tmp/breakbench/unbound_method/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.18",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "forced_unwrap": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/forced_unwrap/main/bb.csproj (in 45 ms).\n  bb -> /tmp/breakbench/forced_unwrap/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.19",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "before",
+   "release_stderr": "Unhandled exception. System.InvalidOperationException: Cannot read the Value property of a Nullable object that has no value. Check HasValue before reading Value.\n   at System.Nullable`1.get_Value()\n   at Program.<Main>$(String[] args) in /tmp/breakbench/forced_unwrap/release/Program.cs:line 2\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.18,
+   "stdout": "before",
+   "stderr": "Unhandled exception. System.InvalidOperationException: Cannot read the Value property of a Nullable object that has no value. Check HasValue before reading Value.\n   at System.Nullable`1.get_Value()\n   at Program.<Main>$(String[] args) in /tmp/breakbench/forced_unwrap/main/Program.cs:line 2\nAborted (core dumped)"
+  },
+  "null_in_text": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/null_in_text/main/bb.csproj (in 45 ms).\n  bb -> /tmp/breakbench/null_in_text/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.17",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "hello,",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/not_found_sentinel/main/bb.csproj (in 43 ms).\n  bb -> /tmp/breakbench/not_found_sentinel/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.17",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/empty_max/main/bb.csproj (in 43 ms).\n  bb -> /tmp/breakbench/empty_max/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.35",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.InvalidOperationException: Sequence contains no elements.\n   at System.MemoryExtensions.MinMaxInteger[T,TMinMax](ReadOnlySpan`1 span)\n   at System.MemoryExtensions.MinMaxInteger[TOuter,TInner,TMinMax](ReadOnlySpan`1 span)\n   at System.MemoryExtensions.Max[T](ReadOnlySpan`1 span)\n   at System.MemoryExtensions.Max[T](ReadOnlySpan`1 span, IComparer`1 comparer)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/empty_max/release/Program.cs:line 1\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.2,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.InvalidOperationException: Sequence contains no elements.\n   at System.MemoryExtensions.MinMaxInteger[T,TMinMax](ReadOnlySpan`1 span)\n   at System.MemoryExtensions.MinMaxInteger[TOuter,TInner,TMinMax](ReadOnlySpan`1 span)\n   at System.MemoryExtensions.Max[T](ReadOnlySpan`1 span)\n   at System.MemoryExtensions.Max[T](ReadOnlySpan`1 span, IComparer`1 comparer)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/empty_max/main/Program.cs:line 2\nAborted (core dumped)"
+  },
+  "readonly_param": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/readonly_param/main/bb.csproj (in 46 ms).\n/tmp/breakbench/readonly_param/main/Program.cs(5,5): error CS0200: Property or indexer 'IReadOnlyList<int>.this[int]' cannot be assigned to -- it is read only [/tmp/breakbench/readonly_param/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/readonly_param/main/Program.cs(5,5): error CS0200: Property or indexer 'IReadOnlyList<int>.this[int]' cannot be assigned to -- it is read only [/tmp/breakbench/readonly_param/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.22",
+   "control": "builds"
+  },
+  "exclusive_mutation": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/exclusive_mutation/main/bb.csproj (in 53 ms).\n  bb -> /tmp/breakbench/exclusive_mutation/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.36",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/literal_range/main/bb.csproj (in 44 ms).\n/tmp/breakbench/literal_range/main/Program.cs(2,15): error CS0031: Constant value '300' cannot be converted to a 'byte' [/tmp/breakbench/literal_range/main/bb.csproj]\n/tmp/breakbench/literal_range/main/Program.cs(2,6): warning CS0219: The variable 'tooBig' is assigned but its value is never used [/tmp/breakbench/literal_range/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/literal_range/main/Program.cs(2,6): warning CS0219: The variable 'tooBig' is assigned but its value is never used [/tmp/breakbench/literal_range/main/bb.csproj]\n/tmp/breakbench/literal_range/main/Program.cs(2,15): error CS0031: Constant value '300' cannot be converted to a 'byte' [/tmp/breakbench/literal_range/main/bb.csproj]\n    1 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.35",
+   "control": "builds"
+  },
+  "no_implicit_conversion": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/no_implicit_conversion/main/bb.csproj (in 67 ms).\n/tmp/breakbench/no_implicit_conversion/main/Program.cs(3,13): error CS0266: Cannot implicitly convert type 'long' to 'int'. An explicit conversion exists (are you missing a cast?) [/tmp/breakbench/no_implicit_conversion/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/no_implicit_conversion/main/Program.cs(3,13): error CS0266: Cannot implicitly convert type 'long' to 'int'. An explicit conversion exists (are you missing a cast?) [/tmp/breakbench/no_implicit_conversion/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.27",
+   "control": "builds"
+  },
+  "generic_constraint": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/generic_constraint/main/bb.csproj (in 48 ms).\n  bb -> /tmp/breakbench/generic_constraint/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.29",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.InvalidOperationException: Failed to compare two elements in the array.\n ---> System.ArgumentException: At least one object must implement IComparable.\n   at System.Collections.Comparer.Compare(Object a, Object b)\n   at System.Collections.Generic.ArraySortHelper`1.SwapIfG\n...\nSystem.Collections.Generic.ArraySortHelper`1.Sort(Span`1 keys, IComparer`1 comparer)\n   at System.Collections.Generic.List`1.Sort(Int32 index, Int32 count, IComparer`1 comparer)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/generic_constraint/release/Program.cs:line 2\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.33,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.InvalidOperationException: Failed to compare two elements in the array.\n ---> System.ArgumentException: At least one object must implement IComparable.\n   at System.Collections.Comparer.Compare(Object a, Object b)\n   at System.Collections.Generic.ArraySortHelper`1.SwapIfGreater(Span`1 keys, Comparison`1 comparer, Int32 i, Int32 j)\n   at System.Collections.Generic.ArraySortHelper`1.IntroSort(Span`1 keys, Int32 depthLimit, Comparison`1 comparer)\n   at System.Collections.Generic.ArraySortHelper`1.Sort(Span`1 keys, IComparer`1 comparer)\n   --- End of inner exception stack trace ---\n   at System.Collections.Generic.ArraySortHelper`1.Sort(Span`1 keys, IComparer`1 comparer)\n   at System.Collections.Generic.List`1.Sort(Int32 index, Int32 count, IComparer`1 comparer)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/generic_constraint/main/Program.cs:line 2\nAborted (core dumped)"
+  },
+  "lossy_int_to_float": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/lossy_int_to_float/main/bb.csproj (in 48 ms).\n  bb -> /tmp/breakbench/lossy_int_to_float/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.43",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "9007199254740992",
+   "stderr": ""
+  },
+  "const_index_bounds": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/const_index_bounds/main/bb.csproj (in 47 ms).\n/tmp/breakbench/const_index_bounds/main/Program.cs(6,25): error CS9166: Index is outside the bounds of the inline array [/tmp/breakbench/const_index_bounds/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/const_index_bounds/main/Program.cs(6,25): error CS9166: Index is outside the bounds of the inline array [/tmp/breakbench/const_index_bounds/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.40",
+   "control": "builds"
+  },
+  "lazy_accumulator": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/lazy_accumulator/main/bb.csproj (in 48 ms).\n  bb -> /tmp/breakbench/lazy_accumulator/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.35",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.87,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/size_overflow_alloc/main/bb.csproj (in 44 ms).\n  bb -> /tmp/breakbench/size_overflow_alloc/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.33",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/size_overflow_alloc/release/Program.cs:line 1\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.24,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/size_overflow_alloc/main/Program.cs:line 3\nAborted (core dumped)"
+  },
+  "const_overflow": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/const_overflow/main/bb.csproj (in 43 ms).\n/tmp/breakbench/const_overflow/main/Program.cs(2,19): error CS0220: The operation overflows at compile time in checked mode [/tmp/breakbench/const_overflow/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/const_overflow/main/Program.cs(2,19): error CS0220: The operation overflows at compile time in checked mode [/tmp/breakbench/const_overflow/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.28",
+   "control": "builds"
+  },
+  "orphaned_receive": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/orphaned_receive/main/bb.csproj (in 48 ms).\n  bb -> /tmp/breakbench/orphaned_receive/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.41",
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "blocking_in_async": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/blocking_in_async/main/bb.csproj (in 46 ms).\n  bb -> /tmp/breakbench/blocking_in_async/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.35",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 1.02,
+   "stdout": "serial",
+   "stderr": ""
+  },
+  "evaluation_order": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/evaluation_order/main/bb.csproj (in 51 ms).\n  bb -> /tmp/breakbench/evaluation_order/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.36",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/dominated_case/main/bb.csproj (in 50 ms).\n/tmp/breakbench/dominated_case/main/Program.cs(4,56): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match. [/tmp/breakbench/dominated_case/main/bb.csproj]\n/tmp/breakbench/dominated_case/main/Program.cs(4,15): warning CS8321: The local function 'Bad' is declared but never used [/tmp/breakbench/dominated_case/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/dominated_case/main/Program.cs(4,15): warning CS8321: The local function 'Bad' is declared but never used [/tmp/breakbench/dominated_case/main/bb.csproj]\n/tmp/breakbench/dominated_case/main/Program.cs(4,56): error CS8510: The pattern is unreachable. It has already been handled by a previous arm of the switch expression or it is impossible to match. [/tmp/breakbench/dominated_case/main/bb.csproj]\n    1 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.42",
+   "control": "builds"
+  },
+  "duplicate_key": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/duplicate_key/main/bb.csproj (in 49 ms).\n  bb -> /tmp/breakbench/duplicate_key/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.42",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.ArgumentException: An item with the same key has already been added. Key: a\n   at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\n   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/duplicate_key/release/Program.cs:line 1\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.27,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.ArgumentException: An item with the same key has already been added. Key: a\n   at System.Collections.Generic.Dictionary`2.TryInsert(TKey key, TValue value, InsertionBehavior behavior)\n   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/duplicate_key/main/Program.cs:line 1\nAborted (core dumped)"
+  },
+  "json_big_integer": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/json_big_integer/main/bb.csproj (in 45 ms).\n  bb -> /tmp/breakbench/json_big_integer/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.19",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "9007199254740993",
+   "stderr": ""
+  },
+  "parse_out_of_range": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/parse_out_of_range/main/bb.csproj (in 42 ms).\n  bb -> /tmp/breakbench/parse_out_of_range/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.17",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.OverflowException: Value was either too large or too small for an Int64.\n   at System.Number.ThrowOverflowException[TInteger]()\n   at System.Int64.Parse(String s)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/parse_out_of_range/release/Program.cs:line 1\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.2,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.OverflowException: Value was either too large or too small for an Int64.\n   at System.Number.ThrowOverflowException[TInteger]()\n   at System.Int64.Parse(String s)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/parse_out_of_range/main/Program.cs:line 1\nAborted (core dumped)"
+  },
+  "json_nan": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/json_nan/main/bb.csproj (in 39 ms).\n  bb -> /tmp/breakbench/json_nan/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.17",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.ArgumentException: .NET number values such as positive and negative infinity cannot be written as valid JSON. To make it work when using 'JsonSerializer', consider specifying 'JsonNumberHandling.AllowNamedFloatingPointLiterals' (see https://learn.microsoft.com/dotnet/api/\n...\nxt.Json.JsonSerializer.WriteString[TValue](TValue& value, JsonTypeInfo`1 jsonTypeInfo)\n   at System.Text.Json.JsonSerializer.Serialize[TValue](TValue value, JsonSerializerOptions options)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/json_nan/release/Program.cs:line 5\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.26,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.ArgumentException: .NET number values such as positive and negative infinity cannot be written as valid JSON. To make it work when using 'JsonSerializer', consider specifying 'JsonNumberHandling.AllowNamedFloatingPointLiterals' (see https://learn.microsoft.com/dotnet/api/system.text.json.serialization.jsonnumberhandling).\n   at System.Text.Json.ThrowHelper.ThrowArgumentException_ValueNotSupported()\n   at System.Text.Json.Utf8JsonWriter.WriteNumberValue(Double value)\n   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)\n   at System.Text.Json.Serialization.Metadata.JsonPropertyInfo`1.GetMemberAndWriteJson(Object obj, WriteSt\n...\nteStack& state)\n   at System.Text.Json.Serialization.JsonConverter`1.TryWrite(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)\n   at System.Text.Json.Serialization.JsonConverter`1.WriteCore(Utf8JsonWriter writer, T& value, JsonSerializerOptions options, WriteStack& state)\n   at System.Text.Json.Serialization.Metadata.JsonTypeInfo`1.Serialize(Utf8JsonWriter writer, T& rootValue, Object rootValueBoxed)\n   at System.Text.Json.JsonSerializer.WriteString[TValue](TValue& value, JsonTypeInfo`1 jsonTypeInfo)\n   at System.Text.Json.JsonSerializer.Serialize[TValue](TValue value, JsonSerializerOptions options)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/json_nan/main/Program.cs:line 5\nAborted (core dumped)"
+  },
+  "comparison_statement": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/comparison_statement/main/bb.csproj (in 43 ms).\n/tmp/breakbench/comparison_statement/main/Program.cs(3,1): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement [/tmp/breakbench/comparison_statement/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/comparison_statement/main/Program.cs(3,1): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement [/tmp/breakbench/comparison_statement/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.08",
+   "control": "builds"
+  },
+  "typo_compound_assign": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/typo_compound_assign/main/bb.csproj (in 43 ms).\n  bb -> /tmp/breakbench/typo_compound_assign/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.12",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "structural_equality": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/structural_equality/main/bb.csproj (in 40 ms).\n  bb -> /tmp/breakbench/structural_equality/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.09",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/array_literal_length/main/bb.csproj (in 49 ms).\n  bb -> /tmp/breakbench/array_literal_length/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.17",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/array_literal_length/release/Program.cs:line 1\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.17,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/array_literal_length/main/Program.cs:line 2\nAborted (core dumped)"
+  },
+  "enum_from_int": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/enum_from_int/main/bb.csproj (in 44 ms).\n  bb -> /tmp/breakbench/enum_from_int/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.19",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "before\n7",
+   "stderr": ""
+  },
+  "invalid_date": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/invalid_date/main/bb.csproj (in 44 ms).\n  bb -> /tmp/breakbench/invalid_date/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.16",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.ArgumentOutOfRangeException: Year, Month, and Day parameters describe an un-representable DateTime.\n   at System.DateOnly..ctor(Int32 year, Int32 month, Int32 day)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/invalid_date/release/Program.cs:line 1\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.18,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.ArgumentOutOfRangeException: Year, Month, and Day parameters describe an un-representable DateTime.\n   at System.DateOnly..ctor(Int32 year, Int32 month, Int32 day)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/invalid_date/main/Program.cs:line 1\nAborted (core dumped)"
+  },
+  "bitwise_on_bool": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/bitwise_on_bool/main/bb.csproj (in 45 ms).\n  bb -> /tmp/breakbench/bitwise_on_bool/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.16",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/bitwise_on_bool/release/Program.cs:line 1\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.18,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array.\n   at System.String.get_Chars(Int32 index)\n   at Program.<Main>$(String[] args) in /tmp/breakbench/bitwise_on_bool/main/Program.cs:line 2\nAborted (core dumped)"
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/readonly_field/main/bb.csproj (in 41 ms).\n/tmp/breakbench/readonly_field/main/Program.cs(2,1): error CS8852: Init-only property or indexer 'Config.Port' can only be assigned in an object initializer, or on 'this' or 'base' in an instance constructor or an 'init' accessor. [/tmp/breakbench/readonly_field/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/readonly_field/main/Program.cs(2,1): error CS8852: Init-only property or indexer 'Config.Port' can only be assigned in an object initializer, or on 'this' or 'base' in an instance constructor or an 'init' accessor. [/tmp/breakbench/readonly_field/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.04",
+   "control": "builds"
+  },
+  "bool_condition": {
+   "outcome": "REJECTED",
+   "message": "Determining projects to restore...\n  Restored /tmp/breakbench/bool_condition/main/bb.csproj (in 41 ms).\n/tmp/breakbench/bool_condition/main/Program.cs(2,5): error CS0029: Cannot implicitly convert type 'int' to 'bool' [/tmp/breakbench/bool_condition/main/bb.csproj]\n\nBuild FAILED.\n\n/tmp/breakbench/bool_condition/main/Program.cs(2,5): error CS0029: Cannot implicitly convert type 'int' to 'bool' [/tmp/breakbench/bool_condition/main/bb.csproj]\n    0 Warning(s)\n    1 Error(s)\n\nTime Elapsed 00:00:01.06",
+   "control": "builds"
+  },
+  "lost_write_error": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/lost_write_error/main/bb.csproj (in 43 ms).\n  bb -> /tmp/breakbench/lost_write_error/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.08",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.IO.IOException: No space left on device : '/dev/full'\n   at System.IO.RandomAccess.WriteAtOffset(SafeFileHandle handle, ReadOnlySpan`1 buffer, Int64& fileOffset)\n   at System.IO.Strategies.BufferedFileStreamStrategy.Flush(Boolean flushToDisk)\n   at System.IO.StreamWriter.\n...\n.IO.StreamWriter.Dispose(Boolean disposing)\n   at System.IO.TextWriter.Dispose()\n   at Program.<Main>$(String[] args) in /tmp/breakbench/lost_write_error/release/Program.cs:line 4\n   at Program.<Main>$(String[] args) in /tmp/breakbench/lost_write_error/release/Program.cs:line 1\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.17,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.IO.IOException: No space left on device : '/dev/full'\n   at System.IO.RandomAccess.WriteAtOffset(SafeFileHandle handle, ReadOnlySpan`1 buffer, Int64& fileOffset)\n   at System.IO.Strategies.BufferedFileStreamStrategy.Flush(Boolean flushToDisk)\n   at System.IO.StreamWriter.Flush(Boolean flushStream, Boolean flushEncoder)\n   at System.IO.StreamWriter.Dispose(Boolean disposing)\n   at System.IO.TextWriter.Dispose()\n   at Program.<Main>$(String[] args) in /tmp/breakbench/lost_write_error/main/Program.cs:line 4\n   at Program.<Main>$(String[] args) in /tmp/breakbench/lost_write_error/main/Program.cs:line 1\nAborted (core dumped)"
+  },
+  "short_read": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/short_read/main/bb.csproj (in 39 ms).\n/tmp/breakbench/short_read/main/Program.cs(6,1): warning CA2022: Avoid inexact read with 'System.IO.Stream.Read(byte[], int, int)' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2022) [/tmp/breakbench/short_read/main/bb.csproj]\n  bb -> /tmp/breakbench/short_read/main/out/bb.dll\n\nBuild succeeded.\n\n/tmp/breakbench/short_read/main/Program.cs(6,1): warning CA2022: Avoid inexact read with 'System.IO.Stream.Read(byte[], int, int)' (https://learn.microsoft.com/dotnet/fundamentals/code-analysis/quality-rules/ca2022) [/tmp/breakbench/short_read/main/bb.csproj]\n    1 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.18",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "HELLO-WO\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/masked_cleanup_error/main/bb.csproj (in 40 ms).\n  bb -> /tmp/breakbench/masked_cleanup_error/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.12",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "close failed",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/unflushed_writer/main/bb.csproj (in 43 ms).\n  bb -> /tmp/breakbench/unflushed_writer/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.10",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/child_exit_status/main/bb.csproj (in 49 ms).\n  bb -> /tmp/breakbench/child_exit_status/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.13",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "backed up",
+   "stderr": ""
+  },
+  "nullable_field": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/nullable_field/main/bb.csproj (in 45 ms).\n/tmp/breakbench/nullable_field/main/Program.cs(3,19): warning CS8602: Dereference of a possibly null reference. [/tmp/breakbench/nullable_field/main/bb.csproj]\n  bb -> /tmp/breakbench/nullable_field/main/out/bb.dll\n\nBuild succeeded.\n\n/tmp/breakbench/nullable_field/main/Program.cs(3,19): warning CS8602: Dereference of a possibly null reference. [/tmp/breakbench/nullable_field/main/bb.csproj]\n    1 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.13",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/nullable_field/release/Program.cs:line 3\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.18,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/nullable_field/main/Program.cs:line 3\nAborted (core dumped)"
+  },
+  "stale_null_check": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/stale_null_check/main/bb.csproj (in 38 ms).\n  bb -> /tmp/breakbench/stale_null_check/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.05",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/stale_null_check/release/Program.cs:line 5\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.17,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/stale_null_check/main/Program.cs:line 5\nAborted (core dumped)"
+  },
+  "empty_slot": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/empty_slot/main/bb.csproj (in 41 ms).\n  bb -> /tmp/breakbench/empty_slot/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.14",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/empty_slot/release/Program.cs:line 3\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.18,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.NullReferenceException: Object reference not set to an instance of an object.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/empty_slot/main/Program.cs:line 4\nAborted (core dumped)"
+  },
+  "typed_nil": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/typed_nil/main/bb.csproj (in 42 ms).\n  bb -> /tmp/breakbench/typed_nil/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.03",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/mutate_after_send/main/bb.csproj (in 41 ms).\n  bb -> /tmp/breakbench/mutate_after_send/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.13",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "99",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/lost_wakeup/main/bb.csproj (in 42 ms).\n  bb -> /tmp/breakbench/lost_wakeup/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.15",
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "lock_skipped_on_return": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/lock_skipped_on_return/main/bb.csproj (in 45 ms).\n  bb -> /tmp/breakbench/lock_skipped_on_return/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.11",
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "cleanup_on_error_path": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/cleanup_on_error_path/main/bb.csproj (in 41 ms).\n  bb -> /tmp/breakbench/cleanup_on_error_path/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.18",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "left behind: export.csv",
+   "stderr": ""
+  },
+  "generator_break_cleanup": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/generator_break_cleanup/main/bb.csproj (in 38 ms).\n  bb -> /tmp/breakbench/generator_break_cleanup/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.16",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "cleaned",
+   "stderr": ""
+  },
+  "main_error_exit_code": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/main_error_exit_code/main/bb.csproj (in 40 ms).\n  bb -> /tmp/breakbench/main_error_exit_code/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.07",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "config missing: Could not find a part of the path '/nonexistent/bb.conf'."
+  },
+  "catch_all_hides_bug": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/catch_all_hides_bug/main/bb.csproj (in 40 ms).\n  bb -> /tmp/breakbench/catch_all_hides_bug/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.09",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "invalid order",
+   "stderr": ""
+  },
+  "assert_side_effect": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/assert_side_effect/main/bb.csproj (in 40 ms).\n  bb -> /tmp/breakbench/assert_side_effect/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.21",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "narrow_counter_loop": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/narrow_counter_loop/main/bb.csproj (in 45 ms).\n/tmp/breakbench/narrow_counter_loop/main/Program.cs(4,8): warning CS0652: Comparison to integral constant is useless; the constant is outside the range of type 'byte' [/tmp/breakbench/narrow_counter_loop/main/bb.csproj]\n  bb -> /tmp/breakbench/narrow_counter_loop/main/out/bb.dll\n\nBuild succeeded.\n\n/tmp/breakbench/narrow_counter_loop/main/Program.cs(4,8): warning CS0652: Comparison to integral constant is useless; the constant is outside the range of type 'byte' [/tmp/breakbench/narrow_counter_loop/main/bb.csproj]\n    1 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.14",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "HANG",
+   "release_stdout": "",
+   "release_stderr": "",
+   "exit": 134,
+   "secs": 0.19,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.OverflowException: Arithmetic operation resulted in an overflow.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/narrow_counter_loop/main/Program.cs:line 7\nAborted (core dumped)"
+  },
+  "timeout_without_cancel": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/timeout_without_cancel/main/bb.csproj (in 42 ms).\n  bb -> /tmp/breakbench/timeout_without_cancel/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.16",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.11,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "blocked_sender_leak": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/blocked_sender_leak/main/bb.csproj (in 38 ms).\n  bb -> /tmp/breakbench/blocked_sender_leak/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.11",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "42\ndone",
+   "stderr": ""
+  }
+ }
+}

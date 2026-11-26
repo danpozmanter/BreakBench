@@ -1,0 +1,1 @@
+-- CANNOT-EXPRESS: no regular expressions in base or the libraries that ship with GHC

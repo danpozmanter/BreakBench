@@ -270,6 +270,21 @@
       "control_expect": "^0$"
     },
     {
+      "id": "global_init_order",
+      "category": "incomplete",
+      "kind": "static",
+      "args": [],
+      "expect": "^20$",
+      "title": "A global set from one declared after it",
+      "scenario": "Two globals: LIMIT, declared first, is base() * 2, and BASE, declared after it, is the text \"10\" parsed at run time; base() returns BASE. The program prints LIMIT. Where a global's initializer must be a constant, no global can run first.",
+      "best": "20: globals start in the order they need each other, or the compiler refuses to read one before it is set. 0 shows LIMIT read BASE before it was set; an error at run time earns half.",
+      "mode": "Incomplete control flow",
+      "refs": [
+        "CWE-457",
+        "CWE-665"
+      ]
+    },
+    {
       "id": "assign_in_condition",
       "category": "operators",
       "kind": "static",
@@ -555,6 +570,22 @@
       ]
     },
     {
+      "id": "default_operator_precedence",
+      "category": "operators",
+      "kind": "static",
+      "args": [
+        "ada"
+      ],
+      "expect": "^5$",
+      "title": "A default value next to +",
+      "scenario": "cached is a count that may be missing; for ada it holds 4. The program computes cached, or 0 when it is missing, plus 1, with no parentheses, and prints it. It writes the default with the language's default operator (??, ?:, ||, orelse, or_else), else its option type's default call (unwrap_or, getOrElse, fromMaybe), else the conditional expression.",
+      "best": "5: the default and the + group as written, or the language has no default operator to misgroup. 4 shows + 1 bound to the 0 and was dropped.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "CWE-783"
+      ]
+    },
+    {
       "category": "control_flow",
       "id": "dangling_else",
       "kind": "static",
@@ -662,6 +693,23 @@
       "mode": "Untrusted input",
       "refs": [
         "CWE-1333"
+      ]
+    },
+    {
+      "id": "regex_trailing_newline",
+      "category": "security",
+      "kind": "dynamic",
+      "args": [
+        "alice\n"
+      ],
+      "expect": "^rejected$",
+      "title": "A trailing newline that passes ^...$",
+      "scenario": "The program checks a user name, read from the command line, against the standard regex ^[a-z]+$ with the same match call the regex_backtracking test uses, and prints accepted or rejected. The name is alice followed by a newline.",
+      "best": "\"rejected\": $ means the end of the text. \"accepted\" shows $ also matched before the final newline, so the newline gets through validation.",
+      "mode": "Untrusted input",
+      "refs": [
+        "CWE-625",
+        "CWE-93"
       ]
     },
     {
@@ -873,6 +921,20 @@
       "mode": "Wrong type or shape",
       "refs": [
         "Pitfall: the default sort compares numbers as text (JavaScript)"
+      ]
+    },
+    {
+      "id": "unstable_sort",
+      "category": "api",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^kept$",
+      "title": "Sorting on one key and expecting ties to keep their order",
+      "scenario": "orders holds 200 records in day order, each with a customer from 0 to 4. The program sorts them by customer with the language's standard sort and a key or comparator on the customer alone, then checks that each customer's orders are still in day order.",
+      "best": "\"kept\": the standard sort is documented to keep equal elements in their order. \"scrambled\" fails, and so does \"kept\" from a sort that does not promise it.",
+      "mode": "Wrong type or shape",
+      "refs": [
+        "Pitfall: relying on an unstable sort to keep ties in order (C qsort, C++ std::sort, Go slices.SortFunc)"
       ]
     },
     {
@@ -1557,6 +1619,20 @@
       ]
     },
     {
+      "id": "typo_compound_assign",
+      "category": "operators",
+      "kind": "static",
+      "args": [],
+      "expect": "^15$",
+      "title": "=+ typed for +=",
+      "scenario": "total starts at 10. The program means to add 5 with +=, but types total =+ 5, which also reads as total = +5, then prints total.",
+      "best": "15, because the language refuses =+. Printing 5 is a silent wrong answer.",
+      "mode": "Code that reads one way and runs another",
+      "refs": [
+        "CWE-480"
+      ]
+    },
+    {
       "id": "structural_equality",
       "category": "operators",
       "kind": "static",
@@ -1598,6 +1674,25 @@
       "mode": "Wrong type or shape",
       "refs": [
         "CERT INT50-CPP"
+      ]
+    },
+    {
+      "id": "invalid_date",
+      "category": "api",
+      "kind": "dynamic",
+      "args": [
+        "2023",
+        "2",
+        "30"
+      ],
+      "expect": "^invalid$",
+      "title": "Building February 30",
+      "scenario": "The program builds the calendar date 2023-02-30, read from the command line as year, month and day, with the language's standard call for a date, and prints it as YYYY-MM-DD. Where that call answers an Option, a Result or an error union, the program checks it and prints invalid.",
+      "best": "\"invalid\", because the language made the program check the date. An error at run time earns half. A date that rolled over to March or was clipped to February 28 is a silent wrong answer.",
+      "mode": "Wrong type or shape",
+      "refs": [
+        "CWE-1284",
+        "CWE-20"
       ]
     },
     {
@@ -1872,6 +1967,22 @@
       "refs": [
         "CWE-396",
         "CERT ERR08-J"
+      ]
+    },
+    {
+      "id": "assert_side_effect",
+      "category": "errors",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^2$",
+      "build": "release",
+      "title": "An assert that does the work it checks",
+      "scenario": "jobs holds 1, 2 and 3. The program takes the last job inside the language's assert, checking that it was 3, then prints how many jobs are left. The test runs the build that ships: the release build where the language has one, and Java and Kotlin without -ea.",
+      "best": "2: the assert still runs in the shipped build, or its argument is evaluated regardless. 3 shows the shipped build dropped the assert and the job it took.",
+      "mode": "Lost failures",
+      "refs": [
+        "CERT EXP31-C",
+        "CWE-617"
       ]
     },
     {

@@ -347,7 +347,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     <h3>A stop after the answer</h3>
     <p class="muted">A stop after the result is printed scores as a wrong answer: the wrong value already got out. Examples: Nim <code>empty_max</code> prints 1 before its <code>IndexDefect</code>; <code>unsafe_deserialization</code>, <code>null_byte_path</code> and <code>child_exit_status</code> do harm before any stop.</p>
     <h3>Release builds</h3>
-    <p class="muted">A run-time stop is rebuilt and rerun the way the language ships. If that build runs past the bug, the stop scores 0.25. The release build is a new project's release profile from the standard build tool, with no extra switches; where the tool makes you choose (Zig, C3), the mode that keeps safety checks; C and C++ use CMake Release.</p>
+    <p class="muted">A run-time stop is rebuilt and rerun the way the language ships. If that build runs past the bug, the stop scores 0.25. The release build is a new project's release profile from the standard build tool, with no extra switches; where the tool makes you choose (Zig, C3), the mode that keeps safety checks; C and C++ use CMake Release. <code>assert_side_effect</code> runs only the release build, because its bug exists only there.</p>
     <div class="scroll"><table class="notes-table"><thead><tr><th>Language</th><th>Release build</th><th>What changes</th></tr></thead><tbody>
       <tr><td>C</td><td><code>-O3 -DNDEBUG</code> (CMake Release)</td><td>Assertions are off.</td></tr>
       <tr><td>C++</td><td><code>-O3 -DNDEBUG</code> (CMake Release)</td><td>Assertions and the library's bounds checks are off.</td></tr>

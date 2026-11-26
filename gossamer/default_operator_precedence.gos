@@ -1,0 +1,11 @@
+use std::env
+
+fn cached_count(name: String) -> Option<i64> {
+    if name == "ada" { Some(4) } else { None }
+}
+
+fn main() {
+    let cached = cached_count(env::args()[0])
+    let count = cached.unwrap_or(0) + 1
+    println(f"{count}")
+}
