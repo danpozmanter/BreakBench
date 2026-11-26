@@ -10,6 +10,7 @@ fn main() {
 	count := os.args[1].int()
 	mean := 0.0 / f64(count)
 	println(json.encode(Report{ mean: mean })) // BREAK!
+	// json.encode inside an if-expression generates C that does not compile, so the fix uses statements.
 	// CONTROL! if math.is_nan(mean) {
 		// CONTROL! println('refused')
 	// CONTROL! } else {
