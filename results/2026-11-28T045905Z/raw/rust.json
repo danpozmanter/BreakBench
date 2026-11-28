@@ -923,6 +923,13 @@
    "secs": 0.0,
    "stdout": "",
    "stderr": "thread 'main' (55) panicked at main.rs:8:25:\nrange end index 16 out of range for slice of length 2\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
+  },
+  "signed_byte_index": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
   }
  }
 }

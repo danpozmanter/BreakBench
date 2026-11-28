@@ -1076,6 +1076,15 @@
    "secs": 0.26,
    "stdout": "hi",
    "stderr": ""
+  },
+  "signed_byte_index": {
+   "build_output": "main",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.38,
+   "stdout": "",
+   "stderr": "Execution error (ArrayIndexOutOfBoundsException) at main/-main (main.clj:6).\nIndex -61 out of bounds for length 256\n\nFull report at:\n/tmp/clojure-6516461127567270391.edn"
   }
  }
 }

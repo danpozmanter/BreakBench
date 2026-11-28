@@ -79,6 +79,7 @@ th.breakdown { text-align: right; white-space: normal; max-width: 7.5em; vertica
 .bar { width: 80px; }
 .num { display: inline-block; min-width: 3.2em; text-align: right; font-weight: 600; }
 tr.hl td { background: color-mix(in srgb, var(--accent) 9%, transparent); }
+.ci { display: block; color: var(--muted); font-size: 12px; margin-top: 2px; }
 .catcount { display: block; color: var(--muted); font-size: 12px; }
 .colkey { display: grid; grid-template-columns: max-content 1fr; gap: 4px 16px; max-width: 72ch; margin: 0 0 16px; }
 .colkey dt { font-weight: 600; color: var(--fg); }
@@ -226,6 +227,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
       <dt>By category</dt><dd>The tests sort into 13 categories (Numbers, Null safety, Concurrency, ...), and some hold far more tests than others. Here each category counts the same: 2 cleanup tests weigh as much as 20 number tests.</dd>
       <dt>By severity</dt><dd>Bugs that let an attacker in or corrupt memory count 3 times, bugs that lose data or stall a service twice, local logic slips once.</dd>
       <dt>Without tools</dt><dd>The compiler and runtime alone.</dd>
+      <dt>The range under a score</dt><dd>How far the score could move with a different mix of bugs. We rebuild the bench 2,000 times from its failure modes picked at random and rescore it; 95% of the scores land in this range. Where two languages' ranges overlap, the order between them is not settled.</dd>
     </dl>
     <div class="scroll"><table id="ranking"></table></div>
   </section>
@@ -464,6 +466,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
       <li><code>timeout_without_cancel</code> uses the language's usual wait with a timeout: Python <code>asyncio.wait_for</code>, Kotlin <code>withTimeoutOrNull</code>, Ruby <code>Timeout.timeout</code>, Haskell <code>timeout</code> and Gossamer <code>sync::with_timeout</code> cancel the work they gave up on; the others only stop waiting.</li>
       <li><code>heartbeat_overread</code> follows Heartbleed. A slice that stops at the payload's end (Python, Ruby, JavaScript, PHP, Haskell, Scala, Clojure, F#, Gossamer) returns only what was sent, which is safe. Go reslices up to the buffer's capacity and C copies past the payload, so both send the old message. Java's <code>copyOfRange</code> pads with zeros: no leak, but a wrong reply.</li>
       <li><code>deep_json_nesting</code> follows CVE-2020-36518. A parser that sets a depth limit and reports it, or parses the text without the call stack, passes; an exception at run time earns half; a blown stack crashes the process, as one request can in a server.</li>
+      <li><code>signed_byte_index</code> follows CVE-2009-0887 (CERT STR34-C). Where a byte is signed (C and C++ <code>char</code>, Java, Kotlin, Scala, Clojure), the bytes of &eacute; index the table at -61 and -87.</li>
       <li>PHP runs 8.5, the newest packaged release. Mojo includes MAX for <code>parallelize</code>.</li>
     </ul>
   </section>
@@ -578,6 +581,10 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     });
     t.append(body);
   }
+  // The range under a score: where 95% of the scores fall when the failure modes are resampled.
+  const scoreCell = (L) => el("span", {}, bar(L.score, ""), L.interval
+    ? el("span", { class: "ci", title: "95% of resampled scores fall in this range", text: L.interval[0].toFixed(1) + " to " + L.interval[1].toFixed(1) })
+    : null);
   // Coverage names how many tests a missing feature rules out, linked to the list of them.
   const coverageCell = (L) => el("span", {}, pct(L.coverage), ...(L.missing
     ? [" ", el("a", { class: "gaps", href: "#missing/" + L.id, title: "What " + L.name + " is missing", text: "(" + L.missing + " N/A)" })]
@@ -588,7 +595,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   };
   function renderRanking() {
     renderTable("ranking", [
-      ["score", "Score (with tools)", "Mean over the tests the language can attempt, with its own linters, warnings and sanitizers; every test counts once", (L) => bar(L.score, "")],
+      ["score", "Score (with tools)", "Mean over the tests the language can attempt, with its own linters, warnings and sanitizers; every test counts once. The range below it is where 95% of resampled scores fall", scoreCell],
       ["coverage", "Coverage", "Share of all tests the language can attempt, and how many of the 13 categories it can attempt at least one test in", coverageCell],
       ["by_category", "By category", "Every category counts the same, however many tests it holds", (L) => pct(L.by_category)],
       ["by_severity", "By severity", "Each test weighted by its severity: critical 3, high 2, moderate 1", (L) => pct(L.by_severity)],

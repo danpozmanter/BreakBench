@@ -938,6 +938,13 @@
    "secs": 0.0,
    "stdout": "",
    "stderr": "Fatal error: exception Invalid_argument(\"String.sub / Bytes.sub\")"
+  },
+  "signed_byte_index": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
   }
  }
 }

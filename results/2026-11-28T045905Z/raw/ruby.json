@@ -1117,6 +1117,14 @@
    "secs": 0.02,
    "stdout": "hi",
    "stderr": ""
+  },
+  "signed_byte_index": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "2",
+   "stderr": ""
   }
  }
 }

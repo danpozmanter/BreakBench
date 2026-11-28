@@ -6,7 +6,7 @@ BreakBench measures 30 programming languages and how they handle correctness and
 [LangArena](https://github.com/kostya/LangArena), which measures speed and efficiency on correct
 programs. BreakBench covers LangArena's 27 languages plus OCaml, Haskell and Clojure.
 
-This is a general signal, and not meant to be an absolute ranking of these languages. Treat close rankings as inconclusive.
+This is a general signal, and not meant to be an absolute ranking of these languages. The range under each score shows which gaps are settled.
 
 "How much does a language help the programmer avoid production bugs?" is the primary driver.
 
@@ -19,6 +19,10 @@ its own project ships, stopped the bug. Every test counts the same. It ranks the
 | By category | Each of the 13 categories counts the same, however many tests it holds: 2 cleanup tests weigh as much as 20 number tests. |
 | By severity | Bugs that let an attacker in or corrupt memory count 3 times, bugs that lose data or stall a service twice, local logic slips once. |
 | Without tools | The compiler and runtime alone. |
+
+The range under each score shows how far it could move with a different mix of bugs: the bench is
+rebuilt 2,000 times from its failure modes picked at random, and 95% of the rescored results land in
+the range. Where two languages' ranges overlap, the order between them is not settled.
 
 The Details tab splits the score into tests of language constructs and tests of standard-library
 calls, shows the score when a program uses the standard library's safer call for the job, and
@@ -57,7 +61,7 @@ checked against, and any language can write it.
 
 ## Tests
 
-129 tests in thirteen categories. Each has a CWE or CERT entry, a CVE, or appears in a language's
+130 tests in thirteen categories. Each has a CWE or CERT entry, a CVE, or appears in a language's
 pitfall list, and covers a mistake no other test covers; `harness/problems.json` gives each test's
 reference and failure mode, and the site's Notes tab maps the failure modes to their tests. Each test is one scenario: the same steps, inputs and
 expected answer in every language, written the way that language teaches first. The code follows the
@@ -67,7 +71,7 @@ rules the mistake out, and where its documentation sent a program to another cal
 
 | Category | Tests | The bug |
 |---|---|---|
-| Numbers | 20 | Arithmetic or a conversion gives the wrong value: overflow, the smallest integer divided by -1, a number parsed past its type's range, NaN written to JSON, a loop counter too small for its limit, a narrowing cast, a negative remainder, float equality, a large integer read from JSON, ... |
+| Numbers | 21 | Arithmetic or a conversion gives the wrong value: overflow, a signed byte used as a table index, the smallest integer divided by -1, a number parsed past its type's range, NaN written to JSON, a loop counter too small for its limit, a narrowing cast, a negative remainder, float equality, a large integer read from JSON, ... |
 | Types and API misuse | 12 | A value or call does not fit what it is used with: text passed as a number, a record built without a field, an integer converted to an enum it does not name, a method the base class never calls, a method passed on without its object, ... |
 | Aliasing and mutation | 12 | Shared or copied state changes when it should not, or does not when it should: a list changed while looping over it, a snapshot that is an alias, a grid whose rows are one list, a closure that captures the loop variable, a copy updated instead of the original, ... |
 | Incomplete code | 4 | A path that ends without a result, a match missing a case, a variable read before it is set |

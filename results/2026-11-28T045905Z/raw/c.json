@@ -1053,6 +1053,16 @@
    "secs": 0.0,
    "stdout": "hiSECRET-KEY-004",
    "stderr": "heartbeat of 2 bytes"
+  },
+  "signed_byte_index": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": "",
+   "tool": "FLAGGED",
+   "tool_output": "main.c:7:47: warning: array subscript is of type 'char' [-Wchar-subscripts]"
   }
  }
 }

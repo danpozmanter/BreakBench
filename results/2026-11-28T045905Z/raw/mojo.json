@@ -910,6 +910,13 @@
    "secs": 0.26,
    "stdout": "At: /tmp/breakbench/heartbeat_overread/main/main.mojo:9:24: Assert Error: slice end index 16 is out of bounds, valid range is 0 to 2",
    "stderr": "Stack dump without symbol names (ensure you have llvm-symbolizer in your PATH or set the environment var `LLVM_SYMBOLIZER_PATH` to point to it):\n0  libKGENCompilerRTShared.so 0x000076f112447d1e\n1  libKGENCompilerRTShared.so 0x000076f112444e46\n2  libKGENCompilerRTShared.so 0x000076f1124488e0\n3  libc.so.6                  0x000076f112152cb0\n4  main                       0x000059c30dfd3a15\n5  main                       0x000059c30dfd3556\n6  main                       0x000059c30dfbf73a\n7  main                       0x000059c30dfb7f52\n8  main                       0x000059c30dfd2c23\n9  main                       0x000059c30dfbb5b6\n10 libc.so.6                  0x000076f112137601\n11 libc.so.6                  0x000076f112137718 __libc_start_main + 136\n12 main                       0x000059c30dfb2175\nIllegal instruction (core dumped)"
+  },
+  "signed_byte_index": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2",
+   "stderr": ""
   }
  }
 }

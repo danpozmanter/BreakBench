@@ -1027,6 +1027,13 @@
    "secs": 0.01,
    "stdout": "hi",
    "stderr": ""
+  },
+  "signed_byte_index": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2",
+   "stderr": ""
   }
  }
 }

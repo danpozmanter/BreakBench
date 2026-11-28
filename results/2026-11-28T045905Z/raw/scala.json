@@ -1030,6 +1030,17 @@
    "secs": 0.11,
    "stdout": "hi",
    "stderr": ""
+  },
+  "signed_byte_index": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index -61 out of bounds for length 256\n\tat Main$.main$$anonfun$1(main.scala:5)\n\tat Main$.main$$anonfun$adapted$1(main.scala:4)\n\tat scala.collection.ArrayOps$.foreach$extension(ArrayOps.scala:1330)\n\tat Main$.main(main.scala:4)\n\tat Main.main(main.scala)",
+   "exit": 1,
+   "secs": 0.09,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index -61 out of bounds for length 256\n\tat Main$.main$$anonfun$1(main.scala:5)\n\tat Main$.main$$anonfun$adapted$1(main.scala:4)\n\tat scala.collection.ArrayOps$.foreach$extension(ArrayOps.scala:1330)\n\tat Main$.main(main.scala:4)\n\tat Main.main(main.scala)"
   }
  }
 }

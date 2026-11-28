@@ -1080,6 +1080,14 @@
    "secs": 0.0,
    "stdout": "hi",
    "stderr": ""
+  },
+  "signed_byte_index": {
+   "build_output": "[1 of 2] Compiling Main             ( main.hs, main.o )\n[2 of 2] Linking main\n\nmain.hs:10:46: warning: [GHC-63394] [-Wx-partial]\n    In the use of \u2018head\u2019\n    (imported from Prelude, but defined in GHC.Internal.List):\n    \"This is a partial function, it throws an error on empty lists. Use pattern matching, 'Data.List.uncons' or 'Data.Maybe.listToMaybe' instead. Consider refactoring to use \"Data.List.NonEmpty\".\"\n   |\n10 |   let bytes = BS.unpack (encodeUtf8 (T.pack (head args)))\n   |                                              ^^^^",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
   }
  }
 }

@@ -20,6 +20,7 @@ import concurrent.futures
 import datetime
 import json
 import os
+import random
 import re
 import subprocess
 import sys
@@ -118,6 +119,27 @@ def mean(pairs):
     return round(100 * sum(v * w for v, w in kept) / total, 1) if total else None
 
 
+def mode_intervals(rows, spec, draws=2000):
+    """Each language's 95% score range when the bench is rebuilt from its failure modes drawn with
+    replacement; the mode, not the test, is the unit, since tests of one mode move together."""
+    modes = spec.get("modes", [])
+    tests = {m: [p["id"] for p in spec["problems"] if p["mode"] == m] for m in modes}
+    # A fixed seed keeps the ranges identical across aggregations of the same results.
+    rng = random.Random(0)
+    picks = [[rng.choice(modes) for _ in modes] for _ in range(draws)]
+    for row in rows:
+        per_mode = {m: [row["results"][pid]["score"] for pid in ids if row["results"][pid]["score"] is not None]
+                    for m, ids in tests.items()}
+        scores = []
+        for pick in picks:
+            earned = [v for m in pick for v in per_mode[m]]
+            if earned:
+                scores.append(100 * sum(earned) / len(earned))
+        scores.sort()
+        row["interval"] = [round(scores[int(0.025 * len(scores))], 1),
+                           round(scores[int(0.975 * len(scores)) - 1], 1)] if scores else None
+
+
 def debug_only(rec):
     """A run-time stop the debug build made and the release build does not."""
     return rec["outcome"] == "TRAPPED" and rec.get("release", "TRAPPED") not in ("TRAPPED", "CORRECT")
@@ -213,6 +235,7 @@ def aggregate(run):
         row["language"] = mean((r["score"], 1) for pid, r in res.items() if layer[pid] == "language")
         row["library"] = mean((r["score"], 1) for pid, r in res.items() if layer[pid] == "library")
         row["with_safer"] = mean((r["safer_score"], 1) for r in res.values())
+    mode_intervals(rows, spec)
     rows.sort(key=lambda r: (-r["score"], -r["caught"] / max(r["scored"], 1), r["name"]))
     for rank, row in enumerate(rows, 1):
         row["rank"] = rank
@@ -249,7 +272,7 @@ def aggregate(run):
     for row in rows:
         parts = "  ".join(f"{name.lower()} {points(row['categories'][c][0])}/{row['categories'][c][1]}"
                           for c, name in CATEGORIES.items())
-        print(f"{row['rank']:>2}. {row['name']:<13} score {row['score']:5.1f}%  category {row['by_category']:5.1f}%  "
+        print(f"{row['rank']:>2}. {row['name']:<13} score {row['score']:5.1f}% ({row['interval'][0]}-{row['interval'][1]})  category {row['by_category']:5.1f}%  "
               f"severity {row['by_severity']:5.1f}%  without tools {row['without_tools']:5.1f}%  coverage {row['coverage']:5.1f}%  "
               f"language {row['language']:5.1f}%  library {row['library']}%  safer {row['with_safer']}%  {parts}")
     if unsolved:
@@ -326,7 +349,7 @@ def site_payload(out):
             }
         langs.append({k: row[k] for k in ("id", "name", "homepage", "repository", "dir", "ext", "version",
                                            "rank", "score", "by_category", "by_severity", "coverage", "language",
-                                           "library", "with_safer", "without_tools", "categories", "modes", "caught",
+                                           "library", "with_safer", "without_tools", "interval", "categories", "modes", "caught",
                                            "categories_attempted",
                                            "safe", "scored", "missing")}
                      | {"results": results})

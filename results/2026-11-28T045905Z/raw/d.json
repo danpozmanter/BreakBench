@@ -986,6 +986,13 @@
    "secs": 0.0,
    "stdout": "",
    "stderr": "core.exception.ArraySliceError@main.d(11): slice [0 .. 16] extends past source array of length 2\n----------------\n??:? onArraySliceError [0x5fd8989860aa]\n??:? _d_arraybounds_slice [0x5fd898986020]\nmain.d:11 _Dmain [0x5fd898986981]"
+  },
+  "signed_byte_index": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
   }
  }
 }

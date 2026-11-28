@@ -1108,6 +1108,14 @@
    "secs": 0.05,
    "stdout": "",
    "stderr": "Unhandled exception:\nRangeError (end): Invalid value: Not in inclusive range 0..2: 16\n#0      RangeError.checkValidRange (dart:core/errors.dart:392:9)\n#1      _TypedListMixin.sublist (dart:typed_data-patch/typed_data_patch.dart:491:31)\n#2      main (file:///tmp/breakbench/heartbeat_overread/main/main.dart:11:25)\n#3      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)\n#4      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
+  },
+  "signed_byte_index": {
+   "build_output": "Compiling main.dart to kernel file main.dill.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.05,
+   "stdout": "2",
+   "stderr": ""
   }
  }
 }

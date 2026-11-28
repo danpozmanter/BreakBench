@@ -994,6 +994,17 @@
    "secs": 0.03,
    "stdout": "",
    "stderr": "Exception in thread \"main\" java.lang.IndexOutOfBoundsException: toIndex (16) is greater than size (2).\n\tat kotlin.collections.ArraysKt__ArraysJVMKt.copyOfRangeToIndexCheck(ArraysJVM.kt:49)\n\tat kotlin.collections.ArraysKt___ArraysJvmKt.copyOfRange(_ArraysJvm.kt:1492)\n\tat MainKt.main(main.kt:8)"
+  },
+  "signed_byte_index": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index -61 out of bounds for length 256\n\tat MainKt.main(main.kt:4)",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index -61 out of bounds for length 256\n\tat MainKt.main(main.kt:4)"
   }
  }
 }

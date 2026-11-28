@@ -943,6 +943,13 @@
    "secs": 0.0,
    "stdout": "hiSECRET-KEY-004",
    "stderr": ""
+  },
+  "signed_byte_index": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "2",
+   "stderr": ""
   }
  }
 }

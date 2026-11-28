@@ -1517,6 +1517,25 @@
       "layer": "language"
     },
     {
+      "id": "signed_byte_index",
+      "category": "numbers",
+      "kind": "memory",
+      "args": [
+        "caf\u00e9"
+      ],
+      "expect": "^2$",
+      "title": "A byte used as a table index",
+      "scenario": "The program reads the text caf\u00e9 from the command line, counts its UTF-8 bytes in a 256-entry table, indexing the table with each byte as the language reads it from the text, and prints how many counted bytes are 128 or above. \u00e9 is the two bytes C3 A9.",
+      "best": "2: bytes read as 0 to 255. Where a byte is signed, \u00e9's bytes become -61 and -87: an error at run time earns half; a write before the table's start or a count of 0 is wrong.",
+      "mode": "Lossy conversions",
+      "refs": [
+        "CVE-2009-0887",
+        "CERT STR34-C",
+        "CWE-194"
+      ],
+      "layer": "language"
+    },
+    {
       "id": "const_index_bounds",
       "category": "memory",
       "kind": "static",

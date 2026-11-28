@@ -940,6 +940,13 @@
    "secs": 0.09,
    "stdout": "",
    "stderr": "/tmp/breakbench/heartbeat_overread/main/main.odin(14:18) Invalid slice indices: 0:16 is out of range 0..<2\nIllegal instruction (core dumped)"
+  },
+  "signed_byte_index": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
   }
  }
 }

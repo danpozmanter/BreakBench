@@ -1123,6 +1123,14 @@
    "secs": 0.02,
    "stdout": "hi",
    "stderr": ""
+  },
+  "signed_byte_index": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/signed_byte_index/main/bb.fsproj (in 185 ms).\n  bb -> /tmp/breakbench/signed_byte_index/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.48",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "2",
+   "stderr": ""
   }
  }
 }

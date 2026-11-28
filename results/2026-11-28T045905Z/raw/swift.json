@@ -933,6 +933,13 @@
    "secs": 0.11,
    "stdout": "",
    "stderr": "Swift/ArraySlice.swift:216: Fatal error: ArraySlice index is out of range\n\n*** Signal 4: Backtracing from 0x78276a8f61ef... done ***\n\n*** Program crashed: Illegal instruction at 0x000078276a8f61ef ***\n\nPlatform: x86_64 Linux (Ubuntu 26.04.1 LTS)\n\nThread 0 \"main\" crashed:\n\n0      0x000078276a8f61ef closure #1 in closure #1 in _assertionFailure(_:_:file:line:flags:) + 623 in libswiftCore.so\n1 [ra] 0x000078276aa8d2cc _assertionFailure(_:_:file:line:flags:) + 283 in libswiftCore.so\n2 [ra] 0x000078276aa86fab ArraySlice._checkIndex(_:) + 138 in libswiftCore.so\n3 [ra] 0x000078276aa2f76a specialized ArraySlice.subscript.getter + 57 in libswiftCore.so\n4 [ra] 0x000078276a8f446a ArraySlice.subscript.getter + 25 in libswiftCore.so\n5 [ra] 0x000078276aa8\n...\n  h\u00ad\u00d6j'x\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\u00b7\nr13 0x0000000000000010  16\nr14 0x0000000000000001  1\nr15 0x000000000000000b  11\nrip 0x000078276a8f61ef  0f 0b 48 83 ec 08 48 8d 05 24 78 49 00 48 8d 3d  \u00b7\u00b7H\u00b7\u00ec\u00b7H\u00b7\u00b7$xI\u00b7H\u00b7=\n\nrflags 0x0000000000010202  \n\ncs 0x0033  fs 0x0000  gs 0x0000\n\n\nImages (19 omitted):\n\n0x0000584617b94000\u20130x0000584617b96d79 18e27d9c84dbb043cf326dc93e2856e4bfa64b70 main            /tmp/breakbench/heartbeat_overread/main/main\n0x0000782768fa5000\u20130x0000782769164819 9851d79b1f32e900a27f8d0a68e29d750303f0c6 libc.so.6       /usr/lib/x86_64-linux-gnu/libc.so.6\n0x000078276a783000\u20130x000078276ad5cb70 5efcbc7cd961c4e601daaa68b8cb1e43cb786bc0 libswiftCore.so /usr/share/swift/usr/lib/swift/linux/libswiftCore.so\n\nBacktrace took 0.01s\n\nIllegal instruction (core dumped)"
+  },
+  "signed_byte_index": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
   }
  }
 }

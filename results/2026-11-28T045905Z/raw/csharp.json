@@ -1197,6 +1197,14 @@
    "secs": 0.19,
    "stdout": "",
    "stderr": "Unhandled exception. System.ArgumentOutOfRangeException: Specified argument was out of the range of valid values.\n   at Program.<Main>$(String[] args) in /tmp/breakbench/heartbeat_overread/main/Program.cs:line 9\nAborted (core dumped)"
+  },
+  "signed_byte_index": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/signed_byte_index/main/bb.csproj (in 44 ms).\n  bb -> /tmp/breakbench/signed_byte_index/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.39",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "2",
+   "stderr": ""
   }
  }
 }

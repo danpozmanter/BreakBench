@@ -979,6 +979,13 @@
    "secs": 0.0,
    "stdout": "",
    "stderr": "/tmp/breakbench/heartbeat_overread/main/main.nim(9) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/system/indices.nim(106) []\n/root/.choosenim/toolchains/nim-2.4.2/lib/system/fatal.nim(62) sysFatal\nError: unhandled exception: index 2 not in 0 .. 1 [IndexDefect]"
+  },
+  "signed_byte_index": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
   }
  }
 }

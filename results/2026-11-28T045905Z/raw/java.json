@@ -1018,6 +1018,17 @@
    "secs": 0.01,
    "stdout": "hi\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
    "stderr": ""
+  },
+  "signed_byte_index": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index -61 out of bounds for length 256\n\tat Main.main(Main.java:7)",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.ArrayIndexOutOfBoundsException: Index -61 out of bounds for length 256\n\tat Main.main(Main.java:7)"
   }
  }
 }

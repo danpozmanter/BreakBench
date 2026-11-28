@@ -935,6 +935,13 @@
    "secs": 0.01,
    "stdout": "",
    "stderr": "V panic: array.slice: slice bounds out of range (16 >= 2)\n v hash: 7647ce1\n    pid: 0x14f\n    tid: 0x14f\n                                                        | 0x55f145b42731 | ./main(+0x15731) \n                                                        | 0x55f145b4a437 | ./main(+0x1d437) \n                                                        | 0x55f145b4a72c | ./main(+0x1d72c) \n                                                        | 0x700ef2b8a601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x700ef2b8a718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x55f145b3d745 | ./main(+0x10745)"
+  },
+  "signed_byte_index": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
   }
  }
 }

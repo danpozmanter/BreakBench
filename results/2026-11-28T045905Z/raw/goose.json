@@ -902,6 +902,13 @@
    "secs": 0.0,
    "stdout": "",
    "stderr": "goose runtime error: slice bounds out of range (main.goose:9)"
+  },
+  "signed_byte_index": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
   }
  }
 }

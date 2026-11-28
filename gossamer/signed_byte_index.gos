@@ -1,0 +1,9 @@
+use std::env
+
+fn main() {
+    let mut counts = #[0; 256]
+    for b in env::args()[0].bytes() {
+        counts[b as i64] += 1
+    }
+    println(counts[128..256].sum())
+}
