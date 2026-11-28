@@ -79,7 +79,6 @@ th.breakdown { text-align: right; white-space: normal; max-width: 7.5em; vertica
 .bar { width: 80px; }
 .num { display: inline-block; min-width: 3.2em; text-align: right; font-weight: 600; }
 tr.hl td { background: color-mix(in srgb, var(--accent) 9%, transparent); }
-tr.example td { background: color-mix(in srgb, var(--muted) 8%, transparent); }
 .extag { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
 .notes { margin: 0; padding-left: 20px; display: grid; gap: 8px; font-size: 14px; line-height: 1.5; max-width: 72em; }
 .notes code, .notes-table code { font-family: var(--font-mono); font-size: 12.5px; }
@@ -217,13 +216,20 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   </div>
 
   <section role="tabpanel" id="leaderboard" aria-labelledby="tab-leaderboard">
-    <p class="muted">Score: mean over the tests that can be expressed in that language. It covers the compiler and runtime with their own checks on; no linters, sanitizers or third-party checkers. Python (mypy) is an unranked example of a third party checker. Language gaps: tests a language cannot attempt for lack of a feature, left out of its score (see Missing features). Details breaks the score down by category.</p>
+    <p class="muted">Score: the mean over the tests the language can attempt, every test counted once; it ranks the table. It covers the compiler and runtime with their own checks on. Coverage: the share of all tests the language can attempt; the rest need a feature it lacks and are left out of its score (see Missing features). By category and By severity weight the same results two other ways, so a ranking that holds under all three does not depend on how many tests each kind of bug got. With tools adds the linters, warnings and sanitizers the language project ships. Details splits the score by language constructs and standard-library calls, by category and by failure mode.</p>
     <div class="scroll"><table id="ranking"></table></div>
   </section>
 
   <section role="tabpanel" id="details-panel" aria-labelledby="tab-details" hidden>
+    <h3>Where the score comes from</h3>
+    <p class="muted">Language constructs: tests whose bug is made with an operator, a cast, a type, a declaration or control flow. Standard-library defaults: tests whose bug is made through a standard-library call, made the way the language teaches first. With safer calls: the score when the program uses the standard library's other call for the same job where one does better (Notes, Safer calls); each such program runs and is scored like the first. The fourth layer, a check the programmer writes by hand, is the fixed program every result is checked against: any language can write it, so it is not scored.</p>
+    <div class="scroll"><table id="layers"></table></div>
+    <h3>By category</h3>
     <p class="muted">Each cell reads correct / attempted / total. Correct is points: a refusal or correct run earns 1, a run-time stop 0.5 or 0.25. Attempted below total means a missing feature. Caught before running counts refusals and design-prevented tests.</p>
     <div class="scroll"><table id="details"></table></div>
+    <h3>By failure mode</h3>
+    <p class="muted">Each test is one program with one input, so one result shows how a language handled that program. A failure mode groups the tests that make the same kind of mistake in different ways (eight integer overflows, eleven missing values); a language that scores well on every test of a mode handles the class, not one instance. Cells read correct / attempted / total.</p>
+    <div class="scroll"><table id="modes-table"></table></div>
   </section>
 
   <section role="tabpanel" id="tests" aria-labelledby="tab-tests" hidden>
@@ -237,22 +243,23 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     <div class="legend" id="legend"></div>
     <div class="scoring" id="scoring"></div>
     <p class="muted">Points reflect when the bug is caught and whether it does harm. A refusal stops it before it ships: 1. A clear stop in the shipped build: 0.5. A stop only in the debug build: 0.25. A wrong answer, corruption, crash or hang: 0. A stop counts only if it comes before the result is printed.</p>
-    <p class="muted">Every test counts once. Equal weight per category was tried and dropped: it made one error-handling test worth 3.5 types tests, added noise, and rewarded skipping tests in small categories. Categories group results; they do not weight them.</p>
+    <p class="muted">The ranked score counts every test once, so a kind of bug with more tests weighs more. Two other weightings sit beside it on the leaderboard. By category gives each of the thirteen categories the same weight, split over the tests it holds. By severity weights each test by how much harm its failure mode does in production, below. A test the language cannot attempt drops out of all three.</p>
+    <div class="scroll"><table class="notes-table" id="severity"></table></div>
     <p class="muted">A right answer earns its point only where the language defines the behavior that gave it. Where the language leaves that behavior undefined or unspecified, the answer is right by chance and earns nothing: another compiler, allocator or input can change it.</p>
-    <p class="muted">Warnings do not score; the Notes tab says why.</p>
+    <p class="muted">Warnings, linters and sanitizers score only in the With tools column; the Notes tab says how.</p>
     <p class="muted">A compile error counts as a refusal only if the same program with the bug removed compiles.</p>
     <p class="muted">N/A: the language lacks a feature the test needs (a mutex, threads, a JSON parser). The test is left out of its score. Prevented by design: the language has the feature and its design rules the error out; 1 point. Unfixable: the error can be made but not fixed; 0.</p>
   </section>
 
   <section role="tabpanel" id="missing" aria-labelledby="tab-missing" hidden>
-    <p class="muted">What each language lacks, and which tests that rules out. Those tests are left out of its score: no penalty, no credit.</p>
+    <p class="muted">What each language lacks, and which tests that rules out. Those tests are left out of its score: no penalty, no credit. The leaderboard's Coverage column shows the share of the bench each language can attempt, so a small feature set shows beside a high score.</p>
     <div id="missing-list" class="missing-list"></div>
   </section>
 
   <section role="tabpanel" id="notes" aria-labelledby="tab-notes" hidden>
     <p class="muted">How BreakBench builds, runs and scores.</p>
     <h3>What the score measures</h3>
-    <p class="muted" id="mode-note">The score measures the language itself: compiler or interpreter, runtime, and the switches that make either refuse more or stop more (checked arithmetic, debug builds, assertions, strict typing). Linters, sanitizers and third-party checkers are left out, even when the language project ships them, since that would measure tooling. Python with mypy is one unranked example.</p>
+    <p class="muted">The ranked score measures the language itself: compiler or interpreter, runtime, and the switches that make either refuse more or stop more (checked arithmetic, debug builds, assertions, strict typing). The With tools column measures the language with the linters, warnings and sanitizers its own project ships, the way a team runs them in CI. Third-party checkers count in neither.</p>
     <p class="muted">Every test can be passed for full marks by some language design: a compiler that refuses the mistake, or a run that ends correctly because the language made the program handle the failure (a check it requires, a stack that grows). A clean stop at run time earns half.</p>
     <h3>Builds</h3>
     <div class="scroll"><table class="notes-table"><thead><tr><th>Language</th><th>Build</th></tr></thead><tbody>
@@ -278,21 +285,30 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
       <tr><td>PHP</td><td>assertions on, errors to stderr</td></tr>
       <tr><td>Julia</td><td><code>--check-bounds=yes</code></td></tr>
       <tr><td>Python, Ruby, OCaml, Haskell, Clojure</td><td>the default build (dune's development profile for OCaml)</td></tr>
-      <tr><td>Python (mypy), example</td><td><code>mypy --strict</code> with every optional error code, then <code>python3</code></td></tr>
     </tbody></table></div>
-    <h3>Left out of the score</h3>
-    <div class="scroll"><table class="notes-table"><thead><tr><th>Language</th><th>Tool left out</th></tr></thead><tbody>
-      <tr><td>C, C++</td><td>AddressSanitizer, UndefinedBehaviorSanitizer, and <code>-Werror=</code> switches that turn single warnings into errors</td></tr>
-      <tr><td>D, Odin, C3</td><td>AddressSanitizer</td></tr>
-      <tr><td>Rust</td><td>clippy</td></tr>
-      <tr><td>Go</td><td><code>go vet</code></td></tr>
+    <h3>With tools</h3>
+    <p class="muted">Each language's own tooling, run on every program that falls short of full marks. A finding counts when it points at the bug's lines (the same rule as a refusal) and the program without the bug does not get it, so a tool that flags everything earns nothing. A linter or compiler warning earns 1: CI that fails on warnings stops the bug before it ships. A sanitizer report earns 0.25, like a stop only the debug build makes; a report that only restates a crash (a signal) does not count. Every finding is read by hand: one about something other than the bug, such as a style lint on a line the fix rewrites, stays in that result's evidence and does not count.</p>
+    <div class="scroll"><table class="notes-table"><thead><tr><th>Language</th><th>Tools</th></tr></thead><tbody>
+      <tr><td>C, C++</td><td>clang's warnings (<code>-Weverything</code> minus style-only groups), the Clang Static Analyzer, AddressSanitizer with UndefinedBehaviorSanitizer and LeakSanitizer</td></tr>
+      <tr><td>Rust</td><td>clippy with the pedantic group</td></tr>
+      <tr><td>Go</td><td><code>go vet</code>, the race detector (<code>-race</code>)</td></tr>
+      <tr><td>Swift, Odin, C3</td><td>AddressSanitizer; the compiler's own warnings</td></tr>
+      <tr><td>D</td><td>ldc's warnings (<code>-wi</code>), AddressSanitizer</td></tr>
+      <tr><td>Nim</td><td><code>nim check</code></td></tr>
       <tr><td>V</td><td><code>v vet</code></td></tr>
       <tr><td>Gossamer</td><td><code>gos lint</code></td></tr>
-      <tr><td>Dart</td><td><code>dart analyze</code> with the recommended lints and strict casts, inference and raw types</td></tr>
+      <tr><td>Java</td><td><code>javac -Xlint:all</code></td></tr>
+      <tr><td>Kotlin</td><td><code>kotlinc -Wextra</code></td></tr>
+      <tr><td>Scala</td><td>scalac's <code>-W</code> checks</td></tr>
       <tr><td>C#</td><td>the .NET code analyzers (<code>AnalysisMode=All</code>)</td></tr>
-      <tr><td>Python</td><td>mypy, shown as the example row</td></tr>
+      <tr><td>F#, Crystal, Zig, Mojo, Goose, TypeScript</td><td>the compiler's own warnings</td></tr>
+      <tr><td>Dart</td><td><code>dart analyze</code> with the recommended lints and strict casts, inference and raw types</td></tr>
+      <tr><td>Python</td><td>mypy (maintained in the Python project's own GitHub organization) with <code>--strict</code> and every optional error code</td></tr>
+      <tr><td>Ruby</td><td><code>ruby -wc</code></td></tr>
+      <tr><td>Haskell</td><td>GHC's <code>-Weverything</code> minus module-metadata warnings</td></tr>
+      <tr><td>OCaml</td><td>every compiler warning (<code>-w +a</code>)</td></tr>
+      <tr><td>JavaScript, PHP, Julia, Clojure</td><td>none: their projects ship no linter or sanitizer</td></tr>
     </tbody></table></div>
-    <p class="muted">Switches that only add warnings (<code>-Weverything</code>, <code>-Xlint:all</code>, Scala's <code>-W</code> flags, OCaml's <code>-w +a</code>, Ruby's <code>-w</code>) are left out too, since warnings do not score.</p>
     <h3>Checking each result</h3>
     <p class="muted">Every program marks its bug: <code>BREAK!</code> on a line the fix removes, <code>CONTROL! code</code> on a line the fix puts in. Dropping the one and swapping in the other gives the program without the bug.</p>
     <ul class="notes muted">
@@ -306,8 +322,6 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     <h3>Tests no language passes</h3>
     <p class="muted">Every language here scores 0 on these. A language could pass each one; none of these does yet.</p>
     <ul class="notes muted" id="unsolved-list"></ul>
-    <h3>Warnings do not score</h3>
-    <p class="muted">Telling whether a warning is about the bug takes a pattern per test, and no pattern is reliable, so warnings never score. Some languages warn far better than others (C and C++ with <code>-Weverything</code>, Scala, C#, Rust, Dart); each result shows the compiler's output, unscored.</p>
     <h3>Removed tests</h3>
     <p class="muted">Any test whose result changes between runs, in any language, is removed. Three full runs checked this: all 3,720 results matched, and the two tests changed afterwards matched over five more runs under load. Removed, with the languages that varied (20 runs of one build):</p>
     <ul class="notes muted">
@@ -334,7 +348,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     <p class="muted">N/A only when the language lacks the construct the mistake needs (a mutex, threads, a map literal, inheritance, interpolation). Otherwise the program is written the way the language allows and scored; a design that rules the mistake out runs correctly. A missing feature never counts as prevention.</p>
     <p class="muted">The one design marker left is <code>unsafe_deserialization</code>: standard decoders build only the declared type. A language with no standard decoder is N/A there. Kotlin uses kotlinx.coroutines for <code>blocking_in_async</code>.</p>
     <h3>One scenario per test</h3>
-    <p class="muted">Each test is one program and one input, written the way the language teaches first. A right answer shows the language handled this program, not every input or idiom. The paths that cost points are listed below.</p>
+    <p class="muted">Each test is one program and one input, written the way the language teaches first. A right answer shows the language handled this program, not every input or idiom. The bench measures classes of mistake through its failure modes instead: each mode holds several tests that make the same kind of mistake in different ways (an overflow in an add, a shift, a subtraction below zero, a parse, a narrow counter), and Details shows each language's result per mode. The safer calls the standard libraries offer are listed below and measured.</p>
     <p class="muted">A forced unwrap is counted once, in <code>forced_unwrap</code>. Where the language makes the program check a failure (an Option, a Result, an error union, a checked exception, a call marked <code>try</code>), the other tests handle it there instead of forcing the value out or passing the failure out of <code>main</code>, and the handled program runs correctly. A check the language does not require, such as Go's discarded <code>err</code>, stays out.</p>
     <h3>A stop after the answer</h3>
     <p class="muted">A stop after the result is printed scores as a wrong answer: the wrong value already got out. Examples: Nim <code>empty_max</code> prints 1 before its <code>IndexDefect</code>; <code>unsafe_deserialization</code>, <code>null_byte_path</code> and <code>child_exit_status</code> do harm before any stop.</p>
@@ -388,28 +402,35 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
       <tr><td>Java</td><td><code>generator_break_cleanup</code></td><td><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/util/stream/BaseStream.html" target="_blank" rel="noopener"><code>BaseStream</code>: “If a stream does require closing, it must be opened as a resource within a try-with-resources statement”</a></td><td>The stream in <code>try</code>-with-resources</td><td>A stream with a close handler, never closed</td></tr>
       <tr><td>C</td><td><code>parse_invalid_number</code></td><td><a href="https://man7.org/linux/man-pages/man3/atoi.3.html" target="_blank" rel="noopener"><code>atoi</code>: use <code>strtol</code> in new programs</a></td><td><code>strtol</code> with its end-pointer check</td><td><code>atoi</code> reads 12 and prints 13</td></tr>
     </tbody></table></div>
-    <h3>Paths that cost points</h3>
-    <p class="muted">Where the same standard library has a safer call for the same job, using it would score better:</p>
-    <div class="scroll"><table class="notes-table paths-table"><thead><tr><th>Language</th><th>Test</th><th>Path used</th><th>Why that path</th><th>Path that scores better</th><th>Effect</th></tr></thead><tbody>
-      <tr><td>Python</td><td><code>child_exit_status</code></td><td><a href="https://docs.python.org/3/library/subprocess.html#subprocess.run" target="_blank" rel="noopener"><code>subprocess.run</code></a></td><td>Taught first; checking is off by default</td><td><code>check=True</code> raises on failure</td><td>0 → 0.5</td></tr>
-      <tr><td>Ruby</td><td><code>child_exit_status</code></td><td><a href="https://docs.ruby-lang.org/en/master/Kernel.html#method-i-system" target="_blank" rel="noopener"><code>system</code></a></td><td>Taught first; returns false on failure</td><td><code>system(..., exception: true)</code> raises</td><td>0 → 0.5</td></tr>
-      <tr><td>Scala</td><td><code>child_exit_status</code></td><td><a href="https://www.scala-lang.org/api/current/scala/sys/process/ProcessBuilder.html" target="_blank" rel="noopener"><code>!</code></a></td><td>Taught first; returns the exit code</td><td><code>!!</code> throws on a non-zero exit</td><td>0 → 0.5</td></tr>
-      <tr><td>Go</td><td><code>short_read</code></td><td><a href="https://pkg.go.dev/io#Reader" target="_blank" rel="noopener"><code>Reader.Read</code></a></td><td>The usual read call the test asks for</td><td><code>io.ReadFull</code></td><td>0 → 1</td></tr>
-      <tr><td>Java, Kotlin, Scala, Clojure</td><td><code>short_read</code></td><td><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/InputStream.html#read(byte%5B%5D)" target="_blank" rel="noopener"><code>InputStream.read(byte[])</code></a></td><td>The usual read call the test asks for</td><td><code>readNBytes</code></td><td>0 → 1</td></tr>
-      <tr><td>C#, F#</td><td><code>short_read</code></td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.read" target="_blank" rel="noopener"><code>Stream.Read</code></a></td><td>The usual read call the test asks for</td><td><code>Stream.ReadExactly</code></td><td>0 → 1</td></tr>
-      <tr><td>Crystal</td><td><code>short_read</code></td><td><a href="https://crystal-lang.org/api/IO.html" target="_blank" rel="noopener"><code>IO#read</code></a></td><td>The usual read call the test asks for</td><td><code>IO#read_fully</code></td><td>0 → 1</td></tr>
-      <tr><td>Go</td><td><code>json_big_integer</code></td><td><a href="https://pkg.go.dev/encoding/json#Unmarshal" target="_blank" rel="noopener"><code>json.Unmarshal</code> into <code>any</code></a></td><td>The general value type the test asks for</td><td><code>Decoder.UseNumber</code></td><td>0 → 1</td></tr>
-      <tr><td>OCaml</td><td><code>not_found_sentinel</code></td><td><a href="https://ocaml.org/manual/latest/api/String.html#VALindex" target="_blank" rel="noopener"><code>String.index</code></a></td><td>The standard search call, listed first</td><td><code>String.index_opt</code> returns an option</td><td>0.5 → 1</td></tr>
-      <tr><td>Python</td><td><code>not_found_sentinel</code></td><td><a href="https://docs.python.org/3/library/stdtypes.html#str.find" target="_blank" rel="noopener"><code>str.find</code></a></td><td>The standard search call; returns -1</td><td><code>str.index</code> raises</td><td>0 → 0.5</td></tr>
-      <tr><td>OCaml</td><td><code>missing_key_default</code></td><td><a href="https://ocaml.org/manual/latest/api/Hashtbl.html#VALfind" target="_blank" rel="noopener"><code>Hashtbl.find</code></a></td><td>The map's ordinary lookup the test asks for</td><td><code>Hashtbl.find_opt</code> returns an option</td><td>0.5 → 1</td></tr>
-      <tr><td>Rust, Gossamer, Haskell, Scala, F#</td><td><code>missing_key_default</code></td><td><a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html" target="_blank" rel="noopener">The index form (<code>map[key]</code>, <code>Map.!</code>, <code>map(key)</code>)</a></td><td>The test asks for the index form where one exists</td><td>A lookup that returns an option (<code>get</code>, <code>lookup</code>, <code>tryFind</code>)</td><td>0.5 → 1</td></tr>
-      <tr><td>Ruby</td><td><code>parse_invalid_number</code></td><td><a href="https://docs.ruby-lang.org/en/master/String.html#method-i-to_i" target="_blank" rel="noopener"><code>String#to_i</code></a></td><td>Taught first; reads the leading digits</td><td><code>Integer(s)</code> raises</td><td>0 → 0.5</td></tr>
-      <tr><td>V</td><td><code>parse_invalid_number</code></td><td><a href="https://docs.vlang.io/" target="_blank" rel="noopener"><code>.int()</code></a></td><td>Taught first; reads the leading digits</td><td><code>strconv.atoi</code> returns an error</td><td>0 → 0.5 or more</td></tr>
-      <tr><td>Rust</td><td><code>narrowing_cast</code></td><td><a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions" target="_blank" rel="noopener"><code>as</code></a></td><td>The standard conversion; truncates</td><td><code>u8::try_from</code> returns a <code>Result</code></td><td>0 → 1</td></tr>
-      <tr><td>F#</td><td><code>null_in_text</code></td><td><a href="https://learn.microsoft.com/en-us/dotnet/fsharp/language-reference/interpolated-strings" target="_blank" rel="noopener"><code>$"{name}"</code></a></td><td>Taught first; untyped</td><td>Typed <code>$"%s{name}"</code> refuses an option</td><td>0 → 1</td></tr>
-      <tr><td>Java, Kotlin, Scala</td><td><code>int_overflow</code></td><td><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Math.html#addExact(long,long)" target="_blank" rel="noopener"><code>+</code></a></td><td>The default operator; wraps</td><td><code>Math.addExact</code> throws</td><td>0 → 0.5</td></tr>
-      <tr><td>PHP, Haskell, OCaml, C, C++ and others</td><td><code>command_injection</code></td><td><a href="https://www.php.net/manual/en/function.shell-exec.php" target="_blank" rel="noopener"><code>shell_exec</code> and each language's one-string call</a></td><td>The test asks for the one-string call, and its docs give no warning</td><td>An argument list (<code>callProcess</code>, <code>Unix.create_process</code>, <code>proc_open</code> with an array)</td><td>0 → 1</td></tr>
-      <tr><td>Go, Java, C#, Zig, Odin and others</td><td><code>unflushed_writer</code></td><td><a href="https://pkg.go.dev/bufio#NewWriter" target="_blank" rel="noopener"><code>bufio.NewWriter</code> and each language's buffered writer</a></td><td>The test asks for the buffered writer where one is paired with files</td><td>Writing through the file itself, or a whole-file write</td><td>0 → 1</td></tr>
+    <h3>Safer calls</h3>
+    <p class="muted">Where the same standard library has a second call for the same job that does better, the job also runs with that call as its own program (<code>&lt;test&gt;.safer.&lt;ext&gt;</code>), built, run and checked like the first. Where that call answers an option or a result, the program handles it to get the value, as with any check the language requires. The ranked score keeps the first-taught call; Details shows the score with these calls. Every language that loses points on one of these tests was checked for such a call; the ones listed have one.</p>
+    <div class="scroll"><table class="notes-table paths-table"><thead><tr><th>Language</th><th>Test</th><th>Path used</th><th>Why that path</th><th>Safer call</th><th>Measured</th></tr></thead><tbody>
+      <tr data-test="child_exit_status" data-langs="python"><td>Python</td><td><code>child_exit_status</code></td><td><a href="https://docs.python.org/3/library/subprocess.html#subprocess.run" target="_blank" rel="noopener"><code>subprocess.run</code></a></td><td>Taught first; checking is off by default</td><td><code>check=True</code> raises on failure</td><td class="measured"></td></tr>
+      <tr data-test="child_exit_status" data-langs="ruby"><td>Ruby</td><td><code>child_exit_status</code></td><td><a href="https://docs.ruby-lang.org/en/master/Kernel.html#method-i-system" target="_blank" rel="noopener"><code>system</code></a></td><td>Taught first; returns false on failure</td><td><code>system(..., exception: true)</code> raises</td><td class="measured"></td></tr>
+      <tr data-test="child_exit_status" data-langs="scala"><td>Scala</td><td><code>child_exit_status</code></td><td><a href="https://www.scala-lang.org/api/current/scala/sys/process/ProcessBuilder.html" target="_blank" rel="noopener"><code>!</code></a></td><td>Taught first; returns the exit code</td><td><code>!!</code> throws on a non-zero exit</td><td class="measured"></td></tr>
+      <tr data-test="short_read" data-langs="golang"><td>Go</td><td><code>short_read</code></td><td><a href="https://pkg.go.dev/io#Reader" target="_blank" rel="noopener"><code>Reader.Read</code></a></td><td>The usual read call the test asks for</td><td><code>io.ReadFull</code></td><td class="measured"></td></tr>
+      <tr data-test="short_read" data-langs="rust"><td>Rust</td><td><code>short_read</code></td><td><a href="https://doc.rust-lang.org/std/io/trait.Read.html#tymethod.read" target="_blank" rel="noopener"><code>Read::read</code></a></td><td>The usual read call the test asks for</td><td><code>Read::read_exact</code></td><td class="measured"></td></tr>
+      <tr data-test="short_read" data-langs="java kotlin scala clojure"><td>Java, Kotlin, Scala, Clojure</td><td><code>short_read</code></td><td><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/io/InputStream.html#read(byte%5B%5D)" target="_blank" rel="noopener"><code>InputStream.read(byte[])</code></a></td><td>The usual read call the test asks for</td><td><code>readNBytes</code></td><td class="measured"></td></tr>
+      <tr data-test="short_read" data-langs="csharp fsharp"><td>C#, F#</td><td><code>short_read</code></td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.io.stream.read" target="_blank" rel="noopener"><code>Stream.Read</code></a></td><td>The usual read call the test asks for</td><td><code>Stream.ReadExactly</code></td><td class="measured"></td></tr>
+      <tr data-test="short_read" data-langs="crystal"><td>Crystal</td><td><code>short_read</code></td><td><a href="https://crystal-lang.org/api/IO.html" target="_blank" rel="noopener"><code>IO#read</code></a></td><td>The usual read call the test asks for</td><td><code>IO#read_fully</code></td><td class="measured"></td></tr>
+      <tr data-test="json_big_integer" data-langs="golang"><td>Go</td><td><code>json_big_integer</code></td><td><a href="https://pkg.go.dev/encoding/json#Unmarshal" target="_blank" rel="noopener"><code>json.Unmarshal</code> into <code>any</code></a></td><td>The general value type the test asks for</td><td><code>Decoder.UseNumber</code></td><td class="measured"></td></tr>
+      <tr data-test="json_big_integer" data-langs="odin"><td>Odin</td><td><code>json_big_integer</code></td><td><a href="https://pkg.odin-lang.org/core/encoding/json/" target="_blank" rel="noopener"><code>json.parse_string</code></a></td><td>The general value type the test asks for</td><td><code>parse_integers = true</code></td><td class="measured"></td></tr>
+      <tr data-test="not_found_sentinel" data-langs="ocaml"><td>OCaml</td><td><code>not_found_sentinel</code></td><td><a href="https://ocaml.org/manual/latest/api/String.html#VALindex" target="_blank" rel="noopener"><code>String.index</code></a></td><td>The standard search call, listed first</td><td><code>String.index_opt</code> returns an option</td><td class="measured"></td></tr>
+      <tr data-test="not_found_sentinel" data-langs="python"><td>Python</td><td><code>not_found_sentinel</code></td><td><a href="https://docs.python.org/3/library/stdtypes.html#str.find" target="_blank" rel="noopener"><code>str.find</code></a></td><td>The standard search call; returns -1</td><td><code>str.index</code> raises</td><td class="measured"></td></tr>
+      <tr data-test="not_found_sentinel" data-langs="fsharp"><td>F#</td><td><code>not_found_sentinel</code></td><td><a href="https://learn.microsoft.com/en-us/dotnet/api/system.string.indexof" target="_blank" rel="noopener"><code>String.IndexOf</code></a></td><td>The standard search call; returns -1</td><td><code>Seq.tryFindIndex</code> returns an option</td><td class="measured"></td></tr>
+      <tr data-test="missing_key_default" data-langs="ocaml"><td>OCaml</td><td><code>missing_key_default</code></td><td><a href="https://ocaml.org/manual/latest/api/Hashtbl.html#VALfind" target="_blank" rel="noopener"><code>Hashtbl.find</code></a></td><td>The map's ordinary lookup the test asks for</td><td><code>Hashtbl.find_opt</code> returns an option</td><td class="measured"></td></tr>
+      <tr data-test="missing_key_default" data-langs="rust gossamer haskell scala crystal"><td>Rust, Gossamer, Haskell, Scala, Crystal</td><td><code>missing_key_default</code></td><td><a href="https://doc.rust-lang.org/std/collections/struct.HashMap.html" target="_blank" rel="noopener">The index form (<code>map[key]</code>, <code>Map.!</code>, <code>map(key)</code>)</a></td><td>The test asks for the index form where one exists</td><td>A lookup that returns an option (<code>get</code>, <code>lookup</code>, <code>[]?</code>)</td><td class="measured"></td></tr>
+      <tr data-test="parse_invalid_number" data-langs="ruby"><td>Ruby</td><td><code>parse_invalid_number</code></td><td><a href="https://docs.ruby-lang.org/en/master/String.html#method-i-to_i" target="_blank" rel="noopener"><code>String#to_i</code></a></td><td>Taught first; reads the leading digits</td><td><code>Integer(s)</code> raises</td><td class="measured"></td></tr>
+      <tr data-test="parse_invalid_number" data-langs="v"><td>V</td><td><code>parse_invalid_number</code></td><td><a href="https://docs.vlang.io/" target="_blank" rel="noopener"><code>.int()</code></a></td><td>Taught first; reads the leading digits</td><td><code>strconv.atoi</code> returns an error</td><td class="measured"></td></tr>
+      <tr data-test="narrowing_cast" data-langs="rust gossamer"><td>Rust, Gossamer</td><td><code>narrowing_cast</code></td><td><a href="https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions" target="_blank" rel="noopener"><code>as</code></a></td><td>The standard conversion</td><td><code>try_from</code> / <code>try_into</code> return a <code>Result</code></td><td class="measured"></td></tr>
+      <tr data-test="narrowing_cast" data-langs="haskell"><td>Haskell</td><td><code>narrowing_cast</code></td><td><a href="https://hackage.haskell.org/package/base/docs/Prelude.html#v:fromIntegral" target="_blank" rel="noopener"><code>fromIntegral</code></a></td><td>The standard conversion; truncates</td><td><code>toIntegralSized</code> returns a <code>Maybe</code></td><td class="measured"></td></tr>
+      <tr data-test="narrowing_cast" data-langs="swift zig"><td>Swift, Zig</td><td><code>narrowing_cast</code></td><td><a href="https://developer.apple.com/documentation/swift/uint8/init(_:)-9b9xk" target="_blank" rel="noopener"><code>UInt8(v)</code>, <code>@intCast</code></a></td><td>The standard conversion; stops on overflow</td><td><code>UInt8(exactly:)</code>, <code>std.math.cast</code> return an optional</td><td class="measured"></td></tr>
+      <tr data-test="narrowing_cast" data-langs="csharp fsharp d"><td>C#, F#, D</td><td><code>narrowing_cast</code></td><td><a href="https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/statements/checked-and-unchecked" target="_blank" rel="noopener">The cast (<code>(byte)v</code>, <code>byte v</code>, <code>cast(ubyte)</code>)</a></td><td>The standard conversion; release builds truncate</td><td><code>checked</code>, <code>Checked.byte</code>, <code>to!ubyte</code> throw in every build</td><td class="measured"></td></tr>
+      <tr data-test="null_in_text" data-langs="fsharp"><td>F#</td><td><code>null_in_text</code></td><td><a href="https://learn.microsoft.com/en-us/dotnet/fsharp/language-reference/interpolated-strings" target="_blank" rel="noopener"><code>$"{name}"</code></a></td><td>Taught first; untyped</td><td>Typed <code>$"%s{name}"</code> refuses an option</td><td class="measured"></td></tr>
+      <tr data-test="int_overflow" data-langs="java kotlin scala"><td>Java, Kotlin, Scala</td><td><code>int_overflow</code></td><td><a href="https://docs.oracle.com/en/java/javase/25/docs/api/java.base/java/lang/Math.html#addExact(long,long)" target="_blank" rel="noopener"><code>+</code></a></td><td>The default operator; wraps</td><td><code>Math.addExact</code> throws</td><td class="measured"></td></tr>
+      <tr data-test="int_overflow" data-langs="rust csharp fsharp julia"><td>Rust, C#, F#, Julia</td><td><code>int_overflow</code></td><td><code>+</code></td><td>The default operator; stops only in debug builds, or wraps</td><td><code>checked_add</code>, <code>checked</code>, <code>Checked.(+)</code>, <code>Base.Checked.checked_add</code></td><td class="measured"></td></tr>
+      <tr data-test="command_injection" data-langs="php haskell ocaml nim crystal d c cpp"><td>PHP, Haskell, OCaml, Nim, Crystal, D, C, C++</td><td><code>command_injection</code></td><td><a href="https://www.php.net/manual/en/function.shell-exec.php" target="_blank" rel="noopener"><code>shell_exec</code> and each language's one-string call</a></td><td>The test asks for the one-string call, and its docs give no warning</td><td>An argument list (<code>proc_open</code> with an array, <code>callProcess</code>, <code>Unix.create_process</code>, <code>posix_spawnp</code>, ...)</td><td class="measured"></td></tr>
+      <tr data-test="unflushed_writer" data-langs="golang java kotlin scala clojure csharp fsharp crystal haskell zig odin"><td>Go, Java, Kotlin, Scala, Clojure, C#, F#, Crystal, Haskell, Zig, Odin</td><td><code>unflushed_writer</code></td><td><a href="https://pkg.go.dev/bufio#NewWriter" target="_blank" rel="noopener"><code>bufio.NewWriter</code> and each language's buffered writer</a></td><td>The test asks for the buffered writer where one is paired with files</td><td>A whole-file write (<code>os.WriteFile</code>, <code>Files.writeString</code>, <code>File.WriteAllText</code>, <code>spit</code>, ...)</td><td class="measured"></td></tr>
     </tbody></table></div>
     <h3>Other considerations</h3>
     <ul class="notes muted">
@@ -487,17 +508,14 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   const slug = (id) => "p-" + id.replace(/_/g, "-");
   const probs = D.problems;
   const meta = document.getElementById("meta");
-  [["Languages", D.languages.filter((L) => !L.example).length], ["Tests", probs.length],
+  [["Languages", D.languages.length], ["Tests", probs.length],
     ...Object.entries(CAT).map(([c, name]) => [name, probs.filter((p) => p.category === c).length]), ["Run", D.date]]
     .forEach(([k, v]) => meta.append(el("span", {}, k + " ", el("b", { text: String(v) }))));
 
   const pct = (v) => v.toFixed(1) + "%";
   const num = (v) => String(Math.round(v * 100) / 100);
   const unsolved = new Set(D.unsolved || []);
-  // The example row shows what one outside checker adds to its language.
-  const mypy = D.languages.find((L) => L.id === "python_mypy");
-  const python = D.languages.find((L) => L.id === "python");
-  if (mypy && python) document.getElementById("mode-note").append(" Python scores " + pct(python.score) + " on its own and " + pct(mypy.score) + " with mypy.");
+  const pctOr = (v) => v == null ? "N/A" : pct(v);
   function shortVersion(id, value) {
     const s = (value || "").trim();
     if (id === "gossamer") return "0.85.0";
@@ -507,8 +525,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     if (versions) return versions[0];
     return s.replace(/^(?:rustc|go version go|Python|PHP|GHC|The Glorious Glasgow Haskell Compilation System)\s*/i, "");
   }
-  // The example row has no rank; it sorts after every ranked language that ties with it.
-  const rankOf = (L) => L.rank ?? D.languages.length + 1;
+  const rankOf = (L) => L.rank;
   const bar = (v, cls) => el("span", { class: "score" }, el("span", { class: "bar " + cls }, (() => { const i = el("i"); i.style.width = v + "%"; return i; })()), el("span", { class: "num", text: pct(v) }));
   const catTotal = (c) => probs.filter((p) => p.category === c).length;
   // A category reads as points earned over tests attempted over tests in the category, so a
@@ -517,14 +534,15 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     const [got, run] = L.categories[c];
     return el("span", { title: run ? (got / run * 100).toFixed(1) + "% of the tests attempted" : "No tests attempted" }, num(got) + " / " + run + " / " + catTotal(c));
   };
-  const ratio = (L, k) => k === "score" ? L.score : k === "missing" ? L.missing
-    : k === "caught" ? L.caught / Math.max(L.scored, 1) : (L.categories[k][1] ? L.categories[k][0] / L.categories[k][1] : -1);
+  const share = ([got, run]) => run ? got / run : -1;
+  const ratio = (L, k) => k === "caught" ? L.caught / Math.max(L.scored, 1)
+    : typeof L[k] === "number" ? L[k] : L[k] === null ? -1
+    : L.categories[k] ? share(L.categories[k]) : L.modes[k] ? share(L.modes[k]) : -1;
   // The name links to the language's homepage; the line below it to its source repository, where public.
   const langCell = (L) => el("td", { class: "lang" }, L.homepage ? el("a", { class: "home", href: L.homepage, target: "_blank", rel: "noopener", title: L.name + " homepage", text: L.name }) : L.name,
-    L.example ? el("span", { class: "extag", text: "Example with a third-party checker, not ranked" }) : null,
     el("span", { class: "ver", title: shortVersion(L.id, L.version) }, shortVersion(L.id, L.version), L.repository ? " " : null,
       L.repository ? el("a", { class: "src", href: L.repository, target: "_blank", rel: "noopener", title: L.name + " source repository", text: "source" }) : null));
-  const sortKeys = { ranking: "score", details: "score" };
+  const sortKeys = { ranking: "score", details: "score", layers: "score", "modes-table": "score" };
   // One sortable table of languages: each column is [key, heading, description, cell].
   function renderTable(id, cols) {
     const t = document.getElementById(id);
@@ -540,19 +558,36 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     const body = el("tbody");
     const key = sortKeys[id];
     [...visibleLanguages()].sort((a, b) => ratio(b, key) - ratio(a, key) || rankOf(a) - rankOf(b)).forEach((L) => {
-      body.append(el("tr", { "data-lang": L.id, class: L.example ? "example" : "" },
-        el("td", { class: "rank", text: L.example ? "-" : String(L.rank) }), langCell(L),
+      body.append(el("tr", { "data-lang": L.id },
+        el("td", { class: "rank", text: String(L.rank) }), langCell(L),
         ...cols.map(([k, , , cell], i) => el("td", { class: i ? "breakdown" : "" }, cell(L)))));
     });
     t.append(body);
   }
-  const gapsCell = (L) => L.missing
-    ? el("a", { href: "#missing/" + L.id, title: "What " + L.name + " is missing", text: String(L.missing) })
-    : "0";
+  // Coverage names how many tests a missing feature rules out, linked to the list of them.
+  const coverageCell = (L) => el("span", {}, pct(L.coverage), ...(L.missing
+    ? [" ", el("a", { class: "gaps", href: "#missing/" + L.id, title: "What " + L.name + " is missing", text: "(" + L.missing + " N/A)" })]
+    : []));
+  const modeCell = (L, m) => {
+    const [got, run, all] = L.modes[m];
+    return el("span", { title: run ? (got / run * 100).toFixed(1) + "% of the tests attempted" : "No tests attempted" }, num(got) + " / " + run + " / " + all);
+  };
   function renderRanking() {
     renderTable("ranking", [
       ["score", "Score", "Mean over the tests the language can attempt; every test counts once", (L) => bar(L.score, "")],
-      ["missing", "Language gaps", "Tests the language cannot attempt, for lack of a feature; left out of its score, not counted against it", gapsCell]]);
+      ["coverage", "Coverage", "Share of all tests the language can attempt; the rest need a feature it lacks and are left out of its score", coverageCell],
+      ["by_category", "By category", "The same results with every category weighted alike", (L) => pct(L.by_category)],
+      ["by_severity", "By severity", "The same results with each test weighted by its severity: critical 3, high 2, moderate 1", (L) => pct(L.by_severity)],
+      ["with_tools", "With tools", "The score with the linters, warnings and sanitizers the language project ships", (L) => pct(L.with_tools)]]);
+    renderTable("layers", [
+      ["score", "Score", "Mean over the tests the language can attempt", (L) => pct(L.score)],
+      ["language", "Language constructs", "Tests whose bug is made with an operator, a cast, a type, a declaration or control flow", (L) => pctOr(L.language)],
+      ["library", "Standard-library defaults", "Tests whose bug is made through a standard-library call, made the way the language teaches first", (L) => pctOr(L.library)],
+      ["with_safer", "With safer calls", "The score with the standard library's safer call for the job, where one does better", (L) => pctOr(L.with_safer)],
+      ["with_tools", "With tools", "The score with the linters, warnings and sanitizers the language project ships", (L) => pct(L.with_tools)]]);
+    renderTable("modes-table", [
+      ["score", "Score", "Mean over the tests the language can attempt", (L) => pct(L.score)],
+      ...(D.modes || []).map((m) => [m, m, "Points earned / tests attempted / tests in this failure mode", (L) => modeCell(L, m)])]);
     renderTable("details", [
       ["score", "Score", "Mean over the tests the language can attempt", (L) => pct(L.score)],
       ...Object.entries(CAT).map(([c, name]) => [c, name, "Points earned / tests attempted / tests in " + name.toLowerCase(), (L) => catCell(L, c)]),
@@ -680,7 +715,10 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
         el("td", { class: "full", "data-label": "Evidence" }, el("pre", { text: r.ev || "" }),
           r.c === "verified" ? el("span", { class: "gcan", text: "The program without the bug gave the expected answer." }) : null,
           r.c === "none" ? el("span", { class: "gcan", text: "No version without the bug to check this result against." }) : null,
-          r.w ? el("pre", { class: "wout", title: "Shown, never scored", text: "Compiler output (not scored):\n" + r.w }) : null)));
+          r.w ? el("pre", { class: "wout", title: "Scores only through With tools", text: "Compiler output:\n" + r.w }) : null,
+          r.t && !r.tu ? el("pre", { class: "wout", text: "With tools, " + (r.t === "FLAGGED" ? "a finding at the bug (1)" : "a sanitizer report (0.25)") + ":\n" + r.tw }) : null,
+          r.tu ? el("pre", { class: "wout", text: "With tools, not counted (" + r.tu + "):\n" + r.tw }) : null,
+          r.so ? el("span", { class: "gcan", text: "With the standard library's safer call: " + (NAME[r.so] || r.so) + ", " + num(r.ss) + "." }) : null)));
     });
     t.append(tb);
     return el("div", { class: "scroll" }, t);
@@ -726,6 +764,33 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     }));
   }
   renderModes();
+
+  // The tiers behind the By severity score, with the failure modes each holds.
+  function renderSeverity() {
+    const box = document.getElementById("severity");
+    const tb = el("tbody");
+    D.severity.tiers.forEach((t) => tb.append(el("tr", {},
+      el("td", { text: t.name + " (" + t.weight + ")" }), el("td", { text: t.rule }), el("td", { text: t.modes.join(", ") }),
+      el("td", { text: String(probs.filter((p) => p.severity === t.weight).length) }))));
+    Object.entries(D.severity.overrides || {}).forEach(([id, [w, why]]) => {
+      const tier = D.severity.tiers.find((t) => t.weight === w);
+      tb.append(el("tr", {}, el("td", { colspan: "4" }, el("code", { text: id }), " is " + tier.name.toLowerCase() + " whatever its mode: " + why)));
+    });
+    box.replaceChildren(el("thead", {}, el("tr", {}, ...["Severity", "What goes wrong", "Failure modes", "Tests"].map((h) => el("th", { text: h })))), tb);
+  }
+  renderSeverity();
+
+  // Each safer-call row in the Notes reads what the run measured: the first-taught call's points, then the safer call's.
+  document.querySelectorAll("tr[data-test]").forEach((tr) => {
+    const ids = tr.dataset.langs.split(" ");
+    const parts = ids.map((id) => {
+      const L = D.languages.find((x) => x.id === id);
+      const r = L && L.results[tr.dataset.test];
+      if (!r || r.s == null) return null;
+      return (ids.length > 1 ? L.name + " " : "") + num(r.s) + " \u2192 " + num(r.ss == null ? r.s : r.ss);
+    }).filter(Boolean);
+    tr.querySelector(".measured").textContent = parts.join(", ");
+  });
 
   let openLang = null;
   function renderCase() {

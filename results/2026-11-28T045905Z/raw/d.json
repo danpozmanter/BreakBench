@@ -1,0 +1,972 @@
+{
+ "lang": "d",
+ "version": "LDC - the LLVM D compiler (1.43.0):",
+ "results": {
+  "null_deref": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.09,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "int_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 136,
+   "secs": 0.1,
+   "stdout": "",
+   "stderr": "Floating point exception (core dumped)"
+  },
+  "int_min_division": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 136,
+   "secs": 0.09,
+   "stdout": "",
+   "stderr": "Floating point exception (core dumped)"
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "44",
+   "stderr": "",
+   "safer": {
+    "outcome": "TRAPPED",
+    "control": "verified",
+    "release": "TRAPPED",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "std.conv.ConvOverflowException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d(1607): Conversion positive overflow\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:1607 pure @safe ubyte std.conv.toImpl!(ubyte, int).toImpl(int) [0x60daa5745f46]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:214 pure @safe ubyte std.conv.to!(ubyte).to!(int).to(int) [0x60daa5743902]\nmain.d:7 _Dmain [0x60daa574387d]"
+   }
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "main.d(8): Error: function `add` is not callable using argument types `(string, int)`\n    writeln(add(raw, 3)); // BREAK!\n               ^\nmain.d(8):        cannot pass argument `raw` of type `string` to parameter `long a`\n    writeln(add(raw, 3)); // BREAK!\n                ^\nmain.d(3):        `main.add(long a, long b)` declared here\nlong add(long a, long b) { return a + b; }\n     ^",
+   "control": "builds"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "main.d(3): Error: function `main.grade` no `return exp;` or `assert(0);` at end of function\nstring grade(int score)\n       ^",
+   "control": "builds"
+  },
+  "non_exhaustive_match": {
+   "outcome": "REJECTED",
+   "message": "main.d(7): Error: `switch` statement without a `default`; use `final switch` or add `default: assert(0);` or add `default: break;`\n    switch (c)\n    ^",
+   "control": "builds"
+  },
+  "uninitialized_variable": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "global_init_order": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "20",
+   "stderr": ""
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "main.d(7): Error: assignment cannot be used as a condition, perhaps `==` was meant?\n    if (x = 1) label = \"one\"; // BREAK!\n          ^",
+   "control": "builds"
+  },
+  "switch_fallthrough": {
+   "outcome": "REJECTED",
+   "message": "main.d(12): Error: switch case fallthrough - use 'goto case;' if intended\n        case 2:\n        ^",
+   "control": "builds"
+  },
+  "break_in_switch": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "have 0",
+   "stderr": ""
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "loose_equality": {
+   "outcome": "REJECTED",
+   "message": "main.d(6): Error: incompatible types for `(code) == (0)`: `string` and `int`\n    writeln(code == 0 ? \"same\" : \"different\"); // CONTROL! writeln(code == \"0\" ? \"same\" : \"different\");\n                 ^",
+   "control": "builds"
+  },
+  "parse_invalid_number": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "std.conv.ConvException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d(2033): Unexpected 'a' when converting from type string to type int\n----------------\n??:? pure @safe int std.conv.toImpl!(int, immutable(char)[]).toImpl(immutable(char)[]) [0x55c6e2c2ae99]\n??:? _Dmain [0x55c6e2c2a853]",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "std.conv.ConvException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d(2033): Unexpected 'a' when converting from type string to type int\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:2033 pure @safe int std.conv.toImpl!(int, immutable(char)[]).toImpl(immutable(char)[]) [0x59ad058420a0]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:214 pure @safe int std.conv.to!(int).to!(immutable(char)[]).to(immutable(char)[]) [0x59ad058418cc]\nmain.d:5 _Dmain [0x59ad05841872]"
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "main.d(10): Error: cannot implicitly convert expression `dogs` of type `Dog[]` to `Animal[]`\n    Animal[] animals = dogs; // BREAK!\n                       ^",
+   "control": "builds"
+  },
+  "mutate_while_iterating": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1,2,3",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3,3,3",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "repeated_row_alias": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "std.file.FileException@std/file.d(840): /dev/null/out.txt: Not a directory\n----------------\n??:? @trusted void std.file.writeImpl(scope const(char)[], scope const(char)*, scope const(void)[], bool) [0x57cc2c54c48f]\n??:? _Dmain [0x57cc2c5489b4]",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "std.file.FileException@std/file.d(840): /dev/null/out.txt: Not a directory\n----------------\n??:? @trusted void std.file.writeImpl(scope const(char)[], scope const(char)*, scope const(void)[], bool) [0x621ffd872d0f]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/file.d:745 @safe void std.file.write!(immutable(char)[]).write(immutable(char)[], const(void[])) [0x621ffd86e8e0]\nmain.d:3 void main.save(immutable(char)[]) [0x621ffd86e868]\nmain.d:7 _Dmain [0x621ffd86e954]"
+  },
+  "sort_with_nan": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3.0",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "outcome": "REJECTED",
+   "message": "main.d(5): Error: octal literals `01234` are no longer supported, use `std.conv.octal!\"1234\"` instead\n    int zip = 01234; // BREAK!\n              ^",
+   "control": "builds"
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "REJECTED",
+   "message": "main.d(6): Error: `1 == 0` must be surrounded by parentheses when next to operator `&`\n    bool even = x & 1 == 0; // BREAK!\n                      ^",
+   "control": "builds"
+  },
+  "dangling_else": {
+   "outcome": "REJECTED",
+   "message": "main.d(10): Error: else is dangling, add { } after condition at main.d(8)\n    else // BREAK!\n    ^",
+   "control": "builds"
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "main.d(6): Error: semicolon needed to end declaration of `inside` instead of `<`\n    bool inside = 1 < x < 3; // BREAK!\n                        ^\nmain.d(6): Error: found `<` instead of statement\n    bool inside = 1 < x < 3; // BREAK!\n                        ^",
+   "control": "builds"
+  },
+  "lost_update_on_copy": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "injected",
+   "stderr": "",
+   "safer": {
+    "outcome": "CORRECT",
+    "exit": 0,
+    "stdout": "safe",
+    "stderr": ""
+   }
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "no match",
+   "stderr": ""
+  },
+  "regex_trailing_newline": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "main.d(8): Error: implicit string concatenation is error-prone and disallowed in D\n        \"carol\",\n        ^\nmain.d(8):        Use the explicit syntax instead (concatenating literals is `@nogc`): \"bob\" ~ \"carol\"\n        \"carol\",\n        ^",
+   "control": "builds"
+  },
+  "return_in_finally": {
+   "outcome": "REJECTED",
+   "message": "main.d(21): Error: `return` statements cannot be in `finally` bodies\n        return; // BREAK!\n        ^",
+   "control": "builds"
+  },
+  "return_line_break": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "worker_failure_lost": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "std.conv.ConvException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d(2571): Unexpected 'x' when converting from type string to type long\n----------------\n??:? pure @safe long std.conv.parse!(long, immutable(char)[], 0).parse(scope ref immutable(char)[]) [0x5b9e419b5466]\n??:? pure @safe long std.conv.toImpl!(long, immutable(char)[]).toImpl(immutable(char)[]) [0x5b9e419b4f27]\n??:? [0x5b9e419b495b]\n??:? thread_entryPoint [0x5b9e41b0df40]\n??:? [0x7962fe9eedb9]\n??:? __clone [0x7962fea82393]",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "std.conv.ConvException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d(2571): Unexpected 'x' when converting from type string to type long\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:2571 pure @safe long std.conv.parse!(long, immutable(char)[], 0).parse(scope ref immutable(char)[]) [0x5c5c95f07c25]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:2036 pure @safe long std.conv.toImpl!(long, immutable(char)[]).toImpl(immutable(char)[]) [0x5c5c95f0714c]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:214 pure @safe long std.conv.to!(long).to!(immutable(char)[]).to(immutable(char)[]) [0x5c5c95f069ec]\nmain.d:10 [0x5c5c95f069a2]\n??:? thread_entryPoint [0x5c5c96061050]\n??:? [0x72a1ff9b1db9]\n??:? __clone [0x72a1ffa45393]"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.05,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "3 of",
+   "release_stderr": "std.format.FormatException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/format/write.d(544): Orphan format specifier: %d\n----------------\n??:? pure @safe noreturn std.exception.bailOut!(std.format.FormatException).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x5e726b22c5fb]\n??:? @safe \n...\nint std.format.write.formattedWrite!(std.stdio.File.LockingTextWriter, char, int).formattedWrite(ref std.stdio.File.LockingTextWriter, scope const(char[]), int) [0x5e726b2281b0]\n??:? @safe void std.stdio.File.writefln!(char, int).writefln(in char[], int) [0x5e726b227e62]\n??:? _Dmain [0x5e726b22786a]",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "3 of",
+   "stderr": "std.format.FormatException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/format/write.d(544): Orphan format specifier: %d\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/exception.d:522 pure @safe noreturn std.exception.bailOut!(std.format.FormatException).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x5e3541c82f5a]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/exception.d:442 pure @safe bool std.exception.enforce!(std.format.FormatException).enforce!(bool).enforce(bool, lazy const(char)[], immutable(char)[], ulong) [0x5e3541c7dce7]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/format/write.d:544 @safe uint std.format.write.formattedWrite!(std.stdio.File.LockingTextWriter, char, int).formattedWrite(ref std.stdio.File.LockingTextWriter, scope const(char[]), int) [0x5e3541c7d131]\nmain.d:1774 @safe void std.stdio.File.writefln!(char, int).writefln(in char[], int) [0x5e3541c7cfe9]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/stdio.d:4492 @safe void std.stdio.writefln!(char, int).writefln(in char[], int) [0x5e3541c7c8b3]\nmain.d:7 _Dmain [0x5e3541c7c871]"
+  },
+  "unsigned_subtraction": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "18446744073709551614",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "CRASH",
+   "release_stdout": "",
+   "release_stderr": "Segmentation fault (core dumped)",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "core.exception.RangeError@main.d(7): Range violation\n----------------\n??:? onRangeError [0x5a982f1cc058]\n??:? _d_arraybounds [0x5a982f1cc2b7]\nmain.d:7 _Dmain [0x5a982f1cc92d]"
+  },
+  "mutable_hash_key": {
+   "outcome": "REJECTED",
+   "message": "main.d(7): Error: associative arrays can only be assigned values with immutable keys, not `int[]`\n    seen[key] = true; // CONTROL! seen[key.idup] = true;\n    ^",
+   "control": "builds"
+  },
+  "shadowed_assignment": {
+   "outcome": "REJECTED",
+   "message": "main.d(8): Error: variable `status` is shadowing variable `main.main.status`\n        string status = \"done\"; // CONTROL! status = \"done\";\n        ^\nmain.d(5):        declared here\n    string status = \"pending\";\n           ^",
+   "control": "builds"
+  },
+  "discarded_pure_result": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "SILENT",
+   "release_stdout": "-182",
+   "release_stderr": "",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "core.exception.ArrayIndexError@main.d(7): index [18446744073709551615] is out of bounds for array of length 3\n----------------\n??:? onArrayIndexError [0x6415cc67b0ed]\n??:? _d_arraybounds_index [0x6415cc67b34d]\nmain.d:7 _Dmain [0x6415cc67b91f]"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "missing",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unbalanced",
+   "stderr": "worker failed: crash mid-update"
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "CORRUPT",
+   "release_stdout": "99",
+   "release_stderr": "",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "core.exception.ArrayIndexError@main.d(13): index [4] is out of bounds for array of length 4\n----------------\n??:? onArrayIndexError [0x5b19d37d60ed]\n??:? _d_arraybounds_index [0x5b19d37d634d]\nmain.d:13 _Dmain [0x5b19d37d68e7]"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "CORRUPT",
+   "release_stdout": "42",
+   "release_stderr": "",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "core.exception.ArrayIndexError@main.d(13): index [4] is out of bounds for array of length 4\n----------------\n??:? onArrayIndexError [0x62643e3f50ed]\n??:? _d_arraybounds_index [0x62643e3f534d]\nmain.d:13 _Dmain [0x62643e3f58e0]"
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "outcome": "REJECTED",
+   "message": "main.d(6): Error: returning `& local` escapes a reference to local variable `local`\n    return &local; // BREAK!\n           ^",
+   "control": "builds"
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "std.variant.VariantException@std/variant.d(1908): Variant: attempting to use incompatible types int and immutable(char)[]\n----------------\n??:? _Dmain [0x64b4a0a069b4]",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "std.variant.VariantException@std/variant.d(1908): Variant: attempting to use incompatible types int and immutable(char)[]\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/variant.d:937 inout @property inout(immutable(char)[]) std.variant.VariantN!(32uL).VariantN.get!(immutable(char)[]).get() [0x5c8b1df32a3f]\nmain.d:6 _Dmain [0x5c8b1df32880]"
+  },
+  "format_string": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "std.format.FormatException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/format/write.d(544): Orphan format specifier: %s\n----------------\n??:? pure @safe noreturn std.exception.bailOut!(std.format.FormatException).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x61be7065c31b]\n??:? @safe uint std.format.write.formattedWrite!(std.stdio.File.LockingTextWriter, char).formattedWrite(ref std.stdio.File.LockingTextWriter, scope const(char[])) [0x61be70658391]\n??:? @safe void std.stdio.File.writefln!(char).writefln(in char[]) [0x61be70657e5a]\n??:? _Dmain [0x61be7065786b]",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "std.format.FormatException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/format/write.d(544): Orphan format specifier: %s\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/exception.d:522 pure @safe noreturn std.exception.bailOut!(std.format.FormatException).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x55ea5aeacd3a]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/exception.d:442 pure @safe bool std.exception.enforce!(std.format.FormatException).enforce!(bool).enforce(bool, lazy const(char)[], immutable(char)[], ulong) [0x55ea5aea7c47]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/format/write.d:544 @safe uint std.format.write.formattedWrite!(std.stdio.File.LockingTextWriter, char).formattedWrite(ref std.stdio.File.LockingTextWriter, scope const(char[])) [0x55ea5aea713e]\nmain.d:1774 @safe void std.stdio.File.writefln!(char).writefln(in char[]) [0x55ea5aea6ff3]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/stdio.d:4492 @safe void std.stdio.writefln!(char).writefln(in char[]) [0x55ea5aea68cd]\nmain.d:5 _Dmain [0x55ea5aea6872]"
+  },
+  "trojan_source": {
+   "outcome": "REJECTED",
+   "message": "main.d(6): Error: Bidirectional control characters are disallowed for security reasons.\n    if (access != \"user\u202e \u2066// admins only\u2069 \u2066\") // CONTROL! if (access != \"user\")\n                  ^\nmain.d(6): Error: Bidirectional control characters are disallowed for security reasons.\n    if (access != \"user\u202e \u2066// admins only\u2069 \u2066\") // CONTROL! if (access != \"user\")\n                  ^\nmain.d(6): Error: Bidirectional control characters are disallowed for security reasons.\n    if (access != \"user\u202e \u2066// admins only\u2069 \u2066\") // CONTROL! if (access != \"user\")\n                  ^\nmain.d(6): Error: Bidirectional control characters are disallowed for security reasons.\n    if (access != \"user\u202e \u2066// admins only\u2069 \u2066\") // CONTROL! if (access != \"user\")\n                  ^",
+   "control": "builds"
+  },
+  "unsafe_deserialization": {
+   "outcome": "SAFE_BY_DESIGN",
+   "message": "std.json builds only JSON values; nothing in the standard library rebuilds a named class"
+  },
+  "null_byte_path": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "secret",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "admin\nadmin",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "main.d(6): Error: cannot modify `immutable` expression `greeting[0]`\n    greeting[0] = 'j'; // CONTROL! greeting = \"j\" ~ greeting[1 .. $];\n            ^",
+   "control": "builds"
+  },
+  "reference_cycle": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.16,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "forgotten_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.17,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "complete_init": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "override_check": {
+   "outcome": "REJECTED",
+   "message": "main.d(11): Error: function `string main.Circle.descibe()` does not override any function\n    override string descibe() { return \"circle\"; } // BREAK!\n                    ^\nmain.d(5):        did you mean to override `string main.Shape.describe()`?\n    string describe() { return \"shape\"; }\n           ^",
+   "control": "builds"
+  },
+  "missing_virtual": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "area 4",
+   "stderr": ""
+  },
+  "unbound_method": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "SILENT",
+   "release_stdout": "before\n1",
+   "release_stderr": "",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "core.exception.AssertError@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/typecons.d(4128): Called `get' on null Nullable!int.\n----------------\n??:? _d_assert_msg [0x5ae033dfb203]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/typecons.d:4128 inout pure nothrow ref @property @nogc @safe inout(int) std.typecons.Nullable!(int).Nullable.get() [0x5ae033cabad5]\nmain.d:9 _Dmain [0x5ae033cab93c]"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hello,",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "core.exception.ArrayIndexError@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/range/primitives.d(2610): index [0] is out of bounds for array of length 0\n----------------\n??:? onArrayIndexError [0x5891651160ed]\n??:? _d_arraybounds_index [0x58916511634d]\n??:? _Dmain [0x589165116a2d]",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "core.exception.AssertError@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/algorithm/searching.d(1451): r is an empty range\n----------------\n??:? _d_assert_msg [0x61bfd4a53a33]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/algorithm/searching.d:1451 pure nothrow @nogc @safe long std.algorithm.searching.extremum!(std.algorithm.searching.__lambda_L3919_C30, \"a > b\", long[]).extremum(long[]) [0x61bfd4905c6c]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/algorithm/searching.d:3922 pure nothrow @nogc @safe long std.algorithm.searching.maxElement!(std.algorithm.searching.__lambda_L3919_C30, long[]).maxElement(long[]) [0x61bfd4902c4c]\nmain.d:6 _Dmain [0x61bfd49028a7]"
+  },
+  "readonly_param": {
+   "outcome": "REJECTED",
+   "message": "main.d(5): Error: cannot modify `const` expression `xs[0]`\n    xs[0] = 9; // BREAK!\n      ^",
+   "control": "builds"
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "REJECTED",
+   "message": "main.d(6): Error: cannot implicitly convert expression `300` of type `int` to `ubyte`\n    ubyte tooBig = 300; // BREAK!\n                   ^",
+   "control": "builds"
+  },
+  "no_implicit_conversion": {
+   "outcome": "REJECTED",
+   "message": "main.d(7): Error: cannot implicitly convert expression `big` of type `long` to `int`\n    int wrong = big; // BREAK!\n                ^",
+   "control": "builds"
+  },
+  "generic_constraint": {
+   "outcome": "REJECTED",
+   "message": "/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/functional.d-mixin-227(227): Error: no operator `<` for type `Point`\na < b\n  ^\nmain.d(4):        perhaps overload it with `int opCmp(Point other) const {}`\nstruct Point { int x; int y; }\n^\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/algorithm/sorting.d(1961): Error: template instance `std.functional.binaryFun!(\"a < b\", \"a\", \"b\").binaryFun!(Point, Point)` error instantiating\n    alias LessRet = typeof(lessFun(r.front, r.front));    // instantiate lessFun\n                                  ^\nmain.d(10):        instantiated from here: `sort!(\"a < b\", SwapStrategy.unstable, Point[])`\n    auto ps = [Point(1, 2)]; ps.sort(); // BREAK!\n                                    ^\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/algorithm/sorting.d(1963):        while evaluating `static assert` argument `\"The return type of the template argument 'less' when used with the binaryFun!less template\" ~ \" must be a bool. This is not the case, the returned type is '\" ~ LessRet.stringof ~ \"'\"`\n    static assert(is(LessRet == bool), \"The return type of the template\"\n    ^",
+   "control": "builds"
+  },
+  "lossy_int_to_float": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "9007199254740992",
+   "stderr": ""
+  },
+  "const_index_bounds": {
+   "outcome": "REJECTED",
+   "message": "main.d(7): Error: array index 5 is out of bounds `table[0 .. 3]`\n    writeln(table[5]); // BREAK!\n            ^\nmain.d(7): Error: template `writeln` is not callable using argument types `!()(int)`\n    writeln(table[5]); // BREAK!\n           ^\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/stdio.d(4260):        Candidate is: `writeln(T...)(T args)`\nvoid writeln(T...)(T args)\n     ^",
+   "control": "builds"
+  },
+  "lazy_accumulator": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 1.28,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "CORRUPT",
+   "release_stdout": "stored",
+   "release_stderr": "",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "core.exception.ArrayIndexError@main.d(9): index [8] is out of bounds for array of length 8\n----------------\n??:? onArrayIndexError [0x5f191cbc80ed]\n??:? _d_arraybounds_index [0x5f191cbc834d]\nmain.d:9 _Dmain [0x5f191cbc88f8]"
+  },
+  "const_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-8985944073709551616",
+   "stderr": ""
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.51,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "REJECTED",
+   "message": "main.d(12): Error: duplicate `case \"circle\"` in `switch` statement\nstring bad(string s) { switch (s) { case \"circle\": return \"circle\"; case \"circle\": return \"again\"; default: return \"other\"; } } // BREAK!\n                                                                    ^",
+   "control": "builds"
+  },
+  "duplicate_key": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "json_big_integer": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "9007199254740993",
+   "stderr": ""
+  },
+  "parse_out_of_range": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "std.conv.ConvOverflowException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d(2551): Overflow in integral conversion\n----------------\n??:? pure @safe long std.conv.parse!(long, immutable(char)[], 0).parse(scope ref immutable(char)[]) [0x6528dd278331]\n??:? pure @safe long std.conv.toImpl!(long, immutable(char)[]).toImpl(immutable(char)[]) [0x6528dd277e47]\n??:? _Dmain [0x6528dd277853]",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "std.conv.ConvOverflowException@/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d(2551): Overflow in integral conversion\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:2551 pure @safe long std.conv.parse!(long, immutable(char)[], 0).parse(scope ref immutable(char)[]) [0x55e50458ba4a]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:2036 pure @safe long std.conv.toImpl!(long, immutable(char)[]).toImpl(immutable(char)[]) [0x55e50458b01c]\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/conv.d:214 pure @safe long std.conv.to!(long).to!(immutable(char)[]).to(immutable(char)[]) [0x55e50458a8cc]\nmain.d:5 _Dmain [0x55e50458a872]"
+  },
+  "json_nan": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "std.json.JSONException@std/json.d(2161): Cannot encode NaN. Consider passing the specialFloatLiterals flag.\n----------------\n??:? @trusted void std.json.toJSON!(std.array.Appender!(immutable(char)[]).Appender).toJSON(ref std.array.Appender!(immutable(char)[]).Appender, ref const(std.json.JSONValue),\n...\nnder!(immutable(char)[]).Appender, ref const(std.json.JSONValue), in bool, in std.json.JSONOptions).toValueImpl(ref const(std.json.JSONValue), ulong) [0x56d4aba9a89d]\n??:? const @safe immutable(char)[] std.json.JSONValue.toString(in std.json.JSONOptions) [0x56d4aba99bb7]\n??:? _Dmain [0x56d4aba379b5]",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "std.json.JSONException@std/json.d(2161): Cannot encode NaN. Consider passing the specialFloatLiterals flag.\n----------------\n??:? @trusted void std.json.toJSON!(std.array.Appender!(immutable(char)[]).Appender).toJSON(ref std.array.Appender!(immutable(char)[]).Appender, ref const(std.json.JSONValue), in bool, in std.json.JSONOptions).toValueImpl(ref const(std.json.JSONValue), ulong) [0x57c442fa5315]\n??:? @safe void std.json.toJSON!(std.array.Appender!(immutable(char)[]).Appender).toJSON(ref std.array.Appender!(immutable(char)[]).Appender, ref const(std.json.JSONValue), in bool, in std.json.JSONOptions).toValueImpl(ref const(std.json.JSONValue), ulong).emit!(immutable(char)[][]).emit(immutable(char)[][]) [0x57c442fa5420]\n??:? @trusted void std.json.toJSON!(std.array.Appender!(immutable(char)[]).Appender).toJSON(ref std.array.Appender!(immutable(char)[]).Appender, ref const(std.json.JSONValue), in bool, in std.json.JSONOptions).toValueImpl(ref const(std.json.JSONValue), ulong) [0x57c442fa515d]\n??:? const @safe immutable(char)[] std.json.JSONValue.toString(in std.json.JSONOptions) [0x57c442fa4477]\nmain.d:7 _Dmain [0x57c442f40930]"
+  },
+  "comparison_statement": {
+   "outcome": "REJECTED",
+   "message": "main.d(7): Error: the result of the equality expression `count == 5` is discarded\n    count == 5; // BREAK!\n          ^",
+   "control": "builds"
+  },
+  "typo_compound_assign": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "structural_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "REJECTED",
+   "message": "main.d(7): Error: mismatched array lengths, 4 and 3\n    int[4] shortTable = [10, 20, 30]; // BREAK!\n           ^",
+   "control": "builds"
+  },
+  "enum_from_int": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "before\ninvalid",
+   "stderr": ""
+  },
+  "bitwise_on_bool": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "CORRECT",
+   "release_stdout": "no",
+   "release_stderr": "",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "core.exception.ArrayIndexError@main.d(6): index [0] is out of bounds for array of length 0\n----------------\n??:? onArrayIndexError [0x60a36e2680ed]\n??:? _d_arraybounds_index [0x60a36e26834d]\nmain.d:6 _Dmain [0x60a36e2688aa]"
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "main.d(8): Error: cannot modify `immutable` expression `c.port`\n    c.port = 1; // BREAK!\n    ^",
+   "control": "builds"
+  },
+  "bool_condition": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "different",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "std.exception.ErrnoException@std/stdio.d(711): Could not close file `/dev/full' (No space left on device)\n----------------\n??:? @safe noreturn std.exception.bailOut!(std.exception.ErrnoException).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x5e1dafa65f2e]\n??:? @safe bool std.exception.enforce!(std.exception.ErrnoException).enforce!(bool).enforce(bool, lazy const(char)[], immutable(char)[], ulong) [0x5e1dafa66ebd]\n??:? @trusted void std.stdio.File.detach() [0x5e1dafa9b301]\n??:? _Dmain [0x5e1dafa65898]",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "std.exception.ErrnoException@std/stdio.d(711): Could not close file `/dev/full' (No space left on device)\n----------------\n/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/exception.d:522 @safe noreturn std.exception.bailOut!(std.exception.ErrnoException).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x5db945305090]\n??:? @safe bool std.exception.enforce!(std.exception.ErrnoException).enforce!(bool).enforce(bool, lazy const(char)[], immutable(char)[], ulong) [0x5db94530658d]\n??:? @trusted void std.stdio.File.detach() [0x5db94533a9d1]\nmain.d:6 _Dmain [0x5db9453048a2]"
+  },
+  "short_read": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "HELLO-WORLD-1234",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "disk full",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "total=42",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "backed up",
+   "stderr": ""
+  },
+  "nullable_field": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "stale_null_check": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.09,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "empty_slot": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.09,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "typed_nil": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "missing_json_field": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "std.json.JSONException@std/json.d(806): Key not found: age\n----------------\n??:? pure @safe noreturn std.exception.bailOut!(std.json.JSONException).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x56efe659ad0d]\n??:? pure @safe inout(std.json.JSONValue)* std.exception.enforce!(std.json.JSONE\n...\neption).enforce!(inout(std.json.JSONValue)*).enforce(inout(std.json.JSONValue)*, lazy const(char)[], immutable(char)[], ulong) [0x56efe659ad6f]\n??:? inout pure ref @safe inout(std.json.JSONValue) std.json.JSONValue.opIndex(return scope immutable(char)[]) [0x56efe65ba6f7]\n??:? _Dmain [0x56efe655487b]",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "std.json.JSONException@std/json.d(806): Key not found: age\n----------------\n??:? pure @safe noreturn std.exception.bailOut!(std.json.JSONException).bailOut(immutable(char)[], ulong, scope const(char)[]) [0x58332829600d]\n??:? pure @safe inout(std.json.JSONValue)* std.exception.enforce!(std.json.JSONException).enforce!(inout(std.json.JSONValue)*).enforce(inout(std.json.JSONValue)*, lazy const(char)[], immutable(char)[], ulong) [0x58332829606f]\n??:? inout pure ref @safe inout(std.json.JSONValue) std.json.JSONValue.opIndex(return scope immutable(char)[]) [0x5833282b59f7]\nmain.d:6 _Dmain [0x58332824f879]"
+  },
+  "mutate_after_send": {
+   "outcome": "REJECTED",
+   "message": "/opt/ldc2-1.43.0-linux-x86_64/bin/../import/std/concurrency.d(697): Error: static assert:  \"Aliases to mutable thread-local data not allowed.\"\n    static assert(!hasLocalAliasing!(T), \"Aliases to mutable thread-local data not allowed.\");\n    ^\nmain.d(14):        instantiated from here: `send!(int[])`\n    tid.send(list); // BREAK!\n            ^",
+   "control": "builds"
+  },
+  "lost_wakeup": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "lock_skipped_on_return": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "cleanup_on_error_path": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "left behind: export.csv",
+   "stderr": ""
+  },
+  "generator_break_cleanup": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "cleaned",
+   "stderr": ""
+  },
+  "main_error_exit_code": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "config missing: /nonexistent/bb.conf: No such file or directory"
+  },
+  "catch_all_hides_bug": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "SILENT",
+   "release_stdout": "invalid order",
+   "release_stderr": "",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "core.exception.ArrayIndexError@main.d(6): index [2] is out of bounds for array of length 2\n----------------\n??:? onArrayIndexError [0x595eed26d0ed]\n??:? _d_arraybounds_index [0x595eed26d34d]\nmain.d:6 int main.parseOrder(immutable(char)[]) [0x595eed26d8b8]\nmain.d:13 _Dmain [0x595eed26d958]"
+  },
+  "assert_side_effect": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "narrow_counter_loop": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "timeout_without_cancel": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.11,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "blocked_sender_leak": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "42\ndone",
+   "stderr": ""
+  }
+ }
+}

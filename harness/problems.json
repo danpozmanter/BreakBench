@@ -85,7 +85,8 @@
       "refs": [
         "CWE-476"
       ],
-      "control_expect": "^missing$"
+      "control_expect": "^missing$",
+      "layer": "language"
     },
     {
       "id": "int_overflow",
@@ -101,7 +102,8 @@
       "mode": "Integer overflow",
       "refs": [
         "CWE-190"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "div_by_zero",
@@ -117,7 +119,8 @@
       "mode": "Arithmetic mistakes",
       "refs": [
         "CWE-369"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "int_min_division",
@@ -135,7 +138,8 @@
       "refs": [
         "CERT INT32-C",
         "CWE-190"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "shift_overflow",
@@ -151,7 +155,8 @@
       "mode": "Integer overflow",
       "refs": [
         "CERT INT34-C"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "narrowing_cast",
@@ -167,7 +172,8 @@
       "mode": "Lossy conversions",
       "refs": [
         "CWE-197"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "float_to_int_overflow",
@@ -183,7 +189,8 @@
       "mode": "Lossy conversions",
       "refs": [
         "CERT FLP34-C"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "signed_unsigned_compare",
@@ -199,7 +206,8 @@
       "mode": "Lossy conversions",
       "refs": [
         "CWE-195"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "type_confusion",
@@ -216,7 +224,8 @@
       "refs": [
         "CWE-843"
       ],
-      "control_expect": "^8$"
+      "control_expect": "^8$",
+      "layer": "language"
     },
     {
       "id": "missing_return",
@@ -233,7 +242,8 @@
       "refs": [
         "CERT MSC37-C"
       ],
-      "control_expect": "^borderline$"
+      "control_expect": "^borderline$",
+      "layer": "language"
     },
     {
       "id": "non_exhaustive_match",
@@ -250,7 +260,8 @@
       "refs": [
         "CWE-478"
       ],
-      "control_expect": "^blue$"
+      "control_expect": "^blue$",
+      "layer": "language"
     },
     {
       "id": "uninitialized_variable",
@@ -267,7 +278,8 @@
       "refs": [
         "CWE-457"
       ],
-      "control_expect": "^0$"
+      "control_expect": "^0$",
+      "layer": "language"
     },
     {
       "id": "global_init_order",
@@ -282,7 +294,8 @@
       "refs": [
         "CWE-457",
         "CWE-665"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "assign_in_condition",
@@ -298,7 +311,8 @@
       "mode": "Code that reads one way and runs another",
       "refs": [
         "CWE-481"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "switch_fallthrough",
@@ -314,7 +328,8 @@
       "mode": "Code that reads one way and runs another",
       "refs": [
         "CWE-484"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "break_in_switch",
@@ -333,7 +348,8 @@
       "mode": "Code that reads one way and runs another",
       "refs": [
         "CWE-670"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "zero_is_falsy",
@@ -349,7 +365,8 @@
       "mode": "Missing values",
       "refs": [
         "CWE-697"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "string_equality",
@@ -365,7 +382,8 @@
       "mode": "Wrong type or shape",
       "refs": [
         "CWE-597"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "loose_equality",
@@ -381,7 +399,8 @@
       "mode": "Wrong type or shape",
       "refs": [
         "CWE-1024"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "parse_invalid_number",
@@ -397,7 +416,8 @@
       "mode": "Untrusted input",
       "refs": [
         "CERT ERR34-C"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "covariant_array_write",
@@ -411,7 +431,8 @@
       "mode": "Wrong type or shape",
       "refs": [
         "Pitfall: array covariance (Java ArrayStoreException, C#, TypeScript)"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "mutate_while_iterating",
@@ -425,7 +446,8 @@
       "mode": "Unintended sharing or copying",
       "refs": [
         "CERT MSC06-J"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "loop_closure_capture",
@@ -439,7 +461,8 @@
       "mode": "Unintended sharing or copying",
       "refs": [
         "Pitfall: closures capture the loop variable (JavaScript var, Python late binding, Go before 1.22)"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "snapshot_aliasing",
@@ -453,7 +476,8 @@
       "mode": "Unintended sharing or copying",
       "refs": [
         "Pitfall: assignment shares a mutable collection (Python, JavaScript, Java)"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "repeated_row_alias",
@@ -467,7 +491,8 @@
       "mode": "Unintended sharing or copying",
       "refs": [
         "Pitfall: Python FAQ, \"How do I create a multidimensional list?\""
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "ignored_error_result",
@@ -481,7 +506,8 @@
       "mode": "Lost failures",
       "refs": [
         "CWE-252"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "sort_with_nan",
@@ -495,7 +521,8 @@
       "mode": "Arithmetic mistakes",
       "refs": [
         "Pitfall: NaN breaks a sort's total order (Python, JavaScript, Java comparators)"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "integer_average",
@@ -509,7 +536,8 @@
       "mode": "Arithmetic mistakes",
       "refs": [
         "CERT FLP06-C"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "leading_zero_literal",
@@ -523,7 +551,8 @@
       "mode": "Code that reads one way and runs another",
       "refs": [
         "CERT DCL18-C"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "shared_default_argument",
@@ -537,7 +566,8 @@
       "mode": "Unintended sharing or copying",
       "refs": [
         "Pitfall: mutable default argument (Python)"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "reused_iterator",
@@ -551,7 +581,8 @@
       "mode": "Unintended sharing or copying",
       "refs": [
         "Pitfall: an exhausted iterator or stream reused (Python generators, Java streams)"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "category": "operators",
@@ -567,7 +598,8 @@
       "mode": "Code that reads one way and runs another",
       "refs": [
         "CWE-783"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "category": "control_flow",
@@ -583,7 +615,8 @@
       "mode": "Code that reads one way and runs another",
       "refs": [
         "CWE-483"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "category": "operators",
@@ -599,7 +632,8 @@
       "mode": "Code that reads one way and runs another",
       "refs": [
         "CWE-480"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "category": "aliasing",
@@ -613,7 +647,8 @@
       "mode": "Unintended sharing or copying",
       "refs": [
         "Pitfall: a loop updates a copy of a value-type element (Go range, Swift, C# structs)"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "category": "security",
@@ -629,7 +664,8 @@
       "mode": "Untrusted input",
       "refs": [
         "CWE-78"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "category": "numbers",
@@ -646,7 +682,8 @@
       "mode": "Arithmetic mistakes",
       "refs": [
         "CWE-1077"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "category": "concurrency",
@@ -660,7 +697,8 @@
       "mode": "Locking",
       "refs": [
         "CWE-833"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "category": "security",
@@ -677,7 +715,8 @@
       "mode": "Untrusted input",
       "refs": [
         "CWE-1333"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "regex_trailing_newline",
@@ -694,7 +733,8 @@
       "refs": [
         "CWE-625",
         "CWE-93"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "category": "numbers",
@@ -710,7 +750,8 @@
       "mode": "Arithmetic mistakes",
       "refs": [
         "CERT INT10-C"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "category": "names",
@@ -724,7 +765,8 @@
       "mode": "Code that reads one way and runs another",
       "refs": [
         "Pitfall: adjacent string literals join silently (Python, C)"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "category": "errors",
@@ -738,7 +780,8 @@
       "mode": "Lost failures",
       "refs": [
         "CWE-584"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "category": "control_flow",
@@ -752,7 +795,8 @@
       "mode": "Code that reads one way and runs another",
       "refs": [
         "Pitfall: automatic semicolon insertion after return (JavaScript)"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "category": "concurrency",
@@ -771,7 +815,8 @@
       "mode": "Lost tasks",
       "refs": [
         "CWE-248"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "category": "concurrency",
@@ -785,7 +830,8 @@
       "mode": "Lost tasks",
       "refs": [
         "Pitfall: a task started and never awaited (JavaScript floating promises, Python coroutines)"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "category": "api",
@@ -799,7 +845,8 @@
       "mode": "Wrong type or shape",
       "refs": [
         "CWE-685"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "unsigned_subtraction",
@@ -815,7 +862,8 @@
       "mode": "Integer overflow",
       "refs": [
         "CERT INT30-C"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "missing_key_default",
@@ -831,7 +879,8 @@
       "mode": "Missing values",
       "refs": [
         "CWE-754"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "mutable_hash_key",
@@ -845,7 +894,8 @@
       "mode": "Unintended sharing or copying",
       "refs": [
         "Pitfall: a hash key changed after insertion (Java, Python docs)"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "shadowed_assignment",
@@ -861,7 +911,8 @@
       "mode": "Code that reads one way and runs another",
       "refs": [
         "Pitfall: := declares a new variable instead of assigning (Go)"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "discarded_pure_result",
@@ -875,7 +926,8 @@
       "mode": "Unintended sharing or copying",
       "refs": [
         "CERT EXP00-J"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "negative_index_wraps",
@@ -891,7 +943,8 @@
       "mode": "Out-of-range indexes",
       "refs": [
         "CWE-129"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "default_numeric_sort",
@@ -905,7 +958,8 @@
       "mode": "Wrong type or shape",
       "refs": [
         "Pitfall: the default sort compares numbers as text (JavaScript)"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "unrelated_type_lookup",
@@ -921,7 +975,8 @@
       "mode": "Wrong type or shape",
       "refs": [
         "CWE-1024"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "panic_under_lock",
@@ -935,7 +990,8 @@
       "mode": "Locking",
       "refs": [
         "CWE-460"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "oob_write",
@@ -952,7 +1008,8 @@
       "mode": "Out-of-range indexes",
       "refs": [
         "CWE-787"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "oob_read",
@@ -969,7 +1026,8 @@
       "mode": "Out-of-range indexes",
       "refs": [
         "CWE-125"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "use_after_free",
@@ -984,7 +1042,8 @@
       "mode": "Memory reuse",
       "refs": [
         "CWE-416"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "double_free",
@@ -999,7 +1058,8 @@
       "mode": "Memory reuse",
       "refs": [
         "CWE-415"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "dangling_stack_ref",
@@ -1014,7 +1074,8 @@
       "mode": "Memory reuse",
       "refs": [
         "CWE-562"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "container_realloc_dangling",
@@ -1029,7 +1090,8 @@
       "mode": "Memory reuse",
       "refs": [
         "CERT CTR51-CPP"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "uninit_heap_read",
@@ -1044,7 +1106,8 @@
       "mode": "Memory reuse",
       "refs": [
         "CWE-908"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "category": "memory",
@@ -1058,7 +1121,8 @@
       "mode": "Wrong type or shape",
       "refs": [
         "CWE-843"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "category": "security",
@@ -1074,7 +1138,8 @@
       "mode": "Untrusted input",
       "refs": [
         "CWE-134"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "trojan_source",
@@ -1088,7 +1153,8 @@
       "mode": "Deceptive source text",
       "refs": [
         "CVE-2021-42574"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "unsafe_deserialization",
@@ -1103,7 +1169,8 @@
       "mode": "Untrusted input",
       "refs": [
         "CWE-502"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "null_byte_path",
@@ -1118,7 +1185,8 @@
       "mode": "Untrusted input",
       "refs": [
         "CWE-158"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "homoglyph_identifier",
@@ -1132,7 +1200,8 @@
       "mode": "Deceptive source text",
       "refs": [
         "CWE-1007"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "string_literal_write",
@@ -1146,7 +1215,8 @@
       "mode": "Memory reuse",
       "refs": [
         "CERT STR30-C"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "reference_cycle",
@@ -1164,7 +1234,8 @@
       "refs": [
         "CWE-401"
       ],
-      "timeout": 60
+      "timeout": 60,
+      "layer": "language"
     },
     {
       "id": "forgotten_free",
@@ -1182,7 +1253,8 @@
       "refs": [
         "CWE-401"
       ],
-      "timeout": 60
+      "timeout": 60,
+      "layer": "language"
     },
     {
       "id": "complete_init",
@@ -1196,7 +1268,8 @@
       "mode": "Wrong type or shape",
       "refs": [
         "CWE-909"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "override_check",
@@ -1210,7 +1283,8 @@
       "mode": "Wrong type or shape",
       "refs": [
         "Pitfall: a misspelled override silently adds a method (Java @Override, C++ override)"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "missing_virtual",
@@ -1224,7 +1298,8 @@
       "mode": "Wrong type or shape",
       "refs": [
         "Pitfall: a non-virtual method is hidden, not overridden (C++ virtual, C# CS0108, Go embedding)"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "unbound_method",
@@ -1238,7 +1313,8 @@
       "mode": "Code that reads one way and runs another",
       "refs": [
         "Pitfall: a method passed as a callback loses this (MDN, \"this\": callbacks)"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "forced_unwrap",
@@ -1252,7 +1328,8 @@
       "mode": "Missing values",
       "refs": [
         "CWE-476"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "null_in_text",
@@ -1269,7 +1346,8 @@
       "refs": [
         "Pitfall: a missing value printed as \"None\", \"null\" or \"undefined\" (Python, JavaScript)"
       ],
-      "control_expect": "^hello,? nobody$"
+      "control_expect": "^hello,? nobody$",
+      "layer": "language"
     },
     {
       "id": "not_found_sentinel",
@@ -1286,7 +1364,8 @@
       "refs": [
         "CWE-253"
       ],
-      "control_expect": "^no colon$"
+      "control_expect": "^no colon$",
+      "layer": "library"
     },
     {
       "id": "empty_max",
@@ -1301,7 +1380,8 @@
       "mode": "Missing values",
       "refs": [
         "CWE-754"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "readonly_param",
@@ -1315,7 +1395,8 @@
       "mode": "Unintended sharing or copying",
       "refs": [
         "CWE-374"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "exclusive_mutation",
@@ -1329,7 +1410,8 @@
       "mode": "Unintended sharing or copying",
       "refs": [
         "Pitfall: one value passed as two mutable arguments (Swift's law of exclusivity, Rust's borrow rules)"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "literal_range",
@@ -1344,7 +1426,8 @@
       "refs": [
         "CERT INT31-C"
       ],
-      "control_expect": "^300$"
+      "control_expect": "^300$",
+      "layer": "language"
     },
     {
       "id": "no_implicit_conversion",
@@ -1360,7 +1443,8 @@
       "mode": "Lossy conversions",
       "refs": [
         "CERT INT31-C"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "generic_constraint",
@@ -1375,7 +1459,8 @@
       "refs": [
         "Pitfall: sorting values that have no order (Python TypeError, JavaScript coercion)"
       ],
-      "control_expect": "^1$"
+      "control_expect": "^1$",
+      "layer": "language"
     },
     {
       "id": "lossy_int_to_float",
@@ -1391,7 +1476,8 @@
       "mode": "Lossy conversions",
       "refs": [
         "CERT FLP36-C"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "const_index_bounds",
@@ -1406,7 +1492,8 @@
       "refs": [
         "CWE-125"
       ],
-      "control_expect": "20$"
+      "control_expect": "20$",
+      "layer": "language"
     },
     {
       "id": "lazy_accumulator",
@@ -1423,7 +1510,8 @@
       "mode": "Exhaustion and leaks",
       "refs": [
         "CWE-401"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "size_overflow_alloc",
@@ -1440,7 +1528,8 @@
       "mode": "Integer overflow",
       "refs": [
         "CWE-680"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "const_overflow",
@@ -1454,7 +1543,8 @@
       "mode": "Integer overflow",
       "refs": [
         "CWE-190"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "orphaned_receive",
@@ -1468,7 +1558,8 @@
       "mode": "Lost tasks",
       "refs": [
         "CWE-833"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "blocking_in_async",
@@ -1482,7 +1573,8 @@
       "mode": "Lost tasks",
       "refs": [
         "Pitfall: a blocking call stalls the event loop (Node.js, Python asyncio docs)"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "evaluation_order",
@@ -1496,7 +1588,8 @@
       "mode": "Code that reads one way and runs another",
       "refs": [
         "CERT EXP30-C"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "dominated_case",
@@ -1510,7 +1603,8 @@
       "mode": "Code that reads one way and runs another",
       "refs": [
         "CWE-561"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "duplicate_key",
@@ -1524,7 +1618,8 @@
       "mode": "Code that reads one way and runs another",
       "refs": [
         "CWE-694"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "json_big_integer",
@@ -1538,7 +1633,8 @@
       "mode": "Lossy conversions",
       "refs": [
         "CWE-681"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "parse_out_of_range",
@@ -1555,7 +1651,8 @@
       "refs": [
         "CERT ERR34-C",
         "CWE-190"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "json_nan",
@@ -1572,7 +1669,8 @@
       "refs": [
         "RFC 8259 section 6",
         "Pitfall: JSON.stringify writes NaN as null (JavaScript); json.dumps writes invalid JSON (Python)"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "comparison_statement",
@@ -1586,7 +1684,8 @@
       "mode": "Code that reads one way and runs another",
       "refs": [
         "CWE-482"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "typo_compound_assign",
@@ -1600,7 +1699,8 @@
       "mode": "Code that reads one way and runs another",
       "refs": [
         "CWE-480"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "structural_equality",
@@ -1614,7 +1714,8 @@
       "mode": "Wrong type or shape",
       "refs": [
         "CWE-595"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "array_literal_length",
@@ -1628,7 +1729,8 @@
       "mode": "Code that reads one way and runs another",
       "refs": [
         "CWE-665"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "enum_from_int",
@@ -1644,7 +1746,8 @@
       "mode": "Wrong type or shape",
       "refs": [
         "CERT INT50-CPP"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "bitwise_on_bool",
@@ -1658,7 +1761,8 @@
       "mode": "Code that reads one way and runs another",
       "refs": [
         "CWE-768"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "readonly_field",
@@ -1672,7 +1776,8 @@
       "mode": "Unintended sharing or copying",
       "refs": [
         "CWE-471"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "bool_condition",
@@ -1686,7 +1791,8 @@
       "mode": "Code that reads one way and runs another",
       "refs": [
         "CERT EXP20-C"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "lost_write_error",
@@ -1700,7 +1806,8 @@
       "mode": "Lost failures",
       "refs": [
         "CWE-252"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "short_read",
@@ -1714,7 +1821,8 @@
       "mode": "Lost failures",
       "refs": [
         "CWE-252"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "masked_cleanup_error",
@@ -1728,7 +1836,8 @@
       "mode": "Lost failures",
       "refs": [
         "CERT ERR05-J"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "unflushed_writer",
@@ -1743,7 +1852,8 @@
       "mode": "Lost failures",
       "refs": [
         "CERT FIO14-J"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "child_exit_status",
@@ -1758,7 +1868,8 @@
       "mode": "Lost failures",
       "refs": [
         "CWE-252"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "nullable_field",
@@ -1773,7 +1884,8 @@
       "refs": [
         "CWE-476"
       ],
-      "control_expect": "^no name$"
+      "control_expect": "^no name$",
+      "layer": "language"
     },
     {
       "id": "stale_null_check",
@@ -1787,7 +1899,8 @@
       "mode": "Missing values",
       "refs": [
         "CWE-476"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "empty_slot",
@@ -1802,7 +1915,8 @@
       "refs": [
         "CWE-476"
       ],
-      "control_expect": "^missing$"
+      "control_expect": "^missing$",
+      "layer": "language"
     },
     {
       "id": "typed_nil",
@@ -1816,7 +1930,25 @@
       "mode": "Missing values",
       "refs": [
         "Pitfall: a nil pointer in an interface is not a nil interface (Go FAQ)"
-      ]
+      ],
+      "layer": "language"
+    },
+    {
+      "id": "missing_json_field",
+      "category": "null",
+      "kind": "dynamic",
+      "args": [],
+      "expect": "^invalid$",
+      "title": "A field missing from decoded JSON",
+      "scenario": "The program decodes {\"name\": \"Ada\"} with the standard library's JSON decoder into a user with a name and an integer age (a typed decode where the library has one, its general value type otherwise) and prints age + 1. Where the decoder answers an error value, an Option, a Result, an error union or a checked exception, the program checks it and prints invalid.",
+      "best": "\"invalid\": the decoder reports the missing field and the language made the program check. An error at run time earns half. 1 (the age read as zero), NaN or null is a silent wrong answer.",
+      "mode": "Missing values",
+      "refs": [
+        "CWE-20",
+        "Pitfall: a missing JSON field decodes to zero or undefined (Go encoding/json, JavaScript JSON.parse)"
+      ],
+      "control_expect": "^37$",
+      "layer": "library"
     },
     {
       "id": "mutate_after_send",
@@ -1830,7 +1962,8 @@
       "mode": "Races and lost signals",
       "refs": [
         "CWE-362"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "lost_wakeup",
@@ -1844,7 +1977,8 @@
       "mode": "Races and lost signals",
       "refs": [
         "CERT CON38-C"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "lock_skipped_on_return",
@@ -1858,7 +1992,8 @@
       "mode": "Locking",
       "refs": [
         "CWE-667"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "cleanup_on_error_path",
@@ -1873,7 +2008,8 @@
       "mode": "Skipped cleanup",
       "refs": [
         "CWE-459"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "generator_break_cleanup",
@@ -1888,7 +2024,8 @@
       "mode": "Skipped cleanup",
       "refs": [
         "CWE-772"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "main_error_exit_code",
@@ -1903,7 +2040,8 @@
       "mode": "Lost failures",
       "refs": [
         "CWE-393"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "catch_all_hides_bug",
@@ -1918,7 +2056,8 @@
       "refs": [
         "CWE-396",
         "CERT ERR08-J"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "assert_side_effect",
@@ -1934,7 +2073,8 @@
       "refs": [
         "CERT EXP31-C",
         "CWE-617"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "narrow_counter_loop",
@@ -1949,7 +2089,8 @@
       "refs": [
         "CWE-835",
         "CWE-197"
-      ]
+      ],
+      "layer": "language"
     },
     {
       "id": "timeout_without_cancel",
@@ -1963,7 +2104,8 @@
       "mode": "Lost tasks",
       "refs": [
         "CWE-404"
-      ]
+      ],
+      "layer": "library"
     },
     {
       "id": "blocked_sender_leak",
@@ -1977,7 +2119,8 @@
       "mode": "Lost tasks",
       "refs": [
         "CWE-772"
-      ]
+      ],
+      "layer": "library"
     }
   ],
   "modes": [
@@ -1999,5 +2142,54 @@
     "Lost tasks",
     "Untrusted input",
     "Deceptive source text"
-  ]
+  ],
+  "severity": {
+    "tiers": [
+      {
+        "weight": 3,
+        "name": "Critical",
+        "rule": "An attacker can take control, or memory the program does not own is read or written.",
+        "modes": [
+          "Memory reuse",
+          "Out-of-range indexes",
+          "Untrusted input",
+          "Deceptive source text"
+        ]
+      },
+      {
+        "weight": 2,
+        "name": "High",
+        "rule": "A running service keeps going on wrong or lost data, or stops serving: values that overflow, convert lossily or go missing, failures nobody sees, locks, tasks and resources that are lost.",
+        "modes": [
+          "Integer overflow",
+          "Lossy conversions",
+          "Missing values",
+          "Lost failures",
+          "Locking",
+          "Races and lost signals",
+          "Lost tasks",
+          "Exhaustion and leaks",
+          "Skipped cleanup"
+        ]
+      },
+      {
+        "weight": 1,
+        "name": "Moderate",
+        "rule": "A local logic slip gives a wrong answer in the program's own computation, the kind a test of that code usually shows.",
+        "modes": [
+          "Arithmetic mistakes",
+          "Wrong type or shape",
+          "Unintended sharing or copying",
+          "Code that reads one way and runs another",
+          "Incomplete control flow"
+        ]
+      }
+    ],
+    "overrides": {
+      "size_overflow_alloc": [
+        3,
+        "The wrapped size makes the allocation too small, so the writes that follow land outside it (CWE-680)."
+      ]
+    }
+  }
 }

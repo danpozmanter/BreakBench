@@ -1,0 +1,13 @@
+use std::encoding::json
+
+struct User {
+    name: String
+    age: i64
+}
+
+fn main() {
+    match json::decode::<User>("""{"name": "Ada"}""") { // CONTROL! match json::decode::<User>("""{"name": "Ada", "age": 36}""") {
+        Ok(user) => println(user.age + 1),
+        Err(_) => println("invalid"),
+    }
+}

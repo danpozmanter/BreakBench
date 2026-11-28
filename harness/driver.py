@@ -11,6 +11,11 @@ A compile failure is a refusal only when the control compiles and the compiler's
 the bug: a marked line, a line near one, or a line opening a construct that holds one. A run that
 does not give the right answer also requires the control to give it, so a stop or a wrong answer
 comes from the bug and not from a broken program.
+
+A program that falls short also gets the language's own tooling (langs.json "tools"): a linter or
+compiler warning counts when it points at the bug and the fixed program does not get it, and a
+sanitizer report counts when the fixed program runs clean. A `<test>.safer.<ext>` program does the
+same job with the standard library's other call for it and is judged like the first.
 """
 
 import json
@@ -360,6 +365,176 @@ CANNOT_RE = re.compile(r"CANNOT-(EXPRESS|MAKE|FIX):\s*(.+?)\s*(?:\*\))?$", re.M)
 # The language leaves the marked behavior undefined or unspecified, so a right answer is chance.
 UNDEFINED_RE = re.compile(r"UNDEFINED:\s*(.+?)\s*(?:\*\))?$", re.M)
 BACKEND_FAILURE_RE = re.compile(r"\.ll:\d+:\d+: error")
+# A report from a sanitizer: AddressSanitizer, LeakSanitizer, UndefinedBehaviorSanitizer (`main.c:5:7:
+# runtime error:`), ThreadSanitizer, or Go's race detector. AddressSanitizer's report of a signal
+# (SEGV, ILL, ...) only restates a crash or trap the program makes without it, so it does not count.
+SANITIZER_RE = re.compile(
+    r"ERROR: AddressSanitizer: (?!(SEGV|ILL|BUS|FPE|ABRT)\b)|ERROR: LeakSanitizer"
+    r"|^\S+:\d+:\d+: runtime error:|WARNING: ThreadSanitizer|WARNING: DATA RACE",
+    re.M,
+)
+# A line of quoted source or a caret under it, which repeats the program rather than the diagnostic.
+SNIPPET_RE = re.compile(r"^\s*\d*\s*[|│]|^\s*[\^~\s]+$")
+GENERIC_WORDS = {"file", "line", "lines", "characters", "warning", "error", "note", "info", "hint", "main"}
+
+
+def location_patterns(file_name):
+    escaped = re.escape(file_name)
+    return [re.compile(p.replace("{f}", escaped)) for p in LOCATION_PATTERNS]
+
+
+def normalize(text, patterns):
+    """A diagnostic's text with its location, work folder, line numbers and the bug markers removed."""
+    text = re.sub(r"\S*" + re.escape(WORK) + r"\S*", "", text)
+    for pattern in patterns:
+        text = pattern.sub("", text)
+    text = re.sub(r"(BREAK!|CONTROL!).*", "", text)
+    return re.sub(r"\s+", " ", re.sub(r"\d+", "", text)).strip().lower()
+
+
+def diagnostics(output, file_name):
+    """(lines, message) for each line of a tool's output that names a line of the program."""
+    patterns = location_patterns(file_name)
+    lines = output.splitlines()
+    found = []
+    for i, line in enumerate(lines):
+        numbers = set()
+        for pattern in patterns:
+            for match in pattern.finditer(line):
+                bounds = [int(g) for g in match.groups() if g]
+                numbers.update(range(bounds[0], bounds[-1] + 1))
+        if not numbers:
+            continue
+        shown = [line]
+        # A location on a line of its own (rustc's `-->`, OCaml's `File ..., line`) carries its
+        # message on the line before or after it.
+        if len(set(re.findall(r"[a-z]{3,}", normalize(line, patterns))) - GENERIC_WORDS) < 2:
+            shown = [lines[j] for j in (i - 1, i, i + 1)
+                     if 0 <= j < len(lines) and (j == i or not SNIPPET_RE.search(lines[j]))]
+        found.append((numbers, normalize(" ".join(shown), patterns), " ".join(x.strip() for x in shown)))
+    return found
+
+
+def tool_findings(main_outputs, control_outputs, file_name, source):
+    """Diagnostics that point at the bug and that the program without the bug does not get."""
+    region = bug_region(source) | declarations_of_marked_types(source)
+    in_control = {message for out in control_outputs for _, message, _ in diagnostics(out, file_name)}
+    return [text for out in main_outputs for numbers, message, text in diagnostics(out, file_name)
+            if numbers & region and message not in in_control]
+
+
+def run_tools(lang, work, commands):
+    outputs = []
+    for command in commands:
+        _, _, out, err, _ = execute(fill(command, {"dir": work}), work, 600)
+        outputs.append(ANSI_RE.sub("", out + "\n" + err))
+    return outputs
+
+
+def with_tools(lang, problem, pid, tag, source, compile_out, work, outcome):
+    """What the language's own tooling adds: a linter or compiler warning tied to the bug, or a
+    sanitizer report the program without the bug does not get."""
+    tools = lang.get("tools", {})
+    control = control_source(source)
+    commands = tools.get("check", [])
+    if control != source:
+        main_outputs = [compile_out, *run_tools(lang, work, commands)]
+        cwork = stage(lang, pid + tag, control, "tools-control")
+        _, control_out = build(lang, cwork)
+        control_outputs = [control_out, *run_tools(lang, cwork, commands)]
+        found = tool_findings(main_outputs, control_outputs, lang["file"], source)
+        if found:
+            return {"tool": "FLAGGED", "tool_output": clip("\n".join(dict.fromkeys(found)), 1200)}
+    # A sanitizer report scores below a stop the program already makes, so it is sought only where
+    # the run did harm unseen.
+    sanitize = tools.get("sanitize")
+    if sanitize and control != source and outcome != "TRAPPED":
+        swork = stage(lang, pid + tag, source, "sanitize")
+        ok, out = build(lang, swork, sanitize["build"])
+        if ok:
+            _, _, sout, serr, _ = run_once(problem, sanitize["run"], swork)
+            if SANITIZER_RE.search(serr):
+                cwork = stage(lang, pid + tag, control, "sanitize-control")
+                cok, _ = build(lang, cwork, sanitize["build"])
+                _, _, _, cerr, _ = run_once(problem, sanitize["run"], cwork) if cok else (0, 0, "", "", 0)
+                if cok and not SANITIZER_RE.search(cerr):
+                    return {"tool": "SANITIZED", "tool_output": clip(serr, 1200)}
+    return {}
+
+
+def judge(lang, problem, pid, source, tag=""):
+    """Build, run and classify one program; tag keeps a second program's folders apart."""
+    record = {}
+    cannot = CANNOT_RE.search(source)
+    if cannot:
+        marker, reason = cannot.groups()
+        outcome = {"EXPRESS": "INEXPRESSIBLE", "MAKE": "SAFE_BY_DESIGN", "FIX": "UNFIXABLE"}[marker]
+        return {"outcome": outcome, "message": reason.strip()}
+    # A test about a check only debug builds keep judges the build that ships.
+    built = shipped(lang) if problem.get("build") == "release" else lang
+    work = stage(built, pid + tag, source, "main")
+    ok, compile_out = build(built, work)
+    control = control_source(source)
+    marked = control != source
+    # A build step that loads the program (Clojure compiles by evaluating each form) can stop
+    # on a run-time error; that is the program running, so it is judged as a run.
+    runs_code = built.get("build_trap") and re.search(built["build_trap"], compile_out, re.M)
+    if not ok and not runs_code:
+        control_ok = False
+        if marked:
+            cwork = stage(built, pid + tag, control, "control")
+            control_ok, control_out = build(built, cwork)
+            if not control_ok:
+                record["control_error"] = clip(control_out, 1500)
+        # A crash in the compiler or its code generator is not a refusal of the bug.
+        crashed = ICE_RE.search(compile_out) or BACKEND_FAILURE_RE.search(compile_out)
+        if crashed:
+            record["outcome"] = "ICE"
+        elif not control_ok:
+            record["outcome"] = "ERROR"
+        elif tied_to_bug(compile_out, built["file"], source):
+            record["outcome"] = "REJECTED"
+        else:
+            record["outcome"] = "UNTIED"
+        record["message"] = clip(compile_out, 1500)
+        if record["outcome"] in ("REJECTED", "UNTIED"):
+            record["control"] = "builds"
+        return record
+    if ok and compile_out.strip():
+        record["build_output"] = clip(compile_out.strip(), 1500)
+
+    record["outcome"], status, out, err, secs = run_once(problem, built["run"], work)
+    if record["outcome"] not in ("CORRECT", "CHANCE"):
+        if marked:
+            verified, detail = check_control(built, problem, pid + tag, control)
+            record["control"] = "verified" if verified else "failed"
+            if not verified:
+                record["unverified_outcome"] = record["outcome"]
+                record["outcome"], record["control_error"] = "ERROR", detail
+        else:
+            record["control"] = "none"
+    undefined = UNDEFINED_RE.search(source)
+    if undefined and record["outcome"] == "CORRECT":
+        record["outcome"] = "CHANCE"
+        record["message"] = undefined.group(1).strip()
+    # A stop that only the debug build makes is gone from the build that ships.
+    if record["outcome"] == "TRAPPED" and built.get("release"):
+        rwork = stage(built, pid + tag, source, "release")
+        rok, rout = build(built, rwork, built["release"]["build"])
+        if rok:
+            rel_outcome, _, rel_out, rel_err, _ = run_once(problem, built["release"]["run"], rwork)
+            record["release"] = rel_outcome
+            record["release_stdout"] = clip(rel_out, 400)
+            record["release_stderr"] = clip(rel_err, 600)
+        else:
+            record["release"] = "ERROR"
+            record["release_stderr"] = clip(rout, 600)
+    record.update({"exit": status, "secs": round(secs, 2), "stdout": clip(out, 400), "stderr": clip(err, 1500)})
+    if not tag and record["outcome"] not in ("CORRECT", "ERROR", "UNFIXABLE"):
+        record.update(with_tools(built, problem, pid, tag, source, compile_out, work, record["outcome"]))
+    return record
+
+
 def main():
     lang_id = sys.argv[1]
     only = set(sys.argv[2:])
@@ -383,96 +558,22 @@ def main():
         pid = problem["id"]
         if only and pid not in only:
             continue
-        src_path = os.path.join(ROOT, lang.get("dir", lang_id), pid + "." + lang["ext"])
+        folder = os.path.join(ROOT, lang.get("dir", lang_id))
+        src_path = os.path.join(folder, pid + "." + lang["ext"])
         if not os.path.exists(src_path):
             results[pid] = {"outcome": "MISSING"}
             continue
-        source = read(src_path)
-        record = {}
-        cannot = CANNOT_RE.search(source)
-        if cannot:
-            marker, reason = cannot.groups()
-            outcome = {
-                "EXPRESS": "INEXPRESSIBLE",
-                "MAKE": "SAFE_BY_DESIGN",
-                "FIX": "UNFIXABLE",
-            }[marker]
-            results[pid] = {"outcome": outcome, "message": reason.strip()}
-            print(f"{lang_id:12} {pid:28} {outcome}", flush=True)
-            continue
-        # A test about a check only debug builds keep judges the build that ships.
-        built = shipped(lang) if problem.get("build") == "release" else lang
-        work = stage(built, pid, source, "main")
-        ok, compile_out = build(built, work)
-        control = control_source(source)
-        marked = control != source
-        # A build step that loads the program (Clojure compiles by evaluating each form) can stop
-        # on a run-time error; that is the program running, so it is judged as a run.
-        runs_code = built.get("build_trap") and re.search(built["build_trap"], compile_out, re.M)
-        if not ok and not runs_code:
-            control_ok = False
-            if marked:
-                cwork = stage(built, pid, control, "control")
-                control_ok, control_out = build(built, cwork)
-                if not control_ok:
-                    record["control_error"] = clip(control_out, 1500)
-            # A crash in the compiler or its code generator is not a refusal of the bug.
-            crashed = ICE_RE.search(compile_out) or BACKEND_FAILURE_RE.search(compile_out)
-            if crashed:
-                record["outcome"] = "ICE"
-            elif not control_ok:
-                record["outcome"] = "ERROR"
-            elif tied_to_bug(compile_out, built["file"], source):
-                record["outcome"] = "REJECTED"
-            else:
-                record["outcome"] = "UNTIED"
-            record["message"] = clip(compile_out, 1500)
-            if record["outcome"] in ("REJECTED", "UNTIED"):
-                record["control"] = "builds"
-            results[pid] = record
-            print(f"{lang_id:12} {pid:28} {record['outcome']}", flush=True)
-            continue
-        if ok:
-            warnings = compile_out.strip()
-            if warnings:
-                record["build_output"] = clip(warnings, 1500)
-
-        record["outcome"], status, out, err, secs = run_once(problem, built["run"], work)
-        if record["outcome"] not in ("CORRECT", "CHANCE"):
-            if marked:
-                verified, detail = check_control(built, problem, pid, control)
-                record["control"] = "verified" if verified else "failed"
-                if not verified:
-                    record["unverified_outcome"] = record["outcome"]
-                    record["outcome"], record["control_error"] = "ERROR", detail
-            else:
-                record["control"] = "none"
-        undefined = UNDEFINED_RE.search(source)
-        if undefined and record["outcome"] == "CORRECT":
-            record["outcome"] = "CHANCE"
-            record["message"] = undefined.group(1).strip()
-        # A stop that only the debug build makes is gone from the build that ships.
-        if record["outcome"] == "TRAPPED" and built.get("release"):
-            rwork = stage(built, pid, source, "release")
-            rok, rout = build(built, rwork, built["release"]["build"])
-            if rok:
-                rel_outcome, _, rel_out, rel_err, _ = run_once(problem, built["release"]["run"], rwork)
-                record["release"] = rel_outcome
-                record["release_stdout"] = clip(rel_out, 400)
-                record["release_stderr"] = clip(rel_err, 600)
-            else:
-                record["release"] = "ERROR"
-                record["release_stderr"] = clip(rout, 600)
-        record.update(
-            {
-                "exit": status,
-                "secs": round(secs, 2),
-                "stdout": clip(out, 400),
-                "stderr": clip(err, 1500),
-            }
-        )
+        record = judge(lang, problem, pid, read(src_path))
+        # The same job done with the standard library's other call for it, judged the same way.
+        safer_path = os.path.join(folder, pid + ".safer." + lang["ext"])
+        if os.path.exists(safer_path) and record["outcome"] not in ("REJECTED", "CORRECT", "SAFE_BY_DESIGN"):
+            safer = judge(lang, problem, pid, read(safer_path), ".safer")
+            record["safer"] = {k: v for k, v in safer.items()
+                               if k in ("outcome", "release", "message", "stdout", "stderr", "control", "exit")}
         results[pid] = record
-        print(f"{lang_id:12} {pid:28} {record['outcome']} (exit {status})", flush=True)
+        extra = "".join(f" {k}={record[k]['outcome'] if k == 'safer' else record[k]}"
+                        for k in ("tool", "safer") if k in record)
+        print(f"{lang_id:12} {pid:28} {record['outcome']}{extra}", flush=True)
 
     with open(raw_path, "w", encoding="utf-8") as f:
         json.dump({"lang": lang_id, "version": version, "results": results}, f, indent=1)

@@ -1,0 +1,1017 @@
+{
+ "lang": "python",
+ "version": "Python 3.15.2",
+ "results": {
+  "null_deref": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/null_deref/main/main.py\", line 15, in <module>\n    print(len(u.name)) # CONTROL! print(\"missing\" if u is None else len(u.name))\n              ^^^^^^\nAttributeError: 'NoneType' object has no attribute 'name'",
+   "tool": "FLAGGED",
+   "tool_output": "main.py:15: error: Item \"None\" of \"User | None\" has no attribute \"name\"  [union-attr]"
+  },
+  "int_overflow": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/div_by_zero/main/main.py\", line 4, in <module>\n    print(100 // d) # CONTROL! print(\"cannot divide\" if d == 0 else 100 // d)\n          ~~~~^^~~\nZeroDivisionError: division by zero"
+  },
+  "int_min_division": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "9223372036854775808",
+   "stderr": ""
+  },
+  "shift_overflow": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "18446744073709551616",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/narrowing_cast/main/main.py\", line 5, in <module>\n    b = bytes([v])[0]\n        ~~~~~^^^^^\nValueError: bytes must be in range(0, 256)"
+  },
+  "float_to_int_overflow": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "100000000000000000000",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/type_confusion/main/main.py\", line 9, in <module>\n    print(add(raw, 3))  # CONTROL! print(add(int(raw), 3))\n          ~~~^^^^^^^^\n  File \"/tmp/breakbench/type_confusion/main/main.py\", line 5, in add\n    return a + b\n           ~~^~~\nTypeError: can only concatenate str (not \"int\") to str",
+   "tool": "FLAGGED",
+   "tool_output": "main.py:9: error: Argument 1 to \"add\" has incompatible type \"str\"; expected \"int\"  [arg-type]"
+  },
+  "missing_return": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "None",
+   "stderr": "",
+   "tool": "FLAGGED",
+   "tool_output": "main.py:4: error: Missing return statement  [return]"
+  },
+  "non_exhaustive_match": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "None",
+   "stderr": "",
+   "tool": "FLAGGED",
+   "tool_output": "main.py:11: error: Missing return statement  [return]\nmain.py:12: error: Match statement has unhandled case for values of type \"Literal[Color.BLUE]\"  [exhaustive-match]\nmain.py:12: note: If match statement is intended to be non-exhaustive, add `case _: pass`"
+  },
+  "uninitialized_variable": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/uninitialized_variable/main/main.py\", line 12, in <module>\n    main()\n    ~~~~^^\n  File \"/tmp/breakbench/uninitialized_variable/main/main.py\", line 9, in main\n    print(x)\n          ^\nUnboundLocalError: cannot access local variable 'x' where it is not associated with a value",
+   "tool": "FLAGGED",
+   "tool_output": "main.py:9: error: Name \"x\" may be undefined  [possibly-undefined]"
+  },
+  "global_init_order": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/global_init_order/main/main.py\", line 5, in <module>\n    LIMIT = base() * 2  # BREAK!\n            ~~~~^^\n  File \"/tmp/breakbench/global_init_order/main/main.py\", line 2, in base\n    return BASE\n           ^^^^\nNameError: name 'BASE' is not defined"
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "File \"main.py\", line 4\n    if x = 1:  # BREAK!\n       ^^^^^\nSyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?",
+   "control": "builds"
+  },
+  "switch_fallthrough": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "break_in_switch": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "missing",
+   "stderr": ""
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "loose_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "different",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/parse_invalid_number/main/main.py\", line 3, in <module>\n    n = int(sys.argv[1]) # CONTROL! n = int(sys.argv[1]) if sys.argv[1].lstrip(\"-\").isdigit() else None\nValueError: invalid literal for int() with base 10: '12abc'"
+  },
+  "covariant_array_write": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "meow",
+   "stderr": "",
+   "tool": "FLAGGED",
+   "tool_output": "main.py:22: error: Incompatible types in assignment (expression has type \"list[Dog]\", variable has type \"list[Animal]\")  [assignment]\nmain.py:22: note: \"list\" is invariant -- see https://mypy.readthedocs.io/en/stable/common_issues.html#variance\nmain.py:22: note: Consider using \"Sequence\" instead, which is covariant"
+  },
+  "mutate_while_iterating": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1,2,3",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2,2,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "repeated_row_alias": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/ignored_error_result/main/main.py\", line 6, in <module>\n    save(\"/dev/null/out.txt\") # BREAK!\n    ~~~~^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/breakbench/ignored_error_result/main/main.py\", line 2, in save\n    with open(path, \"w\") as f:\n         ~~~~^^^^^^^^^^^\nNotADirectoryError: [Errno 20] Not a directory: '/dev/null/out.txt'"
+  },
+  "sort_with_nan": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "unordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "3.5",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "outcome": "REJECTED",
+   "message": "File \"main.py\", line 1\n    zip_code = 01234  # BREAK!\n               ^\nSyntaxError: leading zeros in decimal integer literals are not permitted; use an 0o prefix for octal integers",
+   "control": "builds"
+  },
+  "shared_default_argument": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "12 0",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "not a",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "outside",
+   "stderr": ""
+  },
+  "lost_update_on_copy": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "150",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "regex_backtracking": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 10.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "regex_trailing_newline": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "accepted",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "odd",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "return_in_finally": {
+   "build_output": "main.py:14: SyntaxWarning: 'return' in a 'finally' block\n  return  # BREAK!",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "saved",
+   "stderr": "/tmp/breakbench/return_in_finally/main/main.py:14: SyntaxWarning: 'return' in a 'finally' block\n  return  # BREAK!",
+   "tool": "FLAGGED",
+   "tool_output": "main.py:14: SyntaxWarning: 'return' in a 'finally' block"
+  },
+  "return_line_break": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "None",
+   "stderr": "",
+   "tool": "FLAGGED",
+   "tool_output": "main.py:2: error: Return value expected  [return-value]\nmain.py:3: error: Statement is unreachable  [unreachable]"
+  },
+  "worker_failure_lost": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "total 3",
+   "stderr": "Exception in thread Thread-1 (add_all):\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.15/threading.py\", line 1219, in _bootstrap_inner\n    self._context.run(self.run)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^\n  File \"/usr/local/lib/python3.15/threading.py\", line 1161, in run\n    self._target(*self._args, **self._kwargs)\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/breakbench/worker_failure_lost/main/main.py\", line 11, in add_all\n    total += int(item) # BREAK!\n             ~~~^^^^^^\nValueError: invalid literal for int() with base 10: 'x'"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "0",
+   "stderr": "/tmp/breakbench/unawaited_task/main/main.py:11: RuntimeWarning: coroutine 'save' was never awaited\n  save(store)  # CONTROL! await save(store)\nRuntimeWarning: Enable tracemalloc to get the object allocation traceback",
+   "tool": "FLAGGED",
+   "tool_output": "main.py:11: error: Value of type \"Coroutine[Any, Any, None]\" must be used  [unused-coroutine]\nmain.py:11: note: Are you missing an await?"
+  },
+  "format_arg_mismatch": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/format_arg_mismatch/main/main.py\", line 3, in <module>\n    print(\"{} of {}\".format(done))  # CONTROL! print(\"{} of {}\".format(done, total))\n          ~~~~~~~~~~~~~~~~~^^^^^^\nIndexError: Replacement index 1 out of range for positional args tuple",
+   "tool": "FLAGGED",
+   "tool_output": "main.py:3: error: Cannot find replacement for positional format specifier 1  [str-format]"
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/missing_key_default/main/main.py\", line 5, in <module>\n    print(stock[name] + 5) # CONTROL! print(stock[name] + 5 if name in stock else \"unknown\")\n          ~~~~~^^^^^^\nKeyError: 'pear'"
+  },
+  "mutable_hash_key": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/mutable_hash_key/main/main.py\", line 3, in <module>\n    seen.add(key)\n    ~~~~~~~~^^^^^\nTypeError: cannot use 'list' as a set element (unhashable type: 'list')"
+  },
+  "shadowed_assignment": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "done",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "-20",
+   "stderr": ""
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "missing",
+   "stderr": "",
+   "tool": "FLAGGED",
+   "tool_output": "main.py:5: error: Non-overlapping container check (element type: \"str\", container item type: \"int\")  [comparison-overlap]"
+  },
+  "panic_under_lock": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "unbalanced",
+   "stderr": "Exception in thread Thread-1 (post):\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.15/threading.py\", line 1219, in _bootstrap_inner\n    self._context.run(self.run)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^\n  File \"/usr/local/lib/python3.15/threading.py\", line 1161, in run\n    self._target(*self._args, **self._kwargs)\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/breakbench/panic_under_lock/main/main.py\", line 11, in post\n    raise RuntimeError(\"crash mid-update\") # CONTROL! ledger[\"debits\"] -= 50; raise RuntimeError(\"crash mid-update\")\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: crash mid-update"
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/oob_write/main/main.py\", line 11, in <module>\n    f.buf[int(sys.argv[1])] = 99 # CONTROL! i = int(sys.argv[1])\n    ~~~~~^^^^^^^^^^^^^^^^^^\nIndexError: list assignment index out of range"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/oob_read/main/main.py\", line 11, in <module>\n    print(f.buf[int(sys.argv[1])]) # CONTROL! i = int(sys.argv[1])\n          ~~~~~^^^^^^^^^^^^^^^^^^\nIndexError: list index out of range"
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/wrong_variant_access/main/main.py\", line 2, in <module>\n    print(len(v)) # CONTROL! print(len(v) if isinstance(v, str) else \"not text\")\n          ~~~^^^\nTypeError: object of type 'int' has no len()",
+   "tool": "FLAGGED",
+   "tool_output": "main.py:2: error: Argument 1 to \"len\" has incompatible type \"int | str\"; expected \"Sized\"  [arg-type]"
+  },
+  "format_string": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/format_string/main/main.py\", line 3, in <module>\n    print(sys.argv[1] % ()) # CONTROL! print(sys.argv[1])\n          ~~~~~~~~~~~~^~~~\nTypeError: not enough arguments for format string (got 0)"
+  },
+  "trojan_source": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "admin",
+   "stderr": ""
+  },
+  "unsafe_deserialization": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "null_byte_path": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "admin\nadmin",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/string_literal_write/main/main.py\", line 2, in <module>\n    greeting[0] = \"j\"  # CONTROL! greeting = \"j\" + greeting[1:]\n    ~~~~~~~~^^^\nTypeError: 'str' object does not support item assignment",
+   "tool": "FLAGGED",
+   "tool_output": "main.py:2: error: Unsupported target for indexed assignment (\"str\")  [index]"
+  },
+  "reference_cycle": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.31,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "forgotten_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.31,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "complete_init": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/complete_init/main/main.py\", line 10, in <module>\n    c = Config(timeout=30)  # CONTROL! c = Config(timeout=30, retries=3)\nTypeError: Config.__init__() missing 1 required positional argument: 'retries'",
+   "tool": "FLAGGED",
+   "tool_output": "main.py:10: error: Missing positional argument \"retries\" in call to \"Config\"  [call-arg]"
+  },
+  "override_check": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "shape",
+   "stderr": "",
+   "tool": "FLAGGED",
+   "tool_output": "main.py:11: error: Method \"descibe\" is marked as an override, but no base method was found with this name  [misc]"
+  },
+  "missing_virtual": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "area 4",
+   "stderr": ""
+  },
+  "unbound_method": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "before",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/forced_unwrap/main/main.py\", line 7, in <module>\n    assert found is not None # CONTROL! if found is None: print(\"missing\")\n           ^^^^^^^^^^^^^^^^^\nAssertionError"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "hello, None",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "user",
+   "stderr": "",
+   "safer": {
+    "outcome": "TRAPPED",
+    "control": "verified",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/not_found_sentinel.safer/main/main.py\", line 4, in <module>\n    pos = line.index(\":\") # CONTROL! pos = line.find(\":\")\nValueError: substring not found"
+   }
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/empty_max/main/main.py\", line 4, in <module>\n    print(max(xs) + 1) # CONTROL! print(max(xs) + 1 if xs else \"no readings\")\n          ~~~^^^^\nValueError: max() iterable argument is empty"
+  },
+  "readonly_param": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/literal_range/main/main.py\", line 1, in <module>\n    b = bytes([300])[0] # CONTROL! b = int.from_bytes((300).to_bytes(2, \"big\"), \"big\")\n        ~~~~~^^^^^^^\nValueError: bytes must be in range(0, 256)"
+  },
+  "no_implicit_conversion": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "3000000000",
+   "stderr": ""
+  },
+  "generic_constraint": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/generic_constraint/main/main.py\", line 10, in <module>\n    ps = sorted([Point(3, 4), Point(1, 2)])  # CONTROL! ps = sorted([Point(3, 4), Point(1, 2)], key=lambda p: (p.x, p.y))\nTypeError: '<' not supported between instances of 'Point' and 'Point'",
+   "tool": "FLAGGED",
+   "tool_output": "main.py:10: error: Value of type variable \"SupportsRichComparisonT\" of \"sorted\" cannot be \"Point\"  [type-var]"
+  },
+  "lossy_int_to_float": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "9007199254740992",
+   "stderr": ""
+  },
+  "const_index_bounds": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/const_index_bounds/main/main.py\", line 2, in <module>\n    print(table[5]) # CONTROL! print(table[1])\n          ~~~~~^^^\nIndexError: list index out of range"
+  },
+  "lazy_accumulator": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.69,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/size_overflow_alloc/main/main.py\", line 6, in <module>\n    records = bytearray(size)\nOverflowError: cannot fit 'int' into an index-sized integer"
+  },
+  "const_overflow": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "9460800000000000000",
+   "stderr": ""
+  },
+  "orphaned_receive": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": "Exception in thread Thread-1 (<lambda>):\nTraceback (most recent call last):\n  File \"/usr/local/lib/python3.15/threading.py\", line 1219, in _bootstrap_inner\n    self._context.run(self.run)\n    ~~~~~~~~~~~~~~~~~^^^^^^^^^^\n  File \"/usr/local/lib/python3.15/threading.py\", line 1161, in run\n    self._target(*self._args, **self._kwargs)\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/tmp/breakbench/orphaned_receive/main/main.py\", line 5, in <lambda>\n    threading.Thread(target=lambda: answer.put(int(\"x\"))).start() # CONTROL! threading.Thread(target=lambda: answer.put(int(\"x\") if \"x\".isdigit() else None)).start()\n                                               ~~~^^^^^\nValueError: invalid literal for int() with base 10: 'x'"
+  },
+  "blocking_in_async": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 1.05,
+   "stdout": "serial",
+   "stderr": ""
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "REJECTED",
+   "message": "File \"main.py\", line 11\n    case _:  # BREAK!\n         ^\nSyntaxError: wildcard makes remaining patterns unreachable",
+   "control": "builds"
+  },
+  "duplicate_key": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "json_big_integer": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "9007199254740993",
+   "stderr": ""
+  },
+  "parse_out_of_range": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "9223372036854775808",
+   "stderr": ""
+  },
+  "json_nan": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/json_nan/main/main.py\", line 5, in <module>\n    mean = 0.0 / count # CONTROL! mean = 0.0 / count if count else float(\"nan\")\n           ~~~~^~~~~~~\nZeroDivisionError: division by zero"
+  },
+  "comparison_statement": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "typo_compound_assign": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "structural_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/array_literal_length/main/main.py\", line 2, in <module>\n    print(table[3])\n          ~~~~~^^^\nIndexError: list index out of range"
+  },
+  "enum_from_int": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "before",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/enum_from_int/main/main.py\", line 12, in <module>\n    print(Color(int(sys.argv[1]))) # CONTROL! n = int(sys.argv[1]); print(Color(n) if n in {c.value for c in Color} else \"invalid\")\n          ~~~~~^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.15/enum.py\", line 733, in __call__\n    return cls.__new__(cls, value)\n           ~~~~~~~~~~~^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.15/enum.py\", line 1222, in __new__\n    raise ve_exc\nValueError: 7 is not a valid Color"
+  },
+  "bitwise_on_bool": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/bitwise_on_bool/main/main.py\", line 2, in <module>\n    print(\"yes\" if (len(s) > 0) & (s[0] == \"a\") else \"no\") # CONTROL! print(\"yes\" if (len(s) > 0) and (s[0] == \"a\") else \"no\")\n                                   ~^^^\nIndexError: string index out of range"
+  },
+  "readonly_field": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/readonly_field/main/main.py\", line 10, in <module>\n    c.port = 1  # BREAK!\n    ^^^^^^\n  File \"<string>\", line 15, in __setattr__\ndataclasses.FrozenInstanceError: cannot assign to field 'port'",
+   "tool": "FLAGGED",
+   "tool_output": "main.py:10: error: Property \"port\" defined in \"Config\" is read-only  [misc]"
+  },
+  "bool_condition": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "different",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "OSError: [Errno 28] No space left on device\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/tmp/breakbench/lost_write_error/main/main.py\", line 1, in <module>\n    with open(\"/dev/full\", \"w\") as f: # BREAK!\n         ~~~~^^^^^^^^^^^^^^^^^^\nOSError: [Errno 28] No space left on device"
+  },
+  "short_read": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "HELLO-WORLD-1234",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "close failed",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "total=42",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "backed up",
+   "stderr": "",
+   "safer": {
+    "outcome": "TRAPPED",
+    "control": "verified",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/child_exit_status.safer/main/main.py\", line 3, in <module>\n    subprocess.run([\"sh\", \"-c\", \"exit 3\"], check=True) # CONTROL! if subprocess.run([\"sh\", \"-c\", \"exit 3\"]).returncode != 0: print(\"backup failed\"); raise SystemExit(0)\n    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.15/subprocess.py\", line 692, in run\n    raise CalledProcessError(retcode, process.args,\n                             output=stdout, stderr=stderr)\nsubprocess.CalledProcessError: Command ['sh', '-c', 'exit 3'] returned non-zero exit status 3."
+   }
+  },
+  "nullable_field": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/nullable_field/main/main.py\", line 10, in <module>\n    print(len(decoded.name)) # CONTROL! print(\"no name\" if decoded.name is None else len(decoded.name))\n          ~~~^^^^^^^^^^^^^^\nTypeError: object of type 'NoneType' has no len()",
+   "tool": "FLAGGED",
+   "tool_output": "main.py:10: error: Argument 1 to \"len\" has incompatible type \"str | None\"; expected \"Sized\"  [arg-type]"
+  },
+  "stale_null_check": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/stale_null_check/main/main.py\", line 21, in <module>\n    print(len(session.user.name)) # CONTROL! logout(session)\n              ^^^^^^^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'name'"
+  },
+  "empty_slot": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/empty_slot/main/main.py\", line 12, in <module>\n    print(len(users[0].name)) # CONTROL! print(\"missing\" if users[0] is None else len(users[0].name))\n              ^^^^^^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'name'",
+   "tool": "FLAGGED",
+   "tool_output": "main.py:12: error: Item \"None\" of \"User | None\" has no attribute \"name\"  [union-attr]"
+  },
+  "typed_nil": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "missing_json_field": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/missing_json_field/main/main.py\", line 4, in <module>\n    print(user[\"age\"] + 1)\n          ~~~~^^^^^^^\nKeyError: 'age'"
+  },
+  "mutate_after_send": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "99",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "lock_skipped_on_return": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "cleanup_on_error_path": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "cleaned",
+   "stderr": ""
+  },
+  "generator_break_cleanup": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "cleaned",
+   "stderr": ""
+  },
+  "main_error_exit_code": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "config missing: [Errno 2] No such file or directory: '/nonexistent/bb.conf'"
+  },
+  "catch_all_hides_bug": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "invalid order",
+   "stderr": ""
+  },
+  "assert_side_effect": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "narrow_counter_loop": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no 8-bit integer type; int has no fixed width"
+  },
+  "timeout_without_cancel": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.16,
+   "stdout": "70",
+   "stderr": ""
+  },
+  "blocked_sender_leak": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "42\ndone",
+   "stderr": ""
+  }
+ }
+}

@@ -10,10 +10,19 @@ This is a general signal, and not meant to be an absolute ranking of these langu
 
 "How much does a language help the programmer avoid production bugs?" is the primary driver.
 
-Score: the mean over the tests a language can attempt, as a percentage; every test counts once.
-N/A tests need a feature the language lacks (a mutex, threads, a JSON parser) and are left out, not
-counted against it; the leaderboard shows them as Language gaps. The Details tab shows each category
-as correct / attempted / total.
+Score: the mean over the tests a language can attempt, as a percentage; every test counts once. It
+ranks the leaderboard. Beside it:
+
+| Column | What it shows |
+|---|---|
+| Coverage | The share of all tests the language can attempt. N/A tests need a feature it lacks (a mutex, threads, a JSON parser) and are left out of its score, so a small feature set shows here. |
+| By category | The same results with every category weighted alike. |
+| By severity | The same results with each test weighted by the harm its failure mode does in production: critical 3, high 2, moderate 1. |
+| With tools | The score with the linters, compiler warnings and sanitizers the language project ships. |
+
+The Details tab splits the score into tests of language constructs and tests of standard-library
+calls, shows the score when a program uses the standard library's safer call for the job, and
+breaks results down by category and by failure mode.
 
 Each language runs its latest release, built from LangArena's Dockerfiles or the language's own
 images.
@@ -28,17 +37,28 @@ images.
 
 ## What the score measures
 
-The score measures the language itself: its compiler or interpreter, its runtime, and the switches
-they offer that make the compiler refuse more programs or the program stop on more bugs (checked
-arithmetic, a debug build, assertions, strict type checking). Linters, sanitizers and third-party
-checkers are left out, even where the language's project ships them (clippy, `go vet`, AddressSanitizer,
-mypy). Those tools raise a language's score, and how much each language gets from them varies, so
-counting them would measure tooling as much as language design. Python with mypy appears on the
-leaderboard as one unranked example of how much a checker adds.
+The ranked score measures the language itself: its compiler or interpreter, its runtime, and the
+switches they offer that make the compiler refuse more programs or the program stop on more bugs
+(checked arithmetic, a debug build, assertions, strict type checking).
+
+The With tools score adds what the language project ships for finding bugs: clippy, `go vet` and the
+race detector, `gos lint`, `dart analyze`, the .NET analyzers, mypy, compiler warnings, the Clang
+Static Analyzer, and AddressSanitizer with UndefinedBehaviorSanitizer. A finding counts only when it
+points at the bug's lines and the program without the bug does not get it. A linter or warning
+earns 1, since CI that fails on warnings stops the bug before it ships; a sanitizer report earns
+0.25, like a stop only the debug build makes. Third-party checkers count in neither score.
+
+Results separate three layers. Tests of language constructs make the bug with an operator, a cast, a
+type, a declaration or control flow; tests of standard-library calls make it through a call such as
+a read, a lookup or a process run. Where the same standard library has a safer call for the job
+(`io.ReadFull`, `readNBytes`, `try_from`, `Math.addExact`, an argument-list process call), the
+program also runs with that call as `<language>/<test>.safer.<ext>`, scored apart from the ranking.
+A check the programmer writes by hand is the fourth layer: it is the fixed program every result is
+checked against, and any language can write it.
 
 ## Tests
 
-126 tests in thirteen categories. Each has a CWE or CERT entry, a CVE, or appears in a language's
+127 tests in thirteen categories. Each has a CWE or CERT entry, a CVE, or appears in a language's
 pitfall list, and covers a mistake no other test covers; `harness/problems.json` gives each test's
 reference and failure mode, and the site's Notes tab maps the failure modes to their tests. Each test is one scenario: the same steps, inputs and
 expected answer in every language, written the way that language teaches first. The code follows the
@@ -58,7 +78,7 @@ rules the mistake out, and where its documentation sent a program to another cal
 | Error handling | 9 | A failure goes unseen: an ignored result, a catch-all that turns a bug into bad input, a failed run that exits with success, a return in a cleanup block, a cleanup failure that hides the original error, a read that returns part of a message, a buffered file never flushed, a failed command treated as a success, ... |
 | Resource cleanup | 2 | A file or lock outlives the code that should remove it: a failure that skips the cleanup, a loop that breaks out of a sequence holding it |
 | Security | 8 | Input from outside takes control: command injection, a NUL byte that cuts a file name short, user text as a format string, an object restored from untrusted bytes, hidden or look-alike characters in source, ... |
-| Null safety | 11 | The program uses a value that may be missing as if it were there: a lookup that found nothing, a search that returned -1, a missing name printed as text, a check a later call undoes, an empty pointer passed on as an error, ... |
+| Null safety | 12 | The program uses a value that may be missing as if it were there: a lookup that found nothing, a search that returned -1, a field missing from decoded JSON, a missing name printed as text, a check a later call undoes, an empty pointer passed on as an error, ... |
 | Memory safety | 14 | The program reads or writes memory it does not own, or keeps memory it dropped: use after free, out-of-bounds writes, records never freed, records that keep each other alive, a size that overflows before the allocation, a running total that keeps every message alive, ... |
 | Concurrency | 11 | Threads or tasks interfere: a deadlock, an early return that skips the unlock, a failure in the middle of a locked update, a wake-up sent before anyone waits, a timed-out task that keeps running, a worker stuck sending an answer nobody takes, ... |
 
@@ -108,16 +128,19 @@ Release builds use the standard build tool's release profile with no extra switc
 their safe release mode; C and C++ use CMake Release. `assert_side_effect` runs only the release
 build, because its bug exists only there.
 
-Categories group results; they do not weight them. Warnings never score (no pattern reliably ties a
-warning to the bug); the site shows compiler output, unscored.
+Categories group results in the ranked score; By category weights them alike. Each test is one program
+with one input, so the bench measures a class of mistake through its failure modes: each holds several
+tests that make the same kind of mistake in different ways, and the Details tab shows each language's
+result per mode. Warnings and linters score only in With tools.
 
 
 ## Notes
 
 The site's [Notes tab](https://danpozmanter.github.io/BreakBench/#notes) holds every note in one
-place: the build commands for each language, the release builds, what counts as standard, the removed
-tests, the N/A and design rules, the results that are right only by chance, where the docs sent a
-program to another call, the paths that cost points, and each test's limits.
+place: the build commands for each language, the tools behind With tools, the release builds, what
+counts as standard, the removed tests, the N/A and design rules, the results that are right only by
+chance, where the docs sent a program to another call, the safer calls and what they scored, and
+each test's limits.
 
 ## History
 

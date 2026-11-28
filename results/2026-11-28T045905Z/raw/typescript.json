@@ -1,0 +1,876 @@
+{
+ "lang": "typescript",
+ "version": "tsc Version 7.0.2 / node v26.13.1",
+ "results": {
+  "null_deref": {
+   "outcome": "REJECTED",
+   "message": "main.ts(10,13): error TS18047: 'u' is possibly 'null'.",
+   "control": "builds"
+  },
+  "int_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "9223372036854776000",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "Infinity",
+   "stderr": ""
+  },
+  "int_min_division": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "9223372036854776000",
+   "stderr": ""
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "100000000000000000000",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "main.ts(6,17): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'number'.\n  Type 'undefined' is not assignable to type 'number'.",
+   "control": "builds"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "main.ts(1,32): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.",
+   "control": "builds"
+  },
+  "non_exhaustive_match": {
+   "outcome": "REJECTED",
+   "message": "main.ts(7,26): error TS2366: Function lacks ending return statement and return type does not include 'undefined'.",
+   "control": "builds"
+  },
+  "uninitialized_variable": {
+   "outcome": "REJECTED",
+   "message": "main.ts(4,13): error TS2454: Variable 'x' is used before being assigned.",
+   "control": "builds"
+  },
+  "global_init_order": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/global_init_order/main/out/main.js:7\n    return baseValue;\n    ^\n\nReferenceError: Cannot access 'baseValue' before initialization\n    at base (/tmp/breakbench/global_init_order/main/out/main.js:7:5)\n    at Object.<anonymous> (/tmp/breakbench/global_init_order/main/out/main.js:3:15)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1"
+  },
+  "assign_in_condition": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "one",
+   "stderr": "x is 1"
+  },
+  "switch_fallthrough": {
+   "outcome": "REJECTED",
+   "message": "main.ts(4,3): error TS7029: Fallthrough case in switch.",
+   "control": "builds"
+  },
+  "break_in_switch": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "missing",
+   "stderr": ""
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "loose_equality": {
+   "outcome": "REJECTED",
+   "message": "main.ts(2,13): error TS2367: This comparison appears to be unintentional because the types 'string' and 'number' have no overlap.",
+   "control": "builds"
+  },
+  "parse_invalid_number": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "13",
+   "stderr": ""
+  },
+  "covariant_array_write": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "meow",
+   "stderr": ""
+  },
+  "mutate_while_iterating": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1,2,3",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "repeated_row_alias": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "node:fs:3028\n    return binding.writeFileUtf8(\n                   ^\n\nError: ENOTDIR: not a directory, open '/dev/null/out.txt'\n    at Object.writeFileSync (node:fs:3028:20)\n    at save (/tmp/breakbench/ignored_error_result/main/out/main.js:38:8)\n    at Object.<anonymous> (/tmp/breakbench/ignored_error_result/main/out/main.js:40:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  errno: -20,\n  code: 'ENOTDIR',\n  syscall: 'open',\n  path: '/dev/null/out.txt'\n}\n\nNode.js v26.13.1"
+  },
+  "sort_with_nan": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "unordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "3.5",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "outcome": "REJECTED",
+   "message": "main.ts(1,13): error TS1121: Octal literals are not allowed. Use the syntax '0o1234'.",
+   "control": "builds"
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "12 0",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "REJECTED",
+   "message": "main.ts(2,18): error TS2363: The right-hand side of an arithmetic operation must be of type 'any', 'number', 'bigint' or an enum type.\nmain.ts(2,18): error TS2367: This comparison appears to be unintentional because the types '1' and '0' have no overlap.",
+   "control": "builds"
+  },
+  "dangling_else": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "unset",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "main.ts(2,16): error TS2365: Operator '<' cannot be applied to types 'boolean' and 'number'.",
+   "control": "builds"
+  },
+  "lost_update_on_copy": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "150",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no mutex in the language or its standard library"
+  },
+  "regex_backtracking": {
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 10.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "regex_trailing_newline": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "main.ts(4,3): error TS1005: ',' expected.",
+   "control": "builds"
+  },
+  "return_in_finally": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "REJECTED",
+   "message": "main.ts(2,3): error TS2322: Type 'undefined' is not assignable to type 'number'.\nmain.ts(3,5): error TS7027: Unreachable code detected.",
+   "control": "builds"
+  },
+  "worker_failure_lost": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/worker_failure_lost/main/out/main.js:8\n            throw new Error(`bad number: ${item}`);\n                  ^\n\nError: bad number: x\n    at sum (/tmp/breakbench/worker_failure_lost/main/out/main.js:8:19)\n    at main (/tmp/breakbench/worker_failure_lost/main/out/main.js:14:20)\n    at Object.<anonymous> (/tmp/breakbench/worker_failure_lost/main/out/main.js:18:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.06,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "3 of %d",
+   "stderr": ""
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "REJECTED",
+   "message": "main.ts(3,13): error TS2532: Object is possibly 'undefined'.",
+   "control": "builds"
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "pending",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "REJECTED",
+   "message": "main.ts(3,13): error TS2532: Object is possibly 'undefined'.\nmain.ts(3,27): error TS2532: Object is possibly 'undefined'.",
+   "control": "builds"
+  },
+  "default_numeric_sort": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1 10 9",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "main.ts(3,26): error TS2345: Argument of type 'string' is not assignable to parameter of type 'number'.",
+   "control": "builds"
+  },
+  "panic_under_lock": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no mutex in the language or its standard library"
+  },
+  "oob_write": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "oob_read": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "undefined",
+   "stderr": ""
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "wrong_variant_access": {
+   "outcome": "REJECTED",
+   "message": "main.ts(4,15): error TS2339: Property 'text' does not exist on type 'Value'.\n  Property 'text' does not exist on type '{ kind: \"int\"; value: number; }'.",
+   "control": "builds"
+  },
+  "format_string": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "%s%s%n{}{0}",
+   "stderr": ""
+  },
+  "trojan_source": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "admin",
+   "stderr": ""
+  },
+  "unsafe_deserialization": {
+   "outcome": "SAFE_BY_DESIGN",
+   "message": "JSON.parse builds only plain data; nothing in the standard library rebuilds a named class"
+  },
+  "null_byte_path": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "admin\nadmin",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "main.ts(2,1): error TS2542: Index signature in type 'String' only permits reading.",
+   "control": "builds"
+  },
+  "reference_cycle": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 1.28,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "forgotten_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 1.23,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "complete_init": {
+   "outcome": "REJECTED",
+   "message": "main.ts(4,7): error TS2741: Property 'retries' is missing in type '{ timeout: number; }' but required in type 'Config'.\nmain.ts(4,7): error TS6133: 'partial' is declared but its value is never read.",
+   "control": "builds"
+  },
+  "override_check": {
+   "outcome": "REJECTED",
+   "message": "main.ts(11,12): error TS4117: This member cannot have an 'override' modifier because it is not declared in the base class 'Shape'. Did you mean 'describe'?",
+   "control": "builds"
+  },
+  "missing_virtual": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "area 4",
+   "stderr": ""
+  },
+  "unbound_method": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/unbound_method/main/out/main.js:6\n        this.count += 1;\n        ^\n\nTypeError: Cannot read properties of undefined (reading 'count')\n    at increment (/tmp/breakbench/unbound_method/main/out/main.js:6:9)\n    at runTwice (/tmp/breakbench/unbound_method/main/out/main.js:10:5)\n    at Object.<anonymous> (/tmp/breakbench/unbound_method/main/out/main.js:14:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1"
+  },
+  "forced_unwrap": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "before\nNaN",
+   "stderr": ""
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "hello, null",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "-Infinity",
+   "stderr": ""
+  },
+  "readonly_param": {
+   "outcome": "REJECTED",
+   "message": "main.ts(2,3): error TS2542: Index signature in type 'readonly number[]' only permits reading.",
+   "control": "builds"
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "no_implicit_conversion": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "3000000000",
+   "stderr": ""
+  },
+  "generic_constraint": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "lossy_int_to_float": {
+   "outcome": "REJECTED",
+   "message": "main.ts(7,6): error TS2345: Argument of type 'bigint' is not assignable to parameter of type 'number'.",
+   "control": "builds"
+  },
+  "const_index_bounds": {
+   "outcome": "REJECTED",
+   "message": "main.ts(3,19): error TS2493: Tuple type 'readonly [number, number, number]' of length '3' has no element at index '5'.",
+   "control": "builds"
+  },
+  "lazy_accumulator": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 4.5,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/size_overflow_alloc/main/out/main.js:6\nconst records = new Uint8Array(size);\n                ^\n\nRangeError: Invalid typed array length: 18446744073709552000\n    at new Uint8Array (<anonymous>)\n    at Object.<anonymous> (/tmp/breakbench/size_overflow_alloc/main/out/main.js:6:17)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1"
+  },
+  "const_overflow": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "9460800000000000000",
+   "stderr": ""
+  },
+  "orphaned_receive": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/orphaned_receive/main/out/main.js:9\n            throw new Error(\"not a number: x\"); // CONTROL! if (Number.isNaN(n)) { deliver(null); return; }\n                  ^\n\nError: not a number: x\n    at /tmp/breakbench/orphaned_receive/main/out/main.js:9:19\n    at main (/tmp/breakbench/orphaned_receive/main/out/main.js:11:7)\n    at Object.<anonymous> (/tmp/breakbench/orphaned_receive/main/out/main.js:14:1)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1"
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.52,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "REJECTED",
+   "message": "main.ts(6,7): error TS2358: The left-hand side of an 'instanceof' expression must be of type 'any', an object type or a type parameter.",
+   "control": "builds"
+  },
+  "duplicate_key": {
+   "outcome": "REJECTED",
+   "message": "main.ts(3,33): error TS1117: An object literal cannot have multiple properties with the same name.",
+   "control": "builds"
+  },
+  "json_big_integer": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "9007199254740993",
+   "stderr": ""
+  },
+  "parse_out_of_range": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "9223372036854776000",
+   "stderr": ""
+  },
+  "json_nan": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "{\"mean\":null}",
+   "stderr": ""
+  },
+  "comparison_statement": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "typo_compound_assign": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "structural_equality": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "different",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "REJECTED",
+   "message": "main.ts(3,7): error TS2322: Type '[number, number, number]' is not assignable to type 'readonly [number, number, number, number]'.\n  Source has 3 element(s) but target requires 4.",
+   "control": "builds"
+  },
+  "enum_from_int": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "before\n7",
+   "stderr": ""
+  },
+  "bitwise_on_bool": {
+   "outcome": "REJECTED",
+   "message": "main.ts(3,20): error TS2447: The '&' operator is not allowed for boolean types. Consider using '&&' instead.",
+   "control": "builds"
+  },
+  "readonly_field": {
+   "outcome": "REJECTED",
+   "message": "main.ts(6,3): error TS2540: Cannot assign to 'port' because it is a read-only property.",
+   "control": "builds"
+  },
+  "bool_condition": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "different",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "node:fs:3028\n    return binding.writeFileUtf8(\n                   ^\n\nError: ENOSPC: no space left on device, write\n    at writeFileSync (node:fs:3028:20)\n    at Object.<anonymous> (/tmp/breakbench/lost_write_error/main/out/main.js:4:29)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47 {\n  errno: -28,\n  code: 'ENOSPC',\n  syscall: 'write'\n}\n\nNode.js v26.13.1"
+  },
+  "short_read": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.22,
+   "stdout": "HELLO-WORLD-1234",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "close failed",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "total=42",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "node:child_process:1029\n    throw err;\n    ^\n\nError: Command failed: sh -c exit 3\n    at genericNodeError (node:internal/errors:999:15)\n    at wrappedFn (node:internal/errors:544:14)\n    at checkExecSyncError (node:child_process:990:11)\n    at execFileSync (node:child_process:1026:15)\n    at Object.<anonymous> (/tmp/breakbench/child_exit_status/main/out/main.js:4:39)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19) {\n  status: 3,\n  signal: null,\n  output: [ null, Buffer(0) [Uint8Array] [], Buffer(0) [Uint8Array] [] ],\n  pid: 10205,\n  stdout: Buffer(0) [Uint8Array] [],\n  stderr: Buffer(0) [Uint8Array] []\n}\n\nNode.js v26.13.1"
+  },
+  "nullable_field": {
+   "outcome": "REJECTED",
+   "message": "main.ts(3,13): error TS18047: 'decoded.name' is possibly 'null'.",
+   "control": "builds"
+  },
+  "stale_null_check": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/stale_null_check/main/out/main.js:9\n    console.log(session.user.name.length); // CONTROL! logout(session);\n                             ^\n\nTypeError: Cannot read properties of null (reading 'name')\n    at Object.<anonymous> (/tmp/breakbench/stale_null_check/main/out/main.js:9:30)\n    at Module._compile (node:internal/modules/cjs/loader:1968:14)\n    at Object..js (node:internal/modules/cjs/loader:2108:10)\n    at Module.load (node:internal/modules/cjs/loader:1690:32)\n    at Module._load (node:internal/modules/cjs/loader:1480:12)\n    at wrapModuleLoad (node:internal/modules/cjs/loader:261:19)\n    at Module.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)\n    at node:internal/main/run_main_module:33:47\n\nNode.js v26.13.1"
+  },
+  "empty_slot": {
+   "outcome": "REJECTED",
+   "message": "main.ts(8,13): error TS2532: Object is possibly 'undefined'.",
+   "control": "builds"
+  },
+  "typed_nil": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "missing_json_field": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "NaN",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "lock_skipped_on_return": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no mutex in the language or its standard library"
+  },
+  "cleanup_on_error_path": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "left behind: export.csv",
+   "stderr": ""
+  },
+  "generator_break_cleanup": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "cleaned",
+   "stderr": ""
+  },
+  "main_error_exit_code": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "config missing: Error: ENOENT: no such file or directory, open '/nonexistent/bb.conf'"
+  },
+  "catch_all_hides_bug": {
+   "outcome": "REJECTED",
+   "message": "main.ts(3,31): error TS2345: Argument of type 'string | undefined' is not assignable to parameter of type 'string'.\n  Type 'undefined' is not assignable to type 'string'.",
+   "control": "builds"
+  },
+  "assert_side_effect": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "narrow_counter_loop": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no 8-bit integer type for a variable; numbers are doubles and BigInts"
+  },
+  "timeout_without_cancel": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.12,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "blocked_sender_leak": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "42\ndone",
+   "stderr": ""
+  }
+ }
+}

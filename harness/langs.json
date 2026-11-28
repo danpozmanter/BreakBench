@@ -15,6 +15,18 @@
         "clang -std=c23 -O3 -DNDEBUG -pthread -o main main.c"
       ],
       "run": "./main"
+    },
+    "tools": {
+      "check": [
+        "clang -std=c23 -Weverything -Wno-declaration-after-statement -Wno-unsafe-buffer-usage -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-pre-c23-compat -Wno-padded -fsyntax-only main.c",
+        "clang -std=c23 --analyze -Xanalyzer -analyzer-output=text -o /dev/null main.c"
+      ],
+      "sanitize": {
+        "build": [
+          "clang -std=c23 -O0 -g -fsanitize=address,undefined -fno-sanitize-recover=undefined -fno-omit-frame-pointer -pthread -o main main.c"
+        ],
+        "run": "./main"
+      }
     }
   },
   "cpp": {
@@ -34,6 +46,18 @@
         "clang++ -std=c++23 -O3 -DNDEBUG -pthread -o main main.cpp -lstdc++exp"
       ],
       "run": "./main"
+    },
+    "tools": {
+      "check": [
+        "clang++ -std=c++23 -Weverything -Wno-declaration-after-statement -Wno-unsafe-buffer-usage -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-pre-c23-compat -Wno-padded -D_GLIBCXX_ASSERTIONS -fsyntax-only main.cpp",
+        "clang++ -std=c++23 --analyze -Xanalyzer -analyzer-output=text -o /dev/null main.cpp"
+      ],
+      "sanitize": {
+        "build": [
+          "clang++ -std=c++23 -O0 -g -fsanitize=address,undefined -fno-sanitize-recover=undefined -fno-omit-frame-pointer -D_GLIBCXX_ASSERTIONS -pthread -o main main.cpp -lstdc++exp"
+        ],
+        "run": "./main"
+      }
     }
   },
   "rust": {
@@ -53,6 +77,14 @@
         "rustc --edition 2024 -C opt-level=3 --extern regex=/opt/rustdeps/libregex.rlib -L dependency=/opt/rustdeps/lib -o main main.rs"
       ],
       "run": "./main"
+    },
+    "tools": {
+      "check": [
+        "clippy-driver --edition 2024 -W clippy::pedantic --extern regex=/opt/rustdeps/libregex.rlib -L dependency=/opt/rustdeps/lib -o main_clippy main.rs"
+      ],
+      "unrelated": {
+        "panic_under_lock": "clippy's manual_assert asks for assert! in place of if and panic!; it says nothing about the half-updated ledger"
+      }
     }
   },
   "zig": {
@@ -85,7 +117,18 @@
       "cp /opt/gomod/go.mod /opt/gomod/go.sum . && GOFLAGS=-buildvcs=false go build -o main main.go"
     ],
     "run": "./main",
-    "version": "go version"
+    "version": "go version",
+    "tools": {
+      "check": [
+        "GOFLAGS=-buildvcs=false go vet main.go"
+      ],
+      "sanitize": {
+        "build": [
+          "cp /opt/gomod/go.mod /opt/gomod/go.sum . && GOFLAGS=-buildvcs=false go build -race -o main main.go"
+        ],
+        "run": "./main"
+      }
+    }
   },
   "swift": {
     "name": "Swift",
@@ -104,6 +147,14 @@
         "swiftc -swift-version 6 -O -I /opt/swiftdeps/.build/debug -o main main.swift /opt/swiftdeps/.build/debug/libDeps.a -lstdc++"
       ],
       "run": "./main"
+    },
+    "tools": {
+      "sanitize": {
+        "build": [
+          "swiftc -swift-version 6 -strict-memory-safety -Onone -g -sanitize=address -I /opt/swiftdeps/.build/debug -o main main.swift /opt/swiftdeps/.build/debug/libDeps.a -lstdc++"
+        ],
+        "run": "./main"
+      }
     }
   },
   "crystal": {
@@ -142,6 +193,17 @@
         "ldc2 -O -release -L--export-dynamic -of=main main.d"
       ],
       "run": "./main"
+    },
+    "tools": {
+      "check": [
+        "ldc2 -wi -o- main.d"
+      ],
+      "sanitize": {
+        "build": [
+          "ldc2 -g -fsanitize=address -L--export-dynamic -of=main main.d"
+        ],
+        "run": "./main"
+      }
     }
   },
   "nim": {
@@ -161,6 +223,11 @@
         "nim c -d:release --cc:clang --threads:on --hints:off --verbosity:0 -o:main main.nim"
       ],
       "run": "./main"
+    },
+    "tools": {
+      "check": [
+        "nim check --threads:on --hints:off main.nim"
+      ]
     }
   },
   "v": {
@@ -180,6 +247,11 @@
         "v -prod -cc clang -o main main.v"
       ],
       "run": "./main"
+    },
+    "tools": {
+      "check": [
+        "v vet main.v"
+      ]
     }
   },
   "odin": {
@@ -199,6 +271,17 @@
         "odin build main.odin -file -o:speed -out:main"
       ],
       "run": "./main"
+    },
+    "tools": {
+      "sanitize": {
+        "build": [
+          "odin build main.odin -file -debug -vet -vet-cast -vet-nil-deref -vet-uninitialized -vet-using-param -vet-atomic-access -sanitize:address -out:main"
+        ],
+        "run": "./main"
+      },
+      "unrelated": {
+        "null_byte_path": "LeakSanitizer reports an allocation never freed; it says nothing about the NUL byte that cuts the path short"
+      }
     }
   },
   "c3": {
@@ -218,6 +301,17 @@
         "c3c compile -O1 -o main main.c3"
       ],
       "run": "./main"
+    },
+    "tools": {
+      "sanitize": {
+        "build": [
+          "c3c compile -O0 --validation=strict --sanitize=address -o main main.c3"
+        ],
+        "run": "./main"
+      },
+      "unrelated": {
+        "discarded_pure_result": "LeakSanitizer reports the discarded string's allocation as a leak; it does not say the result was thrown away"
+      }
     }
   },
   "mojo": {
@@ -237,6 +331,11 @@
         "pixi run --manifest-path /opt/mojo-ws/pixi.toml mojo build -o main main.mojo"
       ],
       "run": "./main"
+    },
+    "tools": {
+      "unrelated": {
+        "child_exit_status": "the unused value is the command's output text; Mojo's run returns no exit status for it to warn about"
+      }
     }
   },
   "gossamer": {
@@ -256,6 +355,11 @@
         "gos build --release main.gos"
       ],
       "run": "./target/release/main"
+    },
+    "tools": {
+      "check": [
+        "gos lint main.gos"
+      ]
     }
   },
   "goose": {
@@ -295,6 +399,11 @@
         "javac -d out Main.java"
       ],
       "run": "java -cp out Main"
+    },
+    "tools": {
+      "check": [
+        "javac -Xlint:all -d out_lint Main.java"
+      ]
     }
   },
   "kotlin": {
@@ -314,6 +423,11 @@
         "kotlinc main.kt -cp $(ls /opt/kotlinx/*.jar | tr '\\n' ':') -include-runtime -d main.jar 2>&1 | grep -v '^warning' ; test -f main.jar"
       ],
       "run": "java -cp main.jar:$(ls /opt/kotlinx/*.jar | tr '\\n' ':') MainKt"
+    },
+    "tools": {
+      "check": [
+        "kotlinc -Wextra -progressive main.kt -cp $(ls /opt/kotlinx/*.jar | tr '\\n' ':') -d lint_out"
+      ]
     }
   },
   "scala": {
@@ -333,6 +447,11 @@
         "mkdir -p out && scalac -cp /opt/scalaxml/scala-xml.jar -d out main.scala"
       ],
       "run": "java -cp out:/opt/scalaxml/scala-xml.jar:$(find /opt/scala/maven2 -name \"scala*-library*.jar\" | tr \"\\n\" \":\") Main"
+    },
+    "tools": {
+      "check": [
+        "mkdir -p out_lint && scalac -Wall -deprecation -feature -unchecked -Wnonunit-statement -Wvalue-discard -Wsafe-init -Wimplausible-patterns -Wtostring-interpolated -Wshadow:all -Wunused:all -cp /opt/scalaxml/scala-xml.jar -d out_lint main.scala"
+      ]
     }
   },
   "csharp": {
@@ -355,6 +474,19 @@
         "dotnet build -c Release -p:CheckForOverflowUnderflow=false -o out -nologo -v minimal -clp:NoSummary"
       ],
       "run": "dotnet out/bb.dll"
+    },
+    "tools": {
+      "check": [
+        "dotnet build --no-incremental -c Debug -o out_lint -nologo -v minimal -clp:NoSummary -p:AnalysisMode=All -p:WarningLevel=9999"
+      ],
+      "unrelated": {
+        "parse_invalid_number": "CA1305 asks for an explicit culture on the parse or format call; it says nothing about the bug",
+        "format_string": "CA1305 asks for an explicit culture on the parse or format call; it says nothing about the bug",
+        "orphaned_receive": "CA1305 asks for an explicit culture on the parse or format call; it says nothing about the bug",
+        "parse_out_of_range": "CA1305 asks for an explicit culture on the parse or format call; it says nothing about the bug",
+        "cleanup_on_error_path": "CA1305 asks for an explicit culture on the parse or format call; it says nothing about the bug",
+        "not_found_sentinel": "CA1846 prefers AsSpan over Substring for speed; it says nothing about the -1 the search returned"
+      }
     }
   },
   "fsharp": {
@@ -396,6 +528,11 @@
         "dart compile exe -o main main.dart"
       ],
       "run": "./main"
+    },
+    "tools": {
+      "check": [
+        "cp -r /opt/dartlints/.dart_tool /opt/dartlints/pubspec.yaml . && printf 'include: package:lints/recommended.yaml\\nanalyzer:\\n  language:\\n    strict-casts: true\\n    strict-inference: true\\n    strict-raw-types: true\\n' > analysis_options.yaml && dart analyze --no-fatal-warnings main.dart"
+      ]
     }
   },
   "typescript": {
@@ -428,30 +565,19 @@
     "name": "Python",
     "homepage": "https://www.python.org/",
     "repository": "https://github.com/python/cpython",
-    "service": "python",
+    "service": "python_mypy",
     "ext": "py",
     "file": "main.py",
     "build": [
       "python3 -m py_compile main.py"
     ],
     "run": "python3 main.py",
-    "version": "python3 --version"
-  },
-  "python_mypy": {
-    "name": "Python (mypy)",
-    "homepage": "https://mypy-lang.org/",
-    "repository": "https://github.com/python/mypy",
-    "example": true,
-    "dir": "python",
-    "service": "python_mypy",
-    "ext": "py",
-    "file": "main.py",
-    "build": [
-      "python3 -m py_compile main.py",
-      "mypy --strict --warn-unreachable --strict-equality-for-none --enable-error-code possibly-undefined --enable-error-code redundant-expr --enable-error-code truthy-bool --enable-error-code truthy-iterable --enable-error-code unused-awaitable --enable-error-code explicit-override --enable-error-code mutable-override --enable-error-code exhaustive-match --enable-error-code deprecated --cache-dir /dev/null --no-color-output main.py"
-    ],
-    "run": "python3 main.py",
-    "version": "mypy --version"
+    "version": "python3 --version",
+    "tools": {
+      "check": [
+        "mypy --strict --warn-unreachable --strict-equality-for-none --enable-error-code possibly-undefined --enable-error-code redundant-expr --enable-error-code truthy-bool --enable-error-code truthy-iterable --enable-error-code unused-awaitable --enable-error-code explicit-override --enable-error-code mutable-override --enable-error-code exhaustive-match --enable-error-code deprecated --cache-dir /dev/null --no-color-output main.py"
+      ]
+    }
   },
   "ruby": {
     "name": "Ruby",
@@ -464,7 +590,12 @@
       "ruby -c main.rb"
     ],
     "run": "ruby main.rb",
-    "version": "ruby --version"
+    "version": "ruby --version",
+    "tools": {
+      "check": [
+        "ruby -wc main.rb"
+      ]
+    }
   },
   "php": {
     "name": "PHP",
@@ -525,6 +656,11 @@
         "dune build --profile release ./main.exe 2>&1"
       ],
       "run": "./_build/default/main.exe"
+    },
+    "tools": {
+      "check": [
+        "ocamlfind ocamlopt -w +a -package str,unix,threads.posix,re,zarith -c -o lint.cmx main.ml"
+      ]
     }
   },
   "haskell": {
@@ -544,6 +680,11 @@
         "ghc -O1 -threaded -package-db /opt/hsdb -o main main.hs"
       ],
       "run": "./main"
+    },
+    "tools": {
+      "check": [
+        "ghc -Weverything -Wno-missing-safe-haskell-mode -Wno-unsafe -Wno-safe -Wno-implicit-prelude -Wno-missing-import-lists -Wno-missing-export-lists -Wno-missing-local-signatures -Wno-monomorphism-restriction -Wno-missing-deriving-strategies -Wno-prepositive-qualified-module -Wno-missing-kind-signatures -Wno-missing-poly-kind-signatures -Wno-missing-role-annotations -Wno-all-missed-specialisations -Wno-missed-specialisations -Wno-implicit-lift -fno-code -package-db /opt/hsdb main.hs"
+      ]
     }
   },
   "clojure": {

@@ -1,0 +1,933 @@
+{
+ "lang": "golang",
+ "version": "go version go1.27.4 linux/amd64",
+ "results": {
+  "null_deref": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "panic: runtime error: invalid memory address or nil pointer dereference\n[signal SIGSEGV: segmentation violation code=0x1 addr=0x8 pc=0x49a977]\n\ngoroutine 1 [running]:\nmain.main()\n\t/tmp/breakbench/null_deref/main/main.go:21 +0x57"
+  },
+  "int_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "panic: runtime error: integer divide by zero\n\ngoroutine 1 [running]:\nmain.main()\n\t/tmp/breakbench/div_by_zero/main/main.go:11 +0x90"
+  },
+  "int_min_division": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "shift_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "-9223372036854775808",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:12:18: cannot use raw (variable of type string) as int value in argument to add",
+   "control": "builds"
+  },
+  "missing_return": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:17:1: missing return",
+   "control": "builds"
+  },
+  "non_exhaustive_match": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "unknown",
+   "stderr": ""
+  },
+  "uninitialized_variable": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "global_init_order": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "20",
+   "stderr": ""
+  },
+  "assign_in_condition": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:12:7: syntax error: cannot use assignment x = 1 as value",
+   "control": "builds"
+  },
+  "switch_fallthrough": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "break_in_switch": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:13:5: non-boolean condition in if statement",
+   "control": "builds"
+  },
+  "string_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "loose_equality": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:10:13: invalid operation: code == 0 (mismatched types string and untyped int)",
+   "control": "builds"
+  },
+  "parse_invalid_number": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "covariant_array_write": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:14:25: cannot use dogs (variable of type []Dog) as []Animal value in variable declaration",
+   "control": "builds"
+  },
+  "mutate_while_iterating": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1,2,3",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "repeated_row_alias": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "sort_with_nan": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ordered",
+   "stderr": ""
+  },
+  "integer_average": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:9:20: cannot use sum / count (value of type int) as float64 value in variable declaration",
+   "control": "builds"
+  },
+  "leading_zero_literal": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "668",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not a",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:11:20: invalid operation: 1 < x < 3 (mismatched types untyped bool and untyped int)",
+   "control": "builds"
+  },
+  "lost_update_on_copy": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "100",
+   "stderr": ""
+  },
+  "command_injection": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "fatal error: all goroutines are asleep - deadlock!\n\ngoroutine 1 [sync.WaitGroup.Wait]:\nsync.runtime_SemacquireWaitGroup(0x369370218120?, 0xe0?)\n\t/usr/local/go/src/runtime/sema.go:114 +0x2e\nsync.(*WaitGroup).Wait(0x369370214030)\n\t/usr/local/go/src/sync/waitgroup.go:206 +0x85\nmain.main()\n\t/tmp/breakbench/lock_order_deadlock/main/main.go:26 +0x187\n\ngoroutine 19 [sync.Mutex.Lock]:\ninternal/sync.runtime_SemacquireMutex(0x36937015b728?, 0xe9?, 0x0?)\n\t/usr/local/go/src/runtime/sema.go:95 +0x25\ninternal/sync.(*Mutex).lockSlow(0x369370214028)\n\t/usr/local/go/src/internal/sync/mutex.go:149 +0x15a\ninternal/sync.(*Mutex).Lock(...)\n\t/usr/local/go/src/internal/sync/mutex.go:70\nsync.(*Mutex).Lock(...)\n\t/usr/local/go/src/sync/mutex.go:46\nmain.transfer(0x0?,\n...\n370214040)\n\t/tmp/breakbench/lock_order_deadlock/main/main.go:14 +0xec\ncreated by main.main in goroutine 1\n\t/tmp/breakbench/lock_order_deadlock/main/main.go:24 +0xfe\n\ngoroutine 20 [sync.Mutex.Lock]:\ninternal/sync.runtime_SemacquireMutex(0x1?, 0x0?, 0x19?)\n\t/usr/local/go/src/runtime/sema.go:95 +0x25\ninternal/sync.(*Mutex).lockSlow(0x369370214020)\n\t/usr/local/go/src/internal/sync/mutex.go:149 +0x15a\ninternal/sync.(*Mutex).Lock(...)\n\t/usr/local/go/src/internal/sync/mutex.go:70\nsync.(*Mutex).Lock(...)\n\t/usr/local/go/src/sync/mutex.go:46\nmain.transfer(0x0?, 0x369370214020, 0x0?, 0x369370214040)\n\t/tmp/breakbench/lock_order_deadlock/main/main.go:14 +0xec\ncreated by main.main in goroutine 1\n\t/tmp/breakbench/lock_order_deadlock/main/main.go:25 +0x17d"
+  },
+  "regex_backtracking": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "no match",
+   "stderr": ""
+  },
+  "regex_trailing_newline": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:8:27: syntax error: unexpected newline in composite literal; possibly missing comma or }",
+   "control": "builds"
+  },
+  "return_in_finally": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "failed",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:6:2: not enough return values\n\thave ()\n\twant (int)\n./main.go:7:2: a + b (value of type int) is not used\n./main.go:8:1: missing return",
+   "control": "builds"
+  },
+  "worker_failure_lost": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "panic: strconv.Atoi: parsing \"x\": invalid syntax\n\ngoroutine 7 [running]:\nmain.main.func1()\n\t/tmp/breakbench/worker_failure_lost/main/main.go:20 +0xe8\ncreated by main.main in goroutine 1\n\t/tmp/breakbench/worker_failure_lost/main/main.go:15 +0xa5"
+  },
+  "unawaited_task": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "format_arg_mismatch": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "3 of %!d(MISSING)",
+   "stderr": "",
+   "tool": "FLAGGED",
+   "tool_output": "main.go:8:20: fmt.Printf format %d reads arg #2, but call has 1 arg"
+  },
+  "unsigned_subtraction": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "mutable_hash_key": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "found",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "pending",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "panic: runtime error: index out of range [-1]\n\ngoroutine 1 [running]:\nmain.main()\n\t/tmp/breakbench/negative_index_wraps/main/main.go:12 +0xb3"
+  },
+  "default_numeric_sort": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:12:26: in call to slices.Contains, S (type []int) does not satisfy ~[]E",
+   "control": "builds"
+  },
+  "panic_under_lock": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "panic: crash mid-update\n\ngoroutine 19 [running]:\nmain.(*Ledger).post(0x0?)\n\t/tmp/breakbench/panic_under_lock/main/main.go:19 +0xa8\nmain.main.func1()\n\t/tmp/breakbench/panic_under_lock/main/main.go:30 +0x47\ncreated by main.main in goroutine 1\n\t/tmp/breakbench/panic_under_lock/main/main.go:28 +0xb6"
+  },
+  "oob_write": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "panic: runtime error: index out of range [4] with length 4\n\ngoroutine 1 [running]:\nmain.main()\n\t/tmp/breakbench/oob_write/main/main.go:17 +0xa9"
+  },
+  "oob_read": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "panic: runtime error: index out of range [4] with length 4\n\ngoroutine 1 [running]:\nmain.main()\n\t/tmp/breakbench/oob_read/main/main.go:17 +0xb6"
+  },
+  "use_after_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "wrong_variant_access": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "panic: interface conversion: interface {} is int, not string\n\ngoroutine 1 [running]:\nmain.main()\n\t/tmp/breakbench/wrong_variant_access/main/main.go:7 +0x28"
+  },
+  "format_string": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "%!s(MISSING)%!s(MISSING)%!n(MISSING){}{0}",
+   "stderr": "",
+   "tool": "FLAGGED",
+   "tool_output": "main.go:9:13: non-constant format string in call to fmt.Printf"
+  },
+  "trojan_source": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "admin",
+   "stderr": ""
+  },
+  "unsafe_deserialization": {
+   "outcome": "SAFE_BY_DESIGN",
+   "message": "encoding/gob and encoding/json fill the types the program declares and run no code the data names"
+  },
+  "null_byte_path": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "admin\nadmin",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:7:2: cannot assign to greeting[0] (neither addressable nor a map index expression)",
+   "control": "builds"
+  },
+  "reference_cycle": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 1.22,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "forgotten_free": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 1.27,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "complete_init": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "override_check": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "shape",
+   "stderr": ""
+  },
+  "missing_virtual": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "area 0",
+   "stderr": ""
+  },
+  "unbound_method": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "forced_unwrap": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "before",
+   "stderr": "panic: runtime error: invalid memory address or nil pointer dereference\n[signal SIGSEGV: segmentation violation code=0x1 addr=0x0 pc=0x499e91]\n\ngoroutine 1 [running]:\nmain.main()\n\t/tmp/breakbench/forced_unwrap/main/main.go:16 +0x51"
+  },
+  "null_in_text": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hello, %!s(*string=<nil>)",
+   "stderr": "",
+   "tool": "FLAGGED",
+   "tool_output": "main.go:20:21: fmt.Printf format %s has arg name of wrong type *string"
+  },
+  "not_found_sentinel": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "user",
+   "stderr": ""
+  },
+  "empty_max": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "panic: slices.Max: empty list\n\ngoroutine 1 [running]:\nslices.Max[...](...)\n\t/usr/local/go/src/slices/sort.go:97\nmain.main()\n\t/tmp/breakbench/empty_max/main/main.go:16 +0x205"
+  },
+  "readonly_param": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "exclusive_mutation": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:7:21: cannot use 300 (untyped int constant) as uint8 value in variable declaration (overflows)",
+   "control": "builds"
+  },
+  "no_implicit_conversion": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:8:20: cannot use big (variable of type int64) as int32 value in variable declaration",
+   "control": "builds"
+  },
+  "generic_constraint": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:13:36: Point does not satisfy cmp.Ordered (Point missing in ~int | ~int8 | ~int16 | ~int32 | ~int64 | ~uint | ~uint8 | ~uint16 | ~uint32 | ~uint64 | ~uintptr | ~float32 | ~float64 | ~string)",
+   "control": "builds"
+  },
+  "lossy_int_to_float": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:10:7: cannot use n (variable of type int64) as float64 value in argument to show",
+   "control": "builds"
+  },
+  "const_index_bounds": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:8:20: invalid argument: index 5 out of bounds [0:3]",
+   "control": "builds"
+  },
+  "lazy_accumulator": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 1.87,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "panic: runtime error: index out of range [8] with length 8\n\ngoroutine 1 [running]:\nmain.main()\n\t/tmp/breakbench/size_overflow_alloc/main/main.go:17 +0xdb"
+  },
+  "const_overflow": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:6:20: cannot use 1_000_000_000 * 60 * 60 * 24 * 365 * 300 (untyped int constant 9460800000000000000) as int64 value in constant declaration (overflows)",
+   "control": "builds"
+  },
+  "orphaned_receive": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "fatal error: all goroutines are asleep - deadlock!\n\ngoroutine 1 [chan receive]:\nmain.main()\n\t/tmp/breakbench/orphaned_receive/main/main.go:17 +0x8e"
+  },
+  "blocking_in_async": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.5,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "evaluation_order": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:14:77: duplicate case \"circle\" (constant of type string) in expression switch\n\t./main.go:14:45: previous case",
+   "control": "builds"
+  },
+  "duplicate_key": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:8:41: duplicate key \"a\" in map literal",
+   "control": "builds"
+  },
+  "json_big_integer": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "9.007199254740992e+15",
+   "stderr": "",
+   "safer": {
+    "outcome": "CORRECT",
+    "exit": 0,
+    "stdout": "9007199254740993",
+    "stderr": ""
+   }
+  },
+  "parse_out_of_range": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "9223372036854775807",
+   "stderr": ""
+  },
+  "json_nan": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": ""
+  },
+  "comparison_statement": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:8:2: count == 5 (untyped bool value) is not used",
+   "control": "builds"
+  },
+  "typo_compound_assign": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "structural_equality": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "enum_from_int": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "before\n7",
+   "stderr": ""
+  },
+  "bitwise_on_bool": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:10:5: invalid operation: operator & not defined on (len(s) > 0) (untyped bool value)",
+   "control": "builds"
+  },
+  "readonly_field": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "bool_condition": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:12:5: non-boolean condition in if statement",
+   "control": "builds"
+  },
+  "lost_write_error": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "short_read": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.21,
+   "stdout": "HELLO-WO\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+   "stderr": "",
+   "safer": {
+    "outcome": "CORRECT",
+    "exit": 0,
+    "stdout": "HELLO-WORLD-1234",
+    "stderr": ""
+   }
+  },
+  "masked_cleanup_error": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "disk full",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "",
+   "safer": {
+    "outcome": "CORRECT",
+    "exit": 0,
+    "stdout": "total=42",
+    "stderr": ""
+   }
+  },
+  "child_exit_status": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "backed up",
+   "stderr": ""
+  },
+  "nullable_field": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "panic: runtime error: invalid memory address or nil pointer dereference\n[signal SIGSEGV: segmentation violation code=0x1 addr=0x8 pc=0x499e50]\n\ngoroutine 1 [running]:\nmain.main()\n\t/tmp/breakbench/nullable_field/main/main.go:9 +0x10"
+  },
+  "stale_null_check": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "panic: runtime error: invalid memory address or nil pointer dereference\n[signal SIGSEGV: segmentation violation code=0x1 addr=0x8 pc=0x499e50]\n\ngoroutine 1 [running]:\nmain.main()\n\t/tmp/breakbench/stale_null_check/main/main.go:15 +0x10"
+  },
+  "empty_slot": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "typed_nil": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "invalid",
+   "stderr": ""
+  },
+  "missing_json_field": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "mutate_after_send": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "99",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "fatal error: all goroutines are asleep - deadlock!\n\ngoroutine 1 [sync.WaitGroup.Wait]:\nsync.runtime_SemacquireWaitGroup(0x3c5f2f196000?, 0xe0?)\n\t/usr/local/go/src/runtime/sema.go:114 +0x2e\nsync.(*WaitGroup).Wait(0x3c5f2f188020)\n\t/usr/local/go/src/sync/waitgroup.go:206 +0x85\nmain.main()\n\t/tmp/breakbench/lost_wakeup/main/main.go:24 +0x14f\n\ngoroutine 19 [sync.Cond.Wait]:\nsync.runtime_notifyListWait(0x3c5f2f184090, 0x0)\n\t/usr/local/go/src/runtime/sema.go:617 +0x1b3\nsync.(*Cond).Wait(0x0?)\n\t/usr/local/go/src/sync/cond.go:71 +0x73\nmain.main.func1()\n\t/tmp/breakbench/lost_wakeup/main/main.go:20 +0x7e\ncreated by main.main in goroutine 1\n\t/tmp/breakbench/lost_wakeup/main/main.go:17 +0x145"
+  },
+  "lock_skipped_on_return": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "fatal error: all goroutines are asleep - deadlock!\n\ngoroutine 1 [sync.WaitGroup.Wait]:\nsync.runtime_SemacquireWaitGroup(0x212d06642070?, 0xe0?)\n\t/usr/local/go/src/runtime/sema.go:114 +0x2e\nsync.(*WaitGroup).Wait(0x212d066400a0)\n\t/usr/local/go/src/sync/waitgroup.go:206 +0x85\nmain.main()\n\t/tmp/breakbench/lock_skipped_on_return/main/main.go:30 +0x95\n\ngoroutine 7 [sync.Mutex.Lock]:\ninternal/sync.runtime_SemacquireMutex(0x0?, 0x0?, 0x0?)\n\t/usr/local/go/src/runtime/sema.go:95 +0x25\ninternal/sync.(*Mutex).lockSlow(0x593058)\n\t/usr/local/go/src/internal/sync/mutex.go:149 +0x15a\ninternal/sync.(*Mutex).Lock(...)\n\t/usr/local/go/src/internal/sync/mutex.go:70\nsync.(*Mutex).Lock(...)\n\t/usr/local/go/src/sync/mutex.go:46\nmain.withdraw(0x0?)\n\t/tmp/breakbench/lock_skipped_on_return/main/main.go:14 +0x45\nmain.main.func1()\n\t/tmp/breakbench/lock_skipped_on_return/main/main.go:28 +0x48\ncreated by main.main in goroutine 1\n\t/tmp/breakbench/lock_skipped_on_return/main/main.go:26 +0x8b"
+  },
+  "cleanup_on_error_path": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "left behind: export.csv",
+   "stderr": ""
+  },
+  "generator_break_cleanup": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "cleaned",
+   "stderr": ""
+  },
+  "main_error_exit_code": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "config missing: open /nonexistent/bb.conf: no such file or directory"
+  },
+  "catch_all_hides_bug": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "panic: runtime error: index out of range [2] with length 2\n\ngoroutine 1 [running]:\nmain.parseOrder({0x49c5e8?, 0x0?})\n\t/tmp/breakbench/catch_all_hides_bug/main/main.go:11 +0x50\nmain.main()\n\t/tmp/breakbench/catch_all_hides_bug/main/main.go:16 +0x25"
+  },
+  "assert_side_effect": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no assert statement or standard assert function"
+  },
+  "narrow_counter_loop": {
+   "outcome": "REJECTED",
+   "message": "# command-line-arguments\n./main.go:9:10: 300 (untyped int constant) overflows uint8",
+   "control": "builds"
+  },
+  "timeout_without_cancel": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.1,
+   "stdout": "40",
+   "stderr": ""
+  },
+  "blocked_sender_leak": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 2,
+   "secs": 0.0,
+   "stdout": "42",
+   "stderr": "fatal error: all goroutines are asleep - deadlock!\n\ngoroutine 1 [sync.WaitGroup.Wait]:\nsync.runtime_SemacquireWaitGroup(0x3?, 0x0?)\n\t/usr/local/go/src/runtime/sema.go:114 +0x2e\nsync.(*WaitGroup).Wait(0x16b218b08020)\n\t/usr/local/go/src/sync/waitgroup.go:206 +0x85\nmain.main()\n\t/tmp/breakbench/blocked_sender_leak/main/main.go:20 +0x77\n\ngoroutine 19 [chan send]:\nmain.firstAnswer.func1()\n\t/tmp/breakbench/blocked_sender_leak/main/main.go:12 +0x1e\nsync.(*WaitGroup).Go.func1()\n\t/usr/local/go/src/sync/waitgroup.go:258 +0x4a\ncreated by sync.(*WaitGroup).Go in goroutine 1\n\t/usr/local/go/src/sync/waitgroup.go:238 +0x7d"
+  }
+ }
+}

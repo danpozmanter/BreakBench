@@ -1,0 +1,10 @@
+use std::env
+
+fn main() {
+    let v = env::args()[0].to_i64().unwrap()
+    let converted: Result<u8, _> = v.try_into()
+    match converted {
+        Ok(b) => println(f"{b}"),
+        Err(_) => println("out of range"),
+    }
+}

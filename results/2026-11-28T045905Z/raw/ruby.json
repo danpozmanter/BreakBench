@@ -1,0 +1,1105 @@
+{
+ "lang": "ruby",
+ "version": "ruby 4.0.10 (2026-11-19 revision a704b7cd95) +PRISM [x86_64-linux]",
+ "results": {
+  "null_deref": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.07,
+   "stdout": "",
+   "stderr": "main.rb:8:in '<main>': undefined method 'name' for nil (NoMethodError)\n\nputs u.name.length # CONTROL! puts(u.nil? ? \"missing\" : u.name.length)\n      ^^^^^"
+  },
+  "int_overflow": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "9223372036854775808",
+   "stderr": ""
+  },
+  "div_by_zero": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "main.rb:2:in 'Integer#/': divided by 0 (ZeroDivisionError)\n\tfrom main.rb:2:in '<main>'"
+  },
+  "int_min_division": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "9223372036854775808",
+   "stderr": ""
+  },
+  "shift_overflow": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "18446744073709551616",
+   "stderr": ""
+  },
+  "narrowing_cast": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "float_to_int_overflow": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "100000000000000000000",
+   "stderr": ""
+  },
+  "signed_unsigned_compare": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "less",
+   "stderr": ""
+  },
+  "type_confusion": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "main.rb:2:in 'String#+': no implicit conversion of Integer into String (TypeError)\n\n  a + b\n      ^\n\tfrom main.rb:2:in 'Object#add'\n\tfrom main.rb:6:in '<main>'"
+  },
+  "missing_return": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "nil",
+   "stderr": ""
+  },
+  "non_exhaustive_match": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "nil",
+   "stderr": ""
+  },
+  "uninitialized_variable": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "nil",
+   "stderr": ""
+  },
+  "global_init_order": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "main.rb:2:in 'Object#base': uninitialized constant BASE (NameError)\n\n  BASE\n  ^^^^\n\tfrom main.rb:5:in '<main>'"
+  },
+  "assign_in_condition": {
+   "build_output": "Syntax OK\n\nmain.rb:2: warning: found '= literal' in conditional, should be ==",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "one",
+   "stderr": "main.rb:2: warning: found '= literal' in conditional, should be ==",
+   "tool": "FLAGGED",
+   "tool_output": "main.rb:2: warning: found '= literal' in conditional, should be =="
+  },
+  "switch_fallthrough": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "one",
+   "stderr": ""
+  },
+  "break_in_switch": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "zero_is_falsy": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "have 0",
+   "stderr": ""
+  },
+  "string_equality": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "loose_equality": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "different",
+   "stderr": ""
+  },
+  "parse_invalid_number": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "13",
+   "stderr": "",
+   "safer": {
+    "outcome": "TRAPPED",
+    "control": "verified",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "main.rb:1:in 'Kernel#Integer': invalid value for Integer(): \"12abc\" (ArgumentError)\n\nn = Integer(ARGV[0]) # CONTROL! n = Integer(ARGV[0], exception: false)\n            ^^^^^^^\n\tfrom main.rb:1:in '<main>'"
+   }
+  },
+  "covariant_array_write": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "meow",
+   "stderr": ""
+  },
+  "mutate_while_iterating": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "1,2,3",
+   "stderr": ""
+  },
+  "loop_closure_capture": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "0,1,2",
+   "stderr": ""
+  },
+  "snapshot_aliasing": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "0",
+   "stderr": ""
+  },
+  "repeated_row_alias": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "3",
+   "stderr": ""
+  },
+  "ignored_error_result": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "main.rb:2:in 'IO.write': Not a directory @ rb_sysopen - /dev/null/out.txt (Errno::ENOTDIR)\n\tfrom main.rb:2:in 'Object#save'\n\tfrom main.rb:5:in '<main>'"
+  },
+  "sort_with_nan": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "main.rb:2:in 'Array#sort': comparison of Float with 3.0 failed (ArgumentError)\n\tfrom main.rb:2:in '<main>'"
+  },
+  "integer_average": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "3.0",
+   "stderr": ""
+  },
+  "leading_zero_literal": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "668",
+   "stderr": ""
+  },
+  "shared_default_argument": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "reused_iterator": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "12 3",
+   "stderr": ""
+  },
+  "bitwise_precedence": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "even",
+   "stderr": ""
+  },
+  "dangling_else": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "not a",
+   "stderr": ""
+  },
+  "chained_comparison": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.06,
+   "stdout": "",
+   "stderr": "main.rb:2:in '<main>': undefined method '<' for true (NoMethodError)\n\ninside = 1 < x < 3 # CONTROL! inside = 1 < x && x < 3\n               ^",
+   "tool": "FLAGGED",
+   "tool_output": "main.rb:2: warning: comparison '<' after comparison"
+  },
+  "lost_update_on_copy": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "150",
+   "stderr": ""
+  },
+  "command_injection": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "safe",
+   "stderr": ""
+  },
+  "float_equality": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "not equal",
+   "stderr": ""
+  },
+  "lock_order_deadlock": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "main.rb:34:in 'Thread#join': No live threads left. Deadlock? (fatal)\n3 threads, 3 sleeps current:0x000062c58a06f2e0 main thread:0x000062c589d700b0\n* #<Thread:0x000073a1fe4e7f50 sleep_forever>\n   rb_thread_t:0x000062c589d700b0 native:0x000073a1fe6d2800 int:0\n   main.rb:34:in 'Thread#join'\n   main.rb:34:in '<main>'\n* #<Thread:0x000073a1e323a930 main.rb:32 sleep_forever>\n   rb_thread_t:0x000062c58a06f2e0 native:0x000073a1e311e6c0 int:0\n    depended by: tb_thread_id:0x000062c589d700b0\n   main.rb:28:in 'Thread::Mutex#synchronize'\n   main.rb:28:in 'block in Object#transfer'\n   main.rb:26:in 'Thread::Mutex#synchronize'\n   main.rb:26:in 'Object#transfer'\n   main.rb:32:in 'block in <main>'\n* #<Thread:0x000073a1e323a818 main.rb:33 sleep_forever>\n   rb_thread_t:0x000062c58a063170 native:0x000073a1e2f1c6c0 int:0 mutex:2 cond:1\n   main.rb:28:in 'Thread::Mutex#synchronize'\n   main.rb:28:in 'block in Object#transfer'\n   main.rb:26:in 'Thread::Mutex#synchronize'\n   main.rb:26:in 'Object#transfer'\n   main.rb:33:in 'block in <main>'\n\n\tfrom main.rb:34:in '<main>'"
+  },
+  "regex_backtracking": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "no match",
+   "stderr": ""
+  },
+  "regex_trailing_newline": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "accepted",
+   "stderr": ""
+  },
+  "negative_remainder": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "odd",
+   "stderr": ""
+  },
+  "missing_comma_concat": {
+   "outcome": "REJECTED",
+   "message": "ruby: main.rb:4: syntax error found (SyntaxError)\n  2 |   \"alice\",\n  3 |   \"bob\" # CONTROL! \"bob\",\n> 4 |   \"carol\",\n    | ^ unexpected string literal; expected a `,` separator for the array elements\n  5 | ]\n  6 | puts names.size",
+   "control": "builds"
+  },
+  "return_in_finally": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "saved",
+   "stderr": ""
+  },
+  "return_line_break": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "",
+   "tool": "FLAGGED",
+   "tool_output": "main.rb:3: warning: statement not reached"
+  },
+  "worker_failure_lost": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "#<Thread:0x00007cce7673aea8 main.rb:2 run> terminated with exception (report_on_exception is true):\nmain.rb:3:in 'Kernel#Integer': invalid value for Integer(): \"x\" (ArgumentError)\n\n  ARGV.each { |item| total += Integer(item) }\n                                      ^^^^\n\tfrom main.rb:3:in 'block (2 levels) in <main>'\n\tfrom main.rb:3:in 'Array#each'\n\tfrom main.rb:3:in 'block in <main>'\nmain.rb:3:in 'Kernel#Integer': invalid value for Integer(): \"x\" (ArgumentError)\n\n  ARGV.each { |item| total += Integer(item) }\n                                      ^^^^\n\tfrom main.rb:3:in 'block (2 levels) in <main>'\n\tfrom main.rb:3:in 'Array#each'\n\tfrom main.rb:3:in 'block in <main>'"
+  },
+  "unawaited_task": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "0",
+   "stderr": "",
+   "tool": "FLAGGED",
+   "tool_output": "main.rb:3: warning: assigned but unused variable - task"
+  },
+  "format_arg_mismatch": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "main.rb:3:in 'Kernel#format': too few arguments (ArgumentError)\n\nputs format(\"%d of %d\", done) # CONTROL! puts format(\"%d of %d\", done, total)\n            ^^^^^^^^^^^^^^^^\n\tfrom main.rb:3:in '<main>'",
+   "tool": "FLAGGED",
+   "tool_output": "main.rb:2: warning: assigned but unused variable - total"
+  },
+  "unsigned_subtraction": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "short",
+   "stderr": ""
+  },
+  "missing_key_default": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.07,
+   "stdout": "",
+   "stderr": "main.rb:3:in '<main>': undefined method '+' for nil (NoMethodError)\n\nputs stock[name] + 5 # CONTROL! puts(stock.key?(name) ? stock[name] + 5 : \"unknown\")\n                 ^"
+  },
+  "mutable_hash_key": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "lost",
+   "stderr": ""
+  },
+  "shadowed_assignment": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "done",
+   "stderr": "status: done"
+  },
+  "discarded_pure_result": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "ada",
+   "stderr": ""
+  },
+  "negative_index_wraps": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "-20",
+   "stderr": ""
+  },
+  "default_numeric_sort": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "1 9 10",
+   "stderr": ""
+  },
+  "unrelated_type_lookup": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "missing",
+   "stderr": ""
+  },
+  "panic_under_lock": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "unbalanced",
+   "stderr": "#<Thread:0x000071adcde1ad38 main.rb:4 run> terminated with exception (report_on_exception is true):\nmain.rb:7:in 'block (2 levels) in <main>': crash mid-update (RuntimeError)\n\tfrom main.rb:5:in 'Thread::Mutex#synchronize'\n\tfrom main.rb:5:in 'block in <main>'\nworker failed: crash mid-update"
+  },
+  "oob_write": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "oob_read": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": ""
+  },
+  "use_after_free": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "1234",
+   "stderr": ""
+  },
+  "double_free": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "dangling_stack_ref": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "4242",
+   "stderr": ""
+  },
+  "container_realloc_dangling": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "7",
+   "stderr": ""
+  },
+  "uninit_heap_read": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "000000000000000000000000",
+   "stderr": ""
+  },
+  "wrong_variant_access": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "main.rb:2:in '<main>': undefined method 'length' for an instance of Integer (NoMethodError)\n\nputs v.length # CONTROL! puts(v.is_a?(String) ? v.length : \"not text\")\n      ^^^^^^^"
+  },
+  "format_string": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "main.rb:1:in 'Kernel#format': too few arguments (ArgumentError)\n\nputs format(ARGV[0]) # CONTROL! puts ARGV[0]\n            ^^^^^^^\n\tfrom main.rb:1:in '<main>'"
+  },
+  "trojan_source": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "admin",
+   "stderr": ""
+  },
+  "unsafe_deserialization": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "null_byte_path": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.05,
+   "stdout": "rejected",
+   "stderr": ""
+  },
+  "homoglyph_identifier": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "admin\nadmin",
+   "stderr": ""
+  },
+  "string_literal_write": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "jello",
+   "stderr": ""
+  },
+  "reference_cycle": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.31,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "forgotten_free": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.31,
+   "stdout": "done",
+   "stderr": ""
+  },
+  "complete_init": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.06,
+   "stdout": "",
+   "stderr": "main.rb:3:in 'Data#initialize': missing keyword: :retries (ArgumentError)\n\n    caller: main.rb:3\n    | c = Config.new(timeout: 30) # CONTROL! c = Config.new(timeout: 30, retries: 3)\n                ^^^^\n\tfrom main.rb:3:in 'Config.new'\n\tfrom main.rb:3:in '<main>'"
+  },
+  "override_check": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "shape",
+   "stderr": ""
+  },
+  "missing_virtual": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "area 4",
+   "stderr": ""
+  },
+  "unbound_method": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "2",
+   "stderr": ""
+  },
+  "forced_unwrap": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.05,
+   "stdout": "before",
+   "stderr": "main.rb:7:in '<main>': undefined method '+' for nil (NoMethodError)\n\nputs find(2) + 1 # CONTROL! a = find(2); puts(a ? a + 1 : \"missing\")\n             ^"
+  },
+  "null_in_text": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "hello,",
+   "stderr": ""
+  },
+  "not_found_sentinel": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.04,
+   "stdout": "",
+   "stderr": "main.rb:3:in '<main>': undefined method '+' for nil (NoMethodError)\n\nputs line[pos + 1..] # CONTROL! puts(pos.nil? ? \"no colon\" : line[pos + 1..])\n              ^"
+  },
+  "empty_max": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "main.rb:2:in '<main>': undefined method '+' for nil (NoMethodError)\n\nputs xs.max + 1 # CONTROL! puts(xs.empty? ? \"no readings\" : xs.max + 1)\n            ^"
+  },
+  "readonly_param": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "1",
+   "stderr": ""
+  },
+  "exclusive_mutation": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "130",
+   "stderr": ""
+  },
+  "literal_range": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "44",
+   "stderr": ""
+  },
+  "no_implicit_conversion": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "3000000000",
+   "stderr": ""
+  },
+  "generic_constraint": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "main.rb:3:in 'Array#sort': comparison of Point with Point failed (ArgumentError)\n\tfrom main.rb:3:in '<main>'"
+  },
+  "lossy_int_to_float": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "9007199254740993",
+   "stderr": ""
+  },
+  "const_index_bounds": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": ""
+  },
+  "lazy_accumulator": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 1.31,
+   "stdout": "12288000000",
+   "stderr": ""
+  },
+  "size_overflow_alloc": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "main.rb:4:in 'String#*': bignum too big to convert into 'long' (RangeError)\n\tfrom main.rb:4:in '<main>'"
+  },
+  "const_overflow": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "9460800000000000000",
+   "stderr": ""
+  },
+  "orphaned_receive": {
+   "build_output": "Syntax OK",
+   "outcome": "HANG",
+   "control": "verified",
+   "exit": -9,
+   "secs": 20.0,
+   "stdout": "",
+   "stderr": "#<Thread:0x00007544da5fb060 main.rb:2 run> terminated with exception (report_on_exception is true):\nmain.rb:2:in 'Kernel#Integer': invalid value for Integer(): \"x\" (ArgumentError)\n\nThread.new { answer << Integer(\"x\") } # CONTROL! Thread.new { answer << Integer(\"x\", exception: false) }\n                               ^^^\n\tfrom main.rb:2:in 'block in <main>'"
+  },
+  "blocking_in_async": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.53,
+   "stdout": "concurrent",
+   "stderr": ""
+  },
+  "evaluation_order": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "1 2",
+   "stderr": ""
+  },
+  "dominated_case": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "other",
+   "stderr": ""
+  },
+  "duplicate_key": {
+   "build_output": "Syntax OK\n\nmain.rb:1: warning: key \"a\" is duplicated and overwritten on line 1",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "1",
+   "stderr": "main.rb:1: warning: key \"a\" is duplicated and overwritten on line 1",
+   "tool": "FLAGGED",
+   "tool_output": "main.rb:1: warning: key \"a\" is duplicated and overwritten on line 1"
+  },
+  "json_big_integer": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "9007199254740993",
+   "stderr": ""
+  },
+  "parse_out_of_range": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "9223372036854775808",
+   "stderr": ""
+  },
+  "json_nan": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "main.rb:5:in 'JSON::Ext::Generator::GeneratorMethods::Hash#to_json': NaN not allowed in JSON (JSON::GeneratorError)\nInvalid object: NaN\n\tfrom main.rb:5:in '<main>'"
+  },
+  "comparison_statement": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "0",
+   "stderr": "",
+   "tool": "FLAGGED",
+   "tool_output": "main.rb:2: warning: possibly useless use of == in void context"
+  },
+  "typo_compound_assign": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "5",
+   "stderr": ""
+  },
+  "structural_equality": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "equal",
+   "stderr": ""
+  },
+  "array_literal_length": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": ""
+  },
+  "enum_from_int": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no enum type"
+  },
+  "bitwise_on_bool": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "no",
+   "stderr": ""
+  },
+  "readonly_field": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "main.rb:4:in '<main>': undefined method 'port=' for an instance of Config (NoMethodError)\n\nc.port = 1 # BREAK!\n ^^^^^^^"
+  },
+  "bool_condition": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "same",
+   "stderr": ""
+  },
+  "lost_write_error": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "main.rb:1:in 'IO#close': No space left on device @ fptr_finalize_flush - /dev/full (Errno::ENOSPC)\n\tfrom main.rb:1:in 'IO.open'\n\tfrom main.rb:1:in '<main>'"
+  },
+  "short_read": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.24,
+   "stdout": "HELLO-WORLD-1234",
+   "stderr": ""
+  },
+  "masked_cleanup_error": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "close failed",
+   "stderr": ""
+  },
+  "unflushed_writer": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "total=42",
+   "stderr": ""
+  },
+  "child_exit_status": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "backed up",
+   "stderr": "",
+   "safer": {
+    "outcome": "TRAPPED",
+    "control": "verified",
+    "exit": 1,
+    "stdout": "",
+    "stderr": "main.rb:1:in 'Kernel#system': Command failed with exit 3: sh (RuntimeError)\n\tfrom main.rb:1:in '<main>'"
+   }
+  },
+  "nullable_field": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "main.rb:3:in '<main>': undefined method 'length' for nil (NoMethodError)\n\nputs decoded.name.length # CONTROL! puts(decoded.name.nil? ? \"no name\" : decoded.name.length)\n                 ^^^^^^^"
+  },
+  "stale_null_check": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "main.rb:11:in '<main>': undefined method 'name' for nil (NoMethodError)\n\n  puts session.user.name.length # CONTROL! logout(session)\n                   ^^^^^"
+  },
+  "empty_slot": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "main.rb:6:in '<main>': undefined method 'name' for nil (NoMethodError)\n\nputs users[0].name.length # CONTROL! puts(users[0].nil? ? \"missing\" : users[0].name.length)\n             ^^^^^"
+  },
+  "typed_nil": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "valid",
+   "stderr": ""
+  },
+  "missing_json_field": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "main.rb:4:in '<main>': undefined method '+' for nil (NoMethodError)\n\nputs user[\"age\"] + 1\n                 ^"
+  },
+  "mutate_after_send": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "99",
+   "stderr": ""
+  },
+  "lost_wakeup": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "main.rb:9:in 'Thread#join': No live threads left. Deadlock? (fatal)\n2 threads, 2 sleeps current:0x00005706b66ca7c0 main thread:0x00005706b63cb0b0\n* #<Thread:0x00007a2d6f347f80 sleep_forever>\n   rb_thread_t:0x00005706b63cb0b0 native:0x00007a2d6f536800 int:0\n   main.rb:9:in 'Thread#join'\n   main.rb:9:in '<main>'\n* #<Thread:0x00007a2d540aaec8 main.rb:5 sleep_forever>\n   rb_thread_t:0x00005706b66ca7c0 native:0x00007a2d53f8e6c0 int:0\n    depended by: tb_thread_id:0x00005706b63cb0b0\n   main.rb:6:in 'Thread::ConditionVariable#wait'\n   main.rb:6:in 'block (2 levels) in <main>'\n   main.rb:6:in 'Thread::Mutex#synchronize'\n   main.rb:6:in 'block in <main>'\n\n\tfrom main.rb:9:in '<main>'"
+  },
+  "lock_skipped_on_return": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "main.rb:13:in 'Thread#join': No live threads left. Deadlock? (fatal)\n2 threads, 2 sleeps current:0x000062751702d150 main thread:0x0000627516d2e0b0\n* #<Thread:0x00007fa7efb97f50 sleep_forever>\n   rb_thread_t:0x0000627516d2e0b0 native:0x00007fa7efd7c800 int:0\n   main.rb:13:in 'Thread#join'\n   main.rb:13:in '<main>'\n* #<Thread:0x00007fa7d48faee8 main.rb:12 sleep_forever>\n   rb_thread_t:0x000062751702d150 native:0x00007fa7d47de6c0 int:0\n    depended by: tb_thread_id:0x0000627516d2e0b0\n   main.rb:5:in 'Thread::Mutex#lock'\n   main.rb:5:in 'Object#withdraw'\n   main.rb:12:in 'block in <main>'\n\n\tfrom main.rb:13:in '<main>'"
+  },
+  "cleanup_on_error_path": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "cleaned",
+   "stderr": ""
+  },
+  "generator_break_cleanup": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "cleaned",
+   "stderr": ""
+  },
+  "main_error_exit_code": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "config missing: No such file or directory @ rb_sysopen - /nonexistent/bb.conf"
+  },
+  "catch_all_hides_bug": {
+   "build_output": "Syntax OK",
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "invalid order",
+   "stderr": ""
+  },
+  "assert_side_effect": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no assert outside the test frameworks"
+  },
+  "narrow_counter_loop": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no 8-bit integer type; Integer has no fixed width"
+  },
+  "timeout_without_cancel": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.13,
+   "stdout": "70",
+   "stderr": ""
+  },
+  "blocked_sender_leak": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "42\ndone",
+   "stderr": ""
+  }
+ }
+}
