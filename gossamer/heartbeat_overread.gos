@@ -1,0 +1,12 @@
+use std::env
+
+fn main() {
+    let claimed = env::args()[0].to_i64().unwrap()
+    let mut buf = #[0 as u8; 64]
+    for (i, b) in "SECRET-KEY-0042".bytes().enumerate() { buf[i + 2] = b }
+    for (i, b) in "hi".bytes().enumerate() { buf[i] = b }
+    let payload = buf[0..2]
+    // CONTROL! if claimed > payload.len() { println("invalid"); return }
+    let reply = payload[0..claimed]
+    println(String::from_utf8(reply).unwrap())
+}

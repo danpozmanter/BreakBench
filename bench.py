@@ -91,6 +91,11 @@ def tool_score(rec, score):
     return max(score, TOOL_POINTS.get(rec.get("tool"), 0.0))
 
 
+def flagged(rec):
+    """A linter or compiler warning at the bug, reviewed as being about it."""
+    return rec.get("tool") == "FLAGGED" and not rec.get("tool_unrelated")
+
+
 def safer_score(problem, rec, score, kinds):
     """The score with the standard library's safer call for the job, where it has one."""
     if score is None or "safer" not in rec:
@@ -161,12 +166,13 @@ def aggregate(run):
             rec = raw["results"].get(problem["id"], {"outcome": "MISSING"})
             if rec.get("tool") and problem["id"] in unrelated:
                 rec = {**rec, "tool_unrelated": unrelated[problem["id"]]}
-            score = score_of(problem, rec, kinds)
+            # The ranked score counts the language's own tools; "base" is the language without them.
+            base = score_of(problem, rec, kinds)
+            score = tool_score(rec, base)
             by_mode[problem["mode"]].append(score)
             if score is not None:
                 by_category[problem["category"]].append(score)
-            per_problem[problem["id"]] = {**rec, "score": score,
-                                          "tool_score": tool_score(rec, score),
+            per_problem[problem["id"]] = {**rec, "score": score, "base": base,
                                           "safer_score": safer_score(problem, rec, score, kinds)}
         outcomes = [r["outcome"] for r in per_problem.values()]
         counted = [o for o in outcomes if o != "INEXPRESSIBLE"]
@@ -182,7 +188,9 @@ def aggregate(run):
                 "categories": {c: [sum(scores), len(scores)] for c, scores in by_category.items()},
                 "modes": {m: [sum(x for x in xs if x is not None), sum(x is not None for x in xs), len(xs)]
                           for m, xs in by_mode.items()},
-                "caught": sum(o in {"REJECTED", "SAFE_BY_DESIGN"} for o in counted),
+                "caught": sum(r["outcome"] in {"REJECTED", "SAFE_BY_DESIGN"} or flagged(r)
+                              for r in per_problem.values() if r["outcome"] != "INEXPRESSIBLE"),
+                "categories_attempted": sum(n > 0 for n in map(len, by_category.values())),
                 "safe": sum(o in SAFE for o in counted),
                 "scored": len(counted),
                 "missing": len(outcomes) - len(counted),
@@ -195,6 +203,7 @@ def aggregate(run):
         res = row["results"]
         # The ranked score: every test counts once; a test the language cannot express is left out.
         row["score"] = mean((r["score"], 1) for r in res.values()) or 0.0
+        row["without_tools"] = mean((r["base"], 1) for r in res.values()) or 0.0
         # The same results weighted two other ways: each category alike, and by severity.
         sizes = {c: n for c, (_, n) in row["categories"].items()}
         row["by_category"] = mean((r["score"], 1 / sizes[category[pid]]) for pid, r in res.items()
@@ -204,7 +213,6 @@ def aggregate(run):
         row["language"] = mean((r["score"], 1) for pid, r in res.items() if layer[pid] == "language")
         row["library"] = mean((r["score"], 1) for pid, r in res.items() if layer[pid] == "library")
         row["with_safer"] = mean((r["safer_score"], 1) for r in res.values())
-        row["with_tools"] = mean((r["tool_score"], 1) for r in res.values())
     rows.sort(key=lambda r: (-r["score"], -r["caught"] / max(r["scored"], 1), r["name"]))
     for rank, row in enumerate(rows, 1):
         row["rank"] = rank
@@ -242,7 +250,7 @@ def aggregate(run):
         parts = "  ".join(f"{name.lower()} {points(row['categories'][c][0])}/{row['categories'][c][1]}"
                           for c, name in CATEGORIES.items())
         print(f"{row['rank']:>2}. {row['name']:<13} score {row['score']:5.1f}%  category {row['by_category']:5.1f}%  "
-              f"severity {row['by_severity']:5.1f}%  tools {row['with_tools']:5.1f}%  coverage {row['coverage']:5.1f}%  "
+              f"severity {row['by_severity']:5.1f}%  without tools {row['without_tools']:5.1f}%  coverage {row['coverage']:5.1f}%  "
               f"language {row['language']:5.1f}%  library {row['library']}%  safer {row['with_safer']}%  {parts}")
     if unsolved:
         print("no language passes: " + ", ".join(unsolved))
@@ -311,14 +319,15 @@ def site_payload(out):
                 "t": rec.get("tool", ""),
                 "tu": rec.get("tool_unrelated", ""),
                 "tw": (rec.get("tool_output") or "")[:600],
-                "ts": rec["tool_score"],
+                "b": rec["base"],
                 # The standard library's safer call for the same job, where one exists.
                 "so": rec["safer"]["outcome"] if "safer" in rec else "",
                 "ss": rec["safer_score"] if "safer" in rec else None,
             }
         langs.append({k: row[k] for k in ("id", "name", "homepage", "repository", "dir", "ext", "version",
                                            "rank", "score", "by_category", "by_severity", "coverage", "language",
-                                           "library", "with_safer", "with_tools", "categories", "modes", "caught",
+                                           "library", "with_safer", "without_tools", "categories", "modes", "caught",
+                                           "categories_attempted",
                                            "safe", "scored", "missing")}
                      | {"results": results})
     return {**{k: out[k] for k in ("date", "kinds", "categories", "modes", "severity", "problems", "unsolved")},

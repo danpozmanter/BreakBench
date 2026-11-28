@@ -1088,6 +1088,26 @@
    "secs": 0.06,
    "stdout": "42\ndone",
    "stderr": ""
+  },
+  "deep_json_nesting": {
+   "build_output": "Compiling main.dart to kernel file main.dill.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.07,
+   "stdout": "parsed",
+   "stderr": ""
+  },
+  "heartbeat_overread": {
+   "build_output": "Compiling main.dart to kernel file main.dill.",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception:\nRangeError (end): Invalid value: Not in inclusive range 0..2: 16\n#0      RangeError.checkValidRange (dart:core/errors.dart:392)\n#1      _TypedListMixin.sublist (dart:typed_data-patch/typed_data_patch.dart:491)\n#2      main (file:///tmp/breakbench/heartbeat_overread/release/main.dart:11)\n#3      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311)\n#4      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192)",
+   "exit": 255,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "Unhandled exception:\nRangeError (end): Invalid value: Not in inclusive range 0..2: 16\n#0      RangeError.checkValidRange (dart:core/errors.dart:392:9)\n#1      _TypedListMixin.sublist (dart:typed_data-patch/typed_data_patch.dart:491:31)\n#2      main (file:///tmp/breakbench/heartbeat_overread/main/main.dart:11:25)\n#3      _delayEntrypointInvocation.<anonymous closure> (dart:isolate-patch/isolate_patch.dart:311:33)\n#4      _RawReceivePort._handleMessage (dart:isolate-patch/isolate_patch.dart:192:12)"
   }
  }
 }

@@ -1006,6 +1006,18 @@
    "secs": 0.02,
    "stdout": "42\ndone",
    "stderr": ""
+  },
+  "deep_json_nesting": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no JSON parser in the standard library"
+  },
+  "heartbeat_overread": {
+   "outcome": "SILENT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "hi\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0000",
+   "stderr": ""
   }
  }
 }

@@ -1037,6 +1037,21 @@
   "blocked_sender_leak": {
    "outcome": "INEXPRESSIBLE",
    "message": "no channel or queue between threads in the standard library"
+  },
+  "deep_json_nesting": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no JSON parser in the standard library"
+  },
+  "heartbeat_overread": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "CORRUPT",
+   "release_stdout": "hiSECRET-KEY-004",
+   "release_stderr": "",
+   "exit": 134,
+   "secs": 0.08,
+   "stdout": "",
+   "stderr": "/usr/lib/gcc/x86_64-linux-gnu/15/../../../../include/c++/15/span:386: span<element_type, dynamic_extent> std::span<const char>::first(size_type) const [_Type = const char, _Extent = 18446744073709551615]: Assertion '__count <= size()' failed.\nAborted (core dumped)"
   }
  }
 }

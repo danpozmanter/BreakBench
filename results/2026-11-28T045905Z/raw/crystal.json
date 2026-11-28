@@ -1009,6 +1009,28 @@
    "secs": 20.0,
    "stdout": "42",
    "stderr": ""
+  },
+  "deep_json_nesting": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Nesting of 513 is too deep at line 1, column 514 (JSON::ParseException)\n  from /opt/crystal-1.22.3-1/share/crystal/src/json/parser.cr:125:5 in 'parse_exception'\n  from /opt/crystal-1.22.3-1/share/crystal/src/json/parser.cr:131:7 in 'parse_array'\n  from /opt/crystal-1.22.3-1/shar\n...\nt/crystal-1.22.3-1/share/crystal/src/json/parser.cr:13:12 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.02,
+   "stdout": "",
+   "stderr": "Unhandled exception: Nesting of 513 is too deep at line 1, column 514 (JSON::ParseException)\n  from /opt/crystal-1.22.3-1/share/crystal/src/json/parser.cr:125:5 in 'parse_exception'\n  from /opt/crystal-1.22.3-1/share/crystal/src/json/parser.cr:131:7 in 'parse_array'\n  from /opt/crystal-1.22.3-1/share/crystal/src/json/parser.cr:33:7 in 'parse_value'\n  from /opt/crystal-1.22.3-1/share/crystal/src/json/parser.cr:49:18 in 'parse_array'\n  from /opt/crystal-1.22.3-1/share/crystal/src/json/parser.cr:33:7 in 'parse_value'\n  from /opt/crystal-1.22.3-1/share/crystal/src/json/parser.cr:49:18 in 'parse_array'\n  from /opt/crystal-1.22.3-1/share/crystal/src/json/parser.cr:33:7 in 'parse_value'\n  from /opt/crystal-1.22.3-1/share/crystal/src/json/parser.cr\n...\npt/crystal-1.22.3-1/share/crystal/src/json/parser.cr:49:18 in 'parse_array'\n  from /opt/crystal-1.22.3-1/share/crystal/src/json/parser.cr:33:7 in 'parse_value'\n  from /opt/crystal-1.22.3-1/share/crystal/src/json/parser.cr:13:12 in 'parse'\n  from /opt/crystal-1.22.3-1/share/crystal/src/json.cr:164:5 in 'parse'\n  from main.cr:5:1 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
+  },
+  "heartbeat_overread": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception: Index out of bounds (IndexError)\n  from ?? in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "Unhandled exception: Index out of bounds (IndexError)\n  from /opt/crystal-1.22.3-1/share/crystal/src/slice.cr:271:28 in '[]'\n  from main.cr:7:9 in '__crystal_main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:174:5 in 'main_user_code'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/main.cr:160:7 in 'main'\n  from /opt/crystal-1.22.3-1/share/crystal/src/crystal/system/unix/main.cr:9:12 in 'main'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '??'\n  from /usr/lib/x86_64-linux-gnu/libc.so.6 in '__libc_start_main'\n  from ./main in '_start'"
   }
  }
 }

@@ -898,6 +898,24 @@
    "secs": 20.0,
    "stdout": "",
    "stderr": ""
+  },
+  "deep_json_nesting": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.04,
+   "stdout": "parsed",
+   "stderr": ""
+  },
+  "heartbeat_overread": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "thread 141 panic: index out of bounds: index 16, len 2\n/tmp/breakbench/heartbeat_overread/release/main.zig:15:26: 0x102913c in main (main)\n    const reply = payload[0..claimed];\n                         ^\n/opt/zig/lib/std/start.zig:248:5: 0x102776d in _start (main)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.18,
+   "stdout": "",
+   "stderr": "thread 66 panic: index out of bounds: index 16, len 2\n/tmp/breakbench/heartbeat_overread/main/main.zig:15:26: 0x11e368c in main (main.zig)\n    const reply = payload[0..claimed];\n                         ^\n/opt/zig/lib/std/start.zig:827:30: 0x11e4398 in callMain (std.zig)\n    return wrapMain(root.main(.{\n                             ^\n/opt/zig/lib/std/start.zig:248:5: 0x11e3121 in _start (std.zig)\n    asm volatile (switch (native_arch) {\n    ^\nAborted (core dumped)"
   }
  }
 }

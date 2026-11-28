@@ -1041,6 +1041,18 @@
    "secs": 0.0,
    "stdout": "42\ndone",
    "stderr": ""
+  },
+  "deep_json_nesting": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no JSON parser in the standard library"
+  },
+  "heartbeat_overread": {
+   "outcome": "CORRUPT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hiSECRET-KEY-004",
+   "stderr": "heartbeat of 2 bytes"
   }
  }
 }

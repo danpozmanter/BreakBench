@@ -967,6 +967,25 @@
    "secs": 0.0,
    "stdout": "42\ndone",
    "stderr": ""
+  },
+  "deep_json_nesting": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.1,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "heartbeat_overread": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "CORRUPT",
+   "release_stdout": "hiSECRET-KEY-004",
+   "release_stderr": "",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "core.exception.ArraySliceError@main.d(11): slice [0 .. 16] extends past source array of length 2\n----------------\n??:? onArraySliceError [0x5fd8989860aa]\n??:? _d_arraybounds_slice [0x5fd898986020]\nmain.d:11 _Dmain [0x5fd898986981]"
   }
  }
 }

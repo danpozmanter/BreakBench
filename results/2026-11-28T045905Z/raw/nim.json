@@ -957,6 +957,28 @@
    "secs": 0.0,
    "stdout": "42\ndone",
    "stderr": ""
+  },
+  "deep_json_nesting": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "parsejson.nim(548)       raiseParseErr\nError: unhandled exception: input(1, 1002) Error: ] expected [JsonParsingError]",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/deep_json_nesting/main/main.nim(5) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/json.nim(1050) parseJson\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/json.nim(965) parseJson\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/json.nim(925) parseJson\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/json.nim(925) parseJson\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/json.nim(925) parseJson\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/json.nim(925) parseJson\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/json.nim(925) parseJson\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/json.nim(925) parseJson\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/json.nim(925) parseJson\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/json.ni\n...\nson.nim(925) parseJson\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/json.nim(925) parseJson\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/json.nim(925) parseJson\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/json.nim(925) parseJson\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/json.nim(925) parseJson\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/json.nim(925) parseJson\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/json.nim(925) parseJson\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/json.nim(925) parseJson\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/json.nim(921) parseJson\n/root/.choosenim/toolchains/nim-2.4.2/lib/pure/parsejson.nim(548) raiseParseErr\nError: unhandled exception: input(1, 1002) Error: ] expected [JsonParsingError]"
+  },
+  "heartbeat_overread": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "fatal.nim(62)            sysFatal\nError: unhandled exception: index 2 not in 0 .. 1 [IndexDefect]",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/heartbeat_overread/main/main.nim(9) main\n/root/.choosenim/toolchains/nim-2.4.2/lib/system/indices.nim(106) []\n/root/.choosenim/toolchains/nim-2.4.2/lib/system/fatal.nim(62) sysFatal\nError: unhandled exception: index 2 not in 0 .. 1 [IndexDefect]"
   }
  }
 }

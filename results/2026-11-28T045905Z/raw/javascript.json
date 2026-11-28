@@ -950,6 +950,20 @@
    "secs": 0.02,
    "stdout": "42\ndone",
    "stderr": ""
+  },
+  "deep_json_nesting": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.03,
+   "stdout": "parsed",
+   "stderr": ""
+  },
+  "heartbeat_overread": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "hi",
+   "stderr": ""
   }
  }
 }

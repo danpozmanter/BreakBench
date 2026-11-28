@@ -972,6 +972,28 @@
    "secs": 0.02,
    "stdout": "42\ndone",
    "stderr": ""
+  },
+  "deep_json_nesting": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" kotlinx.serialization.json.JsonDecodingException: Json input is too nested and may be impossible to parse without stack overflow.\nCurrent nesting limit is 400. To adjust it, use 'maxNestingDepth' in 'Json {}' builder.\n\tat kotlinx.serialization.json.internal.JsonExceptionsK\n...\nnElementSerializers.kt:27)\n\tat kotlinx.serialization.json.internal.StreamingJsonDecoder.decodeSerializableValue(StreamingJsonDecoder.kt:71)\n\tat kotlinx.serialization.json.Json.decodeFromString(Json.kt:149)\n\tat kotlinx.serialization.json.Json.parseToJsonElement(Json.kt:179)\n\tat MainKt.main(main.kt:6)",
+   "exit": 1,
+   "secs": 0.11,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" kotlinx.serialization.json.JsonDecodingException: Json input is too nested and may be impossible to parse without stack overflow.\nCurrent nesting limit is 400. To adjust it, use 'maxNestingDepth' in 'Json {}' builder.\n\tat kotlinx.serialization.json.internal.JsonExceptionsKt.decodingExceptionOf(JsonExceptions.kt:17)\n\tat kotlinx.serialization.json.internal.JsonTreeReaderKt.jsonTooNested(JsonTreeReader.kt:145)\n\tat kotlinx.serialization.json.internal.JsonTreeReader.read(JsonTreeReader.kt:204)\n\tat kotlinx.serialization.json.internal.JsonTreeReader.readArray(JsonTreeReader.kt:61)\n\tat kotlinx.serialization.json.internal.JsonTreeReader.read(JsonTreeReader.kt:117)\n\tat kotlinx.serialization.json.internal.JsonTreeReader.read\n...\nr.kt:117)\n\tat kotlinx.serialization.json.internal.JsonTreeReader.readArray(JsonTreeReader.kt:61)\n\tat kotlinx.serialization.json.internal.JsonTreeReader.read(JsonTreeReader.kt:117)\n\tat kotlinx.serialization.json.internal.StreamingJsonDecoder.decodeJsonElement(StreamingJsonDecoder.kt:52)\n\tat kotlinx.serialization.json.JsonElementSerializer.deserialize(JsonElementSerializers.kt:50)\n\tat kotlinx.serialization.json.JsonElementSerializer.deserialize(JsonElementSerializers.kt:27)\n\tat kotlinx.serialization.json.internal.StreamingJsonDecoder.decodeSerializableValue(StreamingJsonDecoder.kt:71)\n\tat kotlinx.serialization.json.Json.decodeFromString(Json.kt:149)\n\tat kotlinx.serialization.json.Json.parseToJsonElement(Json.kt:179)\n\tat MainKt.main(main.kt:6)"
+  },
+  "heartbeat_overread": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Exception in thread \"main\" java.lang.IndexOutOfBoundsException: toIndex (16) is greater than size (2).\n\tat kotlin.collections.ArraysKt__ArraysJVMKt.copyOfRangeToIndexCheck(ArraysJVM.kt:49)\n\tat kotlin.collections.ArraysKt___ArraysJvmKt.copyOfRange(_ArraysJvm.kt:1492)\n\tat MainKt.main(main.kt:8)",
+   "exit": 1,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "Exception in thread \"main\" java.lang.IndexOutOfBoundsException: toIndex (16) is greater than size (2).\n\tat kotlin.collections.ArraysKt__ArraysJVMKt.copyOfRangeToIndexCheck(ArraysJVM.kt:49)\n\tat kotlin.collections.ArraysKt___ArraysJvmKt.copyOfRange(_ArraysJvm.kt:1492)\n\tat MainKt.main(main.kt:8)"
   }
  }
 }

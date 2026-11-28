@@ -1099,6 +1099,21 @@
    "secs": 20.0,
    "stdout": "",
    "stderr": ""
+  },
+  "deep_json_nesting": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no JSON parser in the standard library"
+  },
+  "heartbeat_overread": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "ERROR: LoadError: BoundsError: attempt to access 2-element view(::Vector{UInt8}, 1:2) with eltype UInt8 at index [1:16]\nStacktrace:\n [1] throw_boundserror(A::SubArray{UInt8, 1, Vector{UInt8}, Tuple{UnitRange{Int64}}, true}, I::Tuple{UnitRange{Int64}})\n   @ Base ./essentials.jl:14\n [2] checkbounds\n  \n...\n/breakbench/heartbeat_overread/release/main.jl:12\n [6] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [7] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [8] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/heartbeat_overread/release/main.jl:12",
+   "exit": 1,
+   "secs": 1.4,
+   "stdout": "",
+   "stderr": "ERROR: LoadError: BoundsError: attempt to access 2-element view(::Vector{UInt8}, 1:2) with eltype UInt8 at index [1:16]\nStacktrace:\n [1] throw_boundserror(A::SubArray{UInt8, 1, Vector{UInt8}, Tuple{UnitRange{Int64}}, true}, I::Tuple{UnitRange{Int64}})\n   @ Base ./essentials.jl:14\n [2] checkbounds\n   @ ./abstractarray.jl:702 [inlined]\n [3] getindex\n   @ ./subarray.jl:370 [inlined]\n [4] main()\n   @ Main /tmp/breakbench/heartbeat_overread/main/main.jl:8\n [5] top-level scope\n   @ /tmp/breakbench/heartbeat_overread/main/main.jl:12\n [6] include(mod::Module, _path::String)\n   @ Base ./Base.jl:309\n [7] exec_options(opts::Base.JLOptions)\n   @ Base ./client.jl:344\n [8] _start()\n   @ Base ./client.jl:577\nin expression starting at /tmp/breakbench/heartbeat_overread/main/main.jl:12"
   }
  }
 }

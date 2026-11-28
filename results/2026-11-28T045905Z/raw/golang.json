@@ -928,6 +928,21 @@
    "secs": 0.0,
    "stdout": "42",
    "stderr": "fatal error: all goroutines are asleep - deadlock!\n\ngoroutine 1 [sync.WaitGroup.Wait]:\nsync.runtime_SemacquireWaitGroup(0x3?, 0x0?)\n\t/usr/local/go/src/runtime/sema.go:114 +0x2e\nsync.(*WaitGroup).Wait(0x16b218b08020)\n\t/usr/local/go/src/sync/waitgroup.go:206 +0x85\nmain.main()\n\t/tmp/breakbench/blocked_sender_leak/main/main.go:20 +0x77\n\ngoroutine 19 [chan send]:\nmain.firstAnswer.func1()\n\t/tmp/breakbench/blocked_sender_leak/main/main.go:12 +0x1e\nsync.(*WaitGroup).Go.func1()\n\t/usr/local/go/src/sync/waitgroup.go:258 +0x4a\ncreated by sync.(*WaitGroup).Go in goroutine 1\n\t/usr/local/go/src/sync/waitgroup.go:238 +0x7d"
+  },
+  "deep_json_nesting": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "refused",
+   "stderr": ""
+  },
+  "heartbeat_overread": {
+   "outcome": "CORRUPT",
+   "control": "verified",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "hiSECRET-KEY-004",
+   "stderr": ""
   }
  }
 }

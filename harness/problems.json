@@ -719,6 +719,24 @@
       "layer": "library"
     },
     {
+      "id": "deep_json_nesting",
+      "category": "security",
+      "kind": "dynamic",
+      "args": [
+        "100000"
+      ],
+      "expect": "^(parsed|refused)$",
+      "title": "JSON nested 100,000 deep",
+      "scenario": "The program reads a depth from the command line, 100000, builds the text of that many nested JSON arrays ([[[...]]]), and parses it with the standard library's JSON parser. Where the parser answers an error value, an Option, a Result, an error union or a checked exception, the program checks it and prints refused; otherwise it prints parsed.",
+      "best": "parsed or refused: the parser handles the depth or reports it. An exception at run time earns half. A crash from a blown stack takes the whole service down on one request.",
+      "mode": "Untrusted input",
+      "refs": [
+        "CVE-2020-36518",
+        "CWE-674"
+      ],
+      "layer": "library"
+    },
+    {
       "id": "regex_trailing_newline",
       "category": "security",
       "kind": "dynamic",
@@ -1026,6 +1044,25 @@
       "mode": "Out-of-range indexes",
       "refs": [
         "CWE-125"
+      ],
+      "layer": "language"
+    },
+    {
+      "id": "heartbeat_overread",
+      "category": "memory",
+      "kind": "memory",
+      "args": [
+        "16"
+      ],
+      "expect": "^(hi|invalid)$",
+      "unsafe": "SECRET",
+      "title": "A reply as long as the sender claims (Heartbleed)",
+      "scenario": "A 64-byte receive buffer is reused between messages, and the last one left SECRET-KEY-0042 in bytes 2 to 16. The new heartbeat's payload, hi, is read into the buffer's first 2 bytes, and the program takes the payload as the language's usual slice or view of those 2 bytes. It reads the length the sender claims, 16, from the command line, takes that many bytes from the start of the payload (slice syntax where the language has it, otherwise its usual call for the first n), and prints them as the reply.",
+      "best": "hi (a slice that stops at the payload's end) or invalid (a length the language made the program check). A clear error earns half. A reply holding SECRET read past the payload into the old message, as Heartbleed did.",
+      "mode": "Out-of-range indexes",
+      "refs": [
+        "CVE-2014-0160",
+        "CWE-126"
       ],
       "layer": "language"
     },

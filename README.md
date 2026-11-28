@@ -10,15 +10,15 @@ This is a general signal, and not meant to be an absolute ranking of these langu
 
 "How much does a language help the programmer avoid production bugs?" is the primary driver.
 
-Score: the mean over the tests a language can attempt, as a percentage; every test counts once. It
-ranks the leaderboard. Beside it:
+Score (with tools): the share of tests where the language, with the linters, warnings and sanitizers
+its own project ships, stopped the bug. Every test counts the same. It ranks the leaderboard. Beside it:
 
 | Column | What it shows |
 |---|---|
-| Coverage | The share of all tests the language can attempt. N/A tests need a feature it lacks (a mutex, threads, a JSON parser) and are left out of its score, so a small feature set shows here. |
-| By category | The same results with every category weighted alike. |
-| By severity | The same results with each test weighted by the harm its failure mode does in production: critical 3, high 2, moderate 1. |
-| With tools | The score with the linters, compiler warnings and sanitizers the language project ships. |
+| Coverage | How much of the bench the language can attempt, and in how many of the 13 categories. Tests it lacks a feature for (a mutex, threads, a JSON parser) are left out of its scores. |
+| By category | Each of the 13 categories counts the same, however many tests it holds: 2 cleanup tests weigh as much as 20 number tests. |
+| By severity | Bugs that let an attacker in or corrupt memory count 3 times, bugs that lose data or stall a service twice, local logic slips once. |
+| Without tools | The compiler and runtime alone. |
 
 The Details tab splits the score into tests of language constructs and tests of standard-library
 calls, shows the score when a program uses the standard library's safer call for the job, and
@@ -37,16 +37,15 @@ images.
 
 ## What the score measures
 
-The ranked score measures the language itself: its compiler or interpreter, its runtime, and the
-switches they offer that make the compiler refuse more programs or the program stop on more bugs
-(checked arithmetic, a debug build, assertions, strict type checking).
-
-The With tools score adds what the language project ships for finding bugs: clippy, `go vet` and the
-race detector, `gos lint`, `dart analyze`, the .NET analyzers, mypy, compiler warnings, the Clang
-Static Analyzer, and AddressSanitizer with UndefinedBehaviorSanitizer. A finding counts only when it
-points at the bug's lines and the program without the bug does not get it. A linter or warning
-earns 1, since CI that fails on warnings stops the bug before it ships; a sanitizer report earns
-0.25, like a stop only the debug build makes. Third-party checkers count in neither score.
+The score measures what a team gets from the language and the tools its own project ships: the
+compiler or interpreter, the runtime, the switches that make either refuse more or stop more (checked
+arithmetic, a debug build, assertions, strict type checking), and the project's own bug-finding tools:
+clippy, `go vet` and the race detector, `gos lint`, `dart analyze`, the .NET analyzers, mypy, compiler
+warnings, the Clang Static Analyzer, and AddressSanitizer with UndefinedBehaviorSanitizer. A tool
+finding counts only when it points at the bug's lines and the program without the bug does not get
+it, and every finding is read by hand. A linter or warning earns 1, since CI that fails on warnings
+stops the bug before it ships; a sanitizer report earns 0.25, like a stop only the debug build makes.
+Without tools scores the compiler and runtime alone. Third-party checkers count in neither score.
 
 Results separate three layers. Tests of language constructs make the bug with an operator, a cast, a
 type, a declaration or control flow; tests of standard-library calls make it through a call such as
@@ -58,7 +57,7 @@ checked against, and any language can write it.
 
 ## Tests
 
-127 tests in thirteen categories. Each has a CWE or CERT entry, a CVE, or appears in a language's
+129 tests in thirteen categories. Each has a CWE or CERT entry, a CVE, or appears in a language's
 pitfall list, and covers a mistake no other test covers; `harness/problems.json` gives each test's
 reference and failure mode, and the site's Notes tab maps the failure modes to their tests. Each test is one scenario: the same steps, inputs and
 expected answer in every language, written the way that language teaches first. The code follows the
@@ -71,15 +70,15 @@ rules the mistake out, and where its documentation sent a program to another cal
 | Numbers | 20 | Arithmetic or a conversion gives the wrong value: overflow, the smallest integer divided by -1, a number parsed past its type's range, NaN written to JSON, a loop counter too small for its limit, a narrowing cast, a negative remainder, float equality, a large integer read from JSON, ... |
 | Types and API misuse | 12 | A value or call does not fit what it is used with: text passed as a number, a record built without a field, an integer converted to an enum it does not name, a method the base class never calls, a method passed on without its object, ... |
 | Aliasing and mutation | 12 | Shared or copied state changes when it should not, or does not when it should: a list changed while looping over it, a snapshot that is an alias, a grid whose rows are one list, a closure that captures the loop variable, a copy updated instead of the original, ... |
-| Incomplete code | 3 | A path that ends without a result, a match missing a case, a variable read before it is set |
-| Operators | 9 | An operator that means something other than it looks: an assignment in a condition, & next to ==, 1 < x < 3, == on built strings or records, == between text and a number, ... |
+| Incomplete code | 4 | A path that ends without a result, a match missing a case, a variable read before it is set |
+| Operators | 10 | An operator that means something other than it looks: an assignment in a condition, & next to ==, 1 < x < 3, == on built strings or records, == between text and a number, ... |
 | Control flow | 6 | Code that runs in a different order or path than it reads: a dangling else, a case without break, a break that leaves the switch instead of the loop, a return with its value on the next line, ... |
 | Names and literals | 5 | A name or literal that silently means something else: a new variable instead of an assignment, a missing comma, a repeated map key, a leading-zero number, ... |
-| Error handling | 9 | A failure goes unseen: an ignored result, a catch-all that turns a bug into bad input, a failed run that exits with success, a return in a cleanup block, a cleanup failure that hides the original error, a read that returns part of a message, a buffered file never flushed, a failed command treated as a success, ... |
+| Error handling | 10 | A failure goes unseen: an ignored result, a catch-all that turns a bug into bad input, a failed run that exits with success, a return in a cleanup block, a cleanup failure that hides the original error, a read that returns part of a message, a buffered file never flushed, a failed command treated as a success, ... |
 | Resource cleanup | 2 | A file or lock outlives the code that should remove it: a failure that skips the cleanup, a loop that breaks out of a sequence holding it |
-| Security | 8 | Input from outside takes control: command injection, a NUL byte that cuts a file name short, user text as a format string, an object restored from untrusted bytes, hidden or look-alike characters in source, ... |
+| Security | 10 | Input from outside takes control: command injection, JSON nested deep enough to crash the parser, a NUL byte that cuts a file name short, user text as a format string, an object restored from untrusted bytes, hidden or look-alike characters in source, ... |
 | Null safety | 12 | The program uses a value that may be missing as if it were there: a lookup that found nothing, a search that returned -1, a field missing from decoded JSON, a missing name printed as text, a check a later call undoes, an empty pointer passed on as an error, ... |
-| Memory safety | 14 | The program reads or writes memory it does not own, or keeps memory it dropped: use after free, out-of-bounds writes, records never freed, records that keep each other alive, a size that overflows before the allocation, a running total that keeps every message alive, ... |
+| Memory safety | 15 | The program reads or writes memory it does not own, or keeps memory it dropped: a reply as long as the sender claims (Heartbleed), use after free, out-of-bounds writes, records never freed, records that keep each other alive, a size that overflows before the allocation, a running total that keeps every message alive, ... |
 | Concurrency | 11 | Threads or tasks interfere: a deadlock, an early return that skips the unlock, a failure in the middle of a locked update, a wake-up sent before anyone waits, a timed-out task that keeps running, a worker stuck sending an answer nobody takes, ... |
 
 The bench runs each test once, so it keeps only tests with a stable result: tests whose result
@@ -131,13 +130,13 @@ build, because its bug exists only there.
 Categories group results in the ranked score; By category weights them alike. Each test is one program
 with one input, so the bench measures a class of mistake through its failure modes: each holds several
 tests that make the same kind of mistake in different ways, and the Details tab shows each language's
-result per mode. Warnings and linters score only in With tools.
+result per mode. Warnings and linters score through the tools.
 
 
 ## Notes
 
 The site's [Notes tab](https://danpozmanter.github.io/BreakBench/#notes) holds every note in one
-place: the build commands for each language, the tools behind With tools, the release builds, what
+place: the build commands for each language, the tools in the score, the release builds, what
 counts as standard, the removed tests, the N/A and design rules, the results that are right only by
 chance, where the docs sent a program to another call, the safer calls and what they scored, and
 each test's limits.

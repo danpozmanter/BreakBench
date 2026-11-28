@@ -1100,6 +1100,23 @@
    "secs": 0.03,
    "stdout": "42\ndone",
    "stderr": ""
+  },
+  "deep_json_nesting": {
+   "build_output": "Syntax OK",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.05,
+   "stdout": "",
+   "stderr": "/opt/ruby/lib/ruby/4.0.0/json/common.rb:353:in 'JSON::Ext::Parser.parse': nesting of 101 is too deep (JSON::NestingError)\n\tfrom /opt/ruby/lib/ruby/4.0.0/json/common.rb:353:in 'JSON.parse'\n\tfrom main.rb:5:in '<main>'"
+  },
+  "heartbeat_overread": {
+   "build_output": "Syntax OK",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "hi",
+   "stderr": ""
   }
  }
 }

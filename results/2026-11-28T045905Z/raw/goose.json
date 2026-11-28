@@ -884,6 +884,24 @@
    "secs": 0.0,
    "stdout": "42\ndone",
    "stderr": ""
+  },
+  "deep_json_nesting": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "parsed",
+   "stderr": ""
+  },
+  "heartbeat_overread": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "goose runtime error: slice bounds out of range (main.goose:9)",
+   "exit": 1,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "goose runtime error: slice bounds out of range (main.goose:9)"
   }
  }
 }

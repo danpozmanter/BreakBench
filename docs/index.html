@@ -87,7 +87,11 @@ th.breakdown { text-align: right; white-space: normal; max-width: 7.5em; vertica
 .bar { width: 80px; }
 .num { display: inline-block; min-width: 3.2em; text-align: right; font-weight: 600; }
 tr.hl td { background: color-mix(in srgb, var(--accent) 9%, transparent); }
-.extag { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
+.catcount { display: block; color: var(--muted); font-size: 12px; }
+.colkey { display: grid; grid-template-columns: max-content 1fr; gap: 4px 16px; max-width: 72ch; margin: 0 0 16px; }
+.colkey dt { font-weight: 600; color: var(--fg); }
+.colkey dd { margin: 0; }
+@media (max-width: 600px) { .colkey { grid-template-columns: 1fr; } .colkey dd { margin-bottom: 8px; } }
 .notes { margin: 0; padding-left: 20px; display: grid; gap: 8px; font-size: 14px; line-height: 1.5; max-width: 72em; }
 .notes code, .notes-table code { font-family: var(--font-mono); font-size: 12.5px; }
 .notes-table td:first-child { font-weight: 600; }
@@ -224,7 +228,13 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   </div>
 
   <section role="tabpanel" id="leaderboard" aria-labelledby="tab-leaderboard">
-    <p class="muted">Score: the mean over the tests the language can attempt, every test counted once; it ranks the table. It covers the compiler and runtime with their own checks on. Coverage: the share of all tests the language can attempt; the rest need a feature it lacks and are left out of its score (see Missing features). By category and By severity weight the same results two other ways, so a ranking that holds under all three does not depend on how many tests each kind of bug got. With tools adds the linters, warnings and sanitizers the language project ships. Details splits the score by language constructs and standard-library calls, by category and by failure mode.</p>
+    <dl class="colkey muted">
+      <dt>Score (with tools)</dt><dd>The share of tests where the language, with the linters, warnings and sanitizers its own project ships, stopped the bug. Every test counts the same.</dd>
+      <dt>Coverage</dt><dd>How much of the bench the language can attempt, and in how many of the 13 categories. Tests it lacks a feature for are left out of its scores.</dd>
+      <dt>By category</dt><dd>The tests sort into 13 categories (Numbers, Null safety, Concurrency, ...), and some hold far more tests than others. Here each category counts the same: 2 cleanup tests weigh as much as 20 number tests.</dd>
+      <dt>By severity</dt><dd>Bugs that let an attacker in or corrupt memory count 3 times, bugs that lose data or stall a service twice, local logic slips once.</dd>
+      <dt>Without tools</dt><dd>The compiler and runtime alone.</dd>
+    </dl>
     <div class="scroll"><table id="ranking"></table></div>
   </section>
 
@@ -254,7 +264,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     <p class="muted">The ranked score counts every test once, so a kind of bug with more tests weighs more. Two other weightings sit beside it on the leaderboard. By category gives each of the thirteen categories the same weight, split over the tests it holds. By severity weights each test by how much harm its failure mode does in production, below. A test the language cannot attempt drops out of all three.</p>
     <div class="scroll"><table class="notes-table" id="severity"></table></div>
     <p class="muted">A right answer earns its point only where the language defines the behavior that gave it. Where the language leaves that behavior undefined or unspecified, the answer is right by chance and earns nothing: another compiler, allocator or input can change it.</p>
-    <p class="muted">Warnings, linters and sanitizers score only in the With tools column; the Notes tab says how.</p>
+    <p class="muted">The ranked score counts a finding from the language's own linters and compiler warnings as a refusal (1) and a sanitizer report as a debug-build stop (0.25); the Notes tab says how a finding is tied to the bug. Without tools scores the compiler and runtime alone.</p>
     <p class="muted">A compile error counts as a refusal only if the same program with the bug removed compiles.</p>
     <p class="muted">N/A: the language lacks a feature the test needs (a mutex, threads, a JSON parser). The test is left out of its score. Prevented by design: the language has the feature and its design rules the error out; 1 point. Unfixable: the error can be made but not fixed; 0.</p>
   </section>
@@ -267,7 +277,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   <section role="tabpanel" id="notes" aria-labelledby="tab-notes" hidden>
     <p class="muted">How BreakBench builds, runs and scores.</p>
     <h3>What the score measures</h3>
-    <p class="muted">The ranked score measures the language itself: compiler or interpreter, runtime, and the switches that make either refuse more or stop more (checked arithmetic, debug builds, assertions, strict typing). The With tools column measures the language with the linters, warnings and sanitizers its own project ships, the way a team runs them in CI. Third-party checkers count in neither.</p>
+    <p class="muted">The ranked score measures what a team gets from the language and the tools its own project ships: the compiler or interpreter, the runtime, the switches that make either refuse more or stop more (checked arithmetic, debug builds, assertions, strict typing), and the project's linters, warnings and sanitizers, run the way CI runs them. Without tools leaves those out. Third-party checkers count in neither.</p>
     <p class="muted">Every test can be passed for full marks by some language design: a compiler that refuses the mistake, or a run that ends correctly because the language made the program handle the failure (a check it requires, a stack that grows). A clean stop at run time earns half.</p>
     <h3>Builds</h3>
     <div class="scroll"><table class="notes-table"><thead><tr><th>Language</th><th>Build</th></tr></thead><tbody>
@@ -294,7 +304,7 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
       <tr><td>Julia</td><td><code>--check-bounds=yes</code></td></tr>
       <tr><td>Python, Ruby, OCaml, Haskell, Clojure</td><td>the default build (dune's development profile for OCaml)</td></tr>
     </tbody></table></div>
-    <h3>With tools</h3>
+    <h3>Tools in the score</h3>
     <p class="muted">Each language's own tooling, run on every program that falls short of full marks. A finding counts when it points at the bug's lines (the same rule as a refusal) and the program without the bug does not get it, so a tool that flags everything earns nothing. A linter or compiler warning earns 1: CI that fails on warnings stops the bug before it ships. A sanitizer report earns 0.25, like a stop only the debug build makes; a report that only restates a crash (a signal) does not count. Every finding is read by hand: one about something other than the bug, such as a style lint on a line the fix rewrites, stays in that result's evidence and does not count.</p>
     <div class="scroll"><table class="notes-table"><thead><tr><th>Language</th><th>Tools</th></tr></thead><tbody>
       <tr><td>C, C++</td><td>clang's warnings (<code>-Weverything</code> minus style-only groups), the Clang Static Analyzer, AddressSanitizer with UndefinedBehaviorSanitizer and LeakSanitizer</td></tr>
@@ -460,6 +470,8 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
       <li><code>blocked_sender_leak</code> uses each language's standard channel at its default size. Zig and C3 make the program choose a size, so they use an unbuffered one, the most common default. Clojure, JavaScript and TypeScript answer through a promise, Haskell through an <code>MVar</code>.</li>
       <li>Scala, Clojure, OCaml and F# have no <code>break</code>, so <code>generator_break_cleanup</code> takes the first element (<code>take(1)</code>, <code>first</code>, <code>Seq.take 1</code>, <code>Seq.head</code>).</li>
       <li><code>timeout_without_cancel</code> uses the language's usual wait with a timeout: Python <code>asyncio.wait_for</code>, Kotlin <code>withTimeoutOrNull</code>, Ruby <code>Timeout.timeout</code>, Haskell <code>timeout</code> and Gossamer <code>sync::with_timeout</code> cancel the work they gave up on; the others only stop waiting.</li>
+      <li><code>heartbeat_overread</code> follows Heartbleed. A slice that stops at the payload's end (Python, Ruby, JavaScript, PHP, Haskell, Scala, Clojure, F#, Gossamer) returns only what was sent, which is safe. Go reslices up to the buffer's capacity and C copies past the payload, so both send the old message. Java's <code>copyOfRange</code> pads with zeros: no leak, but a wrong reply.</li>
+      <li><code>deep_json_nesting</code> follows CVE-2020-36518. A parser that sets a depth limit and reports it, or parses the text without the call stack, passes; an exception at run time earns half; a blown stack crashes the process, as one request can in a server.</li>
       <li>PHP runs 8.5, the newest packaged release. Mojo includes MAX for <code>parallelize</code>.</li>
     </ul>
   </section>
@@ -509,7 +521,9 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
     return e;
   };
   // A grid cell's note: a stop that only the debug build made.
-  const tags = (r) => (r.rel ? [el("span", { class: "wtag", text: "Debug build only" })] : []);
+  const tags = (r) => [
+    ...(r.rel ? [el("span", { class: "wtag", text: "Debug build only" })] : []),
+    ...(r.t && !r.tu && r.s !== r.b ? [el("span", { class: "wtag", text: r.t === "FLAGGED" ? "Caught by tools" : "Sanitizer" })] : [])];
   const chip = (o) => el("span", { class: "chip o-" + o, title: DESC[o] || o, text: NAME[o] || o });
   const swatch = (o) => el("span", { class: "swatch o-" + o, "aria-hidden": "true" });
   const present = OUT.filter((o) => D.languages.some((L) => Object.values(L.results).some((r) => r.o === o || (o === "DEBUG_TRAPPED" && r.rel))));
@@ -575,29 +589,29 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
   // Coverage names how many tests a missing feature rules out, linked to the list of them.
   const coverageCell = (L) => el("span", {}, pct(L.coverage), ...(L.missing
     ? [" ", el("a", { class: "gaps", href: "#missing/" + L.id, title: "What " + L.name + " is missing", text: "(" + L.missing + " N/A)" })]
-    : []));
+    : []), el("span", { class: "catcount", text: L.categories_attempted + " of " + Object.keys(CAT).length + " categories" }));
   const modeCell = (L, m) => {
     const [got, run, all] = L.modes[m];
     return el("span", { title: run ? (got / run * 100).toFixed(1) + "% of the tests attempted" : "No tests attempted" }, num(got) + " / " + run + " / " + all);
   };
   function renderRanking() {
     renderTable("ranking", [
-      ["score", "Score", "Mean over the tests the language can attempt; every test counts once", (L) => bar(L.score, "")],
-      ["coverage", "Coverage", "Share of all tests the language can attempt; the rest need a feature it lacks and are left out of its score", coverageCell],
-      ["by_category", "By category", "The same results with every category weighted alike", (L) => pct(L.by_category)],
-      ["by_severity", "By severity", "The same results with each test weighted by its severity: critical 3, high 2, moderate 1", (L) => pct(L.by_severity)],
-      ["with_tools", "With tools", "The score with the linters, warnings and sanitizers the language project ships", (L) => pct(L.with_tools)]]);
+      ["score", "Score (with tools)", "Mean over the tests the language can attempt, with its own linters, warnings and sanitizers; every test counts once", (L) => bar(L.score, "")],
+      ["coverage", "Coverage", "Share of all tests the language can attempt, and how many of the 13 categories it can attempt at least one test in", coverageCell],
+      ["by_category", "By category", "Every category counts the same, however many tests it holds", (L) => pct(L.by_category)],
+      ["by_severity", "By severity", "Each test weighted by its severity: critical 3, high 2, moderate 1", (L) => pct(L.by_severity)],
+      ["without_tools", "Without tools", "The compiler and runtime alone, without linters, warnings or sanitizers", (L) => pct(L.without_tools)]]);
     renderTable("layers", [
-      ["score", "Score", "Mean over the tests the language can attempt", (L) => pct(L.score)],
+      ["score", "Score (with tools)", "Mean over the tests the language can attempt", (L) => pct(L.score)],
       ["language", "Language constructs", "Tests whose bug is made with an operator, a cast, a type, a declaration or control flow", (L) => pctOr(L.language)],
       ["library", "Standard-library defaults", "Tests whose bug is made through a standard-library call, made the way the language teaches first", (L) => pctOr(L.library)],
       ["with_safer", "With safer calls", "The score with the standard library's safer call for the job, where one does better", (L) => pctOr(L.with_safer)],
-      ["with_tools", "With tools", "The score with the linters, warnings and sanitizers the language project ships", (L) => pct(L.with_tools)]]);
+      ["without_tools", "Without tools", "The compiler and runtime alone", (L) => pct(L.without_tools)]]);
     renderTable("modes-table", [
-      ["score", "Score", "Mean over the tests the language can attempt", (L) => pct(L.score)],
+      ["score", "Score (with tools)", "Mean over the tests the language can attempt", (L) => pct(L.score)],
       ...(D.modes || []).map((m) => [m, m, "Points earned / tests attempted / tests in this failure mode", (L) => modeCell(L, m)])]);
     renderTable("details", [
-      ["score", "Score", "Mean over the tests the language can attempt", (L) => pct(L.score)],
+      ["score", "Score (with tools)", "Mean over the tests the language can attempt", (L) => pct(L.score)],
       ...Object.entries(CAT).map(([c, name]) => [c, name, "Points earned / tests attempted / tests in " + name.toLowerCase(), (L) => catCell(L, c)]),
       ["caught", "Caught before running", "Tests refused by the compiler or prevented by design / tests attempted / all tests", (L) => L.caught + " / " + L.scored + " / " + probs.length]]);
   }
@@ -718,14 +732,14 @@ pre { margin: 0; white-space: pre-wrap; word-break: break-word; max-height: 9.5e
       tb.append(el("tr", { class: L.id === langId ? "hl" : "" },
         el("td", { class: "lang" }, srcLink(L, p)),
         el("td", { class: "chipcell" }, chip(r.o)),
-        el("td", { class: "mono", text: r.s == null ? "N/A" : String(r.s) }),
+        el("td", { class: "mono", text: r.s == null ? "N/A" : String(r.s) + (r.b !== r.s ? " (" + r.b + " without tools)" : "") }),
         el("td", { class: "full", "data-label": "Printed" }, el("pre", { class: "out", text: r.out || "" })),
         el("td", { class: "full", "data-label": "Evidence" }, el("pre", { text: r.ev || "" }),
           r.c === "verified" ? el("span", { class: "gcan", text: "The program without the bug gave the expected answer." }) : null,
           r.c === "none" ? el("span", { class: "gcan", text: "No version without the bug to check this result against." }) : null,
-          r.w ? el("pre", { class: "wout", title: "Scores only through With tools", text: "Compiler output:\n" + r.w }) : null,
-          r.t && !r.tu ? el("pre", { class: "wout", text: "With tools, " + (r.t === "FLAGGED" ? "a finding at the bug (1)" : "a sanitizer report (0.25)") + ":\n" + r.tw }) : null,
-          r.tu ? el("pre", { class: "wout", text: "With tools, not counted (" + r.tu + "):\n" + r.tw }) : null,
+          r.w ? el("pre", { class: "wout", text: "Compiler output:\n" + r.w }) : null,
+          r.t && !r.tu ? el("pre", { class: "wout", text: "Tools, " + (r.t === "FLAGGED" ? "a finding at the bug (1)" : "a sanitizer report (0.25)") + ":\n" + r.tw }) : null,
+          r.tu ? el("pre", { class: "wout", text: "Tools, not counted (" + r.tu + "):\n" + r.tw }) : null,
           r.so ? el("span", { class: "gcan", text: "With the standard library's safer call: " + (NAME[r.so] || r.so) + ", " + num(r.ss) + "." }) : null)));
     });
     t.append(tb);

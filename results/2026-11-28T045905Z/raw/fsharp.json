@@ -1103,6 +1103,26 @@
    "secs": 0.04,
    "stdout": "42\ndone",
    "stderr": ""
+  },
+  "deep_json_nesting": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/deep_json_nesting/main/bb.fsproj (in 329 ms).\n  bb -> /tmp/breakbench/deep_json_nesting/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.58",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "Unhandled exception. System.Text.Json.JsonReaderException: The maximum configured depth of 64 has been exceeded. Cannot read next JSON array. LineNumber: 0 | BytePositionInLine: 64.\n   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nex\n...\nnt.ParseValue(ReadOnlySpan`1 json, JsonDocumentOptions options)\n   at System.Text.Json.Nodes.JsonNode.Parse(String json, Nullable`1 nodeOptions, JsonDocumentOptions documentOptions)\n   at Program.main(String[] argv) in /tmp/breakbench/deep_json_nesting/release/Program.fs:line 6\nAborted (core dumped)",
+   "exit": 134,
+   "secs": 0.18,
+   "stdout": "",
+   "stderr": "Unhandled exception. System.Text.Json.JsonReaderException: The maximum configured depth of 64 has been exceeded. Cannot read next JSON array. LineNumber: 0 | BytePositionInLine: 64.\n   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)\n   at System.Text.Json.Utf8JsonReader.StartArray()\n   at System.Text.Json.Utf8JsonReader.ConsumeValue(Byte marker)\n   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()\n   at System.Text.Json.Utf8JsonReader.Read()\n   at System.Text.Json.JsonDocument.Parse(ReadOnlySpan`1 utf8JsonSpan, JsonReaderOptions readerOptions, MetadataDb& database, StackRowStack& stack)\n   at System.Text.Json.JsonDocument.ParseUnrented(ReadOnlyMemory`1 utf8Json, JsonReaderOptions readerOptions, JsonTokenType tokenType, Boolean allowDuplicateProperties)\n   at System.Text.Json.JsonDocument.ParseValue(ReadOnlySpan`1 json, JsonDocumentOptions options)\n   at System.Text.Json.Nodes.JsonNode.Parse(String json, Nullable`1 nodeOptions, JsonDocumentOptions documentOptions)\n   at Program.main(String[] argv) in /tmp/breakbench/deep_json_nesting/main/Program.fs:line 6\nAborted (core dumped)"
+  },
+  "heartbeat_overread": {
+   "build_output": "Determining projects to restore...\n  Restored /tmp/breakbench/heartbeat_overread/main/bb.fsproj (in 148 ms).\n  bb -> /tmp/breakbench/heartbeat_overread/main/out/bb.dll\n\nBuild succeeded.\n    0 Warning(s)\n    0 Error(s)\n\nTime Elapsed 00:00:01.31",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.02,
+   "stdout": "hi",
+   "stderr": ""
   }
  }
 }

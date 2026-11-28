@@ -908,6 +908,21 @@
    "secs": 0.0,
    "stdout": "42\ndone",
    "stderr": ""
+  },
+  "deep_json_nesting": {
+   "outcome": "INEXPRESSIBLE",
+   "message": "no JSON parser in the standard library"
+  },
+  "heartbeat_overread": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "thread 'main' (133) panicked at main.rs:8:25:\nrange end index 16 out of range for slice of length 2\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace",
+   "exit": 101,
+   "secs": 0.0,
+   "stdout": "",
+   "stderr": "thread 'main' (55) panicked at main.rs:8:25:\nrange end index 16 out of range for slice of length 2\nnote: run with `RUST_BACKTRACE=1` environment variable to display a backtrace"
   }
  }
 }

@@ -1011,6 +1011,26 @@
    "secs": 0.0,
    "stdout": "42\ndone",
    "stderr": ""
+  },
+  "deep_json_nesting": {
+   "build_output": "Program linked to executable './main'.",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.0,
+   "stdout": "refused",
+   "stderr": ""
+  },
+  "heartbeat_overread": {
+   "build_output": "Program linked to executable './main'.",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "ERROR: 'End index out of bounds (end index of 15 exceeds size of 2)'\n  in main.main (/tmp/breakbench/heartbeat_overread/release/main.c3:11) [./main] [inline]",
+   "exit": 132,
+   "secs": 0.03,
+   "stdout": "",
+   "stderr": "ERROR: 'End index out of bounds (end index of 15 exceeds size of 2)'\n  in main.main (/tmp/breakbench/heartbeat_overread/main/main.c3:11) [./main] [inline]"
   }
  }
 }

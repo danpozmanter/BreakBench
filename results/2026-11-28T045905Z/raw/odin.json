@@ -921,6 +921,25 @@
    "secs": 20.0,
    "stdout": "42",
    "stderr": ""
+  },
+  "deep_json_nesting": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.1,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "heartbeat_overread": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "/tmp/breakbench/heartbeat_overread/release/main.odin(14:18) Invalid slice indices: 0:16 is out of range 0..<2\nIllegal instruction (core dumped)",
+   "exit": 132,
+   "secs": 0.09,
+   "stdout": "",
+   "stderr": "/tmp/breakbench/heartbeat_overread/main/main.odin(14:18) Invalid slice indices: 0:16 is out of range 0..<2\nIllegal instruction (core dumped)"
   }
  }
 }

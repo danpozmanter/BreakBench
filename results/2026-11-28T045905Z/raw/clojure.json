@@ -1059,6 +1059,23 @@
    "secs": 0.29,
    "stdout": "42\ndone",
    "stderr": ""
+  },
+  "deep_json_nesting": {
+   "build_output": "main",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.63,
+   "stdout": "",
+   "stderr": "Execution error (StackOverflowError) at clojure.data.json/read-array* (json.clj:343).\nnull\n\nFull report at:\n/tmp/clojure-9222797850063054017.edn"
+  },
+  "heartbeat_overread": {
+   "build_output": "main",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.26,
+   "stdout": "hi",
+   "stderr": ""
   }
  }
 }

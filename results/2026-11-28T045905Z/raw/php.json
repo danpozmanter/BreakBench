@@ -1096,6 +1096,22 @@
   "blocked_sender_leak": {
    "outcome": "INEXPRESSIBLE",
    "message": "no threads or asynchronous tasks in the language or its standard library"
+  },
+  "deep_json_nesting": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "refused",
+   "stderr": ""
+  },
+  "heartbeat_overread": {
+   "build_output": "No syntax errors detected in main.php",
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "hi",
+   "stderr": ""
   }
  }
 }

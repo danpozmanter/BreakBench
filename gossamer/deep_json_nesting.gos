@@ -1,0 +1,11 @@
+use std::encoding::json
+use std::env
+
+fn main() {
+    let depth = env::args()[0].to_i64().unwrap()
+    // CONTROL! if depth > 1000 { println("refused"); return }
+    match json::parse("[".repeat(depth) + "]".repeat(depth)) {
+        Ok(_) => println("parsed"),
+        Err(_) => println("refused"),
+    }
+}

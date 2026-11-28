@@ -1012,6 +1012,21 @@
    "secs": 0.02,
    "stdout": "42\ndone",
    "stderr": ""
+  },
+  "deep_json_nesting": {
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "exit": 1,
+   "secs": 0.06,
+   "stdout": "",
+   "stderr": "Traceback (most recent call last):\n  File \"/tmp/breakbench/deep_json_nesting/main/main.py\", line 6, in <module>\n    json.loads(\"[\" * depth + \"]\" * depth)\n    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.15/json/__init__.py\", line 371, in loads\n    return _default_decoder.decode(s)\n           ~~~~~~~~~~~~~~~~~~~~~~~^^^\n  File \"/usr/local/lib/python3.15/json/decoder.py\", line 358, in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.15/json/decoder.py\", line 374, in raw_decode\n    obj, end = self.scan_once(s, idx)\n               ~~~~~~~~~~~~~~^^^^^^^^\nRecursionError: Stack overflow (used 8160 kB) while decoding a JSON array from a unicode string"
+  },
+  "heartbeat_overread": {
+   "outcome": "CORRECT",
+   "exit": 0,
+   "secs": 0.01,
+   "stdout": "hi",
+   "stderr": ""
   }
  }
 }

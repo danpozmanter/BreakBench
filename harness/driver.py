@@ -367,9 +367,9 @@ UNDEFINED_RE = re.compile(r"UNDEFINED:\s*(.+?)\s*(?:\*\))?$", re.M)
 BACKEND_FAILURE_RE = re.compile(r"\.ll:\d+:\d+: error")
 # A report from a sanitizer: AddressSanitizer, LeakSanitizer, UndefinedBehaviorSanitizer (`main.c:5:7:
 # runtime error:`), ThreadSanitizer, or Go's race detector. AddressSanitizer's report of a signal
-# (SEGV, ILL, ...) only restates a crash or trap the program makes without it, so it does not count.
+# (SEGV, ILL, a stack overflow, ...) only restates a crash or trap the program makes without it, so it does not count.
 SANITIZER_RE = re.compile(
-    r"ERROR: AddressSanitizer: (?!(SEGV|ILL|BUS|FPE|ABRT)\b)|ERROR: LeakSanitizer"
+    r"ERROR: AddressSanitizer: (?!(SEGV|ILL|BUS|FPE|ABRT|stack-overflow)\b)|ERROR: LeakSanitizer"
     r"|^\S+:\d+:\d+: runtime error:|WARNING: ThreadSanitizer|WARNING: DATA RACE",
     re.M,
 )

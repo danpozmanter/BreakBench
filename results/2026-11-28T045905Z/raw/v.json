@@ -915,6 +915,26 @@
    "secs": 20.0,
    "stdout": "42",
    "stderr": ""
+  },
+  "deep_json_nesting": {
+   "outcome": "CRASH",
+   "control": "verified",
+   "exit": 139,
+   "secs": 0.19,
+   "stdout": "",
+   "stderr": "Segmentation fault (core dumped)"
+  },
+  "heartbeat_overread": {
+   "build_output": "main.v:8:16: notice: an implicit clone of the slice was done here\n    6 |     copy(mut buf[2..], 'SECRET-KEY-0042'.bytes())\n    7 |     copy(mut buf, 'hi'.bytes())\n    8 |     payload := buf[..2]\n      |                   ~~~~~\n    9 |     // CONTROL! if claimed > payload.len { println('invalid') return }\n   10 |     reply := payload[..claimed]\nDetails: main.v:8:16: details: To silence this notice, use either an explicit `a[..].clone()`,\nor use an explicit `unsafe{ a[..] }`, if you do not want a copy of the slice.\n    6 |     copy(mut buf[2..], 'SECRET-KEY-0042'.bytes())\n    7 |     copy(mut buf, 'hi'.bytes())\n    8 |     payload := buf[..2]\n      |                   ~~~~~\n    9 |     // CONTROL! if claimed > payload.len { println('invalid') return }\n   10 |     reply := payload[..claimed]",
+   "outcome": "TRAPPED",
+   "control": "verified",
+   "release": "TRAPPED",
+   "release_stdout": "",
+   "release_stderr": "V panic: array.slice: slice bounds out of range (16 >= 2)\n v hash: 7647ce1\n    pid: 0x1e6\n    tid: 0x1e6\n                                                        | 0x6033580a9dbb | ./main(+0x1fdbb) \n                                                        | 0x722dec4c0601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x722dec4c0718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x603358090a45 | ./main(+0x6a45)",
+   "exit": 1,
+   "secs": 0.01,
+   "stdout": "",
+   "stderr": "V panic: array.slice: slice bounds out of range (16 >= 2)\n v hash: 7647ce1\n    pid: 0x14f\n    tid: 0x14f\n                                                        | 0x55f145b42731 | ./main(+0x15731) \n                                                        | 0x55f145b4a437 | ./main(+0x1d437) \n                                                        | 0x55f145b4a72c | ./main(+0x1d72c) \n                                                        | 0x700ef2b8a601 | /usr/lib/x86_64-linux-gnu/libc.so.6(+0x2a601) \n                                                        | 0x700ef2b8a718 | /usr/lib/x86_64-linux-gnu/libc.so.6(.libc_start_main+0x88) \n                                                        | 0x55f145b3d745 | ./main(+0x10745)"
   }
  }
 }
